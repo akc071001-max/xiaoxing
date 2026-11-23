@@ -1,16 +1,28 @@
 {
-  "version": "3.7.1",
-  "date": "2026-01-15",
+  "version": "3.7.2",
+  "date": "2026-01-16",
   "items": [
-    { "title": "纯语言界面", "desc": "网站所有内容完全自适应用户所选语言：中文界面就是纯中文，不再混用英文标签（品牌副标题、风格档案、字数统计等全部本地化）" },
-    { "title": "更新弹窗三语", "desc": "更新完成弹窗的内容也跟随界面语言显示" }
+    { "title": "多标签页防丢稿", "desc": "两个标签页同时编辑同一章时自动检测版本冲突：您的这份稿子另存为「冲突副本」，正文更新为最新版，两份都不会丢" },
+    { "title": "备份弹窗不再被设置挡住", "desc": "从设置中心打开任何弹窗（备份、AI 设置、反馈、须知等）都会自动先关闭设置窗口，不再误点" },
+    { "title": "修复品牌名显示异常", "desc": "修复刷新后品牌名显示成 brand.name 的问题（资源加版本号防旧缓存 + 缺失词条保护）" },
+    { "title": "手机窄屏优化", "desc": "窄屏默认折叠章节/大纲面板（抽屉式展开），正文上提，导航不折行，小助手缩小不压正文" },
+    { "title": "修复风格档案重复行", "desc": "删除「设定 → 风格档案」里重复的「写法」行" },
+    { "title": "AI 引导文案统一", "desc": "用户须知改为「内置免费模型开箱即用」；首次联网生成前弹窗告知将发送哪些写作内容并征得确认" }
   ],
   "itemsEn": [
-    { "title": "Pure-language interface", "desc": "Every element now fully follows the chosen language: the Chinese UI is pure Chinese with no mixed English labels (brand subtitle, style profile, word counts etc. are all localized)." },
-    { "title": "Trilingual update popup", "desc": "The update popup content now follows the interface language too." }
+    { "title": "No lost drafts across tabs", "desc": "Editing the same chapter in two tabs now triggers conflict detection: your version is saved as a “conflict copy” and the chapter updates to the latest version — nothing is lost." },
+    { "title": "Backup modal no longer hidden by settings", "desc": "Opening any dialog from Settings (backup, AI settings, feedback, terms…) now closes the Settings window first." },
+    { "title": "Fixed brand-name display bug", "desc": "Fixed the brand name showing as “brand.name” after refresh (cache-busting + missing-key guard)." },
+    { "title": "Mobile narrow-screen polish", "desc": "Panels and outline collapse by default on phones (drawer style), text moves up, nav no longer wraps, the pet assistant shrinks." },
+    { "title": "Fixed duplicate style row", "desc": "Removed the duplicated “Narration” row in Settings → Style Profile." },
+    { "title": "Unified AI guidance", "desc": "Terms now say the built-in free model works out of the box; before the first online generation you are told exactly what content is sent and asked to confirm." }
   ],
   "itemsRu": [
-    { "title": "Чистоязычный интерфейс", "desc": "Все элементы сайта полностью следуют выбранному языку: китайский интерфейс — только по-китайски, без смешанных английских надписей (подзаголовок бренда, профиль стиля, счётчики слов — всё локализовано)." },
-    { "title": "Трёхъязычное окно обновлений", "desc": "Содержимое окна обновлений теперь тоже следует языку интерфейса." }
+    { "title": "Черновики больше не теряются", "desc": "Одновременное редактирование главы в двух вкладках теперь определяется: ваша версия сохраняется как «копия конфликта», глава обновляется до последней версии — ничего не потеряно." },
+    { "title": "Окно резерва больше не скрыто настройками", "desc": "Любое окно из настроек (резерв, ИИ, отзыв, правила…) теперь сначала закрывает окно настроек." },
+    { "title": "Исправлен баг с названием бренда", "desc": "Бренд больше не показывает «brand.name» после обновления (версионирование ресурсов + защита от отсутствующих ключей)." },
+    { "title": "Улучшения для узких экранов", "desc": "На телефоне панели и план по умолчанию свёрнуты (шторка), текст выше, навигация не переносится, питомец уменьшен." },
+    { "title": "Удалена дублирующая строка", "desc": "Убрана повторяющаяся строка «Повествование» в профиле стиля." },
+    { "title": "Единое описание ИИ", "desc": "Правила теперь говорят, что встроенная бесплатная модель работает сразу; перед первой онлайн-генерацией показывается, какие данные будут отправлены, и запрашивается подтверждение." }
   ]
 }
