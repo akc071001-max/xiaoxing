@@ -1541,6 +1541,14 @@ async function delProvider() {
   if (!await confirmDialog(t('confirm.delProvider'))) return;
   state.settings.providers = state.settings.providers.filter(p => p.id !== state.provEditingId);
   if (state.settings.activeProviderId === state.provEditingId) state.settings.activeProviderId = state.settings.providers[0] ? state.settings.providers[0].id : null;
+  // 全部删光时自动恢复内置免费模型，保证 AI 始终可用
+  if (!state.settings.providers.length) {
+    state.settings.providers.push({
+      id: uid(), name: 'Pollinations 免费模型', baseUrl: 'https://text.pollinations.ai', path: '/openai',
+      apiKey: '', model: 'openai', temperature: 0.8, maxTokens: 4096
+    });
+    state.settings.activeProviderId = state.settings.providers[0].id;
+  }
   state.provEditingId = null;
   saveSettings();
   renderProviderList(); renderModelTag();
