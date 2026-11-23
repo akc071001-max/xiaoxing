@@ -366,6 +366,9 @@ input::placeholder,textarea::placeholder{color:rgba(126,145,179,.45)}
 .author-note-tips{font-size:12px;color:var(--txt-bright);line-height:1.75}
 .author-note-wiki{margin-top:6px;font-size:11.5px;color:var(--txt-dim);line-height:1.7;border-top:1px dashed var(--line);padding-top:6px}
 .author-learn-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.author-search-row{display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap}
+.author-search-row .input{flex:1;min-width:160px;font-size:13px;padding:9px 12px}
+.author-search-row .btn{white-space:nowrap}
 
 /* ---------------- 词典 ---------------- */
 .dict-search{display:flex;gap:8px;margin-bottom:14px}
@@ -401,4 +404,50 @@ input::placeholder,textarea::placeholder{color:rgba(126,145,179,.45)}
 .terms-version{font-size:10.5px;color:var(--txt-dim);margin-top:12px;font-family:var(--font-mono)}
 .terms-foot{display:flex;align-items:center;gap:14px;justify-content:flex-end;flex-wrap:wrap}
 .terms-foot .ctx-item{font-size:12px}
+
+/* ---------------- 本章大纲 + 联网生成 ---------------- */
+#chapter-outline-bar{display:flex;flex-direction:column;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(10,16,30,.4)}
+.co-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.co-label{font-family:var(--font-display);font-size:12px;letter-spacing:.16em;color:var(--accent);text-shadow:0 0 8px rgba(0,224,255,.35)}
+.gen-btn{font-size:14px;padding:9px 18px;border-radius:10px;text-shadow:0 0 10px rgba(0,224,255,.6);box-shadow:0 0 16px rgba(0,224,255,.25)}
+.gen-btn:disabled{opacity:.6;cursor:wait}
+.co-hint{font-size:11.5px;color:var(--txt-dim)}
+#chapter-outline{background:rgba(8,13,26,.7);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--txt-bright);font-family:var(--font-ui);font-size:15px;line-height:1.8;resize:vertical}
+#chapter-outline:focus{outline:none;border-color:var(--accent);box-shadow:0 0 12px rgba(0,224,255,.15)}
+#chapter-outline:disabled{opacity:.5}
+
+/* ---------------- 生成进度卡 ---------------- */
+#gen-progress{position:fixed;right:24px;bottom:70px;z-index:250;width:min(340px,90vw);border:1px solid var(--accent);border-radius:14px;background:linear-gradient(165deg, rgba(18,26,46,.97), rgba(9,14,27,.97));box-shadow:0 0 40px rgba(0,224,255,.3), 0 16px 40px rgba(0,0,0,.6);padding:14px 16px;animation:toastIn .25s ease}
+.gp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.gp-title{font-family:var(--font-display);font-size:13px;letter-spacing:.14em;color:var(--accent);text-shadow:0 0 10px rgba(0,224,255,.5)}
+.gp-stage{display:flex;align-items:center;gap:10px;padding:7px 2px;font-size:13.5px;color:var(--txt-dim);transition:.2s}
+.gp-stage.active{color:var(--txt-bright)}
+.gp-stage.done{color:var(--ok)}
+.gp-ico{width:18px;text-align:center;flex:none}
+.gp-stage.active .gp-ico{color:var(--accent);animation:spin 1s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.gp-note{font-size:11.5px;color:var(--txt-dim);margin-top:8px;border-top:1px dashed var(--line);padding-top:8px;line-height:1.7;word-break:break-all}
+
+/* ---------------- 反馈 ---------------- */
+.fb-hint{font-size:11.5px;color:var(--txt-dim);margin-top:10px}
+
+/* ---------------- 会员中心 ---------------- */
+.vip-notice{display:inline-block;font-size:13px;color:#ffd75c;border:1px solid rgba(255,215,92,.5);border-radius:999px;padding:5px 16px;margin-bottom:16px;background:rgba(255,215,92,.08);font-weight:500}
+.vip-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.vip-card{border:1px solid var(--line);border-radius:14px;padding:18px;background:rgba(16,24,42,.5);display:flex;flex-direction:column;gap:10px;text-align:center;transition:.2s}
+.vip-card:hover{border-color:var(--line-soft)}
+.vip-card.current{border-color:var(--accent);box-shadow:0 0 18px rgba(0,224,255,.15)}
+.vip-name{font-size:16px;color:var(--txt-bright);font-weight:600}
+.vip-price{font-size:13px;color:#ffd75c;font-family:var(--font-mono)}
+.vip-card ul{list-style:none;text-align:left;margin:6px 0;flex:1}
+.vip-card li{font-size:12.5px;color:var(--txt);padding:5px 0;border-bottom:1px dashed var(--line)}
+.vip-card li::before{content:'✦ ';color:var(--accent)}
+.vip-foot-note{font-size:11.5px;color:var(--txt-dim);margin-top:14px;text-align:center}
+@media (max-width:900px){.vip-plans{grid-template-columns:1fr}}
+
+/* ---------------- 大输入框（简洁化） ---------------- */
+#ai-input{font-size:13.5px;padding:11px 13px;line-height:1.7}
+#ai-input-row{gap:10px}
+#editor-toolbar{padding:10px 14px}
+.meta-chip{font-size:10.5px}
 
