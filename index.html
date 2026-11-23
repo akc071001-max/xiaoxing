@@ -56,6 +56,8 @@
     <button class="tb-btn" id="btn-lang" data-i18n-title="btn.langTitle" title="切换界面语言 Switch language">EN</button>
     <button class="tb-btn" id="btn-backup" data-i18n="btn.backup" data-i18n-title="btn.backupTitle" title="备份与导出">⛁ 备份</button>
     <button class="tb-btn" id="btn-ai-settings" data-i18n="btn.ai" data-i18n-title="btn.aiTitle" title="AI 模型接入设置">⚙ AI 模型</button>
+    <button class="tb-btn" id="btn-vip" data-i18n="btn.vip" data-i18n-title="btn.vipTitle" title="会员中心（试运营）">💎 会员</button>
+    <button class="tb-btn" id="btn-feedback" data-i18n="btn.feedback" data-i18n-title="btn.feedbackTitle" title="意见反馈">💬 反馈</button>
     <button id="btn-profile" class="profile-btn" data-i18n-title="btn.profileTitle" title="个人档案（头像 / 昵称）">
       <span id="profile-avatar" class="profile-avatar">✦</span>
       <span id="profile-name" data-i18n="profile.default">未设置昵称</span>
@@ -96,6 +98,15 @@
       <button class="tb-btn" id="btn-dict" data-i18n="btn.dict" data-i18n-title="btn.dictTitle" title="英语词典（选中正文后打开自动查词）">📖 词典</button>
       <button class="tb-btn" id="btn-focus" data-i18n="btn.focus" title="专注写作模式（隐藏面板）">⛶ 专注</button>
       <button class="tb-btn accent-btn" id="btn-ai-toggle" data-i18n="btn.aiToggle" title="AI 剧情引擎">✦ AI 引擎</button>
+    </div>
+    <div id="chapter-outline-bar">
+      <div class="co-head">
+        <span class="co-label" data-i18n="co.label">📋 本章大纲</span>
+        <button class="btn primary gen-btn" id="btn-gen-chapter" data-i18n="co.gen">⚡ 联网生成正文</button>
+        <button class="btn" id="btn-gen-again" data-i18n="co.again" title="对结果不满意？重新生成">🔄 重新生成</button>
+        <span class="co-hint" id="gen-hint"></span>
+      </div>
+      <textarea id="chapter-outline" rows="3" data-i18n-ph="co.ph" placeholder="输入本章大纲：本章要发生什么、出现哪些人物、埋什么伏笔…… 输入后点「⚡ 联网生成正文」"></textarea>
     </div>
     <textarea id="editor" spellcheck="false" placeholder="全新章节，从这里开始你的宇宙……（Ctrl+S 保存 · 右侧 ✦ 召唤 AI 引擎）"></textarea>
     <div id="editor-statusbar">
@@ -139,7 +150,7 @@
     </div>
     <div id="ai-messages" class="scroll-area"></div>
     <div id="ai-input-row">
-      <textarea id="ai-input" rows="2" placeholder="与 AI 讨论剧情、让它记住设定、或直接下指令…（Ctrl+Enter 发送）"></textarea>
+      <textarea id="ai-input" rows="3" placeholder="与 AI 讨论剧情、让它记住设定、或直接下指令…（Ctrl+Enter 发送）"></textarea>
       <div class="ai-send-wrap">
         <button id="btn-ai-send" class="accent-btn" data-i18n="ai.send">发送</button>
         <button id="btn-ai-stop" class="stop-btn" data-i18n="ai.stop" style="display:none">■ 停止</button>
@@ -342,7 +353,7 @@
           <input id="note-title" type="text" maxlength="80" placeholder="节点 / 卷名" autocomplete="off" />
         </label>
         <label><span data-i18n="note.content">内容</span>
-          <textarea id="note-content" rows="8" placeholder="情节要点、伏笔、一句话记忆…"></textarea>
+          <textarea id="note-content" rows="10" placeholder="情节要点、伏笔、一句话记忆…"></textarea>
         </label>
         <label id="note-cat-wrap" style="display:none"><span data-i18n="note.cat">分类</span>
           <select id="note-category">
@@ -482,6 +493,82 @@
       <label class="ctx-item"><input type="checkbox" id="terms-agree-chk" /> <span data-i18n="terms.agreeLabel">我已阅读并同意以上全部内容</span></label>
       <button class="btn ghost" id="btn-terms-decline" data-i18n="terms.declineBtn">不同意</button>
       <button class="btn primary" id="btn-terms-agree" data-i18n="terms.agreeBtn" disabled>同意并进入</button>
+    </div>
+  </div>
+</div>
+
+<!-- 联网生成进度 -->
+<div id="gen-progress" hidden>
+  <div class="gp-head">
+    <span class="gp-title" id="gp-title">⚡ 联网生成正文</span>
+    <button class="icon-btn" id="btn-gen-cancel" title="取消">✕</button>
+  </div>
+  <div id="gen-stages"></div>
+  <div class="gp-note" id="gp-note"></div>
+</div>
+
+<!-- 意见反馈 -->
+<div class="modal-overlay" id="modal-feedback" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" data-i18n="fb.title">💬 意见反馈</div>
+      <button class="icon-btn modal-close" data-close="modal-feedback">✕</button>
+    </div>
+    <div class="modal-body">
+      <label><span data-i18n="fb.label">问题或建议</span>
+        <textarea id="feedback-text" rows="7" data-i18n-ph="fb.ph" placeholder="请描述您遇到的问题或建议…"></textarea>
+      </label>
+      <p class="fb-hint" data-i18n="fb.hint">我们会认真阅读每一条反馈。</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn primary" id="btn-fb-send" data-i18n="fb.send">提交反馈</button>
+      <button class="btn ghost" data-close="modal-feedback" data-i18n="common.cancel">取消</button>
+    </div>
+  </div>
+</div>
+
+<!-- 会员中心（试运营） -->
+<div class="modal-overlay" id="modal-vip" hidden>
+  <div class="modal wide">
+    <div class="modal-head">
+      <div class="modal-title" data-i18n="vip.title">💎 会员中心</div>
+      <button class="icon-btn modal-close" data-close="modal-vip">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="vip-notice" data-i18n="vip.notice">试运营 · 不收费</div>
+      <div class="vip-plans">
+        <div class="vip-card current">
+          <div class="vip-name" data-i18n="vip.free">免费体验版</div>
+          <div class="vip-price" data-i18n="vip.freePrice">¥0 · 试运营</div>
+          <ul>
+            <li data-i18n="vip.f1">内置免费 AI 模型</li>
+            <li data-i18n="vip.f2">全部创作功能</li>
+            <li data-i18n="vip.f3">数据本地保存</li>
+          </ul>
+          <button class="btn ghost" disabled data-i18n="vip.currentBtn">当前方案</button>
+        </div>
+        <div class="vip-card">
+          <div class="vip-name" data-i18n="vip.pro">专业创作版</div>
+          <div class="vip-price" data-i18n="vip.proPrice">¥0 · 试运营</div>
+          <ul>
+            <li data-i18n="vip.p1">更优质的大模型</li>
+            <li data-i18n="vip.p2">更长上下文记忆</li>
+            <li data-i18n="vip.p3">更快生成速度</li>
+          </ul>
+          <button class="btn primary" data-vip="pro" data-i18n="vip.btn">暂未开放</button>
+        </div>
+        <div class="vip-card">
+          <div class="vip-name" data-i18n="vip.flag">旗舰版</div>
+          <div class="vip-price" data-i18n="vip.flagPrice">¥0 · 试运营</div>
+          <ul>
+            <li data-i18n="vip.l1">全部专业版权益</li>
+            <li data-i18n="vip.l2">优先接入新模型</li>
+            <li data-i18n="vip.l3">专属客服支持</li>
+          </ul>
+          <button class="btn primary" data-vip="flag" data-i18n="vip.btn">暂未开放</button>
+        </div>
+      </div>
+      <p class="vip-foot-note" data-i18n="vip.foot">试运营期间所有方案均不收费，敬请期待正式上线。</p>
     </div>
   </div>
 </div>
