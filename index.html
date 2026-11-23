@@ -47,6 +47,10 @@
       <div class="brand-sub" data-i18n="brand.sub">ALL-GENRE NOVEL STUDIO</div>
     </div>
   </div>
+  <div class="board-switch">
+    <button class="chip mini on" id="board-novel" data-i18n="board.novel">📖 小说</button>
+    <button class="chip mini" id="board-paper" data-i18n="board.paper">📄 论文</button>
+  </div>
   <button id="btn-novel-switch" class="novel-pill" title="切换 / 管理小说">
     <span id="novel-pill-title">未选择小说</span>
     <span class="pill-caret">▾</span>
@@ -111,6 +115,35 @@
       <span id="status-words">字数：0</span>
       <span id="status-pos">行 1 · 列 1</span>
       <span id="status-chars">字符 0</span>
+    </div>
+
+    <div id="paper-zone">
+      <div id="paper-toolbar">
+        <input id="paper-title" type="text" placeholder="论文标题（可留空，AI 可代起）…" maxlength="120" autocomplete="off" />
+        <select id="paper-status" title="论文状态">
+          <option value="draft" data-i18n="status.draft">草稿</option>
+          <option value="revising" data-i18n="status.revising">修订中</option>
+          <option value="done" data-i18n="status.done">定稿</option>
+        </select>
+        <span class="meta-chip" id="paper-word-count">0 字</span>
+        <span class="meta-chip save-chip" id="paper-save-state">—</span>
+        <span class="spacer"></span>
+        <button class="btn primary gen-btn" id="btn-paper-gen" data-i18n="p.gen">📚 检索并生成论文</button>
+        <button class="btn" id="btn-paper-again" data-i18n="p.again" title="对结果不满意？重新生成">🔄 重新生成</button>
+      </div>
+      <div id="paper-topic-bar">
+        <span class="co-label" data-i18n="p.topicLabel">📄 论文主题 / 要求</span>
+        <textarea id="paper-topic" rows="3" data-i18n-ph="p.topicPh" placeholder="输入论文主题与研究要求…（生成时会联网检索文献，正文带引用编号与出处链接）"></textarea>
+      </div>
+      <div id="paper-free-note">
+        <span data-i18n="p.freeNote"></span>
+        <button class="btn mini primary" id="btn-paper-upgrade" data-i18n="p.upgrade">💎 升级获得更佳正文</button>
+      </div>
+      <textarea id="paper-editor" spellcheck="false" data-i18n-ph="p.editorPh" placeholder="论文正文将生成在这里：正文带 [1][2] 引用标注，文末附参考文献列表（含出处与网页链接）…"></textarea>
+      <div id="paper-statusbar">
+        <span id="paper-status-words">字数：0</span>
+        <span id="paper-status-pos">行 1 · 列 1</span>
+      </div>
     </div>
   </main>
 
@@ -588,9 +621,6 @@
         </div>
       </div>
       <p class="vip-foot-note" data-i18n="vip.foot">试运营期间所有方案均不收费，敬请期待正式上线。</p>
-      <div class="set-row">
-        <button class="btn small primary" id="btn-vip-tip" data-i18n="set.tip">☕ 请作者喝杯奶茶</button>
-      </div>
       <div class="set-section-title" data-i18n="vip.searchTitle">🔍 全网搜索 AI 模型</div>
       <div class="or-search-row">
         <input class="input" id="or-search-input" data-i18n-ph="vip.searchPh" placeholder="输入关键词搜索全网模型（如 deepseek / qwen / llama…）" autocomplete="off" />
@@ -683,12 +713,25 @@
         <span class="set-val mono" id="set-version">3.4.0</span>
         <button class="btn small" id="btn-check-update" data-i18n="set.check">检查更新</button>
       </div>
+      <div class="set-section-title" data-i18n="set.credits">开发者名单</div>
       <div class="set-row">
         <span class="set-label" data-i18n="set.creator">创作者：小柚子</span>
         <span class="set-val" data-i18n="set.creatorNote">本站由单人开发 · 不定期更新</span>
       </div>
-      <div class="set-row">
-        <button class="btn small primary" id="set-tip" data-i18n="set.tip">☕ 请作者喝杯奶茶</button>
+      <div class="dev-tip">
+        <img class="tip-qr" src="qr-tip.png" alt="打赏收款码" />
+        <div class="dev-tip-body">
+          <div class="tip-note" data-i18n="tip.note"></div>
+          <div class="tip-amounts">
+            <button class="chip set-chip" data-tip="6.66">¥6.66</button>
+            <button class="chip set-chip" data-tip="8.88">¥8.88</button>
+            <button class="chip set-chip" data-tip="18.88">¥18.88</button>
+            <button class="chip set-chip" data-tip="66.66">¥66.66</button>
+            <input class="input tip-custom" id="tip-custom" type="number" min="0.01" step="0.01" data-i18n-ph="tip.customPh" placeholder="自定义金额（元）…" autocomplete="off" />
+          </div>
+          <textarea id="tip-msg" rows="2" data-i18n-ph="tip.msgPh" placeholder="给创作者留言（可选）…"></textarea>
+          <button class="btn small primary" id="btn-tip-send" data-i18n="tip.send">💛 送出心意</button>
+        </div>
       </div>
     </div>
   </div>
@@ -831,33 +874,6 @@
     <div class="modal-foot">
       <button class="btn ghost" id="btn-guide-prev" data-i18n="guide.prev" style="visibility:hidden">上一步</button>
       <button class="btn primary" id="btn-guide-next" data-i18n="guide.next">下一步</button>
-    </div>
-  </div>
-</div>
-
-<!-- 支持创作者（打赏 · 自愿） -->
-<div class="modal-overlay" id="modal-tip" hidden>
-  <div class="modal">
-    <div class="modal-head">
-      <div class="modal-title" data-i18n="tip.title">☕ 支持创作者</div>
-      <button class="icon-btn modal-close" data-close="modal-tip">✕</button>
-    </div>
-    <div class="modal-body">
-      <p class="fb-hint" data-i18n="tip.note">本站由小柚子单人开发，不定期更新。打赏全凭心意，不强制、纯自愿。</p>
-      <label><span data-i18n="tip.amount">支持金额</span></label>
-      <div class="tip-amounts">
-        <button class="chip set-chip" data-tip="6.66">¥6.66</button>
-        <button class="chip set-chip" data-tip="8.88">¥8.88</button>
-        <button class="chip set-chip" data-tip="18.88">¥18.88</button>
-        <button class="chip set-chip" data-tip="66.66">¥66.66</button>
-        <input class="input tip-custom" id="tip-custom" type="number" min="0.01" step="0.01" data-i18n-ph="tip.customPh" placeholder="自定义金额（元）…" autocomplete="off" />
-      </div>
-      <label style="margin-top:12px"><span data-i18n="tip.msg">想对创作者说的话（可选）</span>
-        <textarea id="tip-msg" rows="4" data-i18n-ph="tip.msgPh" placeholder="鼓励的话、建议、想说的话…"></textarea>
-      </label>
-    </div>
-    <div class="modal-foot">
-      <button class="btn primary" id="btn-tip-send" data-i18n="tip.send">💛 送出心意</button>
     </div>
   </div>
 </div>
