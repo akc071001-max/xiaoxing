@@ -571,7 +571,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.0.0';
+const APP_VERSION = '3.1.0';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -2423,6 +2423,7 @@ function applyUIPrefs() {
   $('#set-pet-on').classList.toggle('on', !!state.settings.petVisible);
   $('#set-pet-off').classList.toggle('on', !state.settings.petVisible);
   $('#set-auto-model').checked = !!state.settings.autoModel;
+  applyPetPos();
   $('#editor').style.fontSize = state.settings.fontSize + 'px';
   const s = state.settings.ctx;
   $('#ctx-outline').checked = !!s.outline;
@@ -2734,10 +2735,56 @@ async function searchModels() {
   }
 }
 
-/* ---------------- 创作小宠物 ---------------- */
-let petIdleTimer = null, petNudgeTimer = null;
+/* ---------------- 创作小宠物（可拖拽 · 互动动效 · 双击彩蛋） ---------------- */
+let petIdleTimer = null, petNudgeTimer = null, hurtTimer = null;
+const PET_BUBBLES_ZH = ['你好呀！', '我在呢～', '需要帮忙吗？点我试试', '写作加油！', '要不要起个书名？'];
+const PET_BUBBLES_EN = ['Hello!', 'I\'m here~', 'Need help? Click me', 'Keep writing!', 'Want a title idea?'];
+function petEl() { return $('#pet'); }
+function petSay(txt, ms) {
+  const b = $('#pet-bubble');
+  if (!b) return;
+  b.textContent = txt;
+  b.classList.add('show');
+  clearTimeout(b._t);
+  b._t = setTimeout(() => b.classList.remove('show'), ms || 2200);
+}
+function petRandomBubble() {
+  const arr = state.settings.lang === 'zh' ? PET_BUBBLES_ZH : PET_BUBBLES_EN;
+  petSay(arr[Math.floor(Math.random() * arr.length)]);
+}
+function petSparkles(n) {
+  const pet = petEl();
+  if (!pet) return;
+  const emojis = ['✨', '⭐', '💫', '🛸', '🌟'];
+  for (let i = 0; i < (n || 5); i++) {
+    const s = document.createElement('span');
+    s.className = 'pet-spark';
+    s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    s.style.left = (25 + Math.random() * 50) + '%';
+    s.style.setProperty('--dx', (Math.random() * 70 - 35) + 'px');
+    s.style.setProperty('--dy', -(35 + Math.random() * 45) + 'px');
+    s.style.animationDelay = (Math.random() * 0.25) + 's';
+    pet.appendChild(s);
+    setTimeout(() => s.remove(), 1400);
+  }
+}
+function savePetPos(xf, yf) {
+  state.settings.petPos = { xf: clamp(xf, 0, 1), yf: clamp(yf, 0, 1) };
+  saveSettings();
+}
+function applyPetPos() {
+  const pet = petEl();
+  const p = state.settings.petPos;
+  if (!pet || !p) return;
+  const x = clamp(p.xf, 0, 1) * Math.max(0, innerWidth - 92);
+  const y = clamp(p.yf, 0, 1) * Math.max(0, innerHeight - 78);
+  pet.style.left = Math.max(0, x) + 'px';
+  pet.style.top = Math.max(0, y) + 'px';
+  pet.style.right = 'auto';
+  pet.style.bottom = 'auto';
+}
 function petActive() {
-  const pet = $('#pet');
+  const pet = petEl();
   if (!pet) return;
   pet.classList.remove('pet-idle');
   clearTimeout(petIdleTimer);
@@ -2750,9 +2797,70 @@ function petActive() {
     }, 2600);
   }, 60000);
 }
-function petIdleNow() { const pet = $('#pet'); if (pet) pet.classList.add('pet-idle'); }
+function bindPetDrag() {
+  const pet = petEl();
+  if (!pet) return;
+  let dragging = false, moved = 0, sx = 0, sy = 0, ox = 0, oy = 0;
+  const onMove = e => {
+    if (!dragging) return;
+    moved = Math.max(moved, Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy));
+    if (moved > 4) {
+      pet.style.left = clamp(e.clientX - ox, 0, Math.max(0, innerWidth - 80)) + 'px';
+      pet.style.top = clamp(e.clientY - oy, 0, Math.max(0, innerHeight - 70)) + 'px';
+      pet.style.right = 'auto'; pet.style.bottom = 'auto';
+    }
+  };
+  const onUp = () => {
+    if (!dragging) return;
+    dragging = false;
+    pet.classList.remove('pet-dragging');
+    window.removeEventListener('pointermove', onMove);
+    if (moved > 6) {
+      const r = pet.getBoundingClientRect();
+      savePetPos((r.left + r.width / 2) / innerWidth, (r.top + r.height / 2) / innerHeight);
+    }
+  };
+  pet.addEventListener('pointerdown', e => {
+    dragging = true; moved = 0;
+    sx = e.clientX; sy = e.clientY;
+    const r = pet.getBoundingClientRect();
+    ox = e.clientX - r.left; oy = e.clientY - r.top;
+    pet.classList.remove('pet-idle');
+    pet.classList.add('pet-dragging');
+    if (pet.setPointerCapture) { try { pet.setPointerCapture(e.pointerId); } catch (err) { } }
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp, { once: true });
+  });
+  pet.addEventListener('click', e => {
+    if (e.detail > 1) return; // 双击交给 dblclick
+    if (moved > 6) return;    // 拖拽不算点击
+    pet.classList.remove('pet-idle');
+    applyPetPos();
+    petSparkles(6);
+    pet.classList.remove('pet-bounce');
+    void pet.offsetWidth;
+    pet.classList.add('pet-bounce');
+    setTimeout(() => pet.classList.remove('pet-bounce'), 520);
+    petRandomBubble();
+    openAssistant();
+  });
+  pet.addEventListener('dblclick', () => hurtPet());
+}
+function hurtPet() {
+  const pet = petEl();
+  if (!pet || pet.classList.contains('pet-hurt')) return;
+  pet.classList.add('pet-hurt');
+  petSparkles(4);
+  petSay(state.settings.lang === 'zh' ? '好痛…呜呜😭' : 'Ouch… ouch!');
+  clearTimeout(hurtTimer);
+  hurtTimer = setTimeout(() => {
+    pet.classList.remove('pet-hurt');
+    petSparkles(8);
+    petSay(state.settings.lang === 'zh' ? '满血复活！' : 'All better!');
+  }, 6500);
+}
 function openAssistant() {
-  const pet = $('#pet');
+  const pet = petEl();
   if (pet) { pet.classList.remove('pet-idle'); }
   openModal('modal-assistant');
 }
@@ -2870,8 +2978,9 @@ function bindEvents() {
   // 全网模型搜索
   $('#btn-or-search').addEventListener('click', searchModels);
   $('#or-search-input').addEventListener('keydown', e => { if (e.key === 'Enter') searchModels(); });
-  // 小宠物 / 助手
-  $('#pet').addEventListener('click', openAssistant);
+  // 小宠物 / 助手（可拖拽 / 点击互动 / 双击彩蛋）
+  bindPetDrag();
+  addEventListener('resize', applyPetPos);
   $('#asst-hide').addEventListener('click', () => { state.settings.petVisible = false; saveSettings(); applyUIPrefs(); closeModal('modal-assistant'); toast(t('asst.hide'), 'ok', 2000); });
   $('#asst-new-novel').addEventListener('click', () => { closeModal('modal-assistant'); openNovelModal(null); });
   $('#asst-gen').addEventListener('click', () => { closeModal('modal-assistant'); generateChapter(); });
