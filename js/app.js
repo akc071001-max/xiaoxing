@@ -577,7 +577,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.2.0';
+const APP_VERSION = '3.2.1';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -2483,11 +2483,13 @@ function bgResize() {
   bgW = cv.width = innerWidth; bgH = cv.height = innerHeight;
   bgEntities = [];
   bgNebula = [];
+  const nebulaColors = ['124,92,255', '0,224,255', '255,79,216', '90,140,220'];
+  const nebulaAlphas = [0.12, 0.10, 0.07, 0.12];
   for (let i = 0; i < 4; i++) {
     bgNebula.push({
       x: Math.random() * bgW, y: Math.random() * bgH,
       r: (0.25 + Math.random() * 0.4) * Math.min(bgW, bgH),
-      c: [['rgba(124,92,255,', '.12)'], ['rgba(0,224,255,', '.10)'], ['rgba(255,79,216,', '.07)'], ['rgba(90,140,220,', '.12)']][i],
+      c: nebulaColors[i], a: nebulaAlphas[i],
       p: Math.random() * 6.28
     });
   }
@@ -2497,7 +2499,7 @@ function bgResize() {
   }));
   bgSunspots = Array.from({ length: 160 }, () => ({
     a: Math.random() * 6.28, d: Math.random(), r: Math.random() * 3 + 0.6,
-    c: ['rgba(255,190,90,', ')', 'rgba(255,140,60,', ')', 'rgba(255,220,150,', ')'][Math.floor(Math.random() * 3)]
+    c: ['255,190,90', '255,140,60', '255,220,150'][Math.floor(Math.random() * 3)]
   }));
   bgGalaxy = Array.from({ length: 700 }, () => {
     const rad = 16 + Math.pow(Math.random(), 0.62) * Math.min(bgW, bgH) * 0.42;
@@ -2519,11 +2521,16 @@ function bgInit() {
     if (!bgCtx) return;
     const ctx = bgCtx, W = bgW, H = bgH;
     ctx.clearRect(0, 0, W, H);
-    if (bgMode === 'stars') drawStars(ctx, W, H, ts);
-    else if (bgMode === 'solar') drawSolar(ctx, W, H, ts);
-    else if (bgMode === 'galaxy') drawGalaxy(ctx, W, H, ts);
-    else if (bgMode === 'planet') drawPlanet(ctx, W, H, ts);
-    drawVignette(ctx, W, H);
+    try {
+      if (bgMode === 'solar') drawSolar(ctx, W, H, ts);
+      else if (bgMode === 'galaxy') drawGalaxy(ctx, W, H, ts);
+      else if (bgMode === 'planet') drawPlanet(ctx, W, H, ts);
+      else drawStars(ctx, W, H, ts);
+    } catch (e) {
+      // 任何绘制异常都不允许整幅背景消失：回退到星空
+      try { drawStars(ctx, W, H, ts); } catch (e2) { }
+    }
+    try { drawVignette(ctx, W, H); } catch (e3) { }
     requestAnimationFrame(step);
   };
   requestAnimationFrame(step);
@@ -2547,13 +2554,15 @@ function drawVignette(ctx, W, H) {
 }
 function drawNebula(ctx, W, H, ts) {
   for (const nb of bgNebula) {
-    const pulse = 1 + Math.sin(ts / 2600 + nb.p) * 0.25;
-    const g = ctx.createRadialGradient(nb.x, nb.y, 0, nb.x, nb.y, nb.r * pulse);
-    g.addColorStop(0, nb.c[0] + (0.14 * pulse) + nb.c[1]);
-    g.addColorStop(0.6, nb.c[0] + '0.05' + nb.c[1]);
-    g.addColorStop(1, nb.c[0] + '0' + nb.c[1]);
+    const pulse = 1 + Math.sin(ts / 2600 + nb.p) * 0.3;
+    const a = Math.min(0.32, Math.max(0, nb.a * pulse));
+    const r = nb.r * pulse;
+    const g = ctx.createRadialGradient(nb.x, nb.y, 0, nb.x, nb.y, r);
+    g.addColorStop(0, `rgba(${nb.c},${a})`);
+    g.addColorStop(0.55, `rgba(${nb.c},${(a * 0.45).toFixed(3)})`);
+    g.addColorStop(1, `rgba(${nb.c},0)`);
     ctx.fillStyle = g;
-    ctx.fillRect(nb.x - nb.r, nb.y - nb.r, nb.r * 2, nb.r * 2);
+    ctx.fillRect(nb.x - r, nb.y - r, r * 2, r * 2);
   }
 }
 function drawStars(ctx, W, H, ts) {
@@ -2619,7 +2628,7 @@ function drawSolar(ctx, W, H, ts) {
   for (const sp of bgSunspots) {
     const px = cx + Math.cos(sp.a) * sp.d * R * 0.95;
     const py = cy + Math.sin(sp.a) * sp.d * R * 0.95;
-    ctx.fillStyle = sp.c[0] + (0.35 + Math.random() * 0.2) + sp.c[1];
+    ctx.fillStyle = `rgba(${sp.c},${(0.35 + Math.random() * 0.2).toFixed(3)})`;
     ctx.beginPath(); ctx.arc(px, py, sp.r, 0, 7); ctx.fill();
   }
   ctx.restore();
