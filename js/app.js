@@ -47,8 +47,8 @@ function toast(msg, type, ms) {
 /* ---------------- 国际化 ---------------- */
 const I18N = {
   zh: {
-    'brand.sub': 'ALL-GENRE NOVEL STUDIO',
-    'btn.langTitle': '切换界面语言 / Switch language',
+    'brand.sub': '全风格小说创作台', 'brand.name': '晓星',
+    'btn.langTitle': '切换界面语言',
     'btn.backup': '⛁ 备份', 'btn.backupTitle': '备份与导出',
     'btn.ai': '⚙ AI 模型', 'btn.aiTitle': 'AI 模型接入设置',
     'btn.profileTitle': '个人档案（头像 / 昵称）',
@@ -88,8 +88,8 @@ const I18N = {
     'dict.ph': '输入英文单词…（选中正文后打开自动查词）',
     'common.save': '保存', 'common.cancel': '取消', 'common.close': '关闭', 'common.confirm': '确定', 'common.delete': '删除', 'common.export': '导出',
     'w.title': '标题', 'w.genre': '类型', 'w.audience': '用户群体', 'w.length': '篇幅', 'w.pov': '视角', 'w.tone': '基调', 'w.lang': '写作语言', 'w.authors': '参考作家',
-    'w.edit': '✎ 编辑风格表格', 'w.synopsis': '全书梗概 · SYNOPSIS', 'w.world': '世界观 · WORLDVIEW', 'w.custom': '自定义条目', 'w.addSec': '＋ 添加条目',
-    'w.authorLib': '作家文风库 · AUTHOR STYLE LAB', 'w.authorTip': '点击作家切换参考；「联网学习」将抓取维基百科词条研究其写作特点，并随上下文注入 AI。',
+    'w.edit': '✎ 编辑风格表格', 'w.styleProfile': '风格档案', 'w.synopsis': '全书梗概 · SYNOPSIS', 'w.world': '世界观 · WORLDVIEW', 'w.custom': '自定义条目', 'w.addSec': '＋ 添加条目',
+    'w.authorLib': '作家文风库', 'w.authorTip': '点击作家切换参考；「联网学习」将抓取维基百科词条研究其写作特点，并随上下文注入 AI。',
     'w.learn': '⛁ 联网学习文风', 'w.learnSel': '⛁ 联网学习文风（已选 {n} 位）', 'w.builtin': '内置技法', 'w.wiki': '联网学习（维基百科）',
     'w.learnOk': '文风学习完成：{ok}/{n} 位成功', 'w.learnFail': '文风学习：全部失败（请检查网络）', 'w.learnPartial': '文风学习完成：{ok} 成功 / {fail} 失败',
     'stat.words': '中文 {a} · 英文词 {b}', 'stat.pos': '行 {a} · 列 {b}', 'stat.chars': '字符 {a}', 'stat.wordsChip': '字',
@@ -181,7 +181,7 @@ const I18N = {
     'set.stack': '小框大纲 · 大框正文', 'set.split': '一半大纲 · 一半正文',
     'set.aipanel': 'AI 引擎面板', 'set.on': '开', 'set.off': '关', 'set.accent': '主题色',
     'set.account': '个人账户', 'set.editProfile': '编辑头像 / 昵称',
-    'set.lang': '语言 Language',
+    'set.lang': '语言',
     'set.general': '通用', 'set.backup': '⛁ 备份与导出', 'set.ai': '⚙ AI 模型接入',
     'set.feedback': '💬 问题反馈', 'set.terms': '📜 用户须知',
     'set.about': '版本更新', 'set.version': '当前版本', 'set.check': '检查更新',
@@ -234,7 +234,7 @@ const I18N = {
     'p.done': '✓ 论文生成完成，不满意可点「🔄 重新生成」',
     'p.freeNote': '论文模块免费开通中：免费版生成标准论文（约 1500 字 · 8 篇带出处链接的参考文献）；升级专业版可获得更长、更精的正文与更多参考文献。',
     'p.upgrade': '💎 升级获得更佳正文',
-    'gp.psearch': '正在检索文献资料', 'gp.pdraft': '正在拟写论文提纲', 'gp.pwrite': '正在输出论文正文',
+    'gp.psearch': '正在检索文献资料', 'gp.refsFound': '已检索到 {n} 篇文献', 'gp.pdraft': '正在拟写论文提纲', 'gp.pwrite': '正在输出论文正文',
     'gp.check': '⚖ 质量自检', 'gp.rewrite': '发现问题，正在重写优化', 'gp.pass': '自检通过 · 内容达标',
     'gp.failCheck': 'AI 自检未通过：多次重写仍未达标，正文未输出。请调整大纲/主题后重试。',
     'p.langTitle': '论文输出语言',
@@ -292,8 +292,8 @@ const I18N = {
     'tip.thanks': '感谢您的支持！小柚子收到啦 💛', 'tip.fail': '发送失败，请稍后再试', 'tip.needAmount': '请选择或输入支持金额'
   },
   en: {
-    'brand.sub': 'ALL-GENRE NOVEL STUDIO',
-    'btn.langTitle': 'Switch language / 切换语言',
+    'brand.sub': 'ALL-GENRE NOVEL STUDIO', 'brand.name': 'XIAOXING',
+    'btn.langTitle': 'Switch language',
     'btn.backup': '⛁ Backup', 'btn.backupTitle': 'Backup & Export',
     'btn.ai': '⚙ AI Models', 'btn.aiTitle': 'AI model settings',
     'btn.profileTitle': 'Profile (avatar / nickname)',
@@ -333,7 +333,7 @@ const I18N = {
     'dict.ph': 'Type an English word… (opens with selected text)',
     'common.save': 'Save', 'common.cancel': 'Cancel', 'common.close': 'Close', 'common.confirm': 'OK', 'common.delete': 'Delete', 'common.export': 'Export',
     'w.title': 'Title', 'w.genre': 'Genres', 'w.audience': 'Audience', 'w.length': 'Length', 'w.pov': 'POV', 'w.tone': 'Tone', 'w.lang': 'Language', 'w.authors': 'Authors',
-    'w.edit': '✎ Edit style table', 'w.synopsis': 'SYNOPSIS', 'w.world': 'WORLDVIEW', 'w.custom': 'Custom sections', 'w.addSec': '＋ Add section',
+    'w.edit': '✎ Edit style table', 'w.styleProfile': 'Style Profile', 'w.synopsis': 'SYNOPSIS', 'w.world': 'WORLDVIEW', 'w.custom': 'Custom sections', 'w.addSec': '＋ Add section',
     'w.authorLib': 'AUTHOR STYLE LAB', 'w.authorTip': 'Click an author to toggle reference. “Learn styles online” fetches Wikipedia entries to study their craft; the notes are injected into the AI context.',
     'w.learn': '⛁ Learn styles online', 'w.learnSel': '⛁ Learn styles online ({n} selected)', 'w.builtin': 'Built-in craft notes', 'w.wiki': 'Online study (Wikipedia)',
     'w.learnOk': 'Style learning done: {ok}/{n} succeeded', 'w.learnFail': 'Style learning failed (check network)', 'w.learnPartial': 'Style learning: {ok} ok / {fail} failed',
@@ -480,7 +480,7 @@ const I18N = {
     'p.done': '✓ Paper generated — click “🔄 Regenerate” if not satisfied',
     'p.freeNote': 'The paper module is free: the free plan generates a standard paper (~1500 words, 8 cited references with links). Upgrade to Pro for longer, better text and more references.',
     'p.upgrade': '💎 Upgrade for better text',
-    'gp.psearch': 'Searching references', 'gp.pdraft': 'Drafting the outline', 'gp.pwrite': 'Writing the paper',
+    'gp.psearch': 'Searching references', 'gp.refsFound': '{n} references found', 'gp.pdraft': 'Drafting the outline', 'gp.pwrite': 'Writing the paper',
     'gp.check': '⚖ Quality check', 'gp.rewrite': 'Issues found — rewriting', 'gp.pass': 'Check passed · quality confirmed',
     'gp.failCheck': 'AI self-check failed: after several rewrites the quality bar was not met, so nothing was output. Adjust the outline/topic and retry.',
     'p.langTitle': 'Paper output language',
@@ -538,8 +538,8 @@ const I18N = {
     'tip.thanks': 'Thank you for your support! 小柚子 got your message 💛', 'tip.fail': 'Failed to send, try again later', 'tip.needAmount': 'Choose or enter an amount'
   },
   ru: {
-    'brand.sub': 'ALL-GENRE NOVEL STUDIO',
-    'btn.langTitle': 'Переключить язык / Switch language',
+    'brand.sub': 'СТУДИЯ РОМАНОВ ВСЕХ ЖАНРОВ', 'brand.name': 'СЯОСИН',
+    'btn.langTitle': 'Переключить язык',
     'btn.backup': '⛁ Резерв', 'btn.backupTitle': 'Резерв и экспорт',
     'btn.ai': '⚙ ИИ-модели', 'btn.aiTitle': 'Настройки ИИ-моделей',
     'btn.profileTitle': 'Профиль (аватар / ник)',
@@ -590,7 +590,7 @@ const I18N = {
     'dict.ph': 'Введите слово… (открывается с выделенным текстом)',
     'common.save': 'Сохранить', 'common.cancel': 'Отмена', 'common.close': 'Закрыть', 'common.confirm': 'OK', 'common.delete': 'Удалить', 'common.export': 'Экспорт',
     'w.title': 'Название', 'w.genre': 'Жанры', 'w.audience': 'Аудитория', 'w.length': 'Объём', 'w.pov': 'Точка зрения', 'w.tone': 'Тон', 'w.lang': 'Язык', 'w.authors': 'Авторы',
-    'w.edit': '✎ Редактировать таблицу стиля', 'w.synopsis': 'СИНОПСИС', 'w.world': 'МИРОУСТРОЙСТВО', 'w.custom': 'Свои разделы', 'w.addSec': '＋ Добавить',
+    'w.edit': '✎ Редактировать таблицу стиля', 'w.styleProfile': 'Профиль стиля', 'w.synopsis': 'СИНОПСИС', 'w.world': 'МИРОУСТРОЙСТВО', 'w.custom': 'Свои разделы', 'w.addSec': '＋ Добавить',
     'w.authorLib': 'БИБЛИОТЕКА СТИЛЕЙ', 'w.authorTip': 'Кликните автора, чтобы выбрать его эталоном; «Изучить стили онлайн» загрузит материалы из Википедии и добавит их в контекст ИИ.',
     'w.learn': '⛁ Изучить стили онлайн', 'w.learnSel': '⛁ Изучить стили онлайн ({n} выбрано)', 'w.builtin': 'Встроенные приёмы', 'w.wiki': 'Онлайн-изучение (Википедия)',
     'w.learnOk': 'Изучение завершено: {ok}/{n} успешно', 'w.learnFail': 'Не удалось изучить стили (проверьте сеть)', 'w.learnPartial': 'Изучение стилей: {ok} ок / {fail} не удалось',
@@ -598,7 +598,7 @@ const I18N = {
     'w.styleSample': 'Вставьте образец своего текста (до 500 знаков) — ИИ изучит ваш ритм, лексику и стиль диалогов.',
     'w.styleSamplePh': 'Вставьте свой текст (до 500 знаков)…',
     'w.noAuthors': 'Эталонные авторы не выбраны. Кликните автора выше или добавьте своего через поиск.',
-    'stat.words': 'CJK {a} · EN слов {b}', 'stat.pos': 'Стр {a} · Кол {b}', 'stat.chars': 'Символов {a}', 'stat.wordsChip': 'слов',
+    'stat.words': 'Иероглифы {a} · Слова {b}', 'stat.pos': 'Стр {a} · Кол {b}', 'stat.chars': 'Символов {a}', 'stat.wordsChip': 'слов',
     'dict.loading': 'Поиск…', 'dict.notfound': 'Слово не найдено. Проверьте написание.',
     'dict.errNet': 'Ошибка запроса к словарю — нужен интернет.', 'dict.syn': 'Синонимы', 'dict.src': 'Источник: dictionaryapi.dev · Datamuse · Wiktionary',
     'toast.welcome': 'Добро пожаловать в XIAOXING! Создайте роман, затем подключите модель в «⚙ ИИ-модели».',
@@ -721,7 +721,7 @@ const I18N = {
     'p.done': '✓ Статья готова — не понравилось? «🔄 Заново»',
     'p.freeNote': 'Модуль статей бесплатен: стандартная статья (~1500 слов, 8 источников со ссылками). Pro — длиннее, качественнее, больше источников.',
     'p.upgrade': '💎 Улучшить текст',
-    'gp.psearch': 'Поиск источников', 'gp.pdraft': 'Черновик структуры', 'gp.pwrite': 'Написание статьи',
+    'gp.psearch': 'Поиск источников', 'gp.refsFound': 'Найдено источников: {n}', 'gp.pdraft': 'Черновик структуры', 'gp.pwrite': 'Написание статьи',
     'gp.check': '⚖ Проверка качества', 'gp.rewrite': 'Найдены проблемы — переписываю', 'gp.pass': 'Проверка пройдена · качество подтверждено',
     'gp.failCheck': 'ИИ-самопроверка не пройдена: после нескольких переписываний качество не достигнуто, текст не выведен. Скорректируйте тему/план и повторите.',
     'p.langTitle': 'Язык статьи',
@@ -1079,7 +1079,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.7.0';
+const APP_VERSION = '3.7.1';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -1707,7 +1707,7 @@ function renderWorld() {
     <textarea class="input" data-field="world" rows="7" data-i18n-ph="w.worldPh" placeholder="时代背景、地理、规则、力量体系总览…">${esc(n.world || '')}</textarea>
   </div>
   <div class="world-block">
-    <div class="block-label">风格档案 · STYLE <button class="btn mini" data-act="editstyle">${t('w.edit')}</button></div>
+    <div class="block-label">${t('w.styleProfile')} <button class="btn mini" data-act="editstyle">${t('w.edit')}</button></div>
     <div class="style-profile">
       <table>
         <tr><td class="sp-label">${t('w.audience')}</td><td class="sp-val">${esc(styleValName(n.audience || '通用'))}</td></tr>
@@ -4286,7 +4286,7 @@ async function generatePaper() {
     await genSetStage(0, '');
     const refs = await fetchRefs(topic, refCount);
     const refsText = refsToText(refs, L);
-    renderGenStages(t('gp.psearch') + '：' + t('stat.wordsChip') + ' ' + refs.length);
+    renderGenStages(t('gp.refsFound', { n: refs.length }));
     await new Promise(r2 => setTimeout(r2, 400));
     await genSetStage(1, '');
     const draft = await paperDraft(topic, refsText, lenHint, L);
@@ -4354,7 +4354,8 @@ async function checkChangelog() {
     }
     $('#upd-version').textContent = data.version + (data.date ? ' · ' + data.date : '');
     lastChangelogVersion = data.version;
-    $('#upd-items').innerHTML = (data.items || []).map(it =>
+    const items = state.settings.lang === 'en' ? (data.itemsEn || data.items) : (state.settings.lang === 'ru' ? (data.itemsRu || data.items) : data.items);
+    $('#upd-items').innerHTML = (items || []).map(it =>
       `<div class="upd-item"><div class="upd-item-title">✦ ${esc(it.title || '')}</div><div class="upd-item-desc">${esc(it.desc || '')}</div></div>`
     ).join('');
     openModal('modal-update');
