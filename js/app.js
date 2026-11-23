@@ -70,9 +70,9 @@ const I18N = {
     'style.lang': '写作语言', 'style.authors': '参考作家（可多选）', 'style.learn': '⛁ 联网学习文风',
     'aiset.title': '⚙ AI 模型接入', 'aiset.list': '已接入模型', 'aiset.add': '＋ 添加模型', 'aiset.accent': '界面主题色',
     'aiset.config': '模型配置', 'aiset.preset': '预设（快速填充）', 'aiset.name': '显示名称',
-    'aiset.base': 'API 地址（Base URL，通常以 /v1 结尾）', 'aiset.key': 'API Key', 'aiset.model': '模型名称',
+    'aiset.base': 'API 地址（Base URL，通常以 /v1 结尾）', 'aiset.path': '接口路径（默认 /chat/completions）', 'aiset.key': 'API Key', 'aiset.model': '模型名称',
     'aiset.temp': '温度（创造性）', 'aiset.maxtok': '最大输出 tokens', 'aiset.test': '测试连接', 'aiset.save': '保存并启用',
-    'aiset.help': '<b>如何接入？</b><p>只要兼容 OpenAI 接口格式即可。云端模型填 API 地址 + Key；本地开源模型（Ollama / LM Studio / vLLM / llama.cpp）填本地地址，Key 留空。</p><p>Ollama 需允许跨域：环境变量 <code>OLLAMA_ORIGINS=*</code> 后重启；或运行项目里的 <code>node proxy.mjs</code> 代理转发，Base URL 填 <code>http://localhost:8787/v1</code>。</p><p>云端模型若被浏览器 CORS 拦截，也可用代理：<code>node proxy.mjs 8787 https://api.deepseek.com</code>。</p>',
+    'aiset.help': '<b>如何接入？</b><p>只要兼容 OpenAI 接口格式即可。云端模型填 API 地址 + Key；本地开源模型（Ollama / LM Studio / vLLM / llama.cpp）填本地地址，Key 留空。</p><p><b>已内置免费模型</b>：Pollinations AI（无需 Key、无需注册，首次打开即可用）。免费额度有限，高峰时段可能变慢或限流；追求稳定高速，请在预设里选择 DeepSeek / Kimi 等并填入自己的 Key（几块钱可用很久）。</p><p>Ollama 需允许跨域：环境变量 <code>OLLAMA_ORIGINS=*</code> 后重启；或运行项目里的 <code>node proxy.mjs</code> 代理转发，Base URL 填 <code>http://localhost:8787/v1</code>。</p><p>云端模型若被浏览器 CORS 拦截，也可用代理：<code>node proxy.mjs 8787 https://api.deepseek.com</code>。</p>',
     'backup.title': '⛁ 备份与导出', 'backup.desc': '数据保存在本机浏览器（IndexedDB），清理浏览器数据会丢失，建议定期备份。单章与全书均无字数上限。',
     'backup.txt': '导出当前小说 TXT', 'backup.txtSub': '所有章节按顺序合并为纯文本文件',
     'backup.json': '备份全部数据 JSON', 'backup.jsonSub': '书库、章节、大纲、角色、设定、记忆、对话',
@@ -117,7 +117,7 @@ const I18N = {
     'empty.outline': '还没有大纲。<br/>点击右上「＋ 新卷」创建分卷，<br/>再在卷下添加章节情节节点。<br/><br/>AI 剧情引擎会自动引用大纲。',
     'empty.chars': '还没有角色卡。<br/>创建角色卡后，AI 会自动记住人物设定，<br/>写作时保持人设一致。',
     'empty.mem': '暂无记忆条目。<br/>手动添加，或用 AI 引擎的「◬ 提取记忆」自动生成。',
-    'empty.chat': '✦ 剧情引擎已就绪<br/>用上方快捷指令续写 / 推演剧情，<br/>或直接与 AI 讨论、让它记住设定。',
+    'empty.chat': '✦ 剧情引擎已就绪（免费模型已自动接通）<br/>用上方快捷指令续写 / 推演剧情，<br/>或直接与 AI 讨论、让它记住设定。',
     'empty.lib': '星海寂静，尚无小说。点击下方「＋ 新建小说」开始创作。',
     'empty.volKids': '暂无节点，点下方「＋ 节点」添加。',
     'editor.placeholder.zh': '全新章节，从这里开始你的宇宙……（Ctrl+S 保存 · 右侧 ✦ 召唤 AI 引擎）',
@@ -172,9 +172,9 @@ const I18N = {
     'style.lang': 'Language', 'style.authors': 'Reference authors (multi)', 'style.learn': '⛁ Learn styles online',
     'aiset.title': '⚙ AI Model Access', 'aiset.list': 'Connected models', 'aiset.add': '＋ Add model', 'aiset.accent': 'Accent color',
     'aiset.config': 'Model config', 'aiset.preset': 'Preset (quick fill)', 'aiset.name': 'Display name',
-    'aiset.base': 'Base URL (usually ends with /v1)', 'aiset.key': 'API Key', 'aiset.model': 'Model name',
+    'aiset.base': 'Base URL (usually ends with /v1)', 'aiset.path': 'API path (default /chat/completions)', 'aiset.key': 'API Key', 'aiset.model': 'Model name',
     'aiset.temp': 'Temperature', 'aiset.maxtok': 'Max output tokens', 'aiset.test': 'Test connection', 'aiset.save': 'Save & enable',
-    'aiset.help': '<b>How to connect?</b><p>Any OpenAI-compatible API works. Cloud models need a Base URL + API key; local open-source models (Ollama / LM Studio / vLLM / llama.cpp) need only the local address, key left empty.</p><p>Ollama needs CORS enabled: set <code>OLLAMA_ORIGINS=*</code> and restart; or run <code>node proxy.mjs</code> and use Base URL <code>http://localhost:8787/v1</code>.</p><p>If a cloud API is blocked by the browser CORS policy, use the proxy too: <code>node proxy.mjs 8787 https://api.deepseek.com</code>.</p>',
+    'aiset.help': '<b>How to connect?</b><p>Any OpenAI-compatible API works. Cloud models need a Base URL + API key; local open-source models (Ollama / LM Studio / vLLM / llama.cpp) need only the local address, key left empty.</p><p><b>Free model built in</b>: Pollinations AI — no key, no signup, works out of the box. Free quota is limited and may throttle at peak hours; for speed and stability, pick DeepSeek / Kimi from the presets and add your own key.</p><p>Ollama needs CORS enabled: set <code>OLLAMA_ORIGINS=*</code> and restart; or run <code>node proxy.mjs</code> and use Base URL <code>http://localhost:8787/v1</code>.</p><p>If a cloud API is blocked by the browser CORS policy, use the proxy too: <code>node proxy.mjs 8787 https://api.deepseek.com</code>.</p>',
     'backup.title': '⛁ Backup & Export', 'backup.desc': 'All data is stored in your local browser (IndexedDB). Clearing browser data erases it — back up regularly. No word limit per chapter or per book.',
     'backup.txt': 'Export current novel as TXT', 'backup.txtSub': 'All chapters merged in order as plain text',
     'backup.json': 'Back up all data as JSON', 'backup.jsonSub': 'Library, chapters, outline, characters, world, memory, chats',
@@ -219,7 +219,7 @@ const I18N = {
     'empty.outline': 'No outline yet.<br/>Click “＋ New Volume” to create volumes,<br/>then add chapter nodes.<br/><br/>The AI engine references the outline automatically.',
     'empty.chars': 'No character cards.<br/>AI remembers character settings automatically<br/>to keep them consistent.',
     'empty.mem': 'No memory entries.<br/>Add manually, or use “◬ Extract memory” in the AI engine.',
-    'empty.chat': '✦ Story engine ready<br/>Continue / plot via the quick actions above,<br/>or just talk to the AI.',
+    'empty.chat': '✦ Story engine ready (free model auto-connected)<br/>Continue / plot via the quick actions above,<br/>or just talk to the AI.',
     'empty.lib': 'The galaxy is quiet — no novels yet. Click “＋ New Novel” below.',
     'empty.volKids': 'No nodes. Click “＋ Node” below.',
     'editor.placeholder.zh': 'A new chapter begins here… (Ctrl+S to save · ✦ AI engine on the right)',
@@ -312,16 +312,17 @@ const AUTHORS = [
   { id: 'tolkien', name: '托尔金', wiki: 'J·R·R·托尔金', tips: '世界观建构登峰造极；史诗感、语言美感与神话体系。' }
 ];
 const PRESETS = [
-  { name: 'OpenAI', baseUrl: 'https://api.openai.com/v1', model: 'gpt-4o-mini' },
-  { name: 'DeepSeek 深度求索', baseUrl: 'https://api.deepseek.com/v1', model: 'deepseek-chat' },
-  { name: '硅基流动 SiliconFlow', baseUrl: 'https://api.siliconflow.cn/v1', model: 'deepseek-ai/DeepSeek-V3' },
-  { name: 'Moonshot Kimi', baseUrl: 'https://api.moonshot.cn/v1', model: 'moonshot-v1-32k' },
-  { name: '智谱 GLM', baseUrl: 'https://open.bigmodel.cn/api/paas/v4', model: 'glm-4-air' },
-  { name: '通义千问 DashScope', baseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1', model: 'qwen-plus' },
-  { name: 'Ollama（本地开源）', baseUrl: 'http://localhost:11434/v1', model: 'qwen2.5:14b' },
-  { name: 'LM Studio（本地开源）', baseUrl: 'http://localhost:1234/v1', model: 'local-model' },
-  { name: 'vLLM / llama.cpp（本地开源）', baseUrl: 'http://localhost:8000/v1', model: '' },
-  { name: '自定义', baseUrl: '', model: '' }
+  { name: 'Pollinations AI（免费·免密钥·开箱即用）', baseUrl: 'https://text.pollinations.ai', path: '/openai', model: 'openai' },
+  { name: 'OpenAI', baseUrl: 'https://api.openai.com/v1', path: '/chat/completions', model: 'gpt-4o-mini' },
+  { name: 'DeepSeek 深度求索', baseUrl: 'https://api.deepseek.com/v1', path: '/chat/completions', model: 'deepseek-chat' },
+  { name: '硅基流动 SiliconFlow', baseUrl: 'https://api.siliconflow.cn/v1', path: '/chat/completions', model: 'deepseek-ai/DeepSeek-V3' },
+  { name: 'Moonshot Kimi', baseUrl: 'https://api.moonshot.cn/v1', path: '/chat/completions', model: 'moonshot-v1-32k' },
+  { name: '智谱 GLM', baseUrl: 'https://open.bigmodel.cn/api/paas/v4', path: '/chat/completions', model: 'glm-4-air' },
+  { name: '通义千问 DashScope', baseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1', path: '/chat/completions', model: 'qwen-plus' },
+  { name: 'Ollama（本地开源）', baseUrl: 'http://localhost:11434/v1', path: '/chat/completions', model: 'qwen2.5:14b' },
+  { name: 'LM Studio（本地开源）', baseUrl: 'http://localhost:1234/v1', path: '/chat/completions', model: 'local-model' },
+  { name: 'vLLM / llama.cpp（本地开源）', baseUrl: 'http://localhost:8000/v1', path: '/chat/completions', model: '' },
+  { name: '自定义', baseUrl: '', path: '/chat/completions', model: '' }
 ];
 const SYSTEM_PROMPT = [
   '你是「晓星 XIAOXING」的内置剧情引擎，一位精通全类型小说（玄幻、科幻、都市、悬疑、言情、历史、轻小说等）的资深作家与策划。职责：讨论剧情、续写正文、推演走向、润色文笔、提取记忆、规划大纲、诊断文风。',
@@ -1486,6 +1487,7 @@ async function wipeAll() {
 /* ---------------- AI 提供方配置 ---------------- */
 const activeProvider = () => state.settings.providers.find(p => p.id === state.settings.activeProviderId) || null;
 const baseUrl = p => String(p.baseUrl || '').trim().replace(/\/+$/, '');
+const apiPath = p => (p.path !== undefined && p.path !== null && String(p.path).trim() !== '') ? String(p.path).trim() : '/chat/completions';
 
 function renderProviderList() {
   const list = $('#provider-list');
@@ -1501,6 +1503,7 @@ function renderProviderList() {
 function fillProvForm(p) {
   $('#prov-name').value = p ? (p.name || '') : '';
   $('#prov-base').value = p ? (p.baseUrl || '') : '';
+  $('#prov-path').value = p ? (p.path !== undefined ? p.path : '/chat/completions') : '/chat/completions';
   $('#prov-key').value = p ? (p.apiKey || '') : '';
   $('#prov-model').value = p ? (p.model || '') : '';
   $('#prov-temp').value = p ? (p.temperature ?? 0.8) : 0.8;
@@ -1520,6 +1523,7 @@ async function saveProvider() {
   if (!base || !model) return toast(t('toast.providerFill'), 'warn');
   const data = {
     id: state.provEditingId || uid(), name, baseUrl: base,
+    path: $('#prov-path').value.trim() || '/chat/completions',
     apiKey: $('#prov-key').value.trim(), model,
     temperature: clamp(parseFloat($('#prov-temp').value) || 0.8, 0, 2),
     maxTokens: clamp(parseInt($('#prov-maxtok').value) || 4096, 64, 128000)
@@ -1551,7 +1555,7 @@ async function testProvider() {
   const btn = $('#btn-prov-test');
   btn.disabled = true;
   try {
-    const res = await fetch(baseUrl(p) + '/chat/completions', {
+    const res = await fetch(baseUrl(p) + apiPath(p), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...(p.apiKey ? { 'Authorization': 'Bearer ' + p.apiKey } : {}) },
       body: JSON.stringify({ model: p.model, messages: [{ role: 'user', content: '请只回复四个字：连接成功' }], max_tokens: 64, stream: false })
@@ -1578,7 +1582,7 @@ async function aiRequest(messages, opts) {
   };
   if (p.maxTokens) body.max_tokens = Number(p.maxTokens);
   if (opts && opts.maxTokens) body.max_tokens = opts.maxTokens;
-  const res = await fetch(baseUrl(p) + '/chat/completions', {
+  const res = await fetch(baseUrl(p) + apiPath(p), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...(p.apiKey ? { 'Authorization': 'Bearer ' + p.apiKey } : {}) },
     body: JSON.stringify(body),
@@ -1623,6 +1627,7 @@ function humanizeAIError(err) {
   const m = String(err.message || err);
   if (/Failed to fetch|NetworkError|load failed|Load failed/i.test(m))
     return '网络请求失败：可能是跨域(CORS)限制或服务未启动。本地模型请确认已运行（Ollama 需设置 OLLAMA_ORIGINS=*，或运行 node proxy.mjs 代理）；云端模型若被浏览器拦截，也请用代理转发。原始信息：' + m;
+  if (/402|FREE_LIMIT|Payment/i.test(m)) return '免费模型额度已达上限或限流：请稍等几分钟重试；如需稳定高速体验，可在「⚙ AI 模型」中接入自己的模型（如 DeepSeek，充值 10 元可用很久）。原始信息：' + m;
   if (/404/.test(m)) return '404：请检查 API 地址（Base URL 通常以 /v1 结尾）或模型名称是否正确。原始信息：' + m;
   if (/401|403/.test(m)) return '鉴权失败(401/403)：请检查 API Key 是否正确。原始信息：' + m;
   if (/429/.test(m)) return '限流(429)：请求过于频繁或额度不足，请稍后再试。原始信息：' + m;
@@ -1827,7 +1832,23 @@ async function sendAI(userText, opts) {
     tick();
   } catch (err) {
     if (err.name === 'AbortError') { asst.content = acc; }
-    else { asst.error = humanizeAIError(err); }
+    else {
+      // 流式失败时自动改用非流式重试一次（免费模型偶发限流时更稳）
+      let fallbackOk = false;
+      try {
+        const txt = await aiRequest(messages, { stream: false, maxTokens: 1500 });
+        if (txt && txt.trim()) {
+          acc = txt;
+          asst.content = acc;
+          fallbackOk = true;
+          if (bodyEl) bodyEl.innerHTML = renderMd(acc);
+          listEl.scrollTop = listEl.scrollHeight;
+        }
+      } catch (e2) { }
+      if (!fallbackOk) {
+        asst.error = asst.content ? null : humanizeAIError(err);
+      }
+    }
     renderChat(); saveChat();
   } finally {
     state.aiStreaming = false;
@@ -1835,6 +1856,7 @@ async function sendAI(userText, opts) {
     $('#btn-ai-send').disabled = false;
     $('#btn-ai-stop').style.display = 'none';
   }
+  if (!asst.content && !asst.error) asst.error = '模型返回了空内容：可能是免费额度限流或网络波动，请稍后重试，或在「⚙ AI 模型」中接入自己的模型。';
   afterAI(asst);
 }
 function quickPrompt(action) {
@@ -2131,6 +2153,7 @@ function bindEvents() {
     const p = PRESETS[Number(e.target.value)];
     if (!p) return;
     $('#prov-base').value = p.baseUrl;
+    $('#prov-path').value = p.path || '/chat/completions';
     $('#prov-model').value = p.model;
     if (!$('#prov-name').value) $('#prov-name').value = p.name;
   });
@@ -2178,6 +2201,15 @@ function bindEvents() {
 async function boot() {
   loadSettings();
   loadWikiCache();
+  // 首次使用自动配置免费免密钥模型（Pollinations AI），开箱即用
+  if (!state.settings.providers.length) {
+    state.settings.providers.push({
+      id: uid(), name: 'Pollinations 免费模型', baseUrl: 'https://text.pollinations.ai', path: '/openai',
+      apiKey: '', model: 'openai', temperature: 0.8, maxTokens: 4096
+    });
+    state.settings.activeProviderId = state.settings.providers[0].id;
+    saveSettings();
+  }
   // 预设下拉填充
   PRESETS.forEach((p, i) => {
     const o = document.createElement('option');
