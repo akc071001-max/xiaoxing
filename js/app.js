@@ -235,6 +235,9 @@ const I18N = {
     'p.freeNote': '论文模块免费开通中：免费版生成标准论文（约 1500 字 · 8 篇带出处链接的参考文献）；升级专业版可获得更长、更精的正文与更多参考文献。',
     'p.upgrade': '💎 升级获得更佳正文',
     'gp.psearch': '正在检索文献资料', 'gp.pdraft': '正在拟写论文提纲', 'gp.pwrite': '正在输出论文正文',
+    'gp.check': '⚖ 质量自检', 'gp.rewrite': '发现问题，正在重写优化', 'gp.pass': '自检通过 · 内容达标',
+    'gp.failCheck': 'AI 自检未通过：多次重写仍未达标，正文未输出。请调整大纲/主题后重试。',
+    'p.langTitle': '论文输出语言',
     'set.credits': '开发者名单',
     'upd.title': '🎉 更新完成', 'upd.whatsNew': '本次更新内容', 'upd.done': '知道了',
     'top.noNovel': '未选择小说', 'top.novelSwitch': '切换 / 管理小说',
@@ -269,18 +272,18 @@ const I18N = {
     'auth.errPass': '密码需 6-20 位，且必须同时包含英文字母和数字',
     'auth.errPass2': '两次输入的密码不一致',
     'auth.errLogin': '用户名或密码错误', 'auth.errExists': '该用户名已注册，请直接登录',
-    'auth.okRegister': '注册成功！已自动登录，1 天专业版体验已开启',
+    'auth.okRegister': '注册成功！已自动登录，1 天旗舰版体验已开启',
     'auth.welcome': '欢迎回来，{u}',
-    'auth.trialBanner': '🎁 注册新账户即享 1 天专业版免费体验（不强制消费）',
+    'auth.trialBanner': '🎁 注册新账户即享 1 天旗舰版免费体验（最高规格待遇 · 不强制消费）',
     'auth.account': '登录账户', 'auth.logout': '退出登录',
     'auth.confirmLogout': '确定退出当前账户？作品数据仍保存在本机。', 'auth.loggedOut': '已退出登录',
-    'set.trialBadge': ' · 🎁 专业版体验中',
+    'set.trialBadge': ' · 🎁 旗舰版体验中',
     'guide.title': '🎓 新手引导', 'guide.skip': '跳过', 'guide.prev': '上一步', 'guide.next': '下一步', 'guide.done': '开始使用',
     'guide.s1': '<h3>👋 欢迎来到晓星 XIAOXING</h3><p>这是一个<b>全风格小说创作台</b>：写大纲，AI 帮你成文。三步就能开始：</p><ul><li><span class="g-num">1</span>「＋ 新建小说」选好风格（书名可以先不填）</li><li><span class="g-num">2</span> 新建章节，在「📋 本章大纲」写下这一章要发生什么</li><li><span class="g-num">3</span> 点「🚀 开始创作」，正文自动流式写出</li></ul>',
     'guide.s2': '<h3>🤖 先教你配置免费 AI 模型（不用花钱）</h3><p>晓星已经<b>内置了一个免费模型</b>，注册后自动接通，直接就能用，无需任何配置。</p><ul><li>想查看或换模型：右上「⚙ 设置 → AI 模型接入」，能看到当前正在使用的免费模型</li><li>免费模型偶尔会限流或变慢，系统会<b>自动重试并切换备用模型</b>，稍等即可</li><li>想要更稳定？免费注册「硅基流动」（siliconflow.cn）领取免费额度，拿到 Key 后在「AI 模型接入 → 预设」选硅基流动并粘贴 Key 即可</li><li>填好后点「测试连接」确认是否连通</li></ul><p>AI 出问题别慌：页面会给出中文提示，照着做就行。</p>',
     'guide.s3': '<h3>✍️ 常用操作一览</h3><ul><li><b>文风</b>：左侧「🖊 文风」选参考作家（点一下选中），或贴入你自己的 500 字让 AI 学你的文笔</li><li><b>不满意？</b>点「🔄 重新生成」重来，不扣任何费用</li><li><b>界面</b>：「⚙ 设置」里调字号、换背景（太阳系 / 银河系 / 星球）、切中英文、改主题色</li><li><b>章节标题 / 书名</b>：点「✨」让 AI 起名，你从候选里挑</li><li><b>保存</b>：作品自动保存在您的设备上；换设备用「备份与导出」</li><li><b>求助</b>：点击屏幕左下角的小外星人，随时打开创作小助手</li></ul>',
-    'guide.s4': '<h3>💎 关于付费（最后再说这个）</h3><p>当前处于<b>试运营期，全部免费</b>，不强制任何消费。</p><ul><li>🎁 您注册账户已自动获得<b>1 天专业版免费体验</b>：解锁 DeepSeek、Kimi、GLM、千问等主流大模型预设，记忆扩展到前 5 章</li><li>体验到期后自动回到免费版，作品与数据不受任何影响</li><li>想继续使用高级模型？会员中心有免费版 / 专业版 / 旗舰版三档说明（试运营期间同样免费开通）</li><li>正式收费上线前会提前公告，绝不自动扣费</li></ul><p>好，一切就绪，开始你的创作吧！🚀</p>',
-    'vip.trialOn': '🎁 新用户专享：专业版体验中，剩余 {t}（不强制消费）',
+    'guide.s4': '<h3>💎 关于付费（最后再说这个）</h3><p>当前处于<b>试运营期，全部免费</b>，不强制任何消费。</p><ul><li>🎁 您注册账户已自动获得<b>1 天旗舰版免费体验</b>（最高规格待遇）：解锁全部主流大模型预设，记忆扩展到前 10 章，生成内容完整并经过 AI 质量自检</li><li>体验到期后自动回到免费版，作品与数据不受任何影响</li><li>想继续使用高级模型？会员中心有免费版 / 专业版 / 旗舰版三档说明（试运营期间同样免费开通）</li><li>正式收费上线前会提前公告，绝不自动扣费</li></ul><p>好，一切就绪，开始你的创作吧！🚀</p>',
+    'vip.trialOn': '🎁 新用户专享：旗舰版体验中（最高规格待遇），剩余 {t}（不强制消费）',
     'vip.trialEnd': '专业版体验已结束，感谢体验！会员中心可选方案（试运营免费）。',
     'set.creator': '创作者：小柚子', 'set.creatorNote': '本站由单人开发 · 不定期更新', 'set.tip': '☕ 请作者喝杯奶茶',
     'tip.title': '☕ 支持创作者', 'tip.note': '本站由小柚子单人开发，不定期更新。打赏全凭心意，不强制、纯自愿。',
@@ -478,6 +481,9 @@ const I18N = {
     'p.freeNote': 'The paper module is free: the free plan generates a standard paper (~1500 words, 8 cited references with links). Upgrade to Pro for longer, better text and more references.',
     'p.upgrade': '💎 Upgrade for better text',
     'gp.psearch': 'Searching references', 'gp.pdraft': 'Drafting the outline', 'gp.pwrite': 'Writing the paper',
+    'gp.check': '⚖ Quality check', 'gp.rewrite': 'Issues found — rewriting', 'gp.pass': 'Check passed · quality confirmed',
+    'gp.failCheck': 'AI self-check failed: after several rewrites the quality bar was not met, so nothing was output. Adjust the outline/topic and retry.',
+    'p.langTitle': 'Paper output language',
     'set.credits': 'Developer credits',
     'upd.title': '🎉 Update complete', 'upd.whatsNew': 'What\'s new', 'upd.done': 'Got it',
     'top.noNovel': 'No novel selected', 'top.novelSwitch': 'Switch / manage novels',
@@ -512,18 +518,18 @@ const I18N = {
     'auth.errPass': 'Password must be 6-20 chars and contain both letters and digits',
     'auth.errPass2': 'The two passwords do not match',
     'auth.errLogin': 'Wrong username or password', 'auth.errExists': 'Username already registered — sign in instead',
-    'auth.okRegister': 'Registered! Signed in automatically — 1-day Pro trial started',
+    'auth.okRegister': 'Registered! Signed in automatically — 1-day Flagship trial started',
     'auth.welcome': 'Welcome back, {u}',
-    'auth.trialBanner': '🎁 New accounts get a 1-day free Pro trial (no purchase required)',
+    'auth.trialBanner': '🎁 New accounts get a 1-day free Flagship trial (top-tier treatment · no purchase required)',
     'auth.account': 'Account', 'auth.logout': 'Sign out',
     'auth.confirmLogout': 'Sign out of this account? Your works stay saved on this device.', 'auth.loggedOut': 'Signed out',
-    'set.trialBadge': ' · 🎁 Pro trial',
+    'set.trialBadge': ' · 🎁 Flagship trial',
     'guide.title': '🎓 Getting Started', 'guide.skip': 'Skip', 'guide.prev': 'Back', 'guide.next': 'Next', 'guide.done': 'Start writing',
     'guide.s1': '<h3>👋 Welcome to XIAOXING</h3><p>An <b>all-genre novel studio</b>: write an outline, and the AI turns it into prose. Three steps:</p><ul><li><span class="g-num">1</span> “＋ New Novel” and pick the style table (title can wait)</li><li><span class="g-num">2</span> Open a chapter and describe what happens in “📋 Chapter Outline”</li><li><span class="g-num">3</span> Click “🚀 Start Writing” — the text streams out automatically</li></ul>',
     'guide.s2': '<h3>🤖 First, configure the FREE AI model (no cost)</h3><p>XIAOXING has a <b>free model built in</b> — connected automatically after registration. Nothing to configure.</p><ul><li>To view or switch models: “⚙ Settings → AI Models” — you can see the free model in use</li><li>The free model may throttle occasionally; the system <b>auto-retries and switches backup models</b> — just wait a moment</li><li>Want more stability? Sign up free at SiliconFlow (siliconflow.cn) for free credits, copy the Key, then pick the preset in “AI Models” and paste it</li><li>Use “Test connection” to verify</li></ul><p>If the AI errors, don\'t panic — the page shows a friendly hint in your language.</p>',
     'guide.s3': '<h3>✍️ Everything else at a glance</h3><ul><li><b>Style</b>: “🖊 Style” tab on the left — click authors to reference them, or paste 500 characters of your own writing for the AI to learn</li><li><b>Not satisfied?</b> Click “🔄 Regenerate” — free, anytime</li><li><b>Interface</b>: “⚙ Settings” for font size, backgrounds (Solar System / Galaxy / Planet), language and theme color</li><li><b>Chapter / novel titles</b>: click “✨” and pick from AI candidates</li><li><b>Saving</b>: your work autosaves on this device; use “Backup & Export” to move it</li><li><b>Help</b>: click the little alien bottom-left anytime</li></ul>',
-    'guide.s4': '<h3>💎 About paid plans (last, we promise)</h3><p>We are in <b>beta: everything is free</b>. No purchase is required, ever, during beta.</p><ul><li>🎁 Your new account already got a <b>1-day free Pro trial</b>: unlocks DeepSeek, Kimi, GLM, Qwen and more model presets, memory up to 5 chapters</li><li>When the trial ends you return to the Free plan automatically — your works and data are untouched</li><li>Want to keep advanced models? The Membership center explains Free / Pro / Flagship (also free during beta)</li><li>We will announce any paid launch in advance — no auto-charging, ever</li></ul><p>All set — start writing! 🚀</p>',
-    'vip.trialOn': '🎁 New-user perk: Pro trial active, {t} left (no purchase required)',
+    'guide.s4': '<h3>💎 About paid plans (last, we promise)</h3><p>We are in <b>beta: everything is free</b>. No purchase is required, ever, during beta.</p><ul><li>🎁 Your new account already got a <b>1-day free Flagship trial</b> (top-tier treatment): unlocks all mainstream model presets, memory up to 10 chapters, complete AI-quality-checked output</li><li>When the trial ends you return to the Free plan automatically — your works and data are untouched</li><li>Want to keep advanced models? The Membership center explains Free / Pro / Flagship (also free during beta)</li><li>We will announce any paid launch in advance — no auto-charging, ever</li></ul><p>All set — start writing! 🚀</p>',
+    'vip.trialOn': '🎁 New-user perk: Flagship trial (top-tier treatment) active, {t} left (no purchase required)',
     'vip.trialEnd': 'Your Pro trial has ended — thanks for trying! Pick a plan in the Membership center (free during beta).',
     'set.creator': 'Creator: 小柚子', 'set.creatorNote': 'Solo developer · irregular updates', 'set.tip': '☕ Tip the creator',
     'tip.title': '☕ Support the Creator', 'tip.note': 'Made by 小柚子, a solo developer, with irregular updates. Tips are completely voluntary — no obligation.',
@@ -682,7 +688,7 @@ const I18N = {
     'vip.searchTitle': '🔍 Поиск ИИ-моделей по всему миру', 'vip.searchPh': 'Ключевое слово (deepseek / qwen / llama…)',
     'vip.searchBtn': 'Искать', 'vip.searching': 'Ищу модели…', 'vip.searchFail': 'Поиск не удался — попробуйте позже',
     'vip.searchEmpty': 'Модели не найдены', 'vip.copy': 'Копировать ID', 'vip.copied': 'ID скопирован',
-    'vip.trialOn': '🎁 Подарок новичку: действует Про-пробник, осталось {t} (покупка не требуется)',
+    'vip.trialOn': '🎁 Подарок новичку: Флагман-пробник (максимальный уровень), осталось {t} (покупка не требуется)',
     'vip.trialEnd': 'Пробный период Про завершён — спасибо! Выберите план в центре членства (во время беты бесплатно).',
     'btn.settings': '⚙ Настройки', 'btn.settingsTitle': 'Настройки',
     'set.title': '⚙ Настройки', 'set.ui': 'Интерфейс', 'set.font': 'Размер шрифта', 'set.layout': 'Макет',
@@ -698,7 +704,7 @@ const I18N = {
     'set.about': 'О версии', 'set.version': 'Текущая версия', 'set.check': 'Проверить обновления',
     'set.upToDate': 'У вас последняя версия ({v})', 'set.updateFound': 'Доступна версия {v} — нажмите Ctrl+F5',
     'set.updateFail': 'Проверка не удалась — проверьте сеть',
-    'set.trialBadge': ' · 🎁 Про-пробник',
+    'set.trialBadge': ' · 🎁 Флагман-пробник',
     'set.creator': 'Автор: 小柚子 (Сяо Юцзы)', 'set.creatorNote': 'Сайт разработан одним человеком · обновления нерегулярны',
     'set.tip': '☕ Поддержать автора',
     'sp.pickTip': 'Кликните автора, чтобы выбрать его эталоном (повторный клик — отмена). «Изучить стили онлайн» загрузит материалы из Википедии. Не нашли любимого автора? Добавьте через поиск.',
@@ -716,6 +722,9 @@ const I18N = {
     'p.freeNote': 'Модуль статей бесплатен: стандартная статья (~1500 слов, 8 источников со ссылками). Pro — длиннее, качественнее, больше источников.',
     'p.upgrade': '💎 Улучшить текст',
     'gp.psearch': 'Поиск источников', 'gp.pdraft': 'Черновик структуры', 'gp.pwrite': 'Написание статьи',
+    'gp.check': '⚖ Проверка качества', 'gp.rewrite': 'Найдены проблемы — переписываю', 'gp.pass': 'Проверка пройдена · качество подтверждено',
+    'gp.failCheck': 'ИИ-самопроверка не пройдена: после нескольких переписываний качество не достигнуто, текст не выведен. Скорректируйте тему/план и повторите.',
+    'p.langTitle': 'Язык статьи',
     'set.credits': 'Разработчик',
     'upd.title': '🎉 Обновление готово', 'upd.whatsNew': 'Что нового', 'upd.done': 'Понятно',
     'top.noNovel': 'Роман не выбран', 'top.novelSwitch': 'Переключение / управление романами',
@@ -750,16 +759,16 @@ const I18N = {
     'auth.errPass': 'Пароль: 6-20 знаков, обязательно буквы и цифры',
     'auth.errPass2': 'Пароли не совпадают',
     'auth.errLogin': 'Неверное имя или пароль', 'auth.errExists': 'Такое имя уже занято — войдите',
-    'auth.okRegister': 'Готово! Вы вошли — пробный Про на 1 день активирован',
+    'auth.okRegister': 'Готово! Вы вошли — пробный Флагман на 1 день активирован',
     'auth.welcome': 'С возвращением, {u}',
-    'auth.trialBanner': '🎁 Новым аккаунтам — 1 день бесплатного Про (покупка не требуется)',
+    'auth.trialBanner': '🎁 Новым аккаунтам — 1 день бесплатного Флагмана (максимальный уровень · без обязательств)',
     'auth.account': 'Аккаунт', 'auth.logout': 'Выйти',
     'auth.confirmLogout': 'Выйти из аккаунта? Ваши работы останутся на этом устройстве.', 'auth.loggedOut': 'Вы вышли',
     'guide.title': '🎓 Знакомство', 'guide.skip': 'Пропустить', 'guide.prev': 'Назад', 'guide.next': 'Далее', 'guide.done': 'Начать писать',
     'guide.s1': '<h3>👋 Добро пожаловать в XIAOXING</h3><p>Это <b>студия романов всех жанров</b>: пишете план — ИИ пишет текст. Три шага:</p><ul><li><span class="g-num">1</span> «＋ Новый роман», выберите стиль (название можно позже)</li><li><span class="g-num">2</span> Откройте главу и опишите, что в ней произойдёт, в «📋 План главы»</li><li><span class="g-num">3</span> Нажмите «🚀 Начать писать» — текст появится сам</li></ul>',
     'guide.s2': '<h3>🤖 Сначала — бесплатная ИИ-модель (бесплатно)</h3><p>В XIAOXING <b>встроена бесплатная модель</b> — она подключается автоматически после регистрации. Настраивать ничего не нужно.</p><ul><li>Посмотреть или сменить модель: «⚙ Настройки → ИИ-модели»</li><li>Бесплатная модель иногда тормозит — система <b>автоматически повторяет и переключает резервные модели</b></li><li>Хотите стабильнее? Зарегистрируйтесь бесплатно на SiliconFlow (siliconflow.cn), возьмите ключ, выберите пресет и вставьте его</li><li>Проверьте кнопкой «Проверить подключение»</li></ul><p>Если ИИ выдал ошибку — не пугайтесь: на экране появится понятная подсказка.</p>',
     'guide.s3': '<h3>✍️ Остальное в двух словах</h3><ul><li><b>Стиль</b>: вкладка «🖊 Стиль» слева — выбирайте авторов или вставьте свои 500 знаков</li><li><b>Не понравилось?</b> «🔄 Заново» — бесплатно и без ограничений</li><li><b>Интерфейс</b>: «⚙ Настройки» — шрифт, фон (Солнечная система / Галактика / Планета), язык, цвет</li><li><b>Названия</b>: кнопка «✨» — выбирайте из вариантов ИИ</li><li><b>Сохранение</b>: всё хранится на вашем устройстве; перенос через «Резерв и экспорт»</li><li><b>Помощь</b>: кликните инопланетянина слева внизу</li></ul>',
-    'guide.s4': '<h3>💎 О платных планах (в самом конце)</h3><p>Сейчас <b>бета: всё бесплатно</b>. Никаких обязательных покупок.</p><ul><li>🎁 Новый аккаунт уже получил <b>1 день бесплатного Про</b>: DeepSeek, Kimi, GLM, Qwen и другие модели, память до 5 глав</li><li>После пробника вы автоматически вернётесь на бесплатный план — работы и данные не пострадают</li><li>Центр членства объясняет планы (тоже бесплатно во время беты)</li><li>О платном запуске предупредим заранее — автоплатежей не будет</li></ul><p>Всё готово — пишите! 🚀</p>',
+    'guide.s4': '<h3>💎 О платных планах (в самом конце)</h3><p>Сейчас <b>бета: всё бесплатно</b>. Никаких обязательных покупок.</p><ul><li>🎁 Новый аккаунт уже получил <b>1 день бесплатного Флагмана</b> (максимальный уровень): все модели, память до 10 глав, полный текст с ИИ-самопроверкой</li><li>После пробника вы автоматически вернётесь на бесплатный план — работы и данные не пострадают</li><li>Центр членства объясняет планы (тоже бесплатно во время беты)</li><li>О платном запуске предупредим заранее — автоплатежей не будет</li></ul><p>Всё готово — пишите! 🚀</p>',
     'asst.title': '🛸 Помощник', 'asst.petTitle': 'Кликните меня — открою помощника', 'asst.hide': '🙈 Скрыть питомца',
     'asst.a1': '＋ Новый роман', 'asst.a2': '🚀 Начать писать', 'asst.a3': '✨ Названия', 'asst.a4': '⚙ Настройки', 'asst.a5': '💬 Отзыв',
     'asst.guide': '<h3>🚀 Три шага до первой главы</h3><ul><li><b>Шаг 1 · Роман</b>: «＋ Новый роман» и таблица стиля. Название можно оставить пустым.</li><li><b>Шаг 2 · План</b>: откройте главу и опишите, что произойдёт, в «📋 План главы».</li><li><b>Шаг 3 · Пишем</b>: «🚀 Начать писать» — ИИ изучит стили онлайн, составит черновик и напишет текст. Не понравилось — «🔄 Заново».</li></ul><h3>💡 Частые вопросы</h3><ul><li><b>Где текст?</b> В большом поле под планом; сохраняется автоматически.</li><li><b>План и текст рядом?</b> Кнопка «⇋» на панели плана или «⚙ Настройки → Макет».</li><li><b>ИИ пишет не как вы?</b> Вкладка «🖊 Стиль»: авторы или свой текст 500 знаков.</li><li><b>Шрифт, фон, тема?</b> «⚙ Настройки» — есть Солнечная система, Галактика, Планета.</li><li><b>Боитесь потерять данные?</b> «⚙ Настройки → Резерв и экспорт».</li><li><b>Остались вопросы?</b> «⚙ Настройки → Обратная связь».</li></ul>',
@@ -1070,7 +1079,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.6.2';
+const APP_VERSION = '3.7.0';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -2805,7 +2814,7 @@ async function saveMemFromMsg(idx, ei, all) {
 }
 
 /* ---------------- 章节联网生成（大纲 → 正文） ---------------- */
-const GEN_STAGES = ['gp.search', 'gp.style', 'gp.draft', 'gp.write'];
+const GEN_STAGES = ['gp.search', 'gp.style', 'gp.draft', 'gp.write', 'gp.check'];
 function renderGenStages(note) {
   const gs = state.genState;
   const box = $('#gen-stages');
@@ -2890,9 +2899,11 @@ async function genDraft(outline, planCtx) {
 async function genStreamIntoEditor(outline, plan, planCtx) {
   const n = curNovel();
   const nar = narrativeHint(n);
+  const tier = PLAN_LEVEL[effectivePlan()] || 0;
+  const lenHint = tier >= 2 ? '3500-5000 字' : (tier === 1 ? '3000-4000 字' : '2000-3000 字');
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: planCtx + '\n\n【本章大纲】\n' + outline + (nar ? '\n\n' + nar : '') + '\n\n【细纲】\n' + plan + '\n\n请根据以上内容撰写本章正文。要求：像人类作家一样写作（句式长短交错、对话自然、细节具体），直接输出正文，不要标题、不要解释。' }
+    { role: 'user', content: planCtx + '\n\n【本章大纲】\n' + outline + (nar ? '\n\n' + nar : '') + '\n\n【细纲】\n' + plan + '\n\n请根据以上内容撰写本章正文。要求：像人类作家一样写作（句式长短交错、对话自然、细节具体），篇幅目标约 ' + lenHint + '（内容完整、起承转合自然，不注水凑字数），直接输出正文，不要标题、不要解释。' }
   ];
   const res = await aiCallRetry(messages, { stream: true }, t('gp.write'));
   const ed = $('#editor');
@@ -2905,6 +2916,104 @@ async function genStreamIntoEditor(outline, plan, planCtx) {
   }
   if (!acc.trim()) throw new Error('empty');
   return acc;
+}
+
+/* ---------------- 质量自检循环（写完先自查，有问题重写，不合格不输出） ---------------- */
+const NOVEL_CHECK_CRITERIA = [
+  '1. 文风与创作要求一致（参考作家技法 / 用户文风样本 / 对话旁白配比要求）',
+  '2. 情节连贯、逻辑自洽，与上下文衔接自然，无明显漏洞',
+  '3. 无 AI 腔：无套路句式、空洞排比、过度总结、机械复读',
+  '4. 语言自然生动，符合真人写作习惯，句式长短交错',
+  '5. 内容完整：起承转合相对完整，结尾自然（或自然断章）',
+  '6. 无敏感违规内容；不使用表情符号、特殊符号或装饰性字符'
+].join('\n');
+const PAPER_CHECK_CRITERIA = [
+  '1. 学术规范、语言严谨，结构完整（引言-论述-结论-参考文献）',
+  '2. 正文引用处 [n] 标注与文末参考文献一一对应，无凭空引用',
+  '3. 参考文献格式标准，每条均含网页链接，未编造文献',
+  '4. 只使用规范文字与标点，无表情符号或特殊字符',
+  '5. 论点清晰、论证充分，无逻辑漏洞，内容完整',
+  '6. 字数达标，无注水或明显截断'
+].join('\n');
+async function aiCollectText(res) {
+  let acc = '';
+  for await (const chunk of aiStream(res)) acc += chunk;
+  return acc;
+}
+async function runQualityCheck(kind, text, refCtx) {
+  const criteria = kind === 'paper' ? PAPER_CHECK_CRITERIA : NOVEL_CHECK_CRITERIA;
+  const what = kind === 'paper' ? '论文' : '小说章节';
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'user', content: `你是严格的质量审核员。请逐条检查以下${what}是否达标。\n【审核标准】\n${criteria}\n${refCtx ? '【创作要求参考】\n' + refCtx.slice(0, 1500) + '\n' : ''}【待审文本】\n${text.slice(0, 6000)}\n\n只输出一行 JSON（不要其他任何内容）：{"ok":true,"issues":"通过"} 或 {"ok":false,"issues":"问题简述（简短）"}` }
+  ];
+  const res = await aiCallRetry(messages, { stream: true }, t('gp.check'));
+  const out = (await aiCollectText(res)).trim();
+  const m = out.match(/\{[\s\S]*\}/);
+  if (m) {
+    try {
+      const j = JSON.parse(m[0]);
+      return { ok: j.ok === true || j.ok === 'true', issues: String(j.issues || '') };
+    } catch (e) { }
+  }
+  const low = out.toLowerCase();
+  if (/(通过|pass|ok|达标|无问题)/.test(low)) return { ok: true, issues: '' };
+  return { ok: false, issues: out.slice(0, 160) || '未达标' };
+}
+async function qualityLoopNovel(outline, plan, planCtx) {
+  const tier = PLAN_LEVEL[effectivePlan()] || 0;
+  const maxRewrites = tier >= 2 ? 2 : 1;
+  const ed = $('#editor');
+  for (let i = 0; i <= maxRewrites; i++) {
+    await genSetStage(4, '');
+    const r = await runQualityCheck('novel', ed.value, planCtx);
+    if (r.ok) {
+      renderGenStages('✓ ' + t('gp.pass'));
+      await new Promise(r2 => setTimeout(r2, 600));
+      return true;
+    }
+    if (i < maxRewrites) {
+      renderGenStages(t('gp.rewrite') + ' (' + (i + 1) + '/' + maxRewrites + ')：' + (r.issues || '').slice(0, 60));
+      await new Promise(r2 => setTimeout(r2, 800));
+      await genSetStage(3, '');
+      await genStreamIntoEditor(outline, plan, planCtx);
+      updateCounts(); scheduleSave();
+      continue;
+    }
+    ed.value = '';
+    scheduleSave(); updateCounts();
+    toast(t('gp.failCheck'), 'warn', 6000);
+    return false;
+  }
+  return false;
+}
+async function qualityLoopPaper(topic, draft, refsText, lenHint, L) {
+  const tier = PLAN_LEVEL[effectivePlan()] || 0;
+  const maxRewrites = tier >= 2 ? 2 : 1;
+  const ed = $('#paper-editor');
+  const refCtx = `论文主题：${topic}\n可引用文献：\n${refsText}`;
+  for (let i = 0; i <= maxRewrites; i++) {
+    await genSetStage(3, '');
+    const r = await runQualityCheck('paper', ed.value, refCtx);
+    if (r.ok) {
+      renderGenStages('✓ ' + t('gp.pass'));
+      await new Promise(r2 => setTimeout(r2, 600));
+      return true;
+    }
+    if (i < maxRewrites) {
+      renderGenStages(t('gp.rewrite') + ' (' + (i + 1) + '/' + maxRewrites + ')：' + (r.issues || '').slice(0, 60));
+      await new Promise(r2 => setTimeout(r2, 800));
+      await genSetStage(2, '');
+      await paperStream(topic, draft, refsText, lenHint, ed, L);
+      updatePaperCounts(); schedulePaperSave();
+      continue;
+    }
+    ed.value = '';
+    schedulePaperSave(); updatePaperCounts();
+    toast(t('gp.failCheck'), 'warn', 6000);
+    return false;
+  }
+  return false;
 }
 async function generateChapter() {
   const c = curChapter();
@@ -2951,6 +3060,14 @@ async function generateChapter() {
     await genSetStage(3, '');
     await genStreamIntoEditor(outline, plan, planCtx);
     updateCounts(); scheduleSave();
+    // 自检循环：有问题重写，不合格不输出
+    const ok = await qualityLoopNovel(outline, plan, planCtx);
+    if (!ok) {
+      state.genState.running = false;
+      state.aiAbort = null;
+      hideGenProgress();
+      return;
+    }
     state.genState.running = false;
     state.aiAbort = null;
     renderGenStages('');
@@ -3749,7 +3866,7 @@ function trialLeft() {
   return state.settings.lang === 'zh' ? `${h} 小时 ${m} 分` : `${h}h ${m}m`;
 }
 function effectivePlan() {
-  if (trialActive()) return (PLAN_LEVEL[state.settings.plan] || 0) >= 2 ? state.settings.plan : 'pro';
+  if (trialActive()) return 'flag';
   return state.settings.plan;
 }
 function trialCheck() {
@@ -3898,7 +4015,7 @@ async function submitTip() {
 }
 
 /* ---------------- 论文板块（检索文献 · 带出处生成） ---------------- */
-const PAPER_STAGES = ['gp.psearch', 'gp.pdraft', 'gp.pwrite'];
+const PAPER_STAGES = ['gp.psearch', 'gp.pdraft', 'gp.pwrite', 'gp.check'];
 const currentPaper = () => state.papers.find(p => p.id === state.currentPaperId) || null;
 async function setBoard(b) {
   if (state.board === b) return;
@@ -3929,6 +4046,7 @@ function renderPaperPanel() {
 async function newPaper() {
   const p = {
     id: uid(), title: '', topic: '', content: '', status: 'draft',
+    outLang: ['zh', 'en', 'ru'].includes(state.settings.lang) ? state.settings.lang : 'zh',
     wordCount: 0, createdAt: now(), updatedAt: now()
   };
   state.papers.push(p);
@@ -3972,6 +4090,7 @@ function renderPaperEditor() {
   if (document.activeElement !== tp) tp.value = p.topic || '';
   if (document.activeElement !== ed) ed.value = p.content || '';
   st.value = p.status || 'draft';
+  $('#paper-lang').value = p.outLang || state.settings.lang || 'zh';
   ed.style.fontSize = state.settings.fontSize + 'px';
   updatePaperCounts();
   setPaperSaveState(true);
@@ -4008,6 +4127,7 @@ async function savePaper(manual) {
   p.topic = $('#paper-topic').value;
   p.content = $('#paper-editor').value;
   p.status = $('#paper-status').value;
+  p.outLang = $('#paper-lang').value || p.outLang || 'zh';
   p.wordCount = countWords(p.content);
   p.updatedAt = now();
   state.paperDirty = false;
@@ -4083,10 +4203,18 @@ async function fetchRefs(topic, count) {
   return out;
 }
 function paperLang() {
-  const L = state.settings.lang;
-  if (L === 'en') return { write: '请用英文撰写整篇论文', fallback: 'Online search was limited; the reference list is to be supplemented.', linkLabel: 'Link', dateLabel: 'retrieved on', noRefs: 'Online search was limited; references to be supplemented.' };
-  if (L === 'ru') return { write: 'Пишите всю статью на русском языке', fallback: 'Онлайн-поиск был ограничен; список литературы будет дополнен.', linkLabel: 'Ссылка', dateLabel: 'дата обращения', noRefs: 'Онлайн-поиск ограничен; список литературы будет дополнен.' };
-  return { write: '请用中文撰写整篇论文', fallback: '在线检索受限，参考文献待补充', linkLabel: '链接', dateLabel: '检索于', noRefs: '在线检索受限，参考文献待补充' };
+  const p = currentPaper();
+  const L = (p && p.outLang) || state.settings.lang;
+  const MAP = {
+    zh: { write: '请用中文撰写整篇论文', fallback: '在线检索受限，参考文献待补充', linkLabel: '链接', dateLabel: '检索于', noRefs: '在线检索受限，参考文献待补充', refsTitle: '参考文献' },
+    en: { write: '请用英文撰写整篇论文', fallback: 'Online search was limited; the reference list is to be supplemented.', linkLabel: 'Link', dateLabel: 'retrieved on', noRefs: 'Online search was limited; references to be supplemented.', refsTitle: 'References' },
+    ru: { write: 'Пишите всю статью на русском языке', fallback: 'Онлайн-поиск был ограничен; список литературы будет дополнен.', linkLabel: 'Ссылка', dateLabel: 'дата обращения', noRefs: 'Онлайн-поиск ограничен; список литературы будет дополнен.', refsTitle: 'Список литературы' },
+    ja: { write: '論文全体を日本語で執筆してください', fallback: 'オンライン検索が制限されたため、参考文献は後日補足します。', linkLabel: 'リンク', dateLabel: '参照日', noRefs: 'オンライン検索が制限されたため、参考文献は後日補足します。', refsTitle: '参考文献' },
+    fr: { write: 'Rédigez tout l\'article en français', fallback: 'Recherche en ligne limitée ; la liste des références sera complétée.', linkLabel: 'Lien', dateLabel: 'consulté le', noRefs: 'Recherche en ligne limitée ; références à compléter.', refsTitle: 'Références' },
+    de: { write: 'Schreiben Sie den gesamten Artikel auf Deutsch', fallback: 'Online-Recherche eingeschränkt; das Literaturverzeichnis wird ergänzt.', linkLabel: 'Link', dateLabel: 'abgerufen am', noRefs: 'Online-Recherche eingeschränkt; Literaturverzeichnis wird ergänzt.', refsTitle: 'Literaturverzeichnis' },
+    es: { write: 'Escriba todo el artículo en español', fallback: 'Búsqueda en línea limitada; la lista de referencias se completará.', linkLabel: 'Enlace', dateLabel: 'consultado el', noRefs: 'Búsqueda en línea limitada; referencias por completar.', refsTitle: 'Referencias' }
+  };
+  return MAP[L] || MAP.zh;
 }
 function refsToText(refs, L) {
   if (!refs.length) return '';
@@ -4120,7 +4248,7 @@ async function paperDraft(topic, refsText, lenHint, L) {
 async function paperStream(topic, draft, refsText, lenHint, ed, L) {
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: `请根据以下内容撰写完整论文正文（${L.write}），要求：\n1. 学术规范、语言严谨；字数约 ${lenHint}。\n2. 正文引用处一律用 [n] 标注，且只能引用下方给定文献，不得编造文献。\n3. 文末必须附「参考文献」列表，严格按最标准格式，每条必须附上检索到的网页链接：\n[编号] 作者. 标题[J]. 期刊/来源, 年份, 卷(期): 页码. ${L.linkLabel}: URL\n网络资料用 [EB/OL] 并注明检索日期与链接。\n（信息缺失的字段可省略，但链接不可省略，不得编造）\n4. 只使用规范文字与标点，不使用表情符号、特殊符号或装饰性字符。\n5. 若下方文献为空，文末注明「${L.noRefs}」，不要编造。\n6. 直接输出正文（含文末参考文献列表），不要任何额外解释。\n\n【论文主题/要求】\n${topic}\n\n【提纲】\n${draft}\n\n【可引用文献】\n${refsText || '（无）'}` }
+    { role: 'user', content: `请根据以下内容撰写完整论文正文（${L.write}），要求：\n1. 学术规范、语言严谨；字数约 ${lenHint}。\n2. 正文引用处一律用 [n] 标注，且只能引用下方给定文献，不得编造文献。\n3. 文末必须附「${L.refsTitle}」列表，严格按最标准格式，每条必须附上检索到的网页链接：\n[编号] 作者. 标题[J]. 期刊/来源, 年份, 卷(期): 页码. ${L.linkLabel}: URL\n网络资料用 [EB/OL] 并注明检索日期与链接。\n（信息缺失的字段可省略，但链接不可省略，不得编造）\n4. 只使用规范文字与标点，不使用表情符号、特殊符号或装饰性字符。\n5. 若下方文献为空，文末注明「${L.noRefs}」，不要编造。\n6. 直接输出正文（含文末「${L.refsTitle}」列表），不要任何额外解释。\n\n【论文主题/要求】\n${topic}\n\n【提纲】\n${draft}\n\n【可引用文献】\n${refsText || '（无）'}` }
   ];
   const res = await aiCallRetry(messages, { stream: true }, t('gp.pwrite'));
   let acc = '';
@@ -4145,9 +4273,9 @@ async function generatePaper() {
   const ed = $('#paper-editor');
   if (ed.value.trim() && !await confirmDialog(t('p.overwrite'))) return;
   flushPaperSave();
-  const premium = (PLAN_LEVEL[effectivePlan()] || 0) >= 1;
-  const refCount = premium ? 12 : 8;
-  const lenHint = premium ? '3000-3500 字' : '1500-2000 字';
+  const premium = (PLAN_LEVEL[effectivePlan()] || 0);
+  const refCount = premium >= 2 ? 15 : (premium === 1 ? 12 : 8);
+  const lenHint = premium >= 2 ? '4000-5000 字' : (premium === 1 ? '3000-3500 字' : '1500-2000 字');
   const L = paperLang();
   state.genState.running = true;
   state.genState.abort = new AbortController();
@@ -4168,6 +4296,14 @@ async function generatePaper() {
     await genSetStage(2, '');
     await paperStream(topic, draft, refsText, lenHint, ed, L);
     updatePaperCounts(); schedulePaperSave();
+    // 自检循环：有问题重写，不合格不输出
+    const ok = await qualityLoopPaper(topic, draft, refsText, lenHint, L);
+    if (!ok) {
+      state.genState.running = false;
+      state.aiAbort = null;
+      hideGenProgress();
+      return;
+    }
     state.genState.running = false;
     state.aiAbort = null;
     renderGenStages('');
@@ -4307,6 +4443,7 @@ function bindEvents() {
   $('#paper-title').addEventListener('input', schedulePaperSave);
   $('#paper-topic').addEventListener('input', schedulePaperSave);
   $('#paper-status').addEventListener('change', schedulePaperSave);
+  $('#paper-lang').addEventListener('change', schedulePaperSave);
   $('#paper-editor').addEventListener('input', () => { schedulePaperSave(); updatePaperCounts(); });
   $('#paper-editor').addEventListener('keyup', updatePaperCounts);
   $('#paper-editor').addEventListener('click', updatePaperCounts);
