@@ -588,6 +588,9 @@
         </div>
       </div>
       <p class="vip-foot-note" data-i18n="vip.foot">试运营期间所有方案均不收费，敬请期待正式上线。</p>
+      <div class="set-row">
+        <button class="btn small primary" id="btn-vip-tip" data-i18n="set.tip">☕ 请作者喝杯奶茶</button>
+      </div>
       <div class="set-section-title" data-i18n="vip.searchTitle">🔍 全网搜索 AI 模型</div>
       <div class="or-search-row">
         <input class="input" id="or-search-input" data-i18n-ph="vip.searchPh" placeholder="输入关键词搜索全网模型（如 deepseek / qwen / llama…）" autocomplete="off" />
@@ -659,6 +662,7 @@
       <div class="set-row">
         <button class="chip set-chip" id="set-lang-zh" data-lang="zh">中文</button>
         <button class="chip set-chip" id="set-lang-en" data-lang="en">English</button>
+        <button class="chip set-chip" id="set-lang-ru" data-lang="ru">Русский</button>
       </div>
       <div class="set-section-title" data-i18n="set.general">通用</div>
       <div class="set-grid">
@@ -676,8 +680,15 @@
       <div class="set-section-title" data-i18n="set.about">版本更新</div>
       <div class="set-row">
         <span class="set-label" data-i18n="set.version">当前版本</span>
-        <span class="set-val mono" id="set-version">2.2.0</span>
+        <span class="set-val mono" id="set-version">3.4.0</span>
         <button class="btn small" id="btn-check-update" data-i18n="set.check">检查更新</button>
+      </div>
+      <div class="set-row">
+        <span class="set-label" data-i18n="set.creator">创作者：小柚子</span>
+        <span class="set-val" data-i18n="set.creatorNote">本站由单人开发 · 不定期更新</span>
+      </div>
+      <div class="set-row">
+        <button class="btn small primary" id="set-tip" data-i18n="set.tip">☕ 请作者喝杯奶茶</button>
       </div>
     </div>
   </div>
@@ -820,6 +831,33 @@
     <div class="modal-foot">
       <button class="btn ghost" id="btn-guide-prev" data-i18n="guide.prev" style="visibility:hidden">上一步</button>
       <button class="btn primary" id="btn-guide-next" data-i18n="guide.next">下一步</button>
+    </div>
+  </div>
+</div>
+
+<!-- 支持创作者（打赏 · 自愿） -->
+<div class="modal-overlay" id="modal-tip" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" data-i18n="tip.title">☕ 支持创作者</div>
+      <button class="icon-btn modal-close" data-close="modal-tip">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="fb-hint" data-i18n="tip.note">本站由小柚子单人开发，不定期更新。打赏全凭心意，不强制、纯自愿。</p>
+      <label><span data-i18n="tip.amount">支持金额</span></label>
+      <div class="tip-amounts">
+        <button class="chip set-chip" data-tip="6.66">¥6.66</button>
+        <button class="chip set-chip" data-tip="8.88">¥8.88</button>
+        <button class="chip set-chip" data-tip="18.88">¥18.88</button>
+        <button class="chip set-chip" data-tip="66.66">¥66.66</button>
+        <input class="input tip-custom" id="tip-custom" type="number" min="0.01" step="0.01" data-i18n-ph="tip.customPh" placeholder="自定义金额（元）…" autocomplete="off" />
+      </div>
+      <label style="margin-top:12px"><span data-i18n="tip.msg">想对创作者说的话（可选）</span>
+        <textarea id="tip-msg" rows="4" data-i18n-ph="tip.msgPh" placeholder="鼓励的话、建议、想说的话…"></textarea>
+      </label>
+    </div>
+    <div class="modal-foot">
+      <button class="btn primary" id="btn-tip-send" data-i18n="tip.send">💛 送出心意</button>
     </div>
   </div>
 </div>
