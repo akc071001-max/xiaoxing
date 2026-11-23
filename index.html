@@ -53,11 +53,8 @@
   </button>
   <div class="topbar-right">
     <div id="stats" class="stats"></div>
-    <button class="tb-btn" id="btn-lang" data-i18n-title="btn.langTitle" title="切换界面语言 Switch language">EN</button>
-    <button class="tb-btn" id="btn-backup" data-i18n="btn.backup" data-i18n-title="btn.backupTitle" title="备份与导出">⛁ 备份</button>
-    <button class="tb-btn" id="btn-ai-settings" data-i18n="btn.ai" data-i18n-title="btn.aiTitle" title="AI 模型接入设置">⚙ AI 模型</button>
     <button class="tb-btn" id="btn-vip" data-i18n="btn.vip" data-i18n-title="btn.vipTitle" title="会员中心（试运营）">💎 会员</button>
-    <button class="tb-btn" id="btn-feedback" data-i18n="btn.feedback" data-i18n-title="btn.feedbackTitle" title="意见反馈">💬 反馈</button>
+    <button class="tb-btn" id="btn-settings" data-i18n="btn.settings" data-i18n-title="btn.settingsTitle" title="设置">⚙ 设置</button>
     <button id="btn-profile" class="profile-btn" data-i18n-title="btn.profileTitle" title="个人档案（头像 / 昵称）">
       <span id="profile-avatar" class="profile-avatar">✦</span>
       <span id="profile-name" data-i18n="profile.default">未设置昵称</span>
@@ -104,6 +101,8 @@
         <span class="co-label" data-i18n="co.label">📋 本章大纲</span>
         <button class="btn primary gen-btn" id="btn-gen-chapter" data-i18n="co.gen">⚡ 联网生成正文</button>
         <button class="btn" id="btn-gen-again" data-i18n="co.again" title="对结果不满意？重新生成">🔄 重新生成</button>
+        <span class="spacer"></span>
+        <button class="btn mini" id="btn-layout-toggle" data-i18n-title="co.layoutToggleTitle" title="切换布局：上下 / 左右分屏">⇋ <span data-i18n="co.layout">布局</span></button>
         <span class="co-hint" id="gen-hint"></span>
       </div>
       <textarea id="chapter-outline" rows="3" data-i18n-ph="co.ph" placeholder="输入本章大纲：本章要发生什么、出现哪些人物、埋什么伏笔…… 输入后点「⚡ 联网生成正文」"></textarea>
@@ -569,6 +568,68 @@
         </div>
       </div>
       <p class="vip-foot-note" data-i18n="vip.foot">试运营期间所有方案均不收费，敬请期待正式上线。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 设置中心 -->
+<div class="modal-overlay" id="modal-settings" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" data-i18n="set.title">⚙ 设置</div>
+      <button class="icon-btn modal-close" data-close="modal-settings">✕</button>
+    </div>
+    <div class="modal-body set-body">
+      <div class="set-section-title" data-i18n="set.ui">界面设置</div>
+      <div class="set-row">
+        <span class="set-label" data-i18n="set.font">正文字号</span>
+        <button class="btn small" id="set-font-minus">A−</button>
+        <span class="set-val" id="set-font-val">18px</span>
+        <button class="btn small" id="set-font-plus">A+</button>
+      </div>
+      <div class="set-row">
+        <span class="set-label" data-i18n="set.layout">界面样式</span>
+        <button class="chip set-chip" id="set-layout-stack" data-layout="stack" data-i18n="set.stack">小框大纲 · 大框正文</button>
+        <button class="chip set-chip" id="set-layout-split" data-layout="split" data-i18n="set.split">一半大纲 · 一半正文</button>
+      </div>
+      <div class="set-row">
+        <span class="set-label" data-i18n="set.aipanel">AI 引擎面板</span>
+        <button class="chip set-chip" id="set-ai-on" data-aipanel="1" data-i18n="set.on">开</button>
+        <button class="chip set-chip" id="set-ai-off" data-aipanel="0" data-i18n="set.off">关</button>
+      </div>
+      <div class="set-row">
+        <span class="set-label" data-i18n="set.accent">主题色</span>
+        <div class="accent-row">
+          <button class="accent-dot" data-accent="cyan" style="--c:#00e0ff" title="青色"></button>
+          <button class="accent-dot" data-accent="magenta" style="--c:#ff4fd8" title="品红"></button>
+          <button class="accent-dot" data-accent="green" style="--c:#3ddc97" title="翠绿"></button>
+          <button class="accent-dot" data-accent="gold" style="--c:#ffb454" title="琥珀"></button>
+        </div>
+      </div>
+      <div class="set-section-title" data-i18n="set.account">个人账户</div>
+      <div class="set-row">
+        <span class="set-avatar" id="set-profile-avatar">✦</span>
+        <span class="set-label" id="set-profile-name">未设置昵称</span>
+        <button class="btn small" id="set-profile-edit" data-i18n="set.editProfile">编辑头像 / 昵称</button>
+      </div>
+      <div class="set-section-title" data-i18n="set.lang">语言 Language</div>
+      <div class="set-row">
+        <button class="chip set-chip" id="set-lang-zh" data-lang="zh">中文</button>
+        <button class="chip set-chip" id="set-lang-en" data-lang="en">English</button>
+      </div>
+      <div class="set-section-title" data-i18n="set.general">通用</div>
+      <div class="set-grid">
+        <button class="btn" id="set-backup" data-i18n="set.backup">⛁ 备份与导出</button>
+        <button class="btn" id="set-ai" data-i18n="set.ai">⚙ AI 模型接入</button>
+        <button class="btn" id="set-feedback" data-i18n="set.feedback">💬 问题反馈</button>
+        <button class="btn" id="set-terms" data-i18n="set.terms">📜 用户须知</button>
+      </div>
+      <div class="set-section-title" data-i18n="set.about">版本更新</div>
+      <div class="set-row">
+        <span class="set-label" data-i18n="set.version">当前版本</span>
+        <span class="set-val mono" id="set-version">2.2.0</span>
+        <button class="btn small" id="btn-check-update" data-i18n="set.check">检查更新</button>
+      </div>
     </div>
   </div>
 </div>
