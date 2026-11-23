@@ -286,7 +286,11 @@ input::placeholder,textarea::placeholder{color:rgba(126,145,179,.45)}
 @keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* ---------------- 滚动条 ---------------- */
-.scroll-area{overflow-y:auto}
+.scroll-area{overflow-y:auto;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;overscroll-behavior:contain}
+.scroll-area,.modal-body,#ai-input,#paper-editor,#editor,#chapter-outline,#paper-topic,#note-content,#feedback-text,#tip-msg{scroll-behavior:smooth;overscroll-behavior:contain}
+#ai-input{max-height:150px;overflow-y:auto}
+.guide-body{overflow-y:auto}
+.asst-body{overflow-y:auto}
 *::-webkit-scrollbar{width:9px;height:9px}
 *::-webkit-scrollbar-track{background:transparent}
 *::-webkit-scrollbar-thumb{background:rgba(60,90,140,.45);border-radius:6px;border:2px solid transparent;background-clip:padding-box}
@@ -529,6 +533,11 @@ body.board-paper.no-ai #app{grid-template-columns:300px minmax(0,1fr)}
 .tip-qr{width:190px;height:auto;border-radius:10px;border:2px solid var(--line-soft);box-shadow:0 0 18px rgba(0,224,255,.15);background:#fff;flex:none}
 .dev-tip-body{flex:1;min-width:220px;display:flex;flex-direction:column;gap:10px}
 .tip-note{font-size:12px;color:var(--txt-dim);line-height:1.8}
+
+.upd-version{font-family:var(--font-mono);font-size:13px;color:var(--accent);margin-bottom:8px}
+.upd-item{border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-bottom:8px;background:rgba(16,24,42,.4)}
+.upd-item-title{font-size:13px;color:var(--txt-bright);font-weight:500}
+.upd-item-desc{font-size:12px;color:var(--txt-dim);margin-top:3px;line-height:1.7}
 
 /* ---------------- 账户登录 / 注册 ---------------- */
 .auth-langs{display:flex;gap:8px;margin-bottom:14px;justify-content:center}
