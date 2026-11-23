@@ -174,7 +174,19 @@ const I18N = {
     'vip.flag': '旗舰版', 'vip.flagPrice': '¥0 · 试运营',
     'vip.l1': '全部专业版权益', 'vip.l2': '优先接入新模型', 'vip.l3': '专属客服支持',
     'vip.btn': '暂未开放', 'vip.btnToast': '试运营期间不收费，敬请期待',
-    'vip.foot': '试运营期间所有方案均不收费，敬请期待正式上线。'
+    'vip.foot': '试运营期间所有方案均不收费，敬请期待正式上线。',
+    'btn.settings': '⚙ 设置', 'btn.settingsTitle': '设置中心',
+    'co.layout': '布局', 'co.layoutToggleTitle': '切换布局：上下 / 左右分屏',
+    'set.title': '⚙ 设置', 'set.ui': '界面设置', 'set.font': '正文字号', 'set.layout': '界面样式',
+    'set.stack': '小框大纲 · 大框正文', 'set.split': '一半大纲 · 一半正文',
+    'set.aipanel': 'AI 引擎面板', 'set.on': '开', 'set.off': '关', 'set.accent': '主题色',
+    'set.account': '个人账户', 'set.editProfile': '编辑头像 / 昵称',
+    'set.lang': '语言 Language',
+    'set.general': '通用', 'set.backup': '⛁ 备份与导出', 'set.ai': '⚙ AI 模型接入',
+    'set.feedback': '💬 问题反馈', 'set.terms': '📜 用户须知',
+    'set.about': '版本更新', 'set.version': '当前版本', 'set.check': '检查更新',
+    'set.upToDate': '已是最新版本（{v}）', 'set.updateFound': '发现新版本 {v}，请按 Ctrl+F5 刷新页面获取',
+    'set.updateFail': '检查失败：请检查网络后重试'
   },
   en: {
     'brand.sub': 'ALL-GENRE NOVEL STUDIO',
@@ -305,7 +317,19 @@ const I18N = {
     'vip.flag': 'Flagship', 'vip.flagPrice': '¥0 · beta',
     'vip.l1': 'All Pro benefits', 'vip.l2': 'Early access to new models', 'vip.l3': 'Dedicated support',
     'vip.btn': 'Coming soon', 'vip.btnToast': 'Free during beta — stay tuned',
-    'vip.foot': 'All plans are free during the beta period.'
+    'vip.foot': 'All plans are free during the beta period.',
+    'btn.settings': '⚙ Settings', 'btn.settingsTitle': 'Settings',
+    'co.layout': 'Layout', 'co.layoutToggleTitle': 'Toggle layout: stacked / split',
+    'set.title': '⚙ Settings', 'set.ui': 'Interface', 'set.font': 'Font size', 'set.layout': 'Layout',
+    'set.stack': 'Compact outline · Full text', 'set.split': 'Half outline · Half text',
+    'set.aipanel': 'AI Engine panel', 'set.on': 'On', 'set.off': 'Off', 'set.accent': 'Accent',
+    'set.account': 'Account', 'set.editProfile': 'Edit avatar & nickname',
+    'set.lang': 'Language',
+    'set.general': 'General', 'set.backup': '⛁ Backup & Export', 'set.ai': '⚙ AI Models',
+    'set.feedback': '💬 Feedback', 'set.terms': '📜 User Notice',
+    'set.about': 'Version', 'set.version': 'Current version', 'set.check': 'Check update',
+    'set.upToDate': 'Up to date ({v})', 'set.updateFound': 'New version {v} available — press Ctrl+F5',
+    'set.updateFail': 'Update check failed — check network'
   }
 };
 function t(k, vars) {
@@ -319,7 +343,6 @@ function applyI18n() {
   $$('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
   $$('[data-i18n-title]').forEach(el => { el.title = t(el.dataset.i18nTitle); });
   $$('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
-  $('#btn-lang').textContent = state.settings.lang === 'zh' ? 'EN' : '中';
   $('#ai-input').placeholder = t('ai.inputPh');
   $('#btn-focus').textContent = t(document.body.classList.contains('focus-mode') ? 'btn.focusExit' : 'btn.focus');
   renderEditorPlaceholder();
@@ -470,12 +493,13 @@ function dbAll(store) {
 function defaultSettings() {
   return {
     providers: [], activeProviderId: null,
-    fontSize: 18, accent: 'cyan', aiPanelOpen: true, lang: 'zh',
+    fontSize: 18, accent: 'cyan', aiPanelOpen: true, lang: 'zh', layout: 'stack',
     ctx: { outline: true, chars: true, world: true, mem: true, chatHistory: true, prevChapters: 2 },
     user: { nickname: '', avatarPreset: 0, avatarData: '' },
     customAuthors: []
   };
 }
+const APP_VERSION = '2.2.0';
 const state = {
   novels: [], chapters: [], outline: [], characters: [], memories: [], chats: [],
   currentNovelId: null, currentChapterId: null,
@@ -2263,6 +2287,7 @@ async function submitFeedback() {
 function applyUIPrefs() {
   document.documentElement.style.setProperty('--accent', ACCENTS[state.settings.accent] || ACCENTS.cyan);
   document.body.classList.toggle('no-ai', !state.settings.aiPanelOpen);
+  document.body.classList.toggle('split-layout', state.settings.layout === 'split');
   $('#editor').style.fontSize = state.settings.fontSize + 'px';
   const s = state.settings.ctx;
   $('#ctx-outline').checked = !!s.outline;
@@ -2341,18 +2366,77 @@ function openTerms() {
   openModal('modal-terms');
 }
 
+/* ---------------- 设置中心 ---------------- */
+function adjustFont(d) {
+  state.settings.fontSize = clamp(state.settings.fontSize + d, 14, 32);
+  saveSettings();
+  applyUIPrefs();
+  const v = $('#set-font-val');
+  if (v) v.textContent = state.settings.fontSize + 'px';
+}
+function toggleLang() {
+  state.settings.lang = state.settings.lang === 'zh' ? 'en' : 'zh';
+  saveSettings();
+  renderAll();
+  refreshSettingsChips();
+  toast(t('toast.langHint'), 'ok', 1600);
+}
+function toggleLayout() {
+  state.settings.layout = state.settings.layout === 'split' ? 'stack' : 'split';
+  saveSettings();
+  applyUIPrefs();
+  refreshSettingsChips();
+  toast(t('set.layout') + '：' + t(state.settings.layout === 'split' ? 'set.split' : 'set.stack'), 'ok', 2000);
+}
+function refreshSettingsChips() {
+  const s = state.settings;
+  $('#set-layout-stack').classList.toggle('on', s.layout !== 'split');
+  $('#set-layout-split').classList.toggle('on', s.layout === 'split');
+  $('#set-ai-on').classList.toggle('on', s.aiPanelOpen);
+  $('#set-ai-off').classList.toggle('on', !s.aiPanelOpen);
+  $('#set-lang-zh').classList.toggle('on', s.lang === 'zh');
+  $('#set-lang-en').classList.toggle('on', s.lang === 'en');
+}
+function openSettings() {
+  const s = state.settings;
+  $('#set-font-val').textContent = s.fontSize + 'px';
+  refreshSettingsChips();
+  $$('#modal-settings .accent-dot').forEach(d => d.classList.toggle('on', d.dataset.accent === s.accent));
+  const u = s.user || {};
+  $('#set-profile-name').textContent = u.nickname || t('profile.default');
+  $('#set-profile-avatar').innerHTML = u.avatarData ? '<img src="' + u.avatarData + '" alt="" />' : esc(AVATAR_PRESETS[u.avatarPreset || 0][0]);
+  $('#set-version').textContent = APP_VERSION;
+  openModal('modal-settings');
+}
+async function checkUpdate() {
+  const btn = $('#btn-check-update');
+  btn.disabled = true;
+  try {
+    let remote = null;
+    try {
+      const r = await fetch('https://raw.githubusercontent.com/akc071001-max/xiaoxing/main/version.txt', { signal: AbortSignal.timeout(10000) });
+      if (r.ok) remote = (await r.text()).trim();
+    } catch (e) { }
+    if (!remote) {
+      try {
+        const r2 = await fetch('https://xiaoxing.surge.sh/version.txt', { signal: AbortSignal.timeout(10000) });
+        if (r2.ok) remote = (await r2.text()).trim();
+      } catch (e2) { }
+    }
+    if (!remote) { toast(t('set.updateFail'), 'warn'); return; }
+    if (remote === APP_VERSION) toast(t('set.upToDate', { v: APP_VERSION }), 'ok');
+    else toast(t('set.updateFound', { v: remote }), 'warn', 5000);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 /* ---------------- 事件绑定 ---------------- */
 function bindEvents() {
   // 顶部
   $('#btn-novel-switch').addEventListener('click', () => { renderLibrary(); openModal('modal-library'); });
-  $('#btn-backup').addEventListener('click', () => openModal('modal-backup'));
-  $('#btn-ai-settings').addEventListener('click', openAISettings);
-  $('#btn-lang').addEventListener('click', () => {
-    state.settings.lang = state.settings.lang === 'zh' ? 'en' : 'zh';
-    saveSettings();
-    renderAll();
-    toast(t('toast.langHint'), 'ok', 1600);
-  });
+  $('#btn-settings').addEventListener('click', openSettings);
+  $('#btn-vip').addEventListener('click', () => openModal('modal-vip'));
   $('#btn-profile').addEventListener('click', openProfile);
   // 导航
   $('#main-nav').addEventListener('click', e => {
@@ -2371,8 +2455,8 @@ function bindEvents() {
   $('#chapter-title').addEventListener('input', scheduleSave);
   $('#chapter-title').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('#editor').focus(); } });
   $('#chapter-status').addEventListener('change', scheduleSave);
-  $('#btn-font-minus').addEventListener('click', () => { state.settings.fontSize = clamp(state.settings.fontSize - 1, 14, 32); saveSettings(); applyUIPrefs(); });
-  $('#btn-font-plus').addEventListener('click', () => { state.settings.fontSize = clamp(state.settings.fontSize + 1, 14, 32); saveSettings(); applyUIPrefs(); });
+  $('#btn-font-minus').addEventListener('click', () => adjustFont(-1));
+  $('#btn-font-plus').addEventListener('click', () => adjustFont(1));
   $('#btn-focus').addEventListener('click', () => toggleFocus());
   $('#btn-dict').addEventListener('click', () => openDict());
   // 章节大纲 + 联网生成
@@ -2380,10 +2464,24 @@ function bindEvents() {
   $('#btn-gen-chapter').addEventListener('click', generateChapter);
   $('#btn-gen-again').addEventListener('click', generateChapter);
   $('#btn-gen-cancel').addEventListener('click', cancelGen);
-  // 反馈 / 会员
-  $('#btn-feedback').addEventListener('click', () => openModal('modal-feedback'));
+  // 反馈 / 会员 / 布局
   $('#btn-fb-send').addEventListener('click', submitFeedback);
-  $('#btn-vip').addEventListener('click', () => openModal('modal-vip'));
+  $('#btn-layout-toggle').addEventListener('click', toggleLayout);
+  // 设置中心
+  $('#set-font-minus').addEventListener('click', () => adjustFont(-1));
+  $('#set-font-plus').addEventListener('click', () => adjustFont(1));
+  $('#set-layout-stack').addEventListener('click', () => { state.settings.layout = 'stack'; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
+  $('#set-layout-split').addEventListener('click', () => { state.settings.layout = 'split'; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
+  $('#set-ai-on').addEventListener('click', () => { state.settings.aiPanelOpen = true; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
+  $('#set-ai-off').addEventListener('click', () => { state.settings.aiPanelOpen = false; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
+  $('#set-lang-zh').addEventListener('click', () => { if (state.settings.lang !== 'zh') toggleLang(); });
+  $('#set-lang-en').addEventListener('click', () => { if (state.settings.lang !== 'en') toggleLang(); });
+  $('#set-profile-edit').addEventListener('click', openProfile);
+  $('#set-backup').addEventListener('click', () => openModal('modal-backup'));
+  $('#set-ai').addEventListener('click', openAISettings);
+  $('#set-feedback').addEventListener('click', () => openModal('modal-feedback'));
+  $('#set-terms').addEventListener('click', openTerms);
+  $('#btn-check-update').addEventListener('click', checkUpdate);
   document.addEventListener('click', e => {
     const v = e.target.closest('[data-vip]');
     if (v) toast(t('vip.btnToast'), 'info');
