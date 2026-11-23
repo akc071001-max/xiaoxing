@@ -285,6 +285,39 @@ input::placeholder,textarea::placeholder{color:rgba(126,145,179,.45)}
 .toast.out{opacity:0;transform:translateY(8px);transition:.3s}
 @keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
+/* ---------------- 窄屏（手机）适配：默认折叠面板与大纲，正文优先 ---------------- */
+.mobile-only{display:none}
+@media (max-width: 700px){
+  .mobile-only{display:inline-flex}
+  #main-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  #main-nav::-webkit-scrollbar{display:none}
+  #main-nav .nav-item{white-space:nowrap;flex:none}
+  /* 侧栏默认折叠，抽屉式展开 */
+  #side-panel{display:none;position:fixed;top:0;bottom:0;left:0;width:min(78vw,320px);z-index:230;max-height:none;height:100%;transform:translateX(-105%);transition:transform .22s ease;border-right:1px solid var(--line-soft);box-shadow:0 0 42px rgba(0,0,0,.65)}
+  body.panel-open #side-panel{display:flex;transform:none}
+  body.panel-open::after{content:'';position:fixed;inset:0;background:rgba(2,6,16,.55);z-index:225}
+  body.panel-open #btn-panel-toggle{background:var(--accent-soft)}
+  /* 大纲默认折叠 */
+  body.mobile #chapter-outline{display:none}
+  body.mobile.outline-open #chapter-outline{display:block}
+  /* 正文上提 */
+  #app{display:flex;flex-direction:column}
+  #editor-zone{min-height:0}
+  #editor{padding:16px 14px 150px;font-size:16px;line-height:1.9}
+  #editor-statusbar{flex-wrap:wrap}
+  /* 小助手缩小、不压正文 */
+  .pet{transform:scale(.62);transform-origin:bottom left;bottom:4px;left:2px}
+  .pet-bubble{font-size:11px}
+  #pet.hide-pet{display:none}
+  /* 论文区 */
+  #paper-editor{padding:16px 14px 150px}
+  body.board-paper #app{display:flex}
+  /* 顶栏精简 */
+  #topbar{padding:6px 8px;gap:8px}
+  .stats{display:none}
+  .brand-sub{display:none}
+}
+
 /* ---------------- 滚动条 ---------------- */
 .scroll-area{overflow-y:auto;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;overscroll-behavior:contain}
 .scroll-area,.modal-body,#ai-input,#paper-editor,#editor,#chapter-outline,#paper-topic,#note-content,#feedback-text,#tip-msg{scroll-behavior:smooth;overscroll-behavior:contain}
