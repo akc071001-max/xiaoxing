@@ -138,7 +138,7 @@ const I18N = {
     'novel.legacyGenre': '未分类',
     'terms.title': '📜 用户须知 · 用户守则',
     'terms.noticeTitle': '一、用户须知',
-    'terms.notice': '<ul><li><b>数据本地存储</b>：你的小说、大纲、角色、记忆全部保存在你自己浏览器的 IndexedDB 中，本工具不收集、不上传任何创作内容。清除浏览器数据会导致作品丢失，请定期使用「⛁ 备份」导出。</li><li><b>AI 接入</b>：AI 剧情引擎需自行接入模型（云端 API 或本地开源模型）。API Key 仅保存在本机，只在请求你配置的接口时发送给对应服务商。</li><li><b>联网功能</b>：「作家文风学习」「英语词典」会访问公开接口（维基百科、词典服务），仅用于查询，不涉及上传你的内容。</li><li><b>内容责任</b>：本工具免费提供、不作任何担保；由 AI 生成的内容请自行审核其准确性、版权与合规性，创作者对最终发布的内容负全部责任。</li><li><b>未成年人</b>：请在监护人指导下使用。</li></ul>',
+    'terms.notice': '<ul><li><b>数据本地存储</b>：你的小说、大纲、角色、记忆全部保存在你自己浏览器的 IndexedDB 中，本工具不收集、不上传任何创作内容。清除浏览器数据会导致作品丢失，请定期使用「⛁ 备份」导出。</li><li><b>AI 接入</b>：已<b>内置免费模型，开箱即用</b>，无需任何配置；你也可以在「⚙ AI 模型」中自行接入任何 OpenAI 兼容模型（云端 API 或本地开源模型）。API Key 仅保存在本机，只在请求你配置的接口时发送给对应服务商。</li><li><b>AI 生成会发送什么</b>：生成时会把你的写作上下文（风格档案、大纲、角色卡、世界观、记忆库、参考作家技法、前文章节等）发送给你当前选择的模型用于生成；首次联网生成前会再次征得你的确认。</li><li><b>联网功能</b>：「作家文风学习」「词典」「论文文献检索」会访问公开接口（维基百科、Crossref 等），仅用于查询，不涉及上传你的内容。</li><li><b>内容责任</b>：本工具免费提供、不作任何担保；由 AI 生成的内容请自行审核其准确性、版权与合规性，创作者对最终发布的内容负全部责任。</li><li><b>未成年人</b>：请在监护人指导下使用。</li></ul>',
     'terms.rulesTitle': '二、用户守则',
     'terms.rules': '<ul><li>不得生成或传播违法内容：包括但不限于淫秽色情、暴力恐怖、煽动仇恨与歧视、侵犯他人隐私、诈骗与虚假信息、危害国家安全的内容。</li><li>尊重知识产权：参考作家是学习其<b>写作技法</b>，严禁抄袭、洗稿或未经授权转载他人作品。</li><li>遵守所接入 AI 服务商的使用条款及当地法律法规。</li><li>不得滥用联网功能与他人接口（恶意爬取、批量攻击等）。</li><li>友善创作：不得利用工具制作针对真实人物的侮辱、诽谤或深度伪造内容。</li><li>违反守则者自行承担全部法律责任；晓星保留拒绝提供服务并追究责任的权利。</li></ul>',
     'terms.version': '版本 2025-01 · 晓星 XIAOXING',
@@ -240,7 +240,8 @@ const I18N = {
     'p.langTitle': '论文输出语言',
     'set.credits': '开发者名单',
     'upd.title': '🎉 更新完成', 'upd.whatsNew': '本次更新内容', 'upd.done': '知道了',
-    'top.noNovel': '未选择小说', 'top.novelSwitch': '切换 / 管理小说',
+    'top.noNovel': '未选择小说', 'top.novelSwitch': '切换 / 管理小说', 'top.panelToggle': '章节 / 大纲面板',
+    'co.outlineToggle': '⌄ 大纲',
     'w.secTitlePh': '条目名称（如：力量体系 / 势力 / 时间线）', 'w.secBodyPh': '展开设定…',
     'w.synopsisPh': '全书主线、起承转合、结局走向…', 'w.worldPh': '时代背景、地理、规则、力量体系总览…',
     'w.customEmpty': '可添加力量体系、势力、时间线等自定义设定条目。',
@@ -263,6 +264,9 @@ const I18N = {
     'profile.nickPh': '你的笔名…',
     'editor.placeholder.ru': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
     'toast.paperSaved': '论文已保存', 'toast.paperDeleted': '论文已删除',
+    'doc.conflictSuffix': '（冲突副本）',
+    'doc.conflict': '⚠ 检测到其他标签页也修改了这篇内容：您当前这份稿子已另存为「冲突副本」保留，正文已更新为最新版本，请检查后合并，两份都不会丢失。',
+    'ai.firstNotice': '首次联网生成确认：AI 生成时会把您的写作内容（小说：风格档案、本章大纲、角色卡、世界观、记忆库、参考作家技法、前文章节；论文：主题与检索到的文献）发送给您当前选择的 AI 模型用于生成。继续吗？',
     'auth.title': '👤 登录 / 注册', 'auth.login': '登录', 'auth.register': '注册',
     'auth.user': '用户名', 'auth.userPh': '2-20 位：字母 / 数字 / 下划线 / 中文',
     'auth.pass': '密码', 'auth.passPh': '至少 6 位，必须包含英文字母 + 数字',
@@ -384,7 +388,7 @@ const I18N = {
     'novel.legacyGenre': 'Uncategorized',
     'terms.title': '📜 User Notice & Code of Conduct',
     'terms.noticeTitle': 'I. User Notice',
-    'terms.notice': '<ul><li><b>Local storage</b>: your novels, outlines, characters and memories are stored only in your own browser (IndexedDB). This tool does not collect or upload any of your content. Clearing browser data erases your work — back up regularly via “⛁ Backup”.</li><li><b>AI access</b>: the AI engine requires you to connect your own model (cloud API or local open-source model). Your API key stays on this device and is only sent to the endpoint you configure.</li><li><b>Online features</b>: “Learn styles online” and the English dictionary query public APIs (Wikipedia, dictionary services) for lookup only; none of your content is uploaded.</li><li><b>Responsibility</b>: this tool is free and provided without warranty. Review AI-generated content for accuracy, copyright and compliance; you are fully responsible for what you publish.</li><li><b>Minors</b>: use under guardian supervision.</li></ul>',
+    'terms.notice': '<ul><li><b>Local storage</b>: your novels, outlines, characters and memories are stored only in your own browser (IndexedDB). This tool does not collect or upload any of your content. Clearing browser data erases your work — back up regularly via “⛁ Backup”.</li><li><b>AI access</b>: a <b>free model is built in and works out of the box</b> — no configuration needed. You may also connect any OpenAI-compatible model (cloud API or local open-source model) in “⚙ AI models”. Your API key stays on this device and is only sent to the endpoint you configure.</li><li><b>What generation sends</b>: generation sends your writing context (style profile, outline, characters, world, memories, reference-author notes, previous chapters, etc.) to your currently selected model; you are asked to confirm before the first online generation.</li><li><b>Online features</b>: “Learn styles online”, the dictionary and paper reference search query public APIs (Wikipedia, Crossref, etc.) for lookup only; none of your content is uploaded.</li><li><b>Responsibility</b>: this tool is free and provided without warranty. Review AI-generated content for accuracy, copyright and compliance; you are fully responsible for what you publish.</li><li><b>Minors</b>: use under guardian supervision.</li></ul>',
     'terms.rulesTitle': 'II. Code of Conduct',
     'terms.rules': '<ul><li>Do not generate or spread illegal content, including but not limited to: pornography, violence & terror, hate speech & discrimination, privacy violations, fraud & disinformation, or content endangering national security.</li><li>Respect intellectual property: reference authors are for learning <b>craft</b> only. Plagiarism, rewording others\' works, or republishing others\' works without permission is forbidden.</li><li>Comply with the terms of your AI provider and local laws.</li><li>Do not abuse the online features or third-party APIs (scraping, bulk attacks, etc.).</li><li>Create with respect: do not produce defamatory, insulting or deepfake content targeting real people.</li><li>Violators bear full legal responsibility; XIAOXING reserves the right to refuse service and pursue liability.</li></ul>',
     'terms.version': 'Version 2025-01 · XIAOXING',
@@ -486,7 +490,8 @@ const I18N = {
     'p.langTitle': 'Paper output language',
     'set.credits': 'Developer credits',
     'upd.title': '🎉 Update complete', 'upd.whatsNew': 'What\'s new', 'upd.done': 'Got it',
-    'top.noNovel': 'No novel selected', 'top.novelSwitch': 'Switch / manage novels',
+    'top.noNovel': 'No novel selected', 'top.novelSwitch': 'Switch / manage novels', 'top.panelToggle': 'Chapters / outline panel',
+    'co.outlineToggle': '⌄ Outline',
     'w.secTitlePh': 'Entry name (e.g. power system / factions / timeline)', 'w.secBodyPh': 'Expand the setting…',
     'w.synopsisPh': 'Main plotline, arcs, ending…', 'w.worldPh': 'Era, geography, rules, power systems…',
     'w.customEmpty': 'Add custom entries: power systems, factions, timelines…',
@@ -509,6 +514,9 @@ const I18N = {
     'profile.nickPh': 'Your pen name…',
     'editor.placeholder.ru': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
     'toast.paperSaved': 'Paper saved', 'toast.paperDeleted': 'Paper deleted',
+    'doc.conflictSuffix': ' (conflict copy)',
+    'doc.conflict': '⚠ Another tab modified this content: your current draft was saved as a “conflict copy”, and the chapter now shows the latest version. Please review and merge — nothing is lost.',
+    'ai.firstNotice': 'First online generation: to generate, the AI receives your writing context (novel: style profile, chapter outline, characters, world, memories, reference-author notes, previous chapters; paper: topic and retrieved references) from your currently selected AI model. Continue?',
     'auth.title': '👤 Sign in / Register', 'auth.login': 'Sign in', 'auth.register': 'Register',
     'auth.user': 'Username', 'auth.userPh': '2-20 chars: letters / numbers / _ / Chinese',
     'auth.pass': 'Password', 'auth.passPh': 'Min 6 chars, must contain letters AND digits',
@@ -647,7 +655,7 @@ const I18N = {
     'dict.provOk': '✓ Подключено: ', 'dict.provFail': 'Ошибка подключения: ',
     'learn.fetching': 'Изучаю {name}…', 'learn.noSel': 'Сначала выберите авторов выше',
     'terms.title': '📜 Уведомление и правила', 'terms.noticeTitle': 'I. Уведомление',
-    'terms.notice': '<ul><li><b>Локальное хранение</b>: романы, планы, персонажи и память хранятся только в браузере вашего устройства (IndexedDB). Мы ничего не собираем и не загружаем. Очистка данных браузера удалит работы — делайте резервные копии.</li><li><b>ИИ</b>: движок подключается к выбранной вами модели. Ключ хранится локально и отправляется только на указанный вами адрес.</li><li><b>Онлайн-функции</b>: «Изучение стилей» и словарь обращаются к открытым API (Википедия, словари) только для поиска.</li><li><b>Ответственность</b>: инструмент бесплатен и предоставляется без гарантий; проверяйте сгенерированный текст.</li><li><b>Несовершеннолетним</b>: пользуйтесь под присмотром взрослых.</li></ul>',
+    'terms.notice': '<ul><li><b>Локальное хранение</b>: романы, планы, персонажи и память хранятся только в браузере вашего устройства (IndexedDB). Мы ничего не собираем и не загружаем. Очистка данных браузера удалит работы — делайте резервные копии.</li><li><b>ИИ</b>: <b>бесплатная модель встроена и работает сразу</b>, без настройки; можно подключить любую OpenAI-совместимую модель в «⚙ ИИ-модели». Ключ хранится локально и отправляется только на указанный вами адрес.</li><li><b>Что отправляется при генерации</b>: ваш писательский контекст (профиль стиля, план, персонажи, мир, память, заметки о писателях, предыдущие главы и т.д.) отправляется выбранной модели; перед первой онлайн-генерацией мы спросим ваше подтверждение.</li><li><b>Онлайн-функции</b>: «Изучение стилей», словарь и поиск литературы обращаются к открытым API (Википедия, Crossref и др.) только для поиска.</li><li><b>Ответственность</b>: инструмент бесплатен и предоставляется без гарантий; проверяйте сгенерированный текст.</li><li><b>Несовершеннолетним</b>: пользуйтесь под присмотром взрослых.</li></ul>',
     'terms.rulesTitle': 'II. Правила',
     'terms.rules': '<ul><li>Не создавать и не распространять противозаконный контент: порнографию, насилие, разжигание ненависти, нарушение приватности, мошенничество и т.п.</li><li>Уважать авторские права: эталонные авторы — для изучения <b>приёмов</b>, а не для плагиата.</li><li>Соблюдать условия ИИ-провайдеров и местные законы.</li><li>Не злоупотреблять онлайн-функциями и чужими API.</li><li>Не создавать клевету или дипфейки о реальных людях.</li><li>Нарушители несут полную ответственность; XIAOXING оставляет за собой право отказать в обслуживании.</li></ul>',
     'terms.version': 'Версия 2025-01 · XIAOXING',
@@ -727,7 +735,8 @@ const I18N = {
     'p.langTitle': 'Язык статьи',
     'set.credits': 'Разработчик',
     'upd.title': '🎉 Обновление готово', 'upd.whatsNew': 'Что нового', 'upd.done': 'Понятно',
-    'top.noNovel': 'Роман не выбран', 'top.novelSwitch': 'Переключение / управление романами',
+    'top.noNovel': 'Роман не выбран', 'top.novelSwitch': 'Переключение / управление романами', 'top.panelToggle': 'Панель глав / плана',
+    'co.outlineToggle': '⌄ План',
     'w.secTitlePh': 'Название записи (система сил / фракции / хронология)', 'w.secBodyPh': 'Раскройте сеттинг…',
     'w.synopsisPh': 'Главная линия, повороты, финал…', 'w.worldPh': 'Эпоха, география, правила, системы сил…',
     'w.customEmpty': 'Добавьте записи: системы сил, фракции, хронологии…',
@@ -750,6 +759,9 @@ const I18N = {
     'profile.nickPh': 'Ваш псевдоним…',
     'editor.placeholder.ru': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
     'toast.paperSaved': 'Статья сохранена', 'toast.paperDeleted': 'Статья удалена',
+    'doc.conflictSuffix': ' (копия конфликта)',
+    'doc.conflict': '⚠ Другая вкладка тоже изменила этот текст: ваш текущий черновик сохранён как «копия конфликта», а документ обновлён до последней версии. Проверьте и объедините — ничего не потеряно.',
+    'ai.firstNotice': 'Первая онлайн-генерация: ИИ получит ваш писательский контекст (роман: профиль стиля, план главы, персонажи, мир, память, заметки о писателях, предыдущие главы; статья: тему и найденные источники) от выбранной модели. Продолжить?',
     'auth.title': '👤 Вход / Регистрация', 'auth.login': 'Вход', 'auth.register': 'Регистрация',
     'auth.user': 'Имя пользователя', 'auth.userPh': '2-20 знаков: буквы / цифры / _ / китайские',
     'auth.pass': 'Пароль', 'auth.passPh': 'Минимум 6 знаков, обязательно буквы И цифры',
@@ -794,10 +806,10 @@ function t(k, vars) {
   return s;
 }
 function applyI18n() {
-  $$('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
-  $$('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
-  $$('[data-i18n-title]').forEach(el => { el.title = t(el.dataset.i18nTitle); });
-  $$('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+  $$('[data-i18n]').forEach(el => { const v = t(el.dataset.i18n); if (v !== el.dataset.i18n) el.textContent = v; });
+  $$('[data-i18n-ph]').forEach(el => { const v = t(el.dataset.i18nPh); if (v !== el.dataset.i18nPh) el.placeholder = v; });
+  $$('[data-i18n-title]').forEach(el => { const v = t(el.dataset.i18nTitle); if (v !== el.dataset.i18nTitle) el.title = v; });
+  $$('[data-i18n-html]').forEach(el => { const v = t(el.dataset.i18nHtml); if (v !== el.dataset.i18nHtml) el.innerHTML = v; });
   $('#ai-input').placeholder = t('ai.inputPh');
   $('#btn-focus').textContent = t(document.body.classList.contains('focus-mode') ? 'btn.focusExit' : 'btn.focus');
   renderEditorPlaceholder();
@@ -1079,7 +1091,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.7.1';
+const APP_VERSION = '3.7.2';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -1413,7 +1425,7 @@ async function newChapter() {
     id: uid(), novelId: state.currentNovelId,
     title: `第 ${chs.length + 1} 章`, content: '', status: 'draft',
     order: chs.length ? Math.max(...chs.map(c => c.order)) + 1 : 0,
-    wordCount: 0, createdAt: now(), updatedAt: now()
+    wordCount: 0, rev: 1, createdAt: now(), updatedAt: now()
   };
   state.chapters.push(ch);
   await dbPut(STORE.chapters, ch);
@@ -1524,6 +1536,27 @@ function setSaveState(saved) {
   el.textContent = saved ? '● ' + fmtTime(now()) : '◌ …';
   el.className = 'meta-chip save-chip ' + (saved ? 'saved' : 'dirty');
 }
+/* ---------------- 多标签页冲突检测（跨标签页同步镜像 + 版本号） ---------------- */
+const DOC_MIRROR_KEY = 'nebula-doc-mirror';
+let docMirror = {};
+let loadedRevs = {};
+function loadDocMirror() {
+  try { docMirror = JSON.parse(localStorage.getItem(DOC_MIRROR_KEY) || '{}'); } catch (e) { docMirror = {}; }
+}
+function saveDocMirror() {
+  try {
+    localStorage.setItem(DOC_MIRROR_KEY, JSON.stringify(docMirror));
+  } catch (e) {
+    // 超出配额：丢弃最旧条目后重试一次
+    const keys = Object.keys(docMirror).sort((a, b) => (docMirror[a].t || 0) - (docMirror[b].t || 0));
+    while (keys.length) {
+      delete docMirror[keys[0]];
+      keys.shift();
+      try { localStorage.setItem(DOC_MIRROR_KEY, JSON.stringify(docMirror)); return; } catch (e2) { }
+    }
+  }
+}
+function paperMirrorKey(id) { return 'paper-' + id; }
 function scheduleSave() {
   state.editorDirty = true;
   setSaveState(false);
@@ -1537,14 +1570,48 @@ async function flushSave() {
 async function saveChapter(manual) {
   const c = curChapter();
   if (!c) { state.editorDirty = false; return; }
+  const ext = docMirror[c.id];
+  const myRev = c.rev || 0;
+  if (ext && (ext.rev || 0) > myRev && ext.content !== undefined) {
+    // 其他标签页已保存过本章：冲突处理——保留两份，绝不静默丢稿
+    const draft = {
+      id: uid(), novelId: c.novelId,
+      title: ($('#chapter-title').value.trim() || c.title || t('novel.pending')) + t('doc.conflictSuffix'),
+      content: $('#editor').value, outline: $('#chapter-outline').value,
+      status: c.status, wordCount: countWords($('#editor').value),
+      rev: 1, createdAt: now(), updatedAt: now()
+    };
+    await dbPut(STORE.chapters, draft);
+    state.chapters.push(draft);
+    c.title = ext.title !== undefined ? ext.title : ($('#chapter-title').value.trim() || c.title);
+    c.content = ext.content;
+    c.outline = ext.outline !== undefined ? ext.outline : c.outline;
+    c.rev = ext.rev;
+    c.updatedAt = now();
+    state.editorDirty = false;
+    await dbPut(STORE.chapters, c);
+    loadedRevs[c.id] = c.rev;
+    $('#editor').value = c.content;
+    $('#chapter-title').value = c.title;
+    $('#chapter-outline').value = c.outline;
+    updateCounts();
+    setSaveState(true);
+    toast(t('doc.conflict'), 'warn', 8000);
+    renderAll();
+    return;
+  }
   c.title = $('#chapter-title').value.trim();
   c.content = $('#editor').value;
   c.outline = $('#chapter-outline').value;
   c.status = $('#chapter-status').value;
   c.wordCount = countWords(c.content);
+  c.rev = (c.rev || 0) + 1;
   c.updatedAt = now();
   state.editorDirty = false;
   await dbPut(STORE.chapters, c);
+  docMirror[c.id] = { rev: c.rev, title: c.title, content: c.content, outline: c.outline, t: Date.now() };
+  saveDocMirror();
+  loadedRevs[c.id] = c.rev;
   setSaveState(true);
   if (manual) toast(t('toast.savedOk'), 'ok');
   renderTop();
@@ -1717,7 +1784,6 @@ function renderWorld() {
         <tr><td class="sp-label">${t('w.tone')}</td><td class="sp-val">${esc(styleValName(n.tone || '未定'))}</td></tr>
         <tr><td class="sp-label">${t('style.narrative')}</td><td class="sp-val">${esc({ dialogue: t('style.dialogue'), balanced: t('style.balanced'), narrative: t('style.narrativeMode') }[n.narrative] || t('style.dialogue'))}</td></tr>
         <tr><td class="sp-label">${t('w.lang')}</td><td class="sp-val">${n.lang === 'en' ? 'English' : (n.lang === 'ru' ? 'Русский' : '中文')}</td></tr>
-        <tr><td class="sp-label">${t('style.narrative')}</td><td class="sp-val">${esc({ dialogue: t('style.dialogue'), balanced: t('style.balanced'), narrative: t('style.narrativeMode') }[n.narrative] || t('style.dialogue'))}</td></tr>
         <tr><td class="sp-label">${t('style.standard')}</td><td class="sp-val">${esc({ '通用': t('style.stGeneric'), '中国网文': t('style.stNet'), '中式传统': t('style.stTrad'), '日式轻小说': t('style.stJP'), '欧美小说': t('style.stWest'), '俄式文学': t('style.stRu') }[n.standard || '通用'] || n.standard || '通用')}</td></tr>
         <tr><td class="sp-label">${t('style.personal')}</td><td class="sp-val">${esc((n.personal || 'human') === 'human' ? t('style.perHuman') : t('style.perStandard'))}</td></tr>
         <tr><td class="sp-label">${t('w.authors')}</td><td class="sp-val">${esc(refs || '—')}</td></tr>
@@ -2041,7 +2107,11 @@ async function delMem(id) {
 }
 
 /* ---------------- 模态框与确认 ---------------- */
-function openModal(id) { $('#' + id).hidden = false; }
+function openModal(id) {
+  // 从设置中心打开的弹窗：先关掉设置，避免设置窗口压在弹窗上方造成误点
+  if (id !== 'modal-settings') closeModal('modal-settings');
+  $('#' + id).hidden = false;
+}
 function closeModal(id) { $('#' + id).hidden = true; }
 function confirmDialog(text) {
   return new Promise(res => {
@@ -3027,6 +3097,13 @@ async function generateChapter() {
   const ed = $('#editor');
   if (ed.value.trim() && !await confirmDialog(t('co.confirmOverwrite'))) return;
   await flushSave();
+  // 首次联网生成告知：会把哪些写作内容发送给 AI
+  try {
+    if (localStorage.getItem('nebula-ai-notice') !== '1') {
+      if (!await confirmDialog(t('ai.firstNotice'))) return;
+      localStorage.setItem('nebula-ai-notice', '1');
+    }
+  } catch (e) { }
   const n = curNovel();
   const planCtx = buildContext(false) || '（无上下文）';
   state.genState.running = true;
@@ -3179,6 +3256,9 @@ async function submitFeedback() {
 }
 
 /* ---------------- UI 偏好 ---------------- */
+function applyMobile() {
+  document.body.classList.toggle('mobile', innerWidth <= 700);
+}
 function applyUIPrefs() {
   document.documentElement.style.setProperty('--accent', ACCENTS[state.settings.accent] || ACCENTS.cyan);
   document.body.classList.toggle('no-ai', !state.settings.aiPanelOpen);
@@ -4123,15 +4203,48 @@ async function flushPaperSave() {
 async function savePaper(manual) {
   const p = currentPaper();
   if (!p) { state.paperDirty = false; return; }
+  const key = paperMirrorKey(p.id);
+  const ext = docMirror[key];
+  const myRev = p.rev || 0;
+  if (ext && (ext.rev || 0) > myRev && ext.content !== undefined) {
+    const draft = {
+      id: uid(), title: ($('#paper-title').value.trim() || p.title || t('novel.pending')) + t('doc.conflictSuffix'),
+      topic: $('#paper-topic').value, content: $('#paper-editor').value,
+      status: p.status, outLang: p.outLang, wordCount: countWords($('#paper-editor').value),
+      rev: 1, createdAt: now(), updatedAt: now()
+    };
+    await dbPut(STORE.papers, draft);
+    state.papers.push(draft);
+    p.title = ext.title !== undefined ? ext.title : p.title;
+    p.topic = ext.topic !== undefined ? ext.topic : p.topic;
+    p.content = ext.content;
+    p.rev = ext.rev;
+    p.updatedAt = now();
+    state.paperDirty = false;
+    await dbPut(STORE.papers, p);
+    loadedRevs[key] = p.rev;
+    $('#paper-editor').value = p.content;
+    $('#paper-title').value = p.title;
+    $('#paper-topic').value = p.topic;
+    updatePaperCounts();
+    setPaperSaveState(true);
+    toast(t('doc.conflict'), 'warn', 8000);
+    renderAll();
+    return;
+  }
   p.title = $('#paper-title').value.trim();
   p.topic = $('#paper-topic').value;
   p.content = $('#paper-editor').value;
   p.status = $('#paper-status').value;
   p.outLang = $('#paper-lang').value || p.outLang || 'zh';
   p.wordCount = countWords(p.content);
+  p.rev = (p.rev || 0) + 1;
   p.updatedAt = now();
   state.paperDirty = false;
   await dbPut(STORE.papers, p);
+  docMirror[key] = { rev: p.rev, title: p.title, topic: p.topic, content: p.content, t: Date.now() };
+  saveDocMirror();
+  loadedRevs[key] = p.rev;
   setPaperSaveState(true);
   if (manual) toast(t('toast.paperSaved'), 'ok');
   renderTop();
@@ -4273,6 +4386,13 @@ async function generatePaper() {
   const ed = $('#paper-editor');
   if (ed.value.trim() && !await confirmDialog(t('p.overwrite'))) return;
   flushPaperSave();
+  // 首次联网生成告知：会把哪些写作内容发送给 AI
+  try {
+    if (localStorage.getItem('nebula-ai-notice') !== '1') {
+      if (!await confirmDialog(t('ai.firstNotice'))) return;
+      localStorage.setItem('nebula-ai-notice', '1');
+    }
+  } catch (e) { }
   const premium = (PLAN_LEVEL[effectivePlan()] || 0);
   const refCount = premium >= 2 ? 15 : (premium === 1 ? 12 : 8);
   const lenHint = premium >= 2 ? '4000-5000 字' : (premium === 1 ? '3000-3500 字' : '1500-2000 字');
@@ -4434,6 +4554,14 @@ async function checkUpdate() {
 function bindEvents() {
   // 顶部
   $('#btn-novel-switch').addEventListener('click', () => { renderLibrary(); openModal('modal-library'); });
+  // 窄屏：面板抽屉与大纲折叠
+  $('#btn-panel-toggle').addEventListener('click', () => { document.body.classList.toggle('panel-open'); });
+  $('#btn-outline-toggle').addEventListener('click', () => { document.body.classList.toggle('outline-open'); });
+  document.addEventListener('click', e => {
+    if (document.body.classList.contains('panel-open') && !e.target.closest('#side-panel') && !e.target.closest('#btn-panel-toggle')) {
+      document.body.classList.remove('panel-open');
+    }
+  });
   $('#btn-settings').addEventListener('click', openSettings);
   $('#btn-vip').addEventListener('click', () => { renderVip(); openModal('modal-vip'); });
   $('#btn-profile').addEventListener('click', openProfile);
@@ -4762,6 +4890,7 @@ async function boot() {
   loadWikiCache();
   loadAccounts();
   loadRefCache();
+  loadDocMirror();
   // 首次使用自动配置免费免密钥模型（Pollinations AI），开箱即用
   if (!state.settings.providers.length) {
     state.settings.providers.push({
@@ -4773,11 +4902,20 @@ async function boot() {
   }
   fillPresetSelect();
   applyUIPrefs();
+  applyMobile();
+  addEventListener('resize', applyMobile);
   bgInit();
   bindEvents();
   await dbInit();
   await loadAll();
   if (state.board === 'paper') await loadChatFor(chatKey());
+  // 记录各文档已加载的版本号（多标签页冲突检测用）
+  loadedRevs = {};
+  state.chapters.forEach(c => { loadedRevs[c.id] = c.rev || 0; });
+  state.papers.forEach(p => { loadedRevs[paperMirrorKey(p.id)] = p.rev || 0; });
+  // 跨标签页同步：其他标签页保存后同步镜像；本标签页回到前台时刷新
+  window.addEventListener('storage', e => { if (e.key === DOC_MIRROR_KEY) loadDocMirror(); });
+  window.addEventListener('focus', loadDocMirror);
   renderLibrary();
   renderAll();
   if (!state.novels.length) {
