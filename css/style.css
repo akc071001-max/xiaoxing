@@ -497,13 +497,23 @@ body.split-layout .co-head .spacer{display:none}
 #editor-toolbar{padding:10px 14px}
 .meta-chip{font-size:10.5px}
 
-/* ---------------- 点击反馈（所有按钮） ---------------- */
-.btn,.tb-btn,.chip,.icon-btn,.nav-item,.profile-btn,.accent-dot,.avatar-item{transition:transform .12s ease, border-color .18s, box-shadow .18s, background .18s, color .18s}
-.btn:active,.tb-btn:active,.chip:active,.icon-btn:active,.nav-item:active,.profile-btn:active{transform:scale(.94)}
-.accent-dot:active,.avatar-item:active{transform:scale(.85)}
-.btn,.tb-btn,.chip,.profile-btn{position:relative;overflow:hidden}
-.ripple{position:absolute;border-radius:50%;background:rgba(0,224,255,.35);transform:scale(0);animation:rippleA .5s ease-out forwards;pointer-events:none}
+/* ---------------- 点击反馈（所有按钮 · 拟真手感） ---------------- */
+.btn,.tb-btn,.chip,.icon-btn,.nav-item,.profile-btn,.accent-dot,.avatar-item,.title-item{transition:transform .12s cubic-bezier(.34,1.56,.64,1), border-color .18s, box-shadow .18s, background .18s, color .18s, filter .12s}
+.btn:active,.tb-btn:active,.chip:active,.icon-btn:active,.nav-item:active,.profile-btn:active,.title-item:active{transform:scale(.91);filter:brightness(1.25)}
+.accent-dot:active,.avatar-item:active{transform:scale(.8)}
+.btn,.tb-btn,.chip,.profile-btn,.icon-btn,.nav-item,.title-item{position:relative;overflow:hidden}
+.btn-pop{animation:btnPopA .32s cubic-bezier(.34,1.56,.64,1)}
+@keyframes btnPopA{0%{transform:scale(.94)}55%{transform:scale(1.05)}100%{transform:scale(1)}}
+.ripple{position:absolute;border-radius:50%;background:radial-gradient(circle, rgba(160,240,255,.85) 0%, rgba(0,224,255,.4) 60%, rgba(0,224,255,0) 100%);transform:scale(0);animation:rippleA .5s ease-out forwards;pointer-events:none;z-index:1}
 @keyframes rippleA{to{transform:scale(3);opacity:0}}
+.ring{position:absolute;border:2px solid rgba(0,224,255,.65);border-radius:50%;width:10px;height:10px;transform:scale(0);animation:ringA .42s ease-out forwards;pointer-events:none;z-index:2}
+@keyframes ringA{to{transform:scale(9);opacity:0}}
+
+/* ---------------- 文风面板 ---------------- */
+.sp-mode-row{display:flex;gap:10px;margin-bottom:12px}
+.sp-mode-row .set-chip{flex:1;padding:11px 10px;font-size:14px;border-radius:12px}
+.sp-hint{font-size:12.5px;color:var(--txt-dim);line-height:1.9;margin-bottom:12px;padding:10px 12px;border:1px dashed var(--line-soft);border-radius:9px;background:rgba(16,24,42,.3)}
+.sp-sample{font-size:14px;line-height:1.9;min-height:200px}
 
 /* ---------------- 存储权限 ---------------- */
 #storage-warn{position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:210;background:rgba(255,95,109,.12);border:1px solid rgba(255,95,109,.5);color:var(--err);padding:8px 16px;border-radius:10px;font-size:12.5px;max-width:92vw}
