@@ -186,7 +186,38 @@ const I18N = {
     'set.feedback': '💬 问题反馈', 'set.terms': '📜 用户须知',
     'set.about': '版本更新', 'set.version': '当前版本', 'set.check': '检查更新',
     'set.upToDate': '已是最新版本（{v}）', 'set.updateFound': '发现新版本 {v}，请按 Ctrl+F5 刷新页面获取',
-    'set.updateFail': '检查失败：请检查网络后重试'
+    'set.updateFail': '检查失败：请检查网络后重试',
+    'co.gen': '🚀 开始创作', 'co.chapterTitle': 'AI 起章节名（依据本章大纲）',
+    'novel.title': '书名（可留空，稍后由大纲推理）', 'novel.titlePh': '可留空（待定）…',
+    'novel.titleSuggest': '✨ 智能起书名', 'novel.titleSuggestHint': '书名可先空着，写下简介后让 AI 从大纲推理多个候选书名，你来挑选',
+    'novel.pending': '书名待定',
+    'style.narrative': '写法', 'style.dialogue': '对话为主', 'style.balanced': '对话叙述均衡', 'style.narrativeMode': '叙述为主',
+    'storage.title': '💾 存储权限请求',
+    'storage.desc': '<p>晓星需要把您的<b>小说、大纲、角色、记忆</b>等作品数据保存在<b>您自己设备的浏览器存储</b>中（IndexedDB），用于自动保存与下次继续创作。数据不会上传到任何服务器。</p><p>同意后作品会自动保存；拒绝则本次创作内容<b>不会保存</b>，关闭页面后可能丢失。</p>',
+    'storage.allow': '同意并存储', 'storage.deny': '拒绝',
+    'storage.warn': '⚠ 您未授权本地存储：当前作品不会被保存，关闭页面将丢失。可在「⚙ 设置 → 存储权限」重新授权。',
+    'set.storage': '💾 存储权限', 'set.storageState': '存储状态',
+    'set.storageOk': '已授权（作品自动保存到本机）', 'set.storageNo': '未授权（内容不会保存）',
+    'set.bg': '页面背景', 'set.pet': '创作小助手',
+    'asst.title': '🛸 创作小助手', 'asst.petTitle': '点我，找创作小助手', 'asst.hide': '🙈 隐藏小助手',
+    'asst.a1': '＋ 新建小说', 'asst.a2': '🚀 开始创作', 'asst.a3': '✨ 智能起名', 'asst.a4': '⚙ 打开设置', 'asst.a5': '💬 我要反馈',
+    'asst.guide': '<h3>🚀 三步开始创作</h3><ul><li><b>第一步 · 建小说</b>：点「＋ 新建小说」，选好风格表格；书名可以先不填，以后让 AI 帮你起。</li><li><b>第二步 · 写大纲</b>：新建章节，在「📋 本章大纲」框里用大白话写下这一章要发生什么。</li><li><b>第三步 · 开始创作</b>：点「🚀 开始创作」，晓星会自动联网学习文风、拟写细纲并把正文流式写进下面的大框。不满意就点「🔄 重新生成」。</li></ul><h3>💡 常见问题</h3><ul><li><b>正文写到哪了？</b>直接出现在大纲下方的大白框里，并自动保存在您的电脑上。</li><li><b>想并排看大纲和正文？</b>点大纲栏右上角的「⇋」按钮，或「⚙ 设置 → 界面样式」选「一半大纲 · 一半正文」。</li><li><b>AI 写得不像我？</b>到「设定 → 作家文风库」选参考作家；或「设定 → 我的文风」贴上自己写的 500 字，AI 就学你的习惯。</li><li><b>想换字体、背景、主题色？</b>都在「⚙ 设置」里，背景还有太阳系 / 银河系 / 星球可选。</li><li><b>怕数据丢？</b>「⚙ 设置 → 备份与导出」随时导出备份文件。</li><li><b>还有问题？</b>「⚙ 设置 → 问题反馈」，我们会认真看每一条。</li></ul>',
+    'toast.titlesGen': '正在生成候选名…', 'toast.titlesEmpty': '未能生成候选名，请重试',
+    'toast.titleApplied': '已采用该名称', 'toast.titleNeedInput': '请先填写简介或本章大纲',
+    'toast.planChanged': '试运营期间免费开通成功：{p}',
+    'toast.storageOk': '已授权本地存储，作品将自动保存到您的设备', 'toast.storageNo': '已拒绝存储：内容仅在本次会话内有效',
+    'vip.freeBtn': '当前方案',
+    'vip.searchTitle': '🔍 全网搜索 AI 模型', 'vip.searchPh': '输入关键词搜索全网模型（如 deepseek / qwen / llama…）',
+    'vip.searchBtn': '搜索', 'vip.searching': '正在全网搜索模型…', 'vip.searchFail': '模型搜索失败，请稍后重试',
+    'vip.searchEmpty': '未找到匹配的模型', 'vip.copy': '复制模型名', 'vip.copied': '已复制模型名',
+    'aiset.compare': '模型适配对比（已适配主流 AI）',
+    'aiset.stFree': '免费 · 免密钥 · 已适配', 'aiset.stFreeTier': '有免费额度 · 需 Key · 已适配',
+    'aiset.stPaid': '付费 · 需 Key · 已适配（会员可协助接入）',
+    'aiset.auto': '自动切换备用模型（当前模型失败时自动换下一个可用模型）',
+    'w.myStyle': '我的文风（可选）', 'w.styleModeAuthor': '使用作家文风', 'w.styleModeMine': '使用我的文风',
+    'w.styleSample': '把我的 500 字文风样本贴在这里，AI 会学习你的句式节奏、用词习惯与对话风格',
+    'w.styleSamplePh': '粘贴一段你自己的文字（500 字以内）…',
+    'toast.styleSaved': '文风设置已保存', 'toast.orCopied': '已复制模型名'
   },
   en: {
     'brand.sub': 'ALL-GENRE NOVEL STUDIO',
@@ -329,7 +360,38 @@ const I18N = {
     'set.feedback': '💬 Feedback', 'set.terms': '📜 User Notice',
     'set.about': 'Version', 'set.version': 'Current version', 'set.check': 'Check update',
     'set.upToDate': 'Up to date ({v})', 'set.updateFound': 'New version {v} available — press Ctrl+F5',
-    'set.updateFail': 'Update check failed — check network'
+    'set.updateFail': 'Update check failed — check network',
+    'co.gen': '🚀 Start Writing', 'co.chapterTitle': 'AI chapter title (from this chapter outline)',
+    'novel.title': 'Title (optional — AI can infer later)', 'novel.titlePh': 'Leave blank (TBD)…',
+    'novel.titleSuggest': '✨ AI Title Ideas', 'novel.titleSuggestHint': 'Leave the title blank — write a synopsis, then let AI infer several candidates for you to pick.',
+    'novel.pending': 'Untitled',
+    'style.narrative': 'Narration', 'style.dialogue': 'Dialogue-first', 'style.balanced': 'Balanced', 'style.narrativeMode': 'Narrative-first',
+    'storage.title': '💾 Storage Permission',
+    'storage.desc': '<p>XIAOXING needs to save your <b>novels, outlines, characters and memories</b> in <b>your own device\'s browser storage</b> (IndexedDB) for autosave and future sessions. Nothing is uploaded to any server.</p><p>If you agree, your work autosaves. If you decline, <b>nothing will be saved</b> and it may be lost when you close the page.</p>',
+    'storage.allow': 'Allow & Save', 'storage.deny': 'Decline',
+    'storage.warn': '⚠ Local storage not authorized: your work will NOT be saved. Re-authorize in “⚙ Settings → Storage”.',
+    'set.storage': '💾 Storage', 'set.storageState': 'Storage status',
+    'set.storageOk': 'Authorized (autosaves locally)', 'set.storageNo': 'Not authorized (nothing saved)',
+    'set.bg': 'Background', 'set.pet': 'Writing buddy',
+    'asst.title': '🛸 Writing Buddy', 'asst.petTitle': 'Click me — open the buddy', 'asst.hide': '🙈 Hide buddy',
+    'asst.a1': '＋ New novel', 'asst.a2': '🚀 Start writing', 'asst.a3': '✨ AI titles', 'asst.a4': '⚙ Settings', 'asst.a5': '💬 Feedback',
+    'asst.guide': '<h3>🚀 Three steps to start</h3><ul><li><b>Step 1 · Create a novel</b>: click “＋ New Novel” and pick the style table. The title can wait — AI will suggest one later.</li><li><b>Step 2 · Write the outline</b>: open a chapter and describe in plain words what happens in the “📋 Chapter Outline” box.</li><li><b>Step 3 · Start writing</b>: click “🚀 Start Writing”. XIAOXING studies styles online, drafts a plan and streams the text into the big box below. Not happy? Click “🔄 Regenerate”.</li></ul><h3>💡 FAQ</h3><ul><li><b>Where does my text go?</b> Straight into the big box below the outline, autosaved on your device.</li><li><b>Want outline and text side by side?</b> Click “⇋” on the outline bar, or “⚙ Settings → Layout → Half outline · Half text”.</li><li><b>AI doesn\'t sound like me?</b> “World → Author Style Lab” to pick reference authors, or paste your own 500-word sample in “World → My Style”.</li><li><b>Font, background, theme color?</b> All in “⚙ Settings” — backgrounds include Solar System, Galaxy and Planet views.</li><li><b>Worried about losing data?</b> “⚙ Settings → Backup & Export” anytime.</li><li><b>Still stuck?</b> “⚙ Settings → Feedback” — we read every message.</li></ul>',
+    'toast.titlesGen': 'Generating title ideas…', 'toast.titlesEmpty': 'No titles generated — try again',
+    'toast.titleApplied': 'Title applied', 'toast.titleNeedInput': 'Fill in the synopsis or chapter outline first',
+    'toast.planChanged': 'Free upgrade during beta: {p}',
+    'toast.storageOk': 'Storage authorized — your work autosaves on this device', 'toast.storageNo': 'Storage declined: content lasts this session only',
+    'vip.freeBtn': 'Current plan',
+    'vip.searchTitle': '🔍 Search AI models worldwide', 'vip.searchPh': 'Type a keyword (deepseek / qwen / llama…)',
+    'vip.searchBtn': 'Search', 'vip.searching': 'Searching models…', 'vip.searchFail': 'Model search failed — try later',
+    'vip.searchEmpty': 'No matching models', 'vip.copy': 'Copy model ID', 'vip.copied': 'Model ID copied',
+    'aiset.compare': 'Model compatibility (mainstream AIs adapted)',
+    'aiset.stFree': 'Free · no key · adapted', 'aiset.stFreeTier': 'Free tier · needs key · adapted',
+    'aiset.stPaid': 'Paid · needs key · adapted (VIP assists)',
+    'aiset.auto': 'Auto-switch backup models (on failure, try the next available model)',
+    'w.myStyle': 'My Style (optional)', 'w.styleModeAuthor': 'Use author styles', 'w.styleModeMine': 'Use my style',
+    'w.styleSample': 'Paste a sample of your own writing (≤500 characters) — AI learns your rhythm, word choices and dialogue style',
+    'w.styleSamplePh': 'Paste your own text (≤500 chars)…',
+    'toast.styleSaved': 'Style setting saved', 'toast.orCopied': 'Model ID copied'
   }
 };
 function t(k, vars) {
@@ -391,17 +453,23 @@ const AUTHORS = [
   { id: 'tolkien', name: '托尔金', wiki: 'J·R·R·托尔金', tips: '世界观建构登峰造极；史诗感、语言美感与神话体系。' }
 ];
 const PRESETS = [
-  { name: 'Pollinations AI（免费·免密钥·开箱即用）', baseUrl: 'https://text.pollinations.ai', path: '/openai', model: 'openai' },
-  { name: 'OpenAI', baseUrl: 'https://api.openai.com/v1', path: '/chat/completions', model: 'gpt-4o-mini' },
-  { name: 'DeepSeek 深度求索', baseUrl: 'https://api.deepseek.com/v1', path: '/chat/completions', model: 'deepseek-chat' },
-  { name: '硅基流动 SiliconFlow', baseUrl: 'https://api.siliconflow.cn/v1', path: '/chat/completions', model: 'deepseek-ai/DeepSeek-V3' },
-  { name: 'Moonshot Kimi', baseUrl: 'https://api.moonshot.cn/v1', path: '/chat/completions', model: 'moonshot-v1-32k' },
-  { name: '智谱 GLM', baseUrl: 'https://open.bigmodel.cn/api/paas/v4', path: '/chat/completions', model: 'glm-4-air' },
-  { name: '通义千问 DashScope', baseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1', path: '/chat/completions', model: 'qwen-plus' },
-  { name: 'Ollama（本地开源）', baseUrl: 'http://localhost:11434/v1', path: '/chat/completions', model: 'qwen2.5:14b' },
-  { name: 'LM Studio（本地开源）', baseUrl: 'http://localhost:1234/v1', path: '/chat/completions', model: 'local-model' },
-  { name: 'vLLM / llama.cpp（本地开源）', baseUrl: 'http://localhost:8000/v1', path: '/chat/completions', model: '' },
-  { name: '自定义', baseUrl: '', path: '/chat/completions', model: '' }
+  { name: 'Pollinations AI（免费·免密钥·开箱即用）', baseUrl: 'https://text.pollinations.ai', path: '/openai', model: 'openai', plan: 'free' },
+  { name: '硅基流动 SiliconFlow（免费额度）', baseUrl: 'https://api.siliconflow.cn/v1', path: '/chat/completions', model: 'deepseek-ai/DeepSeek-V3', plan: 'free' },
+  { name: 'Ollama（本地开源）', baseUrl: 'http://localhost:11434/v1', path: '/chat/completions', model: 'qwen2.5:14b', plan: 'free' },
+  { name: 'LM Studio（本地开源）', baseUrl: 'http://localhost:1234/v1', path: '/chat/completions', model: 'local-model', plan: 'free' },
+  { name: 'vLLM / llama.cpp（本地开源）', baseUrl: 'http://localhost:8000/v1', path: '/chat/completions', model: '', plan: 'free' },
+  { name: 'DeepSeek 深度求索', baseUrl: 'https://api.deepseek.com/v1', path: '/chat/completions', model: 'deepseek-chat', plan: 'pro' },
+  { name: 'Moonshot Kimi', baseUrl: 'https://api.moonshot.cn/v1', path: '/chat/completions', model: 'moonshot-v1-32k', plan: 'pro' },
+  { name: '智谱 GLM', baseUrl: 'https://open.bigmodel.cn/api/paas/v4', path: '/chat/completions', model: 'glm-4-air', plan: 'pro' },
+  { name: '通义千问 DashScope', baseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1', path: '/chat/completions', model: 'qwen-plus', plan: 'pro' },
+  { name: '火山方舟 Doubao', baseUrl: 'https://ark.cn-beijing.volces.com/api/v3', path: '/chat/completions', model: 'doubao-pro-32k', plan: 'pro' },
+  { name: '讯飞星火 Spark', baseUrl: 'https://spark-api-open.xf-yun.com/v1', path: '/chat/completions', model: 'generalv3.5', plan: 'pro' },
+  { name: 'Google Gemini（OpenAI 兼容）', baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai', path: '/chat/completions', model: 'gemini-2.0-flash', plan: 'pro' },
+  { name: 'Groq（极速推理）', baseUrl: 'https://api.groq.com/openai/v1', path: '/chat/completions', model: 'llama-3.3-70b-versatile', plan: 'pro' },
+  { name: 'OpenAI', baseUrl: 'https://api.openai.com/v1', path: '/chat/completions', model: 'gpt-4o-mini', plan: 'flag' },
+  { name: 'Mistral', baseUrl: 'https://api.mistral.ai/v1', path: '/chat/completions', model: 'mistral-small-latest', plan: 'flag' },
+  { name: 'OpenRouter（全模型聚合）', baseUrl: 'https://openrouter.ai/api/v1', path: '/chat/completions', model: 'deepseek/deepseek-chat', plan: 'flag' },
+  { name: '自定义', baseUrl: '', path: '/chat/completions', model: '', plan: 'free' }
 ];
 const SYSTEM_PROMPT = [
   '你是「晓星 XIAOXING」的内置剧情引擎，一位精通全类型小说（玄幻、科幻、都市、悬疑、言情、历史、轻小说等）的资深作家与策划。职责：讨论剧情、续写正文、推演走向、润色文笔、提取记忆、规划大纲、诊断文风。',
@@ -449,6 +517,7 @@ async function dbInit() {
   catch (e) { dbMode = 'ls'; lsLoad(); toast('已切换到 localStorage 存储模式（容量有限，建议定期备份）', 'warn', 5000); }
 }
 function dbPut(store, obj) {
+  if (state.storageDenied) return Promise.resolve(obj);
   if (dbMode === 'idb') return new Promise((res, rej) => {
     const tr = db.transaction(store, 'readwrite');
     tr.objectStore(store).put(obj);
@@ -457,6 +526,7 @@ function dbPut(store, obj) {
   lsMem[store][obj.id] = obj; lsSave(store); return Promise.resolve(obj);
 }
 function dbDel(store, id) {
+  if (state.storageDenied) return Promise.resolve();
   if (dbMode === 'idb') return new Promise((res, rej) => {
     const tr = db.transaction(store, 'readwrite');
     tr.objectStore(store).delete(id);
@@ -465,6 +535,7 @@ function dbDel(store, id) {
   delete lsMem[store][id]; lsSave(store); return Promise.resolve();
 }
 function dbClear(store) {
+  if (state.storageDenied) return Promise.resolve();
   if (dbMode === 'idb') return new Promise((res, rej) => {
     const tr = db.transaction(store, 'readwrite');
     tr.objectStore(store).clear();
@@ -494,12 +565,15 @@ function defaultSettings() {
   return {
     providers: [], activeProviderId: null,
     fontSize: 18, accent: 'cyan', aiPanelOpen: true, lang: 'zh', layout: 'stack',
+    bg: 'stars', petVisible: true, autoModel: true, plan: 'free', storageDenied: false,
     ctx: { outline: true, chars: true, world: true, mem: true, chatHistory: true, prevChapters: 2 },
     user: { nickname: '', avatarPreset: 0, avatarData: '' },
     customAuthors: []
   };
 }
-const APP_VERSION = '2.2.0';
+const APP_VERSION = '3.0.0';
+const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
+const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
   novels: [], chapters: [], outline: [], characters: [], memories: [], chats: [],
   currentNovelId: null, currentChapterId: null,
@@ -568,7 +642,7 @@ async function saveChat() {
 /* ---------------- 顶栏 ---------------- */
 function renderTop() {
   const n = curNovel();
-  $('#novel-pill-title').textContent = n ? n.title : (state.settings.lang === 'zh' ? '未选择小说' : 'No novel selected');
+  $('#novel-pill-title').textContent = n ? (n.title || t('novel.pending')) : (state.settings.lang === 'zh' ? '未选择小说' : 'No novel selected');
   if (!n) { $('#stats').textContent = ''; renderProfileTop(); return; }
   const chs = chaptersOf(n.id);
   const total = chs.reduce((s, c) => s + (c.wordCount || 0), 0);
@@ -612,7 +686,7 @@ function renderLibrary() {
     <div class="lib-row ${n.id === state.currentNovelId ? 'active' : ''}" data-id="${n.id}">
       <div class="lib-cover" style="--cover:${n.color || '#00e0ff'}"></div>
       <div class="lib-info">
-        <div class="lib-title">${esc(n.title)}</div>
+        <div class="lib-title">${esc(n.title || t('novel.pending'))}</div>
         <div class="lib-meta">${esc(n.audience || '')} ${esc(gtxt || t('novel.legacyGenre'))} · ${chaptersOf(n.id).length} · ${fmtDate(n.updatedAt)}</div>
       </div>
       <div class="row-actions" style="opacity:1">
@@ -648,11 +722,12 @@ function openNovelModal(id) {
       length: n.length || '未定',
       pov: n.pov || '未定',
       tone: n.tone || '未定',
+      narrative: n.narrative || 'dialogue',
       lang: n.lang || 'zh',
       authors: [...novelRefAuthors(n)]
     };
   } else {
-    state.styleDraft = { audience: '通用', genres: [], length: '未定', pov: '未定', tone: '未定', lang: 'zh', authors: [] };
+    state.styleDraft = { audience: '通用', genres: [], length: '未定', pov: '未定', tone: '未定', narrative: 'dialogue', lang: 'zh', authors: [] };
   }
   renderStyleChips();
   $('#novel-learn-status').textContent = '';
@@ -666,7 +741,7 @@ function renderStyleChips() {
   if (gWrap) gWrap.innerHTML = GENRES.map(g => `<button class="chip ${d.genres.includes(g) ? 'on' : ''}" data-val="${g}">${esc(g)}</button>`).join('');
   const aWrap = document.querySelector('#modal-novel [data-field="authors"]');
   if (aWrap) aWrap.innerHTML = allAuthors().map(a => `<button class="chip ${d.authors.includes(a.id) ? 'on' : ''}" data-val="${a.id}">${esc(a.name)}${a.custom ? ' ✦' : ''}</button>`).join('');
-  ['audience', 'length', 'pov', 'tone', 'lang'].forEach(f => {
+  ['audience', 'length', 'pov', 'tone', 'narrative', 'lang'].forEach(f => {
     $$('#modal-novel [data-field="' + f + '"] .chip').forEach(b => b.classList.toggle('on', b.dataset.val === d[f]));
   });
 }
@@ -689,17 +764,16 @@ function onStyleChipClick(e) {
 }
 async function saveNovelFromForm() {
   const title = $('#novel-title').value.trim();
-  if (!title) return toast(t('toast.needTitle'), 'warn');
   const id = state.novelEditingId;
   const desc = $('#novel-desc').value.trim();
-  const d = state.styleDraft || { audience: '通用', genres: [], length: '未定', pov: '未定', tone: '未定', lang: 'zh', authors: [] };
+  const d = state.styleDraft || { audience: '通用', genres: [], length: '未定', pov: '未定', tone: '未定', narrative: 'dialogue', lang: 'zh', authors: [] };
   const genreStr = d.genres.join('、') || t('novel.legacyGenre');
   if (id) {
     const n = state.novels.find(x => x.id === id);
     if (n) {
       n.title = title; n.description = desc;
       n.audience = d.audience; n.genres = [...d.genres]; n.genre = genreStr;
-      n.length = d.length; n.pov = d.pov; n.tone = d.tone; n.lang = d.lang; n.refAuthors = [...d.authors];
+      n.length = d.length; n.pov = d.pov; n.tone = d.tone; n.narrative = d.narrative; n.lang = d.lang; n.refAuthors = [...d.authors];
       n.updatedAt = now();
       await dbPut(STORE.novels, n);
     }
@@ -707,7 +781,8 @@ async function saveNovelFromForm() {
     const n = {
       id: uid(), title, description: desc,
       audience: d.audience, genres: [...d.genres], genre: genreStr,
-      length: d.length, pov: d.pov, tone: d.tone, lang: d.lang, refAuthors: [...d.authors],
+      length: d.length, pov: d.pov, tone: d.tone, narrative: d.narrative, lang: d.lang, refAuthors: [...d.authors],
+      styleMode: 'author', styleSample: '',
       color: PALETTE[state.novels.length % PALETTE.length],
       createdAt: now(), updatedAt: now(), synopsis: '', world: '', worldSections: []
     };
@@ -1094,6 +1169,7 @@ function renderWorld() {
         <tr><td class="sp-label">${t('w.length')}</td><td class="sp-val">${esc(n.length || '未定')}</td></tr>
         <tr><td class="sp-label">${t('w.pov')}</td><td class="sp-val">${esc(n.pov || '未定')}</td></tr>
         <tr><td class="sp-label">${t('w.tone')}</td><td class="sp-val">${esc(n.tone || '未定')}</td></tr>
+        <tr><td class="sp-label">${t('style.narrative')}</td><td class="sp-val">${esc({ dialogue: t('style.dialogue'), balanced: t('style.balanced'), narrative: t('style.narrativeMode') }[n.narrative] || t('style.dialogue'))}</td></tr>
         <tr><td class="sp-label">${t('w.lang')}</td><td class="sp-val">${n.lang === 'en' ? 'English' : '中文'}</td></tr>
         <tr><td class="sp-label">${t('w.authors')}</td><td class="sp-val">${esc(refs || '—')}</td></tr>
       </table>
@@ -1113,6 +1189,15 @@ function renderWorld() {
       <span class="learn-status" id="au-status"></span>
     </div>
     ${renderAuthorNotes(n)}
+  </div>
+  <div class="world-block">
+    <div class="block-label">${t('w.myStyle')}</div>
+    <div class="mem-chips">
+      <button class="chip mini ${n.styleMode !== 'mine' ? 'on' : ''}" data-act="stylemode" data-mode="author">${t('w.styleModeAuthor')}</button>
+      <button class="chip mini ${n.styleMode === 'mine' ? 'on' : ''}" data-act="stylemode" data-mode="mine">${t('w.styleModeMine')}</button>
+    </div>
+    <div class="author-tip">${t('w.styleSample')}</div>
+    <textarea class="input" data-field="styleSample" rows="5" data-i18n-ph="w.styleSamplePh" placeholder="粘贴一段你自己的文字（500 字以内）…">${esc(n.styleSample || '')}</textarea>
   </div>
   <div class="world-block">
     <div class="block-label">${t('w.custom')} <button class="btn mini" data-act="addsec">${t('w.addSec')}</button></div>
@@ -1193,6 +1278,7 @@ function onPanelClick(e) {
     case 'toggleauthor': toggleAuthor(id); break;
     case 'learnauthors': learnAuthors(novelRefAuthors(curNovel()), $('#world-learn-status')); break;
     case 'delcustomauthor': delCustomAuthor(id); break;
+    case 'stylemode': setStyleMode(btn.dataset.mode); break;
   }
 }
 function onPanelInput(e) {
@@ -1203,6 +1289,7 @@ function onPanelInput(e) {
   const f = tEl.dataset.field;
   if (f === 'synopsis') n.synopsis = tEl.value;
   else if (f === 'world') n.world = tEl.value;
+  else if (f === 'styleSample') n.styleSample = tEl.value.slice(0, 500);
   else if (f === 'secTitle') { const s = (n.worldSections || []).find(x => x.id === tEl.dataset.id); if (s) s.title = tEl.value; }
   else if (f === 'secBody') { const s = (n.worldSections || []).find(x => x.id === tEl.dataset.id); if (s) s.content = tEl.value; }
   n.updatedAt = now();
@@ -1613,6 +1700,7 @@ function fillProvForm(p) {
   $('#preset-select').value = '';
 }
 function openAISettings() {
+  fillPresetSelect();
   renderProviderList();
   state.provEditingId = null;
   fillProvForm(null);
@@ -1681,10 +1769,8 @@ async function testProvider() {
   }
 }
 
-/* ---------------- AI 请求（OpenAI 兼容 + 流式） ---------------- */
-async function aiRequest(messages, opts) {
-  const p = activeProvider();
-  if (!p) throw new Error('未配置 AI 模型');
+/* ---------------- AI 请求（OpenAI 兼容 + 流式 + 自动切换备用模型） ---------------- */
+async function aiRequestOnce(messages, opts, p) {
   const body = {
     model: p.model, messages,
     temperature: Number(p.temperature ?? 0.8),
@@ -1709,6 +1795,26 @@ async function aiRequest(messages, opts) {
     return c ? (c.content || '') : '';
   }
   return res;
+}
+async function aiRequest(messages, opts) {
+  const p = activeProvider();
+  if (!p) throw new Error('未配置 AI 模型');
+  let lastErr = null;
+  const candidates = [p].concat(state.settings.providers.filter(x => x.id !== p.id));
+  const maxTries = state.settings.autoModel ? Math.min(candidates.length, 3) : 1;
+  for (let i = 0; i < maxTries; i++) {
+    const cand = candidates[i];
+    if (!cand || !cand.baseUrl || !cand.model) continue;
+    try {
+      return await aiRequestOnce(messages, opts, cand);
+    } catch (e) {
+      lastErr = e;
+      const m = String(e && e.message || '');
+      if (!/402|429|5\d\d|Failed to fetch|NetworkError|load failed|Load failed/i.test(m)) throw e;
+      // 自动切换下一个可用模型
+    }
+  }
+  throw lastErr || new Error('无可用模型');
 }
 async function* aiStream(res) {
   const reader = res.body.getReader();
@@ -1749,18 +1855,24 @@ function formatStyleForAI() {
   const n = curNovel();
   if (!n) return '（无）';
   const gs = novelGenres(n).join('、') || t('novel.legacyGenre');
+  const nar = { dialogue: t('style.dialogue'), balanced: t('style.balanced'), narrative: t('style.narrativeMode') }[n.narrative] || t('style.dialogue');
   const lines = [];
-  lines.push(`用户群体：${n.audience || '通用'}；类型：${gs}；篇幅：${n.length || '未定'}；视角：${n.pov || '未定'}；基调：${n.tone || '未定'}；写作语言：${n.lang === 'en' ? '英文' : '中文'}`);
-  const refs = novelRefAuthors(n);
-  if (refs.length) {
-    const parts = refs.map(id => {
-      const a = findAuthor(id);
-      if (!a) return null;
-      const wk = a.custom ? null : state.wikiCache[id];
-      const learned = wk ? wk.text.slice(0, 500) : (a.learned ? a.learned.slice(0, 500) : '');
-      return `${a.name}：技法要点——${a.tips || '（联网学习资料见后）'}${learned ? '；联网学习资料——' + learned : ''}`;
-    }).filter(Boolean);
-    if (parts.length) lines.push('参考作家及技法：\n' + parts.join('\n'));
+  lines.push(`用户群体：${n.audience || '通用'}；类型：${gs}；篇幅：${n.length || '未定'}；视角：${n.pov || '未定'}；基调：${n.tone || '未定'}；写法：${nar}；写作语言：${n.lang === 'en' ? '英文' : '中文'}`);
+  const styleMode = n.styleMode || 'author';
+  if (styleMode === 'mine' && n.styleSample && n.styleSample.trim()) {
+    lines.push('【用户文风样本】请学习该样本的句式节奏、用词习惯、对话风格与叙事口吻，模仿其文风进行创作（学习文风，不抄袭内容）：\n' + n.styleSample.trim().slice(0, 500));
+  } else {
+    const refs = novelRefAuthors(n);
+    if (refs.length) {
+      const parts = refs.map(id => {
+        const a = findAuthor(id);
+        if (!a) return null;
+        const wk = a.custom ? null : state.wikiCache[id];
+        const learned = wk ? wk.text.slice(0, 500) : (a.learned ? a.learned.slice(0, 500) : '');
+        return `${a.name}：技法要点——${a.tips || '（联网学习资料见后）'}${learned ? '；联网学习资料——' + learned : ''}`;
+      }).filter(Boolean);
+      if (parts.length) lines.push('参考作家及技法：\n' + parts.join('\n'));
+    }
   }
   return lines.join('\n');
 }
@@ -2102,10 +2214,19 @@ async function aiCallRetry(messages, opts, stageNote) {
   }
   throw lastErr;
 }
+function narrativeHint(n) {
+  if (!n) return '';
+  const m = n.narrative || 'dialogue';
+  if (m === 'dialogue') return '写作手法要求：以人物对话为主要呈现方式，用对话推动剧情，旁白精简克制。';
+  if (m === 'narrative') return '写作手法要求：以叙述旁白为主，注重场景描写与心理铺陈，对话为辅。';
+  return '写作手法要求：对话与叙述均衡搭配。';
+}
 async function genDraft(outline, planCtx) {
+  const n = curNovel();
+  const nar = narrativeHint(n);
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: planCtx + '\n\n【本章大纲】\n' + outline + '\n\n请为本章拟写细纲，只输出：\n【核心】一句话概括本章\n【情节节点】3-6 条\n【开头钩子】1-2 句。不要写正文。' }
+    { role: 'user', content: planCtx + '\n\n【本章大纲】\n' + outline + (nar ? '\n\n' + nar : '') + '\n\n请为本章拟写细纲，只输出：\n【核心】一句话概括本章\n【情节节点】3-6 条\n【开头钩子】1-2 句。不要写正文。' }
   ];
   const res = await aiCallRetry(messages, { stream: true }, t('gp.draft'));
   let acc = '';
@@ -2113,9 +2234,11 @@ async function genDraft(outline, planCtx) {
   return (acc || '').trim();
 }
 async function genStreamIntoEditor(outline, plan, planCtx) {
+  const n = curNovel();
+  const nar = narrativeHint(n);
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: planCtx + '\n\n【本章大纲】\n' + outline + '\n\n【细纲】\n' + plan + '\n\n请根据以上内容撰写本章正文。要求：像人类作家一样写作（句式长短交错、对话自然、细节具体），直接输出正文，不要标题、不要解释。' }
+    { role: 'user', content: planCtx + '\n\n【本章大纲】\n' + outline + (nar ? '\n\n' + nar : '') + '\n\n【细纲】\n' + plan + '\n\n请根据以上内容撰写本章正文。要求：像人类作家一样写作（句式长短交错、对话自然、细节具体），直接输出正文，不要标题、不要解释。' }
   ];
   const res = await aiCallRetry(messages, { stream: true }, t('gp.write'));
   const ed = $('#editor');
@@ -2288,6 +2411,18 @@ function applyUIPrefs() {
   document.documentElement.style.setProperty('--accent', ACCENTS[state.settings.accent] || ACCENTS.cyan);
   document.body.classList.toggle('no-ai', !state.settings.aiPanelOpen);
   document.body.classList.toggle('split-layout', state.settings.layout === 'split');
+  document.body.classList.toggle('hide-pet', !state.settings.petVisible);
+  // 动态背景
+  bgMode = state.settings.bg || 'stars';
+  const bgChips = { stars: 'set-bg-stars', solar: 'set-bg-solar', galaxy: 'set-bg-galaxy', planet: 'set-bg-planet' };
+  Object.keys(bgChips).forEach(k => { const el = $('#' + bgChips[k]); if (el) el.classList.toggle('on', k === bgMode); });
+  // 存储状态
+  $('#storage-warn').hidden = !state.settings.storageDenied;
+  $('#set-storage-val').textContent = state.settings.storageDenied ? t('set.storageNo') : t('set.storageOk');
+  // 小助手开关
+  $('#set-pet-on').classList.toggle('on', !!state.settings.petVisible);
+  $('#set-pet-off').classList.toggle('on', !state.settings.petVisible);
+  $('#set-auto-model').checked = !!state.settings.autoModel;
   $('#editor').style.fontSize = state.settings.fontSize + 'px';
   const s = state.settings.ctx;
   $('#ctx-outline').checked = !!s.outline;
@@ -2296,6 +2431,9 @@ function applyUIPrefs() {
   $('#ctx-mem').checked = !!s.mem;
   $('#ctx-chat-history').checked = !!s.chatHistory;
   $('#ctx-chapters').value = s.prevChapters;
+  const prevMax = PLAN_PREV_MAX[state.settings.plan] || 2;
+  $('#ctx-chapters').max = prevMax;
+  if (Number(s.prevChapters) > prevMax) $('#ctx-chapters').value = prevMax;
   $$('.accent-dot').forEach(d => d.classList.toggle('on', d.dataset.accent === state.settings.accent));
   applyI18n();
   renderProfileTop();
@@ -2310,50 +2448,135 @@ function renderAll() {
   applyUIPrefs();
 }
 
-/* ---------------- 星空背景 ---------------- */
-function initStars() {
+/* ---------------- 动态背景（星空 / 太阳系 / 银河系 / 星球 · 全部自绘无版权素材） ---------------- */
+let bgCtx = null, bgW = 0, bgH = 0, bgMode = 'stars', bgEntities = [];
+function bgResize() {
   const cv = $('#starfield');
-  const ctx = cv.getContext('2d');
-  let W, H, stars = [];
-  const resize = () => {
-    W = cv.width = innerWidth; H = cv.height = innerHeight;
-    const n = Math.min(220, Math.floor(W * H / 9000));
-    stars = Array.from({ length: n }, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      r: Math.random() * 1.4 + 0.2,
-      tw: Math.random() * Math.PI * 2,
-      s: 0.5 + Math.random() * 1.5
-    }));
-  };
-  resize();
-  addEventListener('resize', resize);
-  let shooting = null;
+  bgW = cv.width = innerWidth; bgH = cv.height = innerHeight;
+}
+function bgInit() {
+  bgCtx = $('#starfield').getContext('2d');
+  bgResize();
+  addEventListener('resize', bgResize);
   const step = ts => {
+    if (!bgCtx) return;
+    const ctx = bgCtx, W = bgW, H = bgH;
     ctx.clearRect(0, 0, W, H);
-    for (const st of stars) {
-      const a = 0.35 + 0.45 * Math.abs(Math.sin(ts / 1400 + st.tw));
-      ctx.fillStyle = `rgba(160,210,255,${a * 0.8})`;
-      ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 7); ctx.fill();
-      st.x -= 0.02 * st.s;
-      if (st.x < 0) st.x = W;
-    }
-    if (!shooting && Math.random() < 0.004) {
-      shooting = { x: Math.random() * W * 0.8 + W * 0.2, y: Math.random() * H * 0.4, len: 90 + Math.random() * 140, v: 9 };
-    }
-    if (shooting) {
-      const g = ctx.createLinearGradient(shooting.x, shooting.y, shooting.x - shooting.len, shooting.y - shooting.len * 0.5);
-      g.addColorStop(0, 'rgba(0,224,255,.9)'); g.addColorStop(1, 'rgba(0,224,255,0)');
-      ctx.strokeStyle = g; ctx.lineWidth = 1.6;
-      ctx.beginPath();
-      ctx.moveTo(shooting.x, shooting.y);
-      ctx.lineTo(shooting.x - shooting.len, shooting.y - shooting.len * 0.5);
-      ctx.stroke();
-      shooting.x -= shooting.v; shooting.y += shooting.v * 0.5;
-      if (shooting.x < -120) shooting = null;
-    }
+    if (bgMode === 'stars') drawStars(ctx, W, H, ts);
+    else if (bgMode === 'solar') drawSolar(ctx, W, H, ts);
+    else if (bgMode === 'galaxy') drawGalaxy(ctx, W, H, ts);
+    else if (bgMode === 'planet') drawPlanet(ctx, W, H, ts);
     requestAnimationFrame(step);
   };
   requestAnimationFrame(step);
+}
+function setBgMode(m) {
+  bgMode = m;
+  state.settings.bg = m;
+  saveSettings();
+  const chips = { stars: 'set-bg-stars', solar: 'set-bg-solar', galaxy: 'set-bg-galaxy', planet: 'set-bg-planet' };
+  Object.keys(chips).forEach(k => {
+    const el = $('#' + chips[k]);
+    if (el) el.classList.toggle('on', k === m);
+  });
+}
+function drawStars(ctx, W, H, ts) {
+  if (!bgEntities.length || bgEntities.length > 240) {
+    bgEntities = Array.from({ length: Math.min(200, Math.floor(W * H / 9000)) }, () => ({
+      x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + 0.2,
+      tw: Math.random() * Math.PI * 2, s: 0.5 + Math.random() * 1.5
+    }));
+  }
+  for (const st of bgEntities) {
+    const a = 0.35 + 0.45 * Math.abs(Math.sin(ts / 1400 + st.tw));
+    ctx.fillStyle = `rgba(160,210,255,${a * 0.8})`;
+    ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 7); ctx.fill();
+    st.x -= 0.02 * st.s;
+    if (st.x < 0) st.x = W;
+  }
+  if (Math.random() < 0.004) {
+    const sx = Math.random() * W * 0.8 + W * 0.2, sy = Math.random() * H * 0.4;
+    const g = ctx.createLinearGradient(sx, sy, sx - 130, sy - 65);
+    g.addColorStop(0, 'rgba(0,224,255,.9)'); g.addColorStop(1, 'rgba(0,224,255,0)');
+    ctx.strokeStyle = g; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx - 130, sy - 65); ctx.stroke();
+  }
+}
+function drawSolar(ctx, W, H, ts) {
+  const cx = W / 2, cy = H / 2;
+  const glow = ctx.createRadialGradient(cx, cy, 4, cx, cy, Math.min(W, H) * 0.32);
+  glow.addColorStop(0, 'rgba(255,190,90,.35)'); glow.addColorStop(1, 'rgba(255,190,90,0)');
+  ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
+  const sunG = ctx.createRadialGradient(cx, cy, 2, cx, cy, 34);
+  sunG.addColorStop(0, '#ffe9b0'); sunG.addColorStop(0.5, '#ffc25e'); sunG.addColorStop(1, '#ff9a3c');
+  ctx.fillStyle = sunG;
+  ctx.beginPath(); ctx.arc(cx, cy, 30, 0, 7); ctx.fill();
+  const planets = [
+    { d: 62, r: 5, c: '#c9a26b', sp: 0.5 }, { d: 92, r: 7, c: '#7fc6e8', sp: 0.38 },
+    { d: 126, r: 9, c: '#5aa6e0', sp: 0.3 }, { d: 160, r: 6, c: '#e0765a', sp: 0.25 },
+    { d: 210, r: 16, c: '#e0b06a', sp: 0.18 }, { d: 262, r: 13, c: '#d9c9a8', sp: 0.13, ring: true },
+    { d: 306, r: 10, c: '#7cc4d8', sp: 0.1 }, { d: 340, r: 9, c: '#5d7bd8', sp: 0.08 }
+  ];
+  planets.forEach(p => {
+    ctx.strokeStyle = 'rgba(90,130,190,.13)';
+    ctx.beginPath(); ctx.arc(cx, cy, p.d, 0, 7); ctx.stroke();
+    const a = ts / 1000 * p.sp;
+    const px = cx + Math.cos(a) * p.d, py = cy + Math.sin(a) * p.d * 0.35;
+    ctx.fillStyle = p.c;
+    ctx.beginPath(); ctx.arc(px, py, p.r, 0, 7); ctx.fill();
+    if (p.ring) {
+      ctx.strokeStyle = 'rgba(217,201,168,.55)';
+      ctx.beginPath(); ctx.ellipse(px, py, p.r * 1.9, p.r * 0.55, -0.35, 0, 7); ctx.stroke();
+    }
+  });
+  drawStars(ctx, W, H, ts);
+}
+function drawGalaxy(ctx, W, H, ts) {
+  const cx = W / 2, cy = H / 2;
+  const core = ctx.createRadialGradient(cx, cy, 2, cx, cy, Math.min(W, H) * 0.3);
+  core.addColorStop(0, 'rgba(190,160,255,.4)'); core.addColorStop(0.4, 'rgba(124,92,255,.12)'); core.addColorStop(1, 'rgba(124,92,255,0)');
+  ctx.fillStyle = core; ctx.fillRect(0, 0, W, H);
+  const rot = ts / 20000;
+  for (let i = 0; i < 380; i++) {
+    const rad = 18 + Math.pow(Math.random(), 0.6) * Math.min(W, H) * 0.38;
+    const baseA = Math.random() * Math.PI * 2;
+    const arm = (Math.sin(baseA * 2) > 0 ? 1 : -1) * rad * 0.055;
+    const a = baseA + rot * (30 / rad) + arm;
+    const x = cx + Math.cos(a) * rad, y = cy + Math.sin(a) * rad * 0.42;
+    const alpha = Math.max(0.08, 0.75 - rad / (Math.min(W, H) * 0.42));
+    const warm = Math.random() > 0.75;
+    ctx.fillStyle = warm ? `rgba(255,210,160,${alpha})` : `rgba(170,205,255,${alpha})`;
+    ctx.fillRect(x, y, 1.4, 1.4);
+  }
+}
+function drawPlanet(ctx, W, H, ts) {
+  drawStars(ctx, W, H, ts);
+  const px = W * 0.22, py = H * 0.6, pr = Math.min(W, H) * 0.26;
+  const g = ctx.createRadialGradient(px - pr * 0.4, py - pr * 0.4, pr * 0.1, px, py, pr);
+  g.addColorStop(0, '#9ad0e8'); g.addColorStop(0.55, '#3f7fb8'); g.addColorStop(1, '#14243e');
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(px, py, pr, 0, 7); ctx.fill();
+  ctx.strokeStyle = 'rgba(120,180,220,.16)';
+  for (let i = 1; i < 4; i++) {
+    ctx.beginPath(); ctx.ellipse(px, py, pr * 0.72, pr * i * 0.22, -0.5, 0, 7); ctx.stroke();
+  }
+  ctx.save();
+  ctx.translate(px, py);
+  ctx.rotate(-0.42);
+  ctx.strokeStyle = 'rgba(220,205,170,.75)';
+  ctx.lineWidth = Math.max(3, pr * 0.07);
+  ctx.beginPath(); ctx.ellipse(0, 0, pr * 1.55, pr * 0.42, 0, 0, 7); ctx.stroke();
+  ctx.strokeStyle = 'rgba(150,140,120,.5)';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.ellipse(0, 0, pr * 1.3, pr * 0.34, 0, 0, 7); ctx.stroke();
+  ctx.restore();
+  const moonA = ts / 1400;
+  const mx = px + Math.cos(moonA) * pr * 2.1, my = py + Math.sin(moonA) * pr * 2.1 * 0.3;
+  ctx.fillStyle = '#b8b8c8';
+  ctx.beginPath(); ctx.arc(mx, my, pr * 0.14, 0, 7); ctx.fill();
+  const light = ctx.createRadialGradient(W * 0.85, H * 0.2, 2, W * 0.85, H * 0.2, 46);
+  light.addColorStop(0, 'rgba(255,255,240,.9)'); light.addColorStop(1, 'rgba(255,255,240,0)');
+  ctx.fillStyle = light; ctx.fillRect(0, 0, W, H);
 }
 
 /* ---------------- 用户须知 · 用户守则 ---------------- */
@@ -2364,6 +2587,174 @@ function openTerms() {
   $('#terms-agree-chk').checked = false;
   $('#btn-terms-agree').disabled = true;
   openModal('modal-terms');
+}
+
+async function setStyleMode(mode) {
+  const n = curNovel();
+  if (!n) return;
+  n.styleMode = mode;
+  await dbPut(STORE.novels, n);
+  renderPanel();
+  toast(t('toast.styleSaved'), 'ok');
+}
+
+/* ---------------- 智能起名（书名 / 章节名） ---------------- */
+let titlesKind = 'novel';
+async function genTitles(kind) {
+  titlesKind = kind || 'novel';
+  const p = activeProvider();
+  if (!p) { toast(t('toast.noAI'), 'warn'); openAISettings(); return; }
+  if (state.aiStreaming || state.genState.running) { toast(t('toast.aiBusy'), 'warn'); return; }
+  let base = '';
+  if (kind === 'novel') {
+    base = $('#novel-desc').value.trim() || (curNovel() ? (curNovel().description || curNovel().synopsis || '') : '');
+  } else {
+    const c = curChapter();
+    if (!c) { toast(t('toast.needChapterOpen'), 'warn'); return; }
+    base = ($('#chapter-outline').value || c.outline || '') + '\n' + (($('#editor').value || c.content || '').slice(0, 300));
+  }
+  if (!base.trim()) { toast(t('toast.titleNeedInput'), 'warn'); return; }
+  toast(t('toast.titlesGen'), 'info', 2000);
+  $('#title-list').innerHTML = '<div class="dict-loading">' + t('toast.titlesGen') + '</div>';
+  $('#titles-modal-title').textContent = '✨ ' + (kind === 'novel' ? t('novel.titleSuggest') : t('co.chapterTitle'));
+  openModal('modal-titles');
+  try {
+    const target = kind === 'novel' ? '书名' : '章节标题';
+    const messages = [
+      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'user', content: `请根据以下内容为这部${kind === 'novel' ? '小说' : '章节'}想出 8 个候选${target}：\n\n${base.slice(0, 1500)}\n\n要求：每个候选单独一行，格式「候选名（2-4字风格标签）」；风格多样、朗朗上口、有吸引力，不要重复，不要解释。` }
+    ];
+    const res = await aiCallRetry(messages, { stream: true }, t('toast.titlesGen'));
+    let acc = '';
+    for await (const chunk of aiStream(res)) acc += chunk;
+    const lines = acc.split('\n').map(s => s.trim())
+      .map(s => s.replace(/^[\d一二三四五六七八九十]+[.、)）]\s*/, '').replace(/^[-*·]\s*/, '').trim())
+      .filter(s => s.length > 1 && s.length < 40);
+    const list = lines.slice(0, 8);
+    if (!list.length) {
+      $('#title-list').innerHTML = '<div class="empty-hint">' + t('toast.titlesEmpty') + '</div>';
+      return;
+    }
+    $('#title-list').innerHTML = list.map((s, i) =>
+      `<div class="title-item" data-title="${esc(s)}"><span class="t-ico">${['🌟', '✨', '💫', '⭐', '🌠', '🔮', '🪐', '☄️'][i] || '⭐'}</span><span class="t-txt">${esc(s)}</span><span class="mem-cat" data-cat="其他">${t('common.save')}</span></div>`
+    ).join('');
+  } catch (e) {
+    $('#title-list').innerHTML = '<div class="empty-hint">' + humanizeAIError(e) + '</div>';
+  }
+}
+async function applyTitle(title) {
+  if (!title) return;
+  if (titlesKind === 'novel') {
+    const editing = $('#modal-novel').hidden === false;
+    if (editing) { $('#novel-title').value = title; }
+    else {
+      const n = curNovel();
+      if (n) { n.title = title; n.updatedAt = now(); await dbPut(STORE.novels, n); renderTop(); renderLibrary(); }
+    }
+  } else {
+    const c = curChapter();
+    if (c) { $('#chapter-title').value = title; scheduleSave(); }
+  }
+  closeModal('modal-titles');
+  toast(t('toast.titleApplied'), 'ok');
+}
+
+/* ---------------- 存储权限 ---------------- */
+function storageAllowed() {
+  try { return localStorage.getItem('nebula-storage-ok') === '1'; } catch (e) { return true; }
+}
+function openStorageAsk() {
+  openModal('modal-storage');
+}
+function allowStorage() {
+  try { localStorage.setItem('nebula-storage-ok', '1'); } catch (e) { }
+  state.settings.storageDenied = false;
+  saveSettings();
+  closeModal('modal-storage');
+  applyUIPrefs();
+  toast(t('toast.storageOk'), 'ok', 3500);
+}
+function denyStorage() {
+  state.settings.storageDenied = true;
+  saveSettings();
+  closeModal('modal-storage');
+  applyUIPrefs();
+  toast(t('toast.storageNo'), 'warn', 4000);
+}
+
+/* ---------------- 会员方案 ---------------- */
+function planName(p) {
+  return p === 'pro' ? t('vip.pro') : (p === 'flag' ? t('vip.flag') : t('vip.free'));
+}
+function renderVip() {
+  $$('#modal-vip .vip-card').forEach(card => {
+    const btn = card.querySelector('[data-plan]');
+    if (!btn) return;
+    const isCurrent = btn.dataset.plan === state.settings.plan;
+    card.classList.toggle('current', isCurrent);
+    btn.disabled = isCurrent;
+    if (isCurrent) btn.textContent = t('vip.freeBtn');
+    else if (btn.dataset.plan === 'pro') btn.textContent = t('vip.btn');
+    else if (btn.dataset.plan === 'flag') btn.textContent = t('vip.btn');
+  });
+}
+function setPlan(p) {
+  if (state.settings.plan === p) return;
+  state.settings.plan = p;
+  saveSettings();
+  renderVip();
+  fillPresetSelect();
+  applyUIPrefs();
+  toast(t('toast.planChanged', { p: planName(p) }), 'ok', 3500);
+}
+
+/* ---------------- 全网 AI 模型搜索（OpenRouter 公开目录） ---------------- */
+async function searchModels() {
+  const input = $('#or-search-input');
+  const q = (input.value || '').trim();
+  if (!q) return;
+  const box = $('#or-results');
+  box.innerHTML = '<div class="dict-loading">' + t('vip.searching') + '</div>';
+  try {
+    const r = await fetch('https://openrouter.ai/api/v1/models', { signal: AbortSignal.timeout(15000) });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    const list = (j.data || []).filter(m => (m.id || '').toLowerCase().includes(q.toLowerCase())).slice(0, 10);
+    if (!list.length) {
+      box.innerHTML = '<div class="empty-hint small">' + t('vip.searchEmpty') + '</div>';
+      return;
+    }
+    box.innerHTML = list.map(m => {
+      const price = (m.pricing && m.pricing.prompt) ? (Number(m.pricing.prompt) > 0 ? ('$' + (Number(m.pricing.prompt) * 1e6).toFixed(1) + '/M') : t('vip.copy')) : '—';
+      const isFree = m.pricing && m.pricing.prompt === '0';
+      return `<div class="or-item"><span class="or-name">${esc(m.id)}</span><span class="or-price ${isFree ? 'or-free' : ''}">${isFree ? '🆓 ' + t('aiset.stFree') : esc(price)}</span><button class="btn mini" data-orcopy="${esc(m.id)}">⧉ ${t('vip.copy')}</button></div>`;
+    }).join('');
+  } catch (e) {
+    box.innerHTML = '<div class="empty-hint small">' + t('vip.searchFail') + '</div>';
+  }
+}
+
+/* ---------------- 创作小宠物 ---------------- */
+let petIdleTimer = null, petNudgeTimer = null;
+function petActive() {
+  const pet = $('#pet');
+  if (!pet) return;
+  pet.classList.remove('pet-idle');
+  clearTimeout(petIdleTimer);
+  petIdleTimer = setTimeout(() => {
+    pet.classList.add('pet-idle');
+    clearInterval(petNudgeTimer);
+    petNudgeTimer = setInterval(() => {
+      pet.style.setProperty('--nx', (Math.random() * 26 - 13) + 'px');
+      pet.style.setProperty('--ny', (Math.random() * 10 - 5) + 'px');
+    }, 2600);
+  }, 60000);
+}
+function petIdleNow() { const pet = $('#pet'); if (pet) pet.classList.add('pet-idle'); }
+function openAssistant() {
+  const pet = $('#pet');
+  if (pet) { pet.classList.remove('pet-idle'); }
+  openModal('modal-assistant');
 }
 
 /* ---------------- 设置中心 ---------------- */
@@ -2455,10 +2846,62 @@ function bindEvents() {
   $('#chapter-title').addEventListener('input', scheduleSave);
   $('#chapter-title').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('#editor').focus(); } });
   $('#chapter-status').addEventListener('change', scheduleSave);
-  $('#btn-font-minus').addEventListener('click', () => adjustFont(-1));
-  $('#btn-font-plus').addEventListener('click', () => adjustFont(1));
+  $('#btn-title-suggest').addEventListener('click', () => genTitles('chapter'));
   $('#btn-focus').addEventListener('click', () => toggleFocus());
   $('#btn-dict').addEventListener('click', () => openDict());
+  // 智能起名（弹窗列表点击）
+  $('#title-list').addEventListener('click', e => {
+    const it = e.target.closest('.title-item');
+    if (it) applyTitle(it.dataset.title);
+  });
+  $('#btn-novel-title-suggest').addEventListener('click', () => genTitles('novel'));
+  // 存储权限
+  $('#btn-storage-allow').addEventListener('click', allowStorage);
+  $('#btn-storage-deny').addEventListener('click', denyStorage);
+  $('#set-storage-req').addEventListener('click', openStorageAsk);
+  // 会员方案
+  $('#btn-vip').addEventListener('click', () => { renderVip(); openModal('modal-vip'); });
+  document.addEventListener('click', e => {
+    const v = e.target.closest('[data-plan]');
+    if (v && !v.disabled) setPlan(v.dataset.plan);
+    const oc = e.target.closest('[data-orcopy]');
+    if (oc) { copyText(oc.dataset.orcopy); }
+  });
+  // 全网模型搜索
+  $('#btn-or-search').addEventListener('click', searchModels);
+  $('#or-search-input').addEventListener('keydown', e => { if (e.key === 'Enter') searchModels(); });
+  // 小宠物 / 助手
+  $('#pet').addEventListener('click', openAssistant);
+  $('#asst-hide').addEventListener('click', () => { state.settings.petVisible = false; saveSettings(); applyUIPrefs(); closeModal('modal-assistant'); toast(t('asst.hide'), 'ok', 2000); });
+  $('#asst-new-novel').addEventListener('click', () => { closeModal('modal-assistant'); openNovelModal(null); });
+  $('#asst-gen').addEventListener('click', () => { closeModal('modal-assistant'); generateChapter(); });
+  $('#asst-titles').addEventListener('click', () => { closeModal('modal-assistant'); genTitles(curChapter() ? 'chapter' : 'novel'); });
+  $('#asst-settings').addEventListener('click', () => { closeModal('modal-assistant'); openSettings(); });
+  $('#asst-feedback').addEventListener('click', () => { closeModal('modal-assistant'); openModal('modal-feedback'); });
+  ['pointerdown', 'keydown', 'wheel'].forEach(ev => document.addEventListener(ev, petActive, { passive: true }));
+  // 点击反馈水波
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.btn,.tb-btn,.chip,.profile-btn');
+    if (!b || b.disabled) return;
+    const rect = b.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const rp = document.createElement('span');
+    rp.className = 'ripple';
+    rp.style.width = rp.style.height = size + 'px';
+    rp.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    rp.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    b.appendChild(rp);
+    setTimeout(() => rp.remove(), 500);
+  });
+  // 设置：背景 / 小助手 / 词典 / 自动模型
+  $('#set-bg-stars').addEventListener('click', () => setBgMode('stars'));
+  $('#set-bg-solar').addEventListener('click', () => setBgMode('solar'));
+  $('#set-bg-galaxy').addEventListener('click', () => setBgMode('galaxy'));
+  $('#set-bg-planet').addEventListener('click', () => setBgMode('planet'));
+  $('#set-pet-on').addEventListener('click', () => { state.settings.petVisible = true; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
+  $('#set-pet-off').addEventListener('click', () => { state.settings.petVisible = false; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
+  $('#set-dict').addEventListener('click', openDict);
+  $('#set-auto-model').addEventListener('change', e => { state.settings.autoModel = e.target.checked; saveSettings(); });
   // 章节大纲 + 联网生成
   $('#chapter-outline').addEventListener('input', scheduleSave);
   $('#btn-gen-chapter').addEventListener('click', generateChapter);
@@ -2482,10 +2925,6 @@ function bindEvents() {
   $('#set-feedback').addEventListener('click', () => openModal('modal-feedback'));
   $('#set-terms').addEventListener('click', openTerms);
   $('#btn-check-update').addEventListener('click', checkUpdate);
-  document.addEventListener('click', e => {
-    const v = e.target.closest('[data-vip]');
-    if (v) toast(t('vip.btnToast'), 'info');
-  });
   // AI 面板
   $('#btn-ai-toggle').addEventListener('click', () => { state.settings.aiPanelOpen = !state.settings.aiPanelOpen; saveSettings(); applyUIPrefs(); });
   $('#btn-ai-close').addEventListener('click', () => { state.settings.aiPanelOpen = false; saveSettings(); applyUIPrefs(); });
@@ -2634,6 +3073,19 @@ function bindEvents() {
   window.addEventListener('beforeunload', () => { flushSave(); saveSettings(); });
 }
 
+/* ---------------- 预设下拉（按会员方案过滤） ---------------- */
+function fillPresetSelect() {
+  const sel = $('#preset-select');
+  sel.innerHTML = '<option value="">— ' + t('aiset.preset') + ' —</option>';
+  const lvl = PLAN_LEVEL[state.settings.plan] || 0;
+  PRESETS.forEach((p, i) => {
+    if ((PLAN_LEVEL[p.plan] || 0) > lvl) return;
+    const o = document.createElement('option');
+    o.value = String(i); o.textContent = p.name;
+    sel.appendChild(o);
+  });
+}
+
 /* ---------------- 启动 ---------------- */
 async function boot() {
   loadSettings();
@@ -2647,14 +3099,9 @@ async function boot() {
     state.settings.activeProviderId = state.settings.providers[0].id;
     saveSettings();
   }
-  // 预设下拉填充
-  PRESETS.forEach((p, i) => {
-    const o = document.createElement('option');
-    o.value = String(i); o.textContent = p.name;
-    $('#preset-select').appendChild(o);
-  });
+  fillPresetSelect();
   applyUIPrefs();
-  initStars();
+  bgInit();
   bindEvents();
   await dbInit();
   await loadAll();
@@ -2665,6 +3112,8 @@ async function boot() {
     toast(t('toast.welcome'), 'info', 7000);
   }
   if (!termsAccepted()) openTerms();
+  // 首次使用：请求本地存储授权（用户同意后才持久化保存作品）
+  if (!storageAllowed() && !state.settings.storageDenied) openStorageAsk();
   window.__nebulaReady = true;
 }
 boot();
