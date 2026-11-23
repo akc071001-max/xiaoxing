@@ -146,7 +146,35 @@ const I18N = {
     'terms.agreeBtn': '同意并进入',
     'terms.declineBtn': '不同意',
     'terms.declined': '未同意用户须知与守则将无法使用。',
-    'profile.terms': '📜 用户须知'
+    'profile.terms': '📜 用户须知',
+    'btn.vip': '💎 会员', 'btn.vipTitle': '会员中心（试运营·不收费）',
+    'btn.feedback': '💬 反馈', 'btn.feedbackTitle': '意见反馈',
+    'co.label': '📋 本章大纲',
+    'co.gen': '⚡ 联网生成正文', 'co.again': '🔄 重新生成',
+    'co.ph': '输入本章大纲：本章要发生什么、出现哪些人物、埋什么伏笔…… 输入后点「⚡ 联网生成正文」',
+    'co.needChapter': '请先创建并打开一个章节', 'co.needOutline': '请先在「本章大纲」输入内容',
+    'co.confirmOverwrite': '本章已有正文，生成将覆盖现有内容。是否继续？',
+    'co.done': '✓ 生成完成，不满意可点「🔄 重新生成」', 'co.cancelled': '已取消生成',
+    'co.running': '生成中…',
+    'gp.title': '⚡ 联网生成正文',
+    'gp.search': '正在搜索作家', 'gp.style': '正在学习作家文风', 'gp.draft': '正在拟写正文', 'gp.write': '正在输出正文',
+    'gp.cancelTitle': '取消生成',
+    'au.label': '自定义作家', 'au.ph': '输入你喜欢的作家名字，联网搜索添加…',
+    'au.search': '🔍 搜索添加', 'au.needName': '请输入作家名字', 'au.searching': '正在联网搜索…',
+    'au.notfound': '未找到该作家，换个名字试试', 'au.added': '已添加并选为参考：{name}', 'au.fail': '搜索失败：请检查网络后重试',
+    'au.custom': '自定义', 'au.del': '删除该自定义作家？',
+    'fb.title': '💬 意见反馈', 'fb.label': '问题或建议',
+    'fb.ph': '请描述您遇到的问题或建议…', 'fb.hint': '我们会认真阅读每一条反馈。',
+    'fb.send': '提交反馈', 'fb.thanks': '感谢您的反馈', 'fb.fail': '反馈提交失败，请稍后再试', 'fb.needMsg': '请先填写反馈内容',
+    'vip.title': '💎 会员中心', 'vip.notice': '试运营 · 不收费',
+    'vip.free': '免费体验版', 'vip.freePrice': '¥0 · 试运营', 'vip.currentBtn': '当前方案',
+    'vip.f1': '内置免费 AI 模型', 'vip.f2': '全部创作功能', 'vip.f3': '数据本地保存',
+    'vip.pro': '专业创作版', 'vip.proPrice': '¥0 · 试运营',
+    'vip.p1': '更优质的大模型', 'vip.p2': '更长上下文记忆', 'vip.p3': '更快生成速度',
+    'vip.flag': '旗舰版', 'vip.flagPrice': '¥0 · 试运营',
+    'vip.l1': '全部专业版权益', 'vip.l2': '优先接入新模型', 'vip.l3': '专属客服支持',
+    'vip.btn': '暂未开放', 'vip.btnToast': '试运营期间不收费，敬请期待',
+    'vip.foot': '试运营期间所有方案均不收费，敬请期待正式上线。'
   },
   en: {
     'brand.sub': 'ALL-GENRE NOVEL STUDIO',
@@ -249,7 +277,35 @@ const I18N = {
     'terms.agreeBtn': 'Agree & Enter',
     'terms.declineBtn': 'Decline',
     'terms.declined': 'You must agree to the notice & code of conduct to continue.',
-    'profile.terms': '📜 User Notice'
+    'profile.terms': '📜 User Notice',
+    'btn.vip': '💎 VIP', 'btn.vipTitle': 'Membership (beta · free)',
+    'btn.feedback': '💬 Feedback', 'btn.feedbackTitle': 'Feedback',
+    'co.label': '📋 Chapter Outline',
+    'co.gen': '⚡ Generate Online', 'co.again': '🔄 Regenerate',
+    'co.ph': 'Type the chapter outline: what happens, which characters appear, what foreshadowing to plant… then click “⚡ Generate Online”',
+    'co.needChapter': 'Create and open a chapter first', 'co.needOutline': 'Fill in the chapter outline first',
+    'co.confirmOverwrite': 'This chapter already has content. Generating will overwrite it. Continue?',
+    'co.done': '✓ Done — click “🔄 Regenerate” if not satisfied', 'co.cancelled': 'Generation cancelled',
+    'co.running': 'Generating…',
+    'gp.title': '⚡ Online Generation',
+    'gp.search': 'Searching authors', 'gp.style': 'Studying author styles', 'gp.draft': 'Drafting the chapter', 'gp.write': 'Writing the chapter',
+    'gp.cancelTitle': 'Cancel',
+    'au.label': 'Custom authors', 'au.ph': 'Type an author name to search & add online…',
+    'au.search': '🔍 Search & Add', 'au.needName': 'Enter an author name', 'au.searching': 'Searching online…',
+    'au.notfound': 'Author not found — try another name', 'au.added': 'Added as reference: {name}', 'au.fail': 'Search failed — check network and retry',
+    'au.custom': 'Custom', 'au.del': 'Delete this custom author?',
+    'fb.title': '💬 Feedback', 'fb.label': 'Issue or suggestion',
+    'fb.ph': 'Describe the issue or your suggestion…', 'fb.hint': 'We read every piece of feedback.',
+    'fb.send': 'Submit', 'fb.thanks': 'Thank you for your feedback', 'fb.fail': 'Failed to submit, try again later', 'fb.needMsg': 'Please write something first',
+    'vip.title': '💎 Membership', 'vip.notice': 'Beta · Free',
+    'vip.free': 'Free', 'vip.freePrice': '¥0 · beta', 'vip.currentBtn': 'Current plan',
+    'vip.f1': 'Built-in free AI model', 'vip.f2': 'All creative features', 'vip.f3': 'Local data storage',
+    'vip.pro': 'Pro', 'vip.proPrice': '¥0 · beta',
+    'vip.p1': 'Better LLMs', 'vip.p2': 'Longer context memory', 'vip.p3': 'Faster generation',
+    'vip.flag': 'Flagship', 'vip.flagPrice': '¥0 · beta',
+    'vip.l1': 'All Pro benefits', 'vip.l2': 'Early access to new models', 'vip.l3': 'Dedicated support',
+    'vip.btn': 'Coming soon', 'vip.btnToast': 'Free during beta — stay tuned',
+    'vip.foot': 'All plans are free during the beta period.'
   }
 };
 function t(k, vars) {
@@ -416,7 +472,8 @@ function defaultSettings() {
     providers: [], activeProviderId: null,
     fontSize: 18, accent: 'cyan', aiPanelOpen: true, lang: 'zh',
     ctx: { outline: true, chars: true, world: true, mem: true, chatHistory: true, prevChapters: 2 },
-    user: { nickname: '', avatarPreset: 0, avatarData: '' }
+    user: { nickname: '', avatarPreset: 0, avatarData: '' },
+    customAuthors: []
   };
 }
 const state = {
@@ -431,7 +488,8 @@ const state = {
   confirmResolve: null,
   aiStreaming: false, aiAbort: null,
   wikiCache: {},
-  learning: false
+  learning: false,
+  genState: { running: false, stageIdx: -1, abort: null }
 };
 function loadSettings() {
   try {
@@ -450,6 +508,8 @@ const curChapter = () => state.chapters.find(c => c.id === state.currentChapterI
 function chaptersOf(nid) { return state.chapters.filter(c => c.novelId === nid).sort((a, b) => a.order - b.order); }
 const novelGenres = n => (Array.isArray(n.genres) && n.genres.length ? n.genres : (n.genre ? n.genre.split('、') : []));
 const novelRefAuthors = n => (Array.isArray(n.refAuthors) ? n.refAuthors : []);
+const allAuthors = () => AUTHORS.map(a => Object.assign({}, a, { custom: false })).concat((state.settings.customAuthors || []).map(a => Object.assign({}, a, { custom: true, wiki: a.wikiTitle || a.name })));
+const findAuthor = id => allAuthors().find(a => a.id === id) || null;
 
 /* ---------------- 数据加载 ---------------- */
 async function loadAll() {
@@ -581,7 +641,7 @@ function renderStyleChips() {
   const gWrap = document.querySelector('#modal-novel [data-field="genres"]');
   if (gWrap) gWrap.innerHTML = GENRES.map(g => `<button class="chip ${d.genres.includes(g) ? 'on' : ''}" data-val="${g}">${esc(g)}</button>`).join('');
   const aWrap = document.querySelector('#modal-novel [data-field="authors"]');
-  if (aWrap) aWrap.innerHTML = AUTHORS.map(a => `<button class="chip ${d.authors.includes(a.id) ? 'on' : ''}" data-val="${a.id}">${esc(a.name)}</button>`).join('');
+  if (aWrap) aWrap.innerHTML = allAuthors().map(a => `<button class="chip ${d.authors.includes(a.id) ? 'on' : ''}" data-val="${a.id}">${esc(a.name)}${a.custom ? ' ✦' : ''}</button>`).join('');
   ['audience', 'length', 'pov', 'tone', 'lang'].forEach(f => {
     $$('#modal-novel [data-field="' + f + '"] .chip').forEach(b => b.classList.toggle('on', b.dataset.val === d[f]));
   });
@@ -706,6 +766,7 @@ async function learnAuthors(ids, statusEl) {
 
 /* ---------------- 章节 ---------------- */
 function selectChapter(id) {
+  if (state.genState.running && state.genState.abort) state.genState.abort.abort();
   flushSave();
   state.currentChapterId = id;
   renderEditor(); renderPanel();
@@ -735,10 +796,11 @@ async function createChapterFromOutline(nodeId) {
   const ch = {
     id: uid(), novelId: state.currentNovelId,
     title: node.title || '新章节',
-    content: node.note ? `【大纲】${node.note}\n\n` : '',
+    content: '',
+    outline: node.note || '',
     status: 'draft',
     order: chs.length ? Math.max(...chs.map(c => c.order)) + 1 : 0,
-    wordCount: countWords(node.note || ''), createdAt: now(), updatedAt: now()
+    wordCount: 0, createdAt: now(), updatedAt: now()
   };
   state.chapters.push(ch);
   await dbPut(STORE.chapters, ch);
@@ -786,18 +848,20 @@ function renderEditorPlaceholder() {
 }
 function renderEditor() {
   const c = curChapter();
-  const tEl = $('#chapter-title'), st = $('#chapter-status'), ed = $('#editor');
+  const tEl = $('#chapter-title'), st = $('#chapter-status'), ed = $('#editor'), co = $('#chapter-outline');
   renderEditorPlaceholder();
   if (!c) {
     tEl.value = ''; tEl.disabled = true; st.disabled = true;
     ed.value = ''; ed.disabled = true;
+    co.value = ''; co.disabled = true;
     ed.placeholder = t('editor.noChapter');
     updateCounts(); setSaveState(null);
     return;
   }
-  tEl.disabled = false; st.disabled = false; ed.disabled = false;
+  tEl.disabled = false; st.disabled = false; ed.disabled = false; co.disabled = false;
   if (document.activeElement !== tEl) tEl.value = c.title || '';
   if (document.activeElement !== ed) ed.value = c.content || '';
+  if (document.activeElement !== co) co.value = c.outline || '';
   st.value = c.status || 'draft';
   ed.style.fontSize = state.settings.fontSize + 'px';
   updateCounts();
@@ -840,6 +904,7 @@ async function saveChapter(manual) {
   if (!c) { state.editorDirty = false; return; }
   c.title = $('#chapter-title').value.trim();
   c.content = $('#editor').value;
+  c.outline = $('#chapter-outline').value;
   c.status = $('#chapter-status').value;
   c.wordCount = countWords(c.content);
   c.updatedAt = now();
@@ -886,6 +951,11 @@ function renderPanel() {
     $('#act-new-char').addEventListener('click', () => openChar(null));
   } else if (m === 'world') {
     body.innerHTML = renderWorld();
+    const asBtn = $('#btn-author-search');
+    if (asBtn) {
+      asBtn.addEventListener('click', addCustomAuthorByName);
+      $('#author-search-input').addEventListener('keydown', e => { if (e.key === 'Enter') addCustomAuthorByName(); });
+    }
   } else if (m === 'memories') {
     body.innerHTML = renderMemories();
     a.innerHTML = '<button class="btn small primary" id="act-add-mem">＋ ' + (zh ? '记忆' : 'Memory') + '</button>';
@@ -981,7 +1051,7 @@ function renderWorld() {
       <textarea class="input world-sec-body" data-field="secBody" data-id="${s.id}" rows="4" placeholder="展开设定…">${esc(s.content || '')}</textarea>
     </div>`).join('');
   const gs = novelGenres(n).join(' / ') || t('novel.legacyGenre');
-  const refs = novelRefAuthors(n).map(id => (AUTHORS.find(a => a.id === id) || { name: id }).name).join('、');
+  const refs = novelRefAuthors(n).map(id => { const a = findAuthor(id); return a ? a.name : id; }).join('、');
   return `
   <div class="world-block">
     <div class="block-label">${t('w.synopsis')}</div>
@@ -1013,6 +1083,11 @@ function renderWorld() {
       <button class="btn mini primary" data-act="learnauthors">${t('w.learnSel', { n: novelRefAuthors(n).length })}</button>
       <span class="learn-status" id="world-learn-status"></span>
     </div>
+    <div class="author-search-row">
+      <input class="input" id="author-search-input" data-i18n-ph="au.ph" placeholder="输入你喜欢的作家名字，联网搜索添加…" autocomplete="off" />
+      <button class="btn mini primary" id="btn-author-search" data-i18n="au.search">🔍 搜索添加</button>
+      <span class="learn-status" id="au-status"></span>
+    </div>
     ${renderAuthorNotes(n)}
   </div>
   <div class="world-block">
@@ -1022,23 +1097,25 @@ function renderWorld() {
 }
 function renderAuthorChips(n) {
   const refs = novelRefAuthors(n);
-  return AUTHORS.map(a => `<button class="chip mini ${refs.includes(a.id) ? 'on' : ''}" data-act="toggleauthor" data-id="${a.id}">${esc(a.name)}</button>`).join('');
+  return allAuthors().map(a => `<button class="chip mini ${refs.includes(a.id) ? 'on' : ''}" data-act="toggleauthor" data-id="${a.id}" title="${esc(a.name)}${a.custom ? '（' + t('au.custom') + '）' : ''}">${esc(a.name)}${a.custom ? ' ✦' : ''}</button>`).join('');
 }
 function renderAuthorNotes(n) {
   const refs = novelRefAuthors(n);
   if (!refs.length) return '<div class="empty-hint small">' + t('w.noAuthors') + '</div>';
   return refs.map(id => {
-    const a = AUTHORS.find(x => x.id === id);
+    const a = findAuthor(id);
     if (!a) return '';
-    const wk = state.wikiCache[id];
+    const wk = a.custom ? null : state.wikiCache[id];
+    const tipsTxt = a.custom ? (a.learned || a.tips || '') : a.tips;
     return `<div class="author-note-card">
       <div class="author-note-head">
         <span class="author-note-name">${esc(a.name)}</span>
-        <span class="author-note-src">${t('w.builtin')}</span>
+        <span class="author-note-src">${a.custom ? t('au.custom') : t('w.builtin')}</span>
         ${wk ? `<span class="author-note-src">${t('w.wiki')}</span>` : ''}
+        ${a.custom ? `<button class="icon-btn danger" data-act="delcustomauthor" data-id="${a.id}" title="${t('au.del')}" style="margin-left:auto">✕</button>` : ''}
       </div>
-      <div class="author-note-tips">${esc(a.tips)}</div>
-      ${wk ? `<div class="author-note-wiki">${esc(wk.text.slice(0, 400))}${wk.text.length > 400 ? '…' : ''}</div>` : ''}
+      ${tipsTxt ? `<div class="author-note-tips">${esc(a.custom ? (a.learned || '').slice(0, 400) + ((a.learned || '').length > 400 ? '…' : '') : tipsTxt)}</div>` : ''}
+      ${(!a.custom && wk) ? `<div class="author-note-wiki">${esc(wk.text.slice(0, 400))}${wk.text.length > 400 ? '…' : ''}</div>` : ''}
     </div>`;
   }).join('');
 }
@@ -1091,6 +1168,7 @@ function onPanelClick(e) {
     case 'editstyle': openNovelModal(state.currentNovelId); break;
     case 'toggleauthor': toggleAuthor(id); break;
     case 'learnauthors': learnAuthors(novelRefAuthors(curNovel()), $('#world-learn-status')); break;
+    case 'delcustomauthor': delCustomAuthor(id); break;
   }
 }
 function onPanelInput(e) {
@@ -1652,10 +1730,11 @@ function formatStyleForAI() {
   const refs = novelRefAuthors(n);
   if (refs.length) {
     const parts = refs.map(id => {
-      const a = AUTHORS.find(x => x.id === id);
+      const a = findAuthor(id);
       if (!a) return null;
-      const wk = state.wikiCache[id];
-      return `${a.name}：技法要点——${a.tips}${wk ? '；联网学习资料——' + wk.text.slice(0, 500) : ''}`;
+      const wk = a.custom ? null : state.wikiCache[id];
+      const learned = wk ? wk.text.slice(0, 500) : (a.learned ? a.learned.slice(0, 500) : '');
+      return `${a.name}：技法要点——${a.tips || '（联网学习资料见后）'}${learned ? '；联网学习资料——' + learned : ''}`;
     }).filter(Boolean);
     if (parts.length) lines.push('参考作家及技法：\n' + parts.join('\n'));
   }
@@ -1809,6 +1888,7 @@ async function sendAI(userText, opts) {
   const p = activeProvider();
   if (!p) { toast(t('toast.noAI'), 'warn'); openAISettings(); return; }
   if (state.aiStreaming) { toast(t('toast.aiBusy'), 'warn'); return; }
+  if (state.genState.running) { toast(t('co.running'), 'warn'); return; }
   await flushSave();
   const ctx = buildContext();
   const history = state.settings.ctx.chatHistory ? state.chatForNovel.slice(-12).filter(m => !m.error) : [];
@@ -1902,7 +1982,7 @@ function quickPrompt(action) {
       break;
     case 'style': {
       if (!c) { toast(t('toast.needChapterOpen'), 'warn'); return; }
-      const refs = novelRefAuthors(n).map(id => (AUTHORS.find(a => a.id === id) || {}).name).filter(Boolean).join('、');
+      const refs = novelRefAuthors(n).map(id => { const a = findAuthor(id); return a ? a.name : id; }).filter(Boolean).join('、');
       const tail = (c.content || '').slice(-2500);
       sendAI(`请诊断以下小说片段的文笔：句式是否重复、对话是否自然、有无套路化表达、细节与五感描写是否充分${refs ? '，并对照参考作家（' + refs + '）的技法' : ''}，给出 3–5 条具体可执行的修改建议（可引用原文短句做例子），最后给一句整体评价。\n\n${tail}`, { kind: null });
       break;
@@ -1939,6 +2019,244 @@ async function saveMemFromMsg(idx, ei, all) {
   }
   if (state.module === 'memories') renderPanel();
   toast(t('toast.memAdded', { n: saved }), 'ok');
+}
+
+/* ---------------- 章节联网生成（大纲 → 正文） ---------------- */
+const GEN_STAGES = ['gp.search', 'gp.style', 'gp.draft', 'gp.write'];
+function renderGenStages(note) {
+  const gs = state.genState;
+  const box = $('#gen-stages');
+  box.innerHTML = GEN_STAGES.map((key, i) => {
+    const cls = i < gs.stageIdx ? 'done' : (i === gs.stageIdx ? 'active' : '');
+    const ico = i < gs.stageIdx ? '✓' : (i === gs.stageIdx ? '⟳' : '○');
+    return `<div class="gp-stage ${cls}"><span class="gp-ico">${ico}</span><span>${t(key)}</span></div>`;
+  }).join('');
+  $('#gp-note').textContent = note || '';
+}
+async function genSetStage(idx, note) {
+  state.genState.stageIdx = idx;
+  renderGenStages(note);
+  await new Promise(r => setTimeout(r, 400));
+}
+function hideGenProgress() {
+  $('#gen-progress').hidden = true;
+  $('#btn-gen-chapter').disabled = false;
+  $('#btn-gen-again').disabled = false;
+  $('#gen-hint').textContent = '';
+}
+function showGenProgress() {
+  state.genState.stageIdx = -1;
+  $('#gp-title').textContent = t('gp.title');
+  $('#gen-progress').hidden = false;
+  $('#btn-gen-chapter').disabled = true;
+  $('#btn-gen-again').disabled = true;
+  $('#gen-hint').textContent = t('co.running');
+  renderGenStages('');
+}
+async function aiCallRetry(messages, opts, stageNote) {
+  let lastErr = null;
+  const maxTries = 3;
+  for (let i = 0; i < maxTries; i++) {
+    try {
+      return await aiRequest(messages, opts);
+    } catch (e) {
+      lastErr = e;
+      const m = String(e && e.message || '');
+      const isQuota = /402|FREE_LIMIT/i.test(m);
+      const isBusy = /400|502|503|504/i.test(m);
+      if (i < maxTries - 1 && (isQuota || isBusy)) {
+        const waitMs = isQuota ? 25000 : 5000;
+        const waitTxt = state.settings.lang === 'zh'
+          ? (isQuota ? '免费额度限流' : '服务繁忙') + '，' + Math.round(waitMs / 1000) + ' 秒后自动重试…'
+          : (isQuota ? 'Quota limited' : 'Service busy') + ', retrying in ' + Math.round(waitMs / 1000) + 's…';
+        renderGenStages((stageNote || '') + '（' + waitTxt + '）');
+        await new Promise(r => setTimeout(r, waitMs));
+        continue;
+      }
+      throw e;
+    }
+  }
+  throw lastErr;
+}
+async function genDraft(outline, planCtx) {
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'user', content: planCtx + '\n\n【本章大纲】\n' + outline + '\n\n请为本章拟写细纲，只输出：\n【核心】一句话概括本章\n【情节节点】3-6 条\n【开头钩子】1-2 句。不要写正文。' }
+  ];
+  const res = await aiCallRetry(messages, { stream: true }, t('gp.draft'));
+  let acc = '';
+  for await (const chunk of aiStream(res)) acc += chunk;
+  return (acc || '').trim();
+}
+async function genStreamIntoEditor(outline, plan, planCtx) {
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'user', content: planCtx + '\n\n【本章大纲】\n' + outline + '\n\n【细纲】\n' + plan + '\n\n请根据以上内容撰写本章正文。要求：像人类作家一样写作（句式长短交错、对话自然、细节具体），直接输出正文，不要标题、不要解释。' }
+  ];
+  const res = await aiCallRetry(messages, { stream: true }, t('gp.write'));
+  const ed = $('#editor');
+  let acc = '';
+  for await (const chunk of aiStream(res)) {
+    acc += chunk;
+    ed.value = acc;
+    ed.scrollTop = ed.scrollHeight;
+    updateCounts();
+  }
+  if (!acc.trim()) throw new Error('empty');
+  return acc;
+}
+async function generateChapter() {
+  const c = curChapter();
+  if (!c) return toast(t('co.needChapter'), 'warn');
+  const outline = $('#chapter-outline').value.trim();
+  if (!outline) { toast(t('co.needOutline'), 'warn'); $('#chapter-outline').focus(); return; }
+  if (state.genState.running) return;
+  if (state.aiStreaming) { toast(t('toast.aiBusy'), 'warn'); return; }
+  const p = activeProvider();
+  if (!p) { toast(t('toast.noAI'), 'warn'); openAISettings(); return; }
+  const ed = $('#editor');
+  if (ed.value.trim() && !await confirmDialog(t('co.confirmOverwrite'))) return;
+  await flushSave();
+  const n = curNovel();
+  const planCtx = buildContext(false) || '（无上下文）';
+  state.genState.running = true;
+  state.genState.abort = new AbortController();
+  state.aiAbort = state.genState.abort;
+  showGenProgress();
+  try {
+    // 阶段1：搜索作家
+    await genSetStage(0, '');
+    const refs = novelRefAuthors(n);
+    const pending = refs.filter(id => {
+      const a = findAuthor(id);
+      return a && !a.custom && !(state.wikiCache[id] && state.wikiCache[id].text);
+    });
+    for (let i = 0; i < pending.length; i++) {
+      const a = findAuthor(pending[i]);
+      renderGenStages(t('learn.fetching', { name: a ? a.name : '' }));
+      try { await wikiLearn(pending[i]); } catch (e) { }
+    }
+    // 阶段2：学习作家文风
+    const refNames = refs.map(id => { const a = findAuthor(id); return a ? a.name : ''; }).filter(Boolean).join('、');
+    await genSetStage(1, refNames || '');
+    // 阶段3：拟写正文
+    await genSetStage(2, '');
+    const plan = await genDraft(outline, planCtx);
+    if (!plan) throw new Error('draft-empty');
+    renderGenStages(plan.slice(0, 140));
+    await new Promise(r => setTimeout(r, 500));
+    // 阶段4：输出正文
+    await genSetStage(3, '');
+    await genStreamIntoEditor(outline, plan, planCtx);
+    updateCounts(); scheduleSave();
+    state.genState.running = false;
+    state.aiAbort = null;
+    renderGenStages('');
+    $('#gp-title').textContent = '✓ ' + t('gp.title');
+    toast(t('co.done'), 'ok', 4000);
+    setTimeout(hideGenProgress, 2200);
+  } catch (e) {
+    const aborted = e && e.name === 'AbortError';
+    state.genState.running = false;
+    state.aiAbort = null;
+    hideGenProgress();
+    if (aborted) toast(t('co.cancelled'));
+    else toast(humanizeAIError(e), 'err', 6000);
+  }
+}
+function cancelGen() { if (state.genState.running && state.genState.abort) state.genState.abort.abort(); }
+
+/* ---------------- 自定义作家（联网搜索添加） ---------------- */
+function setAuStatus(txt, err) {
+  const el = $('#au-status');
+  if (!el) return;
+  el.textContent = txt || '';
+  el.className = 'learn-status' + (err ? ' err' : '');
+}
+async function addCustomAuthorByName() {
+  const input = $('#author-search-input');
+  if (!input) return;
+  const name = (input.value || '').trim();
+  if (!name) return toast(t('au.needName'), 'warn');
+  const btn = $('#btn-author-search');
+  if (btn) btn.disabled = true;
+  setAuStatus(t('au.searching'));
+  try {
+    const r = await fetch('https://zh.wikipedia.org/w/api.php?action=opensearch&search=' + encodeURIComponent(name) + '&limit=5&format=json&origin=*', { signal: AbortSignal.timeout(12000) });
+    if (!r.ok) throw new Error('search fail');
+    const j = await r.json();
+    const titles = (j && j[1]) || [];
+    if (!titles.length) { setAuStatus(t('au.notfound'), true); return; }
+    const title = String(titles[0]);
+    const r2 = await fetch('https://zh.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&format=json&origin=*&redirects=1&titles=' + encodeURIComponent(title), { signal: AbortSignal.timeout(12000) });
+    if (!r2.ok) throw new Error('extract fail');
+    const j2 = await r2.json();
+    const pages = j2 && j2.query && j2.query.pages;
+    const extract = pages ? (Object.values(pages)[0].extract || '') : '';
+    if (!extract) { setAuStatus(t('au.notfound'), true); return; }
+    state.settings.customAuthors = state.settings.customAuthors || [];
+    const au = { id: 'c-' + uid(), name: title, wikiTitle: title, tips: '', learned: extract.slice(0, 1200), createdAt: now() };
+    state.settings.customAuthors.unshift(au);
+    if (state.settings.customAuthors.length > 50) state.settings.customAuthors.length = 50;
+    saveSettings();
+    const n = curNovel();
+    if (n) {
+      const refs = novelRefAuthors(n);
+      if (!refs.includes(au.id)) { refs.push(au.id); await dbPut(STORE.novels, n); }
+    }
+    input.value = '';
+    setAuStatus(t('au.added', { name: title }));
+    renderPanel();
+  } catch (e) {
+    setAuStatus(t('au.fail'), true);
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+async function delCustomAuthor(id) {
+  if (!await confirmDialog(t('au.del'))) return;
+  state.settings.customAuthors = (state.settings.customAuthors || []).filter(a => a.id !== id);
+  saveSettings();
+  for (const n of state.novels) {
+    if (Array.isArray(n.refAuthors) && n.refAuthors.includes(id)) {
+      n.refAuthors = n.refAuthors.filter(x => x !== id);
+      await dbPut(STORE.novels, n);
+    }
+  }
+  renderPanel();
+}
+
+/* ---------------- 反馈 ---------------- */
+async function submitFeedback() {
+  const msg = $('#feedback-text').value.trim();
+  if (!msg) return toast(t('fb.needMsg'), 'warn');
+  const btn = $('#btn-fb-send');
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/3254643926@qq.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: '【晓星反馈】',
+        message: msg,
+        nickname: (state.settings.user || {}).nickname || '',
+        page: location.href,
+        time: new Date().toISOString()
+      })
+    });
+    const j = await res.json();
+    if (j && (j.success === true || j.success === 'true')) {
+      $('#feedback-text').value = '';
+      closeModal('modal-feedback');
+      toast(t('fb.thanks'), 'ok', 3500);
+    } else {
+      throw new Error('submit fail');
+    }
+  } catch (e) {
+    toast(t('fb.fail'), 'err', 4500);
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 /* ---------------- UI 偏好 ---------------- */
@@ -2057,6 +2375,19 @@ function bindEvents() {
   $('#btn-font-plus').addEventListener('click', () => { state.settings.fontSize = clamp(state.settings.fontSize + 1, 14, 32); saveSettings(); applyUIPrefs(); });
   $('#btn-focus').addEventListener('click', () => toggleFocus());
   $('#btn-dict').addEventListener('click', () => openDict());
+  // 章节大纲 + 联网生成
+  $('#chapter-outline').addEventListener('input', scheduleSave);
+  $('#btn-gen-chapter').addEventListener('click', generateChapter);
+  $('#btn-gen-again').addEventListener('click', generateChapter);
+  $('#btn-gen-cancel').addEventListener('click', cancelGen);
+  // 反馈 / 会员
+  $('#btn-feedback').addEventListener('click', () => openModal('modal-feedback'));
+  $('#btn-fb-send').addEventListener('click', submitFeedback);
+  $('#btn-vip').addEventListener('click', () => openModal('modal-vip'));
+  document.addEventListener('click', e => {
+    const v = e.target.closest('[data-vip]');
+    if (v) toast(t('vip.btnToast'), 'info');
+  });
   // AI 面板
   $('#btn-ai-toggle').addEventListener('click', () => { state.settings.aiPanelOpen = !state.settings.aiPanelOpen; saveSettings(); applyUIPrefs(); });
   $('#btn-ai-close').addEventListener('click', () => { state.settings.aiPanelOpen = false; saveSettings(); applyUIPrefs(); });
