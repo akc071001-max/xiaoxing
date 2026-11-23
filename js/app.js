@@ -221,6 +221,20 @@ const I18N = {
     'sp.pickTip': '点击下方作家即可选为参考（可多选，选中后再点一次取消）。「联网学习」会抓取维基百科研究其写作技法；找不到喜欢的作家？用搜索框全网添加。',
     'sp.mineTip': '把你的 500 字文风样本贴在下面：AI 将学习你的句式节奏、用词习惯与对话风格，之后生成的内容会更像你本人写的。',
     'sp.filterPh': '筛选作家…',
+    'board.novel': '📖 小说', 'board.paper': '📄 论文',
+    'p.list': '我的论文', 'p.new': '新论文', 'p.empty': '还没有论文。<br/>点右上「＋ 新论文」，填写主题后点「📚 检索并生成论文」。',
+    'p.topicLabel': '📄 论文主题 / 要求',
+    'p.topicPh': '输入论文主题与研究要求…（生成时会联网检索文献，正文带引用编号与出处链接）',
+    'p.editorPh': '论文正文将生成在这里：正文带 [1][2] 引用标注，文末附参考文献列表（含出处与网页链接）…',
+    'p.gen': '📚 检索并生成论文', 'p.again': '🔄 重新生成',
+    'p.needTopic': '请先填写论文主题', 'p.needOpen': '请先新建并打开一篇论文',
+    'p.overwrite': '本文已有正文，生成将覆盖，是否继续？',
+    'p.done': '✓ 论文生成完成，不满意可点「🔄 重新生成」',
+    'p.freeNote': '论文模块免费开通中：免费版生成标准论文（约 1500 字 · 8 篇带出处链接的参考文献）；升级专业版可获得更长、更精的正文与更多参考文献。',
+    'p.upgrade': '💎 升级获得更佳正文',
+    'gp.psearch': '正在检索文献资料', 'gp.pdraft': '正在拟写论文提纲', 'gp.pwrite': '正在输出论文正文',
+    'set.credits': '开发者名单',
+    'toast.paperSaved': '论文已保存', 'toast.paperDeleted': '论文已删除',
     'auth.title': '👤 登录 / 注册', 'auth.login': '登录', 'auth.register': '注册',
     'auth.user': '用户名', 'auth.userPh': '2-20 位：字母 / 数字 / 下划线 / 中文',
     'auth.pass': '密码', 'auth.passPh': '至少 6 位，必须包含英文字母 + 数字',
@@ -425,6 +439,20 @@ const I18N = {
     'sp.pickTip': 'Click an author to add them as a reference (click again to remove). “Learn styles online” fetches Wikipedia to study their craft. Can\'t find your favorite? Use the search box to add any author from the web.',
     'sp.mineTip': 'Paste a sample of your own writing (≤500 characters): the AI will learn your rhythm, word choices and dialogue style, so the output sounds more like you.',
     'sp.filterPh': 'Filter authors…',
+    'board.novel': '📖 Novel', 'board.paper': '📄 Paper',
+    'p.list': 'My Papers', 'p.new': 'New Paper', 'p.empty': 'No papers yet.<br/>Click “＋ New Paper”, fill the topic, then “📚 Search & Generate”.',
+    'p.topicLabel': '📄 Topic / Requirements',
+    'p.topicPh': 'Enter the paper topic and requirements… (generation searches literature online; in-text citations with source links)',
+    'p.editorPh': 'The paper will be generated here: in-text [1][2] citations and a reference list with sources and web links…',
+    'p.gen': '📚 Search & Generate', 'p.again': '🔄 Regenerate',
+    'p.needTopic': 'Fill in the topic first', 'p.needOpen': 'Create and open a paper first',
+    'p.overwrite': 'This paper already has content. Overwrite?',
+    'p.done': '✓ Paper generated — click “🔄 Regenerate” if not satisfied',
+    'p.freeNote': 'The paper module is free: the free plan generates a standard paper (~1500 words, 8 cited references with links). Upgrade to Pro for longer, better text and more references.',
+    'p.upgrade': '💎 Upgrade for better text',
+    'gp.psearch': 'Searching references', 'gp.pdraft': 'Drafting the outline', 'gp.pwrite': 'Writing the paper',
+    'set.credits': 'Developer credits',
+    'toast.paperSaved': 'Paper saved', 'toast.paperDeleted': 'Paper deleted',
     'auth.title': '👤 Sign in / Register', 'auth.login': 'Sign in', 'auth.register': 'Register',
     'auth.user': 'Username', 'auth.userPh': '2-20 chars: letters / numbers / _ / Chinese',
     'auth.pass': 'Password', 'auth.passPh': 'Min 6 chars, must contain letters AND digits',
@@ -624,6 +652,20 @@ const I18N = {
     'sp.pickTip': 'Кликните автора, чтобы выбрать его эталоном (повторный клик — отмена). «Изучить стили онлайн» загрузит материалы из Википедии. Не нашли любимого автора? Добавьте через поиск.',
     'sp.mineTip': 'Вставьте образец своего текста (до 500 знаков): ИИ изучит ваш ритм, лексику и стиль диалогов — результат будет похож на ваш.',
     'sp.filterPh': 'Фильтр авторов…',
+    'board.novel': '📖 Роман', 'board.paper': '📄 Статья',
+    'p.list': 'Мои статьи', 'p.new': 'Новая статья', 'p.empty': 'Статей пока нет.<br/>Нажмите «＋ Новая статья», заполните тему, затем «📚 Поиск и генерация».',
+    'p.topicLabel': '📄 Тема / требования',
+    'p.topicPh': 'Введите тему статьи и требования… (поиск литературы онлайн; цитаты со ссылками на источники)',
+    'p.editorPh': 'Текст статьи появится здесь: цитаты [1][2] и список литературы со ссылками…',
+    'p.gen': '📚 Поиск и генерация', 'p.again': '🔄 Заново',
+    'p.needTopic': 'Сначала введите тему', 'p.needOpen': 'Сначала создайте и откройте статью',
+    'p.overwrite': 'В статье уже есть текст. Перезаписать?',
+    'p.done': '✓ Статья готова — не понравилось? «🔄 Заново»',
+    'p.freeNote': 'Модуль статей бесплатен: стандартная статья (~1500 слов, 8 источников со ссылками). Pro — длиннее, качественнее, больше источников.',
+    'p.upgrade': '💎 Улучшить текст',
+    'gp.psearch': 'Поиск источников', 'gp.pdraft': 'Черновик структуры', 'gp.pwrite': 'Написание статьи',
+    'set.credits': 'Разработчик',
+    'toast.paperSaved': 'Статья сохранена', 'toast.paperDeleted': 'Статья удалена',
     'auth.title': '👤 Вход / Регистрация', 'auth.login': 'Вход', 'auth.register': 'Регистрация',
     'auth.user': 'Имя пользователя', 'auth.userPh': '2-20 знаков: буквы / цифры / _ / китайские',
     'auth.pass': 'Пароль', 'auth.passPh': 'Минимум 6 знаков, обязательно буквы И цифры',
@@ -753,8 +795,8 @@ const SYSTEM_PROMPT = [
 ].join('\n');
 
 /* ---------------- 数据库 ---------------- */
-const DB_NAME = 'nebula-novel-db', DB_VER = 1;
-const STORE = { novels: 'novels', chapters: 'chapters', outline: 'outline', characters: 'characters', memories: 'memories', chats: 'chats' };
+const DB_NAME = 'nebula-novel-db', DB_VER = 2;
+const STORE = { novels: 'novels', chapters: 'chapters', outline: 'outline', characters: 'characters', memories: 'memories', chats: 'chats', papers: 'papers' };
 let db = null, dbMode = 'idb';
 
 function idbOpen() {
@@ -766,7 +808,7 @@ function idbOpen() {
       for (const s of Object.values(STORE)) {
         if (!d.objectStoreNames.contains(s)) {
           const st = d.createObjectStore(s, { keyPath: 'id' });
-          st.createIndex('byNovel', 'novelId', { unique: false });
+          if (s !== STORE.papers) st.createIndex('byNovel', 'novelId', { unique: false });
         }
       }
     };
@@ -832,21 +874,23 @@ function defaultSettings() {
   return {
     providers: [], activeProviderId: null,
     fontSize: 18, accent: 'cyan', aiPanelOpen: true, lang: 'zh', layout: 'stack',
-    bg: 'stars', petVisible: true, autoModel: true, plan: 'free', storageDenied: false,
+    bg: 'stars', petVisible: true, autoModel: true, plan: 'free', storageDenied: false, board: 'novel',
     ctx: { outline: true, chars: true, world: true, mem: true, chatHistory: true, prevChapters: 2 },
     user: { nickname: '', avatarPreset: 0, avatarData: '' },
     customAuthors: []
   };
 }
-const APP_VERSION = '3.4.0';
+const APP_VERSION = '3.5.0';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
-  novels: [], chapters: [], outline: [], characters: [], memories: [], chats: [],
-  currentNovelId: null, currentChapterId: null,
+  novels: [], chapters: [], outline: [], characters: [], memories: [], chats: [], papers: [],
+  currentNovelId: null, currentChapterId: null, currentPaperId: null,
+  board: 'novel',
   module: 'chapters', memFilter: '全部', authorFilter: '',
   settings: defaultSettings(),
   saveTimer: null, editorDirty: false, novelSaveTimer: null,
+  paperSaveTimer: null, paperDirty: false,
   chatForNovel: [],
   noteCtx: null, charEditingId: null, novelEditingId: null, provEditingId: null,
   styleDraft: null,
@@ -854,7 +898,7 @@ const state = {
   aiStreaming: false, aiAbort: null,
   wikiCache: {},
   learning: false,
-  genState: { running: false, stageIdx: -1, abort: null },
+  genState: { running: false, stageIdx: -1, abort: null, genKind: 'novel' },
   accounts: {}, currentUser: null, authMode: 'login', guideStep: 0, tipAmount: null
 };
 let lastTrialState = null;
@@ -880,17 +924,19 @@ const findAuthor = id => allAuthors().find(a => a.id === id) || null;
 
 /* ---------------- 数据加载 ---------------- */
 async function loadAll() {
-  const [novels, chapters, outline, characters, memories, chats] = await Promise.all([
+  const [novels, chapters, outline, characters, memories, chats, papers] = await Promise.all([
     dbAll(STORE.novels), dbAll(STORE.chapters), dbAll(STORE.outline),
-    dbAll(STORE.characters), dbAll(STORE.memories), dbAll(STORE.chats)
+    dbAll(STORE.characters), dbAll(STORE.memories), dbAll(STORE.chats), dbAll(STORE.papers)
   ]);
   // 竞态保护：若加载尚未完成时用户已开始创作，则不用旧快照覆盖内存数据
   const fresh = state.novels.length === 0 && state.chapters.length === 0 &&
-    state.outline.length === 0 && state.characters.length === 0 && state.memories.length === 0;
+    state.outline.length === 0 && state.characters.length === 0 && state.memories.length === 0 &&
+    state.papers.length === 0;
   if (!fresh) return;
   state.novels = novels.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
   state.chapters = chapters; state.outline = outline;
   state.characters = characters; state.memories = memories; state.chats = chats;
+  state.papers = papers;
   if (!state.novels.length) { state.currentNovelId = null; state.currentChapterId = null; state.chatForNovel = []; return; }
   if (!state.currentNovelId || !state.novels.find(n => n.id === state.currentNovelId)) state.currentNovelId = state.novels[0].id;
   const chs = chaptersOf(state.currentNovelId);
@@ -904,13 +950,22 @@ async function loadChatFor(nid) {
   state.chatForNovel = rec ? (rec.messages || []) : [];
 }
 async function saveChat() {
-  if (!state.currentNovelId) return;
-  await dbPut(STORE.chats, { id: state.currentNovelId, novelId: state.currentNovelId, messages: state.chatForNovel.slice(-100) });
+  if (!chatKey()) return;
+  await dbPut(STORE.chats, { id: chatKey(), novelId: chatKey(), messages: state.chatForNovel.slice(-100) });
 }
 
 /* ---------------- 顶栏 ---------------- */
 function renderTop() {
   const n = curNovel();
+  if (state.board === 'paper') {
+    $('#novel-pill-title').textContent = t('board.paper');
+    const ps = state.papers;
+    const total = ps.reduce((s, p) => s + (p.wordCount || 0), 0);
+    $('#stats').textContent = ps.length + ' · ' + fmtNum(total) + ' ' + t('stat.wordsChip');
+    renderProfileTop();
+    trialCheck();
+    return;
+  }
   $('#novel-pill-title').textContent = n ? (n.title || t('novel.pending')) : (state.settings.lang === 'zh' ? '未选择小说' : 'No novel selected');
   if (!n) { $('#stats').textContent = ''; renderProfileTop(); return; }
   const chs = chaptersOf(n.id);
@@ -1216,6 +1271,7 @@ function renderEditorPlaceholder() {
   ed.placeholder = t(key);
 }
 function renderEditor() {
+  if (state.board === 'paper') { renderPaperEditor(); return; }
   const c = curChapter();
   const tEl = $('#chapter-title'), st = $('#chapter-status'), ed = $('#editor'), co = $('#chapter-outline');
   renderEditorPlaceholder();
@@ -1297,6 +1353,10 @@ function setNavActive() {
 function renderPanel() {
   const m = state.module;
   const body = $('#panel-body');
+  if (state.board === 'paper') {
+    body.innerHTML = renderPaperPanel();
+    return;
+  }
   const titles = { chapters: 'nav.chapters', outline: 'nav.outline', characters: 'nav.characters', style: 'nav.style', world: 'nav.world', memories: 'nav.memories' };
   $('#panel-title').textContent = t(titles[m]);
   const a = $('#panel-actions');
@@ -1545,6 +1605,8 @@ function onPanelClick(e) {
   const m = state.module;
   switch (act) {
     case 'open': if (id) selectChapter(id); break;
+    case 'openpaper': if (id) selectPaper(id); break;
+    case 'delpaper': if (id) delPaper(id); break;
     case 'up': m === 'chapters' ? moveChapter(id, -1) : moveOutline(id, -1); break;
     case 'down': m === 'chapters' ? moveChapter(id, 1) : moveOutline(id, 1); break;
     case 'del':
@@ -1947,7 +2009,7 @@ async function exportJson() {
   const data = {
     exportedAt: new Date().toISOString(),
     novels: state.novels, chapters: state.chapters, outline: state.outline,
-    characters: state.characters, memories: state.memories, chats: state.chats
+    characters: state.characters, memories: state.memories, chats: state.chats, papers: state.papers
   };
   const d = new Date();
   const p = n => String(n).padStart(2, '0');
@@ -1980,10 +2042,12 @@ async function doImport(file) {
 async function wipeAll() {
   if (!await confirmDialog(t('confirm.wipe'))) return;
   await flushSave();
+  await flushPaperSave();
   for (const k of Object.values(STORE)) await dbClear(k);
   state.novels = []; state.chapters = []; state.outline = [];
-  state.characters = []; state.memories = []; state.chats = [];
+  state.characters = []; state.memories = []; state.chats = []; state.papers = [];
   state.currentNovelId = null; state.currentChapterId = null; state.chatForNovel = [];
+  state.currentPaperId = null;
   renderLibrary(); renderAll();
   toast(t('toast.wiped'));
 }
@@ -2341,7 +2405,7 @@ async function sendAI(userText, opts) {
   if (state.aiStreaming) { toast(t('toast.aiBusy'), 'warn'); return; }
   if (state.genState.running) { toast(t('co.running'), 'warn'); return; }
   await flushSave();
-  const ctx = buildContext();
+  const ctx = state.board === 'paper' ? buildPaperContext() : buildContext();
   const history = state.settings.ctx.chatHistory ? state.chatForNovel.slice(-12).filter(m => !m.error) : [];
   const messages = [{ role: 'system', content: SYSTEM_PROMPT }];
   if (ctx) messages.push({ role: 'user', content: `以下是这部小说当前的完整状态（即你的记忆）：\n\n${ctx}\n\n—— 请先内化以上信息，再回应接下来的问题。` });
@@ -2399,6 +2463,41 @@ async function sendAI(userText, opts) {
   afterAI(asst);
 }
 function quickPrompt(action) {
+  if (state.board === 'paper') {
+    const p = currentPaper();
+    const ped = $('#paper-editor');
+    const ptopic = ($('#paper-topic').value || (p ? p.topic : '') || '').trim();
+    switch (action) {
+      case 'continue': {
+        if (!p) return toast(t('p.needOpen'), 'warn');
+        const tail = (ped.value || p.content || '').slice(-2500);
+        sendAI(`请接着这篇论文继续写下去：保持学术规范，引用处用 [n] 标注并在文末「参考文献」列出出处链接；直接输出正文，不要解释。\n\n当前正文末尾：\n\n${tail}`, { kind: 'continue' });
+        break;
+      }
+      case 'plot':
+        sendAI(`请围绕论文主题「${ptopic || '（未填写）'}」给出 3-5 个可行的论述角度或结构方案，每个说明【角度】【优势】【需要的资料】。`, { kind: null });
+        break;
+      case 'brainstorm':
+        sendAI(`请围绕论文主题「${ptopic || '（未填写）'}」输出 10 个论文选题或论点脑洞，每个一句话点题 + 一句展开。`, { kind: null });
+        break;
+      case 'polish': {
+        const target = (ped.value || (p ? p.content : '') || '').slice(-1500);
+        if (!target) return toast(t('toast.nothingPolish'), 'warn');
+        sendAI(`请润色以下论文片段：保持学术性与原意，提升严谨度与表达，直接输出润色后的文本。\n\n${target}`, { kind: 'polish' });
+        break;
+      }
+      case 'extract':
+        toast(state.settings.lang === 'zh' ? '提取记忆仅适用于小说板块' : 'Extract memory works in the Novel board only', 'warn');
+        break;
+      case 'outline':
+        sendAI(`请为论文「${ptopic || '（未填写）'}」设计一份详细大纲：章节结构、每节核心论点、需要的文献类型。`, { kind: null });
+        break;
+      case 'style':
+        toast(state.settings.lang === 'zh' ? '文风诊断仅适用于小说板块' : 'Style check works in the Novel board only', 'warn');
+        break;
+    }
+    return;
+  }
   const ed = $('#editor');
   const c = curChapter();
   const sel = ed.value.substring(ed.selectionStart, ed.selectionEnd);
@@ -2443,6 +2542,20 @@ function quickPrompt(action) {
 async function insertAssistant(idx) {
   const m = state.chatForNovel[idx];
   if (!m || !m.content) return;
+  if (state.board === 'paper') {
+    const p = currentPaper();
+    if (!p) { toast(t('p.needOpen'), 'warn'); return; }
+    const ed = $('#paper-editor');
+    const pos = ed.selectionStart != null ? ed.selectionStart : ed.value.length;
+    const text = '\n\n' + m.content.trim() + '\n\n';
+    ed.value = ed.value.slice(0, pos) + text + ed.value.slice(pos);
+    ed.focus();
+    const np = pos + text.length;
+    ed.setSelectionRange(np, np);
+    schedulePaperSave(); updatePaperCounts();
+    toast(t('toast.inserted'), 'ok');
+    return;
+  }
   const c = curChapter();
   if (!c) { toast(t('toast.needChapterOpen'), 'warn'); return; }
   const ed = $('#editor');
@@ -2477,7 +2590,8 @@ const GEN_STAGES = ['gp.search', 'gp.style', 'gp.draft', 'gp.write'];
 function renderGenStages(note) {
   const gs = state.genState;
   const box = $('#gen-stages');
-  box.innerHTML = GEN_STAGES.map((key, i) => {
+  const stages = gs.genKind === 'paper' ? PAPER_STAGES : GEN_STAGES;
+  box.innerHTML = stages.map((key, i) => {
     const cls = i < gs.stageIdx ? 'done' : (i === gs.stageIdx ? 'active' : '');
     const ico = i < gs.stageIdx ? '✓' : (i === gs.stageIdx ? '⟳' : '○');
     return `<div class="gp-stage ${cls}"><span class="gp-ico">${ico}</span><span>${t(key)}</span></div>`;
@@ -2584,6 +2698,7 @@ async function generateChapter() {
   state.genState.running = true;
   state.genState.abort = new AbortController();
   state.aiAbort = state.genState.abort;
+  state.genState.genKind = 'novel';
   showGenProgress();
   try {
     // 阶段1：搜索作家
@@ -2727,6 +2842,9 @@ function applyUIPrefs() {
   document.body.classList.toggle('no-ai', !state.settings.aiPanelOpen);
   document.body.classList.toggle('split-layout', state.settings.layout === 'split');
   document.body.classList.toggle('hide-pet', !state.settings.petVisible);
+  document.body.classList.toggle('board-paper', state.board === 'paper');
+  $('#board-novel').classList.toggle('on', state.board === 'novel');
+  $('#board-paper').classList.toggle('on', state.board === 'paper');
   // 动态背景
   bgMode = state.settings.bg || 'stars';
   const bgChips = { stars: 'set-bg-stars', solar: 'set-bg-solar', galaxy: 'set-bg-galaxy', planet: 'set-bg-planet' };
@@ -3510,14 +3628,7 @@ function advanceOnboarding() {
   if (!guidedDone()) openGuide();
 }
 
-/* ---------------- 支持创作者（打赏 · 自愿） ---------------- */
-function openTipModal() {
-  state.tipAmount = null;
-  $$('#modal-tip [data-tip]').forEach(b => b.classList.remove('on'));
-  $('#tip-custom').value = '';
-  $('#tip-msg').value = '';
-  openModal('modal-tip');
-}
+/* ---------------- 支持创作者（打赏 · 内嵌开发者名单 · 无弹窗） ---------------- */
 async function submitTip() {
   const amount = state.tipAmount;
   if (!amount) return toast(t('tip.needAmount'), 'warn');
@@ -3550,6 +3661,250 @@ async function submitTip() {
   } finally {
     btn.disabled = false;
   }
+}
+
+/* ---------------- 论文板块（检索文献 · 带出处生成） ---------------- */
+const PAPER_STAGES = ['gp.psearch', 'gp.pdraft', 'gp.pwrite'];
+const currentPaper = () => state.papers.find(p => p.id === state.currentPaperId) || null;
+async function setBoard(b) {
+  if (state.board === b) return;
+  flushSave();
+  flushPaperSave();
+  state.board = b;
+  state.settings.board = b;
+  saveSettings();
+  loadChatFor(chatKey()).then(() => renderChat());
+  renderAll();
+}
+function renderPaperPanel() {
+  const list = [...state.papers].sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+  $('#panel-title').textContent = t('p.list');
+  $('#panel-actions').innerHTML = '<button class="btn small primary" id="act-new-paper">＋ ' + t('p.new') + '</button>';
+  const nb = $('#act-new-paper');
+  if (nb) nb.addEventListener('click', newPaper);
+  return list.map(p => `<div class="row-item ${p.id === state.currentPaperId ? 'active' : ''}" data-id="${p.id}" data-act="openpaper">
+    <div class="row-main">
+      <div class="row-title">${esc(p.title || t('novel.pending'))}</div>
+      <div class="row-meta">${fmtNum(p.wordCount || 0)} ${t('stat.wordsChip')} · ${fmtTime(p.updatedAt)}</div>
+    </div>
+    <div class="row-actions">
+      <button class="icon-btn danger" data-act="delpaper" data-id="${p.id}" title="${t('common.delete')}">✕</button>
+    </div>
+  </div>`).join('') || '<div class="empty-hint">' + t('p.empty') + '</div>';
+}
+async function newPaper() {
+  const p = {
+    id: uid(), title: '', topic: '', content: '', status: 'draft',
+    wordCount: 0, createdAt: now(), updatedAt: now()
+  };
+  state.papers.push(p);
+  state.currentPaperId = p.id;
+  loadChatFor('paper-' + p.id).then(() => renderChat());
+  renderAll();
+  dbPut(STORE.papers, p);
+  $('#paper-topic').focus();
+}
+function selectPaper(id) {
+  if (state.genState.running && state.genState.abort) state.genState.abort.abort();
+  flushPaperSave();
+  state.currentPaperId = id;
+  loadChatFor('paper-' + id);
+  renderEditor(); renderPanel();
+}
+async function delPaper(id) {
+  if (!await confirmDialog(t('confirm.delChapter'))) return;
+  const i = state.papers.findIndex(p => p.id === id);
+  if (i < 0) return;
+  await dbDel(STORE.papers, id);
+  await dbDel(STORE.chats, 'paper-' + id);
+  state.papers.splice(i, 1);
+  if (state.currentPaperId === id) {
+    state.currentPaperId = state.papers[0] ? state.papers[0].id : null;
+    await loadChatFor(state.currentPaperId ? 'paper-' + state.currentPaperId : null);
+    renderEditor();
+  }
+  renderTop(); renderPanel();
+  toast(t('toast.paperDeleted'));
+}
+function renderPaperEditor() {
+  const p = currentPaper();
+  const tEl = $('#paper-title'), st = $('#paper-status'), tp = $('#paper-topic'), ed = $('#paper-editor');
+  if (!p) {
+    tEl.value = ''; st.value = 'draft'; tp.value = ''; ed.value = '';
+    updatePaperCounts(); setPaperSaveState(null);
+    return;
+  }
+  if (document.activeElement !== tEl) tEl.value = p.title || '';
+  if (document.activeElement !== tp) tp.value = p.topic || '';
+  if (document.activeElement !== ed) ed.value = p.content || '';
+  st.value = p.status || 'draft';
+  ed.style.fontSize = state.settings.fontSize + 'px';
+  updatePaperCounts();
+  setPaperSaveState(true);
+}
+function updatePaperCounts() {
+  const txt = $('#paper-editor').value;
+  const words = countWords(txt);
+  $('#paper-word-count').textContent = fmtNum(words) + ' ' + t('stat.wordsChip');
+  $('#paper-status-words').textContent = t('stat.words', { a: fmtNum(countCJK(txt)), b: countLatin(txt) });
+  const pos = $('#paper-editor').selectionStart || 0;
+  const lines = txt.slice(0, pos).split('\n');
+  $('#paper-status-pos').textContent = t('stat.pos', { a: lines.length, b: lines[lines.length - 1].length + 1 });
+}
+function setPaperSaveState(saved) {
+  const el = $('#paper-save-state');
+  if (saved === null) { el.textContent = '—'; el.className = 'meta-chip save-chip'; return; }
+  el.textContent = saved ? '● ' + fmtTime(now()) : '◌ …';
+  el.className = 'meta-chip save-chip ' + (saved ? 'saved' : 'dirty');
+}
+function schedulePaperSave() {
+  state.paperDirty = true;
+  setPaperSaveState(false);
+  clearTimeout(state.paperSaveTimer);
+  state.paperSaveTimer = setTimeout(() => savePaper(false), 900);
+}
+async function flushPaperSave() {
+  clearTimeout(state.paperSaveTimer);
+  if (state.paperDirty) await savePaper(false);
+}
+async function savePaper(manual) {
+  const p = currentPaper();
+  if (!p) { state.paperDirty = false; return; }
+  p.title = $('#paper-title').value.trim();
+  p.topic = $('#paper-topic').value;
+  p.content = $('#paper-editor').value;
+  p.status = $('#paper-status').value;
+  p.wordCount = countWords(p.content);
+  p.updatedAt = now();
+  state.paperDirty = false;
+  await dbPut(STORE.papers, p);
+  setPaperSaveState(true);
+  if (manual) toast(t('toast.paperSaved'), 'ok');
+  renderTop();
+  if (state.board === 'paper') renderPanel();
+}
+/* 联网检索文献（Crossref 学术库 + 维基百科，均开放 CORS） */
+async function fetchRefs(topic, count) {
+  const refs = [];
+  try {
+    const r = await fetch('https://api.crossref.org/works?query=' + encodeURIComponent(topic) + '&rows=' + Math.max(8, count + 2) + '&select=title,author,URL,DOI,issued,container-title', { signal: AbortSignal.timeout(15000) });
+    if (r.ok) {
+      const j = await r.json();
+      for (const it of (j.message.items || [])) {
+        const title = (it.title && it.title[0]) || '';
+        const authors = (it.author || []).slice(0, 3).map(a => (a.given || '') + ' ' + (a.family || '')).join(', ');
+        const year = it.issued && it.issued['date-parts'] && it.issued['date-parts'][0] ? String(it.issued['date-parts'][0][0]) : '';
+        const url = it.URL || (it.DOI ? 'https://doi.org/' + it.DOI : '');
+        const venue = (it['container-title'] && it['container-title'][0]) || '';
+        if (title && url) refs.push({ title: title.slice(0, 120), authors, year, venue, url });
+        if (refs.length >= count) break;
+      }
+    }
+  } catch (e) { }
+  try {
+    const r2 = await fetch('https://zh.wikipedia.org/w/api.php?action=opensearch&search=' + encodeURIComponent(topic.slice(0, 30)) + '&limit=4&format=json&origin=*', { signal: AbortSignal.timeout(12000) });
+    if (r2.ok) {
+      const j2 = await r2.json();
+      const titles = j2[1] || [], urls = j2[3] || [];
+      for (let i = 0; i < titles.length && refs.length < count + 2; i++) {
+        refs.push({ title: titles[i], authors: '', year: '', venue: '维基百科', url: urls[i] || '' });
+      }
+    }
+  } catch (e) { }
+  return refs.slice(0, count + 2);
+}
+function refsToText(refs) {
+  if (!refs.length) return '';
+  return refs.map((r, i) =>
+    `[${i + 1}] ${r.title}${r.authors ? ' — ' + r.authors : ''}${r.year ? '（' + r.year + '）' : ''}${r.venue ? ' · ' + r.venue : ''}\n    出处链接：${r.url}`
+  ).join('\n');
+}
+async function paperDraft(topic, refsText, lenHint) {
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'user', content: `请为以下论文拟写提纲（只输出提纲，不写正文）：\n【论文主题/要求】\n${topic}\n【可引用文献】\n${refsText || '（未检索到文献）'}\n\n输出：\n【标题建议】1 个\n【摘要要点】2-3 句\n【章节结构】引言 / 方法或论述 / 分析与讨论 / 结论，每节 1-2 句要点\n字数目标：${lenHint}` }
+  ];
+  const res = await aiCallRetry(messages, { stream: true }, t('gp.pdraft'));
+  let acc = '';
+  for await (const chunk of aiStream(res)) acc += chunk;
+  return (acc || '').trim();
+}
+async function paperStream(topic, draft, refsText, lenHint, ed) {
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'user', content: `请根据以下内容撰写完整论文正文，要求：\n1. 学术规范、语言严谨；字数约 ${lenHint}。\n2. 正文引用处一律用 [n] 标注，且只能引用下方给定文献，不得编造文献。\n3. 文末必须附「参考文献」列表：编号、标题、作者、出处、年份、网页链接。\n4. 若下方文献为空，文末注明「在线检索受限，参考文献待补充」，不要编造。\n5. 直接输出正文（含文末参考文献列表），不要任何额外解释。\n\n【论文主题/要求】\n${topic}\n\n【提纲】\n${draft}\n\n【可引用文献】\n${refsText || '（无）'}` }
+  ];
+  const res = await aiCallRetry(messages, { stream: true }, t('gp.pwrite'));
+  let acc = '';
+  for await (const chunk of aiStream(res)) {
+    acc += chunk;
+    ed.value = acc;
+    ed.scrollTop = ed.scrollHeight;
+    updatePaperCounts();
+  }
+  if (!acc.trim()) throw new Error('empty');
+  return acc;
+}
+async function generatePaper() {
+  const p = currentPaper();
+  if (!p) return toast(t('p.needOpen'), 'warn');
+  const topic = $('#paper-topic').value.trim();
+  if (!topic) { toast(t('p.needTopic'), 'warn'); $('#paper-topic').focus(); return; }
+  if (state.genState.running || state.aiStreaming) { toast(t('toast.aiBusy'), 'warn'); return; }
+  const prov = activeProvider();
+  if (!prov) { toast(t('toast.noAI'), 'warn'); openAISettings(); return; }
+  const ed = $('#paper-editor');
+  if (ed.value.trim() && !await confirmDialog(t('p.overwrite'))) return;
+  flushPaperSave();
+  const premium = (PLAN_LEVEL[effectivePlan()] || 0) >= 1;
+  const refCount = premium ? 12 : 8;
+  const lenHint = premium ? '3000-3500 字' : '1500-2000 字';
+  state.genState.running = true;
+  state.genState.abort = new AbortController();
+  state.aiAbort = state.genState.abort;
+  state.genState.genKind = 'paper';
+  showGenProgress();
+  try {
+    await genSetStage(0, '');
+    const refs = await fetchRefs(topic, refCount);
+    const refsText = refsToText(refs);
+    renderGenStages(t('gp.psearch') + '：' + t('stat.wordsChip') + ' ' + refs.length);
+    await new Promise(r2 => setTimeout(r2, 400));
+    await genSetStage(1, '');
+    const draft = await paperDraft(topic, refsText, lenHint);
+    if (!draft) throw new Error('draft-empty');
+    renderGenStages(draft.slice(0, 140));
+    await new Promise(r2 => setTimeout(r2, 400));
+    await genSetStage(2, '');
+    await paperStream(topic, draft, refsText, lenHint, ed);
+    updatePaperCounts(); schedulePaperSave();
+    state.genState.running = false;
+    state.aiAbort = null;
+    renderGenStages('');
+    $('#gp-title').textContent = '✓ ' + t('gp.title');
+    toast(t('p.done'), 'ok', 4000);
+    setTimeout(hideGenProgress, 2200);
+  } catch (e) {
+    const aborted = e && e.name === 'AbortError';
+    state.genState.running = false;
+    state.aiAbort = null;
+    hideGenProgress();
+    if (aborted) toast(t('co.cancelled'));
+    else toast(humanizeAIError(e), 'err', 6000);
+  }
+}
+function buildPaperContext() {
+  const p = currentPaper();
+  const parts = ['【论文板块】'];
+  if (p) {
+    parts.push(`论文标题：《${p.title || t('novel.pending')}》\n主题/要求：${p.topic || '（无）'}\n当前正文（结尾部分）：\n${(p.content || '').slice(-4000)}`);
+  } else {
+    parts.push('（尚未打开论文）');
+  }
+  return parts.join('\n\n');
+}
+function chatKey() {
+  return state.board === 'paper' ? ('paper-' + state.currentPaperId) : state.currentNovelId;
 }
 
 /* ---------------- 设置中心 ---------------- */
@@ -3625,8 +3980,21 @@ function bindEvents() {
   // 顶部
   $('#btn-novel-switch').addEventListener('click', () => { renderLibrary(); openModal('modal-library'); });
   $('#btn-settings').addEventListener('click', openSettings);
-  $('#btn-vip').addEventListener('click', () => openModal('modal-vip'));
+  $('#btn-vip').addEventListener('click', () => { renderVip(); openModal('modal-vip'); });
   $('#btn-profile').addEventListener('click', openProfile);
+  // 板块切换（小说 / 论文）
+  $('#board-novel').addEventListener('click', () => setBoard('novel'));
+  $('#board-paper').addEventListener('click', () => setBoard('paper'));
+  // 论文板块
+  $('#paper-title').addEventListener('input', schedulePaperSave);
+  $('#paper-topic').addEventListener('input', schedulePaperSave);
+  $('#paper-status').addEventListener('change', schedulePaperSave);
+  $('#paper-editor').addEventListener('input', () => { schedulePaperSave(); updatePaperCounts(); });
+  $('#paper-editor').addEventListener('keyup', updatePaperCounts);
+  $('#paper-editor').addEventListener('click', updatePaperCounts);
+  $('#btn-paper-gen').addEventListener('click', generatePaper);
+  $('#btn-paper-again').addEventListener('click', generatePaper);
+  $('#btn-paper-upgrade').addEventListener('click', () => { renderVip(); openModal('modal-vip'); });
   // 导航
   $('#main-nav').addEventListener('click', e => {
     const b = e.target.closest('.nav-item');
@@ -3747,19 +4115,17 @@ function bindEvents() {
   $('#set-feedback').addEventListener('click', () => openModal('modal-feedback'));
   $('#set-terms').addEventListener('click', openTerms);
   $('#btn-check-update').addEventListener('click', checkUpdate);
-  // 支持创作者（打赏）
-  $('#set-tip').addEventListener('click', openTipModal);
-  $('#btn-vip-tip').addEventListener('click', () => { closeModal('modal-vip'); openTipModal(); });
+  // 支持创作者（打赏 · 内嵌开发者名单 · 无弹窗）
   $('#btn-tip-send').addEventListener('click', submitTip);
   $('#tip-custom').addEventListener('input', e => {
     state.tipAmount = e.target.value || null;
-    if (state.tipAmount) $$('#modal-tip [data-tip]').forEach(b => b.classList.remove('on'));
+    if (state.tipAmount) $$('.dev-tip [data-tip]').forEach(b => b.classList.remove('on'));
   });
   document.addEventListener('click', e => {
-    const t3 = e.target.closest('[data-tip]');
+    const t3 = e.target.closest('.dev-tip [data-tip]');
     if (t3) {
       state.tipAmount = t3.dataset.tip;
-      $$('#modal-tip [data-tip]').forEach(b => b.classList.toggle('on', b === t3));
+      $$('.dev-tip [data-tip]').forEach(b => b.classList.toggle('on', b === t3));
       $('#tip-custom').value = '';
     }
   });
@@ -3945,6 +4311,7 @@ async function boot() {
   bindEvents();
   await dbInit();
   await loadAll();
+  if (state.board === 'paper') await loadChatFor(chatKey());
   renderLibrary();
   renderAll();
   if (!state.novels.length) {
