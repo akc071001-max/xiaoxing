@@ -553,6 +553,7 @@
       <button class="icon-btn modal-close" data-close="modal-vip">✕</button>
     </div>
     <div class="modal-body">
+      <div class="vip-notice" id="vip-trial-banner" hidden></div>
       <div class="vip-notice" data-i18n="vip.notice">试运营 · 不收费</div>
       <div class="vip-plans">
         <div class="vip-card current">
@@ -648,6 +649,11 @@
         <span class="set-avatar" id="set-profile-avatar">✦</span>
         <span class="set-label" id="set-profile-name">未设置昵称</span>
         <button class="btn small" id="set-profile-edit" data-i18n="set.editProfile">编辑头像 / 昵称</button>
+      </div>
+      <div class="set-row">
+        <span class="set-label" data-i18n="auth.account">登录账户</span>
+        <span class="set-val" id="set-account-name">—</span>
+        <button class="btn small" id="set-logout" data-i18n="auth.logout">退出登录</button>
       </div>
       <div class="set-section-title" data-i18n="set.lang">语言 Language</div>
       <div class="set-row">
@@ -767,6 +773,55 @@
     <div class="hurt-stars">✦ ✦ ✦</div>
   </div>
   <div id="pet-bubble" class="pet-bubble"></div>
+</div>
+
+<!-- 登录 / 注册 -->
+<div class="modal-overlay" id="modal-auth" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" data-i18n="auth.title">👤 登录 / 注册</div>
+    </div>
+    <div class="modal-body">
+      <div class="auth-tabs">
+        <button class="chip set-chip on" id="auth-tab-login" data-i18n="auth.login">登录</button>
+        <button class="chip set-chip" id="auth-tab-register" data-i18n="auth.register">注册</button>
+      </div>
+      <div class="form-col">
+        <label><span data-i18n="auth.user">用户名</span>
+          <input id="auth-user" type="text" maxlength="20" data-i18n-ph="auth.userPh" placeholder="2-20 位：字母 / 数字 / 下划线 / 中文" autocomplete="off" />
+        </label>
+        <label><span data-i18n="auth.pass">密码</span>
+          <input id="auth-pass" type="password" maxlength="20" data-i18n-ph="auth.passPh" placeholder="至少 6 位，必须包含英文字母 + 数字" autocomplete="off" />
+        </label>
+        <label id="auth-pass2-wrap" style="display:none"><span data-i18n="auth.pass2">确认密码</span>
+          <input id="auth-pass2" type="password" maxlength="20" data-i18n-ph="auth.pass2Ph" placeholder="再输入一次密码" autocomplete="off" />
+        </label>
+        <div class="auth-hint" id="auth-hint"></div>
+      </div>
+      <div class="trial-banner" id="auth-trial-banner" hidden data-i18n="auth.trialBanner">🎁 注册新账户即享 1 天专业版免费体验（不强制消费）</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn primary" id="btn-auth-submit" data-i18n="auth.submitLogin">登录</button>
+    </div>
+  </div>
+</div>
+
+<!-- 新手引导 -->
+<div class="modal-overlay" id="modal-guide" hidden>
+  <div class="modal wide">
+    <div class="modal-head">
+      <div class="modal-title" data-i18n="guide.title">🎓 新手引导</div>
+      <button class="btn mini ghost" id="btn-guide-skip" data-i18n="guide.skip">跳过</button>
+    </div>
+    <div class="modal-body guide-body">
+      <div class="guide-dots" id="guide-dots"></div>
+      <div class="guide-step" id="guide-step"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" id="btn-guide-prev" data-i18n="guide.prev" style="visibility:hidden">上一步</button>
+      <button class="btn primary" id="btn-guide-next" data-i18n="guide.next">下一步</button>
+    </div>
+  </div>
 </div>
 
 <div id="toasts"></div>
