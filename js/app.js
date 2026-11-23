@@ -237,6 +237,28 @@ const I18N = {
     'gp.psearch': '正在检索文献资料', 'gp.pdraft': '正在拟写论文提纲', 'gp.pwrite': '正在输出论文正文',
     'set.credits': '开发者名单',
     'upd.title': '🎉 更新完成', 'upd.whatsNew': '本次更新内容', 'upd.done': '知道了',
+    'top.noNovel': '未选择小说', 'top.novelSwitch': '切换 / 管理小说',
+    'w.secTitlePh': '条目名称（如：力量体系 / 势力 / 时间线）', 'w.secBodyPh': '展开设定…',
+    'w.synopsisPh': '全书主线、起承转合、结局走向…', 'w.worldPh': '时代背景、地理、规则、力量体系总览…',
+    'w.customEmpty': '可添加力量体系、势力、时间线等自定义设定条目。',
+    'char.unnamed': '未命名', 'char.noIntro': '暂无介绍',
+    'p.extractOnly': '提取记忆仅适用于小说板块', 'p.styleOnly': '文风诊断仅适用于小说板块',
+    'p.titlePh': '论文标题（可留空，AI 可代起）…', 'p.statusTitle': '论文状态',
+    'lib.editTitle': '编辑信息', 'lib.delTitle': '删除小说',
+    'ed.chapterTitlePh': '章节标题（可留空，AI 可代起）…', 'ed.chapterStatus': '章节状态',
+    'ed.editorPh': '全新章节，从这里开始你的宇宙……（Ctrl+S 保存 · 右侧 ✦ 召唤 AI 引擎）',
+    'btn.focusTitle': '专注写作模式（隐藏面板）', 'btn.aiToggleTitle': 'AI 剧情引擎',
+    'co.againTitle': '对结果不满意？重新生成',
+    'ai.configTitle': 'AI 设置', 'ai.closeTitle': '收起面板',
+    'novel.descPh': '一句话梗概、核心冲突、风格基调…',
+    'aColor.cyan': '青色', 'aColor.magenta': '品红', 'aColor.green': '翠绿', 'aColor.gold': '琥珀',
+    'aiset.namePh': '例如：本地 Qwen', 'aiset.pathPh': '/chat/completions（Pollinations 填 /openai）', 'aiset.keyPh': '云端模型必填；本地模型留空',
+    'note.titlePh': '节点 / 卷名', 'note.contentPh': '情节要点、伏笔、一句话记忆…',
+    'char.namePh': '角色名', 'char.rolePh': '主角 / 反派 / 星舰舰长…', 'char.appearancePh': '外貌特征…',
+    'char.personalityPh': '性格特点、说话方式…', 'char.backgroundPh': '身世、动机、成长线…',
+    'char.relationsPh': '与其他角色的关系…', 'char.notesPh': '埋设的伏笔、后期计划…',
+    'profile.nickPh': '你的笔名…',
+    'editor.placeholder.ru': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
     'toast.paperSaved': '论文已保存', 'toast.paperDeleted': '论文已删除',
     'auth.title': '👤 登录 / 注册', 'auth.login': '登录', 'auth.register': '注册',
     'auth.user': '用户名', 'auth.userPh': '2-20 位：字母 / 数字 / 下划线 / 中文',
@@ -458,6 +480,28 @@ const I18N = {
     'gp.psearch': 'Searching references', 'gp.pdraft': 'Drafting the outline', 'gp.pwrite': 'Writing the paper',
     'set.credits': 'Developer credits',
     'upd.title': '🎉 Update complete', 'upd.whatsNew': 'What\'s new', 'upd.done': 'Got it',
+    'top.noNovel': 'No novel selected', 'top.novelSwitch': 'Switch / manage novels',
+    'w.secTitlePh': 'Entry name (e.g. power system / factions / timeline)', 'w.secBodyPh': 'Expand the setting…',
+    'w.synopsisPh': 'Main plotline, arcs, ending…', 'w.worldPh': 'Era, geography, rules, power systems…',
+    'w.customEmpty': 'Add custom entries: power systems, factions, timelines…',
+    'char.unnamed': 'Unnamed', 'char.noIntro': 'No intro yet',
+    'p.extractOnly': 'Memory extraction works in the Novel board only', 'p.styleOnly': 'Style check works in the Novel board only',
+    'p.titlePh': 'Paper title (optional, AI can suggest one)…', 'p.statusTitle': 'Paper status',
+    'lib.editTitle': 'Edit info', 'lib.delTitle': 'Delete novel',
+    'ed.chapterTitlePh': 'Chapter title (optional, AI can suggest one)…', 'ed.chapterStatus': 'Chapter status',
+    'ed.editorPh': 'A new chapter starts here… (Ctrl+S to save · ✦ AI engine on the right)',
+    'btn.focusTitle': 'Focus mode (hide panels)', 'btn.aiToggleTitle': 'AI story engine',
+    'co.againTitle': 'Not satisfied? Regenerate',
+    'ai.configTitle': 'AI settings', 'ai.closeTitle': 'Collapse panel',
+    'novel.descPh': 'One-line premise, core conflict, tone…',
+    'aColor.cyan': 'Cyan', 'aColor.magenta': 'Magenta', 'aColor.green': 'Green', 'aColor.gold': 'Amber',
+    'aiset.namePh': 'e.g. Local Qwen', 'aiset.pathPh': '/chat/completions (use /openai for Pollinations)', 'aiset.keyPh': 'Required for cloud models; leave empty for local',
+    'note.titlePh': 'Node / volume name', 'note.contentPh': 'Plot points, foreshadowing, one-line memory…',
+    'char.namePh': 'Character name', 'char.rolePh': 'Hero / villain / starship captain…', 'char.appearancePh': 'Appearance…',
+    'char.personalityPh': 'Personality, speech style…', 'char.backgroundPh': 'Backstory, motives, arc…',
+    'char.relationsPh': 'Relations with other characters…', 'char.notesPh': 'Foreshadowing, future plans…',
+    'profile.nickPh': 'Your pen name…',
+    'editor.placeholder.ru': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
     'toast.paperSaved': 'Paper saved', 'toast.paperDeleted': 'Paper deleted',
     'auth.title': '👤 Sign in / Register', 'auth.login': 'Sign in', 'auth.register': 'Register',
     'auth.user': 'Username', 'auth.userPh': '2-20 chars: letters / numbers / _ / Chinese',
@@ -674,6 +718,28 @@ const I18N = {
     'gp.psearch': 'Поиск источников', 'gp.pdraft': 'Черновик структуры', 'gp.pwrite': 'Написание статьи',
     'set.credits': 'Разработчик',
     'upd.title': '🎉 Обновление готово', 'upd.whatsNew': 'Что нового', 'upd.done': 'Понятно',
+    'top.noNovel': 'Роман не выбран', 'top.novelSwitch': 'Переключение / управление романами',
+    'w.secTitlePh': 'Название записи (система сил / фракции / хронология)', 'w.secBodyPh': 'Раскройте сеттинг…',
+    'w.synopsisPh': 'Главная линия, повороты, финал…', 'w.worldPh': 'Эпоха, география, правила, системы сил…',
+    'w.customEmpty': 'Добавьте записи: системы сил, фракции, хронологии…',
+    'char.unnamed': 'Без имени', 'char.noIntro': 'Пока нет описания',
+    'p.extractOnly': 'Извлечение памяти — только в разделе романов', 'p.styleOnly': 'Проверка стиля — только в разделе романов',
+    'p.titlePh': 'Название статьи (можно позже, ИИ подскажет)…', 'p.statusTitle': 'Статус статьи',
+    'lib.editTitle': 'Редактировать', 'lib.delTitle': 'Удалить роман',
+    'ed.chapterTitlePh': 'Название главы (можно позже, ИИ подскажет)…', 'ed.chapterStatus': 'Статус главы',
+    'ed.editorPh': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
+    'btn.focusTitle': 'Режим фокуса (скрыть панели)', 'btn.aiToggleTitle': 'ИИ-движок сюжета',
+    'co.againTitle': 'Не понравилось? Заново',
+    'ai.configTitle': 'Настройки ИИ', 'ai.closeTitle': 'Свернуть панель',
+    'novel.descPh': 'Завязка, главный конфликт, тон…',
+    'aColor.cyan': 'Голубой', 'aColor.magenta': 'Пурпурный', 'aColor.green': 'Зелёный', 'aColor.gold': 'Янтарный',
+    'aiset.namePh': 'Например: Локальный Qwen', 'aiset.pathPh': '/chat/completions (для Pollinations — /openai)', 'aiset.keyPh': 'Для облачных моделей обязательно; для локальных — пусто',
+    'note.titlePh': 'Название узла / тома', 'note.contentPh': 'Сюжетные точки, заделы, память одной строкой…',
+    'char.namePh': 'Имя персонажа', 'char.rolePh': 'Герой / злодей / капитан корабля…', 'char.appearancePh': 'Внешность…',
+    'char.personalityPh': 'Характер, манера речи…', 'char.backgroundPh': 'Происхождение, мотивы, развитие…',
+    'char.relationsPh': 'Отношения с другими персонажами…', 'char.notesPh': 'Заделы и планы на будущее…',
+    'profile.nickPh': 'Ваш псевдоним…',
+    'editor.placeholder.ru': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
     'toast.paperSaved': 'Статья сохранена', 'toast.paperDeleted': 'Статья удалена',
     'auth.title': '👤 Вход / Регистрация', 'auth.login': 'Вход', 'auth.register': 'Регистрация',
     'auth.user': 'Имя пользователя', 'auth.userPh': '2-20 знаков: буквы / цифры / _ / китайские',
@@ -791,6 +857,99 @@ const AUTHORS = [
   { id: 'marquez', name: '加西亚·马尔克斯', wiki: '加夫列尔·加西亚·马尔克斯', tips: '魔幻现实主义巅峰；时间循环叙事，家族史诗与诗意意象。' },
   { id: 'borges', name: '博尔赫斯', wiki: '豪尔赫·路易斯·博尔赫斯', tips: '迷宫式短篇；哲学与幻想交织，叙事简洁玄妙。' }
 ];
+/* 作家英/俄译名与技法简介（显示层翻译，不影响 AI 中文语境） */
+const AUTHORS_I18N = {
+  luxun: { en: { name: 'Lu Xun', tips: 'Satire and plain description; concise, incisive prose, cold compassion.' }, ru: { name: 'Лу Синь', tips: 'Сатира и лаконичное письмо; холодное сочувствие к человеку.' } },
+  laoshe: { en: { name: 'Lao She', tips: 'Beijing-flavored colloquialism; humor and compassion for ordinary people.' }, ru: { name: 'Лао Шэ', tips: 'Пекинский разговорный колорит; юмор и сострадание к простым людям.' } },
+  shencongwen: { en: { name: 'Shen Congwen', tips: 'Pastoral lyricism of western Hunan; pure, serene prose.' }, ru: { name: 'Шэнь Цунвэнь', tips: 'Пасторальная лирика западной Хунани; чистая, спокойная проза.' } },
+  zhangailing: { en: { name: 'Eileen Chang', tips: 'Brilliant, startling metaphors; bleak-gorgeous tone and urban psychology.' }, ru: { name: 'Чжан Айлин', tips: 'Яркие неожиданные метафоры; меланхоличная роскошь, городская психология.' } },
+  wangzengqi: { en: { name: 'Wang Zengqi', tips: 'Master of plain description; essayistic prose about food and everyday life.' }, ru: { name: 'Ван Цзэнци', tips: 'Мастер беглого описания; эссеистическая проза о еде и быте.' } },
+  yuhua: { en: { name: 'Yu Hua', tips: 'Cold plain style, short sentences; restraint against great suffering, black humor.' }, ru: { name: 'Юй Хуа', tips: 'Холодная лаконичность; сдержанность перед страданием, чёрный юмор.' } },
+  moyan: { en: { name: 'Mo Yan', tips: 'Magical realism with dense rural imagery; sensory power, grand structure.' }, ru: { name: 'Мо Янь', tips: 'Магический реализм с деревенскими образами; чувственная мощь, крупная форма.' } },
+  wangxiaobo: { en: { name: 'Wang Xiaobo', tips: 'Humorous irony and speculation; black humor against grand narratives.' }, ru: { name: 'Ван Сяобо', tips: 'Юмор, ирония и мысль; чёрный юмор против пафоса.' } },
+  jinyong: { en: { name: 'Jin Yong', tips: 'Chapter-form structure, vivid ensemble; martial arts merged with history.' }, ru: { name: 'Цзинь Юн', tips: 'Роман-цикл; боевые искусства и история, яркие персонажи.' } },
+  gulong: { en: { name: 'Gu Long', tips: 'Short lines, ellipsis and suspense; freehand combat, lonely heroes.' }, ru: { name: 'Гу Лун', tips: 'Короткие строки, паузы, саспенс; одинокие герои.' } },
+  liucixin: { en: { name: 'Liu Cixin', tips: 'Vast-scale imagination and hard-SF detail; cool narration, cosmic romance.' }, ru: { name: 'Лю Цысинь', tips: 'Грандиозное воображение и твёрдая НФ; космическая романтика.' } },
+  wangjinkang: { en: { name: 'Wang Jinkang', tips: 'Philosophical SF; technology-ethics conflicts drive the story.' }, ru: { name: 'Ван Цзинькан', tips: 'Философская НФ; конфликты этики и технологий.' } },
+  hexi: { en: { name: 'He Xi', tips: 'Soft SF with warmth; settings serve human themes.' }, ru: { name: 'Хэ Си', tips: 'Мягкая НФ; техника на службе человечности.' } },
+  hansong: { en: { name: 'Han Song', tips: 'Eerie, cold SF imagery; postmodern, dystopian.' }, ru: { name: 'Хань Сун', tips: 'Жутковатые образы, постмодерн, антиутопия.' } },
+  jiangnan: { en: { name: 'Jiang Nan', tips: 'Youthful passion and tragic aesthetics; gorgeous imagery, fine psychology.' }, ru: { name: 'Цзян Нань', tips: 'Юношеский пыл и трагическая эстетика; яркие образы, психологизм.' } },
+  maboyong: { en: { name: 'Ma Boyong', tips: 'Research-based whimsy from historical gaps; fast pace, humor and tension.' }, ru: { name: 'Ма Боюн', tips: 'Остроумные истории из щелей истории; быстрый темп, юмор и напряжение.' } },
+  maoni: { en: { name: 'Mao Ni', tips: 'Literary sensibility, long foreshadowing; idealistic character arcs.' }, ru: { name: 'Мао Ни', tips: 'Литературная утончённость; идеалистичные герои.' } },
+  priest: { en: { name: 'Priest', tips: 'Strong logic and plot, dual protagonists; aphorisms and restraint.' }, ru: { name: 'Priest', tips: 'Крепкая логика сюжета; афоризмы и недосказанность.' } },
+  tiancantudou: { en: { name: 'Tian Can Tu Dou', tips: 'Dense satisfaction beats, clear leveling system; tight pacing.' }, ru: { name: 'Тянь Цань Ту Доу', tips: 'Плотные динамичные сцены, чёткая система прогресса; плотный темп.' } },
+  tangsanshao: { en: { name: 'Tang Jia San Shao', tips: 'Positive-energy passion with romance through-lines; steady narrative.' }, ru: { name: 'Тан Цзя Сань Шао', tips: 'Энергичный позитив, сквозная любовная линия; ровный ритм.' } },
+  tianxiabachang: { en: { name: 'Tian Xia Ba Chang', tips: 'Folklore weird tales and suspense adventure; immersive first person.' }, ru: { name: 'Тянься Бачан', tips: 'Фольклорная мистика и приключения; эффект присутствия.' } },
+  nanpaisanshu: { en: { name: 'Nan Pai San Shu', tips: 'Notebook-style narration, dense hooks; layered schemes.' }, ru: { name: 'Наньпай Саньшу', tips: 'Записки-повествование, крючки саспенса; многослойные загадки.' } },
+  jkrowling: { en: { name: 'J.K. Rowling', tips: 'Careful foreshadowing, clear growth themes; innocence and darkness.' }, ru: { name: 'Дж. К. Роулинг', tips: 'Продуманные ружья, тема взросления; свет и тьма.' } },
+  keigo: { en: { name: 'Keigo Higashino', tips: 'Social mystery, sharp reversals; crime reveals humanity.' }, ru: { name: 'Кэйго Хигасино', tips: 'Социальный детектив; преступление раскрывает человека.' } },
+  agatha: { en: { name: 'Agatha Christie', tips: 'Fair-play puzzle structure; closed settings, multiple suspects.' }, ru: { name: 'Агата Кристи', tips: 'Честная детективная головоломка; закрытое пространство, подозреваемые.' } },
+  hemingway: { en: { name: 'Ernest Hemingway', tips: 'Iceberg theory, terse dialogue; hard action prose.' }, ru: { name: 'Эрнест Хемингуэй', tips: 'Теория айсберга, скупые диалоги; жёсткая проза действия.' } },
+  tolkien: { en: { name: 'J.R.R. Tolkien', tips: 'Pinnacle of world-building; epic scope, mythic language.' }, ru: { name: 'Дж. Р. Р. Толкин', tips: 'Вершина миростроительства; эпический размах и миф.' } },
+  tolstoy: { en: { name: 'Leo Tolstoy', tips: 'Epic canvas and inner history; grand ensembles, moral inquiry.' }, ru: { name: 'Лев Толстой', tips: 'Эпический размах и история души; нравственный поиск.' } },
+  dostoevsky: { en: { name: 'Fyodor Dostoevsky', tips: 'Deep psychology; dialogues of ideas, crime-and-punishment intensity.' }, ru: { name: 'Фёдор Достоевский', tips: 'Глубинная психология; диалоги идей, накал преступления и наказания.' } },
+  chekhov: { en: { name: 'Anton Chekhov', tips: 'Restraint and precision; telling details, open endings.' }, ru: { name: 'Антон Чехов', tips: 'Сдержанность и точность; говорящие детали, открытые финалы.' } },
+  pushkin: { en: { name: 'Alexander Pushkin', tips: 'Concise, beautiful language; narrative verse spirit.' }, ru: { name: 'Александр Пушкин', tips: 'Лаконичный, прекрасный язык; дух повествовательной поэзии.' } },
+  marktwain: { en: { name: 'Mark Twain', tips: 'American humor and satire; lively colloquial narration.' }, ru: { name: 'Марк Твен', tips: 'Американский юмор и сатира; живое разговорное повествование.' } },
+  fitzgerald: { en: { name: 'F. Scott Fitzgerald', tips: 'Jazz-age glamour and disillusion; lyrical, gorgeous imagery.' }, ru: { name: 'Ф. С. Фицджеральд', tips: 'Блеск и разочарование эпохи джаза; лиричные образы.' } },
+  faulkner: { en: { name: 'William Faulkner', tips: 'Stream of consciousness, multi-perspective; Southern Gothic tension.' }, ru: { name: 'Уильям Фолкнер', tips: 'Поток сознания, многоголосие; южная готика.' } },
+  poe: { en: { name: 'Edgar Allan Poe', tips: 'Father of Gothic horror and detective fiction; extreme atmosphere.' }, ru: { name: 'Эдгар Аллан По', tips: 'Отец готики и детектива; предельная атмосфера.' } },
+  lovecraft: { en: { name: 'H.P. Lovecraft', tips: 'Cosmic horror: unnameable dread, Cthulhu mythos, creeping despair.' }, ru: { name: 'Г. Ф. Лавкрафт', tips: 'Космический ужас: невыразимый страх, мифы Ктулху, нарастающее отчаяние.' } },
+  bradbury: { en: { name: 'Ray Bradbury', tips: 'Poetic science fiction; lyricism and reflection.' }, ru: { name: 'Рэй Брэдбери', tips: 'Поэтическая фантастика; лирика и размышление.' } },
+  asimov: { en: { name: 'Isaac Asimov', tips: 'Rigorous hard SF, three laws of robotics; clear logic, neat suspense.' }, ru: { name: 'Айзек Азимов', tips: 'Строгая твёрдая НФ, три закона робототехники; чёткая логика.' } },
+  stephenking: { en: { name: 'Stephen King', tips: 'Horror from everyday details; vivid characters, dense hooks.' }, ru: { name: 'Стивен Кинг', tips: 'Ужас из бытовых деталей; живые герои, плотные крючки.' } },
+  hugo: { en: { name: 'Victor Hugo', tips: 'Romantic giant; grand narrative and compassion.' }, ru: { name: 'Виктор Гюго', tips: 'Гигант романтизма; великое повествование и сострадание.' } },
+  dumas: { en: { name: 'Alexandre Dumas', tips: 'Master of popular fiction; twists, vivid dialogue, revenge and adventure.' }, ru: { name: 'Александр Дюма', tips: 'Мастер приключенческого романа; месть и авантюра.' } },
+  dickens: { en: { name: 'Charles Dickens', tips: 'Victorian social panorama; vivid characters, humor and warmth.' }, ru: { name: 'Чарльз Диккенс', tips: 'Викторианская панорама; яркие характеры, юмор и тепло.' } },
+  austen: { en: { name: 'Jane Austen', tips: 'Fine marriage comedy and wit; brilliant dialogue, subtle psychology.' }, ru: { name: 'Джейн Остин', tips: 'Тонкая комедия нравов; блестящие диалоги, психологизм.' } },
+  kafka: { en: { name: 'Franz Kafka', tips: 'Absurdity and alienation; calm surface over surreal premises.' }, ru: { name: 'Франц Кафка', tips: 'Абсурд и отчуждение; спокойная форма над сюрреальным.' } },
+  camus: { en: { name: 'Albert Camus', tips: 'Existential undertone; restrained narration fusing thought and literature.' }, ru: { name: 'Альбер Камю', tips: 'Экзистенциальный подтекст; сдержанность и мысль.' } },
+  orwell: { en: { name: 'George Orwell', tips: 'Political allegory, clear forceful prose; dystopian legacy.' }, ru: { name: 'Джордж Оруэлл', tips: 'Политическая аллегория, ясная проза; антиутопия.' } },
+  marquez: { en: { name: 'Gabriel García Márquez', tips: 'Pinnacle of magical realism; circular time, family epics.' }, ru: { name: 'Габриэль Гарсиа Маркес', tips: 'Вершина магического реализма; круговое время, семейная эпопея.' } },
+  borges: { en: { name: 'Jorge Luis Borges', tips: 'Labyrinthine short fiction; philosophy and fantasy, terse narration.' }, ru: { name: 'Хорхе Луис Борхес', tips: 'Лабиринтная новелла; философия и фантастика.' } }
+};
+const GENRE_I18N = {
+  '科幻': { en: 'Sci-Fi', ru: 'НФ' }, '玄幻': { en: 'Xuanhuan', ru: 'Сюаньхуань' }, '奇幻': { en: 'Fantasy', ru: 'Фэнтези' },
+  '都市': { en: 'Urban', ru: 'Городское' }, '悬疑': { en: 'Mystery', ru: 'Мистика' }, '推理': { en: 'Detective', ru: 'Детектив' },
+  '恐怖': { en: 'Horror', ru: 'Ужасы' }, '历史': { en: 'Historical', ru: 'Исторический' }, '军事': { en: 'Military', ru: 'Военный' },
+  '武侠': { en: 'Wuxia', ru: 'Уся' }, '仙侠': { en: 'Xianxia', ru: 'Сянься' }, '修真': { en: 'Cultivation', ru: 'Культивация' },
+  '游戏': { en: 'Gaming', ru: 'Игровой' }, '体育': { en: 'Sports', ru: 'Спорт' }, '轻小说': { en: 'Light Novel', ru: 'Ранобэ' },
+  '同人': { en: 'Fanfic', ru: 'Фанфик' }, '言情': { en: 'Romance', ru: 'Романтика' }, '无限流': { en: 'Infinite Flow', ru: 'Бесконечный поток' },
+  '克苏鲁': { en: 'Cthulhu', ru: 'Ктулху' }, '赛博朋克': { en: 'Cyberpunk', ru: 'Киберпанк' }, '废土': { en: 'Wasteland', ru: 'Пустошь' },
+  '太空歌剧': { en: 'Space Opera', ru: 'Космоопера' }, '蒸汽朋克': { en: 'Steampunk', ru: 'Стимпанк' }, '群像': { en: 'Ensemble', ru: 'Ансамбль' },
+  '单元剧': { en: 'Episodic', ru: 'Эпизодический' }
+};
+function genreName(g) {
+  const m = GENRE_I18N[g];
+  if (!m) return g;
+  return state.settings.lang === 'en' ? m.en : (state.settings.lang === 'ru' ? m.ru : g);
+}
+function authorName(a) {
+  const m = AUTHORS_I18N[a.id];
+  if (!m) return a.name;
+  return state.settings.lang === 'en' ? (m.en.name || a.name) : (state.settings.lang === 'ru' ? (m.ru.name || a.name) : a.name);
+}
+function authorTips(a) {
+  const m = AUTHORS_I18N[a.id];
+  if (!m) return a.tips;
+  return state.settings.lang === 'en' ? (m.en.tips || a.tips) : (state.settings.lang === 'ru' ? (m.ru.tips || a.tips) : a.tips);
+}
+/* 通用风格值的显示层翻译 */
+const STYLEVAL_I18N = {
+  '通用': { en: 'Universal', ru: 'Универсальный' }, '未定': { en: 'TBD', ru: 'Не определено' },
+  '大众向': { en: 'General audience', ru: 'Широкая аудитория' }, '青少年': { en: 'Young adult', ru: 'Подростки' }, '成人': { en: 'Adult', ru: 'Взрослые' },
+  '短篇': { en: 'Short story', ru: 'Рассказ' }, '中篇': { en: 'Novella', ru: 'Повесть' }, '长篇': { en: 'Novel', ru: 'Роман' }, '连载': { en: 'Serial', ru: 'Сериал' },
+  '第一人称': { en: 'First person', ru: 'От первого лица' }, '第三人称': { en: 'Third person', ru: 'От третьего лица' },
+  '上帝视角': { en: 'Omniscient', ru: 'Всеведущий' }, '多视角': { en: 'Multi-POV', ru: 'Многоголосие' },
+  '轻松': { en: 'Light', ru: 'Лёгкий' }, '热血': { en: 'Passionate', ru: 'Энергичный' }, '黑暗': { en: 'Dark', ru: 'Мрачный' },
+  '幽默': { en: 'Humorous', ru: 'Юмористический' }, '悬疑': { en: 'Suspenseful', ru: 'Напряжённый' }, '感人': { en: 'Moving', ru: 'Трогательный' }
+};
+function styleValName(v) {
+  if (!v) return '';
+  const m = STYLEVAL_I18N[v];
+  if (!m) return v;
+  return state.settings.lang === 'en' ? m.en : (state.settings.lang === 'ru' ? m.ru : v);
+}
 const PRESETS = [
   { name: 'Pollinations AI（免费·免密钥·开箱即用）', baseUrl: 'https://text.pollinations.ai', path: '/openai', model: 'openai', plan: 'free' },
   { name: '硅基流动 SiliconFlow（免费额度）', baseUrl: 'https://api.siliconflow.cn/v1', path: '/chat/completions', model: 'deepseek-ai/DeepSeek-V3', plan: 'free' },
@@ -911,7 +1070,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.6.1';
+const APP_VERSION = '3.6.2';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -999,7 +1158,7 @@ function renderTop() {
     trialCheck();
     return;
   }
-  $('#novel-pill-title').textContent = n ? (n.title || t('novel.pending')) : (state.settings.lang === 'zh' ? '未选择小说' : 'No novel selected');
+  $('#novel-pill-title').textContent = n ? (n.title || t('novel.pending')) : t('top.noNovel');
   if (!n) { $('#stats').textContent = ''; renderProfileTop(); return; }
   const chs = chaptersOf(n.id);
   const total = chs.reduce((s, c) => s + (c.wordCount || 0), 0);
@@ -1039,17 +1198,17 @@ function renderLibrary() {
   const list = $('#library-list');
   list.innerHTML = state.novels.map(n => {
     const gs = novelGenres(n);
-    const gtxt = gs.slice(0, 2).join(' / ') + (gs.length > 2 ? ' +' + (gs.length - 2) : '');
+    const gtxt = gs.slice(0, 2).map(genreName).join(' / ') + (gs.length > 2 ? ' +' + (gs.length - 2) : '');
     return `
     <div class="lib-row ${n.id === state.currentNovelId ? 'active' : ''}" data-id="${n.id}">
       <div class="lib-cover" style="--cover:${n.color || '#00e0ff'}"></div>
       <div class="lib-info">
         <div class="lib-title">${esc(n.title || t('novel.pending'))}</div>
-        <div class="lib-meta">${esc(n.audience || '')} ${esc(gtxt || t('novel.legacyGenre'))} · ${chaptersOf(n.id).length} · ${fmtDate(n.updatedAt)}</div>
+        <div class="lib-meta">${esc(styleValName(n.audience))} ${esc(gtxt || t('novel.legacyGenre'))} · ${chaptersOf(n.id).length} · ${fmtDate(n.updatedAt)}</div>
       </div>
       <div class="row-actions" style="opacity:1">
-        <button class="icon-btn" data-act="edit" data-id="${n.id}" title="编辑信息">✎</button>
-        <button class="icon-btn danger" data-act="del" data-id="${n.id}" title="删除小说">✕</button>
+        <button class="icon-btn" data-act="edit" data-id="${n.id}" data-i18n-title="lib.editTitle" title="编辑信息">✎</button>
+        <button class="icon-btn danger" data-act="del" data-id="${n.id}" data-i18n-title="lib.delTitle" title="删除小说">✕</button>
       </div>
     </div>`;
   }).join('') || '<div class="empty-hint">' + t('empty.lib') + '</div>';
@@ -1098,11 +1257,14 @@ function renderStyleChips() {
   const d = state.styleDraft;
   if (!d) return;
   const gWrap = document.querySelector('#modal-novel [data-field="genres"]');
-  if (gWrap) gWrap.innerHTML = GENRES.map(g => `<button class="chip ${d.genres.includes(g) ? 'on' : ''}" data-val="${g}">${esc(g)}</button>`).join('');
+  if (gWrap) gWrap.innerHTML = GENRES.map(g => `<button class="chip ${d.genres.includes(g) ? 'on' : ''}" data-val="${g}">${esc(genreName(g))}</button>`).join('');
   const aWrap = document.querySelector('#modal-novel [data-field="authors"]');
-  if (aWrap) aWrap.innerHTML = allAuthors().map(a => `<button class="chip ${d.authors.includes(a.id) ? 'on' : ''}" data-val="${a.id}">${esc(a.name)}${a.custom ? ' ✦' : ''}</button>`).join('');
+  if (aWrap) aWrap.innerHTML = allAuthors().map(a => `<button class="chip ${d.authors.includes(a.id) ? 'on' : ''}" data-val="${a.id}">${esc(authorName(a))}${a.custom ? ' ✦' : ''}</button>`).join('');
   ['audience', 'length', 'pov', 'tone', 'narrative', 'standard', 'personal', 'lang'].forEach(f => {
-    $$('#modal-novel [data-field="' + f + '"] .chip').forEach(b => b.classList.toggle('on', b.dataset.val === d[f]));
+    $$('#modal-novel [data-field="' + f + '"] .chip').forEach(b => {
+      b.classList.toggle('on', b.dataset.val === d[f]);
+      if (!b.hasAttribute('data-i18n')) b.textContent = styleValName(b.dataset.val);
+    });
   });
 }
 function onStyleChipClick(e) {
@@ -1505,12 +1667,12 @@ function renderCharacters() {
   return list.map(c => `<div class="char-card" data-id="${c.id}" data-act="edit">
     <div class="char-head">
       <span class="char-avatar">${esc((c.name || '?').slice(0, 1))}</span>
-      <div><div class="char-name">${esc(c.name || '未命名')}</div><div class="char-role">${esc(c.role || '')}</div></div>
+      <div><div class="char-name">${esc(c.name || t('char.unnamed'))}</div><div class="char-role">${esc(c.role || '')}</div></div>
     </div>
-    <div class="char-summary">${esc((c.background || c.personality || '暂无介绍').slice(0, 120))}</div>
+    <div class="char-summary">${esc((c.background || c.personality || t('char.noIntro')).slice(0, 120))}</div>
     <div class="row-actions">
-      <button class="icon-btn" data-act="edit" data-id="${c.id}" title="编辑">✎</button>
-      <button class="icon-btn danger" data-act="del" data-id="${c.id}" title="删除">✕</button>
+      <button class="icon-btn" data-act="edit" data-id="${c.id}" data-i18n-title="lib.editTitle" title="编辑">✎</button>
+      <button class="icon-btn danger" data-act="del" data-id="${c.id}" data-i18n-title="common.delete" title="删除">✕</button>
     </div>
   </div>`).join('');
 }
@@ -1519,48 +1681,51 @@ function renderWorld() {
   const secs = (n.worldSections || []).map(s => `
     <div class="world-sec" data-id="${s.id}">
       <div class="world-sec-head">
-        <input class="input world-sec-title" data-field="secTitle" data-id="${s.id}" value="${esc(s.title || '')}" placeholder="条目名称（如：力量体系 / 势力 / 时间线）" autocomplete="off" />
-        <button class="icon-btn danger" data-act="delsec" data-id="${s.id}" title="删除条目">✕</button>
+        <input class="input world-sec-title" data-field="secTitle" data-id="${s.id}" value="${esc(s.title || '')}" data-i18n-ph="w.secTitlePh" placeholder="条目名称（如：力量体系 / 势力 / 时间线）" autocomplete="off" />
+        <button class="icon-btn danger" data-act="delsec" data-id="${s.id}" data-i18n-title="common.delete" title="删除条目">✕</button>
       </div>
-      <textarea class="input world-sec-body" data-field="secBody" data-id="${s.id}" rows="4" placeholder="展开设定…">${esc(s.content || '')}</textarea>
+      <textarea class="input world-sec-body" data-field="secBody" data-id="${s.id}" rows="4" data-i18n-ph="w.secBodyPh" placeholder="展开设定…">${esc(s.content || '')}</textarea>
     </div>`).join('');
-  const gs = novelGenres(n).join(' / ') || t('novel.legacyGenre');
-  const refs = novelRefAuthors(n).map(id => { const a = findAuthor(id); return a ? a.name : id; }).join('、');
+  const gs = novelGenres(n).map(genreName).join(' / ') || t('novel.legacyGenre');
+  const refs = novelRefAuthors(n).map(id => { const a = findAuthor(id); return a ? authorName(a) : id; }).join('、');
   return `
   <div class="world-block">
     <div class="block-label">${t('w.synopsis')}</div>
-    <textarea class="input" data-field="synopsis" rows="5" placeholder="全书主线、起承转合、结局走向…">${esc(n.synopsis || '')}</textarea>
+    <textarea class="input" data-field="synopsis" rows="5" data-i18n-ph="w.synopsisPh" placeholder="全书主线、起承转合、结局走向…">${esc(n.synopsis || '')}</textarea>
   </div>
   <div class="world-block">
     <div class="block-label">${t('w.world')}</div>
-    <textarea class="input" data-field="world" rows="7" placeholder="时代背景、地理、规则、力量体系总览…">${esc(n.world || '')}</textarea>
+    <textarea class="input" data-field="world" rows="7" data-i18n-ph="w.worldPh" placeholder="时代背景、地理、规则、力量体系总览…">${esc(n.world || '')}</textarea>
   </div>
   <div class="world-block">
     <div class="block-label">风格档案 · STYLE <button class="btn mini" data-act="editstyle">${t('w.edit')}</button></div>
     <div class="style-profile">
       <table>
-        <tr><td class="sp-label">${t('w.audience')}</td><td class="sp-val">${esc(n.audience || '通用')}</td></tr>
+        <tr><td class="sp-label">${t('w.audience')}</td><td class="sp-val">${esc(styleValName(n.audience || '通用'))}</td></tr>
         <tr><td class="sp-label">${t('w.genre')}</td><td class="sp-val">${esc(gs)}</td></tr>
-        <tr><td class="sp-label">${t('w.length')}</td><td class="sp-val">${esc(n.length || '未定')}</td></tr>
-        <tr><td class="sp-label">${t('w.pov')}</td><td class="sp-val">${esc(n.pov || '未定')}</td></tr>
-        <tr><td class="sp-label">${t('w.tone')}</td><td class="sp-val">${esc(n.tone || '未定')}</td></tr>
+        <tr><td class="sp-label">${t('w.length')}</td><td class="sp-val">${esc(styleValName(n.length || '未定'))}</td></tr>
+        <tr><td class="sp-label">${t('w.pov')}</td><td class="sp-val">${esc(styleValName(n.pov || '未定'))}</td></tr>
+        <tr><td class="sp-label">${t('w.tone')}</td><td class="sp-val">${esc(styleValName(n.tone || '未定'))}</td></tr>
         <tr><td class="sp-label">${t('style.narrative')}</td><td class="sp-val">${esc({ dialogue: t('style.dialogue'), balanced: t('style.balanced'), narrative: t('style.narrativeMode') }[n.narrative] || t('style.dialogue'))}</td></tr>
-        <tr><td class="sp-label">${t('w.lang')}</td><td class="sp-val">${n.lang === 'en' ? 'English' : '中文'}</td></tr>
+        <tr><td class="sp-label">${t('w.lang')}</td><td class="sp-val">${n.lang === 'en' ? 'English' : (n.lang === 'ru' ? 'Русский' : '中文')}</td></tr>
+        <tr><td class="sp-label">${t('style.narrative')}</td><td class="sp-val">${esc({ dialogue: t('style.dialogue'), balanced: t('style.balanced'), narrative: t('style.narrativeMode') }[n.narrative] || t('style.dialogue'))}</td></tr>
+        <tr><td class="sp-label">${t('style.standard')}</td><td class="sp-val">${esc({ '通用': t('style.stGeneric'), '中国网文': t('style.stNet'), '中式传统': t('style.stTrad'), '日式轻小说': t('style.stJP'), '欧美小说': t('style.stWest'), '俄式文学': t('style.stRu') }[n.standard || '通用'] || n.standard || '通用')}</td></tr>
+        <tr><td class="sp-label">${t('style.personal')}</td><td class="sp-val">${esc((n.personal || 'human') === 'human' ? t('style.perHuman') : t('style.perStandard'))}</td></tr>
         <tr><td class="sp-label">${t('w.authors')}</td><td class="sp-val">${esc(refs || '—')}</td></tr>
       </table>
     </div>
   </div>
   <div class="world-block">
     <div class="block-label">${t('w.custom')} <button class="btn mini" data-act="addsec">${t('w.addSec')}</button></div>
-    ${secs || '<div class="empty-hint small">可添加力量体系、势力、时间线等自定义设定条目。</div>'}
+    ${secs || '<div class="empty-hint small">' + t('w.customEmpty') + '</div>'}
   </div>`;
 }
 function renderAuthorChips(n) {
   const refs = novelRefAuthors(n);
   const f = (state.authorFilter || '').toLowerCase();
-  const list = allAuthors().filter(a => !f || (a.name || '').toLowerCase().includes(f));
+  const list = allAuthors().filter(a => !f || (authorName(a) || '').toLowerCase().includes(f) || (a.name || '').toLowerCase().includes(f));
   if (!list.length) return '<span class="learn-status">' + t('vip.searchEmpty') + '</span>';
-  return list.map(a => `<button class="chip mini ${refs.includes(a.id) ? 'on' : ''}" data-act="toggleauthor" data-id="${a.id}" title="${esc(a.name)}${a.custom ? '（' + t('au.custom') + '）' : ''}">${esc(a.name)}${a.custom ? ' ✦' : ''}</button>`).join('');
+  return list.map(a => `<button class="chip mini ${refs.includes(a.id) ? 'on' : ''}" data-act="toggleauthor" data-id="${a.id}" title="${esc(authorName(a))}${a.custom ? '（' + t('au.custom') + '）' : ''}">${esc(authorName(a))}${a.custom ? ' ✦' : ''}</button>`).join('');
 }
 function renderAuthorChipsBox() {
   const box = $('#author-chips-box');
@@ -1605,10 +1770,10 @@ function renderAuthorNotes(n) {
     const a = findAuthor(id);
     if (!a) return '';
     const wk = a.custom ? null : state.wikiCache[id];
-    const tipsTxt = a.custom ? (a.learned || a.tips || '') : a.tips;
+    const tipsTxt = a.custom ? (a.learned || a.tips || '') : authorTips(a);
     return `<div class="author-note-card">
       <div class="author-note-head">
-        <span class="author-note-name">${esc(a.name)}</span>
+        <span class="author-note-name">${esc(authorName(a))}</span>
         <span class="author-note-src">${a.custom ? t('au.custom') : t('w.builtin')}</span>
         ${wk ? `<span class="author-note-src">${t('w.wiki')}</span>` : ''}
         ${a.custom ? `<button class="icon-btn danger" data-act="delcustomauthor" data-id="${a.id}" title="${t('au.del')}" style="margin-left:auto">✕</button>` : ''}
@@ -1621,11 +1786,13 @@ function renderAuthorNotes(n) {
 function renderMemories() {
   const list = state.memories.filter(m => m.novelId === state.currentNovelId);
   const cats = ['全部', '情节', '人物', '伏笔', '世界', '其他'];
+  const CAT_I18N = { '全部': { en: 'All', ru: 'Все' }, '情节': { en: 'Plot', ru: 'Сюжет' }, '人物': { en: 'Character', ru: 'Персонаж' }, '伏笔': { en: 'Foreshadow', ru: 'Задел' }, '世界': { en: 'World', ru: 'Мир' }, '其他': { en: 'Other', ru: 'Другое' } };
+  const catName = c => { const m = CAT_I18N[c]; return m ? (state.settings.lang === 'en' ? m.en : state.settings.lang === 'ru' ? m.ru : c) : c; };
   const active = state.memFilter || '全部';
   const shown = active === '全部' ? list : list.filter(m => m.category === active);
-  const chips = cats.map(c => `<button class="chip mini ${c === active ? 'on' : ''}" data-act="memfilter" data-cat="${c}">${esc(c)}</button>`).join('');
+  const chips = cats.map(c => `<button class="chip mini ${c === active ? 'on' : ''}" data-act="memfilter" data-cat="${c}">${esc(catName(c))}</button>`).join('');
   const rows = shown.map(m => `<div class="mem-item" data-id="${m.id}">
-    <span class="mem-cat" data-cat="${esc(m.category || '其他')}">${esc(m.category || '其他')}</span>
+    <span class="mem-cat" data-cat="${esc(m.category || '其他')}">${esc(catName(m.category || '其他'))}</span>
     <div class="mem-text">${esc(m.content)}</div>
     <div class="row-actions">
       <button class="icon-btn" data-act="edit" data-id="${m.id}" title="编辑">✎</button>
@@ -2260,13 +2427,23 @@ async function* aiStream(res) {
 }
 function humanizeAIError(err) {
   const m = String(err.message || err);
-  if (/Failed to fetch|NetworkError|load failed|Load failed/i.test(m))
-    return '网络请求失败：可能是跨域(CORS)限制或服务未启动。本地模型请确认已运行（Ollama 需设置 OLLAMA_ORIGINS=*，或运行 node proxy.mjs 代理）；云端模型若被浏览器拦截，也请用代理转发。原始信息：' + m;
-  if (/402|FREE_LIMIT|Payment/i.test(m)) return '免费模型额度已达上限或限流：请稍等几分钟重试；如需稳定高速体验，可在「⚙ AI 模型」中接入自己的模型（如 DeepSeek，充值 10 元可用很久）。原始信息：' + m;
-  if (/404/.test(m)) return '404：请检查 API 地址（Base URL 通常以 /v1 结尾）或模型名称是否正确。原始信息：' + m;
-  if (/401|403/.test(m)) return '鉴权失败(401/403)：请检查 API Key 是否正确。原始信息：' + m;
-  if (/429/.test(m)) return '限流(429)：请求过于频繁或额度不足，请稍后再试。原始信息：' + m;
-  return 'AI 请求失败：' + m;
+  const L = state.settings.lang;
+  const net = L === 'ru'
+    ? 'Сетевая ошибка: возможно, ограничение CORS или сервис не запущен. Для локальной модели убедитесь, что она работает (Ollama: OLLAMA_ORIGINS=*, или запустите node proxy.mjs); для облачных используйте прокси. '
+    : L === 'en'
+      ? 'Network error: possible CORS restriction or service not running. For local models make sure it is running (Ollama needs OLLAMA_ORIGINS=*, or run node proxy.mjs); for cloud models use the proxy. '
+      : '网络请求失败：可能是跨域(CORS)限制或服务未启动。本地模型请确认已运行（Ollama 需设置 OLLAMA_ORIGINS=*，或运行 node proxy.mjs 代理）；云端模型若被浏览器拦截，也请用代理转发。';
+  const free = L === 'ru'
+    ? 'Бесплатный лимит модели исчерпан или идёт ограничение: подождите пару минут и повторите; для стабильной работы подключите свою модель в «⚙ ИИ-модели». '
+    : L === 'en'
+      ? 'Free model quota reached or throttled: wait a few minutes and retry; for stable output connect your own model in “⚙ AI models”. '
+      : '免费模型额度已达上限或限流：请稍等几分钟重试；如需稳定高速体验，可在「⚙ AI 模型」中接入自己的模型。';
+  if (/Failed to fetch|NetworkError|load failed|Load failed/i.test(m)) return net + m;
+  if (/402|FREE_LIMIT|Payment/i.test(m)) return free + m;
+  if (/404/.test(m)) return L === 'ru' ? '404: проверьте адрес API (Base URL обычно заканчивается на /v1) и имя модели. ' + m : (L === 'en' ? '404: check the API URL (Base URL usually ends with /v1) and model name. ' + m : '404：请检查 API 地址（Base URL 通常以 /v1 结尾）或模型名称是否正确。' + m);
+  if (/401|403/.test(m)) return L === 'ru' ? 'Ошибка авторизации (401/403): проверьте API-ключ. ' + m : (L === 'en' ? 'Auth failed (401/403): check your API key. ' + m : '鉴权失败(401/403)：请检查 API Key 是否正确。' + m);
+  if (/429/.test(m)) return L === 'ru' ? 'Лимит запросов (429): слишком часто или исчерпан лимит, повторите позже. ' + m : (L === 'en' ? 'Rate limited (429): too many requests, retry later. ' + m : '限流(429)：请求过于频繁或额度不足，请稍后再试。' + m);
+  return (L === 'ru' ? 'Ошибка ИИ-запроса: ' : L === 'en' ? 'AI request failed: ' : 'AI 请求失败：') + m;
 }
 
 /* ---------------- AI 上下文构建（记忆系统核心） ---------------- */
@@ -2529,13 +2706,13 @@ function quickPrompt(action) {
         break;
       }
       case 'extract':
-        toast(state.settings.lang === 'zh' ? '提取记忆仅适用于小说板块' : 'Extract memory works in the Novel board only', 'warn');
+        toast(t('p.extractOnly'), 'warn');
         break;
       case 'outline':
         sendAI(`请为论文「${ptopic || '（未填写）'}」设计一份详细大纲：章节结构、每节核心论点、需要的文献类型。`, { kind: null });
         break;
       case 'style':
-        toast(state.settings.lang === 'zh' ? '文风诊断仅适用于小说板块' : 'Style check works in the Novel board only', 'warn');
+        toast(t('p.styleOnly'), 'warn');
         break;
     }
     return;
@@ -2929,6 +3106,7 @@ function renderAll() {
   renderModelTag();
   renderChat();
   applyUIPrefs();
+  applyI18n();
 }
 
 /* ---------------- 动态背景（星空 / 太阳系 / 银河系 / 星球 · 拟真渲染 · 全部自绘无版权素材） ---------------- */
@@ -3413,6 +3591,7 @@ async function searchModels() {
 let petIdleTimer = null, petNudgeTimer = null, hurtTimer = null;
 const PET_BUBBLES_ZH = ['你好呀！', '我在呢～', '需要帮忙吗？点我试试', '写作加油！', '要不要起个书名？'];
 const PET_BUBBLES_EN = ['Hello!', 'I\'m here~', 'Need help? Click me', 'Keep writing!', 'Want a title idea?'];
+const PET_BUBBLES_RU = ['Привет!', 'Я здесь~', 'Нужна помощь? Нажми на меня', 'Так держать!', 'Придумать название?'];
 function petEl() { return $('#pet'); }
 function petSay(txt, ms) {
   const b = $('#pet-bubble');
@@ -3423,7 +3602,7 @@ function petSay(txt, ms) {
   b._t = setTimeout(() => b.classList.remove('show'), ms || 2200);
 }
 function petRandomBubble() {
-  const arr = state.settings.lang === 'zh' ? PET_BUBBLES_ZH : PET_BUBBLES_EN;
+  const arr = state.settings.lang === 'ru' ? PET_BUBBLES_RU : (state.settings.lang === 'en' ? PET_BUBBLES_EN : PET_BUBBLES_ZH);
   petSay(arr[Math.floor(Math.random() * arr.length)]);
 }
 function petSparkles(n) {
@@ -3903,17 +4082,24 @@ async function fetchRefs(topic, count) {
   }
   return out;
 }
-function refsToText(refs) {
+function paperLang() {
+  const L = state.settings.lang;
+  if (L === 'en') return { write: '请用英文撰写整篇论文', fallback: 'Online search was limited; the reference list is to be supplemented.', linkLabel: 'Link', dateLabel: 'retrieved on', noRefs: 'Online search was limited; references to be supplemented.' };
+  if (L === 'ru') return { write: 'Пишите всю статью на русском языке', fallback: 'Онлайн-поиск был ограничен; список литературы будет дополнен.', linkLabel: 'Ссылка', dateLabel: 'дата обращения', noRefs: 'Онлайн-поиск ограничен; список литературы будет дополнен.' };
+  return { write: '请用中文撰写整篇论文', fallback: '在线检索受限，参考文献待补充', linkLabel: '链接', dateLabel: '检索于', noRefs: '在线检索受限，参考文献待补充' };
+}
+function refsToText(refs, L) {
   if (!refs.length) return '';
   const today = new Date().toISOString().slice(0, 10);
+  const lp = L || paperLang();
   return refs.map((r, i) => {
     const au = r.authors ? r.authors + '. ' : '';
     const ven = r.venue || '';
     const yr = r.year || '';
     const isNet = !ven || ven === '维基百科';
     const tag = isNet ? '[EB/OL]. ' : '[J]. ';
-    const source = isNet ? (ven ? ven + ', ' : '') + '检索于' + today + '. ' : (ven + (yr ? ', ' + yr : '') + '. ');
-    return `[${i + 1}] ${au}${r.title}${tag}${source}链接: ${r.url}`;
+    const source = isNet ? (ven ? ven + ', ' : '') + lp.dateLabel + ' ' + today + '. ' : (ven + (yr ? ', ' + yr : '') + '. ');
+    return `[${i + 1}] ${au}${r.title}${tag}${source}${lp.linkLabel}: ${r.url}`;
   }).join('\n');
 }
 function cleanPaperText(s) {
@@ -3921,20 +4107,20 @@ function cleanPaperText(s) {
     .replace(/[\u{1F000}-\u{1FAFF}\u{2190}-\u{21FF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{FFFD}]/gu, '')
     .replace(/[✦✧✩✪✫✬✭✮✯✰✱✲✳✴✵✶✷✸✹✺✻✼✽✾✿❀❁❂❃❄❅❆❇❈❉❊❋☀☁★☆♠♣♥♦]/g, '');
 }
-async function paperDraft(topic, refsText, lenHint) {
+async function paperDraft(topic, refsText, lenHint, L) {
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: `请为以下论文拟写提纲（只输出提纲，不写正文）：\n【论文主题/要求】\n${topic}\n【可引用文献】\n${refsText || '（未检索到文献）'}\n\n输出：\n【标题建议】1 个\n【摘要要点】2-3 句\n【章节结构】引言 / 方法或论述 / 分析与讨论 / 结论，每节 1-2 句要点\n字数目标：${lenHint}` }
+    { role: 'user', content: `请为以下论文拟写提纲（${L.write}，只输出提纲，不写正文；不使用表情或特殊符号）：\n【论文主题/要求】\n${topic}\n【可引用文献】\n${refsText || '（无）'}\n\n输出：\n【标题建议】1 个\n【摘要要点】2-3 句\n【章节结构】引言 / 方法或论述 / 分析与讨论 / 结论，每节 1-2 句要点\n字数目标：${lenHint}` }
   ];
   const res = await aiCallRetry(messages, { stream: true }, t('gp.pdraft'));
   let acc = '';
   for await (const chunk of aiStream(res)) acc += chunk;
   return (acc || '').trim();
 }
-async function paperStream(topic, draft, refsText, lenHint, ed) {
+async function paperStream(topic, draft, refsText, lenHint, ed, L) {
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: `请根据以下内容撰写完整论文正文，要求：\n1. 学术规范、语言严谨；字数约 ${lenHint}。\n2. 正文引用处一律用 [n] 标注，且只能引用下方给定文献，不得编造文献。\n3. 文末必须附「参考文献」列表，严格按最标准格式，每条必须附上检索到的网页链接：\n[编号] 作者. 标题[J]. 期刊/来源, 年份, 卷(期): 页码. 链接: URL\n网络资料用 [EB/OL] 并注明检索日期与链接。\n（信息缺失的字段可省略，但链接不可省略，不得编造）\n4. 只使用规范文字与标点，不使用表情符号、特殊符号或装饰性字符。\n5. 若下方文献为空，文末注明「在线检索受限，参考文献待补充」，不要编造。\n6. 直接输出正文（含文末参考文献列表），不要任何额外解释。\n\n【论文主题/要求】\n${topic}\n\n【提纲】\n${draft}\n\n【可引用文献】\n${refsText || '（无）'}` }
+    { role: 'user', content: `请根据以下内容撰写完整论文正文（${L.write}），要求：\n1. 学术规范、语言严谨；字数约 ${lenHint}。\n2. 正文引用处一律用 [n] 标注，且只能引用下方给定文献，不得编造文献。\n3. 文末必须附「参考文献」列表，严格按最标准格式，每条必须附上检索到的网页链接：\n[编号] 作者. 标题[J]. 期刊/来源, 年份, 卷(期): 页码. ${L.linkLabel}: URL\n网络资料用 [EB/OL] 并注明检索日期与链接。\n（信息缺失的字段可省略，但链接不可省略，不得编造）\n4. 只使用规范文字与标点，不使用表情符号、特殊符号或装饰性字符。\n5. 若下方文献为空，文末注明「${L.noRefs}」，不要编造。\n6. 直接输出正文（含文末参考文献列表），不要任何额外解释。\n\n【论文主题/要求】\n${topic}\n\n【提纲】\n${draft}\n\n【可引用文献】\n${refsText || '（无）'}` }
   ];
   const res = await aiCallRetry(messages, { stream: true }, t('gp.pwrite'));
   let acc = '';
@@ -3962,6 +4148,7 @@ async function generatePaper() {
   const premium = (PLAN_LEVEL[effectivePlan()] || 0) >= 1;
   const refCount = premium ? 12 : 8;
   const lenHint = premium ? '3000-3500 字' : '1500-2000 字';
+  const L = paperLang();
   state.genState.running = true;
   state.genState.abort = new AbortController();
   state.aiAbort = state.genState.abort;
@@ -3970,16 +4157,16 @@ async function generatePaper() {
   try {
     await genSetStage(0, '');
     const refs = await fetchRefs(topic, refCount);
-    const refsText = refsToText(refs);
+    const refsText = refsToText(refs, L);
     renderGenStages(t('gp.psearch') + '：' + t('stat.wordsChip') + ' ' + refs.length);
     await new Promise(r2 => setTimeout(r2, 400));
     await genSetStage(1, '');
-    const draft = await paperDraft(topic, refsText, lenHint);
+    const draft = await paperDraft(topic, refsText, lenHint, L);
     if (!draft) throw new Error('draft-empty');
     renderGenStages(draft.slice(0, 140));
     await new Promise(r2 => setTimeout(r2, 400));
     await genSetStage(2, '');
-    await paperStream(topic, draft, refsText, lenHint, ed);
+    await paperStream(topic, draft, refsText, lenHint, ed, L);
     updatePaperCounts(); schedulePaperSave();
     state.genState.running = false;
     state.aiAbort = null;
