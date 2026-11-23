@@ -236,6 +236,7 @@ const I18N = {
     'p.upgrade': '💎 升级获得更佳正文',
     'gp.psearch': '正在检索文献资料', 'gp.pdraft': '正在拟写论文提纲', 'gp.pwrite': '正在输出论文正文',
     'set.credits': '开发者名单',
+    'upd.title': '🎉 更新完成', 'upd.whatsNew': '本次更新内容', 'upd.done': '知道了',
     'toast.paperSaved': '论文已保存', 'toast.paperDeleted': '论文已删除',
     'auth.title': '👤 登录 / 注册', 'auth.login': '登录', 'auth.register': '注册',
     'auth.user': '用户名', 'auth.userPh': '2-20 位：字母 / 数字 / 下划线 / 中文',
@@ -456,6 +457,7 @@ const I18N = {
     'p.upgrade': '💎 Upgrade for better text',
     'gp.psearch': 'Searching references', 'gp.pdraft': 'Drafting the outline', 'gp.pwrite': 'Writing the paper',
     'set.credits': 'Developer credits',
+    'upd.title': '🎉 Update complete', 'upd.whatsNew': 'What\'s new', 'upd.done': 'Got it',
     'toast.paperSaved': 'Paper saved', 'toast.paperDeleted': 'Paper deleted',
     'auth.title': '👤 Sign in / Register', 'auth.login': 'Sign in', 'auth.register': 'Register',
     'auth.user': 'Username', 'auth.userPh': '2-20 chars: letters / numbers / _ / Chinese',
@@ -671,6 +673,7 @@ const I18N = {
     'p.upgrade': '💎 Улучшить текст',
     'gp.psearch': 'Поиск источников', 'gp.pdraft': 'Черновик структуры', 'gp.pwrite': 'Написание статьи',
     'set.credits': 'Разработчик',
+    'upd.title': '🎉 Обновление готово', 'upd.whatsNew': 'Что нового', 'upd.done': 'Понятно',
     'toast.paperSaved': 'Статья сохранена', 'toast.paperDeleted': 'Статья удалена',
     'auth.title': '👤 Вход / Регистрация', 'auth.login': 'Вход', 'auth.register': 'Регистрация',
     'auth.user': 'Имя пользователя', 'auth.userPh': '2-20 знаков: буквы / цифры / _ / китайские',
@@ -765,7 +768,28 @@ const AUTHORS = [
   { id: 'keigo', name: '东野圭吾', wiki: '东野圭吾', tips: '社会派推理，反转凌厉；以案件写人性，情感冲击强。' },
   { id: 'agatha', name: '阿加莎·克里斯蒂', wiki: '阿加莎·克里斯蒂', tips: '本格推理结构精巧，线索公平；封闭场景与多重嫌疑人。' },
   { id: 'hemingway', name: '海明威', wiki: '欧内斯特·海明威', tips: '冰山理论，对话简洁有力；删繁就简，动作描写硬朗。' },
-  { id: 'tolkien', name: '托尔金', wiki: 'J·R·R·托尔金', tips: '世界观建构登峰造极；史诗感、语言美感与神话体系。' }
+  { id: 'tolkien', name: '托尔金', wiki: 'J·R·R·托尔金', tips: '世界观建构登峰造极；史诗感、语言美感与神话体系。' },
+  { id: 'tolstoy', name: '列夫·托尔斯泰', wiki: '列夫·托尔斯泰', tips: '史诗格局与心灵史并重；群像宏伟、细节真实，道德追问与人物弧光深长。' },
+  { id: 'dostoevsky', name: '陀思妥耶夫斯基', wiki: '费奥多尔·陀思妥耶夫斯基', tips: '心理剖析极深；对话充满思想交锋，罪与罚式的人性拷问，戏剧张力强。' },
+  { id: 'chekhov', name: '契诃夫', wiki: '安东·契诃夫', tips: '克制含蓄，短篇结构精巧；细节见深意，悲喜交织，结尾留白悠长。' },
+  { id: 'pushkin', name: '普希金', wiki: '亚历山大·普希金', tips: '语言简练优美，叙事诗气质；开创现代俄语文学先河。' },
+  { id: 'marktwain', name: '马克·吐温', wiki: '马克·吐温', tips: '美式幽默与讽刺；口语化叙事生动，冒险故事节奏明快。' },
+  { id: 'fitzgerald', name: '菲茨杰拉德', wiki: '弗朗西斯·斯科特·菲茨杰拉德', tips: '爵士时代浮华与幻灭；抒情笔调，意象华丽，悲剧氛围。' },
+  { id: 'faulkner', name: '福克纳', wiki: '威廉·福克纳', tips: '意识流与多视角叙事；南方哥特氛围，句式绵长富有张力。' },
+  { id: 'poe', name: '爱伦·坡', wiki: '爱伦·坡', tips: '哥特恐怖与侦探推理鼻祖；氛围渲染极致，节奏与音韵考究。' },
+  { id: 'lovecraft', name: '洛夫克拉夫特', wiki: '霍华德·菲利普斯·洛夫克拉夫特', tips: '宇宙恐怖：不可名状的恐惧、克苏鲁神话体系、层层递进的绝望氛围。' },
+  { id: 'bradbury', name: '雷·布拉德伯里', wiki: '雷·布拉德伯里', tips: '诗意的科幻；抒情与哲思并重，短篇凝练动人。' },
+  { id: 'asimov', name: '阿西莫夫', wiki: '艾萨克·阿西莫夫', tips: '硬科幻设定严谨，机器人三定律等概念开创性；逻辑清晰，悬念精巧。' },
+  { id: 'stephenking', name: '斯蒂芬·金', wiki: '斯蒂芬·金', tips: '日常细节制造恐怖；人物鲜活接地气，悬念钩子密集。' },
+  { id: 'hugo', name: '雨果', wiki: '维克多·雨果', tips: '浪漫主义巨匠；宏大叙事与悲悯情怀，人物命运与社会图景交织。' },
+  { id: 'dumas', name: '大仲马', wiki: '大仲马', tips: '通俗小说大师：情节跌宕、悬念连环，对话精彩，复仇与冒险主题。' },
+  { id: 'dickens', name: '狄更斯', wiki: '查尔斯·狄更斯', tips: '维多利亚社会画卷；人物鲜明夸张，幽默与讽刺中见温情。' },
+  { id: 'austen', name: '简·奥斯汀', wiki: '简·奥斯汀', tips: '细腻的婚恋观察与机智讽刺；对话精彩，人物心理入微。' },
+  { id: 'kafka', name: '卡夫卡', wiki: '弗朗茨·卡夫卡', tips: '荒诞与异化；冷静白描包裹超现实设定，寓言气质。' },
+  { id: 'camus', name: '加缪', wiki: '阿尔贝·加缪', tips: '存在主义底色；冷静克制的叙述，哲思与文学融合。' },
+  { id: 'orwell', name: '乔治·奥威尔', wiki: '乔治·奥威尔', tips: '政治寓言与清晰有力的散文；反乌托邦叙事影响深远。' },
+  { id: 'marquez', name: '加西亚·马尔克斯', wiki: '加夫列尔·加西亚·马尔克斯', tips: '魔幻现实主义巅峰；时间循环叙事，家族史诗与诗意意象。' },
+  { id: 'borges', name: '博尔赫斯', wiki: '豪尔赫·路易斯·博尔赫斯', tips: '迷宫式短篇；哲学与幻想交织，叙事简洁玄妙。' }
 ];
 const PRESETS = [
   { name: 'Pollinations AI（免费·免密钥·开箱即用）', baseUrl: 'https://text.pollinations.ai', path: '/openai', model: 'openai', plan: 'free' },
@@ -887,7 +911,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.6.0';
+const APP_VERSION = '3.6.1';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -906,9 +930,11 @@ const state = {
   wikiCache: {},
   learning: false,
   genState: { running: false, stageIdx: -1, abort: null, genKind: 'novel' },
-  accounts: {}, currentUser: null, authMode: 'login', guideStep: 0, tipAmount: null
+  accounts: {}, currentUser: null, authMode: 'login', guideStep: 0, tipAmount: null,
+  changelogChecked: false
 };
 let lastTrialState = null;
+let lastChangelogVersion = null;
 function loadSettings() {
   try {
     const s = JSON.parse(localStorage.getItem('nebula-settings'));
@@ -1544,6 +1570,7 @@ function renderAuthorChipsBox() {
 }
 function renderStylePanel() {
   const n = curNovel();
+  if (!n) return '<div class="empty-hint">' + t('empty.panel') + '</div>';
   const mine = (n.styleMode || 'author') === 'mine';
   const refs = novelRefAuthors(n);
   const authorSection = `
@@ -3634,12 +3661,14 @@ function guideNext() {
     closeModal('modal-guide');
     try { localStorage.setItem('nebula-guided', '1'); } catch (e) { }
     toast(t('toast.welcome'), 'info', 4000);
+    advanceOnboarding();
   }
 }
 function guidePrev() { if (state.guideStep > 0) { state.guideStep--; renderGuideStep(); } }
 function guideSkip() {
   closeModal('modal-guide');
   try { localStorage.setItem('nebula-guided', '1'); } catch (e) { }
+  advanceOnboarding();
 }
 
 /* ---------------- 首次使用流程（须知 → 存储 → 登录 → 引导） ---------------- */
@@ -3647,7 +3676,11 @@ function advanceOnboarding() {
   if (!termsAccepted()) { openTerms(); return; }
   if (!storageAllowed() && !state.settings.storageDenied) { openStorageAsk(); return; }
   if (!state.currentUser) { switchAuthTab(state.authMode); openModal('modal-auth'); return; }
-  if (!guidedDone()) openGuide();
+  if (!guidedDone()) { openGuide(); return; }
+  if (!state.changelogChecked) {
+    state.changelogChecked = true;
+    setTimeout(checkChangelog, 900);
+  }
 }
 
 /* ---------------- 支持创作者（打赏 · 内嵌开发者名单 · 无弹窗） ---------------- */
@@ -3805,35 +3838,70 @@ async function savePaper(manual) {
   renderTop();
   if (state.board === 'paper') renderPanel();
 }
-/* 联网检索文献（Crossref 学术库 + 维基百科，均开放 CORS） */
+/* 联网检索文献（Crossref + Semantic Scholar + 维基百科 三源并行 · 结果缓存提速） */
+const REF_CACHE_KEY = 'nebula-ref-cache';
+let refCache = {};
+function loadRefCache() { try { refCache = JSON.parse(localStorage.getItem(REF_CACHE_KEY) || '{}'); } catch (e) { refCache = {}; } }
+function saveRefCache() { try { localStorage.setItem(REF_CACHE_KEY, JSON.stringify(refCache)); } catch (e) { } }
+function refTopicKey(topic) { return (topic || '').trim().toLowerCase().slice(0, 60); }
 async function fetchRefs(topic, count) {
+  const key = refTopicKey(topic);
+  if (refCache[key] && (Date.now() - refCache[key].t < 86400000) && refCache[key].refs.length) return refCache[key].refs;
   const refs = [];
-  try {
-    const r = await fetch('https://api.crossref.org/works?query=' + encodeURIComponent(topic) + '&rows=' + Math.max(8, count + 2) + '&select=title,author,URL,DOI,issued,container-title', { signal: AbortSignal.timeout(15000) });
-    if (r.ok) {
-      const j = await r.json();
-      for (const it of (j.message.items || [])) {
-        const title = (it.title && it.title[0]) || '';
-        const authors = (it.author || []).slice(0, 3).map(a => (a.given || '') + ' ' + (a.family || '')).join(', ');
-        const year = it.issued && it.issued['date-parts'] && it.issued['date-parts'][0] ? String(it.issued['date-parts'][0][0]) : '';
-        const url = it.URL || (it.DOI ? 'https://doi.org/' + it.DOI : '');
-        const venue = (it['container-title'] && it['container-title'][0]) || '';
-        if (title && url) refs.push({ title: title.slice(0, 120), authors, year, venue, url });
-        if (refs.length >= count) break;
-      }
-    }
-  } catch (e) { }
-  try {
-    const r2 = await fetch('https://zh.wikipedia.org/w/api.php?action=opensearch&search=' + encodeURIComponent(topic.slice(0, 30)) + '&limit=4&format=json&origin=*', { signal: AbortSignal.timeout(12000) });
-    if (r2.ok) {
-      const j2 = await r2.json();
-      const titles = j2[1] || [], urls = j2[3] || [];
-      for (let i = 0; i < titles.length && refs.length < count + 2; i++) {
-        refs.push({ title: titles[i], authors: '', year: '', venue: '维基百科', url: urls[i] || '' });
-      }
-    }
-  } catch (e) { }
-  return refs.slice(0, count + 2);
+  const seen = new Set();
+  const push = r => {
+    const k = ((r.url || '') + '|' + (r.title || '')).toLowerCase();
+    if (!k || seen.has(k)) return;
+    seen.add(k);
+    refs.push(r);
+  };
+  const jobs = [
+    (async () => {
+      try {
+        const r = await fetch('https://api.crossref.org/works?query=' + encodeURIComponent(topic) + '&rows=' + (count + 4) + '&select=title,author,URL,DOI,issued,container-title', { signal: AbortSignal.timeout(9000) });
+        if (!r.ok) return;
+        const j = await r.json();
+        for (const it of (j.message.items || [])) {
+          const title = (it.title && it.title[0]) || '';
+          const authors = (it.author || []).slice(0, 3).map(a => (a.given || '') + ' ' + (a.family || '')).join(', ');
+          const year = it.issued && it.issued['date-parts'] && it.issued['date-parts'][0] ? String(it.issued['date-parts'][0][0]) : '';
+          const url = it.URL || (it.DOI ? 'https://doi.org/' + it.DOI : '');
+          const venue = (it['container-title'] && it['container-title'][0]) || '';
+          if (title && url) push({ title: title.slice(0, 120), authors, year, venue, url });
+        }
+      } catch (e) { }
+    })(),
+    (async () => {
+      try {
+        const r = await fetch('https://api.semanticscholar.org/graph/v1/paper/search?query=' + encodeURIComponent(topic) + '&fields=title,authors,year,url,venue&limit=' + (count + 4), { signal: AbortSignal.timeout(9000) });
+        if (!r.ok) return;
+        const j = await r.json();
+        for (const it of (j.data || [])) {
+          const title = it.title || '';
+          const authors = (it.authors || []).slice(0, 3).map(a => a.name).join(', ');
+          const url = it.url || '';
+          if (title && url) push({ title: title.slice(0, 120), authors, year: it.year ? String(it.year) : '', venue: it.venue || '', url });
+        }
+      } catch (e) { }
+    })(),
+    (async () => {
+      try {
+        const r = await fetch('https://zh.wikipedia.org/w/api.php?action=opensearch&search=' + encodeURIComponent(topic.slice(0, 30)) + '&limit=4&format=json&origin=*', { signal: AbortSignal.timeout(8000) });
+        if (!r.ok) return;
+        const j = await r.json();
+        const titles = j[1] || [], urls = j[3] || [];
+        for (let i = 0; i < titles.length; i++) push({ title: titles[i], authors: '', year: '', venue: '维基百科', url: urls[i] || '' });
+      } catch (e) { }
+    })()
+  ];
+  await Promise.allSettled(jobs);
+  refs.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
+  const out = refs.slice(0, count + 2);
+  if (out.length) {
+    refCache[key] = { refs: out, t: Date.now() };
+    saveRefCache();
+  }
+  return out;
 }
 function refsToText(refs) {
   if (!refs.length) return '';
@@ -3940,6 +4008,34 @@ function buildPaperContext() {
 }
 function chatKey() {
   return state.board === 'paper' ? ('paper-' + state.currentPaperId) : state.currentNovelId;
+}
+
+/* ---------------- 更新完成弹窗（每次更新后上线自动提示） ---------------- */
+async function checkChangelog() {
+  try {
+    let data = null;
+    try { const r = await fetch('changelog.json?v=' + Date.now()); if (r.ok) data = await r.json(); } catch (e) { }
+    if (!data) {
+      try {
+        const r2 = await fetch('https://akc071001-max.github.io/xiaoxing/changelog.json?v=' + Date.now(), { signal: AbortSignal.timeout(8000) });
+        if (r2.ok) data = await r2.json();
+      } catch (e2) { }
+    }
+    if (!data || !data.version) return;
+    const seen = localStorage.getItem('nebula-seen-version');
+    if (seen === data.version) return;
+    if (!seen && APP_VERSION === data.version) {
+      // 全新用户直接是最新版，无需弹窗
+      try { localStorage.setItem('nebula-seen-version', data.version); } catch (e) { }
+      return;
+    }
+    $('#upd-version').textContent = data.version + (data.date ? ' · ' + data.date : '');
+    lastChangelogVersion = data.version;
+    $('#upd-items').innerHTML = (data.items || []).map(it =>
+      `<div class="upd-item"><div class="upd-item-title">✦ ${esc(it.title || '')}</div><div class="upd-item-desc">${esc(it.desc || '')}</div></div>`
+    ).join('');
+    openModal('modal-update');
+  } catch (e) { }
 }
 
 /* ---------------- 设置中心 ---------------- */
@@ -4076,6 +4172,11 @@ function bindEvents() {
   $('#btn-guide-next').addEventListener('click', guideNext);
   $('#btn-guide-prev').addEventListener('click', guidePrev);
   $('#btn-guide-skip').addEventListener('click', guideSkip);
+  // 更新弹窗
+  $('#btn-upd-done').addEventListener('click', () => {
+    closeModal('modal-update');
+    try { localStorage.setItem('nebula-seen-version', lastChangelogVersion || APP_VERSION); } catch (e) { }
+  });
   // 会员方案
   $('#btn-vip').addEventListener('click', () => { renderVip(); openModal('modal-vip'); });
   document.addEventListener('click', e => {
@@ -4335,6 +4436,7 @@ async function boot() {
   loadSettings();
   loadWikiCache();
   loadAccounts();
+  loadRefCache();
   // 首次使用自动配置免费免密钥模型（Pollinations AI），开箱即用
   if (!state.settings.providers.length) {
     state.settings.providers.push({
