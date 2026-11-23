@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/style.css?v=3.7.2" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -47,6 +47,7 @@
       <div class="brand-sub" data-i18n="brand.sub">全风格小说创作台</div>
     </div>
   </div>
+  <button class="icon-btn mobile-only" id="btn-panel-toggle" data-i18n-title="top.panelToggle" title="章节 / 大纲面板">☰</button>
   <div class="board-switch">
     <button class="chip mini on" id="board-novel" data-i18n="board.novel">📖 小说</button>
     <button class="chip mini" id="board-paper" data-i18n="board.paper">📄 论文</button>
@@ -102,6 +103,7 @@
     <div id="chapter-outline-bar">
       <div class="co-head">
         <span class="co-label" data-i18n="co.label">📋 本章大纲</span>
+        <button class="btn mini mobile-only" id="btn-outline-toggle" data-i18n="co.outlineToggle">⌄ 大纲</button>
         <button class="btn primary gen-btn" id="btn-gen-chapter" data-i18n="co.gen">🚀 开始创作</button>
         <button class="btn" id="btn-gen-again" data-i18n="co.again" data-i18n-title="co.againTitle" title="对结果不满意？重新生成">🔄 重新生成</button>
         <span class="spacer"></span>
@@ -929,6 +931,6 @@
 
 <div id="toasts"></div>
 <noscript><div style="position:fixed;inset:0;background:#04060e;color:#fff;display:flex;align-items:center;justify-content:center">本应用需要启用 JavaScript。</div></noscript>
-<script src="js/app.js"></script>
+<script src="js/app.js?v=3.7.2"></script>
 </body>
 </html>
