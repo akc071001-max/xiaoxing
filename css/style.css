@@ -292,23 +292,69 @@ input::placeholder,textarea::placeholder{color:rgba(126,145,179,.45)}
 *::-webkit-scrollbar-thumb{background:rgba(60,90,140,.45);border-radius:6px;border:2px solid transparent;background-clip:padding-box}
 *::-webkit-scrollbar-thumb:hover{background:rgba(0,224,255,.5);background-clip:padding-box}
 
-/* ---------------- 响应式 ---------------- */
+/* ---------------- 分屏布局（一半大纲 · 一半正文） ---------------- */
+body.split-layout #editor-zone{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto 1fr auto}
+body.split-layout #editor-toolbar{grid-column:1 / -1;grid-row:1}
+body.split-layout #chapter-outline-bar{grid-column:1;grid-row:2 / 4;border-right:1px solid var(--line);border-bottom:none;display:flex;flex-direction:column;overflow:auto}
+body.split-layout #chapter-outline{flex:1;min-height:200px;resize:none;font-size:15px}
+body.split-layout #editor{grid-column:2;grid-row:2 / 4;min-width:0}
+body.split-layout #editor-statusbar{grid-column:1 / -1;grid-row:4}
+body.split-layout .co-head .spacer{display:none}
+
+/* ---------------- 设置中心 ---------------- */
+.set-body{display:flex;flex-direction:column;gap:6px;max-height:70vh}
+.set-section-title{font-family:var(--font-display);font-size:11px;letter-spacing:.2em;color:var(--accent);margin:10px 0 4px;text-shadow:0 0 8px rgba(0,224,255,.3)}
+.set-row{display:flex;align-items:center;gap:10px;padding:7px 4px;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+.set-row:last-child{border-bottom:none}
+.set-label{font-size:13px;color:var(--txt);min-width:88px}
+.set-val{font-size:13px;color:var(--txt-bright);font-family:var(--font-mono)}
+.set-val.mono{letter-spacing:.05em}
+.set-chip{padding:6px 14px;font-size:12.5px}
+.set-avatar{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:15px;background:linear-gradient(135deg, rgba(0,224,255,.25), rgba(124,92,255,.3));border:1px solid var(--line-soft);overflow:hidden;flex:none}
+.set-avatar img{width:100%;height:100%;object-fit:cover}
+.set-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:6px 0}
+
+/* ---------------- 响应式：全设备自适配 ---------------- */
 @media (max-width:1500px){
-  #app{grid-template-columns:66px 300px minmax(0,1fr) 350px}
+  #app{grid-template-columns:60px 290px minmax(0,1fr) 340px}
 }
-@media (max-width:1280px){
-  #app{grid-template-columns:60px 280px minmax(0,1fr)}
-  body.no-ai #app{grid-template-columns:60px 280px minmax(0,1fr)}
-  #ai-panel{position:fixed;top:58px;right:0;bottom:0;width:380px;z-index:40;box-shadow:-20px 0 60px rgba(0,0,0,.55);border-left:1px solid var(--line)}
-}
-@media (max-width:900px){
-  #app{grid-template-columns:52px minmax(0,1fr)}
-  body.no-ai #app{grid-template-columns:52px minmax(0,1fr)}
-  #side-panel{position:fixed;left:52px;top:58px;bottom:0;width:300px;z-index:40;border-right:1px solid var(--line);box-shadow:20px 0 60px rgba(0,0,0,.55)}
-  .nav-txt{display:none}
+@media (max-width:1100px){
+  body{overflow-y:auto}
+  body.focus-mode{overflow:hidden}
+  #topbar{flex-wrap:wrap;height:auto;min-height:56px;padding:8px 12px;gap:8px 12px}
+  .brand{min-width:auto}
   .brand-sub{display:none}
+  .brand-name{font-size:14px}
+  #stats{display:none}
+  .novel-pill{max-width:48vw}
+  .topbar-right{margin-left:auto;flex-wrap:wrap;gap:6px;row-gap:6px}
+  .profile-btn{max-width:150px}
+  #app{display:flex;flex-direction:column;height:auto;min-height:calc(100vh - 60px)}
+  body.no-ai #app{display:flex}
+  #main-nav{flex-direction:row;justify-content:space-around;align-items:stretch;padding:4px 8px;border-right:none;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:35;background:rgba(8,13,26,.96);backdrop-filter:blur(10px)}
+  .nav-item{flex-direction:row;gap:6px;padding:9px 12px;flex:1;justify-content:center}
+  .nav-ic{font-size:16px}
+  #side-panel{max-height:46vh;border-right:none;border-bottom:1px solid var(--line);flex:none}
+  #editor-zone{min-height:62vh;border-right:none;flex:none;display:flex}
+  #editor{min-height:320px;padding:22px 18px}
+  #editor-toolbar{flex-wrap:wrap;row-gap:8px}
+  #editor-toolbar .spacer{display:none}
+  #ai-panel{min-height:56vh;border-left:none;border-top:1px solid var(--line);flex:none}
+  body.no-ai #ai-panel{display:none}
+  .gp-stage{padding:6px 2px}
+  .terms-modal,.modal{width:min(560px,94vw)}
+  .modal.wide{width:min(880px,96vw)}
   .ai-settings{grid-template-columns:1fr}
-  #editor{padding:24px 22px}
+  .set-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .novel-pill{max-width:56vw}
+  .profile-btn #profile-name{display:none}
+  .vip-plans{grid-template-columns:1fr}
+  #gen-progress{right:10px;left:10px;width:auto}
+  .btn,.tb-btn{padding:7px 11px;font-size:12px}
+  .co-head{gap:6px;row-gap:8px}
+  body.split-layout #chapter-outline{font-size:14px;padding:10px}
 }
 
 /* ============================================================
