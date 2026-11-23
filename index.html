@@ -51,7 +51,7 @@
     <button class="chip mini on" id="board-novel" data-i18n="board.novel">📖 小说</button>
     <button class="chip mini" id="board-paper" data-i18n="board.paper">📄 论文</button>
   </div>
-  <button id="btn-novel-switch" class="novel-pill" title="切换 / 管理小说">
+  <button id="btn-novel-switch" class="novel-pill" data-i18n-title="top.novelSwitch" title="切换 / 管理小说">
     <span id="novel-pill-title">未选择小说</span>
     <span class="pill-caret">▾</span>
   </button>
@@ -86,9 +86,9 @@
 
   <main id="editor-zone">
     <div id="editor-toolbar">
-      <input id="chapter-title" type="text" placeholder="章节标题（可留空，AI 可代起）…" maxlength="120" autocomplete="off" />
+      <input id="chapter-title" type="text" data-i18n-ph="ed.chapterTitlePh" placeholder="章节标题（可留空，AI 可代起）…" maxlength="120" autocomplete="off" />
       <button class="icon-btn" id="btn-title-suggest" data-i18n-title="co.chapterTitle" title="AI 起章节名">✨</button>
-      <select id="chapter-status" title="章节状态">
+      <select id="chapter-status" data-i18n-title="ed.chapterStatus" title="章节状态">
         <option value="draft" data-i18n="status.draft">草稿</option>
         <option value="revising" data-i18n="status.revising">修订中</option>
         <option value="done" data-i18n="status.done">定稿</option>
@@ -96,21 +96,21 @@
       <span class="meta-chip" id="word-count">0 字</span>
       <span class="meta-chip save-chip" id="save-state">—</span>
       <span class="spacer"></span>
-      <button class="tb-btn" id="btn-focus" data-i18n="btn.focus" title="专注写作模式（隐藏面板）">⛶ 专注</button>
-      <button class="tb-btn accent-btn" id="btn-ai-toggle" data-i18n="btn.aiToggle" title="AI 剧情引擎">✦ AI 引擎</button>
+      <button class="tb-btn" id="btn-focus" data-i18n="btn.focus" data-i18n-title="btn.focusTitle" title="专注写作模式（隐藏面板）">⛶ 专注</button>
+      <button class="tb-btn accent-btn" id="btn-ai-toggle" data-i18n="btn.aiToggle" data-i18n-title="btn.aiToggleTitle" title="AI 剧情引擎">✦ AI 引擎</button>
     </div>
     <div id="chapter-outline-bar">
       <div class="co-head">
         <span class="co-label" data-i18n="co.label">📋 本章大纲</span>
         <button class="btn primary gen-btn" id="btn-gen-chapter" data-i18n="co.gen">🚀 开始创作</button>
-        <button class="btn" id="btn-gen-again" data-i18n="co.again" title="对结果不满意？重新生成">🔄 重新生成</button>
+        <button class="btn" id="btn-gen-again" data-i18n="co.again" data-i18n-title="co.againTitle" title="对结果不满意？重新生成">🔄 重新生成</button>
         <span class="spacer"></span>
         <button class="icon-btn" id="btn-layout-toggle" data-i18n-title="co.layoutToggleTitle" title="切换布局：上下 / 左右分屏">⇋</button>
         <span class="co-hint" id="gen-hint"></span>
       </div>
       <textarea id="chapter-outline" rows="3" data-i18n-ph="co.ph" placeholder="输入本章大纲：本章要发生什么、出现哪些人物、埋什么伏笔…… 输入后点「⚡ 联网生成正文」"></textarea>
     </div>
-    <textarea id="editor" spellcheck="false" placeholder="全新章节，从这里开始你的宇宙……（Ctrl+S 保存 · 右侧 ✦ 召唤 AI 引擎）"></textarea>
+    <textarea id="editor" spellcheck="false" data-i18n-ph="ed.editorPh" placeholder="全新章节，从这里开始你的宇宙……（Ctrl+S 保存 · 右侧 ✦ 召唤 AI 引擎）"></textarea>
     <div id="editor-statusbar">
       <span id="status-words">字数：0</span>
       <span id="status-pos">行 1 · 列 1</span>
@@ -119,8 +119,8 @@
 
     <div id="paper-zone">
       <div id="paper-toolbar">
-        <input id="paper-title" type="text" placeholder="论文标题（可留空，AI 可代起）…" maxlength="120" autocomplete="off" />
-        <select id="paper-status" title="论文状态">
+        <input id="paper-title" type="text" data-i18n-ph="p.titlePh" placeholder="论文标题（可留空，AI 可代起）…" maxlength="120" autocomplete="off" />
+        <select id="paper-status" data-i18n-title="p.statusTitle" title="论文状态">
           <option value="draft" data-i18n="status.draft">草稿</option>
           <option value="revising" data-i18n="status.revising">修订中</option>
           <option value="done" data-i18n="status.done">定稿</option>
@@ -129,7 +129,7 @@
         <span class="meta-chip save-chip" id="paper-save-state">—</span>
         <span class="spacer"></span>
         <button class="btn primary gen-btn" id="btn-paper-gen" data-i18n="p.gen">📚 检索并生成论文</button>
-        <button class="btn" id="btn-paper-again" data-i18n="p.again" title="对结果不满意？重新生成">🔄 重新生成</button>
+        <button class="btn" id="btn-paper-again" data-i18n="p.again" data-i18n-title="co.againTitle" title="对结果不满意？重新生成">🔄 重新生成</button>
       </div>
       <div id="paper-topic-bar">
         <span class="co-label" data-i18n="p.topicLabel">📄 论文主题 / 要求</span>
@@ -153,9 +153,9 @@
       <div class="ai-model-tag" id="ai-model-tag">未配置模型</div>
       <div class="ai-head-btns">
         <button class="icon-btn" id="btn-dict" data-i18n-title="btn.dictTitle" title="英语词典（选中正文后打开自动查词）">📖</button>
-        <button class="icon-btn" id="btn-ai-config" title="AI 设置">⚙</button>
+        <button class="icon-btn" id="btn-ai-config" data-i18n-title="ai.configTitle" title="AI 设置">⚙</button>
         <button class="icon-btn" id="btn-ai-clear" data-i18n-title="ai.clearTitle" title="清空对话">⌫</button>
-        <button class="icon-btn" id="btn-ai-close" title="收起面板">✕</button>
+        <button class="icon-btn" id="btn-ai-close" data-i18n-title="ai.closeTitle" title="收起面板">✕</button>
       </div>
     </div>
     <div id="ai-context">
@@ -182,7 +182,7 @@
     </div>
     <div id="ai-messages" class="scroll-area"></div>
     <div id="ai-input-row">
-      <textarea id="ai-input" rows="3" placeholder="与 AI 讨论剧情、让它记住设定、或直接下指令…（Ctrl+Enter 发送）"></textarea>
+      <textarea id="ai-input" rows="3" data-i18n-ph="ai.inputPh" placeholder="与 AI 讨论剧情、让它记住设定、或直接下指令…（Ctrl+Enter 发送）"></textarea>
       <div class="ai-send-wrap">
         <button id="btn-ai-send" class="accent-btn" data-i18n="ai.send">发送</button>
         <button id="btn-ai-stop" class="stop-btn" data-i18n="ai.stop" style="display:none">■ 停止</button>
@@ -222,7 +222,7 @@
             <input id="novel-title" type="text" maxlength="60" data-i18n-ph="novel.titlePh" placeholder="可留空（待定）…" autocomplete="off" />
           </label>
           <label><span data-i18n="novel.descLabel">简介（AI 与记忆系统自动引用）</span>
-            <textarea id="novel-desc" rows="2" placeholder="一句话梗概、核心冲突、风格基调…"></textarea>
+            <textarea id="novel-desc" rows="2" data-i18n-ph="novel.descPh" placeholder="一句话梗概、核心冲突、风格基调…"></textarea>
           </label>
         </div>
         <div class="novel-title-suggest-row">
@@ -337,10 +337,10 @@
         <button class="btn ghost" id="btn-add-provider" data-i18n="aiset.add">＋ 添加模型</button>
         <div class="ai-section-title" style="margin-top:18px" data-i18n="aiset.accent">界面主题色</div>
         <div class="accent-row">
-          <button class="accent-dot" data-accent="cyan" style="--c:#00e0ff" title="青色"></button>
-          <button class="accent-dot" data-accent="magenta" style="--c:#ff4fd8" title="品红"></button>
-          <button class="accent-dot" data-accent="green" style="--c:#3ddc97" title="翠绿"></button>
-          <button class="accent-dot" data-accent="gold" style="--c:#ffb454" title="琥珀"></button>
+          <button class="accent-dot" data-accent="cyan" style="--c:#00e0ff" data-i18n-title="aColor.cyan" title="青色"></button>
+          <button class="accent-dot" data-accent="magenta" style="--c:#ff4fd8" data-i18n-title="aColor.magenta" title="品红"></button>
+          <button class="accent-dot" data-accent="green" style="--c:#3ddc97" data-i18n-title="aColor.green" title="翠绿"></button>
+          <button class="accent-dot" data-accent="gold" style="--c:#ffb454" data-i18n-title="aColor.gold" title="琥珀"></button>
         </div>
         <div class="ai-section-title" style="margin-top:18px" data-i18n="aiset.compare">模型适配对比（已适配主流 AI）</div>
         <div class="compare-table">
@@ -358,16 +358,16 @@
             <select id="preset-select"><option value="">— 选择预设 —</option></select>
           </label>
           <label><span data-i18n="aiset.name">显示名称</span>
-            <input id="prov-name" type="text" placeholder="例如：本地 Qwen" autocomplete="off" />
+            <input id="prov-name" type="text" data-i18n-ph="aiset.namePh" placeholder="例如：本地 Qwen" autocomplete="off" />
           </label>
           <label><span data-i18n="aiset.base">API 地址（Base URL，通常以 /v1 结尾）</span>
             <input id="prov-base" type="text" placeholder="https://api.deepseek.com/v1" autocomplete="off" />
           </label>
           <label><span data-i18n="aiset.path">接口路径</span>
-            <input id="prov-path" type="text" placeholder="/chat/completions（Pollinations 填 /openai）" autocomplete="off" />
+            <input id="prov-path" type="text" data-i18n-ph="aiset.pathPh" placeholder="/chat/completions（Pollinations 填 /openai）" autocomplete="off" />
           </label>
           <label><span data-i18n="aiset.key">API Key</span>
-            <input id="prov-key" type="password" placeholder="云端模型必填；本地模型留空" autocomplete="off" />
+            <input id="prov-key" type="password" data-i18n-ph="aiset.keyPh" placeholder="云端模型必填；本地模型留空" autocomplete="off" />
           </label>
           <label><span data-i18n="aiset.model">模型名称</span>
             <input id="prov-model" type="text" placeholder="deepseek-chat / qwen2.5:14b / local-model" autocomplete="off" />
@@ -419,10 +419,10 @@
     <div class="modal-body">
       <div class="form-col">
         <label id="note-title-wrap"><span data-i18n="note.title">标题</span>
-          <input id="note-title" type="text" maxlength="80" placeholder="节点 / 卷名" autocomplete="off" />
+          <input id="note-title" type="text" maxlength="80" data-i18n-ph="note.titlePh" placeholder="节点 / 卷名" autocomplete="off" />
         </label>
         <label><span data-i18n="note.content">内容</span>
-          <textarea id="note-content" rows="10" placeholder="情节要点、伏笔、一句话记忆…"></textarea>
+          <textarea id="note-content" rows="10" data-i18n-ph="note.contentPh" placeholder="情节要点、伏笔、一句话记忆…"></textarea>
         </label>
         <label id="note-cat-wrap" style="display:none"><span data-i18n="note.cat">分类</span>
           <select id="note-category">
@@ -453,26 +453,26 @@
       <div class="form-col">
         <div class="form-row2">
           <label><span data-i18n="char.name">姓名</span>
-            <input id="char-name" type="text" maxlength="30" placeholder="角色名" autocomplete="off" />
+            <input id="char-name" type="text" maxlength="30" data-i18n-ph="char.namePh" placeholder="角色名" autocomplete="off" />
           </label>
           <label><span data-i18n="char.role">身份 / 定位</span>
-            <input id="char-role" type="text" maxlength="40" placeholder="主角 / 反派 / 星舰舰长…" autocomplete="off" />
+            <input id="char-role" type="text" maxlength="40" data-i18n-ph="char.rolePh" placeholder="主角 / 反派 / 星舰舰长…" autocomplete="off" />
           </label>
         </div>
         <label><span data-i18n="char.appearance">外貌</span>
-          <textarea id="char-appearance" rows="2" placeholder="外貌特征…"></textarea>
+          <textarea id="char-appearance" rows="2" data-i18n-ph="char.appearancePh" placeholder="外貌特征…"></textarea>
         </label>
         <label><span data-i18n="char.personality">性格</span>
-          <textarea id="char-personality" rows="2" placeholder="性格特点、说话方式…"></textarea>
+          <textarea id="char-personality" rows="2" data-i18n-ph="char.personalityPh" placeholder="性格特点、说话方式…"></textarea>
         </label>
         <label><span data-i18n="char.background">背景</span>
-          <textarea id="char-background" rows="3" placeholder="身世、动机、成长线…"></textarea>
+          <textarea id="char-background" rows="3" data-i18n-ph="char.backgroundPh" placeholder="身世、动机、成长线…"></textarea>
         </label>
         <label><span data-i18n="char.relations">人物关系</span>
-          <textarea id="char-relations" rows="2" placeholder="与其他角色的关系…"></textarea>
+          <textarea id="char-relations" rows="2" data-i18n-ph="char.relationsPh" placeholder="与其他角色的关系…"></textarea>
         </label>
         <label><span data-i18n="char.notes">备注 / 伏笔</span>
-          <textarea id="char-notes" rows="2" placeholder="埋设的伏笔、后期计划…"></textarea>
+          <textarea id="char-notes" rows="2" data-i18n-ph="char.notesPh" placeholder="埋设的伏笔、后期计划…"></textarea>
         </label>
       </div>
     </div>
@@ -495,7 +495,7 @@
         <div id="profile-preview" class="profile-preview">✦</div>
         <div class="profile-form">
           <label><span data-i18n="profile.nick">昵称</span>
-            <input id="profile-nick" type="text" maxlength="16" placeholder="你的笔名…" autocomplete="off" />
+            <input id="profile-nick" type="text" maxlength="16" data-i18n-ph="profile.nickPh" placeholder="你的笔名…" autocomplete="off" />
           </label>
           <div class="profile-btns">
             <button class="btn small" id="btn-avatar-upload" data-i18n="profile.upload">📷 上传头像</button>
@@ -570,7 +570,7 @@
 <div id="gen-progress" hidden>
   <div class="gp-head">
     <span class="gp-title" id="gp-title">⚡ 联网生成正文</span>
-    <button class="icon-btn" id="btn-gen-cancel" title="取消">✕</button>
+    <button class="icon-btn" id="btn-gen-cancel" data-i18n-title="common.cancel" title="取消">✕</button>
   </div>
   <div id="gen-stages"></div>
   <div class="gp-note" id="gp-note"></div>
@@ -677,10 +677,10 @@
       <div class="set-row">
         <span class="set-label" data-i18n="set.accent">主题色</span>
         <div class="accent-row">
-          <button class="accent-dot" data-accent="cyan" style="--c:#00e0ff" title="青色"></button>
-          <button class="accent-dot" data-accent="magenta" style="--c:#ff4fd8" title="品红"></button>
-          <button class="accent-dot" data-accent="green" style="--c:#3ddc97" title="翠绿"></button>
-          <button class="accent-dot" data-accent="gold" style="--c:#ffb454" title="琥珀"></button>
+          <button class="accent-dot" data-accent="cyan" style="--c:#00e0ff" data-i18n-title="aColor.cyan" title="青色"></button>
+          <button class="accent-dot" data-accent="magenta" style="--c:#ff4fd8" data-i18n-title="aColor.magenta" title="品红"></button>
+          <button class="accent-dot" data-accent="green" style="--c:#3ddc97" data-i18n-title="aColor.green" title="翠绿"></button>
+          <button class="accent-dot" data-accent="gold" style="--c:#ffb454" data-i18n-title="aColor.gold" title="琥珀"></button>
         </div>
       </div>
       <div class="set-row">
