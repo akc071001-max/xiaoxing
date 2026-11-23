@@ -53,7 +53,7 @@ const I18N = {
     'btn.ai': '⚙ AI 模型', 'btn.aiTitle': 'AI 模型接入设置',
     'btn.profileTitle': '个人档案（头像 / 昵称）',
     'profile.default': '未设置昵称',
-    'nav.chapters': '章节', 'nav.outline': '大纲', 'nav.characters': '角色', 'nav.world': '设定', 'nav.memories': '记忆',
+    'nav.chapters': '章节', 'nav.outline': '大纲', 'nav.characters': '角色', 'nav.style': '文风', 'nav.world': '设定', 'nav.memories': '记忆',
     'btn.dict': '📖 词典', 'btn.dictTitle': '英语词典（选中正文后打开自动查词）',
     'btn.focus': '⛶ 专注', 'btn.focusExit': '⛶ 退出专注',
     'btn.aiToggle': '✦ AI 引擎',
@@ -67,7 +67,7 @@ const I18N = {
     'lib.title': '◈ 书库管理', 'lib.new': '＋ 新建小说',
     'novel.title': '书名', 'novel.descLabel': '简介（AI 与记忆系统自动引用）',
     'style.audience': '用户群体', 'style.genres': '类型（可多选）', 'style.length': '篇幅', 'style.pov': '视角', 'style.tone': '基调',
-    'style.lang': '写作语言', 'style.authors': '参考作家（可多选）', 'style.learn': '⛁ 联网学习文风',
+    'style.lang': '写作语言', 'style.authors': '参考作家（推荐）', 'style.learn': '⛁ 联网学习文风',
     'aiset.title': '⚙ AI 模型接入', 'aiset.list': '已接入模型', 'aiset.add': '＋ 添加模型', 'aiset.accent': '界面主题色',
     'aiset.config': '模型配置', 'aiset.preset': '预设（快速填充）', 'aiset.name': '显示名称',
     'aiset.base': 'API 地址（Base URL，通常以 /v1 结尾）', 'aiset.path': '接口路径（默认 /chat/completions）', 'aiset.key': 'API Key', 'aiset.model': '模型名称',
@@ -217,7 +217,10 @@ const I18N = {
     'w.myStyle': '我的文风（可选）', 'w.styleModeAuthor': '使用作家文风', 'w.styleModeMine': '使用我的文风',
     'w.styleSample': '把我的 500 字文风样本贴在这里，AI 会学习你的句式节奏、用词习惯与对话风格',
     'w.styleSamplePh': '粘贴一段你自己的文字（500 字以内）…',
-    'toast.styleSaved': '文风设置已保存', 'toast.orCopied': '已复制模型名'
+    'toast.styleSaved': '文风设置已保存', 'toast.orCopied': '已复制模型名',
+    'sp.pickTip': '点击下方作家即可选为参考（可多选，选中后再点一次取消）。「联网学习」会抓取维基百科研究其写作技法；找不到喜欢的作家？用搜索框全网添加。',
+    'sp.mineTip': '把你的 500 字文风样本贴在下面：AI 将学习你的句式节奏、用词习惯与对话风格，之后生成的内容会更像你本人写的。',
+    'sp.filterPh': '筛选作家…'
   },
   en: {
     'brand.sub': 'ALL-GENRE NOVEL STUDIO',
@@ -226,7 +229,7 @@ const I18N = {
     'btn.ai': '⚙ AI Models', 'btn.aiTitle': 'AI model settings',
     'btn.profileTitle': 'Profile (avatar / nickname)',
     'profile.default': 'No nickname',
-    'nav.chapters': 'Chapters', 'nav.outline': 'Outline', 'nav.characters': 'Characters', 'nav.world': 'World', 'nav.memories': 'Memory',
+    'nav.chapters': 'Chapters', 'nav.outline': 'Outline', 'nav.characters': 'Characters', 'nav.style': 'Style', 'nav.world': 'World', 'nav.memories': 'Memory',
     'btn.dict': '📖 Dictionary', 'btn.dictTitle': 'English dictionary (opens with selected text)',
     'btn.focus': '⛶ Focus', 'btn.focusExit': '⛶ Exit focus',
     'btn.aiToggle': '✦ AI Engine',
@@ -240,7 +243,7 @@ const I18N = {
     'lib.title': '◈ Library', 'lib.new': '＋ New Novel',
     'novel.title': 'Title', 'novel.descLabel': 'Synopsis (auto-referenced by AI & memory)',
     'style.audience': 'Audience', 'style.genres': 'Genres (multi)', 'style.length': 'Length', 'style.pov': 'POV', 'style.tone': 'Tone',
-    'style.lang': 'Language', 'style.authors': 'Reference authors (multi)', 'style.learn': '⛁ Learn styles online',
+    'style.lang': 'Language', 'style.authors': 'Reference authors (recommended)', 'style.learn': '⛁ Learn styles online',
     'aiset.title': '⚙ AI Model Access', 'aiset.list': 'Connected models', 'aiset.add': '＋ Add model', 'aiset.accent': 'Accent color',
     'aiset.config': 'Model config', 'aiset.preset': 'Preset (quick fill)', 'aiset.name': 'Display name',
     'aiset.base': 'Base URL (usually ends with /v1)', 'aiset.path': 'API path (default /chat/completions)', 'aiset.key': 'API Key', 'aiset.model': 'Model name',
@@ -391,7 +394,10 @@ const I18N = {
     'w.myStyle': 'My Style (optional)', 'w.styleModeAuthor': 'Use author styles', 'w.styleModeMine': 'Use my style',
     'w.styleSample': 'Paste a sample of your own writing (≤500 characters) — AI learns your rhythm, word choices and dialogue style',
     'w.styleSamplePh': 'Paste your own text (≤500 chars)…',
-    'toast.styleSaved': 'Style setting saved', 'toast.orCopied': 'Model ID copied'
+    'toast.styleSaved': 'Style setting saved', 'toast.orCopied': 'Model ID copied',
+    'sp.pickTip': 'Click an author to add them as a reference (click again to remove). “Learn styles online” fetches Wikipedia to study their craft. Can\'t find your favorite? Use the search box to add any author from the web.',
+    'sp.mineTip': 'Paste a sample of your own writing (≤500 characters): the AI will learn your rhythm, word choices and dialogue style, so the output sounds more like you.',
+    'sp.filterPh': 'Filter authors…'
   }
 };
 function t(k, vars) {
@@ -571,13 +577,13 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.1.0';
+const APP_VERSION = '3.2.0';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
   novels: [], chapters: [], outline: [], characters: [], memories: [], chats: [],
   currentNovelId: null, currentChapterId: null,
-  module: 'chapters', memFilter: '全部',
+  module: 'chapters', memFilter: '全部', authorFilter: '',
   settings: defaultSettings(),
   saveTimer: null, editorDirty: false, novelSaveTimer: null,
   chatForNovel: [],
@@ -1027,7 +1033,7 @@ function setNavActive() {
 function renderPanel() {
   const m = state.module;
   const body = $('#panel-body');
-  const titles = { chapters: 'nav.chapters', outline: 'nav.outline', characters: 'nav.characters', world: 'nav.world', memories: 'nav.memories' };
+  const titles = { chapters: 'nav.chapters', outline: 'nav.outline', characters: 'nav.characters', style: 'nav.style', world: 'nav.world', memories: 'nav.memories' };
   $('#panel-title').textContent = t(titles[m]);
   const a = $('#panel-actions');
   a.innerHTML = '';
@@ -1048,13 +1054,19 @@ function renderPanel() {
     body.innerHTML = renderCharacters();
     a.innerHTML = '<button class="btn small primary" id="act-new-char">＋ ' + (zh ? '新角色' : 'Character') + '</button>';
     $('#act-new-char').addEventListener('click', () => openChar(null));
-  } else if (m === 'world') {
-    body.innerHTML = renderWorld();
+  } else if (m === 'style') {
+    body.innerHTML = renderStylePanel();
     const asBtn = $('#btn-author-search');
     if (asBtn) {
       asBtn.addEventListener('click', addCustomAuthorByName);
       $('#author-search-input').addEventListener('keydown', e => { if (e.key === 'Enter') addCustomAuthorByName(); });
+      $('#author-filter-input').addEventListener('input', () => {
+        state.authorFilter = ($('#author-filter-input').value || '').trim();
+        renderAuthorChipsBox();
+      });
     }
+  } else if (m === 'world') {
+    body.innerHTML = renderWorld();
   } else if (m === 'memories') {
     body.innerHTML = renderMemories();
     a.innerHTML = '<button class="btn small primary" id="act-add-mem">＋ ' + (zh ? '记忆' : 'Memory') + '</button>';
@@ -1176,37 +1188,51 @@ function renderWorld() {
     </div>
   </div>
   <div class="world-block">
-    <div class="block-label">${t('w.authorLib')}</div>
-    <div class="author-tip">${t('w.authorTip')}</div>
-    <div class="author-chips">${renderAuthorChips(n)}</div>
-    <div class="author-learn-row">
-      <button class="btn mini primary" data-act="learnauthors">${t('w.learnSel', { n: novelRefAuthors(n).length })}</button>
-      <span class="learn-status" id="world-learn-status"></span>
-    </div>
-    <div class="author-search-row">
-      <input class="input" id="author-search-input" data-i18n-ph="au.ph" placeholder="输入你喜欢的作家名字，联网搜索添加…" autocomplete="off" />
-      <button class="btn mini primary" id="btn-author-search" data-i18n="au.search">🔍 搜索添加</button>
-      <span class="learn-status" id="au-status"></span>
-    </div>
-    ${renderAuthorNotes(n)}
-  </div>
-  <div class="world-block">
-    <div class="block-label">${t('w.myStyle')}</div>
-    <div class="mem-chips">
-      <button class="chip mini ${n.styleMode !== 'mine' ? 'on' : ''}" data-act="stylemode" data-mode="author">${t('w.styleModeAuthor')}</button>
-      <button class="chip mini ${n.styleMode === 'mine' ? 'on' : ''}" data-act="stylemode" data-mode="mine">${t('w.styleModeMine')}</button>
-    </div>
-    <div class="author-tip">${t('w.styleSample')}</div>
-    <textarea class="input" data-field="styleSample" rows="5" data-i18n-ph="w.styleSamplePh" placeholder="粘贴一段你自己的文字（500 字以内）…">${esc(n.styleSample || '')}</textarea>
-  </div>
-  <div class="world-block">
     <div class="block-label">${t('w.custom')} <button class="btn mini" data-act="addsec">${t('w.addSec')}</button></div>
     ${secs || '<div class="empty-hint small">可添加力量体系、势力、时间线等自定义设定条目。</div>'}
   </div>`;
 }
 function renderAuthorChips(n) {
   const refs = novelRefAuthors(n);
-  return allAuthors().map(a => `<button class="chip mini ${refs.includes(a.id) ? 'on' : ''}" data-act="toggleauthor" data-id="${a.id}" title="${esc(a.name)}${a.custom ? '（' + t('au.custom') + '）' : ''}">${esc(a.name)}${a.custom ? ' ✦' : ''}</button>`).join('');
+  const f = (state.authorFilter || '').toLowerCase();
+  const list = allAuthors().filter(a => !f || (a.name || '').toLowerCase().includes(f));
+  if (!list.length) return '<span class="learn-status">' + t('vip.searchEmpty') + '</span>';
+  return list.map(a => `<button class="chip mini ${refs.includes(a.id) ? 'on' : ''}" data-act="toggleauthor" data-id="${a.id}" title="${esc(a.name)}${a.custom ? '（' + t('au.custom') + '）' : ''}">${esc(a.name)}${a.custom ? ' ✦' : ''}</button>`).join('');
+}
+function renderAuthorChipsBox() {
+  const box = $('#author-chips-box');
+  const n = curNovel();
+  if (!box || !n) return;
+  box.innerHTML = renderAuthorChips(n);
+}
+function renderStylePanel() {
+  const n = curNovel();
+  const mine = (n.styleMode || 'author') === 'mine';
+  const refs = novelRefAuthors(n);
+  const authorSection = `
+    <div class="author-search-row">
+      <input class="input" id="author-search-input" data-i18n-ph="au.ph" placeholder="输入你喜欢的作家名字，联网搜索添加…" autocomplete="off" />
+      <button class="btn mini primary" id="btn-author-search" data-i18n="au.search">🔍 搜索添加</button>
+      <span class="learn-status" id="au-status"></span>
+    </div>
+    <div class="author-search-row">
+      <input class="input" id="author-filter-input" data-i18n-ph="sp.filterPh" placeholder="筛选作家…" autocomplete="off" />
+    </div>
+    <div class="author-chips" id="author-chips-box">${renderAuthorChips(n)}</div>
+    <div class="author-learn-row">
+      <button class="btn mini primary" data-act="learnauthors">${t('w.learnSel', { n: refs.length })}</button>
+      <span class="learn-status" id="world-learn-status"></span>
+    </div>
+    ${renderAuthorNotes(n)}`;
+  const mineSection = `
+    <textarea class="input sp-sample" data-field="styleSample" rows="9" data-i18n-ph="w.styleSamplePh" placeholder="粘贴一段你自己的文字（500 字以内）…">${esc(n.styleSample || '')}</textarea>`;
+  return `
+    <div class="sp-mode-row">
+      <button class="chip set-chip ${!mine ? 'on' : ''}" data-act="stylemode" data-mode="author">${t('w.styleModeAuthor')}</button>
+      <button class="chip set-chip ${mine ? 'on' : ''}" data-act="stylemode" data-mode="mine">${t('w.styleModeMine')}</button>
+    </div>
+    <div class="sp-hint">${mine ? t('sp.mineTip') : t('sp.pickTip')}</div>
+    ${mine ? mineSection : authorSection}`;
 }
 function renderAuthorNotes(n) {
   const refs = novelRefAuthors(n);
@@ -1320,8 +1346,8 @@ async function toggleAuthor(id) {
   const i = refs.indexOf(id);
   if (i >= 0) refs.splice(i, 1); else refs.push(id);
   n.refAuthors = refs;
-  await dbPut(STORE.novels, n);
   renderPanel();
+  await dbPut(STORE.novels, n);
 }
 
 /* ---------------- 大纲操作 ---------------- */
@@ -2364,13 +2390,13 @@ async function delCustomAuthor(id) {
   if (!await confirmDialog(t('au.del'))) return;
   state.settings.customAuthors = (state.settings.customAuthors || []).filter(a => a.id !== id);
   saveSettings();
+  renderPanel();
   for (const n of state.novels) {
     if (Array.isArray(n.refAuthors) && n.refAuthors.includes(id)) {
       n.refAuthors = n.refAuthors.filter(x => x !== id);
       await dbPut(STORE.novels, n);
     }
   }
-  renderPanel();
 }
 
 /* ---------------- 反馈 ---------------- */
@@ -2449,11 +2475,41 @@ function renderAll() {
   applyUIPrefs();
 }
 
-/* ---------------- 动态背景（星空 / 太阳系 / 银河系 / 星球 · 全部自绘无版权素材） ---------------- */
+/* ---------------- 动态背景（星空 / 太阳系 / 银河系 / 星球 · 拟真渲染 · 全部自绘无版权素材） ---------------- */
 let bgCtx = null, bgW = 0, bgH = 0, bgMode = 'stars', bgEntities = [];
+let bgNebula = [], bgBand = [], bgSunspots = [], bgGalaxy = [], bgAsteroids = [];
 function bgResize() {
   const cv = $('#starfield');
   bgW = cv.width = innerWidth; bgH = cv.height = innerHeight;
+  bgEntities = [];
+  bgNebula = [];
+  for (let i = 0; i < 4; i++) {
+    bgNebula.push({
+      x: Math.random() * bgW, y: Math.random() * bgH,
+      r: (0.25 + Math.random() * 0.4) * Math.min(bgW, bgH),
+      c: [['rgba(124,92,255,', '.12)'], ['rgba(0,224,255,', '.10)'], ['rgba(255,79,216,', '.07)'], ['rgba(90,140,220,', '.12)']][i],
+      p: Math.random() * 6.28
+    });
+  }
+  bgBand = Array.from({ length: 160 }, () => ({
+    x: Math.random() * bgW, y: Math.random() * bgH,
+    r: Math.random() * 0.8 + 0.2, d: Math.random() * 1.2, p: Math.random() * 6.28
+  }));
+  bgSunspots = Array.from({ length: 160 }, () => ({
+    a: Math.random() * 6.28, d: Math.random(), r: Math.random() * 3 + 0.6,
+    c: ['rgba(255,190,90,', ')', 'rgba(255,140,60,', ')', 'rgba(255,220,150,', ')'][Math.floor(Math.random() * 3)]
+  }));
+  bgGalaxy = Array.from({ length: 700 }, () => {
+    const rad = 16 + Math.pow(Math.random(), 0.62) * Math.min(bgW, bgH) * 0.42;
+    return {
+      rad, arm: Math.random() < 0.5 ? 0 : Math.PI,
+      off: (Math.random() - 0.5) * 0.55,
+      size: Math.random() * 1.6 + 0.4,
+      warm: Math.random() > 0.72,
+      alpha: Math.random() * 0.85 + 0.1
+    };
+  });
+  bgAsteroids = Array.from({ length: 90 }, () => ({ a: Math.random() * 6.28, d: 0.82 + Math.random() * 0.12, r: Math.random() * 1.6 + 0.5, s: 0.08 + Math.random() * 0.05 }));
 }
 function bgInit() {
   bgCtx = $('#starfield').getContext('2d');
@@ -2467,6 +2523,7 @@ function bgInit() {
     else if (bgMode === 'solar') drawSolar(ctx, W, H, ts);
     else if (bgMode === 'galaxy') drawGalaxy(ctx, W, H, ts);
     else if (bgMode === 'planet') drawPlanet(ctx, W, H, ts);
+    drawVignette(ctx, W, H);
     requestAnimationFrame(step);
   };
   requestAnimationFrame(step);
@@ -2481,103 +2538,249 @@ function setBgMode(m) {
     if (el) el.classList.toggle('on', k === m);
   });
 }
+function drawVignette(ctx, W, H) {
+  const g = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.3, W / 2, H / 2, Math.max(W, H) * 0.72);
+  g.addColorStop(0, 'rgba(0,0,0,0)');
+  g.addColorStop(1, 'rgba(0,0,12,.6)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
+}
+function drawNebula(ctx, W, H, ts) {
+  for (const nb of bgNebula) {
+    const pulse = 1 + Math.sin(ts / 2600 + nb.p) * 0.25;
+    const g = ctx.createRadialGradient(nb.x, nb.y, 0, nb.x, nb.y, nb.r * pulse);
+    g.addColorStop(0, nb.c[0] + (0.14 * pulse) + nb.c[1]);
+    g.addColorStop(0.6, nb.c[0] + '0.05' + nb.c[1]);
+    g.addColorStop(1, nb.c[0] + '0' + nb.c[1]);
+    ctx.fillStyle = g;
+    ctx.fillRect(nb.x - nb.r, nb.y - nb.r, nb.r * 2, nb.r * 2);
+  }
+}
 function drawStars(ctx, W, H, ts) {
-  if (!bgEntities.length || bgEntities.length > 240) {
-    bgEntities = Array.from({ length: Math.min(200, Math.floor(W * H / 9000)) }, () => ({
-      x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + 0.2,
-      tw: Math.random() * Math.PI * 2, s: 0.5 + Math.random() * 1.5
+  if (!bgEntities.length) {
+    bgEntities = Array.from({ length: Math.min(230, Math.floor(W * H / 8000)) }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 1.5 + 0.25,
+      tw: Math.random() * Math.PI * 2,
+      ts: 900 + Math.random() * 1800,
+      c: Math.random() < 0.12 ? '255,225,180' : (Math.random() < 0.3 ? '190,215,255' : '165,205,255')
     }));
   }
+  drawNebula(ctx, W, H, ts);
+  for (const b of bgBand) {
+    const bx = ((b.x + ts * 0.006 * b.d) % W + W) % W;
+    const by = (b.y + Math.sin(ts / 4000 + b.p) * 6 + H) % H;
+    ctx.fillStyle = `rgba(200,215,255,${0.12 + Math.abs(Math.sin(ts / 1600 + b.p)) * 0.1})`;
+    ctx.fillRect(bx, by, b.r, b.r);
+  }
   for (const st of bgEntities) {
-    const a = 0.35 + 0.45 * Math.abs(Math.sin(ts / 1400 + st.tw));
-    ctx.fillStyle = `rgba(160,210,255,${a * 0.8})`;
+    const a = 0.3 + 0.55 * Math.abs(Math.sin(ts / st.ts + st.tw));
+    ctx.fillStyle = `rgba(${st.c},${a})`;
     ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 7); ctx.fill();
-    st.x -= 0.02 * st.s;
+    if (st.r > 1.2) {
+      ctx.strokeStyle = `rgba(${st.c},${a * 0.25})`;
+      ctx.beginPath(); ctx.moveTo(st.x - st.r * 2.4, st.y); ctx.lineTo(st.x + st.r * 2.4, st.y); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(st.x, st.y - st.r * 2.4); ctx.lineTo(st.x, st.y + st.r * 2.4); ctx.stroke();
+    }
+    st.x -= 0.015;
     if (st.x < 0) st.x = W;
   }
-  if (Math.random() < 0.004) {
-    const sx = Math.random() * W * 0.8 + W * 0.2, sy = Math.random() * H * 0.4;
-    const g = ctx.createLinearGradient(sx, sy, sx - 130, sy - 65);
-    g.addColorStop(0, 'rgba(0,224,255,.9)'); g.addColorStop(1, 'rgba(0,224,255,0)');
-    ctx.strokeStyle = g; ctx.lineWidth = 1.6;
-    ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx - 130, sy - 65); ctx.stroke();
+  if (Math.random() < 0.006) {
+    const sx = Math.random() * W, sy = Math.random() * H * 0.5;
+    const g = ctx.createLinearGradient(sx, sy, sx - 180, sy - 90);
+    g.addColorStop(0, 'rgba(210,235,255,.95)'); g.addColorStop(1, 'rgba(210,235,255,0)');
+    ctx.strokeStyle = g; ctx.lineWidth = 1.8;
+    ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx - 180, sy - 90); ctx.stroke();
+    const hg = ctx.createRadialGradient(sx, sy, 0, sx, sy, 8);
+    hg.addColorStop(0, 'rgba(240,248,255,.9)'); hg.addColorStop(1, 'rgba(240,248,255,0)');
+    ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(sx, sy, 8, 0, 7); ctx.fill();
   }
 }
 function drawSolar(ctx, W, H, ts) {
   const cx = W / 2, cy = H / 2;
-  const glow = ctx.createRadialGradient(cx, cy, 4, cx, cy, Math.min(W, H) * 0.32);
-  glow.addColorStop(0, 'rgba(255,190,90,.35)'); glow.addColorStop(1, 'rgba(255,190,90,0)');
-  ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
-  const sunG = ctx.createRadialGradient(cx, cy, 2, cx, cy, 34);
-  sunG.addColorStop(0, '#ffe9b0'); sunG.addColorStop(0.5, '#ffc25e'); sunG.addColorStop(1, '#ff9a3c');
+  const R = Math.min(W, H) * 0.055;
+  drawStars(ctx, W, H, ts);
+  // 日冕与光晕
+  const puls = 1 + Math.sin(ts / 2400) * 0.04;
+  const corona = ctx.createRadialGradient(cx, cy, R * 0.8, cx, cy, R * 7 * puls);
+  corona.addColorStop(0, 'rgba(255,190,90,.5)');
+  corona.addColorStop(0.25, 'rgba(255,160,70,.18)');
+  corona.addColorStop(0.6, 'rgba(255,120,60,.05)');
+  corona.addColorStop(1, 'rgba(255,120,60,0)');
+  ctx.fillStyle = corona;
+  ctx.fillRect(0, 0, W, H);
+  // 太阳本体：米粒组织
+  const sunG = ctx.createRadialGradient(cx - R * 0.25, cy - R * 0.25, R * 0.1, cx, cy, R * 1.05 * puls);
+  sunG.addColorStop(0, '#fff7d8'); sunG.addColorStop(0.5, '#ffd27a'); sunG.addColorStop(0.85, '#ff9a3c'); sunG.addColorStop(1, '#e8762a');
   ctx.fillStyle = sunG;
-  ctx.beginPath(); ctx.arc(cx, cy, 30, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx, cy, R * 1.05 * puls, 0, 7); ctx.fill();
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, R * 1.05 * puls, 0, 7); ctx.clip();
+  for (const sp of bgSunspots) {
+    const px = cx + Math.cos(sp.a) * sp.d * R * 0.95;
+    const py = cy + Math.sin(sp.a) * sp.d * R * 0.95;
+    ctx.fillStyle = sp.c[0] + (0.35 + Math.random() * 0.2) + sp.c[1];
+    ctx.beginPath(); ctx.arc(px, py, sp.r, 0, 7); ctx.fill();
+  }
+  ctx.restore();
+  // 行星（光照来自太阳：面向中心亮、背向暗）
   const planets = [
-    { d: 62, r: 5, c: '#c9a26b', sp: 0.5 }, { d: 92, r: 7, c: '#7fc6e8', sp: 0.38 },
-    { d: 126, r: 9, c: '#5aa6e0', sp: 0.3 }, { d: 160, r: 6, c: '#e0765a', sp: 0.25 },
-    { d: 210, r: 16, c: '#e0b06a', sp: 0.18 }, { d: 262, r: 13, c: '#d9c9a8', sp: 0.13, ring: true },
-    { d: 306, r: 10, c: '#7cc4d8', sp: 0.1 }, { d: 340, r: 9, c: '#5d7bd8', sp: 0.08 }
+    { d: R * 3.4, r: R * 0.16, c: ['#d9b98a', '#6e5736'], sp: 0.5 },
+    { d: R * 5, r: R * 0.24, c: ['#a8d8f0', '#2c5a7a'], sp: 0.38 },
+    { d: R * 6.8, r: R * 0.3, c: ['#6fb4e8', '#163c5e'], sp: 0.3 },
+    { d: R * 8.6, r: R * 0.2, c: ['#e8895f', '#5e2a18'], sp: 0.25 },
+    { d: R * 11.5, r: R * 0.52, c: ['#e8c188', '#6e4f22'], sp: 0.18, ring: true },
+    { d: R * 14.4, r: R * 0.44, c: ['#dccfb0', '#5e5438'], sp: 0.13 },
+    { d: R * 16.8, r: R * 0.32, c: ['#8fd0e0', '#27536b'], sp: 0.1 },
+    { d: R * 18.6, r: R * 0.3, c: ['#7d9ce8', '#232c66'], sp: 0.08 }
   ];
   planets.forEach(p => {
-    ctx.strokeStyle = 'rgba(90,130,190,.13)';
-    ctx.beginPath(); ctx.arc(cx, cy, p.d, 0, 7); ctx.stroke();
+    ctx.strokeStyle = 'rgba(110,150,200,.14)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.ellipse(cx, cy, p.d, p.d * 0.36, 0, 0, 7); ctx.stroke();
     const a = ts / 1000 * p.sp;
-    const px = cx + Math.cos(a) * p.d, py = cy + Math.sin(a) * p.d * 0.35;
-    ctx.fillStyle = p.c;
-    ctx.beginPath(); ctx.arc(px, py, p.r, 0, 7); ctx.fill();
+    const px = cx + Math.cos(a) * p.d, py = cy + Math.sin(a) * p.d * 0.36;
     if (p.ring) {
-      ctx.strokeStyle = 'rgba(217,201,168,.55)';
-      ctx.beginPath(); ctx.ellipse(px, py, p.r * 1.9, p.r * 0.55, -0.35, 0, 7); ctx.stroke();
+      ctx.strokeStyle = 'rgba(226,204,160,.5)';
+      ctx.lineWidth = p.r * 0.34;
+      ctx.beginPath(); ctx.ellipse(px, py, p.r * 2.1, p.r * 0.62, -0.32, 0, 7); ctx.stroke();
+      ctx.strokeStyle = 'rgba(160,140,110,.35)';
+      ctx.lineWidth = p.r * 0.16;
+      ctx.beginPath(); ctx.ellipse(px, py, p.r * 1.72, p.r * 0.5, -0.32, 0, 7); ctx.stroke();
     }
+    const lx = cx - px, ly = cy - py;
+    const ld = Math.hypot(lx, ly) || 1;
+    const g = ctx.createRadialGradient(px + lx / ld * p.r * 0.45, py + ly / ld * p.r * 0.45, p.r * 0.1, px, py, p.r);
+    g.addColorStop(0, p.c[0]); g.addColorStop(0.72, p.c[0]); g.addColorStop(1, p.c[1]);
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(px, py, p.r, 0, 7); ctx.fill();
+    const sh = ctx.createRadialGradient(px - lx / ld * p.r * 0.8, py - ly / ld * p.r * 0.8, p.r * 0.4, px - lx / ld * p.r * 0.8, py - ly / ld * p.r * 0.8, p.r * 1.15);
+    sh.addColorStop(0, 'rgba(0,0,10,.55)'); sh.addColorStop(1, 'rgba(0,0,10,0)');
+    ctx.fillStyle = sh;
+    ctx.beginPath(); ctx.arc(px, py, p.r, 0, 7); ctx.fill();
   });
-  drawStars(ctx, W, H, ts);
+  // 小行星带
+  for (const ast of bgAsteroids) {
+    const a = ts / 1000 * ast.s + ast.a;
+    const x = cx + Math.cos(a) * R * 9.8, y = cy + Math.sin(a) * R * 9.8 * 0.36;
+    ctx.fillStyle = 'rgba(200,190,170,.5)';
+    ctx.fillRect(x, y, ast.r, ast.r);
+  }
 }
 function drawGalaxy(ctx, W, H, ts) {
   const cx = W / 2, cy = H / 2;
-  const core = ctx.createRadialGradient(cx, cy, 2, cx, cy, Math.min(W, H) * 0.3);
-  core.addColorStop(0, 'rgba(190,160,255,.4)'); core.addColorStop(0.4, 'rgba(124,92,255,.12)'); core.addColorStop(1, 'rgba(124,92,255,0)');
-  ctx.fillStyle = core; ctx.fillRect(0, 0, W, H);
-  const rot = ts / 20000;
-  for (let i = 0; i < 380; i++) {
-    const rad = 18 + Math.pow(Math.random(), 0.6) * Math.min(W, H) * 0.38;
-    const baseA = Math.random() * Math.PI * 2;
-    const arm = (Math.sin(baseA * 2) > 0 ? 1 : -1) * rad * 0.055;
-    const a = baseA + rot * (30 / rad) + arm;
-    const x = cx + Math.cos(a) * rad, y = cy + Math.sin(a) * rad * 0.42;
-    const alpha = Math.max(0.08, 0.75 - rad / (Math.min(W, H) * 0.42));
-    const warm = Math.random() > 0.75;
-    ctx.fillStyle = warm ? `rgba(255,210,160,${alpha})` : `rgba(170,205,255,${alpha})`;
-    ctx.fillRect(x, y, 1.4, 1.4);
+  drawStars(ctx, W, H, ts);
+  // 星系晕
+  const halo = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(W, H) * 0.42);
+  halo.addColorStop(0, 'rgba(255,235,190,.34)');
+  halo.addColorStop(0.18, 'rgba(200,170,255,.16)');
+  halo.addColorStop(0.55, 'rgba(124,92,255,.06)');
+  halo.addColorStop(1, 'rgba(124,92,255,0)');
+  ctx.fillStyle = halo;
+  ctx.fillRect(0, 0, W, H);
+  const rot = ts / 24000;
+  // 尘埃带（暗纹旋臂）
+  ctx.save();
+  ctx.translate(cx, cy);
+  for (const armOff of [0, Math.PI]) {
+    ctx.strokeStyle = 'rgba(10,8,24,.5)';
+    ctx.lineWidth = Math.min(W, H) * 0.05;
+    for (let r = 20; r < Math.min(W, H) * 0.4; r += 6) {
+      const a = armOff + rot * (46 / r) + r * 0.012;
+      ctx.beginPath(); ctx.arc(0, 0, r, a - 0.02, a + 0.02);
+      ctx.stroke();
+    }
   }
+  ctx.restore();
+  // 旋臂恒星（较差自转 + 对数旋臂）
+  for (const st of bgGalaxy) {
+    const a = st.arm + rot * (52 / st.rad) + st.rad * 0.011 + st.off;
+    const x = cx + Math.cos(a) * st.rad, y = cy + Math.sin(a) * st.rad * 0.46;
+    const alpha = st.alpha * Math.max(0.15, 1 - st.rad / (Math.min(W, H) * 0.45));
+    ctx.fillStyle = st.warm ? `rgba(255,214,160,${alpha})` : `rgba(175,210,255,${alpha})`;
+    ctx.fillRect(x, y, st.size, st.size);
+  }
+  // 核心
+  const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(W, H) * 0.09);
+  core.addColorStop(0, 'rgba(255,248,225,.95)');
+  core.addColorStop(0.4, 'rgba(255,214,160,.55)');
+  core.addColorStop(1, 'rgba(255,214,160,0)');
+  ctx.fillStyle = core;
+  ctx.beginPath(); ctx.arc(cx, cy, Math.min(W, H) * 0.09, 0, 7); ctx.fill();
 }
 function drawPlanet(ctx, W, H, ts) {
   drawStars(ctx, W, H, ts);
-  const px = W * 0.22, py = H * 0.6, pr = Math.min(W, H) * 0.26;
-  const g = ctx.createRadialGradient(px - pr * 0.4, py - pr * 0.4, pr * 0.1, px, py, pr);
-  g.addColorStop(0, '#9ad0e8'); g.addColorStop(0.55, '#3f7fb8'); g.addColorStop(1, '#14243e');
-  ctx.fillStyle = g;
-  ctx.beginPath(); ctx.arc(px, py, pr, 0, 7); ctx.fill();
-  ctx.strokeStyle = 'rgba(120,180,220,.16)';
-  for (let i = 1; i < 4; i++) {
-    ctx.beginPath(); ctx.ellipse(px, py, pr * 0.72, pr * i * 0.22, -0.5, 0, 7); ctx.stroke();
-  }
+  const px = W * 0.24, py = H * 0.58, pr = Math.min(W, H) * 0.27;
+  const ringTilt = -0.42;
+  // 大气辉光
+  const atm = ctx.createRadialGradient(px, py, pr * 0.85, px, py, pr * 1.22);
+  atm.addColorStop(0, 'rgba(120,200,240,0)');
+  atm.addColorStop(0.75, 'rgba(120,200,240,.25)');
+  atm.addColorStop(1, 'rgba(120,200,240,0)');
+  ctx.fillStyle = atm;
+  ctx.beginPath(); ctx.arc(px, py, pr * 1.22, 0, 7); ctx.fill();
+  // 环（后半段：在行星之后）
   ctx.save();
   ctx.translate(px, py);
-  ctx.rotate(-0.42);
-  ctx.strokeStyle = 'rgba(220,205,170,.75)';
-  ctx.lineWidth = Math.max(3, pr * 0.07);
-  ctx.beginPath(); ctx.ellipse(0, 0, pr * 1.55, pr * 0.42, 0, 0, 7); ctx.stroke();
-  ctx.strokeStyle = 'rgba(150,140,120,.5)';
-  ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.ellipse(0, 0, pr * 1.3, pr * 0.34, 0, 0, 7); ctx.stroke();
+  ctx.rotate(ringTilt);
+  for (const [rw, rh, c, lw] of [[1.75, 0.5, 'rgba(226,204,165,.55)', pr * 0.1], [1.55, 0.43, 'rgba(150,130,105,.4)', pr * 0.05], [1.9, 0.55, 'rgba(190,170,140,.3)', pr * 0.03]]) {
+    ctx.strokeStyle = c;
+    ctx.lineWidth = lw;
+    ctx.beginPath(); ctx.ellipse(0, 0, pr * rw, pr * rh, 0, 0, 7); ctx.stroke();
+  }
   ctx.restore();
-  const moonA = ts / 1400;
-  const mx = px + Math.cos(moonA) * pr * 2.1, my = py + Math.sin(moonA) * pr * 2.1 * 0.3;
-  ctx.fillStyle = '#b8b8c8';
-  ctx.beginPath(); ctx.arc(mx, my, pr * 0.14, 0, 7); ctx.fill();
-  const light = ctx.createRadialGradient(W * 0.85, H * 0.2, 2, W * 0.85, H * 0.2, 46);
-  light.addColorStop(0, 'rgba(255,255,240,.9)'); light.addColorStop(1, 'rgba(255,255,240,0)');
-  ctx.fillStyle = light; ctx.fillRect(0, 0, W, H);
+  // 行星本体：气体巨行星条带 + 昼夜明暗
+  const g = ctx.createRadialGradient(px - pr * 0.45, py - pr * 0.5, pr * 0.08, px, py, pr);
+  g.addColorStop(0, '#cfe8f5'); g.addColorStop(0.45, '#5d9ec8'); g.addColorStop(0.8, '#23486e'); g.addColorStop(1, '#0c1a30');
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(px, py, pr, 0, 7); ctx.fill();
+  ctx.save();
+  ctx.beginPath(); ctx.arc(px, py, pr, 0, 7); ctx.clip();
+  const drift = Math.sin(ts / 9000) * pr * 0.04;
+  for (let i = -3; i <= 3; i++) {
+    const bandY = py + i * pr * 0.22 + drift;
+    ctx.strokeStyle = i % 2 ? 'rgba(255,240,215,.14)' : 'rgba(15,35,60,.2)';
+    ctx.lineWidth = pr * (0.1 + Math.abs(i) * 0.02);
+    ctx.beginPath(); ctx.ellipse(px, bandY, pr * 1.05, pr * 0.12, 0, 0, 7); ctx.stroke();
+  }
+  const night = ctx.createLinearGradient(px - pr, py, px + pr * 1.6, py);
+  night.addColorStop(0, 'rgba(0,0,0,0)');
+  night.addColorStop(0.55, 'rgba(2,6,16,0)');
+  night.addColorStop(1, 'rgba(2,6,16,.82)');
+  ctx.fillStyle = night;
+  ctx.fillRect(px - pr, py - pr, pr * 2.6, pr * 2);
+  ctx.restore();
+  // 环（前半段：越过行星前方）
+  ctx.save();
+  ctx.translate(px, py);
+  ctx.rotate(ringTilt);
+  ctx.strokeStyle = 'rgba(235,215,180,.6)';
+  ctx.lineWidth = pr * 0.1;
+  ctx.beginPath(); ctx.ellipse(0, 0, pr * 1.75, pr * 0.5, 0, 0.06 * Math.PI, 0.94 * Math.PI); ctx.stroke();
+  ctx.strokeStyle = 'rgba(160,145,115,.4)';
+  ctx.lineWidth = pr * 0.05;
+  ctx.beginPath(); ctx.ellipse(0, 0, pr * 1.55, pr * 0.43, 0, 0.05 * Math.PI, 0.95 * Math.PI); ctx.stroke();
+  ctx.restore();
+  // 环投在行星上的影子
+  ctx.strokeStyle = 'rgba(5,10,20,.35)';
+  ctx.lineWidth = pr * 0.09;
+  ctx.beginPath(); ctx.ellipse(px, py, pr * 0.98, pr * 0.1, 0, 0.55 * Math.PI, 1.3 * Math.PI); ctx.stroke();
+  // 卫星
+  const moonA = ts / 1300;
+  const mx = px + Math.cos(moonA) * pr * 2.4, my = py + Math.sin(moonA) * pr * 2.4 * 0.3;
+  const mg = ctx.createRadialGradient(mx - pr * 0.06, my - pr * 0.06, pr * 0.02, mx, my, pr * 0.16);
+  mg.addColorStop(0, '#e8e8ee'); mg.addColorStop(0.6, '#a8a8b8'); mg.addColorStop(1, '#3c3c50');
+  ctx.fillStyle = mg;
+  ctx.beginPath(); ctx.arc(mx, my, pr * 0.16, 0, 7); ctx.fill();
+  // 远方恒星耀斑
+  const flare = ctx.createRadialGradient(W * 0.86, H * 0.16, 0, W * 0.86, H * 0.16, 44 + Math.sin(ts / 1800) * 6);
+  flare.addColorStop(0, 'rgba(255,250,235,.95)'); flare.addColorStop(1, 'rgba(255,250,235,0)');
+  ctx.fillStyle = flare;
+  ctx.beginPath(); ctx.arc(W * 0.86, H * 0.16, 44 + Math.sin(ts / 1800) * 6, 0, 7); ctx.fill();
+  const cross = ctx.createLinearGradient(W * 0.86 - 90, H * 0.16, W * 0.86 + 90, H * 0.16);
+  cross.addColorStop(0, 'rgba(255,250,235,0)'); cross.addColorStop(0.5, 'rgba(255,250,235,.5)'); cross.addColorStop(1, 'rgba(255,250,235,0)');
+  ctx.strokeStyle = cross; ctx.lineWidth = 1.4;
+  ctx.beginPath(); ctx.moveTo(W * 0.86 - 90, H * 0.16); ctx.lineTo(W * 0.86 + 90, H * 0.16); ctx.stroke();
 }
 
 /* ---------------- 用户须知 · 用户守则 ---------------- */
@@ -2594,8 +2797,8 @@ async function setStyleMode(mode) {
   const n = curNovel();
   if (!n) return;
   n.styleMode = mode;
-  await dbPut(STORE.novels, n);
   renderPanel();
+  await dbPut(STORE.novels, n);
   toast(t('toast.styleSaved'), 'ok');
 }
 
@@ -2988,9 +3191,9 @@ function bindEvents() {
   $('#asst-settings').addEventListener('click', () => { closeModal('modal-assistant'); openSettings(); });
   $('#asst-feedback').addEventListener('click', () => { closeModal('modal-assistant'); openModal('modal-feedback'); });
   ['pointerdown', 'keydown', 'wheel'].forEach(ev => document.addEventListener(ev, petActive, { passive: true }));
-  // 点击反馈水波
+  // 点击反馈水波 + 弹跳手感
   document.addEventListener('click', e => {
-    const b = e.target.closest('.btn,.tb-btn,.chip,.profile-btn');
+    const b = e.target.closest('.btn,.tb-btn,.chip,.profile-btn,.icon-btn,.nav-item,.title-item');
     if (!b || b.disabled) return;
     const rect = b.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
@@ -3000,7 +3203,17 @@ function bindEvents() {
     rp.style.left = (e.clientX - rect.left - size / 2) + 'px';
     rp.style.top = (e.clientY - rect.top - size / 2) + 'px';
     b.appendChild(rp);
+    const ring = document.createElement('span');
+    ring.className = 'ring';
+    ring.style.left = (e.clientX - rect.left - 5) + 'px';
+    ring.style.top = (e.clientY - rect.top - 5) + 'px';
+    b.appendChild(ring);
+    b.classList.remove('btn-pop');
+    void b.offsetWidth;
+    b.classList.add('btn-pop');
     setTimeout(() => rp.remove(), 500);
+    setTimeout(() => ring.remove(), 450);
+    setTimeout(() => b.classList.remove('btn-pop'), 380);
   });
   // 设置：背景 / 小助手 / 词典 / 自动模型
   $('#set-bg-stars').addEventListener('click', () => setBgMode('stars'));
