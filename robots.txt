@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akc071001-max.github.io/xiaoxing/sitemap.xml
