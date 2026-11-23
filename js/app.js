@@ -242,7 +242,12 @@ const I18N = {
     'guide.s3': '<h3>✍️ 常用操作一览</h3><ul><li><b>文风</b>：左侧「🖊 文风」选参考作家（点一下选中），或贴入你自己的 500 字让 AI 学你的文笔</li><li><b>不满意？</b>点「🔄 重新生成」重来，不扣任何费用</li><li><b>界面</b>：「⚙ 设置」里调字号、换背景（太阳系 / 银河系 / 星球）、切中英文、改主题色</li><li><b>章节标题 / 书名</b>：点「✨」让 AI 起名，你从候选里挑</li><li><b>保存</b>：作品自动保存在您的设备上；换设备用「备份与导出」</li><li><b>求助</b>：点击屏幕左下角的小外星人，随时打开创作小助手</li></ul>',
     'guide.s4': '<h3>💎 关于付费（最后再说这个）</h3><p>当前处于<b>试运营期，全部免费</b>，不强制任何消费。</p><ul><li>🎁 您注册账户已自动获得<b>1 天专业版免费体验</b>：解锁 DeepSeek、Kimi、GLM、千问等主流大模型预设，记忆扩展到前 5 章</li><li>体验到期后自动回到免费版，作品与数据不受任何影响</li><li>想继续使用高级模型？会员中心有免费版 / 专业版 / 旗舰版三档说明（试运营期间同样免费开通）</li><li>正式收费上线前会提前公告，绝不自动扣费</li></ul><p>好，一切就绪，开始你的创作吧！🚀</p>',
     'vip.trialOn': '🎁 新用户专享：专业版体验中，剩余 {t}（不强制消费）',
-    'vip.trialEnd': '专业版体验已结束，感谢体验！会员中心可选方案（试运营免费）。'
+    'vip.trialEnd': '专业版体验已结束，感谢体验！会员中心可选方案（试运营免费）。',
+    'set.creator': '创作者：小柚子', 'set.creatorNote': '本站由单人开发 · 不定期更新', 'set.tip': '☕ 请作者喝杯奶茶',
+    'tip.title': '☕ 支持创作者', 'tip.note': '本站由小柚子单人开发，不定期更新。打赏全凭心意，不强制、纯自愿。',
+    'tip.amount': '支持金额', 'tip.customPh': '自定义金额（元）…', 'tip.msg': '想对创作者说的话（可选）',
+    'tip.msgPh': '鼓励的话、建议、想说的话…', 'tip.send': '💛 送出心意',
+    'tip.thanks': '感谢您的支持！小柚子收到啦 💛', 'tip.fail': '发送失败，请稍后再试', 'tip.needAmount': '请选择或输入支持金额'
   },
   en: {
     'brand.sub': 'ALL-GENRE NOVEL STUDIO',
@@ -441,7 +446,219 @@ const I18N = {
     'guide.s3': '<h3>✍️ Everything else at a glance</h3><ul><li><b>Style</b>: “🖊 Style” tab on the left — click authors to reference them, or paste 500 characters of your own writing for the AI to learn</li><li><b>Not satisfied?</b> Click “🔄 Regenerate” — free, anytime</li><li><b>Interface</b>: “⚙ Settings” for font size, backgrounds (Solar System / Galaxy / Planet), language and theme color</li><li><b>Chapter / novel titles</b>: click “✨” and pick from AI candidates</li><li><b>Saving</b>: your work autosaves on this device; use “Backup & Export” to move it</li><li><b>Help</b>: click the little alien bottom-left anytime</li></ul>',
     'guide.s4': '<h3>💎 About paid plans (last, we promise)</h3><p>We are in <b>beta: everything is free</b>. No purchase is required, ever, during beta.</p><ul><li>🎁 Your new account already got a <b>1-day free Pro trial</b>: unlocks DeepSeek, Kimi, GLM, Qwen and more model presets, memory up to 5 chapters</li><li>When the trial ends you return to the Free plan automatically — your works and data are untouched</li><li>Want to keep advanced models? The Membership center explains Free / Pro / Flagship (also free during beta)</li><li>We will announce any paid launch in advance — no auto-charging, ever</li></ul><p>All set — start writing! 🚀</p>',
     'vip.trialOn': '🎁 New-user perk: Pro trial active, {t} left (no purchase required)',
-    'vip.trialEnd': 'Your Pro trial has ended — thanks for trying! Pick a plan in the Membership center (free during beta).'
+    'vip.trialEnd': 'Your Pro trial has ended — thanks for trying! Pick a plan in the Membership center (free during beta).',
+    'set.creator': 'Creator: 小柚子', 'set.creatorNote': 'Solo developer · irregular updates', 'set.tip': '☕ Tip the creator',
+    'tip.title': '☕ Support the Creator', 'tip.note': 'Made by 小柚子, a solo developer, with irregular updates. Tips are completely voluntary — no obligation.',
+    'tip.amount': 'Tip amount', 'tip.customPh': 'Custom amount (CNY)…', 'tip.msg': 'A message for the creator (optional)',
+    'tip.msgPh': 'Encouragement, ideas, anything…', 'tip.send': '💛 Send support',
+    'tip.thanks': 'Thank you for your support! 小柚子 got your message 💛', 'tip.fail': 'Failed to send, try again later', 'tip.needAmount': 'Choose or enter an amount'
+  },
+  ru: {
+    'brand.sub': 'ALL-GENRE NOVEL STUDIO',
+    'btn.langTitle': 'Переключить язык / Switch language',
+    'btn.backup': '⛁ Резерв', 'btn.backupTitle': 'Резерв и экспорт',
+    'btn.ai': '⚙ ИИ-модели', 'btn.aiTitle': 'Настройки ИИ-моделей',
+    'btn.profileTitle': 'Профиль (аватар / ник)',
+    'profile.default': 'Нет ника',
+    'nav.chapters': 'Главы', 'nav.outline': 'План', 'nav.characters': 'Персонажи', 'nav.style': 'Стиль', 'nav.world': 'Мир', 'nav.memories': 'Память',
+    'btn.dict': '📖 Словарь', 'btn.dictTitle': 'Словарь (открывается с выделенным текстом)',
+    'btn.focus': '⛶ Фокус', 'btn.focusExit': '⛶ Выйти',
+    'btn.aiToggle': '✦ ИИ-движок',
+    'status.draft': 'Черновик', 'status.revising': 'Правка', 'status.done': 'Готово',
+    'ai.title': '✦ Движок сюжета', 'ai.clearTitle': 'Очистить чат',
+    'ai.ctx': 'Контекст · Объём памяти',
+    'ctx.outline': 'План', 'ctx.chars': 'Персонажи', 'ctx.world': 'Мир', 'ctx.mem': 'Память', 'ctx.chatHistory': 'История чата', 'ctx.prev': 'Пред. главы',
+    'chip.continue': '▶ Продолжить', 'chip.plot': '⛨ Идеи сюжета', 'chip.brainstorm': '✦ Мозговой штурм', 'chip.polish': '✎ Отшлифовать',
+    'chip.extract': '◬ Извлечь память', 'chip.outline': '◈ Черновик плана', 'chip.style': '✧ Проверка стиля',
+    'ai.send': 'Отправить', 'ai.stop': '■ Стоп',
+    'lib.title': '◈ Библиотека', 'lib.new': '＋ Новый роман',
+    'novel.title': 'Название (можно позже)', 'novel.titlePh': 'Оставьте пустым…',
+    'novel.descLabel': 'Описание (ИИ использует автоматически)',
+    'novel.titleSuggest': '✨ Идеи названий', 'novel.titleSuggestHint': 'Название можно не указывать — напишите описание, и ИИ предложит варианты.',
+    'novel.pending': 'Без названия',
+    'novel.legacyGenre': 'Без жанра',
+    'style.audience': 'Аудитория', 'style.genres': 'Жанры (несколько)', 'style.length': 'Объём', 'style.pov': 'Точка зрения', 'style.tone': 'Тон',
+    'style.narrative': 'Повествование', 'style.dialogue': 'Диалоги в приоритете', 'style.balanced': 'Баланс', 'style.narrativeMode': 'Повествование в приоритете',
+    'style.lang': 'Язык', 'style.authors': 'Эталонные авторы (рекомендация)', 'style.learn': '⛁ Изучить стили онлайн',
+    'aiset.title': '⚙ Доступ к ИИ-моделям', 'aiset.list': 'Подключённые модели', 'aiset.add': '＋ Добавить модель', 'aiset.accent': 'Цвет акцента',
+    'aiset.config': 'Конфигурация', 'aiset.preset': 'Пресет (быстрое заполнение)', 'aiset.name': 'Отображаемое имя',
+    'aiset.base': 'Base URL (обычно заканчивается на /v1)', 'aiset.path': 'Путь API (по умолч. /chat/completions)', 'aiset.key': 'API-ключ', 'aiset.model': 'Имя модели',
+    'aiset.temp': 'Температура', 'aiset.maxtok': 'Макс. токенов', 'aiset.test': 'Проверить подключение', 'aiset.save': 'Сохранить и включить',
+    'aiset.help': '<b>Как подключить?</b><p>Подходит любой OpenAI-совместимый API. Облачные модели требуют Base URL + ключ; локальные (Ollama / LM Studio / vLLM / llama.cpp) — только локальный адрес, ключ пустой.</p><p><b>Встроенная бесплатная модель</b>: Pollinations AI — без ключа и регистрации, работает сразу. Бесплатный лимит ограничен; для стабильности выберите DeepSeek / Kimi в пресетах и вставьте свой ключ.</p><p>Ollama требует CORS: задайте <code>OLLAMA_ORIGINS=*</code> и перезапустите; либо запустите <code>node proxy.mjs</code> и укажите Base URL <code>http://localhost:8787/v1</code>.</p>',
+    'aiset.compare': 'Совместимость моделей (адаптированы популярные ИИ)',
+    'aiset.stFree': 'Бесплатно · без ключа · адаптировано', 'aiset.stFreeTier': 'Бесплатный лимит · нужен ключ · адаптировано',
+    'aiset.stPaid': 'Платно · нужен ключ · адаптировано (VIP поможет)',
+    'aiset.auto': 'Автопереключение резервных моделей (при сбое — следующая доступная)',
+    'backup.title': '⛁ Резерв и экспорт', 'backup.desc': 'Данные хранятся в браузере на вашем устройстве (IndexedDB). Очистка данных браузера удалит их — делайте резервные копии. Лимита на объём нет.',
+    'backup.txt': 'Экспорт текущего романа в TXT', 'backup.txtSub': 'Все главы по порядку одним текстовым файлом',
+    'backup.json': 'Резервная копия всех данных (JSON)', 'backup.jsonSub': 'Библиотека, главы, план, персонажи, мир, память, чаты',
+    'backup.import': 'Импорт резервной копии', 'backup.importSub': 'Перезапишет все текущие данные', 'backup.importBtn': 'Импорт',
+    'backup.wipe': 'Удалить все данные', 'backup.wipeSub': 'Необратимо!', 'backup.wipeBtn': 'Удалить',
+    'backup.backupBtn': 'Копия',
+    'note.title': 'Заголовок', 'note.content': 'Содержимое', 'note.cat': 'Категория',
+    'cat.plot': 'Сюжет', 'cat.char': 'Персонаж', 'cat.foreshadow': 'Задел', 'cat.world': 'Мир', 'cat.other': 'Другое',
+    'char.title': '♜ Карточка персонажа', 'char.name': 'Имя', 'char.role': 'Роль', 'char.appearance': 'Внешность', 'char.personality': 'Характер',
+    'char.background': 'Предыстория', 'char.relations': 'Отношения', 'char.notes': 'Заметки / заделы',
+    'profile.title': '👤 Профиль', 'profile.nick': 'Ник', 'profile.upload': '📷 Загрузить аватар', 'profile.clear': 'Сбросить', 'profile.pick': 'Выберите аватар',
+    'dict.title': '📖 Словарь', 'dict.search': 'Искать',
+    'dict.ph': 'Введите слово… (открывается с выделенным текстом)',
+    'common.save': 'Сохранить', 'common.cancel': 'Отмена', 'common.close': 'Закрыть', 'common.confirm': 'OK', 'common.delete': 'Удалить', 'common.export': 'Экспорт',
+    'w.title': 'Название', 'w.genre': 'Жанры', 'w.audience': 'Аудитория', 'w.length': 'Объём', 'w.pov': 'Точка зрения', 'w.tone': 'Тон', 'w.lang': 'Язык', 'w.authors': 'Авторы',
+    'w.edit': '✎ Редактировать таблицу стиля', 'w.synopsis': 'СИНОПСИС', 'w.world': 'МИРОУСТРОЙСТВО', 'w.custom': 'Свои разделы', 'w.addSec': '＋ Добавить',
+    'w.authorLib': 'БИБЛИОТЕКА СТИЛЕЙ', 'w.authorTip': 'Кликните автора, чтобы выбрать его эталоном; «Изучить стили онлайн» загрузит материалы из Википедии и добавит их в контекст ИИ.',
+    'w.learn': '⛁ Изучить стили онлайн', 'w.learnSel': '⛁ Изучить стили онлайн ({n} выбрано)', 'w.builtin': 'Встроенные приёмы', 'w.wiki': 'Онлайн-изучение (Википедия)',
+    'w.learnOk': 'Изучение завершено: {ok}/{n} успешно', 'w.learnFail': 'Не удалось изучить стили (проверьте сеть)', 'w.learnPartial': 'Изучение стилей: {ok} ок / {fail} не удалось',
+    'w.myStyle': 'Мой стиль (необязательно)', 'w.styleModeAuthor': 'Стили авторов', 'w.styleModeMine': 'Мой стиль',
+    'w.styleSample': 'Вставьте образец своего текста (до 500 знаков) — ИИ изучит ваш ритм, лексику и стиль диалогов.',
+    'w.styleSamplePh': 'Вставьте свой текст (до 500 знаков)…',
+    'w.noAuthors': 'Эталонные авторы не выбраны. Кликните автора выше или добавьте своего через поиск.',
+    'stat.words': 'CJK {a} · EN слов {b}', 'stat.pos': 'Стр {a} · Кол {b}', 'stat.chars': 'Символов {a}', 'stat.wordsChip': 'слов',
+    'dict.loading': 'Поиск…', 'dict.notfound': 'Слово не найдено. Проверьте написание.',
+    'dict.errNet': 'Ошибка запроса к словарю — нужен интернет.', 'dict.syn': 'Синонимы', 'dict.src': 'Источник: dictionaryapi.dev · Datamuse · Wiktionary',
+    'toast.welcome': 'Добро пожаловать в XIAOXING! Создайте роман, затем подключите модель в «⚙ ИИ-модели».',
+    'toast.saved': 'Сохранено', 'toast.savedOk': 'Сохранено', 'toast.needNovel': 'Сначала создайте роман', 'toast.needNovelSel': 'Сначала выберите роман',
+    'toast.noChapters': 'Глав пока нет', 'toast.txtOk': 'TXT экспортирован', 'toast.backupOk': 'Резервная копия готова', 'toast.importOk': 'Импорт завершён',
+    'toast.importFail': 'Ошибка импорта: ', 'toast.wiped': 'Все данные удалены', 'toast.chapterDel': 'Глава удалена',
+    'toast.chapterFromNode': 'Глава создана из узла плана', 'toast.outlineDel': 'Узел плана удалён',
+    'toast.charSaved': 'Персонаж сохранён', 'toast.memSaved': 'Сохранено', 'toast.novelSaved': 'Роман сохранён', 'toast.novelDel': 'Роман удалён',
+    'toast.needTitle': 'Введите название', 'toast.needNodeTitle': 'Введите заголовок', 'toast.needContent': 'Введите содержимое', 'toast.needName': 'Введите имя',
+    'toast.noAI': 'ИИ-модель не настроена', 'toast.aiBusy': 'ИИ уже генерирует…',
+    'toast.needChapter': 'Сначала создайте и откройте главу', 'toast.needChapterOpen': 'Сначала откройте главу',
+    'toast.nothingPolish': 'Нечего шлифовать', 'toast.inserted': 'Вставлено в главу', 'toast.memAdded': 'Сохранено записей: {n}',
+    'toast.copied': 'Скопировано', 'toast.copyFail': 'Не удалось скопировать', 'toast.chatClear': 'Чат очищен',
+    'toast.providerSaved': 'Модель сохранена и включена', 'toast.providerDel': 'Модель удалена', 'toast.providerFill': 'Укажите Base URL и имя модели',
+    'toast.providerPick': 'Выберите модель слева или нажмите «Сохранить и включить»', 'toast.profileSaved': 'Профиль сохранён',
+    'toast.avatarTooBig': 'Файл слишком большой (до 2 МБ)', 'toast.avatarBad': 'Не удалось прочитать изображение',
+    'toast.dictNeedWord': 'Введите слово для поиска', 'toast.memDeleted': 'Запись памяти удалена',
+    'toast.learnBusy': 'Идёт онлайн-изучение стилей, подождите…',
+    'toast.langHint': 'Язык интерфейса изменён', 'toast.nickSave': 'Ник сохранён',
+    'toast.titlesGen': 'Генерирую варианты названий…', 'toast.titlesEmpty': 'Не удалось сгенерировать — попробуйте ещё раз',
+    'toast.titleApplied': 'Название применено', 'toast.titleNeedInput': 'Сначала заполните описание или план главы',
+    'toast.planChanged': 'Бесплатно на время беты: {p}',
+    'toast.storageOk': 'Хранилище разрешено — работы сохраняются на устройстве', 'toast.storageNo': 'Хранилище отклонено: данные живут только в этой сессии',
+    'toast.styleSaved': 'Настройки стиля сохранены', 'toast.orCopied': 'Имя модели скопировано',
+    'empty.panel': 'Нажмите название сверху,<br/>чтобы создать / выбрать роман.',
+    'empty.chapters': 'Глав пока нет.<br/>Нажмите «＋ Глава»,<br/>или сначала составьте «План».',
+    'empty.outline': 'Плана пока нет.<br/>Нажмите «＋ Том»,<br/>затем добавьте узлы глав.<br/><br/>ИИ использует план автоматически.',
+    'empty.chars': 'Карточек персонажей нет.<br/>ИИ запомнит их автоматически<br/>и сохранит характеры.',
+    'empty.mem': 'Записей памяти нет.<br/>Добавьте вручную или через «◬ Извлечь память».',
+    'empty.chat': '✦ Движок сюжета готов (бесплатная модель подключена)<br/>Используйте быстрые команды выше<br/>или просто поговорите с ИИ.',
+    'empty.lib': 'В галактике тихо — романов пока нет. Нажмите «＋ Новый роман».',
+    'empty.volKids': 'Узлов нет. Нажмите «＋ Узел» ниже.',
+    'editor.placeholder.zh': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
+    'editor.placeholder.en': 'A new chapter begins here… (Ctrl+S to save · ✦ AI engine on the right)',
+    'editor.noChapter': 'Глава не открыта. Создайте её в панели «Главы» или выберите роман сверху.',
+    'ai.inputPh': 'Обсудите сюжет, попросите запомнить детали или дайте команду… (Ctrl+Enter — отправить)',
+    'ai.modelNone': 'Модель не настроена', 'ai.you': 'Вы', 'ai.engine': '✦ Движок',
+    'novel.new': 'Новый роман', 'novel.edit': 'Редактировать роман',
+    'confirm.delChapter': 'Удалить эту главу? Текст нельзя будет восстановить.',
+    'confirm.delOutline': 'Удалить этот узел плана? Вложенные узлы тоже удалятся.',
+    'confirm.delChar': 'Удалить карточку персонажа?', 'confirm.delMem': 'Удалить запись памяти?',
+    'confirm.delNovel': 'Удалить «{t}» вместе с главами, планом, персонажами и памятью? Необратимо.',
+    'confirm.delProvider': 'Удалить эту модель?',
+    'confirm.wipe': 'Удалить ВСЕ данные? Все романы, главы, планы, персонажи и память будут стёрты навсегда!',
+    'confirm.import': 'Импорт перезапишет все текущие данные. Продолжить?',
+    'dict.provOk': '✓ Подключено: ', 'dict.provFail': 'Ошибка подключения: ',
+    'learn.fetching': 'Изучаю {name}…', 'learn.noSel': 'Сначала выберите авторов выше',
+    'terms.title': '📜 Уведомление и правила', 'terms.noticeTitle': 'I. Уведомление',
+    'terms.notice': '<ul><li><b>Локальное хранение</b>: романы, планы, персонажи и память хранятся только в браузере вашего устройства (IndexedDB). Мы ничего не собираем и не загружаем. Очистка данных браузера удалит работы — делайте резервные копии.</li><li><b>ИИ</b>: движок подключается к выбранной вами модели. Ключ хранится локально и отправляется только на указанный вами адрес.</li><li><b>Онлайн-функции</b>: «Изучение стилей» и словарь обращаются к открытым API (Википедия, словари) только для поиска.</li><li><b>Ответственность</b>: инструмент бесплатен и предоставляется без гарантий; проверяйте сгенерированный текст.</li><li><b>Несовершеннолетним</b>: пользуйтесь под присмотром взрослых.</li></ul>',
+    'terms.rulesTitle': 'II. Правила',
+    'terms.rules': '<ul><li>Не создавать и не распространять противозаконный контент: порнографию, насилие, разжигание ненависти, нарушение приватности, мошенничество и т.п.</li><li>Уважать авторские права: эталонные авторы — для изучения <b>приёмов</b>, а не для плагиата.</li><li>Соблюдать условия ИИ-провайдеров и местные законы.</li><li>Не злоупотреблять онлайн-функциями и чужими API.</li><li>Не создавать клевету или дипфейки о реальных людях.</li><li>Нарушители несут полную ответственность; XIAOXING оставляет за собой право отказать в обслуживании.</li></ul>',
+    'terms.version': 'Версия 2025-01 · XIAOXING',
+    'terms.agreeLabel': 'Я прочитал(а) и согласен(на) со всем вышеперечисленным',
+    'terms.agreeBtn': 'Согласен · Войти', 'terms.declineBtn': 'Отказаться',
+    'terms.declined': 'Без согласия с правилами пользование невозможно.',
+    'profile.terms': '📜 Уведомление',
+    'btn.vip': '💎 VIP', 'btn.vipTitle': 'Членство (бета · бесплатно)',
+    'btn.feedback': '💬 Отзыв', 'btn.feedbackTitle': 'Обратная связь',
+    'co.label': '📋 План главы',
+    'co.gen': '🚀 Начать писать', 'co.again': '🔄 Заново',
+    'co.ph': 'Опишите план главы: что происходит, кто участвует, какие заделы заложить… затем нажмите «🚀 Начать писать»',
+    'co.needChapter': 'Сначала создайте и откройте главу', 'co.needOutline': 'Сначала заполните «План главы»',
+    'co.confirmOverwrite': 'В главе уже есть текст. Генерация перезапишет его. Продолжить?',
+    'co.done': '✓ Готово — не понравилось? Нажмите «🔄 Заново»', 'co.cancelled': 'Генерация отменена',
+    'co.running': 'Идёт генерация…',
+    'co.chapterTitle': 'Название главы от ИИ (по плану главы)',
+    'co.layout': 'Макет', 'co.layoutToggleTitle': 'Переключить макет: вертикально / пополам',
+    'gp.title': '⚡ Онлайн-генерация',
+    'gp.search': 'Поиск авторов', 'gp.style': 'Изучение стилей', 'gp.draft': 'Черновик главы', 'gp.write': 'Написание главы',
+    'gp.cancelTitle': 'Отмена',
+    'au.label': 'Свои авторы', 'au.ph': 'Введите имя автора — поиск и добавление онлайн…',
+    'au.search': '🔍 Найти и добавить', 'au.needName': 'Введите имя автора', 'au.searching': 'Ищу в сети…',
+    'au.notfound': 'Автор не найден — попробуйте другое имя', 'au.added': 'Добавлен как эталон: {name}', 'au.fail': 'Поиск не удался — проверьте сеть',
+    'au.custom': 'Свой', 'au.del': 'Удалить этого автора?',
+    'fb.title': '💬 Обратная связь', 'fb.label': 'Проблема или пожелание',
+    'fb.ph': 'Опишите проблему или предложение…', 'fb.hint': 'Мы читаем каждый отзыв.',
+    'fb.send': 'Отправить', 'fb.thanks': 'Спасибо за отзыв', 'fb.fail': 'Не удалось отправить, попробуйте позже', 'fb.needMsg': 'Сначала напишите текст',
+    'vip.title': '💎 Членство', 'vip.notice': 'Бета · Бесплатно',
+    'vip.free': 'Бесплатный', 'vip.freePrice': '¥0 · бета', 'vip.freeBtn': 'Текущий план', 'vip.currentBtn': 'Текущий план',
+    'vip.f1': 'Встроенная бесплатная ИИ-модель', 'vip.f2': 'Все функции творчества', 'vip.f3': 'Память 2 главы · локальное хранение',
+    'vip.pro': 'Профессиональный', 'vip.proPrice': '¥0 · бета',
+    'vip.p1': 'Лучшие модели (DeepSeek/Kimi/GLM/Qwen…)', 'vip.p2': 'Память до 5 глав', 'vip.p3': 'Быстрее генерация',
+    'vip.flag': 'Флагманский', 'vip.flagPrice': '¥0 · бета',
+    'vip.l1': 'Все плюсы Про + топ-модели', 'vip.l2': 'Поиск ИИ-моделей по всему миру', 'vip.l3': 'Память до 10 глав · поддержка',
+    'vip.btn': 'Скоро', 'vip.btnToast': 'Во время беты бесплатно',
+    'vip.foot': 'Во время беты все планы бесплатны.',
+    'vip.searchTitle': '🔍 Поиск ИИ-моделей по всему миру', 'vip.searchPh': 'Ключевое слово (deepseek / qwen / llama…)',
+    'vip.searchBtn': 'Искать', 'vip.searching': 'Ищу модели…', 'vip.searchFail': 'Поиск не удался — попробуйте позже',
+    'vip.searchEmpty': 'Модели не найдены', 'vip.copy': 'Копировать ID', 'vip.copied': 'ID скопирован',
+    'vip.trialOn': '🎁 Подарок новичку: действует Про-пробник, осталось {t} (покупка не требуется)',
+    'vip.trialEnd': 'Пробный период Про завершён — спасибо! Выберите план в центре членства (во время беты бесплатно).',
+    'btn.settings': '⚙ Настройки', 'btn.settingsTitle': 'Настройки',
+    'set.title': '⚙ Настройки', 'set.ui': 'Интерфейс', 'set.font': 'Размер шрифта', 'set.layout': 'Макет',
+    'set.stack': 'Компактный план · весь текст', 'set.split': 'План пополам · текст пополам',
+    'set.aipanel': 'Панель ИИ-движка', 'set.on': 'Вкл', 'set.off': 'Выкл', 'set.accent': 'Акцент',
+    'set.account': 'Аккаунт', 'set.editProfile': 'Аватар и ник',
+    'set.lang': 'Язык',
+    'set.general': 'Общее', 'set.backup': '⛁ Резерв и экспорт', 'set.ai': '⚙ ИИ-модели',
+    'set.feedback': '💬 Обратная связь', 'set.terms': '📜 Уведомление',
+    'set.storage': '💾 Хранилище', 'set.storageState': 'Статус хранилища',
+    'set.storageOk': 'Разрешено (автосохранение на устройстве)', 'set.storageNo': 'Запрещено (ничего не сохраняется)',
+    'set.bg': 'Фон', 'set.pet': 'Питомец-помощник',
+    'set.about': 'О версии', 'set.version': 'Текущая версия', 'set.check': 'Проверить обновления',
+    'set.upToDate': 'У вас последняя версия ({v})', 'set.updateFound': 'Доступна версия {v} — нажмите Ctrl+F5',
+    'set.updateFail': 'Проверка не удалась — проверьте сеть',
+    'set.trialBadge': ' · 🎁 Про-пробник',
+    'set.creator': 'Автор: 小柚子 (Сяо Юцзы)', 'set.creatorNote': 'Сайт разработан одним человеком · обновления нерегулярны',
+    'set.tip': '☕ Поддержать автора',
+    'sp.pickTip': 'Кликните автора, чтобы выбрать его эталоном (повторный клик — отмена). «Изучить стили онлайн» загрузит материалы из Википедии. Не нашли любимого автора? Добавьте через поиск.',
+    'sp.mineTip': 'Вставьте образец своего текста (до 500 знаков): ИИ изучит ваш ритм, лексику и стиль диалогов — результат будет похож на ваш.',
+    'sp.filterPh': 'Фильтр авторов…',
+    'auth.title': '👤 Вход / Регистрация', 'auth.login': 'Вход', 'auth.register': 'Регистрация',
+    'auth.user': 'Имя пользователя', 'auth.userPh': '2-20 знаков: буквы / цифры / _ / китайские',
+    'auth.pass': 'Пароль', 'auth.passPh': 'Минимум 6 знаков, обязательно буквы И цифры',
+    'auth.pass2': 'Подтвердите пароль', 'auth.pass2Ph': 'Введите пароль ещё раз',
+    'auth.submitLogin': 'Войти', 'auth.submitRegister': 'Зарегистрироваться и начать',
+    'auth.errUser': 'Имя: 2-20 знаков (буквы / цифры / _ / китайские)',
+    'auth.errPass': 'Пароль: 6-20 знаков, обязательно буквы и цифры',
+    'auth.errPass2': 'Пароли не совпадают',
+    'auth.errLogin': 'Неверное имя или пароль', 'auth.errExists': 'Такое имя уже занято — войдите',
+    'auth.okRegister': 'Готово! Вы вошли — пробный Про на 1 день активирован',
+    'auth.welcome': 'С возвращением, {u}',
+    'auth.trialBanner': '🎁 Новым аккаунтам — 1 день бесплатного Про (покупка не требуется)',
+    'auth.account': 'Аккаунт', 'auth.logout': 'Выйти',
+    'auth.confirmLogout': 'Выйти из аккаунта? Ваши работы останутся на этом устройстве.', 'auth.loggedOut': 'Вы вышли',
+    'guide.title': '🎓 Знакомство', 'guide.skip': 'Пропустить', 'guide.prev': 'Назад', 'guide.next': 'Далее', 'guide.done': 'Начать писать',
+    'guide.s1': '<h3>👋 Добро пожаловать в XIAOXING</h3><p>Это <b>студия романов всех жанров</b>: пишете план — ИИ пишет текст. Три шага:</p><ul><li><span class="g-num">1</span> «＋ Новый роман», выберите стиль (название можно позже)</li><li><span class="g-num">2</span> Откройте главу и опишите, что в ней произойдёт, в «📋 План главы»</li><li><span class="g-num">3</span> Нажмите «🚀 Начать писать» — текст появится сам</li></ul>',
+    'guide.s2': '<h3>🤖 Сначала — бесплатная ИИ-модель (бесплатно)</h3><p>В XIAOXING <b>встроена бесплатная модель</b> — она подключается автоматически после регистрации. Настраивать ничего не нужно.</p><ul><li>Посмотреть или сменить модель: «⚙ Настройки → ИИ-модели»</li><li>Бесплатная модель иногда тормозит — система <b>автоматически повторяет и переключает резервные модели</b></li><li>Хотите стабильнее? Зарегистрируйтесь бесплатно на SiliconFlow (siliconflow.cn), возьмите ключ, выберите пресет и вставьте его</li><li>Проверьте кнопкой «Проверить подключение»</li></ul><p>Если ИИ выдал ошибку — не пугайтесь: на экране появится понятная подсказка.</p>',
+    'guide.s3': '<h3>✍️ Остальное в двух словах</h3><ul><li><b>Стиль</b>: вкладка «🖊 Стиль» слева — выбирайте авторов или вставьте свои 500 знаков</li><li><b>Не понравилось?</b> «🔄 Заново» — бесплатно и без ограничений</li><li><b>Интерфейс</b>: «⚙ Настройки» — шрифт, фон (Солнечная система / Галактика / Планета), язык, цвет</li><li><b>Названия</b>: кнопка «✨» — выбирайте из вариантов ИИ</li><li><b>Сохранение</b>: всё хранится на вашем устройстве; перенос через «Резерв и экспорт»</li><li><b>Помощь</b>: кликните инопланетянина слева внизу</li></ul>',
+    'guide.s4': '<h3>💎 О платных планах (в самом конце)</h3><p>Сейчас <b>бета: всё бесплатно</b>. Никаких обязательных покупок.</p><ul><li>🎁 Новый аккаунт уже получил <b>1 день бесплатного Про</b>: DeepSeek, Kimi, GLM, Qwen и другие модели, память до 5 глав</li><li>После пробника вы автоматически вернётесь на бесплатный план — работы и данные не пострадают</li><li>Центр членства объясняет планы (тоже бесплатно во время беты)</li><li>О платном запуске предупредим заранее — автоплатежей не будет</li></ul><p>Всё готово — пишите! 🚀</p>',
+    'asst.title': '🛸 Помощник', 'asst.petTitle': 'Кликните меня — открою помощника', 'asst.hide': '🙈 Скрыть питомца',
+    'asst.a1': '＋ Новый роман', 'asst.a2': '🚀 Начать писать', 'asst.a3': '✨ Названия', 'asst.a4': '⚙ Настройки', 'asst.a5': '💬 Отзыв',
+    'asst.guide': '<h3>🚀 Три шага до первой главы</h3><ul><li><b>Шаг 1 · Роман</b>: «＋ Новый роман» и таблица стиля. Название можно оставить пустым.</li><li><b>Шаг 2 · План</b>: откройте главу и опишите, что произойдёт, в «📋 План главы».</li><li><b>Шаг 3 · Пишем</b>: «🚀 Начать писать» — ИИ изучит стили онлайн, составит черновик и напишет текст. Не понравилось — «🔄 Заново».</li></ul><h3>💡 Частые вопросы</h3><ul><li><b>Где текст?</b> В большом поле под планом; сохраняется автоматически.</li><li><b>План и текст рядом?</b> Кнопка «⇋» на панели плана или «⚙ Настройки → Макет».</li><li><b>ИИ пишет не как вы?</b> Вкладка «🖊 Стиль»: авторы или свой текст 500 знаков.</li><li><b>Шрифт, фон, тема?</b> «⚙ Настройки» — есть Солнечная система, Галактика, Планета.</li><li><b>Боитесь потерять данные?</b> «⚙ Настройки → Резерв и экспорт».</li><li><b>Остались вопросы?</b> «⚙ Настройки → Обратная связь».</li></ul>',
+    'storage.title': '💾 Разрешение на хранение',
+    'storage.desc': '<p>XIAOXING сохраняет ваши <b>романы, планы, персонажей и память</b> в <b>хранилище браузера на вашем устройстве</b> (IndexedDB) для автосохранения. На серверы ничего не загружается.</p><p>Согласитесь — работы сохраняются. Откажетесь — <b>ничего не сохранится</b> и может пропасть при закрытии страницы.</p>',
+    'storage.allow': 'Разрешить и сохранять', 'storage.deny': 'Отказаться',
+    'storage.warn': '⚠ Хранилище не разрешено: работы НЕ сохраняются. Разрешите в «⚙ Настройки → Хранилище».',
+    'tip.title': '☕ Поддержать автора',
+    'tip.note': 'Сайт создан одним человеком — 小柚子 (Сяо Юцзы) — и обновляется нерегулярно. Поддержка полностью добровольная, без обязательств.',
+    'tip.amount': 'Сумма поддержки',
+    'tip.customPh': 'Своя сумма (юани)…',
+    'tip.msg': 'Слова для автора (необязательно)',
+    'tip.msgPh': 'Пожелания, идеи, слова поддержки…',
+    'tip.send': '💛 Отправить поддержку',
+    'tip.thanks': 'Спасибо за поддержку! 小柚子 получил(а) ваше сообщение 💛',
+    'tip.fail': 'Не удалось отправить, попробуйте позже', 'tip.needAmount': 'Выберите или введите сумму'
   }
 };
 function t(k, vars) {
@@ -621,7 +838,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.3.0';
+const APP_VERSION = '3.4.0';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -638,7 +855,7 @@ const state = {
   wikiCache: {},
   learning: false,
   genState: { running: false, stageIdx: -1, abort: null },
-  accounts: {}, currentUser: null, authMode: 'login', guideStep: 0
+  accounts: {}, currentUser: null, authMode: 'login', guideStep: 0, tipAmount: null
 };
 let lastTrialState = null;
 function loadSettings() {
@@ -1623,6 +1840,31 @@ async function dictSearch(word) {
   $('#dict-input').value = word;
   const box = $('#dict-result');
   box.innerHTML = '<div class="dict-loading">' + t('dict.loading') + '</div>';
+  // 俄语词典（西里尔字母 → 维基词典 REST，含书面与口语词汇）
+  if (/[\u0400-\u04FF]/.test(word)) {
+    try {
+      const r = await fetch('https://en.wiktionary.org/api/rest_v1/page/definition/' + encodeURIComponent(word), { signal: AbortSignal.timeout(12000) });
+      if (r.ok) {
+        const j = await r.json();
+        const langEntries = (j && (j.ru || j.Russian)) || [];
+        if (langEntries.length) {
+          const meanings = langEntries.slice(0, 4).map(m => {
+            const defs = (m.definitions || []).slice(0, 4).map(d => `<div class="dict-def">${esc(d.definition)}</div>`).join('');
+            return `<div class="dict-meaning"><span class="dict-pos">${esc(m.partOfSpeech || '')}</span>${defs}</div>`;
+          }).join('');
+          box.innerHTML = `<div class="dict-word"><b>${esc(word)}</b></div><div class="dict-meanings">${meanings}</div><div class="dict-source">${t('dict.src')}</div>`;
+        } else {
+          box.innerHTML = '<div class="dict-empty">' + t('dict.notfound') + '</div>';
+        }
+      } else {
+        box.innerHTML = '<div class="dict-empty">' + t('dict.notfound') + '</div>';
+      }
+    } catch (e) {
+      box.innerHTML = '<div class="dict-empty">' + t('dict.errNet') + '</div>';
+    }
+    box.scrollTop = 0;
+    return;
+  }
   // 主源：dictionaryapi.dev（完整释义/音标/例句）
   let data = null, apiOk = false;
   try {
@@ -3268,6 +3510,48 @@ function advanceOnboarding() {
   if (!guidedDone()) openGuide();
 }
 
+/* ---------------- 支持创作者（打赏 · 自愿） ---------------- */
+function openTipModal() {
+  state.tipAmount = null;
+  $$('#modal-tip [data-tip]').forEach(b => b.classList.remove('on'));
+  $('#tip-custom').value = '';
+  $('#tip-msg').value = '';
+  openModal('modal-tip');
+}
+async function submitTip() {
+  const amount = state.tipAmount;
+  if (!amount) return toast(t('tip.needAmount'), 'warn');
+  const msg = $('#tip-msg').value.trim();
+  const btn = $('#btn-tip-send');
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/3254643926@qq.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: '【晓星打赏】' + amount + '元',
+        message: (msg || '（无留言）') + '\n支持金额：' + amount + ' 元',
+        nickname: (state.settings.user || {}).nickname || '',
+        user: state.currentUser || '',
+        page: location.href,
+        time: new Date().toISOString()
+      })
+    });
+    const j = await res.json();
+    if (j && (j.success === true || j.success === 'true')) {
+      closeModal('modal-tip');
+      $('#tip-msg').value = '';
+      toast(t('tip.thanks'), 'ok', 4000);
+    } else {
+      throw new Error('submit fail');
+    }
+  } catch (e) {
+    toast(t('tip.fail'), 'err', 4500);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 /* ---------------- 设置中心 ---------------- */
 function adjustFont(d) {
   state.settings.fontSize = clamp(state.settings.fontSize + d, 14, 32);
@@ -3276,8 +3560,9 @@ function adjustFont(d) {
   const v = $('#set-font-val');
   if (v) v.textContent = state.settings.fontSize + 'px';
 }
-function toggleLang() {
-  state.settings.lang = state.settings.lang === 'zh' ? 'en' : 'zh';
+function setLang(l) {
+  if (state.settings.lang === l) return;
+  state.settings.lang = l;
   saveSettings();
   renderAll();
   refreshSettingsChips();
@@ -3298,6 +3583,7 @@ function refreshSettingsChips() {
   $('#set-ai-off').classList.toggle('on', !s.aiPanelOpen);
   $('#set-lang-zh').classList.toggle('on', s.lang === 'zh');
   $('#set-lang-en').classList.toggle('on', s.lang === 'en');
+  $('#set-lang-ru').classList.toggle('on', s.lang === 'ru');
 }
 function openSettings() {
   const s = state.settings;
@@ -3452,14 +3738,31 @@ function bindEvents() {
   $('#set-layout-split').addEventListener('click', () => { state.settings.layout = 'split'; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
   $('#set-ai-on').addEventListener('click', () => { state.settings.aiPanelOpen = true; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
   $('#set-ai-off').addEventListener('click', () => { state.settings.aiPanelOpen = false; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
-  $('#set-lang-zh').addEventListener('click', () => { if (state.settings.lang !== 'zh') toggleLang(); });
-  $('#set-lang-en').addEventListener('click', () => { if (state.settings.lang !== 'en') toggleLang(); });
+  $('#set-lang-zh').addEventListener('click', () => setLang('zh'));
+  $('#set-lang-en').addEventListener('click', () => setLang('en'));
+  $('#set-lang-ru').addEventListener('click', () => setLang('ru'));
   $('#set-profile-edit').addEventListener('click', openProfile);
   $('#set-backup').addEventListener('click', () => openModal('modal-backup'));
   $('#set-ai').addEventListener('click', openAISettings);
   $('#set-feedback').addEventListener('click', () => openModal('modal-feedback'));
   $('#set-terms').addEventListener('click', openTerms);
   $('#btn-check-update').addEventListener('click', checkUpdate);
+  // 支持创作者（打赏）
+  $('#set-tip').addEventListener('click', openTipModal);
+  $('#btn-vip-tip').addEventListener('click', () => { closeModal('modal-vip'); openTipModal(); });
+  $('#btn-tip-send').addEventListener('click', submitTip);
+  $('#tip-custom').addEventListener('input', e => {
+    state.tipAmount = e.target.value || null;
+    if (state.tipAmount) $$('#modal-tip [data-tip]').forEach(b => b.classList.remove('on'));
+  });
+  document.addEventListener('click', e => {
+    const t3 = e.target.closest('[data-tip]');
+    if (t3) {
+      state.tipAmount = t3.dataset.tip;
+      $$('#modal-tip [data-tip]').forEach(b => b.classList.toggle('on', b === t3));
+      $('#tip-custom').value = '';
+    }
+  });
   // AI 面板
   $('#btn-ai-toggle').addEventListener('click', () => { state.settings.aiPanelOpen = !state.settings.aiPanelOpen; saveSettings(); applyUIPrefs(); });
   $('#btn-ai-close').addEventListener('click', () => { state.settings.aiPanelOpen = false; saveSettings(); applyUIPrefs(); });
