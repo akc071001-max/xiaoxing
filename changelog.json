@@ -1,10 +1,16 @@
 {
-  "version": "3.7.0",
+  "version": "3.7.1",
   "date": "2026-01-15",
   "items": [
-    { "title": "论文输出语言自由选择", "desc": "论文工具栏新增输出语言选择：中文 / English / Русский / 日本語 / Français / Deutsch / Español，每篇论文独立记忆" },
-    { "title": "体验期最高规格待遇", "desc": "新用户 1 天体验期内享受旗舰版待遇：最长篇幅、最多参考文献、最大记忆（前 10 章）、最多次质量重写机会" },
-    { "title": "AI 质量自检循环（双模块）", "desc": "小说与论文写完正文后，AI 先逐条自查（文风/连贯/引用/格式/完整度），发现问题自动重写再查，不达标绝不输出，确保只输出高品质内容" },
-    { "title": "生成阶段新增「质量自检」", "desc": "进度条新增 ⚖ 质量自检与重写优化阶段，自检过程全程可见" }
+    { "title": "纯语言界面", "desc": "网站所有内容完全自适应用户所选语言：中文界面就是纯中文，不再混用英文标签（品牌副标题、风格档案、字数统计等全部本地化）" },
+    { "title": "更新弹窗三语", "desc": "更新完成弹窗的内容也跟随界面语言显示" }
+  ],
+  "itemsEn": [
+    { "title": "Pure-language interface", "desc": "Every element now fully follows the chosen language: the Chinese UI is pure Chinese with no mixed English labels (brand subtitle, style profile, word counts etc. are all localized)." },
+    { "title": "Trilingual update popup", "desc": "The update popup content now follows the interface language too." }
+  ],
+  "itemsRu": [
+    { "title": "Чистоязычный интерфейс", "desc": "Все элементы сайта полностью следуют выбранному языку: китайский интерфейс — только по-китайски, без смешанных английских надписей (подзаголовок бренда, профиль стиля, счётчики слов — всё локализовано)." },
+    { "title": "Трёхъязычное окно обновлений", "desc": "Содержимое окна обновлений теперь тоже следует языку интерфейса." }
   ]
 }
