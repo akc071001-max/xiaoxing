@@ -65,21 +65,26 @@
 - **文风诊断**：AI 面板「✧ 文风诊断」会对当前章节给出句式重复、对话自然度、套路化表达等具体修改建议。
 - 学习结果缓存在本机，重复学习不会重复请求。
 
-## 🤖 接入 AI 模型（OpenAI 兼容接口）
+## 🤖 AI 剧情引擎（内置免费模型，开箱即用）
 
-右上角「⚙ AI 模型」→ 选预设快速填充，或手动填写：
+**无需任何配置**：首次打开网站会自动接入 **Pollinations AI** 免费模型（免注册、免 Key），右上角显示「Pollinations 免费模型 · openai」即可直接续写、推演、润色。
 
-| 服务商 | API 地址（Base URL） | 模型示例 |
-| --- | --- | --- |
-| DeepSeek | `https://api.deepseek.com/v1` | `deepseek-chat` |
-| OpenAI | `https://api.openai.com/v1` | `gpt-4o-mini` |
-| 硅基流动 | `https://api.siliconflow.cn/v1` | `deepseek-ai/DeepSeek-V3` |
-| Moonshot Kimi | `https://api.moonshot.cn/v1` | `moonshot-v1-32k` |
-| 智谱 GLM | `https://open.bigmodel.cn/api/paas/v4` | `glm-4-air` |
-| 通义千问 | `https://dashscope.aliyuncs.com/compatible-mode/v1` | `qwen-plus` |
-| Ollama（本地） | `http://localhost:11434/v1` | `qwen2.5:14b` |
-| LM Studio（本地） | `http://localhost:1234/v1` | `local-model` |
-| vLLM / llama.cpp | `http://localhost:8000/v1` | 自定义 |
+> ⚠️ 免费模型额度有限，高峰时段可能变慢或限流（报错会提示稍后重试）。追求稳定高速体验，建议接入自己的模型（见下表）。
+
+右上角「⚙ AI 模型」→ 选预设快速填充，或手动填写（新增「接口路径」字段，一般默认 `/chat/completions` 即可；Pollinations 使用 `/openai`）：
+
+| 服务商 | API 地址（Base URL） | 接口路径 | 模型示例 | 费用 |
+| --- | --- | --- | --- | --- |
+| Pollinations（内置默认） | `https://text.pollinations.ai` | `/openai` | `openai` | 免费·免密钥 |
+| DeepSeek | `https://api.deepseek.com/v1` | `/chat/completions` | `deepseek-chat` | 极低价 |
+| OpenAI | `https://api.openai.com/v1` | `/chat/completions` | `gpt-4o-mini` | 付费 |
+| 硅基流动 | `https://api.siliconflow.cn/v1` | `/chat/completions` | `deepseek-ai/DeepSeek-V3` | 有免费额度 |
+| Moonshot Kimi | `https://api.moonshot.cn/v1` | `/chat/completions` | `moonshot-v1-32k` | 有免费额度 |
+| 智谱 GLM | `https://open.bigmodel.cn/api/paas/v4` | `/chat/completions` | `glm-4-air` | 有免费额度 |
+| 通义千问 | `https://dashscope.aliyuncs.com/compatible-mode/v1` | `/chat/completions` | `qwen-plus` | 有免费额度 |
+| Ollama（本地） | `http://localhost:11434/v1` | `/chat/completions` | `qwen2.5:14b` | 免费·本地 |
+| LM Studio（本地） | `http://localhost:1234/v1` | `/chat/completions` | `local-model` | 免费·本地 |
+| vLLM / llama.cpp | `http://localhost:8000/v1` | `/chat/completions` | 自定义 | 免费·本地 |
 
 云端模型填上对应 **API Key**；本地模型 Key 留空。「测试连接」可即时验证。
 
