@@ -192,6 +192,8 @@ const I18N = {
     'novel.titleSuggest': '✨ 智能起书名', 'novel.titleSuggestHint': '书名可先空着，写下简介后让 AI 从大纲推理多个候选书名，你来挑选',
     'novel.pending': '书名待定',
     'style.narrative': '写法', 'style.dialogue': '对话为主', 'style.balanced': '对话叙述均衡', 'style.narrativeMode': '叙述为主',
+    'style.standard': '创作标准', 'style.stGeneric': '通用', 'style.stNet': '中国网文', 'style.stTrad': '中式传统', 'style.stJP': '日式轻小说', 'style.stWest': '欧美小说', 'style.stRu': '俄式文学',
+    'style.personal': '个性化输出', 'style.perHuman': '更像人写的（自然化）', 'style.perStandard': '标准输出',
     'storage.title': '💾 存储权限请求',
     'storage.desc': '<p>晓星需要把您的<b>小说、大纲、角色、记忆</b>等作品数据保存在<b>您自己设备的浏览器存储</b>中（IndexedDB），用于自动保存与下次继续创作。数据不会上传到任何服务器。</p><p>同意后作品会自动保存；拒绝则本次创作内容<b>不会保存</b>，关闭页面后可能丢失。</p>',
     'storage.allow': '同意并存储', 'storage.deny': '拒绝',
@@ -410,6 +412,8 @@ const I18N = {
     'novel.titleSuggest': '✨ AI Title Ideas', 'novel.titleSuggestHint': 'Leave the title blank — write a synopsis, then let AI infer several candidates for you to pick.',
     'novel.pending': 'Untitled',
     'style.narrative': 'Narration', 'style.dialogue': 'Dialogue-first', 'style.balanced': 'Balanced', 'style.narrativeMode': 'Narrative-first',
+    'style.standard': 'Creation standard', 'style.stGeneric': 'Universal', 'style.stNet': 'CN web fiction', 'style.stTrad': 'CN classic', 'style.stJP': 'JP light novel', 'style.stWest': 'Western', 'style.stRu': 'Russian',
+    'style.personal': 'Personalization', 'style.perHuman': 'More human-like', 'style.perStandard': 'Standard output',
     'storage.title': '💾 Storage Permission',
     'storage.desc': '<p>XIAOXING needs to save your <b>novels, outlines, characters and memories</b> in <b>your own device\'s browser storage</b> (IndexedDB) for autosave and future sessions. Nothing is uploaded to any server.</p><p>If you agree, your work autosaves. If you decline, <b>nothing will be saved</b> and it may be lost when you close the page.</p>',
     'storage.allow': 'Allow & Save', 'storage.deny': 'Decline',
@@ -507,6 +511,8 @@ const I18N = {
     'novel.legacyGenre': 'Без жанра',
     'style.audience': 'Аудитория', 'style.genres': 'Жанры (несколько)', 'style.length': 'Объём', 'style.pov': 'Точка зрения', 'style.tone': 'Тон',
     'style.narrative': 'Повествование', 'style.dialogue': 'Диалоги в приоритете', 'style.balanced': 'Баланс', 'style.narrativeMode': 'Повествование в приоритете',
+    'style.standard': 'Стандарт творчества', 'style.stGeneric': 'Универсальный', 'style.stNet': 'Китайский веб-роман', 'style.stTrad': 'Китайская классика', 'style.stJP': 'Японское ранобэ', 'style.stWest': 'Западный роман', 'style.stRu': 'Русская литература',
+    'style.personal': 'Персонализация', 'style.perHuman': 'Более человечно', 'style.perStandard': 'Стандартный вывод',
     'style.lang': 'Язык', 'style.authors': 'Эталонные авторы (рекомендация)', 'style.learn': '⛁ Изучить стили онлайн',
     'aiset.title': '⚙ Доступ к ИИ-моделям', 'aiset.list': 'Подключённые модели', 'aiset.add': '＋ Добавить модель', 'aiset.accent': 'Цвет акцента',
     'aiset.config': 'Конфигурация', 'aiset.preset': 'Пресет (быстрое заполнение)', 'aiset.name': 'Отображаемое имя',
@@ -791,7 +797,8 @@ const SYSTEM_PROMPT = [
   '6. 永远尊重用户创意，可大胆提出构思，但不擅自删除设定。',
   '7. 文笔要求（非常重要）：像人类作家一样写作——句式长短交错，段落节奏有变化；避免连续段落用相同句式开头；少用「只见/顿时/不由得/心中一动」等套路词堆砌；对话口语化、符合人物身份与情绪；用具体细节与五感描写代替抽象概括；避免机械重复同一表达；情节推进自然，不硬凑。',
   '8. 若用户提供了参考作家：学习其写作技法（而非抄袭其句子或情节），结合本小说题材灵活运用，让文笔接地气、通人性。',
-  '9. 若风格档案标注写作语言为英文，正文与润色请用地道自然的英文输出。'
+  '9. 若风格档案标注写作语言为英文，正文与润色请用地道自然的英文输出。',
+  '10. 所有输出遵循标准格式：使用规范文字与标点，不使用表情符号、特殊符号或装饰性字符；引用与参考文献按学术规范标注。'
 ].join('\n');
 
 /* ---------------- 数据库 ---------------- */
@@ -880,7 +887,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.5.0';
+const APP_VERSION = '3.6.0';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -1048,11 +1055,13 @@ function openNovelModal(id) {
       pov: n.pov || '未定',
       tone: n.tone || '未定',
       narrative: n.narrative || 'dialogue',
+      standard: n.standard || '通用',
+      personal: n.personal || 'human',
       lang: n.lang || 'zh',
       authors: [...novelRefAuthors(n)]
     };
   } else {
-    state.styleDraft = { audience: '通用', genres: [], length: '未定', pov: '未定', tone: '未定', narrative: 'dialogue', lang: 'zh', authors: [] };
+    state.styleDraft = { audience: '通用', genres: [], length: '未定', pov: '未定', tone: '未定', narrative: 'dialogue', standard: '通用', personal: 'human', lang: 'zh', authors: [] };
   }
   renderStyleChips();
   $('#novel-learn-status').textContent = '';
@@ -1066,7 +1075,7 @@ function renderStyleChips() {
   if (gWrap) gWrap.innerHTML = GENRES.map(g => `<button class="chip ${d.genres.includes(g) ? 'on' : ''}" data-val="${g}">${esc(g)}</button>`).join('');
   const aWrap = document.querySelector('#modal-novel [data-field="authors"]');
   if (aWrap) aWrap.innerHTML = allAuthors().map(a => `<button class="chip ${d.authors.includes(a.id) ? 'on' : ''}" data-val="${a.id}">${esc(a.name)}${a.custom ? ' ✦' : ''}</button>`).join('');
-  ['audience', 'length', 'pov', 'tone', 'narrative', 'lang'].forEach(f => {
+  ['audience', 'length', 'pov', 'tone', 'narrative', 'standard', 'personal', 'lang'].forEach(f => {
     $$('#modal-novel [data-field="' + f + '"] .chip').forEach(b => b.classList.toggle('on', b.dataset.val === d[f]));
   });
 }
@@ -1091,14 +1100,16 @@ async function saveNovelFromForm() {
   const title = $('#novel-title').value.trim();
   const id = state.novelEditingId;
   const desc = $('#novel-desc').value.trim();
-  const d = state.styleDraft || { audience: '通用', genres: [], length: '未定', pov: '未定', tone: '未定', narrative: 'dialogue', lang: 'zh', authors: [] };
+  const d = state.styleDraft || { audience: '通用', genres: [], length: '未定', pov: '未定', tone: '未定', narrative: 'dialogue', standard: '通用', personal: 'human', lang: 'zh', authors: [] };
   const genreStr = d.genres.join('、') || t('novel.legacyGenre');
   if (id) {
     const n = state.novels.find(x => x.id === id);
     if (n) {
       n.title = title; n.description = desc;
       n.audience = d.audience; n.genres = [...d.genres]; n.genre = genreStr;
-      n.length = d.length; n.pov = d.pov; n.tone = d.tone; n.narrative = d.narrative; n.lang = d.lang; n.refAuthors = [...d.authors];
+      n.length = d.length; n.pov = d.pov; n.tone = d.tone; n.narrative = d.narrative;
+      n.standard = d.standard; n.personal = d.personal;
+      n.lang = d.lang; n.refAuthors = [...d.authors];
       n.updatedAt = now();
       await dbPut(STORE.novels, n);
     }
@@ -1106,7 +1117,9 @@ async function saveNovelFromForm() {
     const n = {
       id: uid(), title, description: desc,
       audience: d.audience, genres: [...d.genres], genre: genreStr,
-      length: d.length, pov: d.pov, tone: d.tone, narrative: d.narrative, lang: d.lang, refAuthors: [...d.authors],
+      length: d.length, pov: d.pov, tone: d.tone, narrative: d.narrative,
+      standard: d.standard, personal: d.personal,
+      lang: d.lang, refAuthors: [...d.authors],
       styleMode: 'author', styleSample: '',
       color: PALETTE[state.novels.length % PALETTE.length],
       createdAt: now(), updatedAt: now(), synopsis: '', world: '', worldSections: []
@@ -2235,8 +2248,10 @@ function formatStyleForAI() {
   if (!n) return '（无）';
   const gs = novelGenres(n).join('、') || t('novel.legacyGenre');
   const nar = { dialogue: t('style.dialogue'), balanced: t('style.balanced'), narrative: t('style.narrativeMode') }[n.narrative] || t('style.dialogue');
+  const std = n.standard || '通用';
+  const per = n.personal === 'standard' ? '标准输出' : '更像人写的（自然化）';
   const lines = [];
-  lines.push(`用户群体：${n.audience || '通用'}；类型：${gs}；篇幅：${n.length || '未定'}；视角：${n.pov || '未定'}；基调：${n.tone || '未定'}；写法：${nar}；写作语言：${n.lang === 'en' ? '英文' : '中文'}`);
+  lines.push(`用户群体：${n.audience || '通用'}；类型：${gs}；篇幅：${n.length || '未定'}；视角：${n.pov || '未定'}；基调：${n.tone || '未定'}；写法：${nar}；创作标准：${std}；个性化输出：${per}；写作语言：${n.lang === 'en' ? '英文' : '中文'}`);
   const styleMode = n.styleMode || 'author';
   if (styleMode === 'mine' && n.styleSample && n.styleSample.trim()) {
     lines.push('【用户文风样本】请学习该样本的句式节奏、用词习惯、对话风格与叙事口吻，模仿其文风进行创作（学习文风，不抄袭内容）：\n' + n.styleSample.trim().slice(0, 500));
@@ -2646,9 +2661,15 @@ async function aiCallRetry(messages, opts, stageNote) {
 function narrativeHint(n) {
   if (!n) return '';
   const m = n.narrative || 'dialogue';
-  if (m === 'dialogue') return '写作手法要求：以人物对话为主要呈现方式，用对话推动剧情，旁白精简克制。';
-  if (m === 'narrative') return '写作手法要求：以叙述旁白为主，注重场景描写与心理铺陈，对话为辅。';
-  return '写作手法要求：对话与叙述均衡搭配。';
+  let hint = '';
+  if (m === 'dialogue') hint = '写作手法要求：以人物对话为主要呈现方式，用对话推动剧情，旁白精简克制。';
+  else if (m === 'narrative') hint = '写作手法要求：以叙述旁白为主，注重场景描写与心理铺陈，对话为辅。';
+  else hint = '写作手法要求：对话与叙述均衡搭配。';
+  const std = n.standard || '通用';
+  if (std !== '通用') hint += `创作标准：遵循「${std}」的叙事习惯与文体规范。`;
+  if ((n.personal || 'human') === 'human') hint += '个性化要求：输出要像真人作者——避免 AI 腔与套路句式，句式灵活多变、长短交错，情感自然不堆砌，允许恰当的口语化表达，让读者感觉是人写的。';
+  else hint += '输出要求：规范、标准、结构清晰。';
+  return hint;
 }
 async function genDraft(outline, planCtx) {
   const n = curNovel();
@@ -2845,6 +2866,7 @@ function applyUIPrefs() {
   document.body.classList.toggle('board-paper', state.board === 'paper');
   $('#board-novel').classList.toggle('on', state.board === 'novel');
   $('#board-paper').classList.toggle('on', state.board === 'paper');
+  $$('#modal-auth [data-authlang]').forEach(b => b.classList.toggle('on', b.dataset.authlang === state.settings.lang));
   // 动态背景
   bgMode = state.settings.bg || 'stars';
   const bgChips = { stars: 'set-bg-stars', solar: 'set-bg-solar', galaxy: 'set-bg-galaxy', planet: 'set-bg-planet' };
@@ -3815,9 +3837,21 @@ async function fetchRefs(topic, count) {
 }
 function refsToText(refs) {
   if (!refs.length) return '';
-  return refs.map((r, i) =>
-    `[${i + 1}] ${r.title}${r.authors ? ' — ' + r.authors : ''}${r.year ? '（' + r.year + '）' : ''}${r.venue ? ' · ' + r.venue : ''}\n    出处链接：${r.url}`
-  ).join('\n');
+  const today = new Date().toISOString().slice(0, 10);
+  return refs.map((r, i) => {
+    const au = r.authors ? r.authors + '. ' : '';
+    const ven = r.venue || '';
+    const yr = r.year || '';
+    const isNet = !ven || ven === '维基百科';
+    const tag = isNet ? '[EB/OL]. ' : '[J]. ';
+    const source = isNet ? (ven ? ven + ', ' : '') + '检索于' + today + '. ' : (ven + (yr ? ', ' + yr : '') + '. ');
+    return `[${i + 1}] ${au}${r.title}${tag}${source}链接: ${r.url}`;
+  }).join('\n');
+}
+function cleanPaperText(s) {
+  return s
+    .replace(/[\u{1F000}-\u{1FAFF}\u{2190}-\u{21FF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{FFFD}]/gu, '')
+    .replace(/[✦✧✩✪✫✬✭✮✯✰✱✲✳✴✵✶✷✸✹✺✻✼✽✾✿❀❁❂❃❄❅❆❇❈❉❊❋☀☁★☆♠♣♥♦]/g, '');
 }
 async function paperDraft(topic, refsText, lenHint) {
   const messages = [
@@ -3832,17 +3866,18 @@ async function paperDraft(topic, refsText, lenHint) {
 async function paperStream(topic, draft, refsText, lenHint, ed) {
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: `请根据以下内容撰写完整论文正文，要求：\n1. 学术规范、语言严谨；字数约 ${lenHint}。\n2. 正文引用处一律用 [n] 标注，且只能引用下方给定文献，不得编造文献。\n3. 文末必须附「参考文献」列表：编号、标题、作者、出处、年份、网页链接。\n4. 若下方文献为空，文末注明「在线检索受限，参考文献待补充」，不要编造。\n5. 直接输出正文（含文末参考文献列表），不要任何额外解释。\n\n【论文主题/要求】\n${topic}\n\n【提纲】\n${draft}\n\n【可引用文献】\n${refsText || '（无）'}` }
+    { role: 'user', content: `请根据以下内容撰写完整论文正文，要求：\n1. 学术规范、语言严谨；字数约 ${lenHint}。\n2. 正文引用处一律用 [n] 标注，且只能引用下方给定文献，不得编造文献。\n3. 文末必须附「参考文献」列表，严格按最标准格式，每条必须附上检索到的网页链接：\n[编号] 作者. 标题[J]. 期刊/来源, 年份, 卷(期): 页码. 链接: URL\n网络资料用 [EB/OL] 并注明检索日期与链接。\n（信息缺失的字段可省略，但链接不可省略，不得编造）\n4. 只使用规范文字与标点，不使用表情符号、特殊符号或装饰性字符。\n5. 若下方文献为空，文末注明「在线检索受限，参考文献待补充」，不要编造。\n6. 直接输出正文（含文末参考文献列表），不要任何额外解释。\n\n【论文主题/要求】\n${topic}\n\n【提纲】\n${draft}\n\n【可引用文献】\n${refsText || '（无）'}` }
   ];
   const res = await aiCallRetry(messages, { stream: true }, t('gp.pwrite'));
   let acc = '';
   for await (const chunk of aiStream(res)) {
     acc += chunk;
-    ed.value = acc;
+    ed.value = cleanPaperText(acc);
     ed.scrollTop = ed.scrollHeight;
     updatePaperCounts();
   }
   if (!acc.trim()) throw new Error('empty');
+  ed.value = cleanPaperText(acc);
   return acc;
 }
 async function generatePaper() {
@@ -4025,7 +4060,11 @@ function bindEvents() {
   $('#btn-storage-allow').addEventListener('click', allowStorage);
   $('#btn-storage-deny').addEventListener('click', denyStorage);
   $('#set-storage-req').addEventListener('click', openStorageAsk);
-  // 账户 / 登录注册（密码必须字母+数字）
+  // 账户 / 登录注册（密码必须字母+数字；登录界面可切换语言）
+  document.addEventListener('click', e => {
+    const al = e.target.closest('[data-authlang]');
+    if (al) setLang(al.dataset.authlang);
+  });
   $('#auth-tab-login').addEventListener('click', () => switchAuthTab('login'));
   $('#auth-tab-register').addEventListener('click', () => switchAuthTab('register'));
   $('#btn-auth-submit').addEventListener('click', authSubmit);
