@@ -732,20 +732,40 @@
 <!-- 存储警告横幅 -->
 <div id="storage-warn" hidden data-i18n="storage.warn"></div>
 
-<!-- 创作小宠物 -->
-<div id="pet" class="pet" data-i18n-title="asst.petTitle" title="点我，找创作小助手">
-  <svg viewBox="0 0 120 100" width="92" height="78" aria-hidden="true">
-    <ellipse cx="60" cy="80" rx="44" ry="13" fill="#5a3fd6" opacity="0.92"/>
-    <path d="M22 64 Q60 42 98 64 Q60 76 22 64 Z" fill="#00e0ff" opacity="0.85"/>
-    <circle cx="22" cy="66" r="2.6" fill="#ffd75c"/><circle cx="40" cy="60" r="2.6" fill="#ffd75c"/><circle cx="80" cy="60" r="2.6" fill="#ffd75c"/><circle cx="98" cy="66" r="2.6" fill="#ffd75c"/>
-    <ellipse cx="60" cy="54" rx="21" ry="15" fill="#b9f6ff" opacity="0.65"/>
-    <circle cx="60" cy="51" r="12" fill="#7fd16b"/>
-    <line x1="52" y1="41" x2="47" y2="33" stroke="#7fd16b" stroke-width="2"/><circle cx="46.5" cy="32" r="2.4" fill="#ffd75c"/>
-    <line x1="68" y1="41" x2="73" y2="33" stroke="#7fd16b" stroke-width="2"/><circle cx="73.5" cy="32" r="2.4" fill="#ffd75c"/>
-    <circle cx="54.5" cy="49" r="3.2" fill="#0a1f0a"/><circle cx="65.5" cy="49" r="3.2" fill="#0a1f0a"/>
-    <circle cx="55.6" cy="50" r="1.1" fill="#fff"/><circle cx="66.6" cy="50" r="1.1" fill="#fff"/>
-    <path d="M56.5 55 Q60 58 63.5 55" stroke="#0a1f0a" fill="none" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
+<!-- 创作小宠物（可拖拽 / 点击互动 / 双击彩蛋） -->
+<div id="pet" class="pet" data-i18n-title="asst.petTitle" title="拖我随便走 · 点击找小助手 · 双击有惊喜">
+  <div class="pet-wrap">
+    <svg viewBox="0 0 120 100" width="92" height="78" aria-hidden="true">
+      <ellipse cx="60" cy="80" rx="44" ry="13" fill="#5a3fd6" opacity="0.92"/>
+      <path d="M22 64 Q60 42 98 64 Q60 76 22 64 Z" fill="#00e0ff" opacity="0.85"/>
+      <circle cx="22" cy="66" r="2.6" fill="#ffd75c"/><circle cx="40" cy="60" r="2.6" fill="#ffd75c"/><circle cx="80" cy="60" r="2.6" fill="#ffd75c"/><circle cx="98" cy="66" r="2.6" fill="#ffd75c"/>
+      <ellipse cx="60" cy="54" rx="21" ry="15" fill="#b9f6ff" opacity="0.65"/>
+      <circle cx="60" cy="51" r="12" fill="#7fd16b"/>
+      <line x1="52" y1="41" x2="47" y2="33" stroke="#7fd16b" stroke-width="2"/><circle cx="46.5" cy="32" r="2.4" fill="#ffd75c"/>
+      <line x1="68" y1="41" x2="73" y2="33" stroke="#7fd16b" stroke-width="2"/><circle cx="73.5" cy="32" r="2.4" fill="#ffd75c"/>
+      <circle cx="54.5" cy="49" r="3.2" fill="#0a1f0a"/><circle cx="65.5" cy="49" r="3.2" fill="#0a1f0a"/>
+      <circle cx="55.6" cy="50" r="1.1" fill="#fff"/><circle cx="66.6" cy="50" r="1.1" fill="#fff"/>
+      <path d="M56.5 55 Q60 58 63.5 55" stroke="#0a1f0a" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="pet-hurt-face" viewBox="0 0 120 100" width="92" height="78" aria-hidden="true">
+      <ellipse cx="52" cy="49" rx="6.2" ry="5.2" fill="#4a3a72"/>
+      <ellipse cx="68" cy="49" rx="6.2" ry="5.2" fill="#4a3a72"/>
+      <g stroke="#0a1f0a" stroke-width="2" stroke-linecap="round">
+        <line x1="48.5" y1="45.5" x2="55.5" y2="52.5"/><line x1="55.5" y1="45.5" x2="48.5" y2="52.5"/>
+        <line x1="64.5" y1="45.5" x2="71.5" y2="52.5"/><line x1="71.5" y1="45.5" x2="64.5" y2="52.5"/>
+      </g>
+      <circle cx="71" cy="40" r="6" fill="#ff8a7a" stroke="#d85c4a" stroke-width="1.5"/>
+      <circle cx="71" cy="40" r="2.2" fill="#d85c4a"/>
+      <g transform="rotate(-25 47 57)">
+        <rect x="39" y="53" width="16" height="8" rx="3" fill="#ffd9b3"/>
+        <rect x="45.5" y="51.5" width="3" height="11" rx="1.4" fill="#f0b98f"/>
+        <rect x="41" y="54.5" width="12" height="3" rx="1.4" fill="#f0b98f"/>
+      </g>
+      <path d="M55 58 q2.5 3.5 5 0 t5 0" stroke="#0a1f0a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="hurt-stars">✦ ✦ ✦</div>
+  </div>
+  <div id="pet-bubble" class="pet-bubble"></div>
 </div>
 
 <div id="toasts"></div>
