@@ -495,6 +495,41 @@ body.split-layout .co-head .spacer{display:none}
 .tip-amounts .set-chip{font-size:14px;padding:8px 14px}
 .tip-custom{width:150px !important}
 
+/* ---------------- 板块切换（小说 / 论文） ---------------- */
+.board-switch{display:flex;gap:6px;align-items:center;flex:none}
+.board-switch .chip{font-size:12.5px;padding:7px 14px}
+
+/* ---------------- 论文板块 ---------------- */
+#paper-zone{display:none;flex:1;flex-direction:column;min-height:0}
+body.board-paper #paper-zone{display:flex}
+body.board-paper #editor-toolbar,body.board-paper #chapter-outline-bar,body.board-paper #editor,body.board-paper #editor-statusbar{display:none}
+body.board-paper #main-nav{display:none}
+body.board-paper #app{grid-template-columns:300px minmax(0,1fr) 380px}
+body.board-paper.no-ai #app{grid-template-columns:300px minmax(0,1fr)}
+#paper-toolbar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+#paper-title{flex:1;min-width:140px;background:transparent;border:1px solid transparent;border-radius:8px;padding:7px 12px;color:var(--txt-bright);font-family:var(--font-ui);font-size:15px;font-weight:500}
+#paper-title:focus{outline:none;border-color:var(--accent);box-shadow:0 0 10px rgba(0,224,255,.15)}
+#paper-status{background:rgba(16,24,42,.8);border:1px solid var(--line);border-radius:8px;color:var(--txt);font-family:var(--font-ui);font-size:12px;padding:6px 8px;cursor:pointer;flex:none}
+#paper-status:focus{outline:none;border-color:var(--accent)}
+#paper-topic-bar{display:flex;flex-direction:column;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(10,16,30,.4)}
+#paper-topic{background:rgba(8,13,26,.7);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--txt-bright);font-family:var(--font-ui);font-size:15px;line-height:1.8;resize:vertical;min-height:72px}
+#paper-topic:focus{outline:none;border-color:var(--accent);box-shadow:0 0 12px rgba(0,224,255,.15)}
+#paper-free-note{font-size:12px;color:var(--warn);padding:8px 16px;border-bottom:1px dashed var(--line);background:rgba(255,180,84,.05);display:flex;align-items:center;gap:10px;flex-wrap:wrap;line-height:1.7}
+#paper-editor{flex:1;width:100%;background:transparent;border:none;outline:none;resize:none;color:var(--txt-bright);font-family:var(--font-ui);font-size:17px;line-height:2;letter-spacing:.03em;padding:30px 44px;caret-color:var(--accent)}
+#paper-editor::placeholder{color:rgba(126,145,179,.4)}
+#paper-statusbar{display:flex;gap:18px;padding:6px 16px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:10.5px;color:var(--txt-dim)}
+@media (max-width:1100px){
+  body.board-paper #app{display:flex}
+  body.board-paper #side-panel{max-height:40vh}
+  #paper-editor{padding:22px 16px;min-height:320px}
+}
+
+/* ---------------- 开发者名单 · 内嵌打赏（无弹窗） ---------------- */
+.dev-tip{display:flex;gap:16px;padding:14px;border:1px solid var(--line-soft);border-radius:12px;background:rgba(16,24,42,.4);margin-top:6px;align-items:flex-start;flex-wrap:wrap}
+.tip-qr{width:190px;height:auto;border-radius:10px;border:2px solid var(--line-soft);box-shadow:0 0 18px rgba(0,224,255,.15);background:#fff;flex:none}
+.dev-tip-body{flex:1;min-width:220px;display:flex;flex-direction:column;gap:10px}
+.tip-note{font-size:12px;color:var(--txt-dim);line-height:1.8}
+
 /* ---------------- 账户登录 / 注册 ---------------- */
 .auth-tabs{display:flex;gap:10px;margin-bottom:16px}
 .auth-tabs .set-chip{flex:1;padding:9px;font-size:13.5px}
