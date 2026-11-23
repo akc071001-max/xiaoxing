@@ -491,6 +491,10 @@ body.split-layout .co-head .spacer{display:none}
 .vip-foot-note{font-size:11.5px;color:var(--txt-dim);margin-top:14px;text-align:center}
 @media (max-width:900px){.vip-plans{grid-template-columns:1fr}}
 
+.tip-amounts{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 4px;align-items:center}
+.tip-amounts .set-chip{font-size:14px;padding:8px 14px}
+.tip-custom{width:150px !important}
+
 /* ---------------- 账户登录 / 注册 ---------------- */
 .auth-tabs{display:flex;gap:10px;margin-bottom:16px}
 .auth-tabs .set-chip{flex:1;padding:9px;font-size:13.5px}
