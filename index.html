@@ -288,6 +288,24 @@
             </div>
           </div>
           <div class="style-row">
+            <div class="style-label" data-i18n="style.standard">创作标准</div>
+            <div class="style-options" data-field="standard">
+              <button class="chip" data-val="通用" data-i18n="style.stGeneric">通用</button>
+              <button class="chip" data-val="中国网文" data-i18n="style.stNet">中国网文</button>
+              <button class="chip" data-val="中式传统" data-i18n="style.stTrad">中式传统</button>
+              <button class="chip" data-val="日式轻小说" data-i18n="style.stJP">日式轻小说</button>
+              <button class="chip" data-val="欧美小说" data-i18n="style.stWest">欧美小说</button>
+              <button class="chip" data-val="俄式文学" data-i18n="style.stRu">俄式文学</button>
+            </div>
+          </div>
+          <div class="style-row">
+            <div class="style-label" data-i18n="style.personal">个性化输出</div>
+            <div class="style-options" data-field="personal">
+              <button class="chip" data-val="human" data-i18n="style.perHuman">更像人写的（自然化）</button>
+              <button class="chip" data-val="standard" data-i18n="style.perStandard">标准输出</button>
+            </div>
+          </div>
+          <div class="style-row">
             <div class="style-label" data-i18n="style.authors">参考作家（可多选）</div>
             <div class="style-options" data-field="authors"></div>
             <div class="style-learn">
@@ -836,6 +854,11 @@
       <div class="modal-title" data-i18n="auth.title">👤 登录 / 注册</div>
     </div>
     <div class="modal-body">
+      <div class="auth-langs">
+        <button class="chip mini" data-authlang="zh">中文</button>
+        <button class="chip mini" data-authlang="en">English</button>
+        <button class="chip mini" data-authlang="ru">Русский</button>
+      </div>
       <div class="auth-tabs">
         <button class="chip set-chip on" id="auth-tab-login" data-i18n="auth.login">登录</button>
         <button class="chip set-chip" id="auth-tab-register" data-i18n="auth.register">注册</button>
