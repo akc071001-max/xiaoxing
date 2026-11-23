@@ -220,7 +220,29 @@ const I18N = {
     'toast.styleSaved': '文风设置已保存', 'toast.orCopied': '已复制模型名',
     'sp.pickTip': '点击下方作家即可选为参考（可多选，选中后再点一次取消）。「联网学习」会抓取维基百科研究其写作技法；找不到喜欢的作家？用搜索框全网添加。',
     'sp.mineTip': '把你的 500 字文风样本贴在下面：AI 将学习你的句式节奏、用词习惯与对话风格，之后生成的内容会更像你本人写的。',
-    'sp.filterPh': '筛选作家…'
+    'sp.filterPh': '筛选作家…',
+    'auth.title': '👤 登录 / 注册', 'auth.login': '登录', 'auth.register': '注册',
+    'auth.user': '用户名', 'auth.userPh': '2-20 位：字母 / 数字 / 下划线 / 中文',
+    'auth.pass': '密码', 'auth.passPh': '至少 6 位，必须包含英文字母 + 数字',
+    'auth.pass2': '确认密码', 'auth.pass2Ph': '再输入一次密码',
+    'auth.submitLogin': '登录', 'auth.submitRegister': '注册并开启体验',
+    'auth.errUser': '用户名需 2-20 位（字母 / 数字 / 下划线 / 中文）',
+    'auth.errPass': '密码需 6-20 位，且必须同时包含英文字母和数字',
+    'auth.errPass2': '两次输入的密码不一致',
+    'auth.errLogin': '用户名或密码错误', 'auth.errExists': '该用户名已注册，请直接登录',
+    'auth.okRegister': '注册成功！已自动登录，1 天专业版体验已开启',
+    'auth.welcome': '欢迎回来，{u}',
+    'auth.trialBanner': '🎁 注册新账户即享 1 天专业版免费体验（不强制消费）',
+    'auth.account': '登录账户', 'auth.logout': '退出登录',
+    'auth.confirmLogout': '确定退出当前账户？作品数据仍保存在本机。', 'auth.loggedOut': '已退出登录',
+    'set.trialBadge': ' · 🎁 专业版体验中',
+    'guide.title': '🎓 新手引导', 'guide.skip': '跳过', 'guide.prev': '上一步', 'guide.next': '下一步', 'guide.done': '开始使用',
+    'guide.s1': '<h3>👋 欢迎来到晓星 XIAOXING</h3><p>这是一个<b>全风格小说创作台</b>：写大纲，AI 帮你成文。三步就能开始：</p><ul><li><span class="g-num">1</span>「＋ 新建小说」选好风格（书名可以先不填）</li><li><span class="g-num">2</span> 新建章节，在「📋 本章大纲」写下这一章要发生什么</li><li><span class="g-num">3</span> 点「🚀 开始创作」，正文自动流式写出</li></ul>',
+    'guide.s2': '<h3>🤖 先教你配置免费 AI 模型（不用花钱）</h3><p>晓星已经<b>内置了一个免费模型</b>，注册后自动接通，直接就能用，无需任何配置。</p><ul><li>想查看或换模型：右上「⚙ 设置 → AI 模型接入」，能看到当前正在使用的免费模型</li><li>免费模型偶尔会限流或变慢，系统会<b>自动重试并切换备用模型</b>，稍等即可</li><li>想要更稳定？免费注册「硅基流动」（siliconflow.cn）领取免费额度，拿到 Key 后在「AI 模型接入 → 预设」选硅基流动并粘贴 Key 即可</li><li>填好后点「测试连接」确认是否连通</li></ul><p>AI 出问题别慌：页面会给出中文提示，照着做就行。</p>',
+    'guide.s3': '<h3>✍️ 常用操作一览</h3><ul><li><b>文风</b>：左侧「🖊 文风」选参考作家（点一下选中），或贴入你自己的 500 字让 AI 学你的文笔</li><li><b>不满意？</b>点「🔄 重新生成」重来，不扣任何费用</li><li><b>界面</b>：「⚙ 设置」里调字号、换背景（太阳系 / 银河系 / 星球）、切中英文、改主题色</li><li><b>章节标题 / 书名</b>：点「✨」让 AI 起名，你从候选里挑</li><li><b>保存</b>：作品自动保存在您的设备上；换设备用「备份与导出」</li><li><b>求助</b>：点击屏幕左下角的小外星人，随时打开创作小助手</li></ul>',
+    'guide.s4': '<h3>💎 关于付费（最后再说这个）</h3><p>当前处于<b>试运营期，全部免费</b>，不强制任何消费。</p><ul><li>🎁 您注册账户已自动获得<b>1 天专业版免费体验</b>：解锁 DeepSeek、Kimi、GLM、千问等主流大模型预设，记忆扩展到前 5 章</li><li>体验到期后自动回到免费版，作品与数据不受任何影响</li><li>想继续使用高级模型？会员中心有免费版 / 专业版 / 旗舰版三档说明（试运营期间同样免费开通）</li><li>正式收费上线前会提前公告，绝不自动扣费</li></ul><p>好，一切就绪，开始你的创作吧！🚀</p>',
+    'vip.trialOn': '🎁 新用户专享：专业版体验中，剩余 {t}（不强制消费）',
+    'vip.trialEnd': '专业版体验已结束，感谢体验！会员中心可选方案（试运营免费）。'
   },
   en: {
     'brand.sub': 'ALL-GENRE NOVEL STUDIO',
@@ -397,7 +419,29 @@ const I18N = {
     'toast.styleSaved': 'Style setting saved', 'toast.orCopied': 'Model ID copied',
     'sp.pickTip': 'Click an author to add them as a reference (click again to remove). “Learn styles online” fetches Wikipedia to study their craft. Can\'t find your favorite? Use the search box to add any author from the web.',
     'sp.mineTip': 'Paste a sample of your own writing (≤500 characters): the AI will learn your rhythm, word choices and dialogue style, so the output sounds more like you.',
-    'sp.filterPh': 'Filter authors…'
+    'sp.filterPh': 'Filter authors…',
+    'auth.title': '👤 Sign in / Register', 'auth.login': 'Sign in', 'auth.register': 'Register',
+    'auth.user': 'Username', 'auth.userPh': '2-20 chars: letters / numbers / _ / Chinese',
+    'auth.pass': 'Password', 'auth.passPh': 'Min 6 chars, must contain letters AND digits',
+    'auth.pass2': 'Confirm password', 'auth.pass2Ph': 'Type the password again',
+    'auth.submitLogin': 'Sign in', 'auth.submitRegister': 'Register & start trial',
+    'auth.errUser': 'Username must be 2-20 chars (letters / numbers / _ / Chinese)',
+    'auth.errPass': 'Password must be 6-20 chars and contain both letters and digits',
+    'auth.errPass2': 'The two passwords do not match',
+    'auth.errLogin': 'Wrong username or password', 'auth.errExists': 'Username already registered — sign in instead',
+    'auth.okRegister': 'Registered! Signed in automatically — 1-day Pro trial started',
+    'auth.welcome': 'Welcome back, {u}',
+    'auth.trialBanner': '🎁 New accounts get a 1-day free Pro trial (no purchase required)',
+    'auth.account': 'Account', 'auth.logout': 'Sign out',
+    'auth.confirmLogout': 'Sign out of this account? Your works stay saved on this device.', 'auth.loggedOut': 'Signed out',
+    'set.trialBadge': ' · 🎁 Pro trial',
+    'guide.title': '🎓 Getting Started', 'guide.skip': 'Skip', 'guide.prev': 'Back', 'guide.next': 'Next', 'guide.done': 'Start writing',
+    'guide.s1': '<h3>👋 Welcome to XIAOXING</h3><p>An <b>all-genre novel studio</b>: write an outline, and the AI turns it into prose. Three steps:</p><ul><li><span class="g-num">1</span> “＋ New Novel” and pick the style table (title can wait)</li><li><span class="g-num">2</span> Open a chapter and describe what happens in “📋 Chapter Outline”</li><li><span class="g-num">3</span> Click “🚀 Start Writing” — the text streams out automatically</li></ul>',
+    'guide.s2': '<h3>🤖 First, configure the FREE AI model (no cost)</h3><p>XIAOXING has a <b>free model built in</b> — connected automatically after registration. Nothing to configure.</p><ul><li>To view or switch models: “⚙ Settings → AI Models” — you can see the free model in use</li><li>The free model may throttle occasionally; the system <b>auto-retries and switches backup models</b> — just wait a moment</li><li>Want more stability? Sign up free at SiliconFlow (siliconflow.cn) for free credits, copy the Key, then pick the preset in “AI Models” and paste it</li><li>Use “Test connection” to verify</li></ul><p>If the AI errors, don\'t panic — the page shows a friendly hint in your language.</p>',
+    'guide.s3': '<h3>✍️ Everything else at a glance</h3><ul><li><b>Style</b>: “🖊 Style” tab on the left — click authors to reference them, or paste 500 characters of your own writing for the AI to learn</li><li><b>Not satisfied?</b> Click “🔄 Regenerate” — free, anytime</li><li><b>Interface</b>: “⚙ Settings” for font size, backgrounds (Solar System / Galaxy / Planet), language and theme color</li><li><b>Chapter / novel titles</b>: click “✨” and pick from AI candidates</li><li><b>Saving</b>: your work autosaves on this device; use “Backup & Export” to move it</li><li><b>Help</b>: click the little alien bottom-left anytime</li></ul>',
+    'guide.s4': '<h3>💎 About paid plans (last, we promise)</h3><p>We are in <b>beta: everything is free</b>. No purchase is required, ever, during beta.</p><ul><li>🎁 Your new account already got a <b>1-day free Pro trial</b>: unlocks DeepSeek, Kimi, GLM, Qwen and more model presets, memory up to 5 chapters</li><li>When the trial ends you return to the Free plan automatically — your works and data are untouched</li><li>Want to keep advanced models? The Membership center explains Free / Pro / Flagship (also free during beta)</li><li>We will announce any paid launch in advance — no auto-charging, ever</li></ul><p>All set — start writing! 🚀</p>',
+    'vip.trialOn': '🎁 New-user perk: Pro trial active, {t} left (no purchase required)',
+    'vip.trialEnd': 'Your Pro trial has ended — thanks for trying! Pick a plan in the Membership center (free during beta).'
   }
 };
 function t(k, vars) {
@@ -577,7 +621,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '3.2.1';
+const APP_VERSION = '3.3.0';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -593,8 +637,10 @@ const state = {
   aiStreaming: false, aiAbort: null,
   wikiCache: {},
   learning: false,
-  genState: { running: false, stageIdx: -1, abort: null }
+  genState: { running: false, stageIdx: -1, abort: null },
+  accounts: {}, currentUser: null, authMode: 'login', guideStep: 0
 };
+let lastTrialState = null;
 function loadSettings() {
   try {
     const s = JSON.parse(localStorage.getItem('nebula-settings'));
@@ -654,6 +700,7 @@ function renderTop() {
   const total = chs.reduce((s, c) => s + (c.wordCount || 0), 0);
   $('#stats').textContent = chs.length + ' · ' + fmtNum(total) + ' ' + t('stat.wordsChip');
   renderProfileTop();
+  trialCheck();
 }
 function renderModelTag() {
   const p = activeProvider();
@@ -2458,7 +2505,7 @@ function applyUIPrefs() {
   $('#ctx-mem').checked = !!s.mem;
   $('#ctx-chat-history').checked = !!s.chatHistory;
   $('#ctx-chapters').value = s.prevChapters;
-  const prevMax = PLAN_PREV_MAX[state.settings.plan] || 2;
+  const prevMax = PLAN_PREV_MAX[effectivePlan()] || 2;
   $('#ctx-chapters').max = prevMax;
   if (Number(s.prevChapters) > prevMax) $('#ctx-chapters').value = prevMax;
   $$('.accent-dot').forEach(d => d.classList.toggle('on', d.dataset.accent === state.settings.accent));
@@ -2886,6 +2933,7 @@ function allowStorage() {
   closeModal('modal-storage');
   applyUIPrefs();
   toast(t('toast.storageOk'), 'ok', 3500);
+  advanceOnboarding();
 }
 function denyStorage() {
   state.settings.storageDenied = true;
@@ -2893,6 +2941,7 @@ function denyStorage() {
   closeModal('modal-storage');
   applyUIPrefs();
   toast(t('toast.storageNo'), 'warn', 4000);
+  advanceOnboarding();
 }
 
 /* ---------------- 会员方案 ---------------- */
@@ -2900,15 +2949,19 @@ function planName(p) {
   return p === 'pro' ? t('vip.pro') : (p === 'flag' ? t('vip.flag') : t('vip.free'));
 }
 function renderVip() {
+  const banner = $('#vip-trial-banner');
+  if (banner) {
+    if (trialActive()) { banner.hidden = false; banner.textContent = t('vip.trialOn', { t: trialLeft() }); }
+    else banner.hidden = true;
+  }
+  const eff = effectivePlan();
   $$('#modal-vip .vip-card').forEach(card => {
     const btn = card.querySelector('[data-plan]');
     if (!btn) return;
-    const isCurrent = btn.dataset.plan === state.settings.plan;
+    const isCurrent = btn.dataset.plan === eff;
     card.classList.toggle('current', isCurrent);
     btn.disabled = isCurrent;
-    if (isCurrent) btn.textContent = t('vip.freeBtn');
-    else if (btn.dataset.plan === 'pro') btn.textContent = t('vip.btn');
-    else if (btn.dataset.plan === 'flag') btn.textContent = t('vip.btn');
+    btn.textContent = isCurrent ? t('vip.freeBtn') : t('vip.btn');
   });
 }
 function setPlan(p) {
@@ -3077,6 +3130,144 @@ function openAssistant() {
   openModal('modal-assistant');
 }
 
+/* ---------------- 账户系统（本机账户 · 密码必须字母+数字） ---------------- */
+const AUTH_KEY = 'nebula-accounts';
+function loadAccounts() {
+  try { state.accounts = JSON.parse(localStorage.getItem(AUTH_KEY) || '{}'); } catch (e) { state.accounts = {}; }
+  try {
+    const s = localStorage.getItem('nebula-session');
+    if (s && state.accounts[s]) state.currentUser = s;
+  } catch (e) { }
+  lastTrialState = trialActive();
+}
+function saveAccounts() { try { localStorage.setItem(AUTH_KEY, JSON.stringify(state.accounts)); } catch (e) { } }
+async function hashPw(salt, pw) {
+  const data = new TextEncoder().encode(salt + '::' + pw);
+  const buf = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+function validUser(u) { return /^[\w\u4e00-\u9fff]{2,20}$/.test(u); }
+function validPass(p) { return p.length >= 6 && p.length <= 20 && /[A-Za-z]/.test(p) && /\d/.test(p); }
+function trialActive() {
+  const u = state.currentUser;
+  return !!(u && state.accounts[u] && state.accounts[u].trialUntil > Date.now());
+}
+function trialLeft() {
+  const u = state.currentUser;
+  if (!u || !state.accounts[u]) return '';
+  const ms = state.accounts[u].trialUntil - Date.now();
+  if (ms <= 0) return '';
+  const h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000);
+  return state.settings.lang === 'zh' ? `${h} 小时 ${m} 分` : `${h}h ${m}m`;
+}
+function effectivePlan() {
+  if (trialActive()) return (PLAN_LEVEL[state.settings.plan] || 0) >= 2 ? state.settings.plan : 'pro';
+  return state.settings.plan;
+}
+function trialCheck() {
+  const active = trialActive();
+  if (lastTrialState === true && !active && state.currentUser) toast(t('vip.trialEnd'), 'warn', 5000);
+  lastTrialState = active;
+}
+function setAuthHint(txt, ok) {
+  const el = $('#auth-hint');
+  el.textContent = txt || '';
+  el.className = 'auth-hint ' + (ok ? 'ok' : 'err');
+}
+function switchAuthTab(mode) {
+  state.authMode = mode;
+  $('#auth-tab-login').classList.toggle('on', mode === 'login');
+  $('#auth-tab-register').classList.toggle('on', mode === 'register');
+  $('#auth-pass2-wrap').style.display = mode === 'register' ? '' : 'none';
+  $('#auth-trial-banner').hidden = mode !== 'register';
+  $('#btn-auth-submit').textContent = t(mode === 'register' ? 'auth.submitRegister' : 'auth.submitLogin');
+  setAuthHint('');
+  $('#auth-pass').value = ''; $('#auth-pass2').value = '';
+}
+async function authSubmit() {
+  const user = $('#auth-user').value.trim();
+  const pass = $('#auth-pass').value;
+  if (!validUser(user)) return setAuthHint(t('auth.errUser'));
+  if (!validPass(pass)) return setAuthHint(t('auth.errPass'));
+  if (state.authMode === 'register') {
+    if ($('#auth-pass2').value !== pass) return setAuthHint(t('auth.errPass2'));
+    if (state.accounts[user]) return setAuthHint(t('auth.errExists'));
+    const salt = uid() + uid();
+    const hash = await hashPw(salt, pass);
+    state.accounts[user] = { salt, hash, createdAt: Date.now(), trialUntil: Date.now() + 86400000 };
+    saveAccounts();
+    state.currentUser = user;
+    try { localStorage.setItem('nebula-session', user); } catch (e) { }
+    lastTrialState = trialActive();
+    closeModal('modal-auth');
+    setAuthHint('');
+    toast(t('auth.okRegister'), 'ok', 4000);
+    toast(t('vip.trialOn', { t: trialLeft() }), 'ok', 5000);
+    renderAll();
+    advanceOnboarding();
+  } else {
+    const acc = state.accounts[user];
+    if (!acc) return setAuthHint(t('auth.errLogin'));
+    const hash = await hashPw(acc.salt, pass);
+    if (hash !== acc.hash) return setAuthHint(t('auth.errLogin'));
+    state.currentUser = user;
+    try { localStorage.setItem('nebula-session', user); } catch (e) { }
+    lastTrialState = trialActive();
+    closeModal('modal-auth');
+    setAuthHint('');
+    toast(t('auth.welcome', { u: user }), 'ok', 3000);
+    if (trialActive()) toast(t('vip.trialOn', { t: trialLeft() }), 'ok', 5000);
+    renderAll();
+    advanceOnboarding();
+  }
+}
+async function logoutUser() {
+  if (!await confirmDialog(t('auth.confirmLogout'))) return;
+  try { localStorage.removeItem('nebula-session'); } catch (e) { }
+  state.currentUser = null;
+  lastTrialState = false;
+  renderAll();
+  toast(t('auth.loggedOut'), 'ok');
+  switchAuthTab('login');
+  openModal('modal-auth');
+}
+
+/* ---------------- 新手引导（先教免费 AI，再谈付费） ---------------- */
+function guidedDone() { try { return localStorage.getItem('nebula-guided') === '1'; } catch (e) { return true; } }
+function openGuide() {
+  state.guideStep = 0;
+  renderGuideStep();
+  openModal('modal-guide');
+}
+function renderGuideStep() {
+  const total = 4;
+  $('#guide-dots').innerHTML = Array.from({ length: total }, (_, i) => `<div class="guide-dot ${i === state.guideStep ? 'on' : ''}"></div>`).join('');
+  $('#guide-step').innerHTML = t('guide.s' + (state.guideStep + 1));
+  $('#btn-guide-prev').style.visibility = state.guideStep === 0 ? 'hidden' : 'visible';
+  $('#btn-guide-next').textContent = state.guideStep === total - 1 ? t('guide.done') : t('guide.next');
+}
+function guideNext() {
+  if (state.guideStep < 3) { state.guideStep++; renderGuideStep(); }
+  else {
+    closeModal('modal-guide');
+    try { localStorage.setItem('nebula-guided', '1'); } catch (e) { }
+    toast(t('toast.welcome'), 'info', 4000);
+  }
+}
+function guidePrev() { if (state.guideStep > 0) { state.guideStep--; renderGuideStep(); } }
+function guideSkip() {
+  closeModal('modal-guide');
+  try { localStorage.setItem('nebula-guided', '1'); } catch (e) { }
+}
+
+/* ---------------- 首次使用流程（须知 → 存储 → 登录 → 引导） ---------------- */
+function advanceOnboarding() {
+  if (!termsAccepted()) { openTerms(); return; }
+  if (!storageAllowed() && !state.settings.storageDenied) { openStorageAsk(); return; }
+  if (!state.currentUser) { switchAuthTab(state.authMode); openModal('modal-auth'); return; }
+  if (!guidedDone()) openGuide();
+}
+
 /* ---------------- 设置中心 ---------------- */
 function adjustFont(d) {
   state.settings.fontSize = clamp(state.settings.fontSize + d, 14, 32);
@@ -3116,6 +3307,7 @@ function openSettings() {
   const u = s.user || {};
   $('#set-profile-name').textContent = u.nickname || t('profile.default');
   $('#set-profile-avatar').innerHTML = u.avatarData ? '<img src="' + u.avatarData + '" alt="" />' : esc(AVATAR_PRESETS[u.avatarPreset || 0][0]);
+  $('#set-account-name').textContent = state.currentUser ? (state.currentUser + (trialActive() ? t('set.trialBadge') : '')) : '—';
   $('#set-version').textContent = APP_VERSION;
   openModal('modal-settings');
 }
@@ -3179,6 +3371,18 @@ function bindEvents() {
   $('#btn-storage-allow').addEventListener('click', allowStorage);
   $('#btn-storage-deny').addEventListener('click', denyStorage);
   $('#set-storage-req').addEventListener('click', openStorageAsk);
+  // 账户 / 登录注册（密码必须字母+数字）
+  $('#auth-tab-login').addEventListener('click', () => switchAuthTab('login'));
+  $('#auth-tab-register').addEventListener('click', () => switchAuthTab('register'));
+  $('#btn-auth-submit').addEventListener('click', authSubmit);
+  ['auth-user', 'auth-pass', 'auth-pass2'].forEach(id => {
+    $('#' + id).addEventListener('keydown', e => { if (e.key === 'Enter') authSubmit(); });
+  });
+  $('#set-logout').addEventListener('click', logoutUser);
+  // 新手引导（先教免费 AI 配置，再谈付费）
+  $('#btn-guide-next').addEventListener('click', guideNext);
+  $('#btn-guide-prev').addEventListener('click', guidePrev);
+  $('#btn-guide-skip').addEventListener('click', guideSkip);
   // 会员方案
   $('#btn-vip').addEventListener('click', () => { renderVip(); openModal('modal-vip'); });
   document.addEventListener('click', e => {
@@ -3338,6 +3542,7 @@ function bindEvents() {
     try { localStorage.setItem('nebula-terms-v1', '1'); } catch (e) { }
     closeModal('modal-terms');
     toast(t('toast.welcome'), 'info', 5000);
+    advanceOnboarding();
   });
   $('#btn-terms-decline').addEventListener('click', () => toast(t('terms.declined'), 'warn', 4000));
   $('#btn-show-terms').addEventListener('click', openTerms);
@@ -3408,7 +3613,7 @@ function bindEvents() {
 function fillPresetSelect() {
   const sel = $('#preset-select');
   sel.innerHTML = '<option value="">— ' + t('aiset.preset') + ' —</option>';
-  const lvl = PLAN_LEVEL[state.settings.plan] || 0;
+  const lvl = PLAN_LEVEL[effectivePlan()] || 0;
   PRESETS.forEach((p, i) => {
     if ((PLAN_LEVEL[p.plan] || 0) > lvl) return;
     const o = document.createElement('option');
@@ -3421,6 +3626,7 @@ function fillPresetSelect() {
 async function boot() {
   loadSettings();
   loadWikiCache();
+  loadAccounts();
   // 首次使用自动配置免费免密钥模型（Pollinations AI），开箱即用
   if (!state.settings.providers.length) {
     state.settings.providers.push({
@@ -3442,9 +3648,8 @@ async function boot() {
     openModal('modal-library');
     toast(t('toast.welcome'), 'info', 7000);
   }
-  if (!termsAccepted()) openTerms();
-  // 首次使用：请求本地存储授权（用户同意后才持久化保存作品）
-  if (!storageAllowed() && !state.settings.storageDenied) openStorageAsk();
+  // 首次使用流程：用户须知 → 存储授权 → 登录/注册 → 新手引导
+  advanceOnboarding();
   window.__nebulaReady = true;
 }
 boot();
