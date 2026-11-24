@@ -25,11 +25,13 @@
       <h1 id="login-title">进入运营控制台</h1>
       <p>仅限管理者查看集中注册人数、近期在线人数和实收款项。</p>
       <form id="login-form">
+        <label for="admin-username">管理员账号（可选）</label>
+        <input type="text" id="admin-username" name="username" autocomplete="username" maxlength="20" placeholder="创作者授权的管理员账号，如：小柚子">
         <label for="admin-password">管理密码</label>
         <input type="password" id="admin-password" name="password" autocomplete="current-password" required maxlength="1024">
         <button type="submit" class="primary">登录</button>
       </form>
-      <p class="callout" id="login-help">管理密码由部署者在服务器上设置。普通作者账号不能登录此页。</p>
+      <p class="callout" id="login-help">可用部署者设置的管理密码登录；创作者授权的管理员账号（如 小柚子）也可用自己的账号密码登录。</p>
       <output id="login-status" class="status" role="status" aria-live="polite"></output>
     </section>
 
