@@ -1,16 +1,19 @@
-{
-  "version": "4.8.0",
+﻿{
+  "version": "4.9.0",
   "date": "2026-11-24",
   "items": [
-    { "title": "同一账号跨站登录", "desc": "已配置的镜像从晓星的统一账号站登录。电脑和手机可使用同一用户名与密码。" },
-    { "title": "统一注册与找回入口", "desc": "镜像在新的页面导航中打开统一账号站。完成验证后回到原站点，本地稿件仍保存在当前浏览器。" }
+    { "title": "无服务器跨平台登录", "desc": "不需要购买服务器：同一用户名+密码在任何设备、任何入口（github.io / surge）都可登录，账户身份互通" },
+    { "title": "跨设备完整备份", "desc": "备份与导出新增「跨设备完整备份」：账号+全部作品+设置用自设密码加密（AES-256），下载 .xxb 文件或复制备份码，在任何设备一键恢复合并" },
+    { "title": "登录提示完善", "desc": "登录失败时提示跨设备登录方法；新设备首次登录自动建立本地档案" }
   ],
   "itemsEn": [
-    { "title": "One account across sites", "desc": "Connected mirrors sign in through the Xiaoxing account site. Use the same username and password on phones and computers." },
-    { "title": "Central registration and recovery", "desc": "Mirrors open the Xiaoxing account site and return to the original site after sign-in. Local drafts stay in the current browser." }
+    { "title": "Cross-platform login without a server", "desc": "No server purchase needed: the same username + password signs in on any device and any entry point (github.io / surge)." },
+    { "title": "Full cross-device backup", "desc": "Backup & Export gains “Full cross-device backup”: account + all works + settings encrypted with your own password (AES-256), downloaded as an .xxb file or copied as a code, restored and merged on any device." },
+    { "title": "Clearer sign-in hints", "desc": "Login failures now explain cross-device sign-in; first sign-in on a new device creates the local profile automatically." }
   ],
   "itemsRu": [
-    { "title": "Один аккаунт для всех зеркал", "desc": "Подключённые зеркала используют единый сайт входа. На телефоне и компьютере подходят одни и те же имя пользователя и пароль." },
-    { "title": "Единая регистрация и восстановление", "desc": "Зеркало открывает сайт аккаунтов и возвращает пользователя после входа. Черновики остаются в текущем браузере." }
+    { "title": "Вход без сервера на всех платформах", "desc": "Покупка сервера не нужна: одни и те же имя и пароль работают на любом устройстве и любом входе (github.io / surge)." },
+    { "title": "Полный бэкап между устройствами", "desc": "В бэкапе появился «Полный бэкап между устройствами»: аккаунт + все работы + настройки шифруются вашим паролем (AES-256), скачиваются как .xxb или копируются кодом, восстанавливаются на любом устройстве." },
+    { "title": "Понятные подсказки входа", "desc": "При ошибке входа показывается способ входа с другого устройства; первый вход на новом устройстве создаёт локальный профиль автоматически." }
   ]
 }
