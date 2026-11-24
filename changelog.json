@@ -1,19 +1,19 @@
 {
-  "version": "4.2.2",
+  "version": "4.3.0",
   "date": "2026-11-24",
   "items": [
-    { "title": "创作者管理员账号：小柚子", "desc": "账号「小柚子」已升级为管理员：自动获得网站最高权限（旗舰版），可登录站长后台，且受保护不可被拉黑" },
-    { "title": "管理员账号登录后台", "desc": "站长后台除部署者管理密码外，也支持创作者授权的管理员账号用自己的账号密码登录（用户名由环境变量维护）" },
-    { "title": "管理员身份徽章", "desc": "设置中心账户行显示 👑 管理员徽章，会员中心自动标记旗舰版" }
+    { "title": "实时在线人数", "desc": "顶栏新增在线人数指示器（绿色呼吸灯 + 数字），每 30 秒自动刷新最近 5 分钟活跃人数" },
+    { "title": "管理员站内直接操作", "desc": "管理员账号登录后顶栏出现「👑 管理」按钮，站内弹窗即可查看用户名单、拉黑/解封、管理白名单，无需离开网站" },
+    { "title": "管理员专属黑色背景", "desc": "管理员登录后背景变为沉稳黑色，顶部如法拉利车灯般的一双「呼吸之眼」缓缓变亮再变暗，压迫感十足" }
   ],
   "itemsEn": [
-    { "title": "Creator admin account: 小柚子", "desc": "The account “小柚子” is now an administrator: it automatically gets the top Flagship tier, can sign into the admin console, and is protected from being blocked." },
-    { "title": "Admin accounts can sign into the console", "desc": "Besides the operator password, creator-authorized admin accounts can sign into the admin console with their own username and password (usernames are maintained via an environment variable)." },
-    { "title": "Admin badge", "desc": "The account row in Settings shows a 👑 Admin badge, and Membership marks Flagship as current." }
+    { "title": "Live online count", "desc": "A green pulsing online indicator now sits in the top bar, refreshing every 30 seconds with the number of users active in the last 5 minutes." },
+    { "title": "Admin operations inside the site", "desc": "Admins see a “👑 Admin” button: view the user list, block/unblock and manage the allowlist right inside the site." },
+    { "title": "Admin black theme", "desc": "Admins get a calm, oppressive black background with a pair of Ferrari-headlight “breathing eyes” that slowly brighten and dim." }
   ],
   "itemsRu": [
-    { "title": "Аккаунт администратора: 小柚子", "desc": "Аккаунт «小柚子» стал администратором: автоматически получает Флагман, может входить в панель управления и защищён от блокировки." },
-    { "title": "Вход администратора в панель", "desc": "Помимо пароля оператора, авторизованные администраторы могут входить в панель управления со своим именем и паролем (имена задаются переменной окружения)." },
-    { "title": "Значок администратора", "desc": "В настройках показывается значок 👑 Админ, в центре членства отмечен Флагман." }
+    { "title": "Живой счётчик онлайн", "desc": "В верхней панели — пульсирующий зелёный индикатор с числом активных за последние 5 минут, обновляется каждые 30 секунд." },
+    { "title": "Админ-операции прямо на сайте", "desc": "У администраторов появилась кнопка «👑 Админ»: список пользователей, блокировка и белый список прямо на сайте." },
+    { "title": "Чёрная тема администратора", "desc": "Спокойный чёрный фон с парой «дышащих глаз» в стиле фар Ferrari, медленно разгорающихся и гаснущих." }
   ]
 }
