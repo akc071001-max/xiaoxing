@@ -77,10 +77,13 @@ function publicUser(row, now = Date.now(), adminCheck = null) {
   if (!row) return null;
   const whitelisted = Boolean(row.whitelisted);
   const isAdmin = whitelisted || Boolean(adminCheck && adminCheck(row.username_key));
+  const deepseek = Number(row.deepseek_until) || 0;
+  const plan = isAdmin || row.trial_ends_at > now ? 'flag' : (deepseek > now ? 'deepseek' : 'free');
   return {
     id: row.id, username: row.username, createdAt: row.created_at, whitelisted,
     isAdmin, blocked: Boolean(row.blocked), hasQuestion: Boolean(row.question),
-    trialEndsAt: row.trial_ends_at, plan: isAdmin || row.trial_ends_at > now ? 'flag' : 'free'
+    hasAgreement: Boolean(row.agreement_at), agreementVer: row.agreement_ver,
+    deepseekUntil: deepseek, trialEndsAt: row.trial_ends_at, plan
   };
 }
 function sendJson(res, status, data, headers = {}) {
@@ -170,7 +173,9 @@ export async function createXiaoxingServer(options = {}) {
       salt TEXT NOT NULL, password_hash TEXT NOT NULL, created_at INTEGER NOT NULL,
       trial_ends_at INTEGER NOT NULL, whitelisted INTEGER NOT NULL DEFAULT 0 CHECK(whitelisted IN(0,1)),
       blocked INTEGER NOT NULL DEFAULT 0 CHECK(blocked IN(0,1)),
-      question TEXT NOT NULL DEFAULT '', answer_hash TEXT NOT NULL DEFAULT ''
+      question TEXT NOT NULL DEFAULT '', answer_hash TEXT NOT NULL DEFAULT '',
+      agreement_at INTEGER NOT NULL DEFAULT 0, agreement_ver TEXT NOT NULL DEFAULT '',
+      deepseek_until INTEGER NOT NULL DEFAULT 0
     );
     CREATE TABLE IF NOT EXISTS sessions(
       token_hash TEXT PRIMARY KEY, role TEXT NOT NULL CHECK(role IN('admin','user')),
@@ -193,6 +198,9 @@ export async function createXiaoxingServer(options = {}) {
   if (!userColumns.has('blocked')) db.exec("ALTER TABLE users ADD COLUMN blocked INTEGER NOT NULL DEFAULT 0 CHECK(blocked IN(0,1))");
   if (!userColumns.has('question')) db.exec("ALTER TABLE users ADD COLUMN question TEXT NOT NULL DEFAULT ''");
   if (!userColumns.has('answer_hash')) db.exec("ALTER TABLE users ADD COLUMN answer_hash TEXT NOT NULL DEFAULT ''");
+  if (!userColumns.has('agreement_at')) db.exec("ALTER TABLE users ADD COLUMN agreement_at INTEGER NOT NULL DEFAULT 0");
+  if (!userColumns.has('agreement_ver')) db.exec("ALTER TABLE users ADD COLUMN agreement_ver TEXT NOT NULL DEFAULT ''");
+  if (!userColumns.has('deepseek_until')) db.exec("ALTER TABLE users ADD COLUMN deepseek_until INTEGER NOT NULL DEFAULT 0");
   const stmt = sql => db.prepare(sql);
   const findUser = stmt('SELECT * FROM users WHERE username_key=?');
   const getUser = stmt('SELECT * FROM users WHERE id=?');
@@ -206,6 +214,8 @@ export async function createXiaoxingServer(options = {}) {
   const updateBlacklist = stmt('UPDATE users SET blocked=? WHERE id=?');
   const setPasswordHash = stmt('UPDATE users SET password_hash=? WHERE id=?');
   const setQuestion = stmt('UPDATE users SET question=?, answer_hash=? WHERE id=?');
+  const setAgreement = stmt('UPDATE users SET agreement_at=?, agreement_ver=? WHERE id=?');
+  const extendDeepseek = stmt('UPDATE users SET deepseek_until=MAX(deepseek_until,?) WHERE id=?');
   const clearUserSessions = stmt("DELETE FROM sessions WHERE role='user' AND user_id=?");
   const getPaymentRef = stmt('SELECT 1 FROM payments WHERE reference=?');
   const postPayment = stmt('INSERT INTO payments VALUES (?,?,?,?,?,?,?,?)');
@@ -217,7 +227,7 @@ export async function createXiaoxingServer(options = {}) {
              SUM(CASE WHEN kind='payment' THEN amount_cents ELSE 0 END) AS gross,
              SUM(CASE WHEN kind='refund' THEN amount_cents ELSE 0 END) AS refunds
              FROM payments WHERE occurred_at>=? AND occurred_at<?`);
-  const usersSQL = stmt(`SELECT u.id,u.username,u.created_at,u.trial_ends_at,u.whitelisted,u.blocked,u.question,COALESCE(x.net,0) AS net,COALESCE(x.has_paid,0) AS has_paid
+  const usersSQL = stmt(`SELECT u.id,u.username,u.created_at,u.trial_ends_at,u.whitelisted,u.blocked,u.question,u.agreement_at,u.deepseek_until,COALESCE(x.net,0) AS net,COALESCE(x.has_paid,0) AS has_paid
     FROM users u LEFT JOIN (SELECT user_id,SUM(CASE WHEN kind='payment' THEN amount_cents ELSE -amount_cents END) AS net,COUNT(CASE WHEN kind='payment' THEN 1 END) AS has_paid
        FROM payments GROUP BY user_id) x ON x.user_id=u.id ORDER BY u.created_at DESC,u.id DESC`);
   const paymentsSQL = stmt(`SELECT p.id,p.user_id,u.username,p.kind,p.amount_cents,p.reference,p.occurred_at,p.note FROM payments p
@@ -314,7 +324,7 @@ export async function createXiaoxingServer(options = {}) {
       periodGrossCents: gross, periodRefundCents: refunds, periodNetCents: gross - refunds, whitelistCount: counts.whitelist,
       users: usersSQL.all().map(r => {
         const { trialEndsAt, ...user } = publicUser(r, now, isAdminUsername);
-        return { ...user, netCents: number(r.net), hasPaid: Boolean(r.has_paid), blocked: Boolean(r.blocked), hasQuestion: Boolean(r.question) };
+        return { ...user, netCents: number(r.net), hasPaid: Boolean(r.has_paid), blocked: Boolean(r.blocked), hasQuestion: Boolean(r.question), hasAgreement: Boolean(r.agreement_at), deepseekUntil: Number(r.deepseek_until) };
       }),
       payments: paymentsSQL.all(min, max).map(r => ({
         id:r.id, userId:r.user_id, username:r.username, kind:r.kind, amountCents:r.amount_cents,
@@ -348,6 +358,8 @@ export async function createXiaoxingServer(options = {}) {
       }
       const id = randomUUID();
       postPayment.run(id, userId, kind, amountCents, reference, occurredAt, note.trim(), now);
+      // DeepSeek 月度会员：40 元（4000 分）收款即自动开通 30 天，自付款发生日起算
+      if (kind === 'payment' && amountCents === 4000) extendDeepseek.run(occurredAt + 30 * DAY, userId);
       db.exec('COMMIT');
       return { id, userId, kind, amountCents, reference, occurredAt: iso(occurredAt), note: note.trim() };
     } catch (e) {
@@ -475,6 +487,15 @@ export async function createXiaoxingServer(options = {}) {
       const now = Date.now();
       if (!touchSession.run(now, u.token_hash, now).changes) throw error(401, 'unauthorized', 'Sign in to continue.');
       return sendJson(res, 200, { ok: true, user: publicUser(getUser.get(u.user_id), now, isAdminUsername) });
+    }
+    if (method === 'POST' && route === '/api/auth/agreement') {
+      // 签署付费协议（DeepSeek 月度会员等付费服务开通前置条件）
+      const u = session(req, 'user');
+      const body = await jsonBody(req);
+      const version = text(body.version) ? body.version.normalize('NFKC').trim() : '';
+      if (!/^[\w.-]{1,32}$/.test(version)) throw error(400, 'invalid_agreement', 'Provide a valid agreement version.');
+      setAgreement.run(Date.now(), version, u.user_id);
+      return sendJson(res, 200, { ok: true, user: publicUser(getUser.get(u.user_id), Date.now(), isAdminUsername) });
     }
     if (method === 'PUT' && route === '/api/admin/whitelist') {
       adminSession(req);
