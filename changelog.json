@@ -1,19 +1,19 @@
 ﻿{
-  "version": "4.9.0",
+  "version": "4.9.1",
   "date": "2026-11-24",
   "items": [
-    { "title": "无服务器跨平台登录", "desc": "不需要购买服务器：同一用户名+密码在任何设备、任何入口（github.io / surge）都可登录，账户身份互通" },
-    { "title": "跨设备完整备份", "desc": "备份与导出新增「跨设备完整备份」：账号+全部作品+设置用自设密码加密（AES-256），下载 .xxb 文件或复制备份码，在任何设备一键恢复合并" },
-    { "title": "登录提示完善", "desc": "登录失败时提示跨设备登录方法；新设备首次登录自动建立本地档案" }
+    { "title": "修复弹窗关不掉", "desc": "登录弹窗此前没有任何关闭方式（无 ✕、禁点背景、Escape 无效），一直遮挡界面；现已加回 ✕ 关闭按钮，Escape 可关闭任何弹窗" },
+    { "title": "用户须知可关闭", "desc": "从设置打开的用户须知新增 ✕ 关闭按钮；全站 14 类弹窗的 ✕ / 取消 / Escape 全部实测可正常关闭" },
+    { "title": "无服务器跨平台登录", "desc": "同一用户名+密码在任何设备、任何入口都可登录；跨设备完整备份（账号+数据密码加密）随本版保留" }
   ],
   "itemsEn": [
-    { "title": "Cross-platform login without a server", "desc": "No server purchase needed: the same username + password signs in on any device and any entry point (github.io / surge)." },
-    { "title": "Full cross-device backup", "desc": "Backup & Export gains “Full cross-device backup”: account + all works + settings encrypted with your own password (AES-256), downloaded as an .xxb file or copied as a code, restored and merged on any device." },
-    { "title": "Clearer sign-in hints", "desc": "Login failures now explain cross-device sign-in; first sign-in on a new device creates the local profile automatically." }
+    { "title": "Fixed unclosable dialogs", "desc": "The sign-in dialog previously had no way to close it (no ✕, backdrop disabled, Escape ignored) and blocked the whole screen; it now has an ✕ and Escape closes any dialog." },
+    { "title": "Terms can be closed", "desc": "The Terms dialog opened from Settings now has an ✕; all 14 dialog types were tested and close correctly via ✕ / Cancel / Escape." },
+    { "title": "Serverless cross-platform login", "desc": "The same username + password signs in on any device and entry point; encrypted full cross-device backup is kept in this release." }
   ],
   "itemsRu": [
-    { "title": "Вход без сервера на всех платформах", "desc": "Покупка сервера не нужна: одни и те же имя и пароль работают на любом устройстве и любом входе (github.io / surge)." },
-    { "title": "Полный бэкап между устройствами", "desc": "В бэкапе появился «Полный бэкап между устройствами»: аккаунт + все работы + настройки шифруются вашим паролем (AES-256), скачиваются как .xxb или копируются кодом, восстанавливаются на любом устройстве." },
-    { "title": "Понятные подсказки входа", "desc": "При ошибке входа показывается способ входа с другого устройства; первый вход на новом устройстве создаёт локальный профиль автоматически." }
+    { "title": "Исправлены незакрывающиеся окна", "desc": "У окна входа не было способа закрытия (нет ✕, фон отключён, Escape не работал) — оно блокировало экран; теперь есть ✕, а Escape закрывает любое окно." },
+    { "title": "Правила можно закрыть", "desc": "У окна правил из настроек появилась ✕; все 14 типов окон проверены — закрываются через ✕ / Отмена / Escape." },
+    { "title": "Вход без сервера на всех платформах", "desc": "Одни и те же имя и пароль работают на любом устройстве; шифрованный полный бэкап сохранён в этом выпуске." }
   ]
 }
