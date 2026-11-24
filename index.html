@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.4.0" />
+<link rel="stylesheet" href="css/style.css?v=4.5.0" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -74,6 +74,7 @@
     <div class="online-indicator" id="online-indicator" hidden title="当前在线人数（最近 5 分钟活跃）">
       <span class="online-dot"></span><span id="online-count">0</span><span data-i18n="online.label">在线</span>
     </div>
+    <button class="tb-btn" id="btn-inbox" data-i18n-title="msg.title" title="私信" hidden>📩<span class="inbox-badge" id="inbox-badge" hidden>0</span></button>
     <button class="tb-btn admin-only" id="btn-admin-console" data-i18n="admin.open" data-i18n-title="admin.openTitle" title="站长操作台">👑 管理</button>
     <button class="tb-btn" id="btn-vip" data-i18n="btn.vip" data-i18n-title="btn.vipTitle" title="会员中心（试运营）">💎 会员</button>
     <button class="tb-btn" id="btn-settings" data-i18n="btn.settings" data-i18n-title="btn.settingsTitle" title="设置">⚙ 设置</button>
@@ -882,6 +883,11 @@
         <button class="btn small" id="set-login" data-i18n="auth.login">登录</button>
         <button class="btn small" id="set-logout" data-i18n="auth.logout" hidden>退出登录</button>
       </div>
+      <div class="set-row" id="set-email-row" style="display:none">
+        <span class="set-label" data-i18n="set.emailLabel">邮箱（用于确认用户信息）</span>
+        <input class="input" id="set-email-input" type="email" maxlength="254" data-i18n-ph="auth.emailPh" placeholder="name@example.com" autocomplete="off" />
+        <button class="btn small" id="set-email-save" data-i18n="set.emailSave">保存邮箱</button>
+      </div>
       <div class="set-section-title" data-i18n="set.lang">语言 Language</div>
       <div class="set-row">
         <button class="chip set-chip" id="set-lang-zh" data-lang="zh">中文</button>
@@ -1050,6 +1056,9 @@
         <label id="auth-pass2-wrap" style="display:none"><span data-i18n="auth.pass2">确认密码</span>
           <input id="auth-pass2" type="password" maxlength="20" data-i18n-ph="auth.pass2Ph" placeholder="再输入一次密码" autocomplete="off" />
         </label>
+        <label id="auth-email-wrap" style="display:none"><span data-i18n="auth.email">邮箱（必填，用于确认用户信息）</span>
+          <input id="auth-email" type="email" maxlength="254" data-i18n-ph="auth.emailPh" placeholder="name@example.com" autocomplete="off" />
+        </label>
         <label id="auth-question-wrap" style="display:none"><span data-i18n="auth.question">密保问题（选填，用于找回密码）</span>
           <select id="auth-question">
             <option value="" data-i18n="auth.q0">不设置密保</option>
@@ -1158,12 +1167,24 @@
         <div class="admin-stat"><span class="as-num" id="admin-stat-payers">—</span><span class="as-label" data-i18n="admin.payers">充值人数</span></div>
         <div class="admin-stat"><span class="as-num" id="admin-stat-net">—</span><span class="as-label" data-i18n="admin.net">净收入（元）</span></div>
       </div>
+      <div class="set-section-title" data-i18n="admin.pendingTitle">⏳ 待核对付款</div>
+      <div class="admin-pending-list" id="admin-pending-list"></div>
+      <div class="set-section-title" data-i18n="admin.paymentsTitle">💰 收款流水（最近）</div>
+      <div class="admin-payments-list" id="admin-payments-list"></div>
       <div class="admin-toolbar">
         <input class="input" id="admin-user-search" data-i18n-ph="admin.searchPh" placeholder="搜索用户…" autocomplete="off" />
         <button class="btn small" id="btn-admin-refresh" data-i18n="admin.refresh">刷新</button>
         <a class="btn small" href="admin.html" target="_blank" rel="noopener" data-i18n="admin.fullConsole">打开完整后台 ↗</a>
       </div>
       <div class="admin-user-list" id="admin-user-list"></div>
+      <div class="admin-msg-composer" id="admin-msg-composer" hidden>
+        <div class="set-section-title"><span data-i18n="admin.msgTarget">私信发送给：</span><b id="admin-msg-target-name"></b></div>
+        <textarea class="input" id="admin-msg-text" rows="3" data-i18n-ph="admin.msgPh" placeholder="私信内容（可发送 API 密钥等）…"></textarea>
+        <div class="admin-msg-actions">
+          <button class="btn small" id="btn-admin-msg-cancel" data-i18n="common.cancel">取消</button>
+          <button class="btn small primary" id="btn-admin-msg-send" data-i18n="admin.msgSend">发送</button>
+        </div>
+      </div>
       <div class="auth-hint" id="admin-status"></div>
     </div>
   </div>
@@ -1204,6 +1225,23 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- 私信（管理员消息，可接收 API 密钥） -->
+<div class="modal-overlay" id="modal-messages" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" data-i18n="msg.title">📩 私信</div>
+      <button class="icon-btn modal-close" data-close="modal-messages">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="msg-list scroll-area" id="msg-list"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn small" id="btn-msg-refresh" data-i18n="admin.refresh">刷新</button>
+      <button class="btn small" id="btn-msg-read" data-i18n="msg.readAll">全部已读</button>
     </div>
   </div>
 </div>
@@ -1305,7 +1343,7 @@
     <p id="draft-review-note" role="status"></p>
   </div>
 </dialog>
-<script src="js/draft-review.js?v=4.4.0"></script>
-<script src="js/app.js?v=4.4.0"></script>
+<script src="js/draft-review.js?v=4.5.0"></script>
+<script src="js/app.js?v=4.5.0"></script>
 </body>
 </html>
