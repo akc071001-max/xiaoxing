@@ -79,6 +79,14 @@ const I18N = {
     'backup.json': '备份全部作品 JSON', 'backup.jsonSub': '含稿件、版本历史和对话；不含账号或模型密钥',
     'backup.import': '导入备份 JSON', 'backup.importSub': '恢复为独立副本，保留现有数据', 'backup.importBtn': '导入',
     'backup.wipe': '清除全部数据', 'backup.wipeSub': '不可恢复！', 'backup.wipeBtn': '清除',
+    'backup.xdev': '跨设备完整备份（账号+数据，加密）', 'backup.xdevSub': '含账号、全部作品与设置；任何设备可恢复',
+    'backup.xdevPassPh': '备份密码（≥6位，含字母+数字）', 'backup.xdevExport': '加密备份',
+    'backup.xdevImport': '跨设备完整恢复', 'backup.xdevImportSub': '选择 .xxb 文件或粘贴备份码',
+    'backup.xdevImportPassPh': '备份密码', 'backup.xdevFile': '选择文件', 'backup.xdevPaste': '粘贴备份码',
+    'backup.xdevOk': '加密备份已生成（已复制到剪贴板并下载 .xxb 文件）',
+    'backup.xdevRestored': '恢复成功：账号与作品已合并到本设备',
+    'backup.xdevBad': '备份无效或密码错误', 'backup.xdevNeedLogin': '请先登录账户再加密备份',
+    'backup.xdevPassRule': '备份密码至少 6 位，须含字母和数字',
     'backup.backupBtn': '备份',
     'note.title': '标题', 'note.content': '内容', 'note.cat': '分类',
     'cat.plot': '情节', 'cat.char': '人物', 'cat.foreshadow': '伏笔', 'cat.world': '世界', 'cat.other': '其他',
@@ -371,6 +379,8 @@ const I18N = {
     'auth.errPass': '密码需 6-20 位，且必须同时包含英文字母和数字',
     'auth.errPass2': '两次输入的密码不一致',
     'auth.errLogin': '用户名或密码错误', 'auth.errExists': '该用户名已注册，请直接登录',
+    'auth.anyDevice': '无服务器模式：同一用户名+密码可在任何设备登录；数据请用「跨设备完整备份」携带',
+    'auth.adoptToast': '已在本设备建立该账号档案（同用户名+密码=同一身份；数据可用「跨设备完整备份」携带）',
     'auth.okRegister': '注册成功！已自动登录，1 天最高规格免费体验已开启（含 DeepSeek 等高级权益）',
     'auth.welcome': '欢迎回来，{u}',
     'auth.trialBanner': '🎁 注册新账户即享 1 天最高规格免费体验（含 DeepSeek 等高级权益 · 不强制消费）',
@@ -433,6 +443,14 @@ const I18N = {
     'backup.json': 'Back up all projects as JSON', 'backup.jsonSub': 'Includes drafts, version history and chats; excludes accounts and model keys',
     'backup.import': 'Import JSON backup', 'backup.importSub': 'Restore as separate copies; keep your current work', 'backup.importBtn': 'Import',
     'backup.wipe': 'Wipe all data', 'backup.wipeSub': 'Cannot be undone!', 'backup.wipeBtn': 'Wipe',
+    'backup.xdev': 'Full cross-device backup (account + data, encrypted)', 'backup.xdevSub': 'Includes accounts, all works and settings; restorable on any device',
+    'backup.xdevPassPh': 'Backup password (6+ chars, letters + digits)', 'backup.xdevExport': 'Encrypted backup',
+    'backup.xdevImport': 'Full cross-device restore', 'backup.xdevImportSub': 'Pick an .xxb file or paste the backup code',
+    'backup.xdevImportPassPh': 'Backup password', 'backup.xdevFile': 'Pick file', 'backup.xdevPaste': 'Paste code',
+    'backup.xdevOk': 'Encrypted backup created (copied to clipboard and downloaded as .xxb)',
+    'backup.xdevRestored': 'Restored: accounts and works merged into this device',
+    'backup.xdevBad': 'Invalid backup or wrong password', 'backup.xdevNeedLogin': 'Sign in before creating an encrypted backup',
+    'backup.xdevPassRule': 'Backup password needs 6+ characters with letters and digits',
     'backup.backupBtn': 'Back up',
     'note.title': 'Title', 'note.content': 'Content', 'note.cat': 'Category',
     'cat.plot': 'Plot', 'cat.char': 'Character', 'cat.foreshadow': 'Foreshadow', 'cat.world': 'World', 'cat.other': 'Other',
@@ -726,6 +744,8 @@ const I18N = {
     'auth.errPass': 'Password must be 6-20 chars and contain both letters and digits',
     'auth.errPass2': 'The two passwords do not match',
     'auth.errLogin': 'Wrong username or password', 'auth.errExists': 'Username already registered — sign in instead',
+    'auth.anyDevice': 'Serverless mode: the same username + password works on any device; carry your data with “Full cross-device backup”.',
+    'auth.adoptToast': 'Account profile created on this device (same username + password = same identity; carry data with “Full cross-device backup”).',
     'auth.okRegister': 'Registered! Signed in automatically — 1-day top-tier free trial (incl. DeepSeek) started',
     'auth.welcome': 'Welcome back, {u}',
     'auth.trialBanner': '🎁 New accounts get a 1-day top-tier free trial (incl. DeepSeek · no purchase required)',
@@ -799,6 +819,14 @@ const I18N = {
     'backup.json': 'Резервная копия всех работ (JSON)', 'backup.jsonSub': 'Включает черновики, версии и чаты; без аккаунтов и ключей моделей',
     'backup.import': 'Импорт резервной копии', 'backup.importSub': 'Восстановление копий без замены текущих работ', 'backup.importBtn': 'Импорт',
     'backup.wipe': 'Удалить все данные', 'backup.wipeSub': 'Необратимо!', 'backup.wipeBtn': 'Удалить',
+    'backup.xdev': 'Полный бэкап между устройствами (аккаунт + данные, шифрование)', 'backup.xdevSub': 'Аккаунты, все работы и настройки; восстановление на любом устройстве',
+    'backup.xdevPassPh': 'Пароль бэкапа (6+ символов, буквы + цифры)', 'backup.xdevExport': 'Шифрованный бэкап',
+    'backup.xdevImport': 'Полное восстановление', 'backup.xdevImportSub': 'Выберите файл .xxb или вставьте код',
+    'backup.xdevImportPassPh': 'Пароль бэкапа', 'backup.xdevFile': 'Выбрать файл', 'backup.xdevPaste': 'Вставить код',
+    'backup.xdevOk': 'Шифрованный бэкап создан (скопирован и скачан .xxb)',
+    'backup.xdevRestored': 'Восстановлено: аккаунты и работы объединены на этом устройстве',
+    'backup.xdevBad': 'Неверный бэкап или пароль', 'backup.xdevNeedLogin': 'Войдите в аккаунт перед шифрованным бэкапом',
+    'backup.xdevPassRule': 'Пароль бэкапа: минимум 6 символов, буквы и цифры',
     'backup.backupBtn': 'Копия',
     'note.title': 'Заголовок', 'note.content': 'Содержимое', 'note.cat': 'Категория',
     'cat.plot': 'Сюжет', 'cat.char': 'Персонаж', 'cat.foreshadow': 'Задел', 'cat.world': 'Мир', 'cat.other': 'Другое',
@@ -1076,6 +1104,8 @@ const I18N = {
     'auth.errPass': 'Пароль: 6-20 знаков, обязательно буквы и цифры',
     'auth.errPass2': 'Пароли не совпадают',
     'auth.errLogin': 'Неверное имя или пароль', 'auth.errExists': 'Такое имя уже занято — войдите',
+    'auth.anyDevice': 'Режим без сервера: одни и те же имя и пароль работают на любом устройстве; данные переносите через «Полный бэкап между устройствами».',
+    'auth.adoptToast': 'Профиль создан на этом устройстве (те же имя и пароль = та же личность; данные — через «Полный бэкап»).',
     'auth.okRegister': 'Готово! Вы вошли — бесплатный пробный период высшего уровня (включая DeepSeek) активирован',
     'auth.welcome': 'С возвращением, {u}',
     'auth.trialBanner': '🎁 Новым аккаунтам — 1 день бесплатного пробного периода высшего уровня (включая DeepSeek · без обязательств)',
@@ -1736,7 +1766,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.8.0';
+const APP_VERSION = '4.9.0';
 const PLAN_LEVEL = { free: 0, pro: 1, deepseek: 2, flag: 3 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, deepseek: 5, flag: 10 };
 const state = {
@@ -5779,6 +5809,7 @@ function loadAccounts() {
   lastTrialState = trialActive();
 }
 function saveAccounts() { try { localStorage.setItem(AUTH_KEY, JSON.stringify(state.accounts)); } catch (e) { } }
+const LOCAL_IDENTITY_SALT = 'xiaoxing-identity-v1';
 async function hashPw(salt, pw) {
   const data = new TextEncoder().encode(salt + '::' + pw);
   const buf = await crypto.subtle.digest('SHA-256', data);
@@ -6730,15 +6761,25 @@ async function authSubmit() {
         if (Object.hasOwn(state.accounts,user)) return setAuthHint(t('auth.errExists'));
         const emailRaw = $('#auth-email').value.trim().toLowerCase();
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailRaw)) return setAuthHint(t('auth.errEmail'));
-        const salt = uid() + uid();
+        // 无服务器模式：盐由用户名确定性派生 → 同一用户名+密码=同一身份，任何设备可登录
+        const salt = await hashPw(LOCAL_IDENTITY_SALT, user);
         const hash = await hashPw(salt, pass);
         const q = $('#auth-question').value;
         const a = $('#auth-answer').value.trim();
         Object.defineProperty(state.accounts, user, {value:{salt, hash, email: emailRaw, question: q || '', answerHash: a ? await hashPw(salt + ':q', a) : '', createdAt:Date.now(), trialUntil:Date.now()+86400000}, enumerable:true, writable:true, configurable:true});
         saveAccounts();
       } else {
-        const acc = Object.hasOwn(state.accounts,user) ? state.accounts[user] : null;
-        if (!acc || await hashPw(acc.salt, pass) !== acc.hash) return setAuthHint(t('auth.errLogin'));
+        let acc = Object.hasOwn(state.accounts,user) ? state.accounts[user] : null;
+        if (!acc) {
+          // 本设备无此账号：若已在其他设备用相同用户名+密码注册，直接按确定性口令建立本地档案（身份互通）
+          const salt = await hashPw(LOCAL_IDENTITY_SALT, user);
+          const hash = await hashPw(salt, pass);
+          Object.defineProperty(state.accounts, user, {value:{salt, hash, email:'', question:'', answerHash:'', createdAt:Date.now(), trialUntil:0, adopted:true}, enumerable:true, writable:true, configurable:true});
+          saveAccounts();
+          acc = state.accounts[user];
+        }
+        if (await hashPw(acc.salt, pass) !== acc.hash) return setAuthHint(t('auth.errLogin') + ' · ' + t('auth.anyDevice'));
+        if (acc.adopted) toast(t('auth.adoptToast'), 'ok', 5000);
       }
       state.currentUser = user;
       try { localStorage.setItem('nebula-session', user); } catch (_) {}
@@ -8077,6 +8118,102 @@ function bindEvents() {
   $('#btn-import-json').addEventListener('click', () => $('#import-file').click());
   $('#import-file').addEventListener('change', e => { const f = e.target.files[0]; if (f) doImport(f); });
   $('#btn-wipe').addEventListener('click', wipeAll);
+
+/* ---------------- 跨设备完整备份（无服务器 · 账号+数据密码加密） ---------------- */
+async function xdevKey(pass, saltStr, usage) {
+  const enc = new TextEncoder();
+  const base = await crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt: enc.encode(saltStr), iterations: 30000, hash: 'SHA-256' },
+    base, { name: 'AES-GCM', length: 256 }, false, [usage]);
+}
+function xdevPassValid(p) { return p.length >= 6 && p.length <= 64 && /[A-Za-z]/.test(p) && /\d/.test(p); }
+function xdevB64(buf) {
+  let s = '';
+  const bytes = new Uint8Array(buf);
+  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return 'XXB1.' + btoa(s);
+}
+function xdevUnb64(text) {
+  if (!text || typeof text !== 'string') return null;
+  const body = text.trim().replace(/\s+/g, '').replace(/^XXB1\./, '');
+  try {
+    const bin = atob(body);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  } catch (_) { return null; }
+}
+async function exportFullBackup() {
+  window.__xdevRan = (window.__xdevRan || 0) + 1;
+  const pass = $('#xdev-pass').value;
+  if (!state.currentUser) return toast(t('backup.xdevNeedLogin'), 'warn');
+  if (!xdevPassValid(pass)) return toast(t('backup.xdevPassRule'), 'warn');
+  try {
+    const payload = JSON.stringify({
+      v: 1, exportedAt: Date.now(), fromUser: state.currentUser,
+      accounts: state.accounts, novels: state.novels, papers: state.papers, settings: state.settings
+    });
+    const key = await xdevKey(pass, 'xiaoxing-xdev-v1', 'encrypt');
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(payload));
+    const merged = new Uint8Array(12 + ct.byteLength);
+    merged.set(iv, 0);
+    merged.set(new Uint8Array(ct), 12);
+    const blobText = xdevB64(merged);
+    window.__xdevStage = 'encrypted';
+    window.__lastXdev = blobText;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([blobText], { type: 'application/octet-stream' }));
+    a.download = '晓星-跨设备备份-' + state.currentUser + '-' + new Date().toISOString().slice(0, 10) + '.xxb';
+    document.body.appendChild(a); a.click(); a.remove();
+    try { await copyText(blobText); } catch (_) { }
+    toast(t('backup.xdevOk'), 'ok', 5000);
+  } catch (e) {
+    window.__xdevErr = String(e?.message || e);
+    toast(t('backup.xdevBad'), 'err');
+  }
+}
+async function importFullBackup(text) {
+  const pass = $('#xdev-import-pass').value;
+  if (!xdevPassValid(pass)) return toast(t('backup.xdevPassRule'), 'warn');
+  const merged = xdevUnb64(text);
+  if (!merged || merged.length <= 12) return toast(t('backup.xdevBad'), 'err');
+  const iv = merged.subarray(0, 12);
+  const ct = merged.subarray(12);
+  try {
+    const key = await xdevKey(pass, 'xiaoxing-xdev-v1', 'decrypt');
+    const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ct);
+    const data = JSON.parse(new TextDecoder().decode(pt));
+    if (data.v !== 1) throw new Error('bad version');
+    // 合并：账号（保留本机已有，补充缺失）、作品按 id 合并、设置浅合并
+    for (const u of Object.keys(data.accounts || {})) {
+      if (!Object.hasOwn(state.accounts, u)) {
+        Object.defineProperty(state.accounts, u, { value: data.accounts[u], enumerable: true, writable: true, configurable: true });
+      }
+    }
+    const mergeById = (target, incoming) => {
+      for (const id of Object.keys(incoming || {})) {
+        if (!Object.hasOwn(target, id)) target[id] = incoming[id];
+      }
+    };
+    mergeById(state.novels, data.novels);
+    mergeById(state.papers, data.papers);
+    if (data.settings) state.settings = Object.assign({}, data.settings, state.settings);
+    saveAccounts(); saveState();
+    renderAll(); applyUIPrefs();
+    window.__xdevImported = true;
+    toast(t('backup.xdevRestored'), 'ok', 5000);
+  } catch (e) {
+    toast(t('backup.xdevBad'), 'err');
+  }
+}
+  // 跨设备完整备份（账号+数据，密码加密）
+  $('#btn-xdev-export').addEventListener('click', exportFullBackup);
+  $('#btn-xdev-import-file').addEventListener('click', () => $('#xdev-file').click());
+  $('#xdev-file').addEventListener('change', e => { const f = e.target.files[0]; if (f) f.text().then(txt => importFullBackup(txt)); });
+  $('#btn-xdev-import-text').addEventListener('click', () => { const box = $('#xdev-text-wrap'); box.hidden = !box.hidden; if (!box.hidden) $('#xdev-text').focus(); });
+  $('#btn-xdev-import-go').addEventListener('click', () => importFullBackup($('#xdev-text').value.trim()));
   // 个人档案
   $('#btn-profile-save').addEventListener('click', saveProfile);
   $('#btn-avatar-upload').addEventListener('click', () => $('#avatar-file').click());
