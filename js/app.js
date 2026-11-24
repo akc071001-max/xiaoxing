@@ -1766,7 +1766,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.9.0';
+const APP_VERSION = '4.9.1';
 const PLAN_LEVEL = { free: 0, pro: 1, deepseek: 2, flag: 3 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, deepseek: 5, flag: 10 };
 const state = {
@@ -2986,12 +2986,13 @@ function handleManagedModalKeys(event) {
   if ($('dialog[open]') || !$('#modal-confirm').hidden) return false;
   const visible = $$('.modal-overlay:not([hidden])');
   const overlay = visible.at(-1);
-  if (!overlay || !Object.hasOwn(FOCUS_MANAGED_MODALS, overlay.id)) return false;
+  if (!overlay || ['modal-terms', 'modal-storage'].includes(overlay.id)) return false;
   if (event.key === 'Escape') {
     event.preventDefault();
     closeModal(overlay.id);
     return true;
   }
+  if (!Object.hasOwn(FOCUS_MANAGED_MODALS, overlay.id)) return false;
   const stops = modalTabStops(overlay);
   const here = stops.indexOf(document.activeElement);
   if (here < 0 || (event.shiftKey ? here === 0 : here === stops.length - 1)) {
@@ -8209,11 +8210,11 @@ async function importFullBackup(text) {
   }
 }
   // 跨设备完整备份（账号+数据，密码加密）
-  $('#btn-xdev-export').addEventListener('click', exportFullBackup);
-  $('#btn-xdev-import-file').addEventListener('click', () => $('#xdev-file').click());
-  $('#xdev-file').addEventListener('change', e => { const f = e.target.files[0]; if (f) f.text().then(txt => importFullBackup(txt)); });
-  $('#btn-xdev-import-text').addEventListener('click', () => { const box = $('#xdev-text-wrap'); box.hidden = !box.hidden; if (!box.hidden) $('#xdev-text').focus(); });
-  $('#btn-xdev-import-go').addEventListener('click', () => importFullBackup($('#xdev-text').value.trim()));
+  $('#btn-xdev-export')?.addEventListener('click', exportFullBackup);
+  $('#btn-xdev-import-file')?.addEventListener('click', () => $('#xdev-file')?.click());
+  $('#xdev-file')?.addEventListener('change', e => { const f = e.target.files[0]; if (f) f.text().then(txt => importFullBackup(txt)); });
+  $('#btn-xdev-import-text')?.addEventListener('click', () => { const box = $('#xdev-text-wrap'); if (box) { box.hidden = !box.hidden; if (!box.hidden) $('#xdev-text').focus(); } });
+  $('#btn-xdev-import-go')?.addEventListener('click', () => importFullBackup($('#xdev-text').value.trim()));
   // 个人档案
   $('#btn-profile-save').addEventListener('click', saveProfile);
   $('#btn-avatar-upload').addEventListener('click', () => $('#avatar-file').click());
@@ -8292,6 +8293,7 @@ async function importFullBackup(text) {
       closeModal(e.target.id);
     }
   });
+  window.__bindingsComplete = true;
   // 快捷键
   document.addEventListener('keydown', e => {
     if (handleManagedModalKeys(e)) return;
