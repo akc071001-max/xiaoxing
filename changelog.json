@@ -1,22 +1,19 @@
 {
-  "version": "4.5.0",
+  "version": "4.6.0",
   "date": "2026-11-24",
   "items": [
-    { "title": "付款信息一目了然", "desc": "站长操作台新增「⏳ 待核对付款」与「💰 收款流水」：用户提交核对后进入队列，管理员一键「✓ 核对并开通」即完成核对（40 元自动开通 30 天）" },
-    { "title": "管理入口在顶栏", "desc": "顶栏「👑 站长操作台」红色呼吸按钮直达站内操作台，无需寻找" },
-    { "title": "私信模块", "desc": "管理员可向指定用户发送私信（如 API 密钥）：顶栏 📩 收件箱 + 未读角标，消息可一键复制；操作台用户列表每行「✉ 私信」按钮直达" },
-    { "title": "注册必填邮箱", "desc": "注册时必须填写个人邮箱（用于确认用户信息）；老用户可在设置中补填，后台名单可见邮箱" }
+    { "title": "唯一付费内容写明：DeepSeek", "desc": "会员中心已移除专业版/旗舰版卡片，明确写明：目前唯一付费内容为 DeepSeek 月度会员（¥40/月），其余功能试运营期间免费" },
+    { "title": "管理入口重建", "desc": "顶栏「👑 管理入口」放在通信模块（📩 私信）旁边，红色呼吸按钮，管理员任何模式下都可见；静态模式打开会提示需管理版服务器" },
+    { "title": "管理模块全功能", "desc": "管理入口内写明全部功能并均可操作：统计概览、待核对付款一键开通、收款流水、收退款登记、用户名单（搜索/拉黑/白名单/私信/邮箱）、私信、完整后台" }
   ],
   "itemsEn": [
-    { "title": "Payment info at a glance", "desc": "The admin console now shows “⏳ Pending payments” and “💰 Recent receipts”: user submissions queue up and the operator confirms with one click “✓ Verify & activate” (¥40 auto-activates 30 days)." },
-    { "title": "Admin entry in the top bar", "desc": "The red glowing “👑 Admin Console” button in the top bar opens the in-site console directly." },
-    { "title": "Private messaging", "desc": "Admins can message any user privately (e.g. an API key): users get a 📩 inbox with an unread badge and one-click copy; each user row in the console has a “✉ Message” button." },
-    { "title": "Email required at registration", "desc": "Registration now requires an email address for identity verification; legacy users can add one in Settings, and emails are visible in the admin console." }
+    { "title": "Only DeepSeek is paid — stated clearly", "desc": "Pro/Flagship cards removed from Membership; it now states plainly: the only paid item is DeepSeek Monthly (¥40/month), everything else is free during beta." },
+    { "title": "Admin entry rebuilt", "desc": "The “👑 Admin Entry” button now sits next to the messaging module (📩), glows red, and is visible to admins in every mode; the static mode explains that the managed server is required." },
+    { "title": "Admin module: all functions labeled and operable", "desc": "The admin entry lists every function and all are operable: stats, pending-payment one-click activation, receipt history, record receipts/refunds, user list (search / block / allowlist / message / email), private messages, full console." }
   ],
   "itemsRu": [
-    { "title": "Платежи видны сразу", "desc": "В панели администратора появились «⏳ Ожидают проверки» и «💰 Последние поступления»: заявки пользователей в очереди, проверка в один клик «✓ Проверить и активировать» (40 юаней = 30 дней)." },
-    { "title": "Вход администратора в верхней панели", "desc": "Красная пульсирующая кнопка «👑 Панель администратора» открывает панель прямо на сайте." },
-    { "title": "Личные сообщения", "desc": "Администратор может отправить пользователю личное сообщение (например, API-ключ): у пользователя 📩 входящие с бейджем непрочитанных и копированием в один клик; в списке пользователей — кнопка «✉ Сообщение»." },
-    { "title": "Почта обязательна при регистрации", "desc": "При регистрации обязательно указывается эл. почта для подтверждения личности; старые пользователи могут добавить её в настройках, почта видна в панели." }
+    { "title": "Платно только DeepSeek — указано явно", "desc": "Карточки Pro/Flag убраны из центра членства; явно указано: единственное платное — DeepSeek ежемесячно (¥40/месяц), остальное бесплатно во время беты." },
+    { "title": "Вход администратора переделан", "desc": "Кнопка «👑 Вход администратора» стоит рядом с модулем сообщений (📩), светится красным и видна администратору в любом режиме; в статическом режиме поясняется, что нужен сервер." },
+    { "title": "Панель администратора: все функции подписаны и работают", "desc": "Во входе администратора перечислены все функции, и все рабочие: статистика, активация ожидающих платежей в один клик, история поступлений, регистрация поступлений/возвратов, список пользователей (поиск / блок / белый список / сообщение / почта), сообщения, полная панель." }
   ]
 }
