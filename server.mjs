@@ -270,6 +270,16 @@ export async function createXiaoxingServer(options = {}) {
     if (!row && required) throw error(401, 'unauthorized', 'Sign in to continue.');
     return row || null;
   }
+  // 管理端授权：管理员会话，或创作者授权管理员账号的用户会话（小柚子可直接在站内操作）
+  function adminSession(req) {
+    const admin = session(req, 'admin', false);
+    if (admin) return true;
+    const user = session(req, 'user', false);
+    if (!user) throw error(401, 'unauthorized', 'Sign in to continue.');
+    const row = getUser.get(user.user_id);
+    if (!row || !isAdminUsername(row.username_key)) throw error(403, 'admin_required', 'Creator-authorized administrator account required.');
+    return true;
+  }
   function checkOrigin(req) {
     if (!origin && !/^(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/i.test(req.headers.host || '')) {
       throw error(403, 'origin_forbidden', 'Set a public HTTPS origin before serving account or admin API requests.');
@@ -351,7 +361,10 @@ export async function createXiaoxingServer(options = {}) {
   };
   async function api(req, res, url) {
     const route = url.pathname, method = req.method;
-    if (method === 'GET' && route === '/api/status') return sendJson(res, 200, { managed: true });
+    if (method === 'GET' && route === '/api/status') {
+      const now = Date.now();
+      return sendJson(res, 200, { managed: true, online: onlineSQL.get(now - ONLINE, now).active });
+    }
     originGate(req);
     if (method === 'GET' && route === '/api/auth/me') {
       const u = session(req, 'user', false);
@@ -359,7 +372,7 @@ export async function createXiaoxingServer(options = {}) {
       return sendJson(res, 200, { user: u ? publicUser(getUser.get(u.user_id), Date.now(), isAdminUsername) : null });
     }
     if (method === 'GET' && route === '/api/admin/dashboard') {
-      session(req, 'admin');
+      adminSession(req);
       return sendJson(res, 200, dashboard(url));
     }
     if (!['POST','PUT'].includes(method)) throw error(404, 'not_found', 'Not found.');
@@ -464,14 +477,14 @@ export async function createXiaoxingServer(options = {}) {
       return sendJson(res, 200, { ok: true, user: publicUser(getUser.get(u.user_id), now, isAdminUsername) });
     }
     if (method === 'PUT' && route === '/api/admin/whitelist') {
-      session(req, 'admin');
+      adminSession(req);
       const body = await jsonBody(req);
       if (!text(body.userId) || body.userId.length > 80 || typeof body.whitelisted !== 'boolean') throw error(400, 'invalid_whitelist', 'Provide a user ID and a true or false authorization value.');
       if (!updateWhitelist.run(Number(body.whitelisted), body.userId).changes) throw error(404, 'user_not_found', 'User not found.');
       return sendJson(res, 200, { user: publicUser(getUser.get(body.userId), Date.now(), isAdminUsername) });
     }
     if (method === 'PUT' && route === '/api/admin/blacklist') {
-      session(req, 'admin');
+      adminSession(req);
       const body = await jsonBody(req);
       if (!text(body.userId) || body.userId.length > 80 || typeof body.blocked !== 'boolean') throw error(400, 'invalid_blacklist', 'Provide a user ID and a true or false blocked value.');
       const target = getUser.get(body.userId);
@@ -485,7 +498,7 @@ export async function createXiaoxingServer(options = {}) {
       return sendJson(res, 200, { user: publicUser(getUser.get(body.userId), Date.now(), isAdminUsername) });
     }
     if (method === 'POST' && route === '/api/admin/payments') {
-      session(req, 'admin');
+      adminSession(req);
       return sendJson(res, 201, { payment: captureReceipt(await jsonBody(req)) });
     }
     throw error(404, 'not_found', 'Not found.');
