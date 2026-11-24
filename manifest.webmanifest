@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "晓星 XIAOXING",
+  "short_name": "晓星",
+  "description": "小说与论文写作台 · Novel and paper writing studio",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#04060e",
+  "background_color": "#04060e",
+  "icons": [
+    {"src": "icons/xiaoxing-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/xiaoxing-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
