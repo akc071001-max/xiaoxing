@@ -1,19 +1,19 @@
 {
-  "version": "4.6.0",
+  "version": "4.7.0",
   "date": "2026-11-24",
   "items": [
-    { "title": "唯一付费内容写明：DeepSeek", "desc": "会员中心已移除专业版/旗舰版卡片，明确写明：目前唯一付费内容为 DeepSeek 月度会员（¥40/月），其余功能试运营期间免费" },
-    { "title": "管理入口重建", "desc": "顶栏「👑 管理入口」放在通信模块（📩 私信）旁边，红色呼吸按钮，管理员任何模式下都可见；静态模式打开会提示需管理版服务器" },
-    { "title": "管理模块全功能", "desc": "管理入口内写明全部功能并均可操作：统计概览、待核对付款一键开通、收款流水、收退款登记、用户名单（搜索/拉黑/白名单/私信/邮箱）、私信、完整后台" }
+    { "title": "手机全适配 · 功能不阉割", "desc": "手机版与电脑版功能完全一致（同一套网页，两端同步更新，暂不做 App）：弹窗全屏适配、章节/大纲/内容/AI 面板抽屉式切换、顶栏自适应换行，付费协议与收款码手机端排版优化" },
+    { "title": "手机付费流程完善", "desc": "付费协议、收款码、提交核对全流程在手机上完整可用（竖排布局、大按钮、滚动条款）" },
+    { "title": "用户可直接给创始人发信息", "desc": "私信面板新增「✉️ 给创始人发信息」：用户留言直达您；管理入口新增「📬 用户来信」列表，一键回复" }
   ],
   "itemsEn": [
-    { "title": "Only DeepSeek is paid — stated clearly", "desc": "Pro/Flagship cards removed from Membership; it now states plainly: the only paid item is DeepSeek Monthly (¥40/month), everything else is free during beta." },
-    { "title": "Admin entry rebuilt", "desc": "The “👑 Admin Entry” button now sits next to the messaging module (📩), glows red, and is visible to admins in every mode; the static mode explains that the managed server is required." },
-    { "title": "Admin module: all functions labeled and operable", "desc": "The admin entry lists every function and all are operable: stats, pending-payment one-click activation, receipt history, record receipts/refunds, user list (search / block / allowlist / message / email), private messages, full console." }
+    { "title": "Full mobile adaptation — nothing cut", "desc": "Mobile has the exact same features as desktop (one web app, both ends updated together, no native app for now): full-screen modals, drawer-style panels/AI, wrapping top bar, and a polished payment agreement/QR layout on phones." },
+    { "title": "Mobile payment flow complete", "desc": "Agreement, payment QR and verification submission all work fully on phones (stacked layout, big buttons, scrollable terms)." },
+    { "title": "Users can message the creator directly", "desc": "The inbox now has “✉️ Message the creator”: user messages reach you directly; the admin entry gains a “📬 Messages to the creator” list with one-click reply." }
   ],
   "itemsRu": [
-    { "title": "Платно только DeepSeek — указано явно", "desc": "Карточки Pro/Flag убраны из центра членства; явно указано: единственное платное — DeepSeek ежемесячно (¥40/месяц), остальное бесплатно во время беты." },
-    { "title": "Вход администратора переделан", "desc": "Кнопка «👑 Вход администратора» стоит рядом с модулем сообщений (📩), светится красным и видна администратору в любом режиме; в статическом режиме поясняется, что нужен сервер." },
-    { "title": "Панель администратора: все функции подписаны и работают", "desc": "Во входе администратора перечислены все функции, и все рабочие: статистика, активация ожидающих платежей в один клик, история поступлений, регистрация поступлений/возвратов, список пользователей (поиск / блок / белый список / сообщение / почта), сообщения, полная панель." }
+    { "title": "Полная адаптация телефонов — ничего не урезано", "desc": "Мобильная версия имеет те же функции, что и компьютер (одно веб-приложение, оба обновляются вместе, пока без нативного приложения): полноэкранные окна, панели-шторки, перенос верхней панели, удобные договор и QR на телефоне." },
+    { "title": "Оплата на телефоне полностью работает", "desc": "Договор, код оплаты и отправка на проверку полностью работают на телефоне (вертикальная раскладка, крупные кнопки, прокрутка условий)." },
+    { "title": "Пользователи пишут автору напрямую", "desc": "Во входящих появилось «✉️ Написать автору»: сообщения приходят напрямую вам; во входе администратора — список «📬 Сообщения автору» с ответом в один клик." }
   ]
 }
