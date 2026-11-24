@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.6.0" />
+<link rel="stylesheet" href="css/style.css?v=4.7.0" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -1150,6 +1150,8 @@
       </div>
       <div class="set-section-title" data-i18n="admin.pendingTitle">⏳ 待核对付款</div>
       <div class="admin-pending-list" id="admin-pending-list"></div>
+      <div class="set-section-title" data-i18n="admin.creatorMsgs">📬 用户来信（给创始人）</div>
+      <div class="admin-pending-list" id="admin-creator-msgs"></div>
       <div class="set-section-title" data-i18n="admin.paymentsTitle">💰 收款流水（最近）</div>
       <div class="admin-payments-list" id="admin-payments-list"></div>
       <div class="set-section-title" data-i18n="admin.receiptTitle">🧾 收退款登记（核对到账后填写）</div>
@@ -1232,6 +1234,13 @@
     </div>
     <div class="modal-body">
       <div class="msg-list scroll-area" id="msg-list"></div>
+      <div class="msg-compose">
+        <div class="set-section-title" data-i18n="msg.sendToCreator">✉️ 给创始人发信息</div>
+        <textarea class="input" id="msg-compose-text" rows="2" data-i18n-ph="msg.sendToCreatorPh" placeholder="给创作者（小柚子）留言、提问或反馈…"></textarea>
+        <div class="admin-msg-actions">
+          <button class="btn small primary" id="btn-msg-send" data-i18n="msg.sendCreator">发送</button>
+        </div>
+      </div>
     </div>
     <div class="modal-foot">
       <button class="btn small" id="btn-msg-refresh" data-i18n="admin.refresh">刷新</button>
@@ -1337,7 +1346,7 @@
     <p id="draft-review-note" role="status"></p>
   </div>
 </dialog>
-<script src="js/draft-review.js?v=4.6.0"></script>
-<script src="js/app.js?v=4.6.0"></script>
+<script src="js/draft-review.js?v=4.7.0"></script>
+<script src="js/app.js?v=4.7.0"></script>
 </body>
 </html>
