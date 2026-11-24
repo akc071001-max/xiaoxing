@@ -550,6 +550,10 @@ body.board-paper.no-ai #app{grid-template-columns:300px minmax(0,1fr)}
 .auth-hint{font-size:12px;line-height:1.7;min-height:18px}
 .auth-hint.err{color:var(--err)}
 .auth-hint.ok{color:var(--ok)}
+#modal-auth [hidden]{display:none!important}
+#auth-bridge-choice{border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin:0 0 10px}
+#auth-bridge-info,#auth-bridge-status{overflow-wrap:anywhere}
+#auth-bridge-choice .forgot-actions{justify-content:flex-start;flex-wrap:wrap}
 .btn-link{background:none;border:none;color:var(--accent);cursor:pointer;font-family:var(--font-ui);font-size:12.5px;padding:4px 0;text-align:left;text-decoration:underline;text-decoration-color:rgba(0,224,255,.4)}
 .btn-link:hover{text-decoration-color:var(--accent)}
 .forgot-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}
