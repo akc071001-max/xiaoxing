@@ -20,7 +20,7 @@ const number = value => Number(value || 0);
 const text = value => typeof value === 'string';
 const record = value => value && typeof value === 'object' && !Array.isArray(value);
 const error = (status, code, message) => Object.assign(new Error(message), { status, code });
-const managedPasswordRule = p => typeof p === 'string' && p.length >= 8 && p.length <= 128 && /\p{L}/u.test(p) && /[0-9]/.test(p);
+const managedPasswordRule = p => typeof p === 'string' && p.length >= 6 && p.length <= 128 && /\p{L}/u.test(p) && /[0-9]/.test(p);
 
 const ASSETS = new Map(Object.entries({
   '/': ['index.html', 'text/html; charset=utf-8'],
@@ -54,9 +54,9 @@ function parseCredentials(body, registration) {
   if (length < 2 || length > 20 || !/^[\p{Script=Latin}\p{Script=Cyrillic}\p{Script=Han}0-9_]+$/u.test(username)) {
     throw error(400, 'invalid_username', 'The username must contain 2–20 supported letters, digits, or underscores.');
   }
-  if (password.length < (registration ? 8 : 1) || password.length > 128 ||
+  if (password.length < (registration ? 6 : 1) || password.length > 128 ||
       (registration && (!/\p{L}/u.test(password) || !/[0-9]/.test(password)))) {
-    throw error(400, 'invalid_password', 'The password must contain 8–128 characters, including a letter and a digit.');
+    throw error(400, 'invalid_password', 'The password must contain 6–128 characters, including a letter and a digit.');
   }
   return { username, usernameKey: username.toLowerCase(), password };
 }
@@ -73,13 +73,14 @@ function sessionCookie(role, token, secure, expired = false) {
   const maxAge = expired ? 0 : Math.floor(SESSION_DURATION[role] / 1000);
   return `${SESSION_COOKIE[role]}=${token}; Path=${COOKIE_PATH[role]}; Max-Age=${maxAge}; HttpOnly; SameSite=Strict${secure ? '; Secure' : ''}`;
 }
-function publicUser(row, now = Date.now()) {
+function publicUser(row, now = Date.now(), adminCheck = null) {
   if (!row) return null;
   const whitelisted = Boolean(row.whitelisted);
+  const isAdmin = whitelisted || Boolean(adminCheck && adminCheck(row.username_key));
   return {
     id: row.id, username: row.username, createdAt: row.created_at, whitelisted,
-    blocked: Boolean(row.blocked), hasQuestion: Boolean(row.question),
-    trialEndsAt: row.trial_ends_at, plan: whitelisted || row.trial_ends_at > now ? 'flag' : 'free'
+    isAdmin, blocked: Boolean(row.blocked), hasQuestion: Boolean(row.question),
+    trialEndsAt: row.trial_ends_at, plan: isAdmin || row.trial_ends_at > now ? 'flag' : 'free'
   };
 }
 function sendJson(res, status, data, headers = {}) {
@@ -142,6 +143,10 @@ export async function createXiaoxingServer(options = {}) {
   if (typeof password !== 'string' || password.length < 16 || password.length > 1024) {
     throw new Error('Set XIAOXING_ADMIN_PASSWORD to a strong independent password (16–1024 characters).');
   }
+  // 创作者授权的管理员账号（用户名白名单，由部署者通过环境变量维护；默认授权「小柚子」）
+  const adminUsernamesRaw = options.adminUsernames ?? process.env.XIAOXING_ADMIN_USERNAMES ?? '小柚子';
+  const adminUserSet = new Set(String(adminUsernamesRaw).split(',').map(s => s.trim().normalize('NFKC').toLowerCase()).filter(Boolean));
+  const isAdminUsername = usernameKey => adminUserSet.has(usernameKey);
   const adminDigest = sha(password);
   // Rotating the administrator password makes any previous admin cookies unusable.
   const hashToken = (role, token) => (role === 'admin' ? createHmac('sha256', adminDigest).update(token).digest() : sha(token)).toString('hex');
@@ -298,7 +303,7 @@ export async function createXiaoxingServer(options = {}) {
       totalPayers: totalPayersSQL.get().total, periodPayers: amounts.total,
       periodGrossCents: gross, periodRefundCents: refunds, periodNetCents: gross - refunds, whitelistCount: counts.whitelist,
       users: usersSQL.all().map(r => {
-        const { trialEndsAt, ...user } = publicUser(r, now);
+        const { trialEndsAt, ...user } = publicUser(r, now, isAdminUsername);
         return { ...user, netCents: number(r.net), hasPaid: Boolean(r.has_paid), blocked: Boolean(r.blocked), hasQuestion: Boolean(r.question) };
       }),
       payments: paymentsSQL.all(min, max).map(r => ({
@@ -351,7 +356,7 @@ export async function createXiaoxingServer(options = {}) {
     if (method === 'GET' && route === '/api/auth/me') {
       const u = session(req, 'user', false);
       if (u) touchSession.run(Date.now(), u.token_hash, Date.now());
-      return sendJson(res, 200, { user: u ? publicUser(getUser.get(u.user_id)) : null });
+      return sendJson(res, 200, { user: u ? publicUser(getUser.get(u.user_id), Date.now(), isAdminUsername) : null });
     }
     if (method === 'GET' && route === '/api/admin/dashboard') {
       session(req, 'admin');
@@ -393,7 +398,7 @@ export async function createXiaoxingServer(options = {}) {
         if (!timingSafeEqual(got, wanted) || !account) throw error(401, 'invalid_credentials', 'Username or password is incorrect.');
         u = account;
       }
-      return sendJson(res, registration ? 201 : 200, { user: publicUser(u) }, { 'Set-Cookie': issueSession(req, 'user', u.id) });
+      return sendJson(res, registration ? 201 : 200, { user: publicUser(u, Date.now(), isAdminUsername) }, { 'Set-Cookie': issueSession(req, 'user', u.id) });
     }
     if (method === 'POST' && route === '/api/auth/forgot-question') {
       throttle(req, 'forgot-question', 12, 60000);
@@ -412,7 +417,7 @@ export async function createXiaoxingServer(options = {}) {
       const answer = text(body.answer) ? String(body.answer) : '';
       const newPassword = text(body.password) ? String(body.password) : '';
       if (!username || !/^[\p{Script=Latin}\p{Script=Cyrillic}\p{Script=Han}0-9_]{2,20}$/u.test(username)) throw error(400, 'invalid_username', 'Enter a valid username.');
-      if (!managedPasswordRule(newPassword)) throw error(400, 'invalid_password', 'The new password must contain 8–128 characters, including a letter and a digit.');
+      if (!managedPasswordRule(newPassword)) throw error(400, 'invalid_password', 'The new password must contain 6–128 characters, including a letter and a digit.');
       const account = findUser.get(usernameKey);
       if (!account || !account.question) throw error(404, 'no_question', 'This account has no security question set.');
       const got = await passwordHash(answer, account.salt + ':q');
@@ -427,7 +432,21 @@ export async function createXiaoxingServer(options = {}) {
       throttle(req, 'admin-login', 12, 15 * 60000);
       const body = await jsonBody(req);
       const input = text(body.password) && body.password.length <= 1024 ? body.password : '';
-      if (!timingSafeEqual(sha(input), adminDigest)) throw error(401, 'invalid_credentials', 'Administrator password is incorrect.');
+      const uname = text(body.username) ? body.username.trim().normalize('NFKC').toLowerCase() : '';
+      // 方式一：创作者授权的管理员账号（如 小柚子）用自己的账号密码登录
+      let accountOk = false;
+      if (uname && isAdminUsername(uname)) {
+        const acc = findUser.get(uname);
+        if (acc && !acc.blocked && input.length >= 1 && input.length <= 128) {
+          const got = await passwordHash(input, acc.salt);
+          const wanted = Buffer.from(acc.password_hash, 'hex');
+          if (timingSafeEqual(got, wanted)) accountOk = true;
+        }
+      }
+      // 方式二：部署者设置的管理密码
+      if (!accountOk && !timingSafeEqual(sha(input), adminDigest)) {
+        throw error(401, 'invalid_credentials', 'Administrator credentials are incorrect.');
+      }
       return sendJson(res, 200, { ok: true }, { 'Set-Cookie': issueSession(req, 'admin') });
     }
     if (method === 'POST' && ['/api/auth/logout','/api/admin/logout'].includes(route)) {
@@ -442,22 +461,28 @@ export async function createXiaoxingServer(options = {}) {
       await jsonBody(req);
       const now = Date.now();
       if (!touchSession.run(now, u.token_hash, now).changes) throw error(401, 'unauthorized', 'Sign in to continue.');
-      return sendJson(res, 200, { ok: true, user: publicUser(getUser.get(u.user_id), now) });
+      return sendJson(res, 200, { ok: true, user: publicUser(getUser.get(u.user_id), now, isAdminUsername) });
     }
     if (method === 'PUT' && route === '/api/admin/whitelist') {
       session(req, 'admin');
       const body = await jsonBody(req);
       if (!text(body.userId) || body.userId.length > 80 || typeof body.whitelisted !== 'boolean') throw error(400, 'invalid_whitelist', 'Provide a user ID and a true or false authorization value.');
       if (!updateWhitelist.run(Number(body.whitelisted), body.userId).changes) throw error(404, 'user_not_found', 'User not found.');
-      return sendJson(res, 200, { user: publicUser(getUser.get(body.userId)) });
+      return sendJson(res, 200, { user: publicUser(getUser.get(body.userId), Date.now(), isAdminUsername) });
     }
     if (method === 'PUT' && route === '/api/admin/blacklist') {
       session(req, 'admin');
       const body = await jsonBody(req);
       if (!text(body.userId) || body.userId.length > 80 || typeof body.blocked !== 'boolean') throw error(400, 'invalid_blacklist', 'Provide a user ID and a true or false blocked value.');
+      const target = getUser.get(body.userId);
+      if (!target) throw error(404, 'user_not_found', 'User not found.');
+      // 创作者授权的管理员账号与白名单账号受保护，不能被拉黑
+      if (body.blocked && (target.whitelisted || isAdminUsername(target.username_key))) {
+        throw error(403, 'admin_protected', 'Creator-authorized administrator accounts cannot be blocked.');
+      }
       if (!updateBlacklist.run(Number(body.blocked), body.userId).changes) throw error(404, 'user_not_found', 'User not found.');
       if (body.blocked) clearUserSessions.run(body.userId); // 拉黑后立即强制下线
-      return sendJson(res, 200, { user: publicUser(getUser.get(body.userId)) });
+      return sendJson(res, 200, { user: publicUser(getUser.get(body.userId), Date.now(), isAdminUsername) });
     }
     if (method === 'POST' && route === '/api/admin/payments') {
       session(req, 'admin');
