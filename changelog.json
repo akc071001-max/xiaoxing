@@ -1,22 +1,19 @@
 {
-  "version": "4.2.1",
+  "version": "4.2.2",
   "date": "2026-11-24",
   "items": [
-    { "title": "管理员拉黑功能", "desc": "站长后台用户列表新增「拉黑 / 解除拉黑」：拉黑后该账户立即强制下线且无法登录，前台显示中文提示" },
-    { "title": "管理员授权与最高权限", "desc": "站长后台仅凭您设置的管理员密码进入（经过您授权）；白名单用户自动获得旗舰版最高权限" },
-    { "title": "忘记密码", "desc": "注册时可设置密保问题；忘记密码时凭密保答案自助重置，重置后旧登录全部失效" },
-    { "title": "用户名单检查", "desc": "后台用户列表新增「已拉黑」标记与状态行，可搜索、筛选，便于核查" }
+    { "title": "创作者管理员账号：小柚子", "desc": "账号「小柚子」已升级为管理员：自动获得网站最高权限（旗舰版），可登录站长后台，且受保护不可被拉黑" },
+    { "title": "管理员账号登录后台", "desc": "站长后台除部署者管理密码外，也支持创作者授权的管理员账号用自己的账号密码登录（用户名由环境变量维护）" },
+    { "title": "管理员身份徽章", "desc": "设置中心账户行显示 👑 管理员徽章，会员中心自动标记旗舰版" }
   ],
   "itemsEn": [
-    { "title": "Admin blacklist", "desc": "The user list in the admin panel now has Block / Unblock: a blocked account is signed out immediately and cannot sign in, with a clear message." },
-    { "title": "Admin authorization & top tier", "desc": "The admin panel opens only with the password you set (authorized by you); allowlisted users automatically get the Flagship tier." },
-    { "title": "Forgot password", "desc": "Set a security question at registration; recover your password with the answer. All previous sessions are invalidated after a reset." },
-    { "title": "User list review", "desc": "The admin user list now shows a Blocked badge and row state, with search and filters." }
+    { "title": "Creator admin account: 小柚子", "desc": "The account “小柚子” is now an administrator: it automatically gets the top Flagship tier, can sign into the admin console, and is protected from being blocked." },
+    { "title": "Admin accounts can sign into the console", "desc": "Besides the operator password, creator-authorized admin accounts can sign into the admin console with their own username and password (usernames are maintained via an environment variable)." },
+    { "title": "Admin badge", "desc": "The account row in Settings shows a 👑 Admin badge, and Membership marks Flagship as current." }
   ],
   "itemsRu": [
-    { "title": "Чёрный список администратора", "desc": "В списке пользователей появились кнопки «Заблокировать / Разблокировать»: заблокированный аккаунт сразу выходит из системы и не может войти." },
-    { "title": "Авторизация администратора и высший уровень", "desc": "Панель администратора открывается только с паролем, который задаёте вы; пользователи из белого списка автоматически получают Флагман." },
-    { "title": "Забыли пароль", "desc": "При регистрации можно задать контрольный вопрос; пароль восстанавливается по ответу, старые сеансы аннулируются." },
-    { "title": "Просмотр списка пользователей", "desc": "В списке пользователей появилась пометка «Заблокирован», есть поиск и фильтры." }
+    { "title": "Аккаунт администратора: 小柚子", "desc": "Аккаунт «小柚子» стал администратором: автоматически получает Флагман, может входить в панель управления и защищён от блокировки." },
+    { "title": "Вход администратора в панель", "desc": "Помимо пароля оператора, авторизованные администраторы могут входить в панель управления со своим именем и паролем (имена задаются переменной окружения)." },
+    { "title": "Значок администратора", "desc": "В настройках показывается значок 👑 Админ, в центре членства отмечен Флагман." }
   ]
 }
