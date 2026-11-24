@@ -1,19 +1,16 @@
 {
-  "version": "4.3.0",
+  "version": "4.3.1",
   "date": "2026-11-24",
   "items": [
-    { "title": "实时在线人数", "desc": "顶栏新增在线人数指示器（绿色呼吸灯 + 数字），每 30 秒自动刷新最近 5 分钟活跃人数" },
-    { "title": "管理员站内直接操作", "desc": "管理员账号登录后顶栏出现「👑 管理」按钮，站内弹窗即可查看用户名单、拉黑/解封、管理白名单，无需离开网站" },
-    { "title": "管理员专属黑色背景", "desc": "管理员登录后背景变为沉稳黑色，顶部如法拉利车灯般的一双「呼吸之眼」缓缓变亮再变暗，压迫感十足" }
+    { "title": "车灯动效重制（按参考图）", "desc": "管理员背景按参考图重制：深黑青色氛围，屏幕中央两盏青白色 LED 车灯（纯白核心 + 青蓝光晕），呼吸般缓缓变亮再变暗，下方带展厅倒影" },
+    { "title": "功能正常保障", "desc": "背景层不拦截任何点击（指针穿透），写作、宠物、设置、管理台等全部功能照常使用" }
   ],
   "itemsEn": [
-    { "title": "Live online count", "desc": "A green pulsing online indicator now sits in the top bar, refreshing every 30 seconds with the number of users active in the last 5 minutes." },
-    { "title": "Admin operations inside the site", "desc": "Admins see a “👑 Admin” button: view the user list, block/unblock and manage the allowlist right inside the site." },
-    { "title": "Admin black theme", "desc": "Admins get a calm, oppressive black background with a pair of Ferrari-headlight “breathing eyes” that slowly brighten and dim." }
+    { "title": "Headlight animation remade (per reference)", "desc": "The admin background now matches the reference: dark teal-black ambience with two cyan-white LED headlights centered on screen (pure-white core, cyan glow), breathing bright and dim, with a showroom reflection below." },
+    { "title": "All features intact", "desc": "The background layer is click-through, so writing, the pet, settings, the admin console and everything else keep working." }
   ],
   "itemsRu": [
-    { "title": "Живой счётчик онлайн", "desc": "В верхней панели — пульсирующий зелёный индикатор с числом активных за последние 5 минут, обновляется каждые 30 секунд." },
-    { "title": "Админ-операции прямо на сайте", "desc": "У администраторов появилась кнопка «👑 Админ»: список пользователей, блокировка и белый список прямо на сайте." },
-    { "title": "Чёрная тема администратора", "desc": "Спокойный чёрный фон с парой «дышащих глаз» в стиле фар Ferrari, медленно разгорающихся и гаснущих." }
+    { "title": "Анимация фар переделана (по образцу)", "desc": "Фон администратора теперь как на образце: тёмный чёрно-бирюзовый фон, две бело-голубые LED-фары по центру экрана (белое ядро, голубое свечение), медленно разгораются и гаснут, с отражением внизу." },
+    { "title": "Все функции работают", "desc": "Фон не перехватывает клики — письмо, питомец, настройки, панель администратора работают как обычно." }
   ]
 }
