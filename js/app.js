@@ -308,6 +308,16 @@ const I18N = {
     'auth.newPass': '新密码', 'auth.backLogin': '返回登录', 'auth.resetPassword': '重置密码',
     'auth.blockedMsg': '该账户已被拉黑，如有疑问请联系管理员。',
     'auth.adminBadge': '管理员',
+    'online.label': '在线',
+    'admin.open': '👑 管理', 'admin.openTitle': '站长操作台（站内直接管理用户）',
+    'admin.title': '👑 站长操作台',
+    'admin.total': '注册人数', 'admin.online': '在线人数', 'admin.payers': '充值人数', 'admin.net': '净收入（元）',
+    'admin.searchPh': '搜索用户…', 'admin.refresh': '刷新', 'admin.fullConsole': '打开完整后台 ↗',
+    'admin.blocked': '已拉黑', 'admin.block': '拉黑', 'admin.unblock': '解除拉黑',
+    'admin.wl': '加入白名单', 'admin.unwl': '移出白名单',
+    'admin.protected': '管理员账号受保护', 'admin.required': '需要创作者授权的管理员账号',
+    'admin.loadFail': '操作台数据加载失败，请检查网络', 'admin.opFail': '操作失败，请重试',
+    'admin.blockedOk': '该用户已被拉黑并强制下线', 'admin.unblocked': '已解除拉黑',
     'auth.noQuestion': '该账户未设置密保问题，无法自助找回。请联系管理员重置密码。',
     'auth.badAnswer': '密保答案不正确', 'auth.resetOk': '密码已重置，请使用新密码登录',
     'auth.submitLogin': '登录', 'auth.submitRegister': '注册并开启体验',
@@ -607,6 +617,16 @@ const I18N = {
     'auth.newPass': 'New password', 'auth.backLogin': 'Back to sign in', 'auth.resetPassword': 'Reset password',
     'auth.blockedMsg': 'This account has been blocked. Contact the site operator.',
     'auth.adminBadge': 'Admin',
+    'online.label': 'online',
+    'admin.open': '👑 Admin', 'admin.openTitle': 'Admin console (manage users right here)',
+    'admin.title': '👑 Admin Console',
+    'admin.total': 'Sign-ups', 'admin.online': 'Online', 'admin.payers': 'Payers', 'admin.net': 'Net (CNY)',
+    'admin.searchPh': 'Search users…', 'admin.refresh': 'Refresh', 'admin.fullConsole': 'Full console ↗',
+    'admin.blocked': 'Blocked', 'admin.block': 'Block', 'admin.unblock': 'Unblock',
+    'admin.wl': 'Allowlist', 'admin.unwl': 'Remove',
+    'admin.protected': 'Admin accounts are protected', 'admin.required': 'A creator-authorized admin account is required',
+    'admin.loadFail': 'Failed to load console data. Check your connection.', 'admin.opFail': 'Action failed. Please retry.',
+    'admin.blockedOk': 'User blocked and signed out', 'admin.unblocked': 'User unblocked',
     'auth.noQuestion': 'This account has no security question set, so self-service recovery is unavailable. Contact the operator.',
     'auth.badAnswer': 'Incorrect security answer', 'auth.resetOk': 'Password reset — sign in with the new password',
     'auth.submitLogin': 'Sign in', 'auth.submitRegister': 'Register & start trial',
@@ -901,6 +921,16 @@ const I18N = {
     'auth.newPass': 'Новый пароль', 'auth.backLogin': 'Вернуться ко входу', 'auth.resetPassword': 'Сбросить пароль',
     'auth.blockedMsg': 'Аккаунт заблокирован. Свяжитесь с администратором.',
     'auth.adminBadge': 'Админ',
+    'online.label': 'онлайн',
+    'admin.open': '👑 Админ', 'admin.openTitle': 'Панель администратора (управление прямо на сайте)',
+    'admin.title': '👑 Панель администратора',
+    'admin.total': 'Регистраций', 'admin.online': 'Онлайн', 'admin.payers': 'Плательщики', 'admin.net': 'Чистый (CNY)',
+    'admin.searchPh': 'Поиск пользователей…', 'admin.refresh': 'Обновить', 'admin.fullConsole': 'Полная панель ↗',
+    'admin.blocked': 'Заблокирован', 'admin.block': 'Заблокировать', 'admin.unblock': 'Разблокировать',
+    'admin.wl': 'В белый список', 'admin.unwl': 'Убрать',
+    'admin.protected': 'Аккаунты администраторов защищены', 'admin.required': 'Нужен авторизованный администратор',
+    'admin.loadFail': 'Не удалось загрузить данные панели. Проверьте сеть.', 'admin.opFail': 'Не удалось выполнить действие. Повторите.',
+    'admin.blockedOk': 'Пользователь заблокирован и вышел из системы', 'admin.unblocked': 'Пользователь разблокирован',
     'auth.noQuestion': 'Контрольный вопрос не задан — самостоятельное восстановление недоступно. Обратитесь к администратору.',
     'auth.badAnswer': 'Неверный ответ', 'auth.resetOk': 'Пароль сброшен — войдите с новым паролем',
     'auth.submitLogin': 'Войти', 'auth.submitRegister': 'Зарегистрироваться и начать',
@@ -1567,7 +1597,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.2.2';
+const APP_VERSION = '4.3.0';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -4822,6 +4852,7 @@ function applyUIPrefs() {
   document.body.classList.toggle('split-layout', state.settings.layout === 'split');
   document.body.classList.toggle('hide-pet', !state.settings.petVisible);
   document.body.classList.toggle('board-paper', state.board === 'paper');
+  applyAdminMode();
   $('#board-novel').classList.toggle('on', state.board === 'novel');
   $('#board-paper').classList.toggle('on', state.board === 'paper');
   $$('#modal-auth [data-authlang]').forEach(b => b.classList.toggle('on', b.dataset.authlang === state.settings.lang));
@@ -5567,6 +5598,115 @@ const authModeCopy = () => AUTH_MODE_I18N[state.settings.lang] || AUTH_MODE_I18N
 /* 创作者授权的管理员账号（用户名名单，由创作者维护；静态版凭此自动获得旗舰版最高权限） */
 const CREATOR_ADMIN_USERS = ['小柚子'];
 const isCreatorAdmin = username => CREATOR_ADMIN_USERS.includes((username || '').trim().normalize('NFKC'));
+const isAdminNow = () => authMode === 'managed' ? Boolean(serverUser?.isAdmin) : isCreatorAdmin(state.currentUser);
+
+/* ---------------- 管理员模式（黑色沉稳背景 + 呼吸车灯之眼）与在线人数 ---------------- */
+function applyAdminMode() {
+  const admin = isAdminNow();
+  document.body.classList.toggle('admin-mode', admin);
+  const btn = $('#btn-admin-console');
+  if (btn) btn.style.display = admin && authMode === 'managed' ? '' : 'none';
+}
+let onlineTimer = null;
+async function pollOnline() {
+  if (authMode !== 'managed') {
+    const el = $('#online-indicator');
+    if (el) el.hidden = true;
+    stopOnlinePoll();
+    return;
+  }
+  try {
+    const r = await fetch(new URL('./api/status', document.baseURI), {
+      credentials: 'same-origin', cache: 'no-store', headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(4000)
+    });
+    if (r.ok && authJson(r)) {
+      const j = await r.json();
+      if (typeof j.online === 'number') {
+        $('#online-count').textContent = j.online;
+        $('#online-indicator').hidden = false;
+      }
+    }
+  } catch (e) { }
+}
+function startOnlinePoll() { stopOnlinePoll(); pollOnline(); onlineTimer = setInterval(pollOnline, 30000); }
+function stopOnlinePoll() { if (onlineTimer) clearInterval(onlineTimer); onlineTimer = null; }
+
+/* ---------------- 站长操作台（管理员站内直接管理用户） ---------------- */
+let lastAdminUsers = [];
+function renderAdminUserList() {
+  const q = ($('#admin-user-search').value || '').toLowerCase();
+  const users = (lastAdminUsers || []).filter(u => !q || String(u.username).toLowerCase().includes(q));
+  const el = $('#admin-user-list');
+  el.innerHTML = users.map(u => {
+    const badges = [];
+    if (u.isAdmin) badges.push('<span class="au-badge admin">👑 ' + t('auth.adminBadge') + '</span>');
+    else if (u.plan === 'flag') badges.push('<span class="au-badge flag">' + t('vip.flag') + '</span>');
+    if (u.blocked) badges.push('<span class="au-badge blocked">' + t('admin.blocked') + '</span>');
+    return `<div class="admin-user-row ${u.blocked ? 'blocked' : ''}" data-id="${esc(u.id)}">
+      <span class="au-name">${esc(u.username)}</span>
+      <span class="au-meta">${new Date(u.createdAt).toLocaleDateString()}${u.hasPaid ? ' · ' + t('admin.payers') : ''}</span>
+      <span class="au-badges">${badges.join(' ')}</span>
+      <span class="au-actions">
+        <button class="btn mini" data-aact="block" data-id="${esc(u.id)}" data-blocked="${u.blocked ? 1 : 0}" ${u.isAdmin ? 'disabled title="' + esc(t('admin.protected')) + '"' : ''}>${u.blocked ? t('admin.unblock') : t('admin.block')}</button>
+        <button class="btn mini" data-aact="wl" data-id="${esc(u.id)}" data-wl="${u.whitelisted ? 1 : 0}">${u.whitelisted ? t('admin.unwl') : t('admin.wl')}</button>
+      </span>
+    </div>`;
+  }).join('') || '<div class="empty-hint">' + t('vip.searchEmpty') + '</div>';
+  el.querySelectorAll('[data-aact]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.id;
+      btn.disabled = true;
+      try {
+        if (btn.dataset.aact === 'block') {
+          const r = await fetch(new URL('./api/admin/blacklist', document.baseURI), {
+            method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ userId: id, blocked: btn.dataset.blocked !== '1' })
+          });
+          if (!r.ok) throw Object.assign(new Error('fail'), { status: r.status });
+          toast(btn.dataset.blocked === '1' ? t('admin.unblocked') : t('admin.blockedOk'), 'ok');
+        } else {
+          const r = await fetch(new URL('./api/admin/whitelist', document.baseURI), {
+            method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ userId: id, whitelisted: btn.dataset.wl !== '1' })
+          });
+          if (!r.ok) throw Object.assign(new Error('fail'), { status: r.status });
+          toast(t('toast.planChanged', { p: btn.dataset.wl === '1' ? t('vip.free') : t('vip.flag') }), 'ok');
+        }
+        await renderAdminPanel();
+      } catch (e) {
+        toast(t('admin.opFail'), 'err');
+        await renderAdminPanel();
+      }
+    });
+  });
+}
+async function renderAdminPanel() {
+  const status = $('#admin-status');
+  status.textContent = ''; status.className = 'auth-hint';
+  try {
+    const r = await fetch(new URL('./api/admin/dashboard?days=30', document.baseURI), {
+      credentials: 'same-origin', cache: 'no-store', headers: { Accept: 'application/json' }
+    });
+    if (!r.ok) {
+      const j = await r.json().catch(() => null);
+      throw Object.assign(new Error('fail'), { status: r.status, code: j?.code });
+    }
+    const data = await r.json();
+    lastAdminUsers = data.users || [];
+    $('#admin-stat-total').textContent = data.totalUsers;
+    $('#admin-stat-online').textContent = data.onlineUsers;
+    $('#admin-stat-payers').textContent = data.totalPayers;
+    $('#admin-stat-net').textContent = ((data.periodNetCents || 0) / 100).toFixed(2);
+    renderAdminUserList();
+  } catch (e) {
+    status.textContent = e.code === 'admin_required' ? t('admin.required') : t('admin.loadFail');
+    status.className = 'auth-hint err';
+  }
+}
+function openAdminConsole() {
+  openModal('modal-admin');
+  renderAdminPanel();
+}
 let authMode = 'unknown', serverUser = null, authModeCheck = null, authBusy = false, authRevision = 0;
 let presenceTimer = null, presenceRequest = null, restoreSession = null;
 const authNamespace = () => 'nebula-managed-auth:' + new URL('.', document.baseURI).pathname;
@@ -5605,6 +5745,7 @@ function updateServerUser(user) {
     serverUser = null;
     state.currentUser = null;
     stopPresence();
+    applyAdminMode();
     refreshAccountLabel();
     toast(t('auth.blockedMsg'), 'warn', 6000);
     if (!$('#modal-auth').hidden) { switchAuthTab('login'); }
@@ -5613,6 +5754,7 @@ function updateServerUser(user) {
   }
   serverUser = u;
   state.currentUser = u?.username || null;
+  applyAdminMode();
 }
 function refreshAccountLabel() {
   const account = $('#set-account-name');
@@ -5690,6 +5832,13 @@ async function setUpAccountMode({ restore = false } = {}) {
   }
   if (authMode !== 'local' && !serverUser) state.currentUser = null;
   if (restore && authMode === 'managed' && !serverUser) await restoreManagedSession();
+  if (authMode === 'managed') startOnlinePoll();
+  else {
+    stopOnlinePoll();
+    const el = $('#online-indicator');
+    if (el) el.hidden = true;
+  }
+  applyAdminMode();
 }
 async function restoreManagedSession() {
   if (restoreSession) return restoreSession;
@@ -6904,6 +7053,10 @@ function bindEvents() {
   $('#btn-settings').addEventListener('click', openSettings);
   $('#btn-vip').addEventListener('click', () => { renderVip(); openModal('modal-vip'); });
   $('#btn-profile').addEventListener('click', openProfile);
+  // 站长操作台（管理员站内直接管理）
+  $('#btn-admin-console').addEventListener('click', openAdminConsole);
+  $('#btn-admin-refresh').addEventListener('click', renderAdminPanel);
+  $('#admin-user-search').addEventListener('input', renderAdminUserList);
   // 板块切换（小说 / 论文）
   $('#board-novel').addEventListener('click', () => setBoard('novel'));
   $('#board-paper').addEventListener('click', () => setBoard('paper'));
