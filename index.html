@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.5.0" />
+<link rel="stylesheet" href="css/style.css?v=4.6.0" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -778,26 +778,6 @@
           </ul>
           <button class="btn ghost" data-plan="free" data-i18n="vip.freeBtn">当前方案</button>
         </div>
-        <div class="vip-card">
-          <div class="vip-name" data-i18n="vip.pro">专业创作版</div>
-          <div class="vip-price" data-i18n="vip.proPrice">¥0 · 试运营</div>
-          <ul>
-            <li data-i18n="vip.p1">解锁更优质的大模型（DeepSeek/Kimi/GLM/千问…）</li>
-            <li data-i18n="vip.p2">更长上下文记忆（前 5 章）</li>
-            <li data-i18n="vip.p3">更快生成速度</li>
-          </ul>
-          <button class="btn primary" data-plan="pro" data-i18n="vip.btn">免费开通</button>
-        </div>
-        <div class="vip-card">
-          <div class="vip-name" data-i18n="vip.flag">旗舰版</div>
-          <div class="vip-price" data-i18n="vip.flagPrice">¥0 · 试运营</div>
-          <ul>
-            <li data-i18n="vip.l1">全部专业版权益 + 顶级大模型</li>
-            <li data-i18n="vip.l2">全网 AI 模型搜索与接入指导</li>
-            <li data-i18n="vip.l3">记忆前 10 章 · 专属客服支持</li>
-          </ul>
-          <button class="btn primary" data-plan="flag" data-i18n="vip.btn">免费开通</button>
-        </div>
         <div class="vip-card vip-deepseek">
           <div class="vip-name" data-i18n="vip.deepseek">DeepSeek 月度会员</div>
           <div class="vip-price" data-i18n="vip.deepseekPrice">¥40 / 月</div>
@@ -809,7 +789,7 @@
           <button class="btn primary" data-plan="deepseek" data-i18n="vip.deepseekBtn">签署协议并开通</button>
         </div>
       </div>
-      <p class="vip-foot-note" data-i18n="vip.foot">试运营期间所有方案均不收费，敬请期待正式上线。</p>
+      <p class="vip-foot-note" data-i18n="vip.foot">目前唯一付费内容：DeepSeek 月度会员（¥40/月）；其余功能在试运营期间免费。</p>
       <div class="set-section-title" data-i18n="vip.searchTitle">🔍 全网搜索 AI 模型</div>
       <div class="or-search-row">
         <input class="input" id="or-search-input" data-i18n-ph="vip.searchPh" placeholder="输入关键词搜索全网模型（如 deepseek / qwen / llama…）" autocomplete="off" />
@@ -1161,6 +1141,7 @@
       <button class="icon-btn modal-close" data-close="modal-admin">✕</button>
     </div>
     <div class="modal-body admin-console-body">
+      <p class="admin-func-note" data-i18n="admin.funcNote"></p>
       <div class="admin-stats-row">
         <div class="admin-stat"><span class="as-num" id="admin-stat-total">—</span><span class="as-label" data-i18n="admin.total">注册人数</span></div>
         <div class="admin-stat"><span class="as-num" id="admin-stat-online">—</span><span class="as-label" data-i18n="admin.online">在线人数</span></div>
@@ -1171,6 +1152,19 @@
       <div class="admin-pending-list" id="admin-pending-list"></div>
       <div class="set-section-title" data-i18n="admin.paymentsTitle">💰 收款流水（最近）</div>
       <div class="admin-payments-list" id="admin-payments-list"></div>
+      <div class="set-section-title" data-i18n="admin.receiptTitle">🧾 收退款登记（核对到账后填写）</div>
+      <div class="admin-receipt-form" id="admin-receipt-form">
+        <select class="input" id="ar-kind">
+          <option value="payment" data-i18n="admin.receiptPayment">收款</option>
+          <option value="refund" data-i18n="admin.receiptRefund">退款</option>
+        </select>
+        <select class="input" id="ar-user"></select>
+        <input class="input" id="ar-amount" type="number" min="0.01" step="0.01" data-i18n-ph="admin.receiptAmount" placeholder="金额（元）" autocomplete="off" />
+        <input class="input" id="ar-ref" maxlength="120" data-i18n-ph="admin.receiptRef" placeholder="交易编号" autocomplete="off" />
+        <input class="input" id="ar-time" type="datetime-local" />
+        <input class="input" id="ar-note" maxlength="500" data-i18n-ph="admin.receiptNote" placeholder="备注（可选）" autocomplete="off" />
+        <button class="btn small primary" id="btn-ar-submit" data-i18n="admin.receiptSubmit">登记</button>
+      </div>
       <div class="admin-toolbar">
         <input class="input" id="admin-user-search" data-i18n-ph="admin.searchPh" placeholder="搜索用户…" autocomplete="off" />
         <button class="btn small" id="btn-admin-refresh" data-i18n="admin.refresh">刷新</button>
@@ -1343,7 +1337,7 @@
     <p id="draft-review-note" role="status"></p>
   </div>
 </dialog>
-<script src="js/draft-review.js?v=4.5.0"></script>
-<script src="js/app.js?v=4.5.0"></script>
+<script src="js/draft-review.js?v=4.6.0"></script>
+<script src="js/app.js?v=4.6.0"></script>
 </body>
 </html>
