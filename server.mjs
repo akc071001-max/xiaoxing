@@ -10,6 +10,10 @@ const ROOT = dirname(fileURLToPath(import.meta.url));
 const DAY = 86400000;
 const ONLINE = 5 * 60000;
 const SESSION_DURATION = { user: 7 * DAY, admin: 8 * 3600000 };
+const MIRROR_SESSION_DURATION = 12 * 3600000;
+const CONNECT_CODE_DURATION = 2 * 60000;
+const RANDOM_TOKEN = /^[A-Za-z0-9_-]{43}$/;
+const PKCE_VERIFIER = /^[A-Za-z0-9._~-]{43,128}$/;
 const SESSION_COOKIE = { user: 'xiaoxing_user', admin: 'xiaoxing_admin' };
 const COOKIE_PATH = { user: '/', admin: '/api/admin' };
 const scrypt = promisify(scryptCb);
@@ -22,6 +26,14 @@ const record = value => value && typeof value === 'object' && !Array.isArray(val
 const error = (status, code, message) => Object.assign(new Error(message), { status, code });
 const managedPasswordRule = p => typeof p === 'string' && p.length >= 6 && p.length <= 128 && /\p{L}/u.test(p) && /[0-9]/.test(p);
 
+const MIRROR_API = new Map([
+  ['/api/status', 'GET'], ['/api/auth/exchange', 'POST'], ['/api/auth/me', 'GET'],
+  ['/api/auth/logout', 'POST'], ['/api/auth/heartbeat', 'POST'], ['/api/auth/agreement', 'POST'],
+  ['/api/auth/payment-submit', 'POST'], ['/api/auth/email', 'POST'], ['/api/auth/messages', 'GET'],
+  ['/api/auth/messages/read', 'POST'], ['/api/auth/messages/send', 'POST']
+]);
+const MIRROR_HEADERS = new Set(['accept', 'authorization', 'content-type']);
+
 const ASSETS = new Map(Object.entries({
   '/': ['index.html', 'text/html; charset=utf-8'],
   '/index.html': ['index.html', 'text/html; charset=utf-8'],
@@ -31,6 +43,8 @@ const ASSETS = new Map(Object.entries({
   '/css/style.css': ['css/style.css', 'text/css; charset=utf-8'],
   '/css/admin.css': ['css/admin.css', 'text/css; charset=utf-8'],
   '/js/app.js': ['js/app.js', 'text/javascript; charset=utf-8'],
+  '/js/account-config.js': ['js/account-config.js', 'text/javascript; charset=utf-8'],
+  '/js/account-bridge.js': ['js/account-bridge.js', 'text/javascript; charset=utf-8'],
   '/js/admin.js': ['js/admin.js', 'text/javascript; charset=utf-8'],
   '/js/managed-auth.js': ['js/managed-auth.js', 'text/javascript; charset=utf-8'],
   '/js/author-works.js': ['js/author-works.js', 'text/javascript; charset=utf-8'],
@@ -127,6 +141,22 @@ function validateOrigin(value) {
   if (u.protocol !== 'https:' && !loopback) throw new Error('Public deployment requires an HTTPS origin.');
   return u.origin;
 }
+function mirrorConfig(value, centralOrigin) {
+  const urls = new Map();
+  for (const input of String(value).split(',').map(url => url.trim()).filter(Boolean)) {
+    let url;
+    try { url = new URL(input); }
+    catch { throw new Error('XIAOXING_AUTH_MIRROR_URLS must contain absolute mirror URLs.'); }
+    const loopback = ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname);
+    const httpDevelopment = loopback && !centralOrigin.startsWith('https:') && url.protocol === 'http:';
+    if (!/^https?:\/\//i.test(input) || (url.protocol !== 'https:' && !httpDevelopment) || url.username || url.password ||
+        /[?#\\]/.test(input) || url.origin === centralOrigin) {
+      throw new Error('XIAOXING_AUTH_MIRROR_URLS must contain distinct HTTPS mirror URLs without query, fragment, or credentials.');
+    }
+    urls.set(url.href, url.origin);
+  }
+  return urls;
+}
 function normalizeTimestamp(value, now) {
   if (value == null || value === '') return now;
   const n = typeof value === 'number' ? value :
@@ -138,7 +168,7 @@ function normalizeTimestamp(value, now) {
 }
 function keyForCookie(req, role, hashToken) {
   const raw = collectCookies(req.headers.cookie)[SESSION_COOKIE[role]];
-  return /^[A-Za-z0-9_-]{43}$/.test(raw || '') ? hashToken(role, raw) : '';
+  return RANDOM_TOKEN.test(raw || '') ? hashToken(role, raw) : '';
 }
 
 export async function createXiaoxingServer(options = {}) {
@@ -146,15 +176,19 @@ export async function createXiaoxingServer(options = {}) {
   if (typeof password !== 'string' || password.length < 16 || password.length > 1024) {
     throw new Error('Set XIAOXING_ADMIN_PASSWORD to a strong independent password (16–1024 characters).');
   }
-  // 创作者授权的管理员账号（用户名白名单，由部署者通过环境变量维护；默认授权「小柚子」）
-  const adminUsernamesRaw = options.adminUsernames ?? process.env.XIAOXING_ADMIN_USERNAMES ?? '小柚子';
+  // Only an operator can select existing administrator accounts. Public registration cannot claim these names.
+  const adminUsernamesRaw = options.adminUsernames ?? process.env.XIAOXING_ADMIN_USERNAMES ?? '';
   const adminUserSet = new Set(String(adminUsernamesRaw).split(',').map(s => s.trim().normalize('NFKC').toLowerCase()).filter(Boolean));
   const isAdminUsername = usernameKey => adminUserSet.has(usernameKey);
+  const reservedNames = new Set(['小柚子', ...adminUserSet]);
   const adminDigest = sha(password);
   // Rotating the administrator password makes any previous admin cookies unusable.
   const hashToken = (role, token) => (role === 'admin' ? createHmac('sha256', adminDigest).update(token).digest() : sha(token)).toString('hex');
   const origin = validateOrigin(options.publicOrigin ?? process.env.XIAOXING_PUBLIC_ORIGIN);
   const secure = origin.startsWith('https:');
+  const mirrors = mirrorConfig(options.authMirrorUrls ?? process.env.XIAOXING_AUTH_MIRROR_URLS ?? '', origin);
+  const mirrorOrigins = new Set(mirrors.values());
+  const mirrorHash = (token, mirrorOrigin) => sha(`mirror:${mirrorOrigin}:${token}`).toString('hex');
   const configuredPath = options.dbPath ?? process.env.XIAOXING_DB_PATH ?? join(ROOT, '.data', 'xiaoxing.sqlite');
   const filename = configuredPath === ':memory:' ? ':memory:' : resolve(configuredPath);
   if (filename !== ':memory:') {
@@ -189,7 +223,12 @@ export async function createXiaoxingServer(options = {}) {
     CREATE TABLE IF NOT EXISTS sessions(
       token_hash TEXT PRIMARY KEY, role TEXT NOT NULL CHECK(role IN('admin','user')),
       user_id TEXT REFERENCES users(id), expires_at INTEGER NOT NULL, last_seen_at INTEGER NOT NULL,
+      mirror_origin TEXT NOT NULL DEFAULT '',
       CHECK ((role='admin' AND user_id IS NULL) OR (role='user' AND user_id IS NOT NULL))
+    );
+    CREATE TABLE IF NOT EXISTS account_connect_codes(
+      code_hash TEXT PRIMARY KEY, session_hash TEXT NOT NULL REFERENCES sessions(token_hash) ON DELETE CASCADE,
+      return_url TEXT NOT NULL, challenge TEXT NOT NULL, expires_at INTEGER NOT NULL
     );
     CREATE TABLE IF NOT EXISTS payments(
       id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id),
@@ -199,6 +238,8 @@ export async function createXiaoxingServer(options = {}) {
     );
     CREATE INDEX IF NOT EXISTS users_created ON users(created_at);
     CREATE INDEX IF NOT EXISTS sessions_presence ON sessions(role,last_seen_at,expires_at);
+    CREATE INDEX IF NOT EXISTS connect_codes_session ON account_connect_codes(session_hash);
+    CREATE INDEX IF NOT EXISTS connect_codes_expiry ON account_connect_codes(expires_at);
     CREATE INDEX IF NOT EXISTS payments_user_time ON payments(user_id,occurred_at);
     CREATE INDEX IF NOT EXISTS payments_time ON payments(occurred_at);
   `);
@@ -211,22 +252,32 @@ export async function createXiaoxingServer(options = {}) {
   if (!userColumns.has('agreement_ver')) db.exec("ALTER TABLE users ADD COLUMN agreement_ver TEXT NOT NULL DEFAULT ''");
   if (!userColumns.has('deepseek_until')) db.exec("ALTER TABLE users ADD COLUMN deepseek_until INTEGER NOT NULL DEFAULT 0");
   if (!userColumns.has('email')) db.exec("ALTER TABLE users ADD COLUMN email TEXT NOT NULL DEFAULT ''");
+  const sessionColumns = new Set(db.prepare('PRAGMA table_info(sessions)').all().map(row => row.name));
+  if (!sessionColumns.has('mirror_origin')) db.exec("ALTER TABLE sessions ADD COLUMN mirror_origin TEXT NOT NULL DEFAULT ''");
   // messages 表补充 from_user（1=用户发给创始人的来信）
   const msgColumns = new Set(db.prepare('PRAGMA table_info(messages)').all().map(row => row.name));
   if (!msgColumns.has('from_user')) db.exec("ALTER TABLE messages ADD COLUMN from_user INTEGER NOT NULL DEFAULT 0");
   const stmt = sql => db.prepare(sql);
   const findUser = stmt('SELECT * FROM users WHERE username_key=?');
   const getUser = stmt('SELECT * FROM users WHERE id=?');
-  const insertUser = stmt('INSERT INTO users (id,username,username_key,salt,password_hash,created_at,trial_ends_at) VALUES (?,?,?,?,?,?,?)');
-  const getSession = stmt('SELECT * FROM sessions WHERE token_hash=? AND role=? AND expires_at>?');
-  const insertSession = stmt('INSERT INTO sessions VALUES (?,?,?,?,?)');
+  const insertUser = stmt(`INSERT INTO users
+    (id,username,username_key,salt,password_hash,created_at,trial_ends_at,email,question,answer_hash)
+    VALUES (?,?,?,?,?,?,?,?,?,?)`);
+  const getSession = stmt('SELECT * FROM sessions WHERE token_hash=? AND role=? AND mirror_origin=? AND expires_at>?');
+  const insertSession = stmt('INSERT INTO sessions (token_hash,role,user_id,expires_at,last_seen_at,mirror_origin) VALUES (?,?,?,?,?,?)');
   const delSession = stmt('DELETE FROM sessions WHERE token_hash=? AND role=?');
   const purgeSessions = stmt('DELETE FROM sessions WHERE expires_at<=?');
+  const purgeConnectCodes = stmt('DELETE FROM account_connect_codes WHERE expires_at<=?');
+  const insertConnectCode = stmt('INSERT INTO account_connect_codes (code_hash,session_hash,return_url,challenge,expires_at) VALUES (?,?,?,?,?)');
+  const consumeConnectCode = stmt(`DELETE FROM account_connect_codes
+    WHERE code_hash=? AND return_url=? AND challenge=? AND expires_at>?
+      AND EXISTS (SELECT 1 FROM sessions s JOIN users u ON u.id=s.user_id
+        WHERE s.token_hash=session_hash AND s.role='user' AND s.mirror_origin='' AND s.expires_at>? AND u.blocked=0)
+    RETURNING session_hash`);
   const touchSession = stmt('UPDATE sessions SET last_seen_at=? WHERE token_hash=? AND role=\'user\' AND expires_at>?');
   const updateWhitelist = stmt('UPDATE users SET whitelisted=? WHERE id=?');
   const updateBlacklist = stmt('UPDATE users SET blocked=? WHERE id=?');
   const setPasswordHash = stmt('UPDATE users SET password_hash=? WHERE id=?');
-  const setQuestion = stmt('UPDATE users SET question=?, answer_hash=? WHERE id=?');
   const setAgreement = stmt('UPDATE users SET agreement_at=?, agreement_ver=? WHERE id=?');
   const setEmail = stmt('UPDATE users SET email=? WHERE id=?');
   const findEmail = stmt('SELECT 1 FROM users WHERE email=?');
@@ -295,12 +346,17 @@ export async function createXiaoxingServer(options = {}) {
     const old = keyForCookie(req, role, hashToken);
     if (old) delSession.run(old, role);
     const raw = randomBytes(32).toString('base64url');
-    insertSession.run(hashToken(role, raw), role, userId, now + SESSION_DURATION[role], now);
+    insertSession.run(hashToken(role, raw), role, userId, now + SESSION_DURATION[role], now, '');
     return sessionCookie(role, raw, secure);
   }
-  function session(req, role, required = true) {
-    const key = keyForCookie(req, role, hashToken);
-    const row = key && getSession.get(key, role, Date.now());
+  function bearerKey(req, mirrorOrigin) {
+    const header = req.headers.authorization;
+    const token = header && /^Bearer ([A-Za-z0-9_-]{43})$/i.exec(header)?.[1];
+    return token ? mirrorHash(token, mirrorOrigin) : '';
+  }
+  function session(req, role, required = true, mirrorOrigin = '') {
+    const key = mirrorOrigin ? bearerKey(req, mirrorOrigin) : keyForCookie(req, role, hashToken);
+    const row = key && getSession.get(key, role, mirrorOrigin, Date.now());
     if (!row && required) throw error(401, 'unauthorized', 'Sign in to continue.');
     return row || null;
   }
@@ -314,14 +370,59 @@ export async function createXiaoxingServer(options = {}) {
     if (!row || !isAdminUsername(row.username_key)) throw error(403, 'admin_required', 'Creator-authorized administrator account required.');
     return true;
   }
+  function mainOrigin(req) {
+    return origin || (/^(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/i.test(req.headers.host || '') ? `http://${req.headers.host}` : '');
+  }
   function checkOrigin(req) {
-    if (!origin && !/^(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/i.test(req.headers.host || '')) {
+    const expected = mainOrigin(req);
+    if (!expected) {
       throw error(403, 'origin_forbidden', 'Set a public HTTPS origin before serving account or admin API requests.');
     }
-    const expected = origin || `http://${req.headers.host}`;
     const mode = req.headers['sec-fetch-site'];
     if (req.headers.origin !== expected || (mode && mode !== 'same-origin')) {
       throw error(403, 'origin_forbidden', 'Only matching-origin requests are permitted.');
+    }
+  }
+  function startConnection(req, body) {
+    const login = session(req, 'user');
+    if (getUser.get(login.user_id)?.blocked) throw error(403, 'blocked', 'This account has been blocked.');
+    const { returnUrl, challenge, state } = body;
+    const mirrorOrigin = mirrors.get(returnUrl);
+    if (!mirrorOrigin || mirrorOrigin === mainOrigin(req)) throw error(400, 'invalid_mirror', 'This writing site is not registered.');
+    if (!text(challenge) || !RANDOM_TOKEN.test(challenge) || !text(state) || !RANDOM_TOKEN.test(state)) {
+      throw error(400, 'invalid_connection', 'Restart sign-in from the writing site.');
+    }
+    throttle(req, 'connect', 20, 60000, login.user_id);
+    const now = Date.now(), code = randomBytes(32).toString('base64url');
+    purgeConnectCodes.run(now);
+    insertConnectCode.run(sha(code).toString('hex'), login.token_hash, returnUrl, challenge, now + CONNECT_CODE_DURATION);
+    const redirect = new URL(returnUrl);
+    redirect.searchParams.set('xx_code', code);
+    redirect.searchParams.set('xx_state', state);
+    return { redirectUrl: redirect.href };
+  }
+  function exchangeConnection(body, mirrorOrigin) {
+    const { returnUrl, code, verifier } = body;
+    if (mirrors.get(returnUrl) !== mirrorOrigin || !text(code) || !RANDOM_TOKEN.test(code) ||
+        !text(verifier) || !PKCE_VERIFIER.test(verifier)) {
+      throw error(400, 'invalid_connection', 'Restart sign-in from the writing site.');
+    }
+    const now = Date.now();
+    db.exec('BEGIN IMMEDIATE');
+    try {
+      const codeHash = sha(code).toString('hex');
+      const challenge = sha(verifier).toString('base64url');
+      const consumed = consumeConnectCode.get(codeHash, returnUrl, challenge, now, now);
+      if (!consumed) throw error(400, 'invalid_connection', 'This sign-in code expired or has already been used.');
+      const login = getSession.get(consumed.session_hash, 'user', '', now);
+      const user = publicUser(getUser.get(login.user_id), now, isAdminUsername);
+      const accessToken = randomBytes(32).toString('base64url');
+      insertSession.run(mirrorHash(accessToken, mirrorOrigin), 'user', user.id, now + MIRROR_SESSION_DURATION, now, mirrorOrigin);
+      db.exec('COMMIT');
+      return { accessToken, user };
+    } catch (e) {
+      db.exec('ROLLBACK');
+      throw e;
     }
   }
   function dashboard(url) {
@@ -401,22 +502,55 @@ export async function createXiaoxingServer(options = {}) {
   }
   const originGate = req => {
     const mode = req.headers['sec-fetch-site'];
-    if (mode && !['same-origin', 'none'].includes(mode)) throw error(403, 'origin_forbidden', 'Only matching-origin requests are permitted.');
+    const requestedOrigin = req.headers.origin;
+    if ((requestedOrigin !== undefined && requestedOrigin !== mainOrigin(req)) ||
+        (mode && !['same-origin', 'none'].includes(mode))) {
+      throw error(403, 'origin_forbidden', 'Only matching-origin requests are permitted.');
+    }
   };
+  function mirrorRequest(req, res, route) {
+    const allowedMethod = MIRROR_API.get(route);
+    if (!allowedMethod) return '';
+    res.setHeader('Vary', 'Origin');
+    const requestedOrigin = req.headers.origin;
+    if (!mirrorOrigins.has(requestedOrigin) || requestedOrigin === mainOrigin(req)) return '';
+    res.setHeader('Access-Control-Allow-Origin', requestedOrigin);
+    if (req.method === 'OPTIONS') {
+      res.setHeader('Vary', 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers');
+      const requestedHeaders = String(req.headers['access-control-request-headers'] || '').split(',')
+        .map(header => header.trim().toLowerCase()).filter(Boolean);
+      if (req.headers['access-control-request-method'] !== allowedMethod || requestedHeaders.some(header => !MIRROR_HEADERS.has(header))) {
+        throw error(403, 'origin_forbidden', 'The requested mirror method or header is not available.');
+      }
+      res.writeHead(204, {
+        'Access-Control-Allow-Methods': allowedMethod,
+        'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type',
+        'Access-Control-Max-Age': '300'
+      }).end();
+    } else if (req.method !== allowedMethod) {
+      throw error(405, 'method_not_allowed', 'The requested mirror method is not available.');
+    }
+    return requestedOrigin;
+  }
   async function api(req, res, url) {
     const route = url.pathname, method = req.method;
+    const mirrorOrigin = mirrorRequest(req, res, route);
+    if (res.writableEnded) return;
+    if (!mirrorOrigin) originGate(req);
+    if ((route === '/api/auth/connect' || route.startsWith('/api/admin/')) && req.headers.authorization !== undefined) {
+      throw error(403, 'origin_forbidden', 'Use a first-party browser session.');
+    }
     if (method === 'GET' && route === '/api/status') {
       const now = Date.now();
-      return sendJson(res, 200, { managed: true, online: onlineSQL.get(now - ONLINE, now).active });
+      return sendJson(res, 200, { managed: true, online: onlineSQL.get(now - ONLINE, now).active, mirrorLogin: mirrors.size > 0 });
     }
-    originGate(req);
     if (method === 'GET' && route === '/api/auth/me') {
-      const u = session(req, 'user', false);
+      const u = session(req, 'user', false, mirrorOrigin);
       if (u) touchSession.run(Date.now(), u.token_hash, Date.now());
       return sendJson(res, 200, { user: u ? publicUser(getUser.get(u.user_id), Date.now(), isAdminUsername) : null });
     }
     if (method === 'GET' && route === '/api/auth/messages') {
-      const u = session(req, 'user');
+      const u = session(req, 'user', true, mirrorOrigin);
       const msgs = userMessages.all(u.user_id).map(m => ({ id: m.id, content: m.content, createdAt: iso(m.created_at), read: Boolean(m.read_at) }));
       return sendJson(res, 200, { messages: msgs, unread: unreadCount.get(u.user_id).n });
     }
@@ -425,7 +559,12 @@ export async function createXiaoxingServer(options = {}) {
       return sendJson(res, 200, dashboard(url));
     }
     if (!['POST','PUT'].includes(method)) throw error(404, 'not_found', 'Not found.');
-    checkOrigin(req);
+    if (route === '/api/auth/exchange') {
+      if (!mirrorOrigin || method !== 'POST') throw error(403, 'origin_forbidden', 'Exchange from the registered writing site.');
+      return sendJson(res, 200, exchangeConnection(await jsonBody(req), mirrorOrigin));
+    }
+    if (!mirrorOrigin) checkOrigin(req);
+    if (method === 'POST' && route === '/api/auth/connect') return sendJson(res, 200, startConnection(req, await jsonBody(req)));
     if (method === 'POST' && ['/api/auth/register','/api/auth/login'].includes(route)) {
       const registration = route.endsWith('/register');
       throttle(req, registration ? 'register' : 'login', registration ? 30 : 65, 60000);
@@ -434,6 +573,7 @@ export async function createXiaoxingServer(options = {}) {
       if (!registration) throttle(req, 'login-account', 10, 60000, usernameKey);
       let u;
       if (registration) {
+        if (reservedNames.has(usernameKey)) throw error(409, 'username_taken', 'This username is not available.');
         const id = randomUUID(), salt = randomBytes(16).toString('hex');
         const hash = (await passwordHash(pass, salt)).toString('hex');
         const now = Date.now();
@@ -454,10 +594,16 @@ export async function createXiaoxingServer(options = {}) {
           question = questionKey;
           answerHash = (await passwordHash(answer, salt + ':q')).toString('hex');
         }
-        try { insertUser.run(id, username, usernameKey, salt, hash, now, now + DAY); }
-        catch (e) { if (findUser.get(usernameKey)) throw error(409, 'username_taken', 'This username is already registered.'); throw e; }
-        if (question) setQuestion.run(question, answerHash, id);
-        setEmail.run(email, id);
+        db.exec('BEGIN IMMEDIATE');
+        try {
+          if (findUser.get(usernameKey)) throw error(409, 'username_taken', 'This username is already registered.');
+          if (findEmail.get(email)) throw error(409, 'email_taken', 'This email is already registered.');
+          insertUser.run(id, username, usernameKey, salt, hash, now, now + DAY, email, question, answerHash);
+          db.exec('COMMIT');
+        } catch (e) {
+          db.exec('ROLLBACK');
+          throw e;
+        }
         u = getUser.get(id);
       } else {
         const account = findUser.get(usernameKey);
@@ -465,7 +611,9 @@ export async function createXiaoxingServer(options = {}) {
         const got = await passwordHash(pass, account?.salt || '23e219f40be9112fe16373894cad5fc8');
         const wanted = account ? Buffer.from(account.password_hash, 'hex') : Buffer.alloc(32);
         if (!timingSafeEqual(got, wanted) || !account) throw error(401, 'invalid_credentials', 'Username or password is incorrect.');
-        u = account;
+        u = getUser.get(account.id);
+        if (!u || u.password_hash !== account.password_hash) throw error(401, 'invalid_credentials', 'Username or password is incorrect.');
+        if (u.blocked) throw error(403, 'blocked', 'This account has been blocked. Contact the site operator.');
       }
       return sendJson(res, registration ? 201 : 200, { user: publicUser(u, Date.now(), isAdminUsername) }, { 'Set-Cookie': issueSession(req, 'user', u.id) });
     }
@@ -521,21 +669,22 @@ export async function createXiaoxingServer(options = {}) {
     if (method === 'POST' && ['/api/auth/logout','/api/admin/logout'].includes(route)) {
       await jsonBody(req);
       const role = route.startsWith('/api/admin/') ? 'admin' : 'user';
-      const key = keyForCookie(req, role, hashToken);
+      const key = mirrorOrigin ? bearerKey(req, mirrorOrigin) : keyForCookie(req, role, hashToken);
       if (key) delSession.run(key, role);
-      return sendJson(res, 200, { ok: true }, { 'Set-Cookie': sessionCookie(role, '', secure, true) });
+      const headers = mirrorOrigin ? {} : { 'Set-Cookie': sessionCookie(role, '', secure, true) };
+      return sendJson(res, 200, { ok: true }, headers);
     }
     if (method === 'POST' && route === '/api/auth/heartbeat') {
-      const u = session(req, 'user');
       await jsonBody(req);
+      const u = session(req, 'user', true, mirrorOrigin);
       const now = Date.now();
       if (!touchSession.run(now, u.token_hash, now).changes) throw error(401, 'unauthorized', 'Sign in to continue.');
       return sendJson(res, 200, { ok: true, user: publicUser(getUser.get(u.user_id), now, isAdminUsername) });
     }
     if (method === 'POST' && route === '/api/auth/agreement') {
       // 签署付费协议（DeepSeek 月度会员等付费服务开通前置条件）
-      const u = session(req, 'user');
       const body = await jsonBody(req);
+      const u = session(req, 'user', true, mirrorOrigin);
       const version = text(body.version) ? body.version.normalize('NFKC').trim() : '';
       if (!/^[\w.-]{1,32}$/.test(version)) throw error(400, 'invalid_agreement', 'Provide a valid agreement version.');
       setAgreement.run(Date.now(), version, u.user_id);
@@ -543,8 +692,8 @@ export async function createXiaoxingServer(options = {}) {
     }
     if (method === 'POST' && route === '/api/auth/email') {
       // 老用户补充个人邮箱（注册已必填；用于确认用户信息）
-      const u = session(req, 'user');
       const body = await jsonBody(req);
+      const u = session(req, 'user', true, mirrorOrigin);
       const email = text(body.email) ? String(body.email).trim().toLowerCase() : '';
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) throw error(400, 'invalid_email', 'A valid email address is required.');
       if (findEmail.get(email)) throw error(409, 'email_taken', 'This email is already registered.');
@@ -553,23 +702,23 @@ export async function createXiaoxingServer(options = {}) {
     }
     if (method === 'POST' && route === '/api/auth/payment-submit') {
       // 用户「我已付款，提交核对」：进入待核对队列，管理员在操作台一键核对开通
-      const u = session(req, 'user');
       const body = await jsonBody(req);
+      const u = session(req, 'user', true, mirrorOrigin);
       const amount = Number(body.amountCents);
       if (!Number.isSafeInteger(amount) || amount < 1 || amount > 100000000) throw error(400, 'invalid_amount', 'Provide a valid amount.');
       insertPending.run(randomUUID(), u.user_id, amount, text(body.note) ? String(body.note).slice(0, 500) : '', Date.now());
       return sendJson(res, 201, { ok: true });
     }
     if (method === 'POST' && route === '/api/auth/messages/read') {
-      const u = session(req, 'user');
       await jsonBody(req);
+      const u = session(req, 'user', true, mirrorOrigin);
       markRead.run(Date.now(), u.user_id);
       return sendJson(res, 200, { ok: true });
     }
     if (method === 'POST' && route === '/api/auth/messages/send') {
       // 用户直接给创始人（小柚子）发信息
-      const u = session(req, 'user');
       const body = await jsonBody(req);
+      const u = session(req, 'user', true, mirrorOrigin);
       const content = text(body.content) ? String(body.content).trim() : '';
       if (!content || content.length > 4000) throw error(400, 'invalid_content', 'Message content is required (up to 4000 characters).');
       insertMessage.run(randomUUID(), u.user_id, content, Date.now(), 0, 1);
