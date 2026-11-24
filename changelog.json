@@ -1,19 +1,22 @@
 {
-  "version": "4.3.3",
+  "version": "4.4.0",
   "date": "2026-11-24",
   "items": [
-    { "title": "红灯同步慢闪", "desc": "双灯改为红色警示灯，两灯完全同步闪烁，12 秒一个周期缓慢变亮再变暗" },
-    { "title": "管理员可切换普通背景", "desc": "设置 → 页面背景新增「👑 管理员专属背景」开关：可随时切回普通版星空背景" },
-    { "title": "操作台入口显眼", "desc": "顶栏「👑 站长操作台」改为醒目的红色呼吸发光按钮，一眼可见、点击直达，无需寻找" }
+    { "title": "DeepSeek 月度会员上线", "desc": "¥40/月：DeepSeek 等优质模型稳定接入、更快响应、更长记忆；按月支付，不自动续费，是否续费由用户自行决定" },
+    { "title": "付费协议（全面合规）", "desc": "付款前必须签署八条付费协议：服务与价格、支付方式、周期与续费、退款政策、使用规范、免责声明、个人信息、争议解决" },
+    { "title": "收款流程透明", "desc": "签署协议 → 出示您的个人收款码（备注填用户名）→ 提交核对 → 管理员 24 小时内核对入账并开通；核对前可随时全额退款" },
+    { "title": "管理端自动开通", "desc": "站长后台登记 40 元收款即自动开通 30 天会员（自付款日起算），到期自动结束" }
   ],
   "itemsEn": [
-    { "title": "Synchronized red flashing", "desc": "The two lights are now red warning lights, flashing in perfect sync over a slow 12-second cycle." },
-    { "title": "Admins can use the normal background", "desc": "Settings → Page background gains a “👑 Admin background” switch so admins can switch back to the normal starfield anytime." },
-    { "title": "Prominent console entry", "desc": "The top-bar “👑 Admin Console” button is now a striking red glowing pulsing button — visible at a glance, one click away." }
+    { "title": "DeepSeek Monthly launched", "desc": "¥40/month: stable DeepSeek access, faster responses, longer memory. Monthly payment, no auto-renewal — the user decides each month." },
+    { "title": "Payment agreement (comprehensive)", "desc": "An eight-article agreement must be signed before payment: service & price, payment method, term & renewal, refunds, usage rules, disclaimer, personal information, disputes." },
+    { "title": "Transparent payment flow", "desc": "Sign → your personal payment code (put username in the note) → submit for verification → the operator verifies within 24h; full refund anytime before activation." },
+    { "title": "Auto-activation in the admin console", "desc": "Recording a ¥40 receipt in the admin console automatically activates 30 days of membership from the payment date." }
   ],
   "itemsRu": [
-    { "title": "Синхронное красное мигание", "desc": "Фары стали красными сигнальными огнями, мигают идеально синхронно, медленный цикл 12 секунд." },
-    { "title": "Админ может вернуть обычный фон", "desc": "Настройки → Фон страницы: добавлен переключатель «👑 Фон администратора» — можно в любой момент вернуть обычное звёздное небо." },
-    { "title": "Заметный вход в панель", "desc": "Кнопка «👑 Панель администратора» в верхней панели теперь яркая красная пульсирующая — видна сразу, панель открывается в один клик." }
+    { "title": "DeepSeek ежемесячно запущен", "desc": "¥40/месяц: стабильный DeepSeek, быстрее ответы, длиннее память. Оплата помесячно, без автопродления — пользователь решает сам." },
+    { "title": "Договор об оплате (полный)", "desc": "Перед оплатой обязательно подписание договора из восьми статей: услуга и цена, оплата, срок и продление, возвраты, правила, отказ от ответственности, персональные данные, споры." },
+    { "title": "Прозрачная оплата", "desc": "Подпись → ваш личный код оплаты (укажите имя пользователя) → отправка на проверку → администратор проверяет в течение 24 ч; полный возврат доступен до активации." },
+    { "title": "Автоактивация в панели администратора", "desc": "Регистрация поступления 40 юаней автоматически открывает 30 дней с даты оплаты." }
   ]
 }
