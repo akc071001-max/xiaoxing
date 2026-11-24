@@ -550,6 +550,10 @@ body.board-paper.no-ai #app{grid-template-columns:300px minmax(0,1fr)}
 .auth-hint{font-size:12px;line-height:1.7;min-height:18px}
 .auth-hint.err{color:var(--err)}
 .auth-hint.ok{color:var(--ok)}
+.btn-link{background:none;border:none;color:var(--accent);cursor:pointer;font-family:var(--font-ui);font-size:12.5px;padding:4px 0;text-align:left;text-decoration:underline;text-decoration-color:rgba(0,224,255,.4)}
+.btn-link:hover{text-decoration-color:var(--accent)}
+.forgot-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}
+.forgot-question-text{font-size:13px;color:var(--txt-bright);line-height:1.8;display:block;padding:8px 10px;border:1px dashed var(--line-soft);border-radius:8px;background:rgba(16,24,42,.4)}
 .trial-banner{font-size:13px;color:#ffd75c;border:1px solid rgba(255,215,92,.5);border-radius:10px;padding:9px 14px;margin-top:6px;background:rgba(255,215,92,.07);line-height:1.7}
 
 /* ---------------- 新手引导 ---------------- */
