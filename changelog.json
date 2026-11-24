@@ -1,16 +1,16 @@
 {
-  "version": "4.3.1",
+  "version": "4.3.2",
   "date": "2026-11-24",
   "items": [
-    { "title": "车灯动效重制（按参考图）", "desc": "管理员背景按参考图重制：深黑青色氛围，屏幕中央两盏青白色 LED 车灯（纯白核心 + 青蓝光晕），呼吸般缓缓变亮再变暗，下方带展厅倒影" },
-    { "title": "功能正常保障", "desc": "背景层不拦截任何点击（指针穿透），写作、宠物、设置、管理台等全部功能照常使用" }
+    { "title": "刀锋车灯", "desc": "车灯改为锋利的刀锋多边形造型（clip-path 刀刃线条），白色刀锋中脊流畅贯穿，青色多层光晕，呼吸般变亮变暗，左右镜像对称居中" },
+    { "title": "管理员终端全面重做", "desc": "站长操作台代码全部重写（事件委托 + 统一请求层 + 忙碌锁），并修复管理员模式下所有弹窗失效的关键问题，站内全部功能恢复正常" }
   ],
   "itemsEn": [
-    { "title": "Headlight animation remade (per reference)", "desc": "The admin background now matches the reference: dark teal-black ambience with two cyan-white LED headlights centered on screen (pure-white core, cyan glow), breathing bright and dim, with a showroom reflection below." },
-    { "title": "All features intact", "desc": "The background layer is click-through, so writing, the pet, settings, the admin console and everything else keep working." }
+    { "title": "Blade headlights", "desc": "Headlights are now sharp blade-shaped polygons with a flowing white spine line and layered cyan glow, breathing bright and dim, mirrored and centered." },
+    { "title": "Admin console rebuilt", "desc": "The in-site admin console was rewritten from scratch (event delegation, unified request layer, busy lock), and the critical bug that broke all modals in admin mode is fixed — every in-site feature works again." }
   ],
   "itemsRu": [
-    { "title": "Анимация фар переделана (по образцу)", "desc": "Фон администратора теперь как на образце: тёмный чёрно-бирюзовый фон, две бело-голубые LED-фары по центру экрана (белое ядро, голубое свечение), медленно разгораются и гаснут, с отражением внизу." },
-    { "title": "Все функции работают", "desc": "Фон не перехватывает клики — письмо, питомец, настройки, панель администратора работают как обычно." }
+    { "title": "Фары-лезвия", "desc": "Фары стали острыми полигональными лезвиями с плавной белой линией-хребтом и слоистым голубым свечением; дышат — разгораются и гаснут, зеркально по центру." },
+    { "title": "Панель администратора переписана", "desc": "Встроенная панель администратора полностью переписана (делегирование событий, единый слой запросов, защита от двойных действий), исправлена критическая ошибка, ломавшая все окна в режиме администратора — все функции сайта снова работают." }
   ]
 }
