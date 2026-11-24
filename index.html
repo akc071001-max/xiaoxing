@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.9.0" />
+<link rel="stylesheet" href="css/style.css?v=4.9.1" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -578,6 +578,7 @@
         <textarea class="input" id="xdev-text" rows="3" placeholder="XXB1.…"></textarea>
         <button class="btn primary" id="btn-xdev-import-go" data-i18n="backup.xdevImport">恢复</button>
       </div>
+      <input type="file" id="xdev-file" accept=".xxb,text/plain,application/octet-stream" hidden />
       <div class="backup-row danger-row"><div><b data-i18n="backup.wipe">清除全部数据</b><span data-i18n="backup.wipeSub">不可恢复！</span></div><button class="btn danger" id="btn-wipe" data-i18n="backup.wipeBtn">清除</button></div>
       <input type="file" id="import-file" accept="application/json" hidden />
     </div>
@@ -725,6 +726,7 @@
   <div class="modal terms-modal">
     <div class="modal-head">
       <div class="modal-title" data-i18n="terms.title">📜 用户须知 · 用户守则</div>
+      <button class="icon-btn modal-close" type="button" data-close="modal-terms" data-i18n-title="common.close" title="关闭">✕</button>
     </div>
     <div class="modal-body terms-body">
       <h3 class="terms-h" data-i18n="terms.noticeTitle">一、用户须知</h3>
@@ -1029,6 +1031,7 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" data-i18n="auth.title">👤 登录 / 注册</div>
+      <button class="icon-btn modal-close" type="button" data-close="modal-auth" data-i18n-title="common.close" title="关闭">✕</button>
     </div>
     <div class="modal-body">
       <div class="auth-langs">
@@ -1369,8 +1372,8 @@
   </div>
 </dialog>
 <script src="js/account-config.js"></script>
-<script src="js/account-bridge.js?v=4.9.0"></script>
-<script src="js/draft-review.js?v=4.9.0"></script>
-<script src="js/app.js?v=4.9.0"></script>
+<script src="js/account-bridge.js?v=4.9.1"></script>
+<script src="js/draft-review.js?v=4.9.1"></script>
+<script src="js/app.js?v=4.9.1"></script>
 </body>
 </html>
