@@ -1,19 +1,22 @@
 {
-  "version": "4.1.1",
-  "date": "2026-11-23",
+  "version": "4.2.1",
+  "date": "2026-11-24",
   "items": [
-    { "title": "自检规则更新：两次重写后直接输出", "desc": "合格→输出正文；不合格→返回重写；执行两次重写后无论结果直接输出正文，供您审阅修改，不再拦截" },
-    { "title": "小助手交互升级", "desc": "单击=点开创作小助手；双击=纯互动彩蛋（不打开助手）；拖拽手感增强（跟手缩放、惯性回弹、光标反馈）" },
-    { "title": "文风栏滑动系统", "desc": "作家列表区可独立滑动，新增 ▲▼ 滑动按键，所有作家简介均可完整浏览" }
+    { "title": "管理员拉黑功能", "desc": "站长后台用户列表新增「拉黑 / 解除拉黑」：拉黑后该账户立即强制下线且无法登录，前台显示中文提示" },
+    { "title": "管理员授权与最高权限", "desc": "站长后台仅凭您设置的管理员密码进入（经过您授权）；白名单用户自动获得旗舰版最高权限" },
+    { "title": "忘记密码", "desc": "注册时可设置密保问题；忘记密码时凭密保答案自助重置，重置后旧登录全部失效" },
+    { "title": "用户名单检查", "desc": "后台用户列表新增「已拉黑」标记与状态行，可搜索、筛选，便于核查" }
   ],
   "itemsEn": [
-    { "title": "Self-check rule: output after two rewrites", "desc": "Pass → output; fail → rewrite; after two rewrite rounds the text is output directly for your review — never blocked again." },
-    { "title": "Pet assistant interaction upgrade", "desc": "Single click opens the assistant; double click is pure fun (doesn't open it); improved drag feel (scale, settle easing, cursor feedback)." },
-    { "title": "Style panel scroll system", "desc": "The author list scrolls independently, with ▲▼ buttons, so every author bio can be read in full." }
+    { "title": "Admin blacklist", "desc": "The user list in the admin panel now has Block / Unblock: a blocked account is signed out immediately and cannot sign in, with a clear message." },
+    { "title": "Admin authorization & top tier", "desc": "The admin panel opens only with the password you set (authorized by you); allowlisted users automatically get the Flagship tier." },
+    { "title": "Forgot password", "desc": "Set a security question at registration; recover your password with the answer. All previous sessions are invalidated after a reset." },
+    { "title": "User list review", "desc": "The admin user list now shows a Blocked badge and row state, with search and filters." }
   ],
   "itemsRu": [
-    { "title": "Правило самопроверки: вывод после двух переписываний", "desc": "Пройдена → вывод; не пройдена → переписывание; после двух раундов текст выводится напрямую для вашей проверки — больше без блокировок." },
-    { "title": "Питомец-помощник: новая интеракция", "desc": "Один клик открывает помощника; двойной клик — просто развлечение (без открытия); улучшено ощущение перетаскивания." },
-    { "title": "Прокрутка в разделе стилей", "desc": "Список авторов прокручивается отдельно, добавлены кнопки ▲▼ — все биографии читаются полностью." }
+    { "title": "Чёрный список администратора", "desc": "В списке пользователей появились кнопки «Заблокировать / Разблокировать»: заблокированный аккаунт сразу выходит из системы и не может войти." },
+    { "title": "Авторизация администратора и высший уровень", "desc": "Панель администратора открывается только с паролем, который задаёте вы; пользователи из белого списка автоматически получают Флагман." },
+    { "title": "Забыли пароль", "desc": "При регистрации можно задать контрольный вопрос; пароль восстанавливается по ответу, старые сеансы аннулируются." },
+    { "title": "Просмотр списка пользователей", "desc": "В списке пользователей появилась пометка «Заблокирован», есть поиск и фильтры." }
   ]
 }
