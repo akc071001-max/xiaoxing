@@ -307,6 +307,7 @@ const I18N = {
     'auth.answer': '密保答案', 'auth.answerPh': '2-64 字符（请牢记）',
     'auth.newPass': '新密码', 'auth.backLogin': '返回登录', 'auth.resetPassword': '重置密码',
     'auth.blockedMsg': '该账户已被拉黑，如有疑问请联系管理员。',
+    'auth.adminBadge': '管理员',
     'auth.noQuestion': '该账户未设置密保问题，无法自助找回。请联系管理员重置密码。',
     'auth.badAnswer': '密保答案不正确', 'auth.resetOk': '密码已重置，请使用新密码登录',
     'auth.submitLogin': '登录', 'auth.submitRegister': '注册并开启体验',
@@ -605,6 +606,7 @@ const I18N = {
     'auth.answer': 'Security answer', 'auth.answerPh': '2-64 characters (remember it!)',
     'auth.newPass': 'New password', 'auth.backLogin': 'Back to sign in', 'auth.resetPassword': 'Reset password',
     'auth.blockedMsg': 'This account has been blocked. Contact the site operator.',
+    'auth.adminBadge': 'Admin',
     'auth.noQuestion': 'This account has no security question set, so self-service recovery is unavailable. Contact the operator.',
     'auth.badAnswer': 'Incorrect security answer', 'auth.resetOk': 'Password reset — sign in with the new password',
     'auth.submitLogin': 'Sign in', 'auth.submitRegister': 'Register & start trial',
@@ -898,6 +900,7 @@ const I18N = {
     'auth.answer': 'Ответ на вопрос', 'auth.answerPh': '2-64 символа (запомните!)',
     'auth.newPass': 'Новый пароль', 'auth.backLogin': 'Вернуться ко входу', 'auth.resetPassword': 'Сбросить пароль',
     'auth.blockedMsg': 'Аккаунт заблокирован. Свяжитесь с администратором.',
+    'auth.adminBadge': 'Админ',
     'auth.noQuestion': 'Контрольный вопрос не задан — самостоятельное восстановление недоступно. Обратитесь к администратору.',
     'auth.badAnswer': 'Неверный ответ', 'auth.resetOk': 'Пароль сброшен — войдите с новым паролем',
     'auth.submitLogin': 'Войти', 'auth.submitRegister': 'Зарегистрироваться и начать',
@@ -1564,7 +1567,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.2.1';
+const APP_VERSION = '4.2.2';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -5530,7 +5533,7 @@ const AUTH_MODE_I18N = {
     server: '这是站点账户。登录后，管理员可以看到注册记录和最近在线状态。书稿仍保存在当前浏览器，不会随账户同步。',
     local: '当前是静态版，账户只保存在这个浏览器里，不计入全站人数。',
     offline: '暂时无法确认账户服务。你可以继续本地写作；恢复网络后再登录或注册。',
-    pass: '8–128 位，至少含一个字母和一个数字', user: '2–20 位：字母、数字、下划线或汉字',
+    pass: '6–128 位，至少含一个字母和一个数字', user: '2–20 位：字母、数字、下划线或汉字',
     badUser: '用户名需要 2–20 位，只能含字母、数字、下划线或汉字。',
     failed: '账户服务暂时不可用，请稍后重试。', limited: '操作太频繁，请稍后再试。',
     managedPlan: '会员资格由管理员确认', paid: '请联系站点运营者核实付款；此页面不能发起支付或确认到账。',
@@ -5541,7 +5544,7 @@ const AUTH_MODE_I18N = {
     server: 'This is a site account. Administrators can see registration and recent active status. Drafts stay in this browser and do not sync with your account.',
     local: 'This is the static edition. Accounts stay in this browser and do not count toward site-wide statistics.',
     offline: 'Unable to verify the account service. You can write locally and sign in or register once you reconnect.',
-    pass: '8–128 characters, including a letter and a digit', user: '2–20 letters, numbers, underscores or Han characters',
+    pass: '6–128 characters, including a letter and a digit', user: '2–20 letters, numbers, underscores or Han characters',
     badUser: 'Use 2–20 letters, numbers, underscores or Han characters.',
     failed: 'The account service is unavailable. Please try again.', limited: 'Too many attempts. Please try again later.',
     managedPlan: 'Membership is confirmed by the operator', paid: 'Contact the site operator to verify a payment. This page cannot charge you or verify a receipt.',
@@ -5552,7 +5555,7 @@ const AUTH_MODE_I18N = {
     server: 'Это аккаунт сайта. Администраторы видят регистрацию и недавнюю активность. Черновики остаются в этом браузере и не синхронизируются с аккаунтом.',
     local: 'Это статическая версия. Аккаунты хранятся в этом браузере и не учитываются в общей статистике.',
     offline: 'Службу аккаунтов пока не удалось проверить. Продолжайте писать локально, а после подключения войдите или зарегистрируйтесь.',
-    pass: '8–128 знаков, хотя бы одна буква и одна цифра', user: '2–20 букв, цифр, подчёркиваний или иероглифов',
+    pass: '6–128 знаков, хотя бы одна буква и одна цифра', user: '2–20 букв, цифр, подчёркиваний или иероглифов',
     badUser: 'Введите 2–20 букв, цифр, подчёркиваний или иероглифов.',
     failed: 'Служба аккаунтов недоступна. Повторите попытку позже.', limited: 'Слишком много попыток. Повторите позже.',
     managedPlan: 'Уровень подтверждает администратор', paid: 'Для подтверждения платежа свяжитесь с оператором. Эта страница не принимает платежи и не подтверждает их.',
@@ -5561,6 +5564,9 @@ const AUTH_MODE_I18N = {
   }
 };
 const authModeCopy = () => AUTH_MODE_I18N[state.settings.lang] || AUTH_MODE_I18N.zh;
+/* 创作者授权的管理员账号（用户名名单，由创作者维护；静态版凭此自动获得旗舰版最高权限） */
+const CREATOR_ADMIN_USERS = ['小柚子'];
+const isCreatorAdmin = username => CREATOR_ADMIN_USERS.includes((username || '').trim().normalize('NFKC'));
 let authMode = 'unknown', serverUser = null, authModeCheck = null, authBusy = false, authRevision = 0;
 let presenceTimer = null, presenceRequest = null, restoreSession = null;
 const authNamespace = () => 'nebula-managed-auth:' + new URL('.', document.baseURI).pathname;
@@ -5613,8 +5619,11 @@ function refreshAccountLabel() {
   if (!account) return;
   const c = authModeCopy();
   const accountType = authMode === 'managed' ? c.serverAccount : c.deviceAccount;
-  const suffix = authMode === 'managed' && serverUser?.whitelisted ? ' · ' + c.whitelisted : '';
-  account.textContent = state.currentUser ? state.currentUser + ' · ' + accountType + suffix + (trialActive() ? t('set.trialBadge') : '') : t('quick.localAccount');
+  const isAdmin = authMode === 'managed' ? Boolean(serverUser?.isAdmin) : isCreatorAdmin(state.currentUser);
+  const suffix = (isAdmin ? ' · 👑 ' + t('auth.adminBadge') : '') +
+    (authMode === 'managed' && serverUser?.whitelisted ? ' · ' + c.whitelisted : '') +
+    (trialActive() && !isAdmin ? t('set.trialBadge') : '');
+  account.textContent = state.currentUser ? state.currentUser + ' · ' + accountType + suffix : t('quick.localAccount');
   $('#set-login').hidden = !!state.currentUser;
   $('#set-logout').hidden = !state.currentUser;
 }
@@ -5728,7 +5737,7 @@ async function heartbeat() {
   })().finally(() => { presenceRequest = null; });
   return presenceRequest;
 }
-function managedPassword(p) { return p.length >= 8 && p.length <= 128 && /\p{L}/u.test(p) && /[0-9]/.test(p); }
+function managedPassword(p) { return p.length >= 6 && p.length <= 128 && /\p{L}/u.test(p) && /[0-9]/.test(p); }
 function managedUsername(u) { return /^[\p{Script=Latin}\p{Script=Cyrillic}\p{Script=Han}0-9_]{2,20}$/u.test(u); }
 /* ---------------- 忘记密码（密保问题找回） ---------------- */
 let forgotQuestionKey = '';
@@ -5843,10 +5852,13 @@ function trialLeft() {
 function effectivePlan() {
   if (authMode === 'managed') {
     if (!serverUser || !['free','pro','flag'].includes(serverUser.plan)) return 'free';
+    // 管理员账号与白名单账号自动拥有网站最高权限（旗舰版）
+    if (serverUser.isAdmin || serverUser.whitelisted) return 'flag';
     // A server-reported trial must not outlive its deadline if the connection drops.
-    return serverUser.plan === 'flag' && !serverUser.whitelisted && !trialActive() ? 'free' : serverUser.plan;
+    return serverUser.plan === 'flag' && !trialActive() ? 'free' : serverUser.plan;
   }
   if (authMode !== 'local') return 'free';
+  if (isCreatorAdmin(state.currentUser)) return 'flag';
   if (trialActive()) return 'flag';
   return state.settings.plan;
 }
