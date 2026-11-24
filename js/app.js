@@ -240,6 +240,9 @@ const I18N = {
     'gp.psearch': '正在检索文献资料', 'gp.refsFound': '已检索到 {n} 篇文献', 'gp.pdraft': '正在拟写论文提纲', 'gp.pwrite': '正在输出论文正文',
     'gp.check': '⚖ 质量自检', 'gp.rewrite': '发现问题，正在重写优化', 'gp.pass': '自检通过 · 内容达标',
     'gp.failCheck': 'AI 自检未通过：多次重写仍未达标，正文未输出。请调整大纲/主题后重试。',
+    'gp.forceOutput': '自检未完全达标：已按要求重写两次，现直接输出正文，请审阅修改。',
+    'gp.forceNote': '两次重写完成 · 直接输出正文',
+    'sp.scrollHint': '滑动 / 按键查看全部作家简介',
     "p.guide": "写作向导",
     "p.guideTitle": "论文写作路线",
     "p.guideStart": "选择一个起步模板",
@@ -527,6 +530,9 @@ const I18N = {
     'gp.psearch': 'Searching references', 'gp.refsFound': '{n} references found', 'gp.pdraft': 'Drafting the outline', 'gp.pwrite': 'Writing the paper',
     'gp.check': '⚖ Quality check', 'gp.rewrite': 'Issues found — rewriting', 'gp.pass': 'Check passed · quality confirmed',
     'gp.failCheck': 'AI self-check failed: after several rewrites the quality bar was not met, so nothing was output. Adjust the outline/topic and retry.',
+    'gp.forceOutput': 'Self-check didn\'t fully pass: after the required two rewrites, the text is output directly for your review.',
+    'gp.forceNote': 'Two rewrites done · outputting directly',
+    'sp.scrollHint': 'Scroll or use buttons to view all author bios',
     "p.guide": "Writing guide",
     "p.guideTitle": "Plan your paper",
     "p.guideStart": "Choose a starter template",
@@ -809,6 +815,9 @@ const I18N = {
     'gp.psearch': 'Поиск источников', 'gp.refsFound': 'Найдено источников: {n}', 'gp.pdraft': 'Черновик структуры', 'gp.pwrite': 'Написание статьи',
     'gp.check': '⚖ Проверка качества', 'gp.rewrite': 'Найдены проблемы — переписываю', 'gp.pass': 'Проверка пройдена · качество подтверждено',
     'gp.failCheck': 'ИИ-самопроверка не пройдена: после нескольких переписываний качество не достигнуто, текст не выведен. Скорректируйте тему/план и повторите.',
+    'gp.forceOutput': 'Самопроверка не полностью пройдена: после двух переписываний текст выводится напрямую — проверьте и отредактируйте.',
+    'gp.forceNote': 'Два переписывания завершены · вывод текста',
+    'sp.scrollHint': 'Прокрутите или нажмите кнопки, чтобы увидеть всех авторов',
     "p.guide": "План работы",
     "p.guideTitle": "План написания статьи",
     "p.guideStart": "Выберите шаблон",
@@ -1530,7 +1539,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.1.0';
+const APP_VERSION = '4.1.1';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -2409,6 +2418,11 @@ function renderStylePanel() {
     <div class="author-search-row">
       <input class="input" id="author-filter-input" data-i18n-ph="sp.filterPh" placeholder="筛选作家…" autocomplete="off" />
     </div>
+    <div class="sp-scroll-row">
+      <button class="btn mini" data-act="scrolltop" title="向上滑动">▲</button>
+      <button class="btn mini" data-act="scrollbottom" title="向下滑动">▼</button>
+      <span class="learn-status" data-i18n="sp.scrollHint">滑动 / 按键查看全部作家简介</span>
+    </div>
     <div class="author-chips" id="author-chips-box">${renderAuthorChips(n)}</div>
     <div class="author-learn-row">
       <button class="btn mini primary" data-act="learnauthors">${t('w.learnSel', { n: refs.length })}</button>
@@ -2500,6 +2514,8 @@ function onPanelClick(e) {
     case 'learnauthors': learnAuthors(novelRefAuthors(curNovel()), $('#world-learn-status')); break;
     case 'delcustomauthor': delCustomAuthor(id); break;
     case 'stylemode': setStyleMode(btn.dataset.mode); break;
+    case 'scrolltop': $('#panel-body').scrollBy({ top: -$('#panel-body').clientHeight * 0.85, behavior: 'smooth' }); break;
+    case 'scrollbottom': $('#panel-body').scrollBy({ top: $('#panel-body').clientHeight * 0.85, behavior: 'smooth' }); break;
   }
 }
 function onPanelInput(e) {
@@ -4611,20 +4627,24 @@ async function runQualityCheck(kind, text, refCtx, task) {
 }
 async function reviewedCandidate(task, write, refCtx) {
   const paper = task.kind === 'paper';
-  const maxRewrites = (PLAN_LEVEL[effectivePlan()] || 0) >= 2 ? 2 : 1;
+  const maxRewrites = 2; // 规则：不合格返回重写，执行两次重写后直接输出正文
+  let last = null;
   for (let i = 0; i <= maxRewrites; i++) {
     await genSetStage(task, paper ? 2 : 3, '');
     const candidate = await write();
+    last = candidate;
     await genSetStage(task, paper ? 3 : 4, '');
     const result = await runQualityCheck(task.kind, candidate, refCtx, task);
     if (result.ok) return candidate;
     if (i < maxRewrites) {
-      renderGenStages(t('gp.rewrite') + ' (' + (i + 1) + '/' + maxRewrites + ')：' + result.issues.slice(0, 60));
+      renderGenStages(t('gp.rewrite') + ' (' + (i + 1) + '/' + maxRewrites + ')：' + (result.issues || '').slice(0, 60));
       await generationDelay(800, task.opts.signal);
     }
   }
-  toast(t('gp.failCheck'), 'warn', 6000);
-  return null;
+  // 已执行两次重写：按规则直接输出正文，供用户审阅
+  renderGenStages(t('gp.forceNote'));
+  toast(t('gp.forceOutput'), 'warn', 5000);
+  return last;
 }
 async function generateChapter() {
   const c = curChapter();
@@ -5384,6 +5404,7 @@ function bindPetDrag() {
   const pet = petEl();
   if (!pet) return;
   let dragging = false, moved = 0, sx = 0, sy = 0, ox = 0, oy = 0;
+  let clickTimer = null;
   const onMove = e => {
     if (!dragging) return;
     moved = Math.max(moved, Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy));
@@ -5403,6 +5424,20 @@ function bindPetDrag() {
       savePetPos((r.left + r.width / 2) / innerWidth, (r.top + r.height / 2) / innerHeight);
     }
   };
+  // 单击：点开创作小助手
+  const petSingle = () => {
+    pet.classList.remove('pet-idle');
+    applyPetPos();
+    petSparkles(6);
+    pet.classList.remove('pet-bounce');
+    void pet.offsetWidth;
+    pet.classList.add('pet-bounce');
+    setTimeout(() => pet.classList.remove('pet-bounce'), 520);
+    petRandomBubble();
+    openAssistant();
+  };
+  // 双击：纯互动彩蛋（不打开助手）
+  const petDouble = () => hurtPet();
   pet.addEventListener('pointerdown', e => {
     dragging = true; moved = 0;
     sx = e.clientX; sy = e.clientY;
@@ -5415,19 +5450,17 @@ function bindPetDrag() {
     window.addEventListener('pointerup', onUp, { once: true });
   });
   pet.addEventListener('click', e => {
-    if (e.detail > 1) return; // 双击交给 dblclick
-    if (moved > 6) return;    // 拖拽不算点击
-    pet.classList.remove('pet-idle');
-    applyPetPos();
-    petSparkles(6);
-    pet.classList.remove('pet-bounce');
-    void pet.offsetWidth;
-    pet.classList.add('pet-bounce');
-    setTimeout(() => pet.classList.remove('pet-bounce'), 520);
-    petRandomBubble();
-    openAssistant();
+    if (e.detail > 1) return;
+    if (moved > 6) return; // 拖拽不算点击
+    clearTimeout(clickTimer);
+    // 延迟触发：若 280ms 内出现第二次点击（双击），则取消打开助手，只做互动
+    clickTimer = setTimeout(() => { clickTimer = null; petSingle(); }, 280);
   });
-  pet.addEventListener('dblclick', () => hurtPet());
+  pet.addEventListener('dblclick', () => {
+    clearTimeout(clickTimer);
+    clickTimer = null;
+    petDouble();
+  });
 }
 function hurtPet() {
   const pet = petEl();
