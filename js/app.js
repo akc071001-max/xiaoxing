@@ -326,6 +326,16 @@ const I18N = {
     'auth.user': '用户名', 'auth.userPh': '2-20 位：字母 / 数字 / 下划线 / 中文',
     'auth.pass': '密码', 'auth.passPh': '至少 6 位，必须包含英文字母 + 数字',
     'auth.pass2': '确认密码', 'auth.pass2Ph': '再输入一次密码',
+    'auth.email': '邮箱（必填，用于确认用户信息）', 'auth.emailPh': 'name@example.com',
+    'auth.errEmail': '请输入有效的邮箱地址', 'auth.emailTaken': '该邮箱已被注册',
+    'msg.title': '📩 私信', 'msg.empty': '暂无私信', 'msg.readAll': '全部已读',
+    'msg.fromAdmin': '来自：站长', 'msg.copy': '复制', 'msg.sent': '私信已送达',
+    'admin.pendingTitle': '⏳ 待核对付款', 'admin.pendingEmpty': '暂无待核对付款',
+    'admin.resolve': '✓ 核对并开通', 'admin.paymentsTitle': '💰 收款流水（最近）',
+    'admin.msg': '✉ 私信', 'admin.msgTarget': '私信发送给：',
+    'admin.msgPh': '私信内容（可发送 API 密钥等）…', 'admin.msgSend': '发送',
+    'admin.msgSent': '私信已送达该用户',
+    'set.emailLabel': '邮箱（用于确认用户信息）', 'set.emailSave': '保存邮箱', 'set.emailSaved': '邮箱已保存',
     'auth.forgot': '忘记密码？', 'auth.forgotTitle': '找回密码',
     'auth.q0': '不设置密保', 'auth.q1': '你最喜欢的一本书？', 'auth.q2': '你小时候的昵称？',
     'auth.q3': '你第一位老师的姓氏？', 'auth.q4': '你最喜欢的城市？',
@@ -661,6 +671,16 @@ const I18N = {
     'auth.user': 'Username', 'auth.userPh': '2-20 chars: letters / numbers / _ / Chinese',
     'auth.pass': 'Password', 'auth.passPh': 'Min 6 chars, must contain letters AND digits',
     'auth.pass2': 'Confirm password', 'auth.pass2Ph': 'Type the password again',
+    'auth.email': 'Email (required, used to verify your identity)', 'auth.emailPh': 'name@example.com',
+    'auth.errEmail': 'Enter a valid email address', 'auth.emailTaken': 'This email is already registered',
+    'msg.title': '📩 Messages', 'msg.empty': 'No messages yet', 'msg.readAll': 'Mark all read',
+    'msg.fromAdmin': 'From: operator', 'msg.copy': 'Copy', 'msg.sent': 'Message delivered',
+    'admin.pendingTitle': '⏳ Pending payments', 'admin.pendingEmpty': 'No pending payments',
+    'admin.resolve': '✓ Verify & activate', 'admin.paymentsTitle': '💰 Recent receipts',
+    'admin.msg': '✉ Message', 'admin.msgTarget': 'Send message to:',
+    'admin.msgPh': 'Message content (e.g. an API key)…', 'admin.msgSend': 'Send',
+    'admin.msgSent': 'Message delivered to the user',
+    'set.emailLabel': 'Email (used to verify your identity)', 'set.emailSave': 'Save email', 'set.emailSaved': 'Email saved',
     'auth.forgot': 'Forgot password?', 'auth.forgotTitle': 'Recover password',
     'auth.q0': 'No security question', 'auth.q1': 'What is your favorite book?', 'auth.q2': 'Your childhood nickname?',
     'auth.q3': 'Your first teacher\'s surname?', 'auth.q4': 'Your favorite city?',
@@ -991,6 +1011,16 @@ const I18N = {
     'auth.user': 'Имя пользователя', 'auth.userPh': '2-20 знаков: буквы / цифры / _ / китайские',
     'auth.pass': 'Пароль', 'auth.passPh': 'Минимум 6 знаков, обязательно буквы И цифры',
     'auth.pass2': 'Подтвердите пароль', 'auth.pass2Ph': 'Введите пароль ещё раз',
+    'auth.email': 'Эл. почта (обязательна для подтверждения личности)', 'auth.emailPh': 'name@example.com',
+    'auth.errEmail': 'Введите корректный адрес эл. почты', 'auth.emailTaken': 'Эта почта уже зарегистрирована',
+    'msg.title': '📩 Сообщения', 'msg.empty': 'Сообщений пока нет', 'msg.readAll': 'Прочитать всё',
+    'msg.fromAdmin': 'От: администратор', 'msg.copy': 'Копировать', 'msg.sent': 'Сообщение доставлено',
+    'admin.pendingTitle': '⏳ Ожидают проверки', 'admin.pendingEmpty': 'Нет ожидающих платежей',
+    'admin.resolve': '✓ Проверить и активировать', 'admin.paymentsTitle': '💰 Последние поступления',
+    'admin.msg': '✉ Сообщение', 'admin.msgTarget': 'Сообщение для:',
+    'admin.msgPh': 'Текст сообщения (например, API-ключ)…', 'admin.msgSend': 'Отправить',
+    'admin.msgSent': 'Сообщение доставлено пользователю',
+    'set.emailLabel': 'Эл. почта (для подтверждения личности)', 'set.emailSave': 'Сохранить', 'set.emailSaved': 'Почта сохранена',
     'auth.forgot': 'Забыли пароль?', 'auth.forgotTitle': 'Восстановление пароля',
     'auth.q0': 'Без контрольного вопроса', 'auth.q1': 'Ваша любимая книга?', 'auth.q2': 'Ваше детское прозвище?',
     'auth.q3': 'Фамилия первого учителя?', 'auth.q4': 'Ваш любимый город?',
@@ -1676,7 +1706,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.4.0';
+const APP_VERSION = '4.5.0';
 const PLAN_LEVEL = { free: 0, pro: 1, deepseek: 2, flag: 3 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, deepseek: 5, flag: 10 };
 const state = {
@@ -5522,6 +5552,10 @@ async function submitDeepseekPaid() {
     const j = await res.json().catch(() => null);
     if (j && (j.success === true || j.success === 'true')) {
       localStorage.setItem('nebula-deepseek-pending', '1');
+      // 管理版：同时写入站内「待核对付款」队列，管理员一键核对开通
+      if (authMode === 'managed') {
+        try { await serverAuthRequest('payment-submit', { amountCents: 4000, note: 'DeepSeek 月度会员' }); } catch (e) { }
+      }
       closeModal('modal-agreement');
       toast(t('agr.submitted'), 'ok', 6000);
     } else {
@@ -5796,6 +5830,54 @@ async function pollOnline() {
 function startOnlinePoll() { stopOnlinePoll(); pollOnline(); onlineTimer = setInterval(pollOnline, 30000); }
 function stopOnlinePoll() { if (onlineTimer) clearInterval(onlineTimer); onlineTimer = null; }
 
+/* ---------------- 私信模块（管理员可把 API 密钥私信发送给指定用户） ---------------- */
+let inboxTimer = null;
+async function pollInbox() {
+  if (authMode !== 'managed' || !serverUser) {
+    const b = $('#btn-inbox');
+    if (b) b.hidden = true;
+    stopInboxPoll();
+    return;
+  }
+  try {
+    const r = await serverAuthRequest('messages');
+    const badge = $('#inbox-badge');
+    $('#btn-inbox').hidden = false;
+    if (Number(r.unread) > 0) { badge.hidden = false; badge.textContent = r.unread > 99 ? '99+' : r.unread; }
+    else badge.hidden = true;
+  } catch (e) { }
+}
+function startInboxPoll() { stopInboxPoll(); pollInbox(); inboxTimer = setInterval(pollInbox, 60000); }
+function stopInboxPoll() { if (inboxTimer) clearInterval(inboxTimer); inboxTimer = null; }
+function renderInbox(messages) {
+  const el = $('#msg-list');
+  el.innerHTML = (messages || []).map(m => `
+    <div class="msg-item ${m.read ? '' : 'unread'}">
+      <div class="msg-head"><span class="msg-src">${t('msg.fromAdmin')}</span><span class="msg-time">${new Date(m.createdAt).toLocaleString()}</span></div>
+      <div class="msg-body">${esc(m.content)}</div>
+      <button class="btn mini" data-msgcopy="${esc(m.content)}">${t('msg.copy')}</button>
+    </div>`).join('') || '<div class="empty-hint">' + t('msg.empty') + '</div>';
+}
+async function openInbox() {
+  openModal('modal-messages');
+  try {
+    const r = await serverAuthRequest('messages');
+    renderInbox(r.messages);
+    if (Number(r.unread) > 0) serverAuthRequest('messages/read', {}).then(pollInbox).catch(() => {});
+  } catch (e) {
+    $('#msg-list').innerHTML = '<div class="empty-hint">' + authModeCopy().failed + '</div>';
+  }
+}
+function bindInbox() {
+  $('#btn-inbox').addEventListener('click', openInbox);
+  $('#btn-msg-refresh').addEventListener('click', openInbox);
+  $('#btn-msg-read').addEventListener('click', () => { serverAuthRequest('messages/read', {}).then(pollInbox).catch(() => {}); openInbox(); });
+  $('#msg-list').addEventListener('click', e => {
+    const b = e.target.closest('[data-msgcopy]');
+    if (b) copyText(b.dataset.msgcopy);
+  });
+}
+
 /* ---------------- 站长操作台（站内）· 重制版 ---------------- */
 const adminState = { users: [], busy: false, notice: '' };
 async function adminApi(path, method = 'GET', body) {
@@ -5834,9 +5916,53 @@ function renderAdminList() {
       <span class="au-actions">
         <button class="btn mini" data-aa="block" ${u.isAdmin ? 'disabled title="' + esc(t('admin.protected')) + '"' : ''}>${u.blocked ? t('admin.unblock') : t('admin.block')}</button>
         <button class="btn mini" data-aa="wl">${u.whitelisted ? t('admin.unwl') : t('admin.wl')}</button>
+        <button class="btn mini" data-aa="msg">${t('admin.msg')}</button>
       </span>
     </div>`;
   }).join('') || '<div class="empty-hint">' + t('vip.searchEmpty') + '</div>';
+}
+function renderAdminPending(pending) {
+  const el = $('#admin-pending-list');
+  el.innerHTML = (pending || []).map(p => `
+    <div class="admin-user-row pending" data-pid="${esc(p.id)}">
+      <span class="au-name">${esc(p.username)}</span>
+      <span class="au-meta">¥${(p.amountCents / 100).toFixed(2)} · ${new Date(p.submittedAt).toLocaleString()}${p.note ? ' · ' + esc(p.note.slice(0, 40)) : ''}</span>
+      <span class="au-actions"><button class="btn mini primary" data-presolve="${esc(p.id)}">${t('admin.resolve')}</button></span>
+    </div>`).join('') || '<div class="empty-hint small">' + t('admin.pendingEmpty') + '</div>';
+  el.querySelectorAll('[data-presolve]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (adminState.busy) return;
+      adminState.busy = true;
+      setAdminStatus('');
+      try {
+        await adminApi('./api/admin/pending-resolve', 'POST', { pendingId: btn.dataset.presolve });
+        adminState.notice = t('admin.unblocked').replace('已解除拉黑', '已核对并开通');
+        toast(t('admin.blockedOk').replace('已被拉黑并强制下线', '已核对并开通'), 'ok');
+      } catch (e) {
+        setAdminStatus(t('admin.opFail'), true);
+      } finally {
+        adminState.busy = false;
+        await refreshAdminConsole();
+      }
+    });
+  });
+}
+function renderAdminPayments(payments) {
+  const el = $('#admin-payments-list');
+  el.innerHTML = (payments || []).slice(0, 8).map(p => `
+    <div class="admin-pay-row">
+      <span class="au-name">${esc(p.username || '—')}</span>
+      <span class="au-meta">${p.kind === 'payment' ? '收款' : '退款'} ¥${(p.amountCents / 100).toFixed(2)} · ${new Date(p.occurredAt).toLocaleString()}</span>
+    </div>`).join('') || '<div class="empty-hint small">—</div>';
+}
+function openAdminComposer(uid) {
+  const u = adminState.users.find(x => x.id === uid);
+  if (!u) return;
+  $('#admin-msg-target-name').textContent = u.username;
+  $('#admin-msg-target-name').dataset.uid = uid;
+  $('#admin-msg-text').value = '';
+  $('#admin-msg-composer').hidden = false;
+  $('#admin-msg-text').focus();
 }
 async function refreshAdminConsole() {
   if (adminState.busy) return;
@@ -5846,6 +5972,8 @@ async function refreshAdminConsole() {
     const d = await adminApi('./api/admin/dashboard?days=30');
     adminState.users = Array.isArray(d.users) ? d.users : [];
     renderAdminStats(d);
+    renderAdminPending(d.pending || []);
+    renderAdminPayments(d.payments || []);
     renderAdminList();
     setAdminStatus(adminState.notice || (t('admin.total') + '：' + (d.totalUsers ?? '—')));
     adminState.notice = '';
@@ -5858,6 +5986,7 @@ async function refreshAdminConsole() {
 async function adminRowAction(uid, kind) {
   const u = adminState.users.find(x => x.id === uid);
   if (!u || adminState.busy) return;
+  if (kind === 'msg') { openAdminComposer(uid); return; }
   adminState.busy = true;
   setAdminStatus('');
   try {
@@ -5876,6 +6005,24 @@ async function adminRowAction(uid, kind) {
     await refreshAdminConsole();
   }
 }
+async function sendAdminMessage() {
+  const nameEl = $('#admin-msg-target-name');
+  const uid = nameEl.dataset.uid;
+  const content = $('#admin-msg-text').value.trim();
+  if (!uid || !content) return;
+  if (adminState.busy) return;
+  adminState.busy = true;
+  setAdminStatus('');
+  try {
+    await adminApi('./api/admin/messages', 'POST', { userId: uid, content });
+    $('#admin-msg-composer').hidden = true;
+    toast(t('admin.msgSent'), 'ok');
+  } catch (e) {
+    setAdminStatus(t('admin.opFail'), true);
+  } finally {
+    adminState.busy = false;
+  }
+}
 function openAdminConsole() {
   openModal('modal-admin');
   refreshAdminConsole();
@@ -5890,6 +6037,24 @@ function bindAdminConsole() {
     const row = btn.closest('[data-uid]');
     if (row) adminRowAction(row.dataset.uid, btn.dataset.aa);
   });
+  $('#btn-admin-msg-send').addEventListener('click', sendAdminMessage);
+  $('#btn-admin-msg-cancel').addEventListener('click', () => { $('#admin-msg-composer').hidden = true; });
+  // 邮箱补充（管理版老用户）
+  $('#set-email-save').addEventListener('click', async () => {
+    const email = $('#set-email-input').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return toast(t('auth.errEmail'), 'warn');
+    try {
+      const r = await serverAuthRequest('email', { email });
+      updateServerUser(r.user);
+      refreshAccountLabel();
+      openSettings();
+      toast(t('set.emailSaved'), 'ok');
+    } catch (e) {
+      toast(e.code === 'email_taken' ? t('auth.emailTaken') : authModeCopy().failed, 'err');
+    }
+  });
+  // 私信收件箱
+  bindInbox();
 }
 let authMode = 'unknown', serverUser = null, authModeCheck = null, authBusy = false, authRevision = 0;
 let presenceTimer = null, presenceRequest = null, restoreSession = null;
@@ -6016,11 +6181,16 @@ async function setUpAccountMode({ restore = false } = {}) {
   }
   if (authMode !== 'local' && !serverUser) state.currentUser = null;
   if (restore && authMode === 'managed' && !serverUser) await restoreManagedSession();
-  if (authMode === 'managed') startOnlinePoll();
-  else {
+  if (authMode === 'managed') {
+    startOnlinePoll();
+    startInboxPoll();
+  } else {
     stopOnlinePoll();
+    stopInboxPoll();
     const el = $('#online-indicator');
     if (el) el.hidden = true;
+    const ib = $('#btn-inbox');
+    if (ib) ib.hidden = true;
   }
   applyAdminMode();
 }
@@ -6167,7 +6337,8 @@ function managedAuthHint(error) {
   return ({
     invalid_username:c.badUser, invalid_password:c.pass, username_taken:t('auth.errExists'),
     invalid_credentials:t('auth.errLogin'), rate_limited:c.limited, blocked:t('auth.blockedMsg'),
-    invalid_question:t('auth.q0') + ' · ' + t('auth.answerPh')
+    invalid_question:t('auth.q0') + ' · ' + t('auth.answerPh'),
+    invalid_email:t('auth.errEmail'), email_taken:t('auth.emailTaken')
   })[error.code] || c.failed;
 }
 function trialUntil() {
@@ -6210,6 +6381,7 @@ function switchAuthTab(mode) {
   $('#auth-tab-login').classList.toggle('on', mode === 'login');
   $('#auth-tab-register').classList.toggle('on', mode === 'register');
   $('#auth-pass2-wrap').style.display = mode === 'register' ? '' : 'none';
+  $('#auth-email-wrap').style.display = mode === 'register' ? '' : 'none';
   $('#auth-question-wrap').style.display = mode === 'register' ? '' : 'none';
   $('#auth-answer-wrap').style.display = mode === 'register' && $('#auth-question').value ? '' : 'none';
   $('#btn-auth-forgot').style.display = mode === 'login' ? '' : 'none';
@@ -6239,10 +6411,12 @@ async function authSubmit() {
     if (authMode === 'managed') {
       if (!managedUsername(user)) return setAuthHint(authModeCopy().badUser);
       if (!pass || (isRegister && !managedPassword(pass))) return setAuthHint(isRegister ? authModeCopy().pass : t('auth.errLogin'));
+      const emailRaw = isRegister ? $('#auth-email').value.trim().toLowerCase() : '';
+      if (isRegister && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailRaw)) return setAuthHint(t('auth.errEmail'));
       const q = isRegister ? $('#auth-question').value : '';
       const a = isRegister ? $('#auth-answer').value.trim() : '';
       const response = await serverAuthRequest(isRegister ? 'register' : 'login',
-        isRegister ? { username: user, password: pass, question: q || undefined, answer: a || undefined } : { username: user, password: pass });
+        isRegister ? { username: user, password: pass, email: emailRaw, question: q || undefined, answer: a || undefined } : { username: user, password: pass });
       authRevision++;
       updateServerUser(response.user);
       if (!serverUser) throw new Error('Missing session user');
@@ -6251,11 +6425,13 @@ async function authSubmit() {
       if (!validPass(pass)) return setAuthHint(t('auth.errPass'));
       if (isRegister) {
         if (Object.hasOwn(state.accounts,user)) return setAuthHint(t('auth.errExists'));
+        const emailRaw = $('#auth-email').value.trim().toLowerCase();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailRaw)) return setAuthHint(t('auth.errEmail'));
         const salt = uid() + uid();
         const hash = await hashPw(salt, pass);
         const q = $('#auth-question').value;
         const a = $('#auth-answer').value.trim();
-        Object.defineProperty(state.accounts, user, {value:{salt, hash, question: q || '', answerHash: a ? await hashPw(salt + ':q', a) : '', createdAt:Date.now(), trialUntil:Date.now()+86400000}, enumerable:true, writable:true, configurable:true});
+        Object.defineProperty(state.accounts, user, {value:{salt, hash, email: emailRaw, question: q || '', answerHash: a ? await hashPw(salt + ':q', a) : '', createdAt:Date.now(), trialUntil:Date.now()+86400000}, enumerable:true, writable:true, configurable:true});
         saveAccounts();
       } else {
         const acc = Object.hasOwn(state.accounts,user) ? state.accounts[user] : null;
@@ -7209,6 +7385,13 @@ function openSettings() {
   $('#set-profile-avatar').innerHTML = u.avatarData ? '<img src="' + u.avatarData + '" alt="" />' : esc(AVATAR_PRESETS[u.avatarPreset || 0][0]);
   refreshAccountLabel();
   $('#set-version').textContent = APP_VERSION;
+  // 管理版老用户补充邮箱（注册已必填，用于确认用户信息）
+  const emailRow = $('#set-email-row');
+  if (emailRow) {
+    const needEmail = authMode === 'managed' && serverUser && !serverUser.email;
+    emailRow.style.display = needEmail ? '' : 'none';
+    if (needEmail) $('#set-email-input').value = '';
+  }
   openModal('modal-settings');
 }
 async function checkUpdate() {
