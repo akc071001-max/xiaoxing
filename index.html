@@ -27,10 +27,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.2.2" />
+<link rel="stylesheet" href="css/style.css?v=4.3.0" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
+<!-- 管理员专属背景：黑色沉稳 + 法拉利车灯般的呼吸之眼 -->
+<div id="admin-eyes" aria-hidden="true">
+  <div class="admin-eye" id="admin-eye-l"></div>
+  <div class="admin-eye" id="admin-eye-r"></div>
+  <div class="admin-eye-glow"></div>
+</div>
 <div class="scanlines" aria-hidden="true"></div>
 
 <header id="topbar">
@@ -62,6 +68,10 @@
   </button>
   <div class="topbar-right">
     <div id="stats" class="stats"></div>
+    <div class="online-indicator" id="online-indicator" hidden title="当前在线人数（最近 5 分钟活跃）">
+      <span class="online-dot"></span><span id="online-count">0</span><span data-i18n="online.label">在线</span>
+    </div>
+    <button class="tb-btn admin-only" id="btn-admin-console" data-i18n="admin.open" data-i18n-title="admin.openTitle" title="站长操作台">👑 管理</button>
     <button class="tb-btn" id="btn-vip" data-i18n="btn.vip" data-i18n-title="btn.vipTitle" title="会员中心（试运营）">💎 会员</button>
     <button class="tb-btn" id="btn-settings" data-i18n="btn.settings" data-i18n-title="btn.settingsTitle" title="设置">⚙ 设置</button>
     <button class="tb-btn mobile-tool" type="button" id="btn-mobile-assistant" data-i18n-title="asst.title" title="创作小助手" aria-label="创作小助手">✦</button>
@@ -1116,6 +1126,31 @@
   </div>
 </div>
 
+<!-- 站长操作台（管理员账号站内直接操作） -->
+<div class="modal-overlay" id="modal-admin" hidden>
+  <div class="modal wide">
+    <div class="modal-head">
+      <div class="modal-title" data-i18n="admin.title">👑 站长操作台</div>
+      <button class="icon-btn modal-close" data-close="modal-admin">✕</button>
+    </div>
+    <div class="modal-body admin-console-body">
+      <div class="admin-stats-row">
+        <div class="admin-stat"><span class="as-num" id="admin-stat-total">—</span><span class="as-label" data-i18n="admin.total">注册人数</span></div>
+        <div class="admin-stat"><span class="as-num" id="admin-stat-online">—</span><span class="as-label" data-i18n="admin.online">在线人数</span></div>
+        <div class="admin-stat"><span class="as-num" id="admin-stat-payers">—</span><span class="as-label" data-i18n="admin.payers">充值人数</span></div>
+        <div class="admin-stat"><span class="as-num" id="admin-stat-net">—</span><span class="as-label" data-i18n="admin.net">净收入（元）</span></div>
+      </div>
+      <div class="admin-toolbar">
+        <input class="input" id="admin-user-search" data-i18n-ph="admin.searchPh" placeholder="搜索用户…" autocomplete="off" />
+        <button class="btn small" id="btn-admin-refresh" data-i18n="admin.refresh">刷新</button>
+        <a class="btn small" href="admin.html" target="_blank" rel="noopener" data-i18n="admin.fullConsole">打开完整后台 ↗</a>
+      </div>
+      <div class="admin-user-list" id="admin-user-list"></div>
+      <div class="auth-hint" id="admin-status"></div>
+    </div>
+  </div>
+</div>
+
 <div id="toasts"></div>
 <noscript><div style="position:fixed;inset:0;background:#04060e;color:#fff;display:flex;align-items:center;justify-content:center">本应用需要启用 JavaScript。</div></noscript>
 <div class="modal-overlay" id="modal-install-app" hidden>
@@ -1213,7 +1248,7 @@
     <p id="draft-review-note" role="status"></p>
   </div>
 </dialog>
-<script src="js/draft-review.js?v=4.2.2"></script>
-<script src="js/app.js?v=4.2.2"></script>
+<script src="js/draft-review.js?v=4.3.0"></script>
+<script src="js/app.js?v=4.3.0"></script>
 </body>
 </html>
