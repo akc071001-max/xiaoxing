@@ -1597,7 +1597,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.3.0';
+const APP_VERSION = '4.3.1';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
