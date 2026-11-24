@@ -1736,7 +1736,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.7.0';
+const APP_VERSION = '4.7.1';
 const PLAN_LEVEL = { free: 0, pro: 1, deepseek: 2, flag: 3 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, deepseek: 5, flag: 10 };
 const state = {
@@ -6226,7 +6226,9 @@ function refreshAccountLabel() {
   const suffix = (isAdmin ? ' · 👑 ' + t('auth.adminBadge') : '') +
     (authMode === 'managed' && serverUser?.whitelisted ? ' · ' + c.whitelisted : '') +
     (trialActive() && !isAdmin ? t('set.trialBadge') : '');
-  account.textContent = state.currentUser ? state.currentUser + ' · ' + accountType + suffix : t('quick.localAccount');
+  // 全平台统一展示登录信息：用户名 + 账户类型 + 邮箱（管理版）
+  const email = authMode === 'managed' && serverUser?.email ? ' · ' + serverUser.email : '';
+  account.textContent = state.currentUser ? state.currentUser + ' · ' + accountType + email + suffix : t('quick.localAccount');
   $('#set-login').hidden = !!state.currentUser;
   $('#set-logout').hidden = !state.currentUser;
 }
@@ -7934,12 +7936,15 @@ function bindEvents() {
     state.settings.accent = d.dataset.accent;
     saveSettings(); applyUIPrefs();
   });
-  // 模态关闭
+  // 模态关闭（登录/须知/存储授权/付费协议等关键弹窗不允许点背景关闭，防手机误触）
   document.addEventListener('click', e => {
     const c = e.target.closest('[data-close]');
     if (c) { closeModal(c.dataset.close); return; }
     if (e.target.id === 'modal-confirm') { $('#btn-confirm-cancel').click(); return; }
-    if (e.target.classList && e.target.classList.contains('modal-overlay')) closeModal(e.target.id);
+    if (e.target.classList && e.target.classList.contains('modal-overlay')) {
+      if (['modal-auth', 'modal-terms', 'modal-storage', 'modal-agreement'].includes(e.target.id)) return;
+      closeModal(e.target.id);
+    }
   });
   // 快捷键
   document.addEventListener('keydown', e => {
