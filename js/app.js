@@ -301,6 +301,14 @@ const I18N = {
     'auth.user': '用户名', 'auth.userPh': '2-20 位：字母 / 数字 / 下划线 / 中文',
     'auth.pass': '密码', 'auth.passPh': '至少 6 位，必须包含英文字母 + 数字',
     'auth.pass2': '确认密码', 'auth.pass2Ph': '再输入一次密码',
+    'auth.forgot': '忘记密码？', 'auth.forgotTitle': '找回密码',
+    'auth.q0': '不设置密保', 'auth.q1': '你最喜欢的一本书？', 'auth.q2': '你小时候的昵称？',
+    'auth.q3': '你第一位老师的姓氏？', 'auth.q4': '你最喜欢的城市？',
+    'auth.answer': '密保答案', 'auth.answerPh': '2-64 字符（请牢记）',
+    'auth.newPass': '新密码', 'auth.backLogin': '返回登录', 'auth.resetPassword': '重置密码',
+    'auth.blockedMsg': '该账户已被拉黑，如有疑问请联系管理员。',
+    'auth.noQuestion': '该账户未设置密保问题，无法自助找回。请联系管理员重置密码。',
+    'auth.badAnswer': '密保答案不正确', 'auth.resetOk': '密码已重置，请使用新密码登录',
     'auth.submitLogin': '登录', 'auth.submitRegister': '注册并开启体验',
     'auth.errUser': '用户名需 2-20 位（字母 / 数字 / 下划线 / 中文）',
     'auth.errPass': '密码需 6-20 位，且必须同时包含英文字母和数字',
@@ -591,6 +599,14 @@ const I18N = {
     'auth.user': 'Username', 'auth.userPh': '2-20 chars: letters / numbers / _ / Chinese',
     'auth.pass': 'Password', 'auth.passPh': 'Min 6 chars, must contain letters AND digits',
     'auth.pass2': 'Confirm password', 'auth.pass2Ph': 'Type the password again',
+    'auth.forgot': 'Forgot password?', 'auth.forgotTitle': 'Recover password',
+    'auth.q0': 'No security question', 'auth.q1': 'What is your favorite book?', 'auth.q2': 'Your childhood nickname?',
+    'auth.q3': 'Your first teacher\'s surname?', 'auth.q4': 'Your favorite city?',
+    'auth.answer': 'Security answer', 'auth.answerPh': '2-64 characters (remember it!)',
+    'auth.newPass': 'New password', 'auth.backLogin': 'Back to sign in', 'auth.resetPassword': 'Reset password',
+    'auth.blockedMsg': 'This account has been blocked. Contact the site operator.',
+    'auth.noQuestion': 'This account has no security question set, so self-service recovery is unavailable. Contact the operator.',
+    'auth.badAnswer': 'Incorrect security answer', 'auth.resetOk': 'Password reset — sign in with the new password',
     'auth.submitLogin': 'Sign in', 'auth.submitRegister': 'Register & start trial',
     'auth.errUser': 'Username must be 2-20 chars (letters / numbers / _ / Chinese)',
     'auth.errPass': 'Password must be 6-20 chars and contain both letters and digits',
@@ -876,6 +892,14 @@ const I18N = {
     'auth.user': 'Имя пользователя', 'auth.userPh': '2-20 знаков: буквы / цифры / _ / китайские',
     'auth.pass': 'Пароль', 'auth.passPh': 'Минимум 6 знаков, обязательно буквы И цифры',
     'auth.pass2': 'Подтвердите пароль', 'auth.pass2Ph': 'Введите пароль ещё раз',
+    'auth.forgot': 'Забыли пароль?', 'auth.forgotTitle': 'Восстановление пароля',
+    'auth.q0': 'Без контрольного вопроса', 'auth.q1': 'Ваша любимая книга?', 'auth.q2': 'Ваше детское прозвище?',
+    'auth.q3': 'Фамилия первого учителя?', 'auth.q4': 'Ваш любимый город?',
+    'auth.answer': 'Ответ на вопрос', 'auth.answerPh': '2-64 символа (запомните!)',
+    'auth.newPass': 'Новый пароль', 'auth.backLogin': 'Вернуться ко входу', 'auth.resetPassword': 'Сбросить пароль',
+    'auth.blockedMsg': 'Аккаунт заблокирован. Свяжитесь с администратором.',
+    'auth.noQuestion': 'Контрольный вопрос не задан — самостоятельное восстановление недоступно. Обратитесь к администратору.',
+    'auth.badAnswer': 'Неверный ответ', 'auth.resetOk': 'Пароль сброшен — войдите с новым паролем',
     'auth.submitLogin': 'Войти', 'auth.submitRegister': 'Зарегистрироваться и начать',
     'auth.errUser': 'Имя: 2-20 знаков (буквы / цифры / _ / китайские)',
     'auth.errPass': 'Пароль: 6-20 знаков, обязательно буквы и цифры',
@@ -1066,6 +1090,7 @@ function applyI18n() {
   $('#btn-mobile-assistant').setAttribute('aria-label', t('asst.title'));
   $('#btn-mobile-panel-close').setAttribute('aria-label', t('common.close'));
   $('#btn-quick-start').setAttribute('aria-label', t('quick.title'));
+  renderAuthModeCopy();
   applyHistoryLabels();
   applyCoachLabels();
   applyManuscriptLabels();
@@ -1539,7 +1564,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.1.1';
+const APP_VERSION = '4.2.1';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -5297,11 +5322,12 @@ function renderVip() {
     if (!btn) return;
     const isCurrent = btn.dataset.plan === eff;
     card.classList.toggle('current', isCurrent);
-    btn.disabled = isCurrent;
-    btn.textContent = isCurrent ? t('vip.freeBtn') : t('vip.btn');
+    btn.disabled = isCurrent || authMode !== 'local';
+    btn.textContent = isCurrent ? t('vip.freeBtn') : (authMode === 'local' ? t('vip.btn') : authModeCopy().managedPlan);
   });
 }
 function setPlan(p) {
+  if (authMode !== 'local') return toast(authModeCopy().managedPlan, 'warn');
   if (state.settings.plan === p) return;
   state.settings.plan = p;
   saveSettings();
@@ -5487,7 +5513,7 @@ function loadAccounts() {
   try { state.accounts = JSON.parse(localStorage.getItem(AUTH_KEY) || '{}'); } catch (e) { state.accounts = {}; }
   try {
     const s = localStorage.getItem('nebula-session');
-    if (s && state.accounts[s]) state.currentUser = s;
+    if (s && Object.hasOwn(state.accounts, s)) state.currentUser = s;
   } catch (e) { }
   lastTrialState = trialActive();
 }
@@ -5499,19 +5525,328 @@ async function hashPw(salt, pw) {
 }
 function validUser(u) { return /^[\w\u4e00-\u9fff]{2,20}$/.test(u); }
 function validPass(p) { return p.length >= 6 && p.length <= 20 && /[A-Za-z]/.test(p) && /\d/.test(p); }
-function trialActive() {
-  const u = state.currentUser;
-  return !!(u && state.accounts[u] && state.accounts[u].trialUntil > Date.now());
+const AUTH_MODE_I18N = {
+  zh: {
+    server: '这是站点账户。登录后，管理员可以看到注册记录和最近在线状态。书稿仍保存在当前浏览器，不会随账户同步。',
+    local: '当前是静态版，账户只保存在这个浏览器里，不计入全站人数。',
+    offline: '暂时无法确认账户服务。你可以继续本地写作；恢复网络后再登录或注册。',
+    pass: '8–128 位，至少含一个字母和一个数字', user: '2–20 位：字母、数字、下划线或汉字',
+    badUser: '用户名需要 2–20 位，只能含字母、数字、下划线或汉字。',
+    failed: '账户服务暂时不可用，请稍后重试。', limited: '操作太频繁，请稍后再试。',
+    managedPlan: '会员资格由管理员确认', paid: '请联系站点运营者核实付款；此页面不能发起支付或确认到账。',
+    whitelisted: '白名单', serverAccount: '站点账户', deviceAccount: '本地账户',
+    signedOut: '登录已过期，请重新登录。你的稿件仍保存在本机。'
+  },
+  en: {
+    server: 'This is a site account. Administrators can see registration and recent active status. Drafts stay in this browser and do not sync with your account.',
+    local: 'This is the static edition. Accounts stay in this browser and do not count toward site-wide statistics.',
+    offline: 'Unable to verify the account service. You can write locally and sign in or register once you reconnect.',
+    pass: '8–128 characters, including a letter and a digit', user: '2–20 letters, numbers, underscores or Han characters',
+    badUser: 'Use 2–20 letters, numbers, underscores or Han characters.',
+    failed: 'The account service is unavailable. Please try again.', limited: 'Too many attempts. Please try again later.',
+    managedPlan: 'Membership is confirmed by the operator', paid: 'Contact the site operator to verify a payment. This page cannot charge you or verify a receipt.',
+    whitelisted: 'Allowlisted', serverAccount: 'Site account', deviceAccount: 'Local account',
+    signedOut: 'Your sign-in expired. Please sign in again. Your drafts are still on this device.'
+  },
+  ru: {
+    server: 'Это аккаунт сайта. Администраторы видят регистрацию и недавнюю активность. Черновики остаются в этом браузере и не синхронизируются с аккаунтом.',
+    local: 'Это статическая версия. Аккаунты хранятся в этом браузере и не учитываются в общей статистике.',
+    offline: 'Службу аккаунтов пока не удалось проверить. Продолжайте писать локально, а после подключения войдите или зарегистрируйтесь.',
+    pass: '8–128 знаков, хотя бы одна буква и одна цифра', user: '2–20 букв, цифр, подчёркиваний или иероглифов',
+    badUser: 'Введите 2–20 букв, цифр, подчёркиваний или иероглифов.',
+    failed: 'Служба аккаунтов недоступна. Повторите попытку позже.', limited: 'Слишком много попыток. Повторите позже.',
+    managedPlan: 'Уровень подтверждает администратор', paid: 'Для подтверждения платежа свяжитесь с оператором. Эта страница не принимает платежи и не подтверждает их.',
+    whitelisted: 'В списке доступа', serverAccount: 'Аккаунт сайта', deviceAccount: 'Локальный аккаунт',
+    signedOut: 'Сеанс истёк. Войдите снова. Черновики остаются на этом устройстве.'
+  }
+};
+const authModeCopy = () => AUTH_MODE_I18N[state.settings.lang] || AUTH_MODE_I18N.zh;
+let authMode = 'unknown', serverUser = null, authModeCheck = null, authBusy = false, authRevision = 0;
+let presenceTimer = null, presenceRequest = null, restoreSession = null;
+const authNamespace = () => 'nebula-managed-auth:' + new URL('.', document.baseURI).pathname;
+const authMethod = () => location.protocol === 'https:' || location.protocol === 'http:';
+function readManagedMarker() {
+  try { return localStorage.getItem(authNamespace()) === '1'; } catch (_) { return false; }
 }
-function trialLeft() {
+function writeManagedMarker() {
+  try { localStorage.setItem(authNamespace(), '1'); } catch (_) {}
+}
+function authJson(response) { return /^application\/json(?:\s*;|$)/i.test(response.headers.get('content-type') || ''); }
+async function serverAuthRequest(path, data) {
+  const endpoint = new URL('./api/auth/' + path, document.baseURI);
+  // Central credentials may travel over plaintext only for local development.
+  if (endpoint.protocol !== 'https:' && !['localhost','127.0.0.1','[::1]'].includes(endpoint.hostname)) {
+    throw new Error('HTTPS is required for site accounts');
+  }
+  const response = await fetch(endpoint, {
+    method: data === undefined ? 'GET' : 'POST',
+    credentials: 'same-origin', cache: 'no-store', redirect: 'error',
+    headers: data === undefined ? { Accept: 'application/json' } : { Accept: 'application/json', 'Content-Type': 'application/json' },
+    body: data === undefined ? undefined : JSON.stringify(data),
+    signal: AbortSignal.timeout(path === 'me' ? 3500 : 10000)
+  });
+  let result = null;
+  if (authJson(response)) try { result = await response.json(); } catch (_) {}
+  if (!response.ok || !result) {
+    throw Object.assign(new Error('Account request failed'), { status:response.status, code:result?.code });
+  }
+  return result;
+}
+function updateServerUser(user) {
+  const u = user && typeof user.id === 'string' && typeof user.username === 'string' ? user : null;
+  if (u && u.blocked) {
+    // 账户已被管理员拉黑：立即下线并提示
+    serverUser = null;
+    state.currentUser = null;
+    stopPresence();
+    refreshAccountLabel();
+    toast(t('auth.blockedMsg'), 'warn', 6000);
+    if (!$('#modal-auth').hidden) { switchAuthTab('login'); }
+    else { switchAuthTab('login'); openModal('modal-auth'); }
+    return;
+  }
+  serverUser = u;
+  state.currentUser = u?.username || null;
+}
+function refreshAccountLabel() {
+  const account = $('#set-account-name');
+  if (!account) return;
+  const c = authModeCopy();
+  const accountType = authMode === 'managed' ? c.serverAccount : c.deviceAccount;
+  const suffix = authMode === 'managed' && serverUser?.whitelisted ? ' · ' + c.whitelisted : '';
+  account.textContent = state.currentUser ? state.currentUser + ' · ' + accountType + suffix + (trialActive() ? t('set.trialBadge') : '') : t('quick.localAccount');
+  $('#set-login').hidden = !!state.currentUser;
+  $('#set-logout').hidden = !state.currentUser;
+}
+function renderAuthModeCopy() {
+  const anchor = $('#auth-hint');
+  if (!anchor) return;
+  let note = $('#auth-mode-note');
+  if (!note) {
+    note = document.createElement('p');
+    note.id = 'auth-mode-note';
+    note.className = 'auth-local-note';
+    anchor.after(note);
+  }
+  note.textContent = authModeCopy()[authMode === 'managed' ? 'server' : authMode === 'local' ? 'local' : 'offline'];
+  if (authMode === 'managed') {
+    $('#auth-user').placeholder = authModeCopy().user;
+    $('#auth-pass').placeholder = authModeCopy().pass;
+  } else {
+    $('#auth-user').placeholder = t('auth.userPh');
+    $('#auth-pass').placeholder = t('auth.passPh');
+  }
+  const max = authMode === 'local' ? 20 : 128;
+  $('#auth-pass').maxLength = max;
+  $('#auth-pass2').maxLength = max;
+  refreshAccountLabel();
+  const legacyTip = $('#btn-tip-send')?.closest('.dev-tip');
+  if (legacyTip) {
+    let notice = $('#managed-payment-note');
+    if (!notice) {
+      notice = document.createElement('p');
+      notice.id = 'managed-payment-note';
+      notice.className = 'auth-local-note';
+      legacyTip.after(notice);
+    }
+    legacyTip.style.display = authMode === 'local' ? '' : 'none';
+    notice.hidden = authMode === 'local';
+    notice.textContent = authModeCopy().paid;
+  }
+}
+async function setUpAccountMode({ restore = false } = {}) {
+  if (!authMethod()) { authMode = 'local'; return; }
+  if (authMode === 'local') return;
+  if (readManagedMarker()) authMode = 'managed';
+  if (authMode === 'unknown') {
+    if (!authModeCheck) {
+      authModeCheck = (async () => {
+        try {
+          const response = await fetch(new URL('./api/status', document.baseURI), {
+            credentials:'same-origin', cache:'no-store', redirect:'error', signal:AbortSignal.timeout(3000),
+            headers:{Accept:'application/json'}
+          });
+          if ((response.ok && authJson(response) && (await response.json())?.managed === true)) {
+            authMode = 'managed';
+            writeManagedMarker();
+          } else if ([404,405,410].includes(response.status)) {
+            // An explicit absence is normal on the static deployment. Never downgrade a known managed installation.
+            authMode = 'local';
+            loadAccounts();
+          }
+        } catch (_) { /* Unknown stays unknown; account creation is unavailable, but local writing works. */ }
+      })().finally(() => { authModeCheck = null; });
+    }
+    await authModeCheck;
+  }
+  if (authMode !== 'local' && !serverUser) state.currentUser = null;
+  if (restore && authMode === 'managed' && !serverUser) await restoreManagedSession();
+}
+async function restoreManagedSession() {
+  if (restoreSession) return restoreSession;
+  const version = authRevision;
+  restoreSession = (async () => {
+    try {
+      const response = await serverAuthRequest('me');
+      if (authRevision === version) updateServerUser(response.user);
+    } catch (_) { /* An offline or busy server never creates a local shadow account. */ }
+  })().finally(() => { restoreSession = null; });
+  return restoreSession;
+}
+function stopPresence() {
+  if (presenceTimer !== null) clearInterval(presenceTimer);
+  presenceTimer = null;
+}
+function syncPresence() {
+  stopPresence();
+  if (authMode !== 'managed' || !serverUser || document.visibilityState !== 'visible') return;
+  presenceTimer = setInterval(heartbeat, 60000);
+  void heartbeat();
+}
+async function heartbeat() {
+  if (authMode !== 'managed' || !serverUser || authBusy || presenceRequest || document.visibilityState !== 'visible') return;
+  const version = authRevision, user = serverUser.id;
+  presenceRequest = (async () => {
+    try {
+      const response = await serverAuthRequest('heartbeat', {});
+      if (authRevision !== version || serverUser?.id !== user) return;
+      if (response.user?.id && response.user?.username) {
+        updateServerUser(response.user);
+        refreshAccountLabel();
+        renderVip();
+        trialCheck();
+      }
+    } catch (error) {
+      if (error.status === 401 && authRevision === version && serverUser?.id === user) {
+        updateServerUser(null);
+        stopPresence();
+        refreshAccountLabel();
+        renderVip();
+        toast(authModeCopy().signedOut, 'warn', 5000);
+      }
+    }
+  })().finally(() => { presenceRequest = null; });
+  return presenceRequest;
+}
+function managedPassword(p) { return p.length >= 8 && p.length <= 128 && /\p{L}/u.test(p) && /[0-9]/.test(p); }
+function managedUsername(u) { return /^[\p{Script=Latin}\p{Script=Cyrillic}\p{Script=Han}0-9_]{2,20}$/u.test(u); }
+/* ---------------- 忘记密码（密保问题找回） ---------------- */
+let forgotQuestionKey = '';
+function hintForgot(txt) {
+  const el = $('#forgot-hint');
+  if (!el) return;
+  el.textContent = txt || '';
+  el.className = 'auth-hint' + (txt ? ' err' : '');
+}
+function resetForgotState() {
+  forgotQuestionKey = '';
+  hintForgot('');
+  const qw = $('#forgot-question-wrap'), aw = $('#forgot-answer-wrap'), pw = $('#forgot-pass-wrap');
+  if (qw) qw.hidden = true;
+  if (aw) aw.hidden = true;
+  if (pw) pw.hidden = true;
+  const btn = $('#btn-forgot-reset');
+  if (btn) btn.disabled = true;
+  const fi = $('#forgot-answer'), fp = $('#forgot-pass');
+  if (fi) fi.value = '';
+  if (fp) fp.value = '';
+}
+function openForgot() {
+  $('#forgot-panel').hidden = false;
+  $('#btn-auth-forgot').style.display = 'none';
+  resetForgotState();
+  $('#forgot-user').value = $('#auth-user').value.trim();
+  $('#forgot-user').focus();
+}
+function closeForgot() {
+  $('#forgot-panel').hidden = true;
+  $('#btn-auth-forgot').style.display = '';
+  resetForgotState();
+}
+async function askForgotQuestion() {
+  const user = $('#forgot-user').value.trim();
+  if (!user) return hintForgot(t('auth.errUser'));
+  hintForgot('');
+  if (authMode === 'managed') {
+    try {
+      const r = await serverAuthRequest('forgot-question', { username: user });
+      if (!r.question) return hintForgot(t('auth.noQuestion'));
+      forgotQuestionKey = r.question;
+      $('#forgot-question-text').textContent = t('auth.' + r.question);
+      $('#forgot-question-wrap').hidden = false;
+      $('#forgot-answer-wrap').hidden = false;
+      $('#forgot-pass-wrap').hidden = false;
+      $('#btn-forgot-reset').disabled = false;
+    } catch (e) {
+      hintForgot(e.code === 'rate_limited' ? authModeCopy().limited : authModeCopy().failed);
+    }
+  } else {
+    const acc = Object.hasOwn(state.accounts, user) ? state.accounts[user] : null;
+    if (!acc || !acc.question) return hintForgot(t('auth.noQuestion'));
+    forgotQuestionKey = acc.question;
+    $('#forgot-question-text').textContent = t('auth.' + acc.question);
+    $('#forgot-question-wrap').hidden = false;
+    $('#forgot-answer-wrap').hidden = false;
+    $('#forgot-pass-wrap').hidden = false;
+    $('#btn-forgot-reset').disabled = false;
+  }
+}
+async function submitForgotReset() {
+  const user = $('#forgot-user').value.trim();
+  const answer = $('#forgot-answer').value.trim();
+  const pass = $('#forgot-pass').value;
+  const managed = authMode === 'managed';
+  if (!forgotQuestionKey) return hintForgot(t('auth.noQuestion'));
+  if (!answer || answer.length < 2) return hintForgot(t('auth.answerPh'));
+  if (managed ? !managedPassword(pass) : !validPass(pass)) return hintForgot(managed ? authModeCopy().pass : t('auth.errPass'));
+  try {
+    if (managed) {
+      await serverAuthRequest('forgot-reset', { username: user, answer, password: pass });
+    } else {
+      const acc = Object.hasOwn(state.accounts, user) ? state.accounts[user] : null;
+      if (!acc) return hintForgot(t('auth.noQuestion'));
+      const h = await hashPw(acc.salt + ':q', answer);
+      if (h !== acc.answerHash) return hintForgot(t('auth.badAnswer'));
+      acc.hash = await hashPw(acc.salt, pass);
+      saveAccounts();
+    }
+    closeForgot();
+    switchAuthTab('login');
+    toast(t('auth.resetOk'), 'ok', 4000);
+  } catch (e) {
+    if (e.code === 'invalid_answer') hintForgot(t('auth.badAnswer'));
+    else if (e.code === 'no_question') hintForgot(t('auth.noQuestion'));
+    else if (e.code === 'rate_limited') hintForgot(authModeCopy().limited);
+    else hintForgot(authModeCopy().failed);
+  }
+}
+function managedAuthHint(error) {
+  const c = authModeCopy();
+  return ({
+    invalid_username:c.badUser, invalid_password:c.pass, username_taken:t('auth.errExists'),
+    invalid_credentials:t('auth.errLogin'), rate_limited:c.limited, blocked:t('auth.blockedMsg'),
+    invalid_question:t('auth.q0') + ' · ' + t('auth.answerPh')
+  })[error.code] || c.failed;
+}
+function trialUntil() {
+  if (authMode === 'managed') return Number(serverUser?.trialEndsAt) || 0;
   const u = state.currentUser;
-  if (!u || !state.accounts[u]) return '';
-  const ms = state.accounts[u].trialUntil - Date.now();
+  return authMode === 'local' && u && Object.hasOwn(state.accounts,u) ? Number(state.accounts[u].trialUntil) || 0 : 0;
+}
+function trialActive() { return trialUntil() > Date.now(); }
+function trialLeft() {
+  const ms = trialUntil() - Date.now();
   if (ms <= 0) return '';
   const h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000);
   return state.settings.lang === 'zh' ? `${h} 小时 ${m} 分` : `${h}h ${m}m`;
 }
 function effectivePlan() {
+  if (authMode === 'managed') {
+    if (!serverUser || !['free','pro','flag'].includes(serverUser.plan)) return 'free';
+    // A server-reported trial must not outlive its deadline if the connection drops.
+    return serverUser.plan === 'flag' && !serverUser.whitelisted && !trialActive() ? 'free' : serverUser.plan;
+  }
+  if (authMode !== 'local') return 'free';
   if (trialActive()) return 'flag';
   return state.settings.plan;
 }
@@ -5530,57 +5865,103 @@ function switchAuthTab(mode) {
   $('#auth-tab-login').classList.toggle('on', mode === 'login');
   $('#auth-tab-register').classList.toggle('on', mode === 'register');
   $('#auth-pass2-wrap').style.display = mode === 'register' ? '' : 'none';
+  $('#auth-question-wrap').style.display = mode === 'register' ? '' : 'none';
+  $('#auth-answer-wrap').style.display = mode === 'register' && $('#auth-question').value ? '' : 'none';
+  $('#btn-auth-forgot').style.display = mode === 'login' ? '' : 'none';
+  $('#forgot-panel').hidden = true;
+  resetForgotState();
   $('#auth-trial-banner').hidden = mode !== 'register';
   $('#btn-auth-submit').textContent = t(mode === 'register' ? 'auth.submitRegister' : 'auth.submitLogin');
   setAuthHint('');
   $('#auth-pass').value = ''; $('#auth-pass2').value = '';
+  renderAuthModeCopy();
 }
 async function authSubmit() {
+  if (authBusy) return;
   const user = $('#auth-user').value.trim();
   const pass = $('#auth-pass').value;
-  if (!validUser(user)) return setAuthHint(t('auth.errUser'));
-  if (!validPass(pass)) return setAuthHint(t('auth.errPass'));
-  if (state.authMode === 'register') {
-    if ($('#auth-pass2').value !== pass) return setAuthHint(t('auth.errPass2'));
-    if (state.accounts[user]) return setAuthHint(t('auth.errExists'));
-    const salt = uid() + uid();
-    const hash = await hashPw(salt, pass);
-    state.accounts[user] = { salt, hash, createdAt: Date.now(), trialUntil: Date.now() + 86400000 };
-    saveAccounts();
-    state.currentUser = user;
-    try { localStorage.setItem('nebula-session', user); } catch (e) { }
+  const isRegister = state.authMode === 'register';
+  if (isRegister && $('#auth-pass2').value !== pass) return setAuthHint(t('auth.errPass2'));
+  const submit = $('#btn-auth-submit'), guest = $('#btn-auth-guest');
+  authBusy = true;
+  submit.disabled = true;
+  if (guest) guest.disabled = true;
+  let signedIn = false;
+  try {
+    if (authMode === 'unknown') await setUpAccountMode();
+    renderAuthModeCopy();
+    if (authMode === 'unknown') return setAuthHint(authModeCopy().failed);
+    if (authMode === 'managed') {
+      if (!managedUsername(user)) return setAuthHint(authModeCopy().badUser);
+      if (!pass || (isRegister && !managedPassword(pass))) return setAuthHint(isRegister ? authModeCopy().pass : t('auth.errLogin'));
+      const q = isRegister ? $('#auth-question').value : '';
+      const a = isRegister ? $('#auth-answer').value.trim() : '';
+      const response = await serverAuthRequest(isRegister ? 'register' : 'login',
+        isRegister ? { username: user, password: pass, question: q || undefined, answer: a || undefined } : { username: user, password: pass });
+      authRevision++;
+      updateServerUser(response.user);
+      if (!serverUser) throw new Error('Missing session user');
+    } else {
+      if (!validUser(user)) return setAuthHint(t('auth.errUser'));
+      if (!validPass(pass)) return setAuthHint(t('auth.errPass'));
+      if (isRegister) {
+        if (Object.hasOwn(state.accounts,user)) return setAuthHint(t('auth.errExists'));
+        const salt = uid() + uid();
+        const hash = await hashPw(salt, pass);
+        const q = $('#auth-question').value;
+        const a = $('#auth-answer').value.trim();
+        Object.defineProperty(state.accounts, user, {value:{salt, hash, question: q || '', answerHash: a ? await hashPw(salt + ':q', a) : '', createdAt:Date.now(), trialUntil:Date.now()+86400000}, enumerable:true, writable:true, configurable:true});
+        saveAccounts();
+      } else {
+        const acc = Object.hasOwn(state.accounts,user) ? state.accounts[user] : null;
+        if (!acc || await hashPw(acc.salt, pass) !== acc.hash) return setAuthHint(t('auth.errLogin'));
+      }
+      state.currentUser = user;
+      try { localStorage.setItem('nebula-session', user); } catch (_) {}
+    }
     lastTrialState = trialActive();
     closeModal('modal-auth');
+    $('#auth-pass').value = ''; $('#auth-pass2').value = '';
     setAuthHint('');
-    toast(t('auth.okRegister'), 'ok', 4000);
-    toast(t('vip.trialOn', { t: trialLeft() }), 'ok', 5000);
-    renderAll();
-    advanceOnboarding();
-  } else {
-    const acc = state.accounts[user];
-    if (!acc) return setAuthHint(t('auth.errLogin'));
-    const hash = await hashPw(acc.salt, pass);
-    if (hash !== acc.hash) return setAuthHint(t('auth.errLogin'));
-    state.currentUser = user;
-    try { localStorage.setItem('nebula-session', user); } catch (e) { }
-    lastTrialState = trialActive();
-    closeModal('modal-auth');
-    setAuthHint('');
-    toast(t('auth.welcome', { u: user }), 'ok', 3000);
+    toast(isRegister ? t('auth.okRegister') : t('auth.welcome', { u: state.currentUser }), 'ok', 3500);
     if (trialActive()) toast(t('vip.trialOn', { t: trialLeft() }), 'ok', 5000);
+    signedIn = true;
     renderAll();
     advanceOnboarding();
+  } catch (error) {
+    setAuthHint(authMode === 'managed' ? managedAuthHint(error) : authModeCopy().failed);
+  } finally {
+    authBusy = false;
+    submit.disabled = false;
+    if (guest) guest.disabled = false;
+    if (signedIn) syncPresence();
   }
 }
 async function logoutUser() {
-  if (!await confirmDialog(t('auth.confirmLogout'))) return;
-  try { localStorage.removeItem('nebula-session'); } catch (e) { }
-  state.currentUser = null;
-  lastTrialState = false;
-  renderAll();
-  toast(t('auth.loggedOut'), 'ok');
-  closeModal('modal-settings');
-  continueLocalWriting();
+  if (authBusy || !await confirmDialog(t('auth.confirmLogout')) || authBusy) return;
+  authBusy = true;
+  authRevision++;
+  stopPresence();
+  try {
+    if (authMode === 'managed') {
+      try { await serverAuthRequest('logout', {}); }
+      catch (error) { if (error.status !== 401) throw error; }
+      updateServerUser(null);
+    } else {
+      try { localStorage.removeItem('nebula-session'); } catch (_) {}
+      state.currentUser = null;
+    }
+    lastTrialState = false;
+    renderAll();
+    toast(t('auth.loggedOut'), 'ok');
+    closeModal('modal-settings');
+    continueLocalWriting();
+  } catch (_) {
+    toast(authModeCopy().failed, 'warn');
+  } finally {
+    authBusy = false;
+    if (serverUser) syncPresence();
+  }
 }
 
 /* ---------------- 新手工作台 ---------------- */
@@ -5649,6 +6030,7 @@ function advanceOnboarding() {
 
 /* ---------------- 支持创作者（打赏 · 内嵌开发者名单 · 无弹窗） ---------------- */
 async function submitTip() {
+  if (authMode !== 'local') return toast(authModeCopy().paid, 'warn', 6500);
   const amount = state.tipAmount;
   if (!amount) return toast(t('tip.needAmount'), 'warn');
   const msg = $('#tip-msg').value.trim();
@@ -6476,9 +6858,7 @@ function openSettings() {
   const u = s.user || {};
   $('#set-profile-name').textContent = u.nickname || t('profile.default');
   $('#set-profile-avatar').innerHTML = u.avatarData ? '<img src="' + u.avatarData + '" alt="" />' : esc(AVATAR_PRESETS[u.avatarPreset || 0][0]);
-  $('#set-account-name').textContent = state.currentUser ? (state.currentUser + (trialActive() ? t('set.trialBadge') : '')) : t('quick.localAccount');
-  $('#set-login').hidden = !!state.currentUser;
-  $('#set-logout').hidden = !state.currentUser;
+  refreshAccountLabel();
   $('#set-version').textContent = APP_VERSION;
   openModal('modal-settings');
 }
@@ -6617,6 +6997,16 @@ function bindEvents() {
     if (al) setLang(al.dataset.authlang);
   });
   $('#auth-tab-login').addEventListener('click', () => switchAuthTab('login'));
+  // 忘记密码（密保问题找回）
+  $('#btn-auth-forgot').addEventListener('click', openForgot);
+  $('#btn-forgot-back').addEventListener('click', closeForgot);
+  $('#btn-forgot-reset').addEventListener('click', submitForgotReset);
+  $('#forgot-user').addEventListener('keydown', e => { if (e.key === 'Enter') askForgotQuestion(); });
+  $('#forgot-answer').addEventListener('keydown', e => { if (e.key === 'Enter') submitForgotReset(); });
+  $('#forgot-pass').addEventListener('keydown', e => { if (e.key === 'Enter') submitForgotReset(); });
+  $('#auth-question').addEventListener('change', () => {
+    $('#auth-answer-wrap').style.display = $('#auth-question').value ? '' : 'none';
+  });
   $('#auth-tab-register').addEventListener('click', () => switchAuthTab('register'));
   $('#btn-auth-submit').addEventListener('click', authSubmit);
   ['auth-user', 'auth-pass', 'auth-pass2'].forEach(id => {
@@ -6630,6 +7020,22 @@ function bindEvents() {
     $('#auth-user').focus();
   });
   $('#btn-auth-guest').addEventListener('click', continueLocalWriting);
+  document.addEventListener('visibilitychange', syncPresence);
+  window.addEventListener('pagehide', stopPresence);
+  window.addEventListener('pageshow', e => { if (e.persisted) syncPresence(); });
+  window.addEventListener('online', async () => {
+    if (authBusy) return;
+    if (authMode === 'managed' && serverUser) { void heartbeat(); return; }
+    if (authMode !== 'local') {
+      await setUpAccountMode({restore:true});
+      renderAuthModeCopy();
+      if (!serverUser) return;
+      if (!$('#modal-auth').hidden) closeModal('modal-auth');
+      renderVip();
+      advanceOnboarding();
+      syncPresence();
+    }
+  });
   $('#btn-quick-start').addEventListener('click', openQuickStart);
   $('#btn-quick-close').addEventListener('click', () => $('#modal-quick-start').close());
   $('#modal-quick-start').addEventListener('close', finishQuickStart);
@@ -6923,6 +7329,8 @@ async function boot() {
   state.board = state.settings.board === 'paper' ? 'paper' : 'novel';
   loadWikiCache();
   loadAccounts();
+  await setUpAccountMode({restore:true});
+  lastTrialState = trialActive();
   loadRefCache();
   // 首次使用自动配置免费免密钥模型（Pollinations AI），开箱即用
   if (!state.settings.providers.length) {
@@ -6948,6 +7356,7 @@ async function boot() {
   renderAll();
   // 首次使用只显示当前步骤，避免书库与须知、登录、工作台重叠。
   advanceOnboarding();
+  syncPresence();
   window.__nebulaReady = true;
 }
 boot();
