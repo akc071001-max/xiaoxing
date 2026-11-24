@@ -1,5 +1,11 @@
 # 晓星 XIAOXING · 全风格小说创作台
 
+## 4.2：账户、在线人数和经营统计
+
+- 管理版由 Node.js 提供在线注册、在线人数和站长后台。后台入口为 `/admin.html`，启动步骤见[管理版部署与统计说明](管理版说明.md)。
+- 站长可维护用户白名单，登记已核实的人民币充值及退款，查看充值账户和分期收入。注册和在线数据来自管理版服务。
+- 小说和论文的稿件继续存放在当前浏览器。GitHub Pages 和 Surge 可用于静态前台，本地账号与稿件按原方式使用。
+
 ## 4.1：长篇查找、论文资料卡、手机写作键
 
 - 「全文查找」限当前小说，可按章节标题、正文、大纲筛选，结果能直接定位到对应稿件。
@@ -21,7 +27,7 @@
 
 > 🌐 在线访问（已部署）：**https://akc071001-max.github.io/xiaoxing/**（GitHub Pages，可被搜索引擎收录）
 > 备用镜像：https://xiaoxing.surge.sh（surge.sh 免费托管，平台限制不被搜索引擎收录）
-> 当前版本：**v3.6.1**（检查更新：⚙ 设置 → 版本更新；每次更新后上线自动弹出更新说明）
+> 本部署包版本为 **v4.2.0**（设置 → 版本更新）。
 
 一款科幻风格的本地小说创作网站。全风格小说皆可创作，内置风格表格、大纲、角色卡、世界观、记忆库、作家文风联网学习与 **AI 剧情引擎**（可自定义接入任意 OpenAI 兼容模型，含云端大模型与本地开源模型）。
 
@@ -51,7 +57,7 @@
 4. 新建章节 → 在「📋 本章大纲」输入本章大纲 → 点「⚡ 联网生成正文」，坐等正文流式写出；不满意点「🔄 重新生成」。
 5. 点右上「⚙ 设置」集中管理：字号、**界面样式（小框大纲大框正文 / 一半大纲一半正文）**、AI 面板开关、主题色、账户、语言、备份、AI 接入、反馈、用户须知、版本更新。
 
-> 想部署成真正的网站？把整个文件夹扔到任意静态服务器即可（Nginx / GitHub Pages / Vercel 等），零构建。
+> 静态前台可零构建部署到静态服务器。要启用管理后台，请按[管理版部署与统计说明](管理版说明.md)启动 Node.js 服务。
 
 ## ⚙ 设置中心（右上角齿轮）
 
@@ -82,7 +88,7 @@
 
 1. 注册 [GitHub](https://github.com) 账号（免费，1 分钟）。
 2. 右上角 `+` → **New repository**，仓库名填 `xiaoxing`（或其他名字），选 **Public** 公开仓库，创建。
-3. 进入仓库页 → **Add file** → **Upload files** → 把本项目文件夹里的文件全部拖入（index.html、css/、js/、og-image.png、robots.txt、sitemap.xml 等）→ **Commit changes**。
+3. 进入仓库页 → **Add file** → **Upload files**，上传静态前台目录和文件（`index.html`、`css/style.css`、`js/app.js`、`js/draft-review.js`、`icons/`、`changelog.json`、`version.txt`、`service-worker.js`、`manifest.webmanifest`、图片及搜索引擎文件）→ **Commit changes**。
 4. 仓库页 → **Settings** → 左侧 **Pages** → Source 选 **Deploy from a branch** → 分支选 `main`、目录选 `/ (root)` → **Save**。
 5. 稍等 1-2 分钟，页面会显示你的网址：`https://你的用户名.github.io/xiaoxing/`。
 6. 把 index.html 里 `<link rel="canonical">`、`og:url`、`og:image`、JSON-LD 中的域名，以及 robots.txt、sitemap.xml 里的域名，替换成你的 github.io 网址后重新上传（Commit）。
