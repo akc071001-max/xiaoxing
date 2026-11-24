@@ -309,7 +309,8 @@ const I18N = {
     'auth.blockedMsg': '该账户已被拉黑，如有疑问请联系管理员。',
     'auth.adminBadge': '管理员',
     'online.label': '在线',
-    'admin.open': '👑 管理', 'admin.openTitle': '站长操作台（站内直接管理用户）',
+    'set.adminBg': '👑 管理员专属背景', 'set.adminBgOn': '红灯车灯', 'set.adminBgOff': '普通版背景',
+    'admin.open': '👑 站长操作台', 'admin.openTitle': '站长操作台（站内直接管理用户）',
     'admin.title': '👑 站长操作台',
     'admin.total': '注册人数', 'admin.online': '在线人数', 'admin.payers': '充值人数', 'admin.net': '净收入（元）',
     'admin.searchPh': '搜索用户…', 'admin.refresh': '刷新', 'admin.fullConsole': '打开完整后台 ↗',
@@ -618,7 +619,8 @@ const I18N = {
     'auth.blockedMsg': 'This account has been blocked. Contact the site operator.',
     'auth.adminBadge': 'Admin',
     'online.label': 'online',
-    'admin.open': '👑 Admin', 'admin.openTitle': 'Admin console (manage users right here)',
+    'set.adminBg': '👑 Admin background', 'set.adminBgOn': 'Red lights', 'set.adminBgOff': 'Normal background',
+    'admin.open': '👑 Admin Console', 'admin.openTitle': 'Admin console (manage users right here)',
     'admin.title': '👑 Admin Console',
     'admin.total': 'Sign-ups', 'admin.online': 'Online', 'admin.payers': 'Payers', 'admin.net': 'Net (CNY)',
     'admin.searchPh': 'Search users…', 'admin.refresh': 'Refresh', 'admin.fullConsole': 'Full console ↗',
@@ -922,7 +924,8 @@ const I18N = {
     'auth.blockedMsg': 'Аккаунт заблокирован. Свяжитесь с администратором.',
     'auth.adminBadge': 'Админ',
     'online.label': 'онлайн',
-    'admin.open': '👑 Админ', 'admin.openTitle': 'Панель администратора (управление прямо на сайте)',
+    'set.adminBg': '👑 Фон администратора', 'set.adminBgOn': 'Красные фары', 'set.adminBgOff': 'Обычный фон',
+    'admin.open': '👑 Панель администратора', 'admin.openTitle': 'Панель администратора (управление прямо на сайте)',
     'admin.title': '👑 Панель администратора',
     'admin.total': 'Регистраций', 'admin.online': 'Онлайн', 'admin.payers': 'Плательщики', 'admin.net': 'Чистый (CNY)',
     'admin.searchPh': 'Поиск пользователей…', 'admin.refresh': 'Обновить', 'admin.fullConsole': 'Полная панель ↗',
@@ -1592,12 +1595,13 @@ function defaultSettings() {
     providers: [], activeProviderId: null,
     fontSize: 18, accent: 'cyan', aiPanelOpen: true, lang: 'zh', layout: 'stack',
     bg: 'stars', petVisible: true, autoModel: false, plan: 'free', storageDenied: false, board: 'novel',
+    adminBg: true,
     ctx: { outline: true, chars: true, world: true, mem: true, chatHistory: true, prevChapters: 2 },
     user: { nickname: '', avatarPreset: 0, avatarData: '' },
     customAuthors: []
   };
 }
-const APP_VERSION = '4.3.2';
+const APP_VERSION = '4.3.3';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -5603,7 +5607,9 @@ const isAdminNow = () => authMode === 'managed' ? Boolean(serverUser?.isAdmin) :
 /* ---------------- 管理员模式（黑色沉稳背景 + 呼吸车灯之眼）与在线人数 ---------------- */
 function applyAdminMode() {
   const admin = isAdminNow();
-  document.body.classList.toggle('admin-mode', admin);
+  document.body.classList.toggle('is-admin', admin);
+  // 管理员可随时切回普通版背景
+  document.body.classList.toggle('admin-mode', admin && state.settings.adminBg !== false);
   const btn = $('#btn-admin-console');
   if (btn) btn.style.display = admin && authMode === 'managed' ? '' : 'none';
 }
@@ -7029,6 +7035,10 @@ function refreshSettingsChips() {
   $('#set-lang-zh').classList.toggle('on', s.lang === 'zh');
   $('#set-lang-en').classList.toggle('on', s.lang === 'en');
   $('#set-lang-ru').classList.toggle('on', s.lang === 'ru');
+  $('#set-admin-bg-on').classList.toggle('on', s.adminBg !== false);
+  $('#set-admin-bg-off').classList.toggle('on', s.adminBg === false);
+  const bgRow = $('#admin-bg-row');
+  if (bgRow) bgRow.style.display = isAdminNow() ? '' : 'none';
 }
 function openSettings() {
   const s = state.settings;
@@ -7281,6 +7291,9 @@ function bindEvents() {
   $('#set-bg-galaxy').addEventListener('click', () => setBgMode('galaxy'));
   $('#set-bg-planet').addEventListener('click', () => setBgMode('planet'));
   $('#set-pet-on').addEventListener('click', () => { state.settings.petVisible = true; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
+  // 管理员专属背景切换（管理员也可以使用普通版背景）
+  $('#set-admin-bg-on').addEventListener('click', () => { state.settings.adminBg = true; saveSettings(); applyUIPrefs(); refreshSettingsChips(); toast(t('set.adminBgOn'), 'ok', 2500); });
+  $('#set-admin-bg-off').addEventListener('click', () => { state.settings.adminBg = false; saveSettings(); applyUIPrefs(); refreshSettingsChips(); toast(t('set.adminBgOff'), 'ok', 2500); });
   $('#set-pet-off').addEventListener('click', () => { state.settings.petVisible = false; saveSettings(); applyUIPrefs(); refreshSettingsChips(); });
   $('#set-dict').addEventListener('click', openDict);
   $('#set-auto-model').addEventListener('change', e => { state.settings.autoModel = e.target.checked; saveSettings(); });
