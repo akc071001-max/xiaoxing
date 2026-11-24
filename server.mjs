@@ -179,7 +179,8 @@ export async function createXiaoxingServer(options = {}) {
     );
     CREATE TABLE IF NOT EXISTS messages(
       id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id),
-      content TEXT NOT NULL, created_at INTEGER NOT NULL, read_at INTEGER NOT NULL DEFAULT 0
+      content TEXT NOT NULL, created_at INTEGER NOT NULL, read_at INTEGER NOT NULL DEFAULT 0,
+      from_user INTEGER NOT NULL DEFAULT 0
     );
     CREATE TABLE IF NOT EXISTS payments_pending(
       id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id),
@@ -210,6 +211,9 @@ export async function createXiaoxingServer(options = {}) {
   if (!userColumns.has('agreement_ver')) db.exec("ALTER TABLE users ADD COLUMN agreement_ver TEXT NOT NULL DEFAULT ''");
   if (!userColumns.has('deepseek_until')) db.exec("ALTER TABLE users ADD COLUMN deepseek_until INTEGER NOT NULL DEFAULT 0");
   if (!userColumns.has('email')) db.exec("ALTER TABLE users ADD COLUMN email TEXT NOT NULL DEFAULT ''");
+  // messages 表补充 from_user（1=用户发给创始人的来信）
+  const msgColumns = new Set(db.prepare('PRAGMA table_info(messages)').all().map(row => row.name));
+  if (!msgColumns.has('from_user')) db.exec("ALTER TABLE messages ADD COLUMN from_user INTEGER NOT NULL DEFAULT 0");
   const stmt = sql => db.prepare(sql);
   const findUser = stmt('SELECT * FROM users WHERE username_key=?');
   const getUser = stmt('SELECT * FROM users WHERE id=?');
@@ -227,10 +231,11 @@ export async function createXiaoxingServer(options = {}) {
   const setEmail = stmt('UPDATE users SET email=? WHERE id=?');
   const findEmail = stmt('SELECT 1 FROM users WHERE email=?');
   const extendDeepseek = stmt('UPDATE users SET deepseek_until=MAX(deepseek_until,?) WHERE id=?');
-  const insertMessage = stmt('INSERT INTO messages VALUES (?,?,?,?,0)');
-  const userMessages = stmt('SELECT id,content,created_at,read_at FROM messages WHERE user_id=? ORDER BY created_at DESC LIMIT 100');
-  const unreadCount = stmt('SELECT COUNT(*) AS n FROM messages WHERE user_id=? AND read_at=0');
-  const markRead = stmt('UPDATE messages SET read_at=? WHERE user_id=? AND read_at=0');
+  const insertMessage = stmt('INSERT INTO messages (id,user_id,content,created_at,read_at,from_user) VALUES (?,?,?,?,?,?)');
+  const userMessages = stmt('SELECT id,content,created_at,read_at FROM messages WHERE user_id=? AND from_user=0 ORDER BY created_at DESC LIMIT 100');
+  const unreadCount = stmt('SELECT COUNT(*) AS n FROM messages WHERE user_id=? AND from_user=0 AND read_at=0');
+  const markRead = stmt('UPDATE messages SET read_at=? WHERE user_id=? AND from_user=0 AND read_at=0');
+  const operatorMessages = stmt('SELECT m.id,m.user_id,u.username,u.email,m.content,m.created_at,m.read_at FROM messages m JOIN users u ON u.id=m.user_id WHERE m.from_user=1 ORDER BY m.created_at DESC LIMIT 50');
   const insertPending = stmt('INSERT INTO payments_pending VALUES (?,?,?,?,?)');
   const pendingList = stmt('SELECT p.id,p.user_id,u.username,p.amount_cents,p.note,p.submitted_at FROM payments_pending p JOIN users u ON u.id=p.user_id ORDER BY p.submitted_at DESC LIMIT 100');
   const pendingGet = stmt('SELECT * FROM payments_pending WHERE id=?');
@@ -348,6 +353,10 @@ export async function createXiaoxingServer(options = {}) {
       pending: pendingList.all().map(p => ({
         id: p.id, userId: p.user_id, username: p.username, amountCents: p.amount_cents,
         note: p.note, submittedAt: iso(p.submitted_at)
+      })),
+      operatorMessages: operatorMessages.all().map(m => ({
+        id: m.id, userId: m.user_id, username: m.username, email: m.email,
+        content: m.content, createdAt: iso(m.created_at), read: Boolean(m.read_at)
       })),
       payments: paymentsSQL.all(min, max).map(r => ({
         id:r.id, userId:r.user_id, username:r.username, kind:r.kind, amountCents:r.amount_cents,
@@ -557,6 +566,15 @@ export async function createXiaoxingServer(options = {}) {
       markRead.run(Date.now(), u.user_id);
       return sendJson(res, 200, { ok: true });
     }
+    if (method === 'POST' && route === '/api/auth/messages/send') {
+      // 用户直接给创始人（小柚子）发信息
+      const u = session(req, 'user');
+      const body = await jsonBody(req);
+      const content = text(body.content) ? String(body.content).trim() : '';
+      if (!content || content.length > 4000) throw error(400, 'invalid_content', 'Message content is required (up to 4000 characters).');
+      insertMessage.run(randomUUID(), u.user_id, content, Date.now(), 0, 1);
+      return sendJson(res, 201, { ok: true });
+    }
     if (method === 'POST' && route === '/api/admin/messages') {
       // 管理员私信：可把 API 密钥等私信发送给指定用户
       adminSession(req);
@@ -564,7 +582,7 @@ export async function createXiaoxingServer(options = {}) {
       if (!text(body.userId) || body.userId.length > 80 || !getUser.get(body.userId)) throw error(404, 'user_not_found', 'User not found.');
       const content = text(body.content) ? String(body.content).trim() : '';
       if (!content || content.length > 4000) throw error(400, 'invalid_content', 'Message content is required (up to 4000 characters).');
-      insertMessage.run(randomUUID(), body.userId, content, Date.now());
+      insertMessage.run(randomUUID(), body.userId, content, Date.now(), 0, 0);
       return sendJson(res, 201, { ok: true });
     }
     if (method === 'POST' && route === '/api/admin/pending-resolve') {
