@@ -280,14 +280,18 @@ async function reload({ silent = false, initial = false, onlineOnly = false, not
 async function login(event) {
   event.preventDefault();
   const password = el('admin-password');
+  const usernameEl = el('admin-username');
   const button = el('login-form').querySelector('button');
   const submitted = password.value;
   if (!submitted || button.disabled) return;
   button.disabled = true;
   setStatus('login-status', '正在登录…');
   try {
-    await api('/api/admin/login', 'POST', { password: submitted });
+    const payload = { password: submitted };
+    if (usernameEl && usernameEl.value.trim()) payload.username = usernameEl.value.trim();
+    await api('/api/admin/login', 'POST', payload);
     password.value = '';
+    if (usernameEl) usernameEl.value = '';
     await reload({ initial: true });
   } catch (err) {
     setStatus('login-status', errorText(err), 'error');
