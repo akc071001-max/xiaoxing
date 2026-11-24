@@ -83,7 +83,7 @@ function publicUser(row, now = Date.now(), adminCheck = null) {
     id: row.id, username: row.username, createdAt: row.created_at, whitelisted,
     isAdmin, blocked: Boolean(row.blocked), hasQuestion: Boolean(row.question),
     hasAgreement: Boolean(row.agreement_at), agreementVer: row.agreement_ver,
-    deepseekUntil: deepseek, trialEndsAt: row.trial_ends_at, plan
+    deepseekUntil: deepseek, trialEndsAt: row.trial_ends_at, email: row.email || '', plan
   };
 }
 function sendJson(res, status, data, headers = {}) {
@@ -175,7 +175,15 @@ export async function createXiaoxingServer(options = {}) {
       blocked INTEGER NOT NULL DEFAULT 0 CHECK(blocked IN(0,1)),
       question TEXT NOT NULL DEFAULT '', answer_hash TEXT NOT NULL DEFAULT '',
       agreement_at INTEGER NOT NULL DEFAULT 0, agreement_ver TEXT NOT NULL DEFAULT '',
-      deepseek_until INTEGER NOT NULL DEFAULT 0
+      deepseek_until INTEGER NOT NULL DEFAULT 0, email TEXT NOT NULL DEFAULT ''
+    );
+    CREATE TABLE IF NOT EXISTS messages(
+      id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id),
+      content TEXT NOT NULL, created_at INTEGER NOT NULL, read_at INTEGER NOT NULL DEFAULT 0
+    );
+    CREATE TABLE IF NOT EXISTS payments_pending(
+      id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id),
+      amount_cents INTEGER NOT NULL CHECK(amount_cents>0), note TEXT NOT NULL DEFAULT '', submitted_at INTEGER NOT NULL
     );
     CREATE TABLE IF NOT EXISTS sessions(
       token_hash TEXT PRIMARY KEY, role TEXT NOT NULL CHECK(role IN('admin','user')),
@@ -201,6 +209,7 @@ export async function createXiaoxingServer(options = {}) {
   if (!userColumns.has('agreement_at')) db.exec("ALTER TABLE users ADD COLUMN agreement_at INTEGER NOT NULL DEFAULT 0");
   if (!userColumns.has('agreement_ver')) db.exec("ALTER TABLE users ADD COLUMN agreement_ver TEXT NOT NULL DEFAULT ''");
   if (!userColumns.has('deepseek_until')) db.exec("ALTER TABLE users ADD COLUMN deepseek_until INTEGER NOT NULL DEFAULT 0");
+  if (!userColumns.has('email')) db.exec("ALTER TABLE users ADD COLUMN email TEXT NOT NULL DEFAULT ''");
   const stmt = sql => db.prepare(sql);
   const findUser = stmt('SELECT * FROM users WHERE username_key=?');
   const getUser = stmt('SELECT * FROM users WHERE id=?');
@@ -215,7 +224,17 @@ export async function createXiaoxingServer(options = {}) {
   const setPasswordHash = stmt('UPDATE users SET password_hash=? WHERE id=?');
   const setQuestion = stmt('UPDATE users SET question=?, answer_hash=? WHERE id=?');
   const setAgreement = stmt('UPDATE users SET agreement_at=?, agreement_ver=? WHERE id=?');
+  const setEmail = stmt('UPDATE users SET email=? WHERE id=?');
+  const findEmail = stmt('SELECT 1 FROM users WHERE email=?');
   const extendDeepseek = stmt('UPDATE users SET deepseek_until=MAX(deepseek_until,?) WHERE id=?');
+  const insertMessage = stmt('INSERT INTO messages VALUES (?,?,?,?,0)');
+  const userMessages = stmt('SELECT id,content,created_at,read_at FROM messages WHERE user_id=? ORDER BY created_at DESC LIMIT 100');
+  const unreadCount = stmt('SELECT COUNT(*) AS n FROM messages WHERE user_id=? AND read_at=0');
+  const markRead = stmt('UPDATE messages SET read_at=? WHERE user_id=? AND read_at=0');
+  const insertPending = stmt('INSERT INTO payments_pending VALUES (?,?,?,?,?)');
+  const pendingList = stmt('SELECT p.id,p.user_id,u.username,p.amount_cents,p.note,p.submitted_at FROM payments_pending p JOIN users u ON u.id=p.user_id ORDER BY p.submitted_at DESC LIMIT 100');
+  const pendingGet = stmt('SELECT * FROM payments_pending WHERE id=?');
+  const delPending = stmt('DELETE FROM payments_pending WHERE id=?');
   const clearUserSessions = stmt("DELETE FROM sessions WHERE role='user' AND user_id=?");
   const getPaymentRef = stmt('SELECT 1 FROM payments WHERE reference=?');
   const postPayment = stmt('INSERT INTO payments VALUES (?,?,?,?,?,?,?,?)');
@@ -227,7 +246,7 @@ export async function createXiaoxingServer(options = {}) {
              SUM(CASE WHEN kind='payment' THEN amount_cents ELSE 0 END) AS gross,
              SUM(CASE WHEN kind='refund' THEN amount_cents ELSE 0 END) AS refunds
              FROM payments WHERE occurred_at>=? AND occurred_at<?`);
-  const usersSQL = stmt(`SELECT u.id,u.username,u.created_at,u.trial_ends_at,u.whitelisted,u.blocked,u.question,u.agreement_at,u.deepseek_until,COALESCE(x.net,0) AS net,COALESCE(x.has_paid,0) AS has_paid
+  const usersSQL = stmt(`SELECT u.id,u.username,u.created_at,u.trial_ends_at,u.whitelisted,u.blocked,u.question,u.agreement_at,u.deepseek_until,u.email,COALESCE(x.net,0) AS net,COALESCE(x.has_paid,0) AS has_paid
     FROM users u LEFT JOIN (SELECT user_id,SUM(CASE WHEN kind='payment' THEN amount_cents ELSE -amount_cents END) AS net,COUNT(CASE WHEN kind='payment' THEN 1 END) AS has_paid
        FROM payments GROUP BY user_id) x ON x.user_id=u.id ORDER BY u.created_at DESC,u.id DESC`);
   const paymentsSQL = stmt(`SELECT p.id,p.user_id,u.username,p.kind,p.amount_cents,p.reference,p.occurred_at,p.note FROM payments p
@@ -324,8 +343,12 @@ export async function createXiaoxingServer(options = {}) {
       periodGrossCents: gross, periodRefundCents: refunds, periodNetCents: gross - refunds, whitelistCount: counts.whitelist,
       users: usersSQL.all().map(r => {
         const { trialEndsAt, ...user } = publicUser(r, now, isAdminUsername);
-        return { ...user, netCents: number(r.net), hasPaid: Boolean(r.has_paid), blocked: Boolean(r.blocked), hasQuestion: Boolean(r.question), hasAgreement: Boolean(r.agreement_at), deepseekUntil: Number(r.deepseek_until) };
+        return { ...user, netCents: number(r.net), hasPaid: Boolean(r.has_paid), blocked: Boolean(r.blocked), hasQuestion: Boolean(r.question), hasAgreement: Boolean(r.agreement_at), deepseekUntil: Number(r.deepseek_until), email: r.email || '' };
       }),
+      pending: pendingList.all().map(p => ({
+        id: p.id, userId: p.user_id, username: p.username, amountCents: p.amount_cents,
+        note: p.note, submittedAt: iso(p.submitted_at)
+      })),
       payments: paymentsSQL.all(min, max).map(r => ({
         id:r.id, userId:r.user_id, username:r.username, kind:r.kind, amountCents:r.amount_cents,
         reference:r.reference, occurredAt:iso(r.occurred_at), note:r.note
@@ -383,6 +406,11 @@ export async function createXiaoxingServer(options = {}) {
       if (u) touchSession.run(Date.now(), u.token_hash, Date.now());
       return sendJson(res, 200, { user: u ? publicUser(getUser.get(u.user_id), Date.now(), isAdminUsername) : null });
     }
+    if (method === 'GET' && route === '/api/auth/messages') {
+      const u = session(req, 'user');
+      const msgs = userMessages.all(u.user_id).map(m => ({ id: m.id, content: m.content, createdAt: iso(m.created_at), read: Boolean(m.read_at) }));
+      return sendJson(res, 200, { messages: msgs, unread: unreadCount.get(u.user_id).n });
+    }
     if (method === 'GET' && route === '/api/admin/dashboard') {
       adminSession(req);
       return sendJson(res, 200, dashboard(url));
@@ -400,6 +428,12 @@ export async function createXiaoxingServer(options = {}) {
         const id = randomUUID(), salt = randomBytes(16).toString('hex');
         const hash = (await passwordHash(pass, salt)).toString('hex');
         const now = Date.now();
+        // 注册必须填写个人邮箱，用于确认用户信息
+        const email = text(body.email) ? String(body.email).trim().toLowerCase() : '';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
+          throw error(400, 'invalid_email', 'A valid email address is required for registration.');
+        }
+        if (findEmail.get(email)) throw error(409, 'email_taken', 'This email is already registered.');
         // 密保问题（选填，用于找回密码）
         const questionKey = text(body.question) ? String(body.question).trim() : '';
         const answer = text(body.answer) ? String(body.answer).trim() : '';
@@ -414,6 +448,7 @@ export async function createXiaoxingServer(options = {}) {
         try { insertUser.run(id, username, usernameKey, salt, hash, now, now + DAY); }
         catch (e) { if (findUser.get(usernameKey)) throw error(409, 'username_taken', 'This username is already registered.'); throw e; }
         if (question) setQuestion.run(question, answerHash, id);
+        setEmail.run(email, id);
         u = getUser.get(id);
       } else {
         const account = findUser.get(usernameKey);
@@ -496,6 +531,59 @@ export async function createXiaoxingServer(options = {}) {
       if (!/^[\w.-]{1,32}$/.test(version)) throw error(400, 'invalid_agreement', 'Provide a valid agreement version.');
       setAgreement.run(Date.now(), version, u.user_id);
       return sendJson(res, 200, { ok: true, user: publicUser(getUser.get(u.user_id), Date.now(), isAdminUsername) });
+    }
+    if (method === 'POST' && route === '/api/auth/email') {
+      // 老用户补充个人邮箱（注册已必填；用于确认用户信息）
+      const u = session(req, 'user');
+      const body = await jsonBody(req);
+      const email = text(body.email) ? String(body.email).trim().toLowerCase() : '';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) throw error(400, 'invalid_email', 'A valid email address is required.');
+      if (findEmail.get(email)) throw error(409, 'email_taken', 'This email is already registered.');
+      setEmail.run(email, u.user_id);
+      return sendJson(res, 200, { ok: true, user: publicUser(getUser.get(u.user_id), Date.now(), isAdminUsername) });
+    }
+    if (method === 'POST' && route === '/api/auth/payment-submit') {
+      // 用户「我已付款，提交核对」：进入待核对队列，管理员在操作台一键核对开通
+      const u = session(req, 'user');
+      const body = await jsonBody(req);
+      const amount = Number(body.amountCents);
+      if (!Number.isSafeInteger(amount) || amount < 1 || amount > 100000000) throw error(400, 'invalid_amount', 'Provide a valid amount.');
+      insertPending.run(randomUUID(), u.user_id, amount, text(body.note) ? String(body.note).slice(0, 500) : '', Date.now());
+      return sendJson(res, 201, { ok: true });
+    }
+    if (method === 'POST' && route === '/api/auth/messages/read') {
+      const u = session(req, 'user');
+      await jsonBody(req);
+      markRead.run(Date.now(), u.user_id);
+      return sendJson(res, 200, { ok: true });
+    }
+    if (method === 'POST' && route === '/api/admin/messages') {
+      // 管理员私信：可把 API 密钥等私信发送给指定用户
+      adminSession(req);
+      const body = await jsonBody(req);
+      if (!text(body.userId) || body.userId.length > 80 || !getUser.get(body.userId)) throw error(404, 'user_not_found', 'User not found.');
+      const content = text(body.content) ? String(body.content).trim() : '';
+      if (!content || content.length > 4000) throw error(400, 'invalid_content', 'Message content is required (up to 4000 characters).');
+      insertMessage.run(randomUUID(), body.userId, content, Date.now());
+      return sendJson(res, 201, { ok: true });
+    }
+    if (method === 'POST' && route === '/api/admin/pending-resolve') {
+      // 一键核对：登记收款（40 元自动开通 30 天）并移出待核对队列
+      adminSession(req);
+      const body = await jsonBody(req);
+      if (!text(body.pendingId)) throw error(400, 'invalid_pending', 'Provide a pending id.');
+      const p = pendingGet.get(body.pendingId);
+      if (!p) throw error(404, 'pending_not_found', 'Pending request not found.');
+      const reference = 'PEND-' + p.id;
+      db.exec('BEGIN IMMEDIATE');
+      try {
+        if (getPaymentRef.get(reference)) throw error(409, 'duplicate_reference', 'Already recorded.');
+        postPayment.run(randomUUID(), p.user_id, 'payment', p.amount_cents, reference, Date.now(), ('待核对收款：' + (p.note || '')).slice(0, 500), Date.now());
+        if (p.amount_cents === 4000) extendDeepseek.run(Date.now() + 30 * DAY, p.user_id);
+        delPending.run(p.id);
+        db.exec('COMMIT');
+      } catch (e) { db.exec('ROLLBACK'); throw e; }
+      return sendJson(res, 200, { ok: true, user: publicUser(getUser.get(p.user_id), Date.now(), isAdminUsername) });
     }
     if (method === 'PUT' && route === '/api/admin/whitelist') {
       adminSession(req);
