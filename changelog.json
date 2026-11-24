@@ -1,19 +1,16 @@
 {
-  "version": "4.7.0",
+  "version": "4.7.1",
   "date": "2026-11-24",
   "items": [
-    { "title": "手机全适配 · 功能不阉割", "desc": "手机版与电脑版功能完全一致（同一套网页，两端同步更新，暂不做 App）：弹窗全屏适配、章节/大纲/内容/AI 面板抽屉式切换、顶栏自适应换行，付费协议与收款码手机端排版优化" },
-    { "title": "手机付费流程完善", "desc": "付费协议、收款码、提交核对全流程在手机上完整可用（竖排布局、大按钮、滚动条款）" },
-    { "title": "用户可直接给创始人发信息", "desc": "私信面板新增「✉️ 给创始人发信息」：用户留言直达您；管理入口新增「📬 用户来信」列表，一键回复" }
+    { "title": "修复手机无法登录", "desc": "登录/须知/存储授权/付费协议弹窗不再因误触背景而关闭；手机输入框字号锁定 16px 防 iOS 自动缩放；登录表单区域独立滚动、按钮永远可见" },
+    { "title": "全平台登录信息统一", "desc": "设置中心统一展示登录信息：用户名 + 账户类型（站点/本地）+ 邮箱 + 管理员徽章；站点账户任意设备登录同一账号，本地账户信息仅存本机并明确提示" }
   ],
   "itemsEn": [
-    { "title": "Full mobile adaptation — nothing cut", "desc": "Mobile has the exact same features as desktop (one web app, both ends updated together, no native app for now): full-screen modals, drawer-style panels/AI, wrapping top bar, and a polished payment agreement/QR layout on phones." },
-    { "title": "Mobile payment flow complete", "desc": "Agreement, payment QR and verification submission all work fully on phones (stacked layout, big buttons, scrollable terms)." },
-    { "title": "Users can message the creator directly", "desc": "The inbox now has “✉️ Message the creator”: user messages reach you directly; the admin entry gains a “📬 Messages to the creator” list with one-click reply." }
+    { "title": "Fixed mobile sign-in", "desc": "The sign-in / terms / storage / agreement dialogs no longer close when the backdrop is tapped by mistake; inputs are locked at 16px to stop iOS auto-zoom; the form area scrolls independently and the buttons stay visible." },
+    { "title": "Unified login info on all platforms", "desc": "Settings now shows unified login info: username + account type (site/local) + email + admin badge. Site accounts work on any device; local accounts stay on this device with a clear hint." }
   ],
   "itemsRu": [
-    { "title": "Полная адаптация телефонов — ничего не урезано", "desc": "Мобильная версия имеет те же функции, что и компьютер (одно веб-приложение, оба обновляются вместе, пока без нативного приложения): полноэкранные окна, панели-шторки, перенос верхней панели, удобные договор и QR на телефоне." },
-    { "title": "Оплата на телефоне полностью работает", "desc": "Договор, код оплаты и отправка на проверку полностью работают на телефоне (вертикальная раскладка, крупные кнопки, прокрутка условий)." },
-    { "title": "Пользователи пишут автору напрямую", "desc": "Во входящих появилось «✉️ Написать автору»: сообщения приходят напрямую вам; во входе администратора — список «📬 Сообщения автору» с ответом в один клик." }
+    { "title": "Исправлен вход на телефоне", "desc": "Окна входа / правил / хранилища / договора больше не закрываются при случайном касании фона; поля 16px против автозума iOS; форма прокручивается отдельно, кнопки всегда видны." },
+    { "title": "Единая информация о входе", "desc": "В настройках единообразно показывается: имя + тип аккаунта (сайт/локально) + почта + значок администратора. Сайт-аккаунт работает на любом устройстве; локальный хранится только здесь, с понятной подсказкой." }
   ]
 }
