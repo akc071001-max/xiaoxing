@@ -1,22 +1,22 @@
 {
-  "version": "4.4.0",
+  "version": "4.5.0",
   "date": "2026-11-24",
   "items": [
-    { "title": "DeepSeek 月度会员上线", "desc": "¥40/月：DeepSeek 等优质模型稳定接入、更快响应、更长记忆；按月支付，不自动续费，是否续费由用户自行决定" },
-    { "title": "付费协议（全面合规）", "desc": "付款前必须签署八条付费协议：服务与价格、支付方式、周期与续费、退款政策、使用规范、免责声明、个人信息、争议解决" },
-    { "title": "收款流程透明", "desc": "签署协议 → 出示您的个人收款码（备注填用户名）→ 提交核对 → 管理员 24 小时内核对入账并开通；核对前可随时全额退款" },
-    { "title": "管理端自动开通", "desc": "站长后台登记 40 元收款即自动开通 30 天会员（自付款日起算），到期自动结束" }
+    { "title": "付款信息一目了然", "desc": "站长操作台新增「⏳ 待核对付款」与「💰 收款流水」：用户提交核对后进入队列，管理员一键「✓ 核对并开通」即完成核对（40 元自动开通 30 天）" },
+    { "title": "管理入口在顶栏", "desc": "顶栏「👑 站长操作台」红色呼吸按钮直达站内操作台，无需寻找" },
+    { "title": "私信模块", "desc": "管理员可向指定用户发送私信（如 API 密钥）：顶栏 📩 收件箱 + 未读角标，消息可一键复制；操作台用户列表每行「✉ 私信」按钮直达" },
+    { "title": "注册必填邮箱", "desc": "注册时必须填写个人邮箱（用于确认用户信息）；老用户可在设置中补填，后台名单可见邮箱" }
   ],
   "itemsEn": [
-    { "title": "DeepSeek Monthly launched", "desc": "¥40/month: stable DeepSeek access, faster responses, longer memory. Monthly payment, no auto-renewal — the user decides each month." },
-    { "title": "Payment agreement (comprehensive)", "desc": "An eight-article agreement must be signed before payment: service & price, payment method, term & renewal, refunds, usage rules, disclaimer, personal information, disputes." },
-    { "title": "Transparent payment flow", "desc": "Sign → your personal payment code (put username in the note) → submit for verification → the operator verifies within 24h; full refund anytime before activation." },
-    { "title": "Auto-activation in the admin console", "desc": "Recording a ¥40 receipt in the admin console automatically activates 30 days of membership from the payment date." }
+    { "title": "Payment info at a glance", "desc": "The admin console now shows “⏳ Pending payments” and “💰 Recent receipts”: user submissions queue up and the operator confirms with one click “✓ Verify & activate” (¥40 auto-activates 30 days)." },
+    { "title": "Admin entry in the top bar", "desc": "The red glowing “👑 Admin Console” button in the top bar opens the in-site console directly." },
+    { "title": "Private messaging", "desc": "Admins can message any user privately (e.g. an API key): users get a 📩 inbox with an unread badge and one-click copy; each user row in the console has a “✉ Message” button." },
+    { "title": "Email required at registration", "desc": "Registration now requires an email address for identity verification; legacy users can add one in Settings, and emails are visible in the admin console." }
   ],
   "itemsRu": [
-    { "title": "DeepSeek ежемесячно запущен", "desc": "¥40/месяц: стабильный DeepSeek, быстрее ответы, длиннее память. Оплата помесячно, без автопродления — пользователь решает сам." },
-    { "title": "Договор об оплате (полный)", "desc": "Перед оплатой обязательно подписание договора из восьми статей: услуга и цена, оплата, срок и продление, возвраты, правила, отказ от ответственности, персональные данные, споры." },
-    { "title": "Прозрачная оплата", "desc": "Подпись → ваш личный код оплаты (укажите имя пользователя) → отправка на проверку → администратор проверяет в течение 24 ч; полный возврат доступен до активации." },
-    { "title": "Автоактивация в панели администратора", "desc": "Регистрация поступления 40 юаней автоматически открывает 30 дней с даты оплаты." }
+    { "title": "Платежи видны сразу", "desc": "В панели администратора появились «⏳ Ожидают проверки» и «💰 Последние поступления»: заявки пользователей в очереди, проверка в один клик «✓ Проверить и активировать» (40 юаней = 30 дней)." },
+    { "title": "Вход администратора в верхней панели", "desc": "Красная пульсирующая кнопка «👑 Панель администратора» открывает панель прямо на сайте." },
+    { "title": "Личные сообщения", "desc": "Администратор может отправить пользователю личное сообщение (например, API-ключ): у пользователя 📩 входящие с бейджем непрочитанных и копированием в один клик; в списке пользователей — кнопка «✉ Сообщение»." },
+    { "title": "Почта обязательна при регистрации", "desc": "При регистрации обязательно указывается эл. почта для подтверждения личности; старые пользователи могут добавить её в настройках, почта видна в панели." }
   ]
 }
