@@ -407,7 +407,10 @@ body.split-layout .co-head .spacer{display:none}
 .style-profile .sp-label{color:var(--txt-dim);width:76px;white-space:nowrap}
 .style-profile .sp-val{color:var(--txt-bright)}
 .style-profile .sp-edit{margin-top:10px}
-.author-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.author-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;max-height:44%;overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.sp-scroll-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sp-scroll-row .btn{font-size:11px;padding:4px 9px;line-height:1}
+.sp-scroll-row .learn-status{font-size:11px}
 .author-tip{font-size:11px;color:var(--txt-dim);line-height:1.7;margin-bottom:10px}
 .author-note-card{border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:8px;background:rgba(16,24,42,.4)}
 .author-note-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
@@ -610,7 +613,8 @@ body.board-paper.no-ai #app{grid-template-columns:300px minmax(0,1fr)}
 .pet:active{cursor:grabbing}
 .pet-wrap{position:relative;transition:transform .2s}
 .pet:hover .pet-wrap{transform:scale(1.12) rotate(-4deg)}
-.pet.pet-dragging{animation:none;transition:none;filter:drop-shadow(0 0 24px rgba(0,224,255,.85))}
+.pet.pet-dragging{animation:none;transition:none;filter:drop-shadow(0 0 24px rgba(0,224,255,.85));will-change:left,top;cursor:grabbing}
+.pet.pet-dragging .pet-wrap{transform:scale(1.1) rotate(-5deg)}
 @keyframes petBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 .pet.pet-idle{left:auto !important;right:150px !important;top:6px !important;bottom:auto !important;animation:petWiggle .7s ease-in-out infinite}
 @keyframes petWiggle{0%,100%{transform:translate(0,0) rotate(-4deg)}50%{transform:translate(3px,-2px) rotate(5deg)}}
