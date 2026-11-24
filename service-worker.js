@@ -1,10 +1,10 @@
 /* Cache only the public app shell. AI requests and writing data never enter Cache Storage. */
 const scope = new URL('./', self.location.href);
 const prefix = 'xiaoxing-shell:' + scope.pathname + ':';
-const cache = prefix + '4.1.0';
+const cache = prefix + '4.2.0';
 const index = new URL('index.html', scope).href;
 const assets = [
-  'css/style.css?v=4.1.0', 'js/app.js?v=4.1.0', 'js/draft-review.js?v=4.1.0', 'manifest.webmanifest',
+  'css/style.css?v=4.2.0', 'js/app.js?v=4.2.0', 'js/draft-review.js?v=4.2.0', 'manifest.webmanifest',
   'icons/xiaoxing-192.png', 'icons/xiaoxing-512.png', 'qr-tip.png'
 ].map(path => new URL(path, scope).href);
 const assetURLs = new Set(assets);
