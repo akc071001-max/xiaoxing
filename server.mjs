@@ -11,7 +11,7 @@ const DAY = 86400000;
 const ONLINE = 5 * 60000;
 const SESSION_DURATION = { user: 7 * DAY, admin: 8 * 3600000 };
 const SESSION_COOKIE = { user: 'xiaoxing_user', admin: 'xiaoxing_admin' };
-const COOKIE_PATH = { user: '/api/auth', admin: '/api/admin' };
+const COOKIE_PATH = { user: '/', admin: '/api/admin' };
 const scrypt = promisify(scryptCb);
 const sha = value => createHash('sha256').update(value).digest();
 const iso = value => new Date(value).toISOString();
