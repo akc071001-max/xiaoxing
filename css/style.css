@@ -1016,6 +1016,18 @@ body.is-admin .admin-only-row{display:flex}
 
 /* ---------------- 站长操作台（站内弹窗） ---------------- */
 .admin-console-body{max-height:72vh;overflow-y:auto}
+/* ---------------- DeepSeek 月度会员：付费协议 ---------------- */
+.vip-deepseek{border-color:rgba(255,80,60,.5)}
+.vip-deepseek .vip-price{color:#ff6b5e}
+.agr-scroll{max-height:40vh;overflow-y:auto;border:1px solid var(--line);border-radius:10px;padding:12px 16px;background:rgba(10,14,22,.5);font-size:12.5px;line-height:1.9;color:var(--txt);margin-bottom:12px}
+.agr-scroll h3{color:var(--accent);font-size:13px;margin:10px 0 4px}
+.agr-check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--txt-bright);margin-bottom:10px;cursor:pointer}
+.agr-sign{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--txt-dim);margin-bottom:10px}
+.agr-sign .input{margin-top:4px}
+.agr-pay-note{font-size:12.5px;color:var(--warn);margin-bottom:10px;line-height:1.8}
+.agr-amount{font-family:var(--font-mono);font-size:15px;color:var(--txt-bright);margin-bottom:8px}
+.agr-pay-steps{padding-left:18px;font-size:12.5px;color:var(--txt);line-height:1.9}
+.agr-note{font-size:11.5px;color:var(--txt-dim);line-height:1.7;margin:8px 0}
 .admin-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
 .admin-stat{border:1px solid var(--line);border-radius:10px;padding:12px 10px;background:rgba(10,14,22,.6);text-align:center}
 .as-num{display:block;font-family:var(--font-mono);font-size:19px;color:var(--accent);text-shadow:0 0 10px rgba(0,224,255,.4)}
