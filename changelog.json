@@ -1,16 +1,19 @@
 {
-  "version": "4.3.2",
+  "version": "4.3.3",
   "date": "2026-11-24",
   "items": [
-    { "title": "刀锋车灯", "desc": "车灯改为锋利的刀锋多边形造型（clip-path 刀刃线条），白色刀锋中脊流畅贯穿，青色多层光晕，呼吸般变亮变暗，左右镜像对称居中" },
-    { "title": "管理员终端全面重做", "desc": "站长操作台代码全部重写（事件委托 + 统一请求层 + 忙碌锁），并修复管理员模式下所有弹窗失效的关键问题，站内全部功能恢复正常" }
+    { "title": "红灯同步慢闪", "desc": "双灯改为红色警示灯，两灯完全同步闪烁，12 秒一个周期缓慢变亮再变暗" },
+    { "title": "管理员可切换普通背景", "desc": "设置 → 页面背景新增「👑 管理员专属背景」开关：可随时切回普通版星空背景" },
+    { "title": "操作台入口显眼", "desc": "顶栏「👑 站长操作台」改为醒目的红色呼吸发光按钮，一眼可见、点击直达，无需寻找" }
   ],
   "itemsEn": [
-    { "title": "Blade headlights", "desc": "Headlights are now sharp blade-shaped polygons with a flowing white spine line and layered cyan glow, breathing bright and dim, mirrored and centered." },
-    { "title": "Admin console rebuilt", "desc": "The in-site admin console was rewritten from scratch (event delegation, unified request layer, busy lock), and the critical bug that broke all modals in admin mode is fixed — every in-site feature works again." }
+    { "title": "Synchronized red flashing", "desc": "The two lights are now red warning lights, flashing in perfect sync over a slow 12-second cycle." },
+    { "title": "Admins can use the normal background", "desc": "Settings → Page background gains a “👑 Admin background” switch so admins can switch back to the normal starfield anytime." },
+    { "title": "Prominent console entry", "desc": "The top-bar “👑 Admin Console” button is now a striking red glowing pulsing button — visible at a glance, one click away." }
   ],
   "itemsRu": [
-    { "title": "Фары-лезвия", "desc": "Фары стали острыми полигональными лезвиями с плавной белой линией-хребтом и слоистым голубым свечением; дышат — разгораются и гаснут, зеркально по центру." },
-    { "title": "Панель администратора переписана", "desc": "Встроенная панель администратора полностью переписана (делегирование событий, единый слой запросов, защита от двойных действий), исправлена критическая ошибка, ломавшая все окна в режиме администратора — все функции сайта снова работают." }
+    { "title": "Синхронное красное мигание", "desc": "Фары стали красными сигнальными огнями, мигают идеально синхронно, медленный цикл 12 секунд." },
+    { "title": "Админ может вернуть обычный фон", "desc": "Настройки → Фон страницы: добавлен переключатель «👑 Фон администратора» — можно в любой момент вернуть обычное звёздное небо." },
+    { "title": "Заметный вход в панель", "desc": "Кнопка «👑 Панель администратора» в верхней панели теперь яркая красная пульсирующая — видна сразу, панель открывается в один клик." }
   ]
 }
