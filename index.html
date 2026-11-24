@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="referrer" content="no-referrer" />
 <title>晓星 XIAOXING · 全风格小说创作台</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e0ff'/%3E%3Cstop offset='1' stop-color='%237c5cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 4 C34 16 42 22 56 24 C42 26 34 32 32 44 C30 32 22 26 8 24 C22 22 30 16 32 4 Z' fill='url(%23g)'/%3E%3Cpath d='M20 13 L44 35 M44 13 L20 35' stroke='%23eaf6ff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E" />
 <meta name="description" content="晓星 XIAOXING —— 免费全风格小说在线创作平台：男频/女频风格表格、大纲、角色卡、记忆库、AI 剧情引擎、作家文风联网学习、英语词典。数据保存在本地浏览器，无字数上限。" />
@@ -27,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.7.1" />
+<link rel="stylesheet" href="css/style.css?v=4.8.0" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -1022,22 +1023,22 @@
         <button class="chip mini" data-authlang="en">English</button>
         <button class="chip mini" data-authlang="ru">Русский</button>
       </div>
-      <div class="auth-tabs">
+      <div class="auth-tabs" id="auth-tabs">
         <button class="chip set-chip on" id="auth-tab-login" data-i18n="auth.login">登录</button>
         <button class="chip set-chip" id="auth-tab-register" data-i18n="auth.register">注册</button>
       </div>
-      <div class="form-col">
+      <div class="form-col" id="auth-credentials">
         <label><span data-i18n="auth.user">用户名</span>
-          <input id="auth-user" type="text" maxlength="20" data-i18n-ph="auth.userPh" placeholder="2-20 位：字母 / 数字 / 下划线 / 中文" autocomplete="off" />
+          <input id="auth-user" type="text" maxlength="20" data-i18n-ph="auth.userPh" placeholder="2-20 位：字母 / 数字 / 下划线 / 中文" autocomplete="username" autocapitalize="none" spellcheck="false" />
         </label>
         <label><span data-i18n="auth.pass">密码</span>
-          <input id="auth-pass" type="password" maxlength="20" data-i18n-ph="auth.passPh" placeholder="至少 6 位，必须包含英文字母 + 数字" autocomplete="off" />
+          <input id="auth-pass" type="password" maxlength="128" data-i18n-ph="auth.passPh" placeholder="至少 6 位，必须包含英文字母 + 数字" autocomplete="current-password" />
         </label>
         <label id="auth-pass2-wrap" style="display:none"><span data-i18n="auth.pass2">确认密码</span>
-          <input id="auth-pass2" type="password" maxlength="20" data-i18n-ph="auth.pass2Ph" placeholder="再输入一次密码" autocomplete="off" />
+          <input id="auth-pass2" type="password" maxlength="128" data-i18n-ph="auth.pass2Ph" placeholder="再输入一次密码" autocomplete="new-password" />
         </label>
         <label id="auth-email-wrap" style="display:none"><span data-i18n="auth.email">邮箱（必填，用于确认用户信息）</span>
-          <input id="auth-email" type="email" maxlength="254" data-i18n-ph="auth.emailPh" placeholder="name@example.com" autocomplete="off" />
+          <input id="auth-email" type="email" maxlength="254" data-i18n-ph="auth.emailPh" placeholder="name@example.com" autocomplete="email" autocapitalize="none" spellcheck="false" />
         </label>
         <label id="auth-question-wrap" style="display:none"><span data-i18n="auth.question">密保问题（选填，用于找回密码）</span>
           <select id="auth-question">
@@ -1054,6 +1055,14 @@
         <div class="auth-hint" id="auth-hint"></div>
         <button class="btn-link" type="button" id="btn-auth-forgot" data-i18n="auth.forgot">忘记密码？</button>
       </div>
+      <div class="form-col" id="auth-bridge-choice" hidden>
+        <p id="auth-bridge-info" class="auth-local-note"></p>
+        <div class="forgot-actions">
+          <button class="btn ghost" type="button" id="btn-auth-bridge-switch" hidden></button>
+          <button class="btn-link" type="button" id="btn-auth-bridge-forgot" data-i18n="auth.forgot" hidden>忘记密码？</button>
+        </div>
+      </div>
+      <p class="auth-hint" id="auth-bridge-status" role="status" aria-live="polite" hidden></p>
       <div class="form-col" id="forgot-panel" hidden>
         <label><span data-i18n="auth.user">用户名</span>
           <input id="forgot-user" type="text" maxlength="20" data-i18n-ph="auth.userPh" placeholder="输入要找回的账户用户名" autocomplete="off" />
@@ -1066,7 +1075,7 @@
           <input id="forgot-answer" type="text" maxlength="64" data-i18n-ph="auth.answerPh" placeholder="注册时设置的答案" autocomplete="off" />
         </label>
         <label id="forgot-pass-wrap" hidden><span data-i18n="auth.newPass">新密码</span>
-          <input id="forgot-pass" type="password" maxlength="128" data-i18n-ph="auth.passPh" placeholder="至少 6 位，必须包含英文字母 + 数字" autocomplete="off" />
+          <input id="forgot-pass" type="password" maxlength="128" data-i18n-ph="auth.passPh" placeholder="至少 6 位，必须包含英文字母 + 数字" autocomplete="new-password" />
         </label>
         <div class="forgot-actions">
           <button class="btn" type="button" id="btn-forgot-back" data-i18n="auth.backLogin">返回登录</button>
@@ -1346,7 +1355,9 @@
     <p id="draft-review-note" role="status"></p>
   </div>
 </dialog>
-<script src="js/draft-review.js?v=4.7.1"></script>
-<script src="js/app.js?v=4.7.1"></script>
+<script src="js/account-config.js"></script>
+<script src="js/account-bridge.js?v=4.8.0"></script>
+<script src="js/draft-review.js?v=4.8.0"></script>
+<script src="js/app.js?v=4.8.0"></script>
 </body>
 </html>
