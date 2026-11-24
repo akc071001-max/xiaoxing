@@ -178,6 +178,31 @@ const I18N = {
     'vip.l1': '全部专业版权益', 'vip.l2': '优先接入新模型', 'vip.l3': '专属客服支持',
     'vip.btn': '暂未开放', 'vip.btnToast': '试运营期间不收费，敬请期待',
     'vip.foot': '试运营期间所有方案均不收费，敬请期待正式上线。',
+    'vip.deepseek': 'DeepSeek 月度会员', 'vip.deepseekPrice': '¥40 / 月',
+    'vip.d1': 'DeepSeek 等优质大模型稳定接入（不占用免费额度）',
+    'vip.d2': '更快响应 · 更长记忆（前 5 章）',
+    'vip.d3': '按月支付 · 不自动续费 · 到期自行决定是否续费',
+    'vip.deepseekBtn': '签署协议并开通',
+    'agr.title': '📄 DeepSeek 月度会员付费协议',
+    'agr.agreeLabel': '我已阅读并同意以上全部条款',
+    'agr.signLabel': '电子签名（输入用户名确认签署）',
+    'agr.signPh': '输入您的用户名作为电子签名',
+    'agr.signBtn': '签署协议并查看收款码',
+    'agr.payNote': '请通过下方个人收款码支付 ¥40，并按步骤操作。',
+    'agr.amount': '付款金额：¥40.00（一个月服务）',
+    'agr.step1': '打开微信 / 支付宝扫描左侧收款码',
+    'agr.step2': '付款时请在「添加备注 / 转账说明」中填写您的用户名',
+    'agr.step3': '付款完成后点击下方「我已付款，提交核对」',
+    'agr.waitNote': '提交后管理员将在 24 小时内核对入账并开通；核对完成前可随时申请退款。',
+    'agr.paidBtn': '我已付款，提交核对',
+    'agr.hintNeedAgree': '请先勾选「我已阅读并同意以上全部条款」',
+    'agr.hintNeedLogin': '请先登录您的账户再签署协议',
+    'agr.hintSignMismatch': '电子签名必须与当前登录用户名一致',
+    'agr.signedOk': '协议已签署，请完成付款',
+    'agr.submitted': '已提交核对！管理员将在 24 小时内核对入账并开通；核对完成前可随时申请退款。',
+    'agr.submitFail': '提交失败，请稍后再试，或通过「反馈」联系管理员',
+    'agr.pending': '核对中…',
+    'agr.text': '<h3>第一条 服务内容与价格</h3><p>1.1 本协议是用户与「晓星 XIAOXING」网站（创作者：小柚子，下称「本站」）之间就 DeepSeek 月度会员服务订立的协议。</p><p>1.2 服务内容：开通期间内可使用本站接入的 DeepSeek 等优质大模型进行创作（以本站实际接入的模型为准），享有更快响应与更长上下文记忆（前 5 章）等权益。</p><p>1.3 价格：人民币 40 元 / 月（30 天）。</p><h3>第二条 支付方式</h3><p>2.1 本站采用创作者个人收款码收款。</p><p>2.2 用户应在付款备注中填写用户名，以便核对。</p><p>2.3 付款不代表立即开通：管理员在核对实际到账后开通服务；核对完成前用户可随时申请退款。</p><h3>第三条 服务周期与续费</h3><p>3.1 一个月服务期自实际付款发生之日起算（以登记时间为准），共 30 天。</p><p>3.2 本服务不设置自动续费、不自动扣款：到期后服务自动结束，是否续费完全由用户自行决定。</p><p>3.3 续费需再次签署本协议并重新付款。</p><h3>第四条 退款政策</h3><p>4.1 在管理员核对入账并开通服务前，用户可随时通过「💬 反馈」申请全额退款。</p><p>4.2 服务已开通后，因服务具有即时性，原则上不支持退款；但因本站原因导致服务连续 72 小时不可用的，用户可申请按剩余天数折算退款。</p><p>4.3 退款经管理员核实后原路退回，处理周期一般为 7 个工作日。</p><h3>第五条 使用规范</h3><p>5.1 会员权益仅限本人账号使用，不得转售、共享、出租或用于商业转售目的。</p><p>5.2 用户须遵守本站《用户须知与守则》及 AI 服务商的使用条款，不得利用服务生成违法或侵权内容。</p><p>5.3 违反本条的，本站有权停止服务且不予退款。</p><h3>第六条 服务声明与免责</h3><p>6.1 本站尽力保证服务质量，但 AI 生成结果不构成任何专业意见或承诺。</p><p>6.2 因第三方模型服务商、网络或不可抗力导致的暂时不可用，本站不承担赔偿责任，但会尽力协调恢复。</p><p>6.3 本站保留根据成本与运营情况调整价格或服务内容的权利，调整前将提前公告；已付款周期不受影响。</p><h3>第七条 个人信息</h3><p>7.1 本站仅收集开通与核对所必需的信息（用户名、付款登记信息），不收集与提供服务无关的敏感信息。</p><p>7.2 付款信息由支付平台处理，本站不接触用户的银行账户信息。</p><h3>第八条 争议解决</h3><p>8.1 本协议适用中华人民共和国法律。</p><p>8.2 双方发生争议应友好协商；协商不成的，可向本站运营者所在地有管辖权的人民法院提起诉讼。</p>',
     'btn.settings': '⚙ 设置', 'btn.settingsTitle': '设置中心',
     'co.layout': '布局', 'co.layoutToggleTitle': '切换布局：上下 / 左右分屏',
     'set.title': '⚙ 设置', 'set.ui': '界面设置', 'set.font': '正文字号', 'set.layout': '界面样式',
@@ -488,6 +513,31 @@ const I18N = {
     'vip.l1': 'All Pro benefits', 'vip.l2': 'Early access to new models', 'vip.l3': 'Dedicated support',
     'vip.btn': 'Coming soon', 'vip.btnToast': 'Free during beta — stay tuned',
     'vip.foot': 'All plans are free during the beta period.',
+    'vip.deepseek': 'DeepSeek Monthly', 'vip.deepseekPrice': '¥40 / month',
+    'vip.d1': 'Stable access to DeepSeek and other quality models (separate from the free quota)',
+    'vip.d2': 'Faster responses · longer memory (up to 5 chapters)',
+    'vip.d3': 'Monthly payment · no auto-renewal · you decide each month',
+    'vip.deepseekBtn': 'Sign the agreement & subscribe',
+    'agr.title': '📄 DeepSeek Monthly Service Agreement',
+    'agr.agreeLabel': 'I have read and agree to all the terms above',
+    'agr.signLabel': 'Electronic signature (type your username)',
+    'agr.signPh': 'Type your username as your electronic signature',
+    'agr.signBtn': 'Sign & show the payment code',
+    'agr.payNote': 'Pay ¥40 with the personal payment code below and follow the steps.',
+    'agr.amount': 'Amount: ¥40.00 (one month of service)',
+    'agr.step1': 'Scan the code with WeChat / Alipay',
+    'agr.step2': 'Put your username in the payment note so we can verify',
+    'agr.step3': 'After paying, click “I have paid — submit for verification” below',
+    'agr.waitNote': 'The operator verifies the payment and activates the service within 24 hours; before verification you may request a full refund at any time.',
+    'agr.paidBtn': 'I have paid — submit for verification',
+    'agr.hintNeedAgree': 'Please tick “I have read and agree” first',
+    'agr.hintNeedLogin': 'Please sign in before signing the agreement',
+    'agr.hintSignMismatch': 'The signature must match your signed-in username',
+    'agr.signedOk': 'Agreement signed — please complete the payment',
+    'agr.submitted': 'Submitted! The operator verifies the payment within 24 hours; you may request a refund anytime before activation.',
+    'agr.submitFail': 'Submission failed. Please retry later or contact the operator via Feedback.',
+    'agr.pending': 'Verifying…',
+    'agr.text': '<h3>Article 1. Service and price</h3><p>1.1 This agreement is between the user and the XIAOXING website (creator: 小柚子, “the site”) for the DeepSeek Monthly service.</p><p>1.2 The service provides access to DeepSeek and other quality models available on the site, faster responses and longer context memory (up to 5 chapters).</p><p>1.3 Price: CNY 40 per month (30 days).</p><h3>Article 2. Payment</h3><p>2.1 Payment is made via the creator’s personal payment code.</p><p>2.2 The user should put their username in the payment note for verification.</p><p>2.3 Payment does not activate the service immediately: the operator verifies the actual receipt first. Before verification the user may request a refund at any time.</p><h3>Article 3. Term and renewal</h3><p>3.1 One month runs for 30 days from the actual payment date (as recorded).</p><p>3.2 There is no auto-renewal and no automatic charging: when the term ends the service stops, and renewal is entirely the user’s choice.</p><p>3.3 Renewal requires signing this agreement again and paying again.</p><h3>Article 4. Refunds</h3><p>4.1 Before verification and activation, the user may request a full refund anytime via “💬 Feedback”.</p><p>4.2 After activation the service is generally non-refundable due to its immediate nature; if the service is unusable for 72 consecutive hours due to the site, a pro-rated refund for the remaining days may be requested.</p><p>4.3 Verified refunds are returned via the original channel, usually within 7 business days.</p><h3>Article 5. Usage rules</h3><p>5.1 Benefits are for the account owner only; reselling, sharing or renting is prohibited.</p><p>5.2 Users must follow the site’s Notice & Rules and the AI providers’ terms, and must not generate illegal or infringing content.</p><p>5.3 Violations may result in service termination without refund.</p><h3>Article 6. Disclaimer</h3><p>6.1 The site makes best efforts, but AI output is not professional advice or a promise.</p><p>6.2 Temporary unavailability caused by third-party providers, networks or force majeure is not compensated, but the site will work to restore service.</p><p>6.3 The site may adjust prices or content with advance notice; paid periods are unaffected.</p><h3>Article 7. Personal information</h3><p>7.1 The site collects only what is needed for activation and verification (username, payment records).</p><p>7.2 Payment details are processed by the payment platform; the site does not access bank account information.</p><h3>Article 8. Disputes</h3><p>8.1 This agreement is governed by the laws of the People’s Republic of China.</p><p>8.2 Disputes are resolved by friendly negotiation first; otherwise they may be brought to the competent court where the site operator is located.</p>',
     'btn.settings': '⚙ Settings', 'btn.settingsTitle': 'Settings',
     'co.layout': 'Layout', 'co.layoutToggleTitle': 'Toggle layout: stacked / split',
     'set.title': '⚙ Settings', 'set.ui': 'Interface', 'set.font': 'Font size', 'set.layout': 'Layout',
@@ -816,6 +866,31 @@ const I18N = {
     'vip.l1': 'Все плюсы Про + топ-модели', 'vip.l2': 'Поиск ИИ-моделей по всему миру', 'vip.l3': 'Память до 10 глав · поддержка',
     'vip.btn': 'Скоро', 'vip.btnToast': 'Во время беты бесплатно',
     'vip.foot': 'Во время беты все планы бесплатны.',
+    'vip.deepseek': 'DeepSeek ежемесячно', 'vip.deepseekPrice': '¥40 / месяц',
+    'vip.d1': 'Стабильный доступ к DeepSeek и другим качественным моделям (отдельно от бесплатной квоты)',
+    'vip.d2': 'Быстрее ответы · длиннее память (до 5 глав)',
+    'vip.d3': 'Оплата помесячно · без автопродления · вы решаете каждый месяц',
+    'vip.deepseekBtn': 'Подписать договор и оформить',
+    'agr.title': '📄 Договор о ежемесячной подписке DeepSeek',
+    'agr.agreeLabel': 'Я прочитал(а) и согласен(на) со всеми условиями выше',
+    'agr.signLabel': 'Электронная подпись (введите имя пользователя)',
+    'agr.signPh': 'Введите имя пользователя как электронную подпись',
+    'agr.signBtn': 'Подписать и показать код оплаты',
+    'agr.payNote': 'Оплатите ¥40 по личному коду ниже и следуйте шагам.',
+    'agr.amount': 'Сумма: ¥40.00 (один месяц обслуживания)',
+    'agr.step1': 'Отсканируйте код в WeChat / Alipay',
+    'agr.step2': 'Укажите имя пользователя в примечании к платежу для сверки',
+    'agr.step3': 'После оплаты нажмите «Я оплатил(а) — отправить на проверку» ниже',
+    'agr.waitNote': 'Администратор проверит поступление и активирует услугу в течение 24 часов; до проверки можно в любой момент запросить полный возврат.',
+    'agr.paidBtn': 'Я оплатил(а) — отправить на проверку',
+    'agr.hintNeedAgree': 'Сначала отметьте «Я прочитал(а) и согласен(на)»',
+    'agr.hintNeedLogin': 'Войдите в аккаунт перед подписанием',
+    'agr.hintSignMismatch': 'Подпись должна совпадать с именем пользователя',
+    'agr.signedOk': 'Договор подписан — завершите оплату',
+    'agr.submitted': 'Отправлено! Администратор проверит оплату в течение 24 часов; до активации можно запросить возврат.',
+    'agr.submitFail': 'Не удалось отправить. Повторите позже или свяжитесь с администратором через «Обратная связь».',
+    'agr.pending': 'Проверяем…',
+    'agr.text': '<h3>Статья 1. Услуга и цена</h3><p>1.1 Настоящий договор заключается между пользователем и сайтом XIAOXING (автор: 小柚子, «сайт») об услуге «DeepSeek ежемесячно».</p><p>1.2 Услуга даёт доступ к DeepSeek и другим качественным моделям сайта, более быстрые ответы и более длинную память (до 5 глав).</p><p>1.3 Цена: 40 юаней в месяц (30 дней).</p><h3>Статья 2. Оплата</h3><p>2.1 Оплата производится по личному коду автора.</p><p>2.2 В примечании к платежу укажите имя пользователя для сверки.</p><p>2.3 Оплата не активирует услугу мгновенно: администратор проверяет фактическое поступление. До проверки можно запросить возврат в любое время.</p><h3>Статья 3. Срок и продление</h3><p>3.1 Один месяц — 30 дней с даты фактической оплаты (по учёту).</p><p>3.2 Автопродления и автоматического списания нет: по истечении срока услуга останавливается, продление — только по вашему решению.</p><p>3.3 Продление требует повторного подписания договора и оплаты.</p><h3>Статья 4. Возвраты</h3><p>4.1 До проверки и активации можно в любой момент запросить полный возврат через «💬 Обратная связь».</p><p>4.2 После активации возврат, как правило, не производится ввиду немедленного характера услуги; при недоступности услуги 72 часа подряд по вине сайта возможен пропорциональный возврат за оставшиеся дни.</p><p>4.3 Подтверждённые возвраты отправляются по исходному каналу, обычно в течение 7 рабочих дней.</p><h3>Статья 5. Правила использования</h3><p>5.1 Льготы — только для владельца аккаунта; перепродажа, передача и аренда запрещены.</p><p>5.2 Соблюдайте «Уведомление и правила» сайта и условия ИИ-провайдеров; нельзя генерировать незаконный или нарушающий права контент.</p><p>5.3 За нарушения услуга может быть остановлена без возврата.</p><h3>Статья 6. Отказ от ответственности</h3><p>6.1 Сайт старается обеспечить качество, но результат ИИ не является профессиональной консультацией или обещанием.</p><p>6.2 Временная недоступность из-за сторонних провайдеров, сети или форс-мажора не компенсируется; сайт приложит усилия для восстановления.</p><p>6.3 Сайт может менять цены или состав услуг с предварительным уведомлением; оплаченные периоды не затрагиваются.</p><h3>Статья 7. Персональные данные</h3><p>7.1 Сайт собирает только необходимое для активации и сверки (имя пользователя, записи об оплате).</p><p>7.2 Данные платежа обрабатывает платёжная платформа; сайт не имеет доступа к банковским реквизитам.</p><h3>Статья 8. Споры</h3><p>8.1 Договор регулируется законодательством КНР.</p><p>8.2 Споры решаются переговорами; при недостижении согласия — в компетентном суде по месту оператора сайта.</p>',
     'vip.searchTitle': '🔍 Поиск ИИ-моделей по всему миру', 'vip.searchPh': 'Ключевое слово (deepseek / qwen / llama…)',
     'vip.searchBtn': 'Искать', 'vip.searching': 'Ищу модели…', 'vip.searchFail': 'Поиск не удался — попробуйте позже',
     'vip.searchEmpty': 'Модели не найдены', 'vip.copy': 'Копировать ID', 'vip.copied': 'ID скопирован',
@@ -1601,9 +1676,9 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.3.3';
-const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
-const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
+const APP_VERSION = '4.4.0';
+const PLAN_LEVEL = { free: 0, pro: 1, deepseek: 2, flag: 3 };
+const PLAN_PREV_MAX = { free: 2, pro: 5, deepseek: 5, flag: 10 };
 const state = {
   novels: [], chapters: [], outline: [], characters: [], memories: [], chats: [], papers: [],
   currentNovelId: null, currentChapterId: null, currentPaperId: null,
@@ -5346,8 +5421,9 @@ function denyStorage() {
 
 /* ---------------- 会员方案 ---------------- */
 function planName(p) {
-  return p === 'pro' ? t('vip.pro') : (p === 'flag' ? t('vip.flag') : t('vip.free'));
+  return p === 'pro' ? t('vip.pro') : (p === 'flag' ? t('vip.flag') : (p === 'deepseek' ? t('vip.deepseek') : t('vip.free')));
 }
+function deepseekPending() { try { return localStorage.getItem('nebula-deepseek-pending') === '1'; } catch (e) { return false; } }
 function renderVip() {
   const banner = $('#vip-trial-banner');
   if (banner) {
@@ -5360,11 +5436,20 @@ function renderVip() {
     if (!btn) return;
     const isCurrent = btn.dataset.plan === eff;
     card.classList.toggle('current', isCurrent);
+    if (btn.dataset.plan === 'deepseek') {
+      // DeepSeek 月度会员：按流程签署协议并付款，不由普通方案按钮直接开通
+      btn.disabled = isCurrent;
+      if (isCurrent) btn.textContent = t('vip.freeBtn');
+      else if (deepseekPending()) btn.textContent = t('agr.pending');
+      else btn.textContent = t('vip.deepseekBtn');
+      return;
+    }
     btn.disabled = isCurrent || authMode !== 'local';
     btn.textContent = isCurrent ? t('vip.freeBtn') : (authMode === 'local' ? t('vip.btn') : authModeCopy().managedPlan);
   });
 }
 function setPlan(p) {
+  if (p === 'deepseek') { openAgreementModal(); return; }
   if (authMode !== 'local') return toast(authModeCopy().managedPlan, 'warn');
   if (state.settings.plan === p) return;
   state.settings.plan = p;
@@ -5373,6 +5458,80 @@ function setPlan(p) {
   fillPresetSelect();
   applyUIPrefs();
   toast(t('toast.planChanged', { p: planName(p) }), 'ok', 3500);
+}
+
+/* ---------------- DeepSeek 月度会员：付费协议 + 收款码流程 ---------------- */
+const AGREEMENT_VER = 'v1';
+const AGREEMENT_ACCEPT_KEY = 'nebula-deepseek-agree';
+function agreementAccepted() { try { return localStorage.getItem(AGREEMENT_ACCEPT_KEY) === AGREEMENT_VER; } catch (e) { return false; } }
+function setAgrHint(txt) {
+  const el = $('#agr-hint');
+  el.textContent = txt || '';
+  el.className = 'auth-hint' + (txt ? ' err' : '');
+}
+function refreshAgreementUI() {
+  const signed = agreementAccepted();
+  $('#agr-sign-section').hidden = signed;
+  $('#agr-pay-section').hidden = !signed;
+}
+function openAgreementModal() {
+  closeModal('modal-vip');
+  $('#agr-text').innerHTML = t('agr.text');
+  $('#agr-agree-chk').checked = false;
+  $('#agr-sign-name').value = state.currentUser || '';
+  $('#btn-agr-sign').disabled = true;
+  setAgrHint('');
+  refreshAgreementUI();
+  openModal('modal-agreement');
+}
+function updateAgrSignBtn() {
+  const ok = $('#agr-agree-chk').checked && $('#agr-sign-name').value.trim().length > 0;
+  $('#btn-agr-sign').disabled = !ok;
+}
+async function signAgreement() {
+  const name = $('#agr-sign-name').value.trim();
+  if (!$('#agr-agree-chk').checked) return setAgrHint(t('agr.hintNeedAgree'));
+  if (!state.currentUser) return setAgrHint(t('agr.hintNeedLogin'));
+  if (name !== state.currentUser) return setAgrHint(t('agr.hintSignMismatch'));
+  try {
+    if (authMode === 'managed') await serverAuthRequest('agreement', { version: AGREEMENT_VER });
+    localStorage.setItem(AGREEMENT_ACCEPT_KEY, AGREEMENT_VER);
+    setAgrHint('');
+    refreshAgreementUI();
+    toast(t('agr.signedOk'), 'ok', 3500);
+  } catch (e) {
+    setAgrHint(authModeCopy().failed);
+  }
+}
+async function submitDeepseekPaid() {
+  const btn = $('#btn-agr-paid');
+  if (!state.currentUser) return setAgrHint(t('agr.hintNeedLogin'));
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/3254643926@qq.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: '【晓星付费核对】DeepSeek 月度会员 40 元',
+        message: `用户 ${state.currentUser} 已付款 ¥40，申请开通 DeepSeek 月度会员。\n已签署付费协议版本：${AGREEMENT_VER}\n付款时间：${new Date().toLocaleString()}\n请核对收款记录后开通（后台登记 40 元收款即自动开通 30 天）。`,
+        user: state.currentUser,
+        page: location.href,
+        time: new Date().toISOString()
+      })
+    });
+    const j = await res.json().catch(() => null);
+    if (j && (j.success === true || j.success === 'true')) {
+      localStorage.setItem('nebula-deepseek-pending', '1');
+      closeModal('modal-agreement');
+      toast(t('agr.submitted'), 'ok', 6000);
+    } else {
+      throw new Error('fail');
+    }
+  } catch (e) {
+    setAgrHint(t('agr.submitFail'));
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 /* ---------------- 全网 AI 模型搜索（OpenRouter 公开目录） ---------------- */
@@ -6025,7 +6184,7 @@ function trialLeft() {
 }
 function effectivePlan() {
   if (authMode === 'managed') {
-    if (!serverUser || !['free','pro','flag'].includes(serverUser.plan)) return 'free';
+    if (!serverUser || !['free','pro','deepseek','flag'].includes(serverUser.plan)) return 'free';
     // 管理员账号与白名单账号自动拥有网站最高权限（旗舰版）
     if (serverUser.isAdmin || serverUser.whitelisted) return 'flag';
     // A server-reported trial must not outlive its deadline if the connection drops.
@@ -7248,6 +7407,11 @@ function bindEvents() {
     const oc = e.target.closest('[data-orcopy]');
     if (oc) { copyText(oc.dataset.orcopy); }
   });
+  // DeepSeek 月度会员：付费协议与收款流程
+  $('#agr-agree-chk').addEventListener('change', updateAgrSignBtn);
+  $('#agr-sign-name').addEventListener('input', updateAgrSignBtn);
+  $('#btn-agr-sign').addEventListener('click', signAgreement);
+  $('#btn-agr-paid').addEventListener('click', submitDeepseekPaid);
   // 全网模型搜索
   $('#btn-or-search').addEventListener('click', searchModels);
   $('#or-search-input').addEventListener('keydown', e => { if (e.key === 'Enter') searchModels(); });
