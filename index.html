@@ -10,6 +10,8 @@
 <meta name="author" content="晓星 XIAOXING" />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#04060e" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="icons/xiaoxing-192.png" />
 <link rel="canonical" href="https://akc071001-max.github.io/xiaoxing/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="晓星 XIAOXING" />
@@ -20,12 +22,12 @@
 <meta property="og:image" content="https://akc071001-max.github.io/xiaoxing/og-image.png" />
 <meta name="twitter:card" content="summary" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"晓星 XIAOXING","alternateName":"XIAOXING Novel Studio","url":"https://akc071001-max.github.io/xiaoxing/","description":"免费全风格小说在线创作平台：风格表格、大纲、角色卡、记忆库、AI 剧情引擎、作家文风联网学习、英语词典，数据保存在本地浏览器。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"featureList":["小说写作","小说大纲","角色卡","AI剧情引擎","作家文风学习","英语词典"]}
+{"@context":"https://schema.org","@type":"WebApplication","name":"晓星 XIAOXING","alternateName":"XIAOXING Novel Studio","url":"https://akc071001-max.github.io/xiaoxing/","description":"免费全风格小说在线创作平台：风格表格、大纲、角色卡、记忆库、AI 剧情引擎、作家文风联网学习、英语词典，数据保存在本地浏览器。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","inLanguage":["zh-CN","en","ru"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"featureList":["小说写作","小说大纲","角色卡","AI剧情引擎","作家文风学习","英语词典"]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=3.7.2" />
+<link rel="stylesheet" href="css/style.css?v=4.1.0" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -46,8 +48,10 @@
       <div class="brand-name" data-i18n-html="brand.name">晓星 <span>XIAOXING</span></div>
       <div class="brand-sub" data-i18n="brand.sub">全风格小说创作台</div>
     </div>
+    <button class="tb-btn accent-btn" type="button" id="btn-quick-start" aria-haspopup="dialog" data-i18n-title="quick.title" title="新手工作台">
+      <span aria-hidden="true">↗</span><span class="quick-start-label" data-i18n="quick.title">新手工作台</span>
+    </button>
   </div>
-  <button class="icon-btn mobile-only" id="btn-panel-toggle" data-i18n-title="top.panelToggle" title="章节 / 大纲面板">☰</button>
   <div class="board-switch">
     <button class="chip mini on" id="board-novel" data-i18n="board.novel">📖 小说</button>
     <button class="chip mini" id="board-paper" data-i18n="board.paper">📄 论文</button>
@@ -60,6 +64,7 @@
     <div id="stats" class="stats"></div>
     <button class="tb-btn" id="btn-vip" data-i18n="btn.vip" data-i18n-title="btn.vipTitle" title="会员中心（试运营）">💎 会员</button>
     <button class="tb-btn" id="btn-settings" data-i18n="btn.settings" data-i18n-title="btn.settingsTitle" title="设置">⚙ 设置</button>
+    <button class="tb-btn mobile-tool" type="button" id="btn-mobile-assistant" data-i18n-title="asst.title" title="创作小助手" aria-label="创作小助手">✦</button>
     <button id="btn-profile" class="profile-btn" data-i18n-title="btn.profileTitle" title="个人档案（头像 / 昵称）">
       <span id="profile-avatar" class="profile-avatar">✦</span>
       <span id="profile-name" data-i18n="profile.default">未设置昵称</span>
@@ -77,10 +82,16 @@
     <button class="nav-item" data-module="memories"><span class="nav-ic">◬</span><span class="nav-txt" data-i18n="nav.memories">记忆</span></button>
   </nav>
 
+  <div id="mobile-paper-nav" class="mobile-tool">
+    <button class="btn" type="button" id="btn-mobile-paper-list" aria-controls="side-panel" aria-expanded="false" data-i18n="p.list">论文列表</button>
+    <button class="btn accent-btn" type="button" id="btn-mobile-paper-ai" aria-controls="ai-panel" aria-expanded="false" data-i18n="btn.aiToggle">✦ AI 引擎</button>
+  </div>
+
   <aside id="side-panel">
     <div id="panel-head">
       <div id="panel-title">章节</div>
       <div id="panel-actions"></div>
+      <button class="icon-btn mobile-tool" type="button" id="btn-mobile-panel-close" data-i18n-title="common.close" title="关闭" aria-label="关闭">✕</button>
     </div>
     <div id="panel-body" class="scroll-area"></div>
   </aside>
@@ -96,14 +107,17 @@
       </select>
       <span class="meta-chip" id="word-count">0 字</span>
       <span class="meta-chip save-chip" id="save-state">—</span>
+      <button class="btn mini draft-history-btn" id="btn-chapter-history" type="button" disabled>版本历史</button>
+      <button class="btn mini" id="btn-manuscript-search" type="button" aria-haspopup="dialog" disabled>全文查找</button>
       <span class="spacer"></span>
       <button class="tb-btn" id="btn-focus" data-i18n="btn.focus" data-i18n-title="btn.focusTitle" title="专注写作模式（隐藏面板）">⛶ 专注</button>
       <button class="tb-btn accent-btn" id="btn-ai-toggle" data-i18n="btn.aiToggle" data-i18n-title="btn.aiToggleTitle" title="AI 剧情引擎">✦ AI 引擎</button>
     </div>
     <div id="chapter-outline-bar">
       <div class="co-head">
-        <span class="co-label" data-i18n="co.label">📋 本章大纲</span>
-        <button class="btn mini mobile-only" id="btn-outline-toggle" data-i18n="co.outlineToggle">⌄ 大纲</button>
+        <span class="co-label desktop-brief-label" data-i18n="co.label">📋 本章大纲</span>
+        <button class="btn mobile-tool mobile-brief-toggle" type="button" id="btn-mobile-outline" aria-controls="chapter-outline" aria-expanded="false" data-i18n="co.label">📋 本章大纲</button>
+        <button class="btn coach-entry" id="btn-chapter-coach" type="button" disabled>构思这一章</button>
         <button class="btn primary gen-btn" id="btn-gen-chapter" data-i18n="co.gen">🚀 开始创作</button>
         <button class="btn" id="btn-gen-again" data-i18n="co.again" data-i18n-title="co.againTitle" title="对结果不满意？重新生成">🔄 重新生成</button>
         <span class="spacer"></span>
@@ -112,11 +126,26 @@
       </div>
       <textarea id="chapter-outline" rows="3" data-i18n-ph="co.ph" placeholder="输入本章大纲：本章要发生什么、出现哪些人物、埋什么伏笔…… 输入后点「⚡ 联网生成正文」"></textarea>
     </div>
+    <div id="mobile-novel-writing" class="mobile-writing-tools" data-writing-board="novel" hidden>
+      <details>
+        <summary><span aria-hidden="true">⌨</span><span data-writing-label="keys">写作键</span></summary>
+        <div class="mobile-writing-keys" role="group" data-writing-area="tools">
+          <button type="button" class="btn" data-writing-key="quotes">“ ”</button>
+          <button type="button" class="btn" data-writing-key="brackets">（ ）</button>
+          <button type="button" class="btn" data-writing-key="dash">——</button>
+          <button type="button" class="btn" data-writing-key="ellipsis">……</button>
+          <button type="button" class="btn" data-writing-key="paragraph">↵</button>
+          <button type="button" class="btn" data-writing-key="end">↓</button>
+        </div>
+      </details>
+      <button type="button" class="btn mobile-writing-save" data-writing-key="save" aria-controls="editor"><span aria-hidden="true">✓</span><span data-writing-label="save">保存</span></button>
+    </div>
     <textarea id="editor" spellcheck="false" data-i18n-ph="ed.editorPh" placeholder="全新章节，从这里开始你的宇宙……（Ctrl+S 保存 · 右侧 ✦ 召唤 AI 引擎）"></textarea>
     <div id="editor-statusbar">
       <span id="status-words">字数：0</span>
       <span id="status-pos">行 1 · 列 1</span>
       <span id="status-chars">字符 0</span>
+      <button id="btn-review-chapter" class="btn mini review-entry" type="button" aria-haspopup="dialog">稿件自检</button>
     </div>
 
     <div id="paper-zone">
@@ -131,29 +160,48 @@
           <option value="zh">中文</option>
           <option value="en">English</option>
           <option value="ru">Русский</option>
-          <option value="ja">日本語</option>
-          <option value="fr">Français</option>
-          <option value="de">Deutsch</option>
-          <option value="es">Español</option>
+
+
+
+
         </select>
         <span class="meta-chip" id="paper-word-count">0 字</span>
         <span class="meta-chip save-chip" id="paper-save-state">—</span>
+      <button class="btn mini draft-history-btn" id="btn-paper-history" type="button" disabled>版本历史</button>
         <span class="spacer"></span>
+        <button class="btn" id="btn-paper-guide" type="button" aria-haspopup="dialog" data-i18n="p.guide">写作向导</button>
+        <button type="button" class="btn" id="btn-paper-sources" aria-haspopup="dialog" data-i18n="refs.open" disabled>文献笔记</button>
         <button class="btn primary gen-btn" id="btn-paper-gen" data-i18n="p.gen">📚 检索并生成论文</button>
         <button class="btn" id="btn-paper-again" data-i18n="p.again" data-i18n-title="co.againTitle" title="对结果不满意？重新生成">🔄 重新生成</button>
       </div>
       <div id="paper-topic-bar">
-        <span class="co-label" data-i18n="p.topicLabel">📄 论文主题 / 要求</span>
+        <span class="co-label desktop-brief-label" data-i18n="p.topicLabel">📄 论文主题 / 要求</span>
+        <button class="btn mobile-tool mobile-brief-toggle" type="button" id="btn-mobile-topic" aria-controls="paper-topic" aria-expanded="false" data-i18n="p.topicLabel">📄 论文主题 / 要求</button>
         <textarea id="paper-topic" rows="3" data-i18n-ph="p.topicPh" placeholder="输入论文主题与研究要求…（生成时会联网检索文献，正文带引用编号与出处链接）"></textarea>
       </div>
       <div id="paper-free-note">
         <span data-i18n="p.freeNote"></span>
         <button class="btn mini primary" id="btn-paper-upgrade" data-i18n="p.upgrade">💎 升级获得更佳正文</button>
       </div>
+      <div id="mobile-paper-writing" class="mobile-writing-tools" data-writing-board="paper" hidden>
+        <details>
+          <summary><span aria-hidden="true">⌨</span><span data-writing-label="keys">写作键</span></summary>
+          <div class="mobile-writing-keys" role="group" data-writing-area="tools">
+            <button type="button" class="btn" data-writing-key="quotes">“ ”</button>
+            <button type="button" class="btn" data-writing-key="brackets">（ ）</button>
+            <button type="button" class="btn" data-writing-key="dash">——</button>
+            <button type="button" class="btn" data-writing-key="ellipsis">……</button>
+            <button type="button" class="btn" data-writing-key="paragraph">↵</button>
+            <button type="button" class="btn" data-writing-key="end">↓</button>
+          </div>
+        </details>
+        <button type="button" class="btn mobile-writing-save" data-writing-key="save" aria-controls="paper-editor"><span aria-hidden="true">✓</span><span data-writing-label="save">保存</span></button>
+      </div>
       <textarea id="paper-editor" spellcheck="false" data-i18n-ph="p.editorPh" placeholder="论文正文将生成在这里：正文带 [1][2] 引用标注，文末附参考文献列表（含出处与网页链接）…"></textarea>
       <div id="paper-statusbar">
         <span id="paper-status-words">字数：0</span>
         <span id="paper-status-pos">行 1 · 列 1</span>
+        <button id="btn-review-paper" class="btn mini review-entry" type="button" aria-haspopup="dialog">稿件自检</button>
       </div>
     </div>
   </main>
@@ -169,6 +217,7 @@
         <button class="icon-btn" id="btn-ai-close" data-i18n-title="ai.closeTitle" title="收起面板">✕</button>
       </div>
     </div>
+    <p id="ai-data-note" data-i18n="ai.dataNote">使用 AI 时会发送相关上下文；手写和本地保存不发送稿件。</p>
     <div id="ai-context">
       <details id="ai-ctx-details">
         <summary data-i18n="ai.ctx">上下文注入 · 记忆范围</summary>
@@ -288,6 +337,7 @@
             <div class="style-options" data-field="lang">
               <button class="chip" data-val="zh">中文</button>
               <button class="chip" data-val="en">English</button>
+              <button class="chip" data-val="ru">Русский</button>
             </div>
           </div>
           <div class="style-row">
@@ -334,36 +384,114 @@
   </div>
 </div>
 
+<dialog id="modal-paper-sources" class="modal wide paper-notebook" aria-labelledby="paper-source-heading">
+  <div class="modal-head">
+    <h2 class="modal-title" id="paper-source-heading">文献笔记</h2>
+    <button type="button" class="icon-btn" id="paper-source-close" aria-label="关闭文献笔记">✕</button>
+  </div>
+  <div class="modal-body">
+    <p class="paper-notebook-intro" id="paper-source-intro"></p>
+    <div class="paper-notebook-tabs">
+      <button type="button" class="btn" id="paper-source-tab-library" aria-pressed="false" aria-controls="paper-source-library"></button>
+      <button type="button" class="btn" id="paper-source-tab-form" aria-pressed="true" aria-controls="paper-source-form"></button>
+    </div>
+    <div class="paper-notebook-columns">
+      <form id="paper-source-form" class="paper-notebook-form">
+        <h3 id="paper-source-form-title"></h3>
+        <label><span id="paper-source-title-label"></span><input class="input" id="paper-source-title" type="text" maxlength="180" required></label>
+        <label><span id="paper-source-url-label"></span><input class="input" id="paper-source-url" type="text" inputmode="url" maxlength="600" required></label>
+        <div class="paper-notebook-meta">
+          <label><span id="paper-source-authors-label"></span><input class="input" id="paper-source-authors" type="text" maxlength="160"></label>
+          <label><span id="paper-source-year-label"></span><input class="input" id="paper-source-year" type="text" inputmode="numeric" maxlength="12"></label>
+        </div>
+        <label><span id="paper-source-venue-label"></span><input class="input" id="paper-source-venue" type="text" maxlength="140"></label>
+        <label><span id="paper-source-notes-label"></span><textarea class="input" id="paper-source-notes" rows="3" maxlength="1600"></textarea></label>
+        <label class="source-note-check"><input id="paper-source-read" type="checkbox"><span id="paper-source-read-label"></span></label>
+        <label class="source-note-check"><input id="paper-source-ai" type="checkbox"><span id="paper-source-ai-label"></span></label>
+        <div class="source-note-actions"><button class="btn primary" id="paper-source-submit" type="submit"></button><button class="btn" id="paper-source-reset" type="button"></button></div>
+        <output id="paper-source-form-status" class="source-note-meta" aria-live="polite"></output>
+      </form>
+      <section id="paper-source-library" class="paper-notebook-library" aria-labelledby="paper-source-list-title">
+        <h3 id="paper-source-list-title"></h3>
+        <div id="paper-source-list"></div>
+        <form id="paper-source-search" class="paper-notebook-search">
+          <h3 id="paper-source-search-title"></h3>
+          <p class="source-note-meta" id="paper-source-search-tip"></p>
+          <input class="input" id="paper-source-query" type="search" maxlength="180" required>
+          <button type="submit" class="btn" id="paper-source-search-submit"></button>
+        </form>
+        <output id="paper-source-search-status" class="source-note-meta" aria-live="polite"></output>
+        <div id="paper-source-results"></div>
+      </section>
+    </div>
+  </div>
+</dialog>
+
+<div class="modal-overlay" id="modal-paper-guide" hidden>
+  <section class="modal paper-guide" role="dialog" aria-modal="true" aria-labelledby="paper-guide-title">
+    <header class="modal-head">
+      <h2 class="modal-title" id="paper-guide-title" data-i18n="p.guideTitle">论文写作路线</h2>
+      <button class="icon-btn modal-close" type="button" data-close="modal-paper-guide" data-i18n-title="common.close">✕</button>
+    </header>
+    <div class="modal-body">
+      <ol class="paper-guide-steps">
+        <li data-i18n="p.step1"></li>
+        <li data-i18n="p.step2"></li>
+        <li data-i18n="p.step3"></li>
+      </ol>
+      <section class="paper-guide-section" aria-labelledby="paper-guide-start">
+        <h3 id="paper-guide-start" data-i18n="p.guideStart">选择一个起步模板</h3>
+        <p id="paper-guide-template-note"></p>
+        <div class="paper-guide-tools">
+          <button class="btn" type="button" data-paper-template="review" data-i18n="p.tplReview">文献综述</button>
+          <button class="btn" type="button" data-paper-template="compare" data-i18n="p.tplCompare">比较分析</button>
+          <button class="btn" type="button" data-paper-template="empirical" data-i18n="p.tplEmpirical">实证研究</button>
+        </div>
+      </section>
+      <section class="paper-guide-section">
+        <button class="btn primary" type="button" id="btn-paper-audit" data-i18n="p.audit">核对正文引用</button>
+        <button type="button" class="btn" id="paper-source-open-notes" data-i18n="refs.open">文献笔记</button>
+        <p data-i18n="p.auditScope"></p>
+        <output id="paper-guide-audit-result" role="status" aria-live="polite"></output>
+      </section>
+    </div>
+    <footer class="modal-foot">
+      <button class="btn" type="button" data-close="modal-paper-guide" data-i18n="common.close">关闭</button>
+    </footer>
+  </section>
+</div>
+
 <!-- AI 模型接入 -->
 <div class="modal-overlay" id="modal-ai" hidden>
-  <div class="modal wide">
+  <div class="modal wide model-setup" role="dialog" aria-modal="true" aria-labelledby="model-setup-title">
     <div class="modal-head">
-      <div class="modal-title" data-i18n="aiset.title">⚙ AI 模型接入</div>
-      <button class="icon-btn modal-close" data-close="modal-ai">✕</button>
+      <div class="modal-title" id="model-setup-title" data-i18n="aiset.title">⚙ AI 模型接入</div>
+      <button class="icon-btn modal-close" data-close="modal-ai" data-i18n-title="common.close">✕</button>
     </div>
-    <div class="modal-body ai-settings">
-      <div class="ai-left">
-        <div class="ai-section-title" data-i18n="aiset.list">已接入模型</div>
-        <div id="provider-list" class="scroll-area prov-list-max"></div>
-        <button class="btn ghost" id="btn-add-provider" data-i18n="aiset.add">＋ 添加模型</button>
-        <div class="ai-section-title" style="margin-top:18px" data-i18n="aiset.accent">界面主题色</div>
-        <div class="accent-row">
-          <button class="accent-dot" data-accent="cyan" style="--c:#00e0ff" data-i18n-title="aColor.cyan" title="青色"></button>
-          <button class="accent-dot" data-accent="magenta" style="--c:#ff4fd8" data-i18n-title="aColor.magenta" title="品红"></button>
-          <button class="accent-dot" data-accent="green" style="--c:#3ddc97" data-i18n-title="aColor.green" title="翠绿"></button>
-          <button class="accent-dot" data-accent="gold" style="--c:#ffb454" data-i18n-title="aColor.gold" title="琥珀"></button>
+    <div class="modal-body model-setup-body">
+      <section class="model-current" aria-labelledby="model-current-label">
+        <span class="ai-section-title" id="model-current-label" data-i18n="model.active">当前模型</span>
+        <strong id="model-active-name"></strong>
+        <div class="model-muted" id="model-active-meta"></div>
+        <div class="model-actions">
+          <button class="btn primary" type="button" id="model-use-default" data-i18n="model.useDefault">使用内置模型</button>
+          <button class="btn" type="button" id="model-test-active" data-i18n="model.testActive">测试当前模型</button>
         </div>
-        <div class="ai-section-title" style="margin-top:18px" data-i18n="aiset.compare">模型适配对比（已适配主流 AI）</div>
-        <div class="compare-table">
-          <div class="cmp-row"><span class="cmp-name">Pollinations（内置默认）</span><span class="cmp-status free" data-i18n="aiset.stFree">免费 · 免密钥 · 已适配</span></div>
-          <div class="cmp-row"><span class="cmp-name">DeepSeek · Kimi · GLM · 千问 · 硅基流动</span><span class="cmp-status tier" data-i18n="aiset.stFreeTier">有免费额度 · 需 Key · 已适配</span></div>
-          <div class="cmp-row"><span class="cmp-name">OpenAI · Gemini · Groq · Mistral · OpenRouter</span><span class="cmp-status paid" data-i18n="aiset.stPaid">付费 · 需 Key · 已适配（会员可协助接入）</span></div>
-        </div>
-        <label class="ctx-item" style="margin-top:12px"><input type="checkbox" id="set-auto-model" checked /> <span data-i18n="aiset.auto">自动切换备用模型（当前模型失败时自动换下一个可用模型）</span></label>
-        <div class="ai-help" data-i18n-html="aiset.help"></div>
+        <p class="model-muted" data-i18n="model.intro">内置模型无需填密钥；也可接入自己账户里的模型，或连接本机已运行的模型。</p>
+      </section>
+      <div class="model-actions model-setup-tools">
+        <button class="btn" type="button" id="btn-add-provider" data-i18n="model.addCloud">接入其他模型</button>
+        <button class="btn" type="button" id="model-add-local" data-i18n="model.addLocal">连接本机模型</button>
       </div>
-      <div class="ai-right">
-        <div class="ai-section-title" data-i18n="aiset.config">模型配置</div>
+      <section class="model-library" aria-labelledby="model-library-label">
+        <div class="ai-section-title" id="model-library-label" data-i18n="aiset.list">已接入模型</div>
+        <div id="provider-list" class="scroll-area prov-list-max"></div>
+        <label class="ctx-item"><input type="checkbox" id="set-auto-model" /> <span data-i18n="aiset.auto">自动切换备用模型（当前模型失败时自动换下一个可用模型）</span></label>
+      </section>
+      <div id="model-test-status" class="model-test-status" role="status" aria-live="polite" hidden></div>
+      <section id="model-form" class="model-form" aria-labelledby="model-form-label" hidden>
+        <div class="ai-section-title" id="model-form-label" data-i18n="aiset.config">模型配置</div>
+        <p id="model-form-guide" class="model-muted"></p>
         <div class="form-col">
           <label><span data-i18n="aiset.preset">预设（快速填充）</span>
             <select id="preset-select"><option value="">— 选择预设 —</option></select>
@@ -371,33 +499,40 @@
           <label><span data-i18n="aiset.name">显示名称</span>
             <input id="prov-name" type="text" data-i18n-ph="aiset.namePh" placeholder="例如：本地 Qwen" autocomplete="off" />
           </label>
-          <label><span data-i18n="aiset.base">API 地址（Base URL，通常以 /v1 结尾）</span>
-            <input id="prov-base" type="text" placeholder="https://api.deepseek.com/v1" autocomplete="off" />
-          </label>
-          <label><span data-i18n="aiset.path">接口路径</span>
-            <input id="prov-path" type="text" data-i18n-ph="aiset.pathPh" placeholder="/chat/completions（Pollinations 填 /openai）" autocomplete="off" />
-          </label>
           <label><span data-i18n="aiset.key">API Key</span>
-            <input id="prov-key" type="password" data-i18n-ph="aiset.keyPh" placeholder="云端模型必填；本地模型留空" autocomplete="off" />
+            <input id="prov-key" type="password" data-i18n-ph="model.keyPh" placeholder="仅在服务商要求时填写" autocomplete="off" />
           </label>
-          <label><span data-i18n="aiset.model">模型名称</span>
-            <input id="prov-model" type="text" placeholder="deepseek-chat / qwen2.5:14b / local-model" autocomplete="off" />
-          </label>
-          <div class="form-row">
-            <label><span data-i18n="aiset.temp">温度（创造性）</span>
-              <input id="prov-temp" type="number" step="0.1" min="0" max="2" value="0.8" />
-            </label>
-            <label><span data-i18n="aiset.maxtok">最大输出 tokens</span>
-              <input id="prov-maxtok" type="number" min="64" max="128000" value="4096" />
-            </label>
-          </div>
+          <p class="model-muted" data-i18n="model.testPrivacy">测试只给所填的地址发送一句固定问候，不附带论文或小说内容。</p>
+          <details id="model-advanced">
+            <summary data-i18n="model.advanced">高级设置（地址、模型名、生成参数）</summary>
+            <div class="form-col">
+              <label><span data-i18n="aiset.base">API 地址（Base URL，通常以 /v1 结尾）</span>
+                <input id="prov-base" type="text" placeholder="https://api.deepseek.com/v1" autocomplete="off" />
+              </label>
+              <label><span data-i18n="aiset.path">接口路径</span>
+                <input id="prov-path" type="text" data-i18n-ph="aiset.pathPh" placeholder="/chat/completions（Pollinations 填 /openai）" autocomplete="off" />
+              </label>
+              <label><span data-i18n="aiset.model">模型名称</span>
+                <input id="prov-model" type="text" placeholder="deepseek-chat / qwen2.5:14b / local-model" autocomplete="off" />
+              </label>
+              <div class="form-row">
+                <label><span data-i18n="aiset.temp">温度（创造性）</span>
+                  <input id="prov-temp" type="number" step="0.1" min="0" max="2" value="0.8" />
+                </label>
+                <label><span data-i18n="aiset.maxtok">最大输出 tokens</span>
+                  <input id="prov-maxtok" type="number" min="64" max="128000" value="4096" />
+                </label>
+              </div>
+            </div>
+          </details>
         </div>
-        <div class="modal-foot" style="padding:14px 0 0">
-          <button class="btn ghost" id="btn-prov-test" data-i18n="aiset.test">测试连接</button>
-          <button class="btn danger" id="btn-prov-del" data-i18n="common.delete">删除</button>
-          <button class="btn primary" id="btn-prov-save" data-i18n="aiset.save">保存并启用</button>
+        <div class="modal-foot">
+          <button class="btn ghost" type="button" id="model-hide-form" data-i18n="common.cancel">取消</button>
+          <button class="btn ghost" type="button" id="btn-prov-test" data-i18n="aiset.test">测试连接</button>
+          <button class="btn danger" type="button" id="btn-prov-del" data-i18n="common.delete">删除</button>
+          <button class="btn primary" type="button" id="btn-prov-save" data-i18n="aiset.save">保存并启用</button>
         </div>
-      </div>
+      </section>
     </div>
   </div>
 </div>
@@ -411,9 +546,10 @@
     </div>
     <div class="modal-body">
       <p class="backup-desc" data-i18n="backup.desc">数据保存在本机浏览器（IndexedDB），清理浏览器数据会丢失，建议定期备份。单章与全书均无字数上限。</p>
-      <div class="backup-row"><div><b data-i18n="backup.txt">导出当前小说 TXT</b><span data-i18n="backup.txtSub">所有章节按顺序合并为纯文本文件</span></div><button class="btn" id="btn-export-txt" data-i18n="common.export">导出</button></div>
-      <div class="backup-row"><div><b data-i18n="backup.json">备份全部数据 JSON</b><span data-i18n="backup.jsonSub">书库、章节、大纲、角色、设定、记忆、对话</span></div><button class="btn" id="btn-export-json" data-i18n="backup.backupBtn">备份</button></div>
-      <div class="backup-row"><div><b data-i18n="backup.import">导入备份 JSON</b><span data-i18n="backup.importSub">将覆盖当前全部数据</span></div><button class="btn" id="btn-import-json" data-i18n="backup.importBtn">导入</button></div>
+      <div class="backup-row"><div><b data-i18n="backup.txt">导出当前作品 TXT</b><span data-i18n="backup.txtSub">导出小说章节或当前论文正文</span></div><button class="btn" id="btn-export-txt" data-i18n="common.export">导出</button></div>
+      <div class="backup-row"><div><b id="docx-title">导出 Word 文档</b><span id="docx-desc">下载可继续编辑的小说或论文（.docx）</span></div><button type="button" class="btn" id="btn-export-docx">下载 Word</button></div>
+      <div class="backup-row"><div><b data-i18n="backup.json">备份全部作品 JSON</b><span data-i18n="backup.jsonSub">含稿件、版本历史和对话；不含账号或模型密钥</span></div><button class="btn" id="btn-export-json" data-i18n="backup.backupBtn">备份</button></div>
+      <div class="backup-row"><div><b data-i18n="backup.import">导入备份 JSON</b><span data-i18n="backup.importSub">恢复为独立副本，保留现有数据</span></div><button class="btn" id="btn-import-json" data-i18n="backup.importBtn">导入</button></div>
       <div class="backup-row danger-row"><div><b data-i18n="backup.wipe">清除全部数据</b><span data-i18n="backup.wipeSub">不可恢复！</span></div><button class="btn danger" id="btn-wipe" data-i18n="backup.wipeBtn">清除</button></div>
       <input type="file" id="import-file" accept="application/json" hidden />
     </div>
@@ -715,7 +851,8 @@
       <div class="set-row">
         <span class="set-label" data-i18n="auth.account">登录账户</span>
         <span class="set-val" id="set-account-name">—</span>
-        <button class="btn small" id="set-logout" data-i18n="auth.logout">退出登录</button>
+        <button class="btn small" id="set-login" data-i18n="auth.login">登录</button>
+        <button class="btn small" id="set-logout" data-i18n="auth.logout" hidden>退出登录</button>
       </div>
       <div class="set-section-title" data-i18n="set.lang">语言 Language</div>
       <div class="set-row">
@@ -727,6 +864,7 @@
       <div class="set-grid">
         <button class="btn" id="set-backup" data-i18n="set.backup">⛁ 备份与导出</button>
         <button class="btn" id="set-ai" data-i18n="set.ai">⚙ AI 模型接入</button>
+        <button type="button" class="btn" id="set-install-app">安装到设备</button>
         <button class="btn" id="set-dict" data-i18n="btn.dict">📖 英语词典</button>
         <button class="btn" id="set-feedback" data-i18n="set.feedback">💬 问题反馈</button>
         <button class="btn" id="set-terms" data-i18n="set.terms">📜 用户须知</button>
@@ -888,29 +1026,46 @@
       </div>
       <div class="trial-banner" id="auth-trial-banner" hidden data-i18n="auth.trialBanner">🎁 注册新账户即享 1 天专业版免费体验（不强制消费）</div>
     </div>
-    <div class="modal-foot">
+    <div class="modal-foot auth-choices">
+      <button class="btn accent-btn" type="button" id="btn-auth-guest" data-i18n="quick.guest">先本地写作</button>
       <button class="btn primary" id="btn-auth-submit" data-i18n="auth.submitLogin">登录</button>
+      <p class="auth-local-note" data-i18n="quick.guestNote">可以不注册。允许本地保存后，作品只留在当前浏览器。</p>
     </div>
   </div>
 </div>
 
-<!-- 新手引导 -->
-<div class="modal-overlay" id="modal-guide" hidden>
-  <div class="modal wide">
-    <div class="modal-head">
-      <div class="modal-title" data-i18n="guide.title">🎓 新手引导</div>
-      <button class="btn mini ghost" id="btn-guide-skip" data-i18n="guide.skip">跳过</button>
-    </div>
-    <div class="modal-body guide-body">
-      <div class="guide-dots" id="guide-dots"></div>
-      <div class="guide-step" id="guide-step"></div>
-    </div>
-    <div class="modal-foot">
-      <button class="btn ghost" id="btn-guide-prev" data-i18n="guide.prev" style="visibility:hidden">上一步</button>
-      <button class="btn primary" id="btn-guide-next" data-i18n="guide.next">下一步</button>
-    </div>
+<!-- 新手工作台 -->
+<dialog id="modal-quick-start" class="modal quick-start" aria-labelledby="quick-start-title">
+  <div class="modal-head">
+    <div class="modal-title" id="quick-start-title" data-i18n="quick.title">新手工作台</div>
+    <button class="icon-btn modal-close" type="button" id="btn-quick-close" data-i18n-title="common.close" title="关闭">✕</button>
   </div>
-</div>
+  <div class="modal-body quick-body">
+    <div class="quick-intro">
+      <strong data-i18n="quick.heading">第一段，从这里写起。</strong>
+      <p data-i18n="quick.intro">不用写代码。可以自己写，也可以先选模型，再用 AI 协助。</p>
+    </div>
+    <div class="quick-grid">
+      <button type="button" class="quick-card quick-writing" data-quick-action="novel" autofocus>
+        <span class="quick-icon" aria-hidden="true">◈</span>
+        <span><b data-i18n="quick.novel">开始写小说</b><small data-i18n="quick.novelHint">建一本小说，直接打开第一章。可写正文，也可先列大纲。</small></span>
+      </button>
+      <button type="button" class="quick-card quick-writing" data-quick-action="paper">
+        <span class="quick-icon" aria-hidden="true">▤</span>
+        <span><b data-i18n="quick.paper">开始写论文</b><small data-i18n="quick.paperHint">新建一篇论文，填研究主题，再选择输出语言。</small></span>
+      </button>
+      <button type="button" class="quick-card" data-quick-action="model">
+        <span class="quick-icon" aria-hidden="true">✦</span>
+        <span><b data-i18n="quick.model">选择 AI 模型</b><small data-i18n="quick.modelHint">选择已保存的模型，或用预设接入你的服务。</small></span>
+      </button>
+      <button type="button" class="quick-card" data-quick-action="backup">
+        <span class="quick-icon" aria-hidden="true">↓</span>
+        <span><b data-i18n="quick.backup">备份与恢复</b><small data-i18n="quick.backupHint">下载全文或作品备份，也可从备份恢复。</small></span>
+      </button>
+    </div>
+    <p class="quick-tip" data-i18n="quick.tip">作品默认留在当前浏览器。换设备前，请先导出备份。</p>
+  </div>
+</dialog>
 
 <!-- 更新完成弹窗 -->
 <div class="modal-overlay" id="modal-update" hidden>
@@ -931,6 +1086,102 @@
 
 <div id="toasts"></div>
 <noscript><div style="position:fixed;inset:0;background:#04060e;color:#fff;display:flex;align-items:center;justify-content:center">本应用需要启用 JavaScript。</div></noscript>
-<script src="js/app.js?v=3.7.2"></script>
+<div class="modal-overlay" id="modal-install-app" hidden>
+  <section class="modal small" role="dialog" aria-modal="true" aria-labelledby="install-app-title">
+    <div class="modal-head"><div class="modal-title" id="install-app-title"></div>
+      <button type="button" class="icon-btn" data-close="modal-install-app" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body chapter-coach-body"><p id="install-app-help"></p><p id="install-app-offline"></p></div>
+  </section>
+</div>
+<div class="modal-overlay" id="modal-chapter-coach" hidden>
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="chapter-coach-title">
+    <div class="modal-head">
+      <div class="modal-title" id="chapter-coach-title">写出第一场戏</div>
+      <button class="icon-btn" id="chapter-coach-close" type="button" data-close="modal-chapter-coach" aria-label="关闭">✕</button>
+    </div>
+    <div class="modal-body chapter-coach-body">
+      <p id="chapter-coach-sub"></p>
+      <div class="chapter-coach-picker">
+        <label id="chapter-coach-example-label" for="chapter-coach-example">示例题材</label>
+        <select class="input" id="chapter-coach-example">
+          <option value="mystery">悬疑</option><option value="adventure">冒险</option><option value="relationship">人物关系</option><option value="sci">科幻</option>
+        </select>
+        <small id="chapter-coach-example-tip"></small>
+      </div>
+      <div class="chapter-coach-grid">
+        <div class="chapter-coach-card">
+          <label for="chapter-coach-0"><span aria-hidden="true">01</span><b id="chapter-coach-label-0"></b></label>
+          <textarea class="input" id="chapter-coach-0" rows="2" maxlength="300"></textarea>
+        </div>
+        <div class="chapter-coach-card">
+          <label for="chapter-coach-1"><span aria-hidden="true">02</span><b id="chapter-coach-label-1"></b></label>
+          <textarea class="input" id="chapter-coach-1" rows="2" maxlength="300"></textarea>
+        </div>
+        <div class="chapter-coach-card">
+          <label for="chapter-coach-2"><span aria-hidden="true">03</span><b id="chapter-coach-label-2"></b></label>
+          <textarea class="input" id="chapter-coach-2" rows="2" maxlength="300"></textarea>
+        </div>
+        <div class="chapter-coach-card">
+          <label for="chapter-coach-3"><span aria-hidden="true">04</span><b id="chapter-coach-label-3"></b></label>
+          <textarea class="input" id="chapter-coach-3" rows="2" maxlength="300"></textarea>
+        </div>
+      </div>
+      <p id="chapter-coach-footnote"></p>
+    </div>
+    <div class="modal-foot chapter-coach-actions">
+      <span class="meta-chip" id="chapter-coach-progress" aria-live="polite">0/4</span>
+      <button class="btn primary" id="chapter-coach-add" type="button" disabled>添加到本章大纲</button>
+    </div>
+  </section>
+</div>
+<dialog id="modal-manuscript-search" class="modal manuscript-search" aria-labelledby="manuscript-title">
+  <div class="modal-head">
+    <h2 class="modal-title" id="manuscript-title">全文查找</h2>
+    <button type="button" class="icon-btn" id="manuscript-close" aria-label="关闭">✕</button>
+  </div>
+  <div class="modal-body manuscript-search-body">
+    <div class="manuscript-search-controls">
+      <label for="manuscript-query"><span id="manuscript-query-label">查找文字</span><input id="manuscript-query" class="input" type="search" maxlength="120" autocomplete="off" spellcheck="false"></label>
+      <label for="manuscript-scope"><span id="manuscript-scope-label">查找范围</span><select id="manuscript-scope" class="input">
+        <option value="all">全部</option><option value="title">章节标题</option><option value="content">正文</option><option value="outline">章节大纲</option>
+      </select></label>
+    </div>
+    <p id="manuscript-local" class="manuscript-search-note"></p>
+    <p id="manuscript-status" class="manuscript-search-status" aria-live="polite"></p>
+    <ol id="manuscript-results" class="manuscript-results"></ol>
+  </div>
+  <div class="modal-foot manuscript-search-footer" id="manuscript-keys"></div>
+</dialog>
+<div class="modal-overlay" id="modal-draft-history" hidden>
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="draft-history-title">
+    <div class="modal-head">
+      <div class="modal-title" id="draft-history-title">版本历史</div>
+      <button class="btn icon" id="draft-history-close" type="button" data-close="modal-draft-history" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <p id="draft-history-help"></p>
+      <select id="draft-history-list" class="input" style="width:100%;margin-bottom:12px"></select>
+      <textarea id="draft-history-preview" class="input" style="width:100%;resize:vertical;min-height:180px" rows="10" readonly></textarea>
+    </div>
+    <div class="modal-foot">
+      <button class="btn primary" id="draft-history-restore" type="button" disabled>恢复选中版本</button>
+    </div>
+  </section>
+</div>
+<dialog id="draft-review" class="modal draft-review" aria-labelledby="draft-review-title">
+  <div class="modal-head">
+    <strong class="modal-title" id="draft-review-title">稿件自检</strong>
+    <button class="icon-btn" id="draft-review-close" type="button" aria-label="关闭">✕</button>
+  </div>
+  <div class="modal-body">
+    <p id="draft-review-intro"></p>
+    <dl id="draft-review-stats"></dl>
+    <ol id="draft-review-issues"></ol>
+    <p id="draft-review-note" role="status"></p>
+  </div>
+</dialog>
+<script src="js/draft-review.js?v=4.1.0"></script>
+<script src="js/app.js?v=4.1.0"></script>
 </body>
 </html>
