@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.1.1" />
+<link rel="stylesheet" href="css/style.css?v=4.2.1" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -1022,7 +1022,39 @@
         <label id="auth-pass2-wrap" style="display:none"><span data-i18n="auth.pass2">确认密码</span>
           <input id="auth-pass2" type="password" maxlength="20" data-i18n-ph="auth.pass2Ph" placeholder="再输入一次密码" autocomplete="off" />
         </label>
+        <label id="auth-question-wrap" style="display:none"><span data-i18n="auth.question">密保问题（选填，用于找回密码）</span>
+          <select id="auth-question">
+            <option value="" data-i18n="auth.q0">不设置密保</option>
+            <option value="q1" data-i18n="auth.q1">你最喜欢的一本书？</option>
+            <option value="q2" data-i18n="auth.q2">你小时候的昵称？</option>
+            <option value="q3" data-i18n="auth.q3">你第一位老师的姓氏？</option>
+            <option value="q4" data-i18n="auth.q4">你最喜欢的城市？</option>
+          </select>
+        </label>
+        <label id="auth-answer-wrap" style="display:none"><span data-i18n="auth.answer">密保答案</span>
+          <input id="auth-answer" type="text" maxlength="64" data-i18n-ph="auth.answerPh" placeholder="2-64 字符（请牢记）" autocomplete="off" />
+        </label>
         <div class="auth-hint" id="auth-hint"></div>
+        <button class="btn-link" type="button" id="btn-auth-forgot" data-i18n="auth.forgot">忘记密码？</button>
+      </div>
+      <div class="form-col" id="forgot-panel" hidden>
+        <label><span data-i18n="auth.user">用户名</span>
+          <input id="forgot-user" type="text" maxlength="20" data-i18n-ph="auth.userPh" placeholder="输入要找回的账户用户名" autocomplete="off" />
+        </label>
+        <div class="auth-hint" id="forgot-hint"></div>
+        <label id="forgot-question-wrap" hidden><span data-i18n="auth.question">密保问题</span>
+          <span class="forgot-question-text" id="forgot-question-text">—</span>
+        </label>
+        <label id="forgot-answer-wrap" hidden><span data-i18n="auth.answer">密保答案</span>
+          <input id="forgot-answer" type="text" maxlength="64" data-i18n-ph="auth.answerPh" placeholder="注册时设置的答案" autocomplete="off" />
+        </label>
+        <label id="forgot-pass-wrap" hidden><span data-i18n="auth.newPass">新密码</span>
+          <input id="forgot-pass" type="password" maxlength="128" data-i18n-ph="auth.passPh" placeholder="至少 6 位，必须包含英文字母 + 数字" autocomplete="off" />
+        </label>
+        <div class="forgot-actions">
+          <button class="btn" type="button" id="btn-forgot-back" data-i18n="auth.backLogin">返回登录</button>
+          <button class="btn primary" type="button" id="btn-forgot-reset" data-i18n="auth.resetPassword" disabled>重置密码</button>
+        </div>
       </div>
       <div class="trial-banner" id="auth-trial-banner" hidden data-i18n="auth.trialBanner">🎁 注册新账户即享 1 天专业版免费体验（不强制消费）</div>
     </div>
@@ -1181,7 +1213,7 @@
     <p id="draft-review-note" role="status"></p>
   </div>
 </dialog>
-<script src="js/draft-review.js?v=4.1.1"></script>
-<script src="js/app.js?v=4.1.1"></script>
+<script src="js/draft-review.js?v=4.2.1"></script>
+<script src="js/app.js?v=4.2.1"></script>
 </body>
 </html>
