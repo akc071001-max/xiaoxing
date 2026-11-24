@@ -47,6 +47,7 @@ function toast(msg, type, ms) {
 /* ---------------- 国际化 ---------------- */
 const I18N = {
   zh: {
+    'refs.open': '文献笔记',
     'brand.sub': '全风格小说创作台', 'brand.name': '晓星',
     'btn.langTitle': '切换界面语言',
     'btn.backup': '⛁ 备份', 'btn.backupTitle': '备份与导出',
@@ -74,9 +75,9 @@ const I18N = {
     'aiset.temp': '温度（创造性）', 'aiset.maxtok': '最大输出 tokens', 'aiset.test': '测试连接', 'aiset.save': '保存并启用',
     'aiset.help': '<b>如何接入？</b><p>只要兼容 OpenAI 接口格式即可。云端模型填 API 地址 + Key；本地开源模型（Ollama / LM Studio / vLLM / llama.cpp）填本地地址，Key 留空。</p><p><b>已内置免费模型</b>：Pollinations AI（无需 Key、无需注册，首次打开即可用）。免费额度有限，高峰时段可能变慢或限流；追求稳定高速，请在预设里选择 DeepSeek / Kimi 等并填入自己的 Key（几块钱可用很久）。</p><p>Ollama 需允许跨域：环境变量 <code>OLLAMA_ORIGINS=*</code> 后重启；或运行项目里的 <code>node proxy.mjs</code> 代理转发，Base URL 填 <code>http://localhost:8787/v1</code>。</p><p>云端模型若被浏览器 CORS 拦截，也可用代理：<code>node proxy.mjs 8787 https://api.deepseek.com</code>。</p>',
     'backup.title': '⛁ 备份与导出', 'backup.desc': '数据保存在本机浏览器（IndexedDB），清理浏览器数据会丢失，建议定期备份。单章与全书均无字数上限。',
-    'backup.txt': '导出当前小说 TXT', 'backup.txtSub': '所有章节按顺序合并为纯文本文件',
-    'backup.json': '备份全部数据 JSON', 'backup.jsonSub': '书库、章节、大纲、角色、设定、记忆、对话',
-    'backup.import': '导入备份 JSON', 'backup.importSub': '将覆盖当前全部数据', 'backup.importBtn': '导入',
+    'backup.txt': '导出当前作品 TXT', 'backup.txtSub': '导出小说章节或当前论文正文',
+    'backup.json': '备份全部作品 JSON', 'backup.jsonSub': '含稿件、版本历史和对话；不含账号或模型密钥',
+    'backup.import': '导入备份 JSON', 'backup.importSub': '恢复为独立副本，保留现有数据', 'backup.importBtn': '导入',
     'backup.wipe': '清除全部数据', 'backup.wipeSub': '不可恢复！', 'backup.wipeBtn': '清除',
     'backup.backupBtn': '备份',
     'note.title': '标题', 'note.content': '内容', 'note.cat': '分类',
@@ -97,7 +98,7 @@ const I18N = {
     'dict.errNet': '词典请求失败：可能是网络问题（该接口需联网）。', 'dict.syn': '近义词 / 同义词', 'dict.src': '数据来源：dictionaryapi.dev · Datamuse',
     'toast.welcome': '欢迎来到晓星 XIAOXING！先「新建小说」，再到右上「⚙ AI 模型」接入你的模型。',
     'toast.saved': '已保存', 'toast.savedOk': '已保存', 'toast.needNovel': '请先新建小说', 'toast.needNovelSel': '请先选择小说',
-    'toast.noChapters': '暂无章节', 'toast.txtOk': '已导出 TXT', 'toast.backupOk': '备份完成', 'toast.importOk': '导入完成',
+    'toast.noChapters': '暂无章节', 'toast.txtOk': '已导出 TXT', 'toast.backupOk': '备份完成',
     'toast.importFail': '导入失败：', 'toast.wiped': '已清除全部数据', 'toast.chapterDel': '章节已删除',
     'toast.chapterFromNode': '已从大纲节点创建章节，可继续编辑', 'toast.outlineDel': '大纲节点已删除',
     'toast.charSaved': '角色已保存', 'toast.memSaved': '已保存', 'toast.novelSaved': '小说已保存', 'toast.novelDel': '小说已删除',
@@ -117,7 +118,8 @@ const I18N = {
     'empty.outline': '还没有大纲。<br/>点击右上「＋ 新卷」创建分卷，<br/>再在卷下添加章节情节节点。<br/><br/>AI 剧情引擎会自动引用大纲。',
     'empty.chars': '还没有角色卡。<br/>创建角色卡后，AI 会自动记住人物设定，<br/>写作时保持人设一致。',
     'empty.mem': '暂无记忆条目。<br/>手动添加，或用 AI 引擎的「◬ 提取记忆」自动生成。',
-    'empty.chat': '✦ 剧情引擎已就绪（免费模型已自动接通）<br/>用上方快捷指令续写 / 推演剧情，<br/>或直接与 AI 讨论、让它记住设定。',
+    'ai.dataNote': '使用 AI 时，提示和相关上下文会发给选中的模型。手写和本地保存不发送稿件。',
+    'empty.chat': '✦ 选择模型后即可尝试使用 AI。<br/>用上方快捷指令续写、推演，或直接提问。连接有问题时，可在模型设置中测试。',
     'empty.lib': '星海寂静，尚无小说。点击下方「＋ 新建小说」开始创作。',
     'empty.volKids': '暂无节点，点下方「＋ 节点」添加。',
     'editor.placeholder.zh': '全新章节，从这里开始你的宇宙……（Ctrl+S 保存 · 右侧 ✦ 召唤 AI 引擎）',
@@ -131,14 +133,15 @@ const I18N = {
     'confirm.delNovel': '删除小说《{t}》及其全部章节、大纲、角色、设定、记忆？此操作不可恢复。',
     'confirm.delProvider': '删除该模型配置？',
     'confirm.wipe': '清除全部数据？所有小说、章节、大纲、角色、记忆都将永久删除，不可恢复！',
-    'confirm.import': '导入将覆盖当前全部数据（书库 / 章节 / 大纲 / 角色 / 记忆 / 对话）。确认导入？',
+    'toast.importOk': '已恢复为独立副本', 'backup.copySuffix': '备份副本', 'backup.invalid': '这不是支持的晓星备份格式。', 'backup.empty': '备份没有可恢复的小说或论文。', 'backup.idbOnly': '恢复需要可用的 IndexedDB；你仍可导出备份。', 'backup.exportFail': '备份导出失败，请检查浏览器存储。', 'backup.orphanChats': '已跳过 {n} 条未找到所属作品的旧对话。',
+    'confirm.import': '恢复为独立副本：{details}。现有作品不会被覆盖。继续吗？',
     'dict.provOk': '✓ 连接成功：', 'dict.provFail': '连接失败：',
     'learn.fetching': '正在学习 {name} 的文风…', 'learn.noSel': '请先在上方选择参考作家',
     'w.noAuthors': '尚未选择参考作家。点击上方作家标签选择，再联网学习其写作技法。',
     'novel.legacyGenre': '未分类',
     'terms.title': '📜 用户须知 · 用户守则',
     'terms.noticeTitle': '一、用户须知',
-    'terms.notice': '<ul><li><b>数据本地存储</b>：你的小说、大纲、角色、记忆全部保存在你自己浏览器的 IndexedDB 中，本工具不收集、不上传任何创作内容。清除浏览器数据会导致作品丢失，请定期使用「⛁ 备份」导出。</li><li><b>AI 接入</b>：已<b>内置免费模型，开箱即用</b>，无需任何配置；你也可以在「⚙ AI 模型」中自行接入任何 OpenAI 兼容模型（云端 API 或本地开源模型）。API Key 仅保存在本机，只在请求你配置的接口时发送给对应服务商。</li><li><b>AI 生成会发送什么</b>：生成时会把你的写作上下文（风格档案、大纲、角色卡、世界观、记忆库、参考作家技法、前文章节等）发送给你当前选择的模型用于生成；首次联网生成前会再次征得你的确认。</li><li><b>联网功能</b>：「作家文风学习」「词典」「论文文献检索」会访问公开接口（维基百科、Crossref 等），仅用于查询，不涉及上传你的内容。</li><li><b>内容责任</b>：本工具免费提供、不作任何担保；由 AI 生成的内容请自行审核其准确性、版权与合规性，创作者对最终发布的内容负全部责任。</li><li><b>未成年人</b>：请在监护人指导下使用。</li></ul>',
+    'terms.notice': '<ul><li><b>数据本地存储</b>：你的小说、大纲、角色、记忆全部保存在你自己浏览器的 IndexedDB 中，普通手写和保存不会向模型服务发送稿件。清除浏览器数据会导致作品丢失，请定期使用「⛁ 备份」导出。</li><li><b>AI 接入</b>：可选择内置、云端或本机模型。主动使用 AI 时，对应提示和所选上下文会发送到模型服务；启用备用模型时，请求也可能交给备用服务。密钥保存在本机，仅用于对应的服务请求。</li><li><b>联网功能</b>：「作家文风学习」「英语词典」会访问公开接口（维基百科、词典服务），会发送用于查询的词语或关键词。</li><li><b>内容责任</b>：本工具免费提供、不作任何担保；由 AI 生成的内容请自行审核其准确性、版权与合规性，创作者对最终发布的内容负全部责任。</li><li><b>未成年人</b>：请在监护人指导下使用。</li></ul>',
     'terms.rulesTitle': '二、用户守则',
     'terms.rules': '<ul><li>不得生成或传播违法内容：包括但不限于淫秽色情、暴力恐怖、煽动仇恨与歧视、侵犯他人隐私、诈骗与虚假信息、危害国家安全的内容。</li><li>尊重知识产权：参考作家是学习其<b>写作技法</b>，严禁抄袭、洗稿或未经授权转载他人作品。</li><li>遵守所接入 AI 服务商的使用条款及当地法律法规。</li><li>不得滥用联网功能与他人接口（恶意爬取、批量攻击等）。</li><li>友善创作：不得利用工具制作针对真实人物的侮辱、诽谤或深度伪造内容。</li><li>违反守则者自行承担全部法律责任；晓星保留拒绝提供服务并追究责任的权利。</li></ul>',
     'terms.version': '版本 2025-01 · 晓星 XIAOXING',
@@ -195,7 +198,7 @@ const I18N = {
     'style.standard': '创作标准', 'style.stGeneric': '通用', 'style.stNet': '中国网文', 'style.stTrad': '中式传统', 'style.stJP': '日式轻小说', 'style.stWest': '欧美小说', 'style.stRu': '俄式文学',
     'style.personal': '个性化输出', 'style.perHuman': '更像人写的（自然化）', 'style.perStandard': '标准输出',
     'storage.title': '💾 存储权限请求',
-    'storage.desc': '<p>晓星需要把您的<b>小说、大纲、角色、记忆</b>等作品数据保存在<b>您自己设备的浏览器存储</b>中（IndexedDB），用于自动保存与下次继续创作。数据不会上传到任何服务器。</p><p>同意后作品会自动保存；拒绝则本次创作内容<b>不会保存</b>，关闭页面后可能丢失。</p>',
+    'storage.desc': '<p>晓星需要把您的<b>小说、大纲、角色、记忆</b>等作品数据保存在<b>您自己设备的浏览器存储</b>中（IndexedDB），用于自动保存与下次继续创作。此授权只允许本机保存；主动使用联网 AI 是另一个操作。</p><p>同意后作品会自动保存；拒绝则本次创作内容<b>不会保存</b>，关闭页面后可能丢失。</p>',
     'storage.allow': '同意并存储', 'storage.deny': '拒绝',
     'storage.warn': '⚠ 您未授权本地存储：当前作品不会被保存，关闭页面将丢失。可在「⚙ 设置 → 存储权限」重新授权。',
     'set.storage': '💾 存储权限', 'set.storageState': '存储状态',
@@ -226,22 +229,49 @@ const I18N = {
     'board.novel': '📖 小说', 'board.paper': '📄 论文',
     'p.list': '我的论文', 'p.new': '新论文', 'p.empty': '还没有论文。<br/>点右上「＋ 新论文」，填写主题后点「📚 检索并生成论文」。',
     'p.topicLabel': '📄 论文主题 / 要求',
-    'p.topicPh': '输入论文主题与研究要求…（生成时会联网检索文献，正文带引用编号与出处链接）',
-    'p.editorPh': '论文正文将生成在这里：正文带 [1][2] 引用标注，文末附参考文献列表（含出处与网页链接）…',
+    "p.topicPh": "写下研究问题、材料范围与要求；联网检索仅使用简短关键词。",
+    'p.editorPh': '在这里手写正文，或用 AI 起草。用 [1][2] 标注来源，提交前核对原文。',
     'p.gen': '📚 检索并生成论文', 'p.again': '🔄 重新生成',
     'p.needTopic': '请先填写论文主题', 'p.needOpen': '请先新建并打开一篇论文',
-    'p.overwrite': '本文已有正文，生成将覆盖，是否继续？',
+    'p.overwrite': '只有生成稿通过检查后才会替换当前正文。继续起草吗？',
     'p.done': '✓ 论文生成完成，不满意可点「🔄 重新生成」',
-    'p.freeNote': '论文模块免费开通中：免费版生成标准论文（约 1500 字 · 8 篇带出处链接的参考文献）；升级专业版可获得更长、更精的正文与更多参考文献。',
+    "p.freeNote": "检索只提供候选来源。论文可手写或用 AI 起草；提交前请检查原文、引文与页码。",
     'p.upgrade': '💎 升级获得更佳正文',
     'gp.psearch': '正在检索文献资料', 'gp.refsFound': '已检索到 {n} 篇文献', 'gp.pdraft': '正在拟写论文提纲', 'gp.pwrite': '正在输出论文正文',
     'gp.check': '⚖ 质量自检', 'gp.rewrite': '发现问题，正在重写优化', 'gp.pass': '自检通过 · 内容达标',
     'gp.failCheck': 'AI 自检未通过：多次重写仍未达标，正文未输出。请调整大纲/主题后重试。',
+    "p.guide": "写作向导",
+    "p.guideTitle": "论文写作路线",
+    "p.guideStart": "选择一个起步模板",
+    "p.step1": "写清一个可回答的研究问题，再限定时间、地点、群体或材料范围。",
+    "p.step2": "查找原文，记下用到的证据和页码。自动检索只提供候选来源，不代表已证明论点。",
+    "p.step3": "可以直接手写正文，也可以先生成草稿。交稿前逐条核对 [n]、原文和引用格式。",
+    "p.tplReview": "文献综述",
+    "p.tplCompare": "比较分析",
+    "p.tplEmpirical": "实证研究",
+    "p.tplReviewBody": "研究问题：\n检索关键词：\n文献范围（年份、学科）：\n纳入与排除标准：\n需要比较的研究观点：",
+    "p.tplCompareBody": "研究问题：\n检索关键词：\n比较对象与时间范围：\n共同的比较指标：\n计划使用的材料：",
+    "p.tplEmpiricalBody": "研究问题：\n检索关键词：\n研究对象与样本：\n数据来源与方法：\n局限性和可能偏差：",
+    "p.guideBlank": "模板只填入空白的主题框，不改写正文。",
+    "p.guideFilled": "主题框已有内容，模板不会覆盖它。你可以按上面步骤继续。",
+    "p.guideNeedPaper": "请先从论文列表新建或打开一篇论文。",
+    "p.audit": "核对正文引用",
+    "p.auditScope": "只检查 [n] 编号与参考文献链接的格式，不判断来源是否真实、相关或能支持论点。",
+    "p.auditEmpty": "正文还没有内容。",
+    "p.auditTally": "正文标注 {n} 个不同编号；文末有 {m} 条编号文献。",
+    "p.auditNoRefs": "未发现编号引文或文末编号文献。",
+    "p.auditMissing": "缺少对应文献：{n}",
+    "p.auditUncited": "文末列出但正文未引用：{n}",
+    "p.auditDuplicate": "文末编号重复：{n}",
+    "p.auditNoLink": "未附有效网页链接：{n}",
+    "p.auditMalformed": "有不支持的组合编号，请改写成 [1][2] 这种形式。",
+    "p.auditPass": "编号与链接格式核对通过，仍需打开原文核实。",
+    "p.topicRequired": "先填写模板中的研究问题；也可加上简短的检索关键词。",
+    "p.refsInvalid": "生成稿存在无对应来源的引文或不受支持的链接，原稿已保留。",
     'p.langTitle': '论文输出语言',
     'set.credits': '开发者名单',
     'upd.title': '🎉 更新完成', 'upd.whatsNew': '本次更新内容', 'upd.done': '知道了',
-    'top.noNovel': '未选择小说', 'top.novelSwitch': '切换 / 管理小说', 'top.panelToggle': '章节 / 大纲面板',
-    'co.outlineToggle': '⌄ 大纲',
+    'top.noNovel': '未选择小说', 'top.novelSwitch': '切换 / 管理小说',
     'w.secTitlePh': '条目名称（如：力量体系 / 势力 / 时间线）', 'w.secBodyPh': '展开设定…',
     'w.synopsisPh': '全书主线、起承转合、结局走向…', 'w.worldPh': '时代背景、地理、规则、力量体系总览…',
     'w.customEmpty': '可添加力量体系、势力、时间线等自定义设定条目。',
@@ -264,9 +294,6 @@ const I18N = {
     'profile.nickPh': '你的笔名…',
     'editor.placeholder.ru': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
     'toast.paperSaved': '论文已保存', 'toast.paperDeleted': '论文已删除',
-    'doc.conflictSuffix': '（冲突副本）',
-    'doc.conflict': '⚠ 检测到其他标签页也修改了这篇内容：您当前这份稿子已另存为「冲突副本」保留，正文已更新为最新版本，请检查后合并，两份都不会丢失。',
-    'ai.firstNotice': '首次联网生成确认：AI 生成时会把您的写作内容（小说：风格档案、本章大纲、角色卡、世界观、记忆库、参考作家技法、前文章节；论文：主题与检索到的文献）发送给您当前选择的 AI 模型用于生成。继续吗？',
     'auth.title': '👤 登录 / 注册', 'auth.login': '登录', 'auth.register': '注册',
     'auth.user': '用户名', 'auth.userPh': '2-20 位：字母 / 数字 / 下划线 / 中文',
     'auth.pass': '密码', 'auth.passPh': '至少 6 位，必须包含英文字母 + 数字',
@@ -282,11 +309,21 @@ const I18N = {
     'auth.account': '登录账户', 'auth.logout': '退出登录',
     'auth.confirmLogout': '确定退出当前账户？作品数据仍保存在本机。', 'auth.loggedOut': '已退出登录',
     'set.trialBadge': ' · 🎁 旗舰版体验中',
-    'guide.title': '🎓 新手引导', 'guide.skip': '跳过', 'guide.prev': '上一步', 'guide.next': '下一步', 'guide.done': '开始使用',
-    'guide.s1': '<h3>👋 欢迎来到晓星 XIAOXING</h3><p>这是一个<b>全风格小说创作台</b>：写大纲，AI 帮你成文。三步就能开始：</p><ul><li><span class="g-num">1</span>「＋ 新建小说」选好风格（书名可以先不填）</li><li><span class="g-num">2</span> 新建章节，在「📋 本章大纲」写下这一章要发生什么</li><li><span class="g-num">3</span> 点「🚀 开始创作」，正文自动流式写出</li></ul>',
-    'guide.s2': '<h3>🤖 先教你配置免费 AI 模型（不用花钱）</h3><p>晓星已经<b>内置了一个免费模型</b>，注册后自动接通，直接就能用，无需任何配置。</p><ul><li>想查看或换模型：右上「⚙ 设置 → AI 模型接入」，能看到当前正在使用的免费模型</li><li>免费模型偶尔会限流或变慢，系统会<b>自动重试并切换备用模型</b>，稍等即可</li><li>想要更稳定？免费注册「硅基流动」（siliconflow.cn）领取免费额度，拿到 Key 后在「AI 模型接入 → 预设」选硅基流动并粘贴 Key 即可</li><li>填好后点「测试连接」确认是否连通</li></ul><p>AI 出问题别慌：页面会给出中文提示，照着做就行。</p>',
-    'guide.s3': '<h3>✍️ 常用操作一览</h3><ul><li><b>文风</b>：左侧「🖊 文风」选参考作家（点一下选中），或贴入你自己的 500 字让 AI 学你的文笔</li><li><b>不满意？</b>点「🔄 重新生成」重来，不扣任何费用</li><li><b>界面</b>：「⚙ 设置」里调字号、换背景（太阳系 / 银河系 / 星球）、切中英文、改主题色</li><li><b>章节标题 / 书名</b>：点「✨」让 AI 起名，你从候选里挑</li><li><b>保存</b>：作品自动保存在您的设备上；换设备用「备份与导出」</li><li><b>求助</b>：点击屏幕左下角的小外星人，随时打开创作小助手</li></ul>',
-    'guide.s4': '<h3>💎 关于付费（最后再说这个）</h3><p>当前处于<b>试运营期，全部免费</b>，不强制任何消费。</p><ul><li>🎁 您注册账户已自动获得<b>1 天旗舰版免费体验</b>（最高规格待遇）：解锁全部主流大模型预设，记忆扩展到前 10 章，生成内容完整并经过 AI 质量自检</li><li>体验到期后自动回到免费版，作品与数据不受任何影响</li><li>想继续使用高级模型？会员中心有免费版 / 专业版 / 旗舰版三档说明（试运营期间同样免费开通）</li><li>正式收费上线前会提前公告，绝不自动扣费</li></ul><p>好，一切就绪，开始你的创作吧！🚀</p>',
+    'quick.title': '新手工作台',
+    'quick.heading': '第一段，从这里写起。',
+    'quick.intro': '不用写代码。可以自己写，也可以先选模型，再用 AI 协助。',
+    'quick.novel': '开始写小说',
+    'quick.novelHint': '建一本小说，直接打开第一章。可写正文，也可先列大纲。',
+    'quick.paper': '开始写论文',
+    'quick.paperHint': '新建一篇论文，填研究主题，再选择输出语言。',
+    'quick.model': '选择 AI 模型',
+    'quick.modelHint': '选择已保存的模型，或用预设接入你的服务。',
+    'quick.backup': '备份与恢复',
+    'quick.backupHint': '下载全文或作品备份，也可从备份恢复。',
+    'quick.tip': '作品默认留在当前浏览器。换设备前，请先导出备份。',
+    'quick.guest': '先本地写作',
+    'quick.guestNote': '可以不注册。允许本地保存后，作品只留在当前浏览器。',
+    'quick.localAccount': '本地写作（未登录）',
     'vip.trialOn': '🎁 新用户专享：旗舰版体验中（最高规格待遇），剩余 {t}（不强制消费）',
     'vip.trialEnd': '专业版体验已结束，感谢体验！会员中心可选方案（试运营免费）。',
     'set.creator': '创作者：小柚子', 'set.creatorNote': '本站由单人开发 · 不定期更新', 'set.tip': '☕ 请作者喝杯奶茶',
@@ -296,6 +333,7 @@ const I18N = {
     'tip.thanks': '感谢您的支持！小柚子收到啦 💛', 'tip.fail': '发送失败，请稍后再试', 'tip.needAmount': '请选择或输入支持金额'
   },
   en: {
+    'refs.open': 'Source notebook',
     'brand.sub': 'ALL-GENRE NOVEL STUDIO', 'brand.name': 'XIAOXING',
     'btn.langTitle': 'Switch language',
     'btn.backup': '⛁ Backup', 'btn.backupTitle': 'Backup & Export',
@@ -323,9 +361,9 @@ const I18N = {
     'aiset.temp': 'Temperature', 'aiset.maxtok': 'Max output tokens', 'aiset.test': 'Test connection', 'aiset.save': 'Save & enable',
     'aiset.help': '<b>How to connect?</b><p>Any OpenAI-compatible API works. Cloud models need a Base URL + API key; local open-source models (Ollama / LM Studio / vLLM / llama.cpp) need only the local address, key left empty.</p><p><b>Free model built in</b>: Pollinations AI — no key, no signup, works out of the box. Free quota is limited and may throttle at peak hours; for speed and stability, pick DeepSeek / Kimi from the presets and add your own key.</p><p>Ollama needs CORS enabled: set <code>OLLAMA_ORIGINS=*</code> and restart; or run <code>node proxy.mjs</code> and use Base URL <code>http://localhost:8787/v1</code>.</p><p>If a cloud API is blocked by the browser CORS policy, use the proxy too: <code>node proxy.mjs 8787 https://api.deepseek.com</code>.</p>',
     'backup.title': '⛁ Backup & Export', 'backup.desc': 'All data is stored in your local browser (IndexedDB). Clearing browser data erases it — back up regularly. No word limit per chapter or per book.',
-    'backup.txt': 'Export current novel as TXT', 'backup.txtSub': 'All chapters merged in order as plain text',
-    'backup.json': 'Back up all data as JSON', 'backup.jsonSub': 'Library, chapters, outline, characters, world, memory, chats',
-    'backup.import': 'Import JSON backup', 'backup.importSub': 'Will overwrite all current data', 'backup.importBtn': 'Import',
+    'backup.txt': 'Export current work as TXT', 'backup.txtSub': 'Novel chapters or the current paper as plain text',
+    'backup.json': 'Back up all projects as JSON', 'backup.jsonSub': 'Includes drafts, version history and chats; excludes accounts and model keys',
+    'backup.import': 'Import JSON backup', 'backup.importSub': 'Restore as separate copies; keep your current work', 'backup.importBtn': 'Import',
     'backup.wipe': 'Wipe all data', 'backup.wipeSub': 'Cannot be undone!', 'backup.wipeBtn': 'Wipe',
     'backup.backupBtn': 'Back up',
     'note.title': 'Title', 'note.content': 'Content', 'note.cat': 'Category',
@@ -346,7 +384,7 @@ const I18N = {
     'dict.errNet': 'Dictionary request failed — network issue? (This API needs internet.)', 'dict.syn': 'Synonyms', 'dict.src': 'Source: dictionaryapi.dev · Datamuse',
     'toast.welcome': 'Welcome to XIAOXING! Create a novel first, then connect your model via “⚙ AI Models”.',
     'toast.saved': 'Saved', 'toast.savedOk': 'Saved', 'toast.needNovel': 'Create a novel first', 'toast.needNovelSel': 'Select a novel first',
-    'toast.noChapters': 'No chapters yet', 'toast.txtOk': 'TXT exported', 'toast.backupOk': 'Backup done', 'toast.importOk': 'Import done',
+    'toast.noChapters': 'No chapters yet', 'toast.txtOk': 'TXT exported', 'toast.backupOk': 'Backup done',
     'toast.importFail': 'Import failed: ', 'toast.wiped': 'All data cleared', 'toast.chapterDel': 'Chapter deleted',
     'toast.chapterFromNode': 'Chapter created from outline node', 'toast.outlineDel': 'Outline node deleted',
     'toast.charSaved': 'Character saved', 'toast.memSaved': 'Saved', 'toast.novelSaved': 'Novel saved', 'toast.novelDel': 'Novel deleted',
@@ -366,7 +404,8 @@ const I18N = {
     'empty.outline': 'No outline yet.<br/>Click “＋ New Volume” to create volumes,<br/>then add chapter nodes.<br/><br/>The AI engine references the outline automatically.',
     'empty.chars': 'No character cards.<br/>AI remembers character settings automatically<br/>to keep them consistent.',
     'empty.mem': 'No memory entries.<br/>Add manually, or use “◬ Extract memory” in the AI engine.',
-    'empty.chat': '✦ Story engine ready (free model auto-connected)<br/>Continue / plot via the quick actions above,<br/>or just talk to the AI.',
+    'ai.dataNote': 'AI sends your prompt and relevant context to the selected model. Manual writing and local saves do not send drafts.',
+    'empty.chat': '✦ Choose a model to try AI.<br/>Use the quick actions above or ask a question. Test the connection in model settings if needed.',
     'empty.lib': 'The galaxy is quiet — no novels yet. Click “＋ New Novel” below.',
     'empty.volKids': 'No nodes. Click “＋ Node” below.',
     'editor.placeholder.zh': 'A new chapter begins here… (Ctrl+S to save · ✦ AI engine on the right)',
@@ -381,14 +420,15 @@ const I18N = {
     'confirm.delNovel': 'Delete “{t}” and all its chapters, outline, characters, world & memories? This cannot be undone.',
     'confirm.delProvider': 'Delete this model config?',
     'confirm.wipe': 'Wipe ALL data? Every novel, chapter, outline, character and memory will be permanently deleted!',
-    'confirm.import': 'Importing will overwrite all current data (library / chapters / outline / characters / memory / chats). Continue?',
+    'toast.importOk': 'Restored as separate copies', 'backup.copySuffix': 'Restored copy', 'backup.invalid': 'This is not a supported XIAOXING backup.', 'backup.empty': 'The backup has no novels or papers to restore.', 'backup.idbOnly': 'Restoring requires IndexedDB. You can still export a backup.', 'backup.exportFail': 'Backup export failed. Check your browser storage.', 'backup.orphanChats': 'Skipped {n} old chat records without a matching project.',
+    'confirm.import': 'Restore separate copies: {details}. Your existing projects will not be overwritten. Continue?',
     'dict.provOk': '✓ Connected: ', 'dict.provFail': 'Connection failed: ',
     'learn.fetching': 'Studying {name}…', 'learn.noSel': 'Select reference authors above first',
     'w.noAuthors': 'No reference authors selected. Click the author chips above, then learn their craft online.',
     'novel.legacyGenre': 'Uncategorized',
     'terms.title': '📜 User Notice & Code of Conduct',
     'terms.noticeTitle': 'I. User Notice',
-    'terms.notice': '<ul><li><b>Local storage</b>: your novels, outlines, characters and memories are stored only in your own browser (IndexedDB). This tool does not collect or upload any of your content. Clearing browser data erases your work — back up regularly via “⛁ Backup”.</li><li><b>AI access</b>: a <b>free model is built in and works out of the box</b> — no configuration needed. You may also connect any OpenAI-compatible model (cloud API or local open-source model) in “⚙ AI models”. Your API key stays on this device and is only sent to the endpoint you configure.</li><li><b>What generation sends</b>: generation sends your writing context (style profile, outline, characters, world, memories, reference-author notes, previous chapters, etc.) to your currently selected model; you are asked to confirm before the first online generation.</li><li><b>Online features</b>: “Learn styles online”, the dictionary and paper reference search query public APIs (Wikipedia, Crossref, etc.) for lookup only; none of your content is uploaded.</li><li><b>Responsibility</b>: this tool is free and provided without warranty. Review AI-generated content for accuracy, copyright and compliance; you are fully responsible for what you publish.</li><li><b>Minors</b>: use under guardian supervision.</li></ul>',
+    'terms.notice': '<ul><li><b>Local storage</b>: your novels, outlines, characters and memories are stored only in your own browser (IndexedDB). Ordinary manual editing and saving do not send drafts to a model service. Clearing browser data erases your work — back up regularly via “⛁ Backup”.</li><li><b>AI access</b>: Choose a built-in, cloud or local model. When you use AI, the corresponding prompt and selected context are sent to the model provider. Enabled fallback providers may also receive a request. API keys are saved locally and used only for the corresponding provider.</li><li><b>Online features</b>: “Learn styles online” and the English dictionary query public APIs (Wikipedia, dictionary services) for lookups using the search terms you provide.</li><li><b>Responsibility</b>: this tool is free and provided without warranty. Review AI-generated content for accuracy, copyright and compliance; you are fully responsible for what you publish.</li><li><b>Minors</b>: use under guardian supervision.</li></ul>',
     'terms.rulesTitle': 'II. Code of Conduct',
     'terms.rules': '<ul><li>Do not generate or spread illegal content, including but not limited to: pornography, violence & terror, hate speech & discrimination, privacy violations, fraud & disinformation, or content endangering national security.</li><li>Respect intellectual property: reference authors are for learning <b>craft</b> only. Plagiarism, rewording others\' works, or republishing others\' works without permission is forbidden.</li><li>Comply with the terms of your AI provider and local laws.</li><li>Do not abuse the online features or third-party APIs (scraping, bulk attacks, etc.).</li><li>Create with respect: do not produce defamatory, insulting or deepfake content targeting real people.</li><li>Violators bear full legal responsibility; XIAOXING reserves the right to refuse service and pursue liability.</li></ul>',
     'terms.version': 'Version 2025-01 · XIAOXING',
@@ -445,7 +485,7 @@ const I18N = {
     'style.standard': 'Creation standard', 'style.stGeneric': 'Universal', 'style.stNet': 'CN web fiction', 'style.stTrad': 'CN classic', 'style.stJP': 'JP light novel', 'style.stWest': 'Western', 'style.stRu': 'Russian',
     'style.personal': 'Personalization', 'style.perHuman': 'More human-like', 'style.perStandard': 'Standard output',
     'storage.title': '💾 Storage Permission',
-    'storage.desc': '<p>XIAOXING needs to save your <b>novels, outlines, characters and memories</b> in <b>your own device\'s browser storage</b> (IndexedDB) for autosave and future sessions. Nothing is uploaded to any server.</p><p>If you agree, your work autosaves. If you decline, <b>nothing will be saved</b> and it may be lost when you close the page.</p>',
+    'storage.desc': '<p>XIAOXING needs to save your <b>novels, outlines, characters and memories</b> in <b>your own device\'s browser storage</b> (IndexedDB) for autosave and future sessions. This permission only covers local saving; using online AI is a separate action.</p><p>If you agree, your work autosaves. If you decline, <b>nothing will be saved</b> and it may be lost when you close the page.</p>',
     'storage.allow': 'Allow & Save', 'storage.deny': 'Decline',
     'storage.warn': '⚠ Local storage not authorized: your work will NOT be saved. Re-authorize in “⚙ Settings → Storage”.',
     'set.storage': '💾 Storage', 'set.storageState': 'Storage status',
@@ -476,22 +516,49 @@ const I18N = {
     'board.novel': '📖 Novel', 'board.paper': '📄 Paper',
     'p.list': 'My Papers', 'p.new': 'New Paper', 'p.empty': 'No papers yet.<br/>Click “＋ New Paper”, fill the topic, then “📚 Search & Generate”.',
     'p.topicLabel': '📄 Topic / Requirements',
-    'p.topicPh': 'Enter the paper topic and requirements… (generation searches literature online; in-text citations with source links)',
-    'p.editorPh': 'The paper will be generated here: in-text [1][2] citations and a reference list with sources and web links…',
+    "p.topicPh": "Add a research question, scope and requirements. Online search uses short keywords only.",
+    'p.editorPh': 'Write here or generate a draft. Mark sources with [1][2] and check the original texts before submitting.',
     'p.gen': '📚 Search & Generate', 'p.again': '🔄 Regenerate',
     'p.needTopic': 'Fill in the topic first', 'p.needOpen': 'Create and open a paper first',
     'p.overwrite': 'This paper already has content. Overwrite?',
     'p.done': '✓ Paper generated — click “🔄 Regenerate” if not satisfied',
-    'p.freeNote': 'The paper module is free: the free plan generates a standard paper (~1500 words, 8 cited references with links). Upgrade to Pro for longer, better text and more references.',
+    "p.freeNote": "Search provides candidate sources. Write by hand or use an AI draft, then verify the original sources, citations and page numbers.",
     'p.upgrade': '💎 Upgrade for better text',
     'gp.psearch': 'Searching references', 'gp.refsFound': '{n} references found', 'gp.pdraft': 'Drafting the outline', 'gp.pwrite': 'Writing the paper',
     'gp.check': '⚖ Quality check', 'gp.rewrite': 'Issues found — rewriting', 'gp.pass': 'Check passed · quality confirmed',
     'gp.failCheck': 'AI self-check failed: after several rewrites the quality bar was not met, so nothing was output. Adjust the outline/topic and retry.',
+    "p.guide": "Writing guide",
+    "p.guideTitle": "Plan your paper",
+    "p.guideStart": "Choose a starter template",
+    "p.step1": "Define one answerable question and set limits on your period, place, population or material.",
+    "p.step2": "Read the original sources and record the evidence and page numbers. Search results are leads, not proof.",
+    "p.step3": "Write by hand or generate a draft. Before submitting, check every [n], the original passage and the required citation style.",
+    "p.tplReview": "Literature review",
+    "p.tplCompare": "Comparative analysis",
+    "p.tplEmpirical": "Empirical study",
+    "p.tplReviewBody": "Research question:\nSearch keywords:\nDate range and disciplines:\nInclusion and exclusion criteria:\nPositions to compare:",
+    "p.tplCompareBody": "Research question:\nSearch keywords:\nCases and period:\nCommon criteria for comparison:\nSources to consult:",
+    "p.tplEmpiricalBody": "Research question:\nSearch keywords:\nPopulation and sample:\nData and method:\nLimitations and possible bias:",
+    "p.guideBlank": "Templates only fill an empty topic field. Your draft stays as it is.",
+    "p.guideFilled": "Your topic already has text. A template would overwrite it, so continue using the steps above.",
+    "p.guideNeedPaper": "Create or open a paper first.",
+    "p.audit": "Check draft citations",
+    "p.auditScope": "Checks [n] numbering and link format only. It does not verify that sources are real, relevant or support any claim.",
+    "p.auditEmpty": "The draft is empty.",
+    "p.auditTally": "The body cites {n} distinct numbers; the reference list has {m} numbered entries.",
+    "p.auditNoRefs": "No numbered citations or numbered references found.",
+    "p.auditMissing": "Missing reference entries: {n}",
+    "p.auditUncited": "Listed but not cited in the body: {n}",
+    "p.auditDuplicate": "Duplicate reference numbers: {n}",
+    "p.auditNoLink": "No valid web link: {n}",
+    "p.auditMalformed": "Use separate numbers like [1][2], rather than grouped citations.",
+    "p.auditPass": "Numbering and link format match. Still verify the original sources.",
+    "p.topicRequired": "Fill in the research question first. You can add short search keywords.",
+    "p.refsInvalid": "The generated draft has unmatched citations or unsupported links. Your original was kept.",
     'p.langTitle': 'Paper output language',
     'set.credits': 'Developer credits',
     'upd.title': '🎉 Update complete', 'upd.whatsNew': 'What\'s new', 'upd.done': 'Got it',
-    'top.noNovel': 'No novel selected', 'top.novelSwitch': 'Switch / manage novels', 'top.panelToggle': 'Chapters / outline panel',
-    'co.outlineToggle': '⌄ Outline',
+    'top.noNovel': 'No novel selected', 'top.novelSwitch': 'Switch / manage novels',
     'w.secTitlePh': 'Entry name (e.g. power system / factions / timeline)', 'w.secBodyPh': 'Expand the setting…',
     'w.synopsisPh': 'Main plotline, arcs, ending…', 'w.worldPh': 'Era, geography, rules, power systems…',
     'w.customEmpty': 'Add custom entries: power systems, factions, timelines…',
@@ -514,9 +581,6 @@ const I18N = {
     'profile.nickPh': 'Your pen name…',
     'editor.placeholder.ru': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
     'toast.paperSaved': 'Paper saved', 'toast.paperDeleted': 'Paper deleted',
-    'doc.conflictSuffix': ' (conflict copy)',
-    'doc.conflict': '⚠ Another tab modified this content: your current draft was saved as a “conflict copy”, and the chapter now shows the latest version. Please review and merge — nothing is lost.',
-    'ai.firstNotice': 'First online generation: to generate, the AI receives your writing context (novel: style profile, chapter outline, characters, world, memories, reference-author notes, previous chapters; paper: topic and retrieved references) from your currently selected AI model. Continue?',
     'auth.title': '👤 Sign in / Register', 'auth.login': 'Sign in', 'auth.register': 'Register',
     'auth.user': 'Username', 'auth.userPh': '2-20 chars: letters / numbers / _ / Chinese',
     'auth.pass': 'Password', 'auth.passPh': 'Min 6 chars, must contain letters AND digits',
@@ -532,11 +596,21 @@ const I18N = {
     'auth.account': 'Account', 'auth.logout': 'Sign out',
     'auth.confirmLogout': 'Sign out of this account? Your works stay saved on this device.', 'auth.loggedOut': 'Signed out',
     'set.trialBadge': ' · 🎁 Flagship trial',
-    'guide.title': '🎓 Getting Started', 'guide.skip': 'Skip', 'guide.prev': 'Back', 'guide.next': 'Next', 'guide.done': 'Start writing',
-    'guide.s1': '<h3>👋 Welcome to XIAOXING</h3><p>An <b>all-genre novel studio</b>: write an outline, and the AI turns it into prose. Three steps:</p><ul><li><span class="g-num">1</span> “＋ New Novel” and pick the style table (title can wait)</li><li><span class="g-num">2</span> Open a chapter and describe what happens in “📋 Chapter Outline”</li><li><span class="g-num">3</span> Click “🚀 Start Writing” — the text streams out automatically</li></ul>',
-    'guide.s2': '<h3>🤖 First, configure the FREE AI model (no cost)</h3><p>XIAOXING has a <b>free model built in</b> — connected automatically after registration. Nothing to configure.</p><ul><li>To view or switch models: “⚙ Settings → AI Models” — you can see the free model in use</li><li>The free model may throttle occasionally; the system <b>auto-retries and switches backup models</b> — just wait a moment</li><li>Want more stability? Sign up free at SiliconFlow (siliconflow.cn) for free credits, copy the Key, then pick the preset in “AI Models” and paste it</li><li>Use “Test connection” to verify</li></ul><p>If the AI errors, don\'t panic — the page shows a friendly hint in your language.</p>',
-    'guide.s3': '<h3>✍️ Everything else at a glance</h3><ul><li><b>Style</b>: “🖊 Style” tab on the left — click authors to reference them, or paste 500 characters of your own writing for the AI to learn</li><li><b>Not satisfied?</b> Click “🔄 Regenerate” — free, anytime</li><li><b>Interface</b>: “⚙ Settings” for font size, backgrounds (Solar System / Galaxy / Planet), language and theme color</li><li><b>Chapter / novel titles</b>: click “✨” and pick from AI candidates</li><li><b>Saving</b>: your work autosaves on this device; use “Backup & Export” to move it</li><li><b>Help</b>: click the little alien bottom-left anytime</li></ul>',
-    'guide.s4': '<h3>💎 About paid plans (last, we promise)</h3><p>We are in <b>beta: everything is free</b>. No purchase is required, ever, during beta.</p><ul><li>🎁 Your new account already got a <b>1-day free Flagship trial</b> (top-tier treatment): unlocks all mainstream model presets, memory up to 10 chapters, complete AI-quality-checked output</li><li>When the trial ends you return to the Free plan automatically — your works and data are untouched</li><li>Want to keep advanced models? The Membership center explains Free / Pro / Flagship (also free during beta)</li><li>We will announce any paid launch in advance — no auto-charging, ever</li></ul><p>All set — start writing! 🚀</p>',
+    'quick.title': 'Quick Start',
+    'quick.heading': 'Write your first paragraph.',
+    'quick.intro': 'No code required. Write on your own or choose an AI model for help.',
+    'quick.novel': 'Start a novel',
+    'quick.novelHint': 'Create a novel and open chapter one. Start drafting or write an outline.',
+    'quick.paper': 'Start a paper',
+    'quick.paperHint': 'Open a blank paper, add a research topic, and pick the output language.',
+    'quick.model': 'Choose an AI model',
+    'quick.modelHint': 'Select a saved model or use a preset to connect your own provider.',
+    'quick.backup': 'Back up and restore',
+    'quick.backupHint': 'Download your text or a backup of your work, or restore from a backup.',
+    'quick.tip': 'Work stays in this browser. Export a backup before switching browsers or devices.',
+    'quick.guest': 'Write without an account',
+    'quick.guestNote': 'Registration is optional. If you allow local storage, your work stays in this browser.',
+    'quick.localAccount': 'Writing locally (signed out)',
     'vip.trialOn': '🎁 New-user perk: Flagship trial (top-tier treatment) active, {t} left (no purchase required)',
     'vip.trialEnd': 'Your Pro trial has ended — thanks for trying! Pick a plan in the Membership center (free during beta).',
     'set.creator': 'Creator: 小柚子', 'set.creatorNote': 'Solo developer · irregular updates', 'set.tip': '☕ Tip the creator',
@@ -546,6 +620,7 @@ const I18N = {
     'tip.thanks': 'Thank you for your support! 小柚子 got your message 💛', 'tip.fail': 'Failed to send, try again later', 'tip.needAmount': 'Choose or enter an amount'
   },
   ru: {
+    'refs.open': 'Заметки об источниках',
     'brand.sub': 'СТУДИЯ РОМАНОВ ВСЕХ ЖАНРОВ', 'brand.name': 'СЯОСИН',
     'btn.langTitle': 'Переключить язык',
     'btn.backup': '⛁ Резерв', 'btn.backupTitle': 'Резерв и экспорт',
@@ -584,9 +659,9 @@ const I18N = {
     'aiset.stPaid': 'Платно · нужен ключ · адаптировано (VIP поможет)',
     'aiset.auto': 'Автопереключение резервных моделей (при сбое — следующая доступная)',
     'backup.title': '⛁ Резерв и экспорт', 'backup.desc': 'Данные хранятся в браузере на вашем устройстве (IndexedDB). Очистка данных браузера удалит их — делайте резервные копии. Лимита на объём нет.',
-    'backup.txt': 'Экспорт текущего романа в TXT', 'backup.txtSub': 'Все главы по порядку одним текстовым файлом',
-    'backup.json': 'Резервная копия всех данных (JSON)', 'backup.jsonSub': 'Библиотека, главы, план, персонажи, мир, память, чаты',
-    'backup.import': 'Импорт резервной копии', 'backup.importSub': 'Перезапишет все текущие данные', 'backup.importBtn': 'Импорт',
+    'backup.txt': 'Экспорт текущей работы в TXT', 'backup.txtSub': 'Главы романа или текст текущей статьи',
+    'backup.json': 'Резервная копия всех работ (JSON)', 'backup.jsonSub': 'Включает черновики, версии и чаты; без аккаунтов и ключей моделей',
+    'backup.import': 'Импорт резервной копии', 'backup.importSub': 'Восстановление копий без замены текущих работ', 'backup.importBtn': 'Импорт',
     'backup.wipe': 'Удалить все данные', 'backup.wipeSub': 'Необратимо!', 'backup.wipeBtn': 'Удалить',
     'backup.backupBtn': 'Копия',
     'note.title': 'Заголовок', 'note.content': 'Содержимое', 'note.cat': 'Категория',
@@ -611,7 +686,7 @@ const I18N = {
     'dict.errNet': 'Ошибка запроса к словарю — нужен интернет.', 'dict.syn': 'Синонимы', 'dict.src': 'Источник: dictionaryapi.dev · Datamuse · Wiktionary',
     'toast.welcome': 'Добро пожаловать в XIAOXING! Создайте роман, затем подключите модель в «⚙ ИИ-модели».',
     'toast.saved': 'Сохранено', 'toast.savedOk': 'Сохранено', 'toast.needNovel': 'Сначала создайте роман', 'toast.needNovelSel': 'Сначала выберите роман',
-    'toast.noChapters': 'Глав пока нет', 'toast.txtOk': 'TXT экспортирован', 'toast.backupOk': 'Резервная копия готова', 'toast.importOk': 'Импорт завершён',
+    'toast.noChapters': 'Глав пока нет', 'toast.txtOk': 'TXT экспортирован', 'toast.backupOk': 'Резервная копия готова',
     'toast.importFail': 'Ошибка импорта: ', 'toast.wiped': 'Все данные удалены', 'toast.chapterDel': 'Глава удалена',
     'toast.chapterFromNode': 'Глава создана из узла плана', 'toast.outlineDel': 'Узел плана удалён',
     'toast.charSaved': 'Персонаж сохранён', 'toast.memSaved': 'Сохранено', 'toast.novelSaved': 'Роман сохранён', 'toast.novelDel': 'Роман удалён',
@@ -636,7 +711,8 @@ const I18N = {
     'empty.outline': 'Плана пока нет.<br/>Нажмите «＋ Том»,<br/>затем добавьте узлы глав.<br/><br/>ИИ использует план автоматически.',
     'empty.chars': 'Карточек персонажей нет.<br/>ИИ запомнит их автоматически<br/>и сохранит характеры.',
     'empty.mem': 'Записей памяти нет.<br/>Добавьте вручную или через «◬ Извлечь память».',
-    'empty.chat': '✦ Движок сюжета готов (бесплатная модель подключена)<br/>Используйте быстрые команды выше<br/>или просто поговорите с ИИ.',
+    'ai.dataNote': 'При работе с ИИ запрос и нужный контекст отправляются выбранной модели. При ручном вводе и сохранении черновики не отправляются.',
+    'empty.chat': '✦ Выберите модель, чтобы попробовать ИИ.<br/>Используйте быстрые команды или задайте вопрос. Проверьте подключение в настройках модели при необходимости.',
     'empty.lib': 'В галактике тихо — романов пока нет. Нажмите «＋ Новый роман».',
     'empty.volKids': 'Узлов нет. Нажмите «＋ Узел» ниже.',
     'editor.placeholder.zh': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
@@ -651,11 +727,12 @@ const I18N = {
     'confirm.delNovel': 'Удалить «{t}» вместе с главами, планом, персонажами и памятью? Необратимо.',
     'confirm.delProvider': 'Удалить эту модель?',
     'confirm.wipe': 'Удалить ВСЕ данные? Все романы, главы, планы, персонажи и память будут стёрты навсегда!',
-    'confirm.import': 'Импорт перезапишет все текущие данные. Продолжить?',
+    'toast.importOk': 'Восстановлено в отдельных копиях', 'backup.copySuffix': 'Восстановленная копия', 'backup.invalid': 'Формат резервной копии не поддерживается.', 'backup.empty': 'В копии нет романов или статей для восстановления.', 'backup.idbOnly': 'Для восстановления нужна IndexedDB. Экспорт резервной копии доступен.', 'backup.exportFail': 'Не удалось экспортировать копию. Проверьте хранилище браузера.', 'backup.orphanChats': 'Пропущены старые чаты без связанной работы: {n}.',
+    'confirm.import': 'Восстановить отдельные копии: {details}. Текущие работы сохранятся. Продолжить?',
     'dict.provOk': '✓ Подключено: ', 'dict.provFail': 'Ошибка подключения: ',
     'learn.fetching': 'Изучаю {name}…', 'learn.noSel': 'Сначала выберите авторов выше',
     'terms.title': '📜 Уведомление и правила', 'terms.noticeTitle': 'I. Уведомление',
-    'terms.notice': '<ul><li><b>Локальное хранение</b>: романы, планы, персонажи и память хранятся только в браузере вашего устройства (IndexedDB). Мы ничего не собираем и не загружаем. Очистка данных браузера удалит работы — делайте резервные копии.</li><li><b>ИИ</b>: <b>бесплатная модель встроена и работает сразу</b>, без настройки; можно подключить любую OpenAI-совместимую модель в «⚙ ИИ-модели». Ключ хранится локально и отправляется только на указанный вами адрес.</li><li><b>Что отправляется при генерации</b>: ваш писательский контекст (профиль стиля, план, персонажи, мир, память, заметки о писателях, предыдущие главы и т.д.) отправляется выбранной модели; перед первой онлайн-генерацией мы спросим ваше подтверждение.</li><li><b>Онлайн-функции</b>: «Изучение стилей», словарь и поиск литературы обращаются к открытым API (Википедия, Crossref и др.) только для поиска.</li><li><b>Ответственность</b>: инструмент бесплатен и предоставляется без гарантий; проверяйте сгенерированный текст.</li><li><b>Несовершеннолетним</b>: пользуйтесь под присмотром взрослых.</li></ul>',
+    'terms.notice': '<ul><li><b>Локальное хранение</b>: романы, планы, персонажи и память хранятся только в браузере вашего устройства (IndexedDB). Ручное редактирование и сохранение не отправляют черновик поставщику модели. Очистка данных браузера удалит работы — делайте резервные копии.</li><li><b>ИИ</b>: доступны встроенные, облачные и локальные модели. При использовании ИИ запрос и выбранный контекст передаются поставщику модели. При включённом резервном режиме запрос может получить резервный поставщик. Ключ хранится локально и используется для соответствующего сервиса.</li><li><b>Онлайн-функции</b>: «Изучение стилей» и словарь обращаются к открытым API (Википедия, словари) только для поиска.</li><li><b>Ответственность</b>: инструмент бесплатен и предоставляется без гарантий; проверяйте сгенерированный текст.</li><li><b>Несовершеннолетним</b>: пользуйтесь под присмотром взрослых.</li></ul>',
     'terms.rulesTitle': 'II. Правила',
     'terms.rules': '<ul><li>Не создавать и не распространять противозаконный контент: порнографию, насилие, разжигание ненависти, нарушение приватности, мошенничество и т.п.</li><li>Уважать авторские права: эталонные авторы — для изучения <b>приёмов</b>, а не для плагиата.</li><li>Соблюдать условия ИИ-провайдеров и местные законы.</li><li>Не злоупотреблять онлайн-функциями и чужими API.</li><li>Не создавать клевету или дипфейки о реальных людях.</li><li>Нарушители несут полную ответственность; XIAOXING оставляет за собой право отказать в обслуживании.</li></ul>',
     'terms.version': 'Версия 2025-01 · XIAOXING',
@@ -721,22 +798,49 @@ const I18N = {
     'board.novel': '📖 Роман', 'board.paper': '📄 Статья',
     'p.list': 'Мои статьи', 'p.new': 'Новая статья', 'p.empty': 'Статей пока нет.<br/>Нажмите «＋ Новая статья», заполните тему, затем «📚 Поиск и генерация».',
     'p.topicLabel': '📄 Тема / требования',
-    'p.topicPh': 'Введите тему статьи и требования… (поиск литературы онлайн; цитаты со ссылками на источники)',
-    'p.editorPh': 'Текст статьи появится здесь: цитаты [1][2] и список литературы со ссылками…',
+    "p.topicPh": "Укажите исследовательский вопрос, материалы и требования. Для поиска используются короткие ключевые слова.",
+    'p.editorPh': 'Введите текст или создайте черновик. Ставьте ссылки [1][2] и сверяйтесь с оригиналами перед сдачей.',
     'p.gen': '📚 Поиск и генерация', 'p.again': '🔄 Заново',
     'p.needTopic': 'Сначала введите тему', 'p.needOpen': 'Сначала создайте и откройте статью',
     'p.overwrite': 'В статье уже есть текст. Перезаписать?',
     'p.done': '✓ Статья готова — не понравилось? «🔄 Заново»',
-    'p.freeNote': 'Модуль статей бесплатен: стандартная статья (~1500 слов, 8 источников со ссылками). Pro — длиннее, качественнее, больше источников.',
+    "p.freeNote": "Поиск даёт возможные источники. Пишите сами или используйте черновик ИИ; затем проверьте оригиналы, ссылки и страницы.",
     'p.upgrade': '💎 Улучшить текст',
     'gp.psearch': 'Поиск источников', 'gp.refsFound': 'Найдено источников: {n}', 'gp.pdraft': 'Черновик структуры', 'gp.pwrite': 'Написание статьи',
     'gp.check': '⚖ Проверка качества', 'gp.rewrite': 'Найдены проблемы — переписываю', 'gp.pass': 'Проверка пройдена · качество подтверждено',
     'gp.failCheck': 'ИИ-самопроверка не пройдена: после нескольких переписываний качество не достигнуто, текст не выведен. Скорректируйте тему/план и повторите.',
+    "p.guide": "План работы",
+    "p.guideTitle": "План написания статьи",
+    "p.guideStart": "Выберите шаблон",
+    "p.step1": "Сформулируйте один исследовательский вопрос и определите период, территорию, группу или материалы.",
+    "p.step2": "Прочитайте первоисточники, запишите доказательства и страницы. Результаты поиска сами по себе не подтверждают выводы.",
+    "p.step3": "Напишите текст сами или создайте черновик. Перед сдачей проверьте каждую ссылку [n], оригинал и правила оформления.",
+    "p.tplReview": "Обзор литературы",
+    "p.tplCompare": "Сравнительный анализ",
+    "p.tplEmpirical": "Эмпирическое исследование",
+    "p.tplReviewBody": "Исследовательский вопрос:\nКлючевые слова:\nПериод и дисциплины:\nКритерии включения и исключения:\nПодходы для сравнения:",
+    "p.tplCompareBody": "Исследовательский вопрос:\nКлючевые слова:\nОбъекты и период:\nОбщие критерии сравнения:\nПланируемые источники:",
+    "p.tplEmpiricalBody": "Исследовательский вопрос:\nКлючевые слова:\nСовокупность и выборка:\nДанные и методы:\nОграничения и возможные смещения:",
+    "p.guideBlank": "Шаблон заполняет только пустое поле темы. Черновик не меняется.",
+    "p.guideFilled": "В поле темы уже есть текст. Продолжайте работу по шагам выше.",
+    "p.guideNeedPaper": "Сначала создайте или откройте статью.",
+    "p.audit": "Проверить ссылки в тексте",
+    "p.auditScope": "Проверяются только номера [n] и формат URL. Проверка не подтверждает подлинность, релевантность или содержание источников.",
+    "p.auditEmpty": "Черновик пуст.",
+    "p.auditTally": "В тексте {n} различных номеров; в списке литературы {m} записей с номерами.",
+    "p.auditNoRefs": "Нумерованные ссылки и записи не найдены.",
+    "p.auditMissing": "Нет записей для ссылок: {n}",
+    "p.auditUncited": "Нет ссылки в тексте на записи: {n}",
+    "p.auditDuplicate": "Повторяющиеся номера: {n}",
+    "p.auditNoLink": "Нет корректного URL: {n}",
+    "p.auditMalformed": "Пишите номера раздельно, например [1][2].",
+    "p.auditPass": "Номера и формат ссылок согласованы. Всё равно проверьте оригиналы.",
+    "p.topicRequired": "Сначала заполните исследовательский вопрос. Можно добавить краткие ключевые слова.",
+    "p.refsInvalid": "В черновике есть ссылки без источника или недопустимые URL. Исходный текст сохранён.",
     'p.langTitle': 'Язык статьи',
     'set.credits': 'Разработчик',
     'upd.title': '🎉 Обновление готово', 'upd.whatsNew': 'Что нового', 'upd.done': 'Понятно',
-    'top.noNovel': 'Роман не выбран', 'top.novelSwitch': 'Переключение / управление романами', 'top.panelToggle': 'Панель глав / плана',
-    'co.outlineToggle': '⌄ План',
+    'top.noNovel': 'Роман не выбран', 'top.novelSwitch': 'Переключение / управление романами',
     'w.secTitlePh': 'Название записи (система сил / фракции / хронология)', 'w.secBodyPh': 'Раскройте сеттинг…',
     'w.synopsisPh': 'Главная линия, повороты, финал…', 'w.worldPh': 'Эпоха, география, правила, системы сил…',
     'w.customEmpty': 'Добавьте записи: системы сил, фракции, хронологии…',
@@ -759,9 +863,6 @@ const I18N = {
     'profile.nickPh': 'Ваш псевдоним…',
     'editor.placeholder.ru': 'Новая глава начинается здесь… (Ctrl+S — сохранить · ✦ ИИ-движок справа)',
     'toast.paperSaved': 'Статья сохранена', 'toast.paperDeleted': 'Статья удалена',
-    'doc.conflictSuffix': ' (копия конфликта)',
-    'doc.conflict': '⚠ Другая вкладка тоже изменила этот текст: ваш текущий черновик сохранён как «копия конфликта», а документ обновлён до последней версии. Проверьте и объедините — ничего не потеряно.',
-    'ai.firstNotice': 'Первая онлайн-генерация: ИИ получит ваш писательский контекст (роман: профиль стиля, план главы, персонажи, мир, память, заметки о писателях, предыдущие главы; статья: тему и найденные источники) от выбранной модели. Продолжить?',
     'auth.title': '👤 Вход / Регистрация', 'auth.login': 'Вход', 'auth.register': 'Регистрация',
     'auth.user': 'Имя пользователя', 'auth.userPh': '2-20 знаков: буквы / цифры / _ / китайские',
     'auth.pass': 'Пароль', 'auth.passPh': 'Минимум 6 знаков, обязательно буквы И цифры',
@@ -776,16 +877,26 @@ const I18N = {
     'auth.trialBanner': '🎁 Новым аккаунтам — 1 день бесплатного Флагмана (максимальный уровень · без обязательств)',
     'auth.account': 'Аккаунт', 'auth.logout': 'Выйти',
     'auth.confirmLogout': 'Выйти из аккаунта? Ваши работы останутся на этом устройстве.', 'auth.loggedOut': 'Вы вышли',
-    'guide.title': '🎓 Знакомство', 'guide.skip': 'Пропустить', 'guide.prev': 'Назад', 'guide.next': 'Далее', 'guide.done': 'Начать писать',
-    'guide.s1': '<h3>👋 Добро пожаловать в XIAOXING</h3><p>Это <b>студия романов всех жанров</b>: пишете план — ИИ пишет текст. Три шага:</p><ul><li><span class="g-num">1</span> «＋ Новый роман», выберите стиль (название можно позже)</li><li><span class="g-num">2</span> Откройте главу и опишите, что в ней произойдёт, в «📋 План главы»</li><li><span class="g-num">3</span> Нажмите «🚀 Начать писать» — текст появится сам</li></ul>',
-    'guide.s2': '<h3>🤖 Сначала — бесплатная ИИ-модель (бесплатно)</h3><p>В XIAOXING <b>встроена бесплатная модель</b> — она подключается автоматически после регистрации. Настраивать ничего не нужно.</p><ul><li>Посмотреть или сменить модель: «⚙ Настройки → ИИ-модели»</li><li>Бесплатная модель иногда тормозит — система <b>автоматически повторяет и переключает резервные модели</b></li><li>Хотите стабильнее? Зарегистрируйтесь бесплатно на SiliconFlow (siliconflow.cn), возьмите ключ, выберите пресет и вставьте его</li><li>Проверьте кнопкой «Проверить подключение»</li></ul><p>Если ИИ выдал ошибку — не пугайтесь: на экране появится понятная подсказка.</p>',
-    'guide.s3': '<h3>✍️ Остальное в двух словах</h3><ul><li><b>Стиль</b>: вкладка «🖊 Стиль» слева — выбирайте авторов или вставьте свои 500 знаков</li><li><b>Не понравилось?</b> «🔄 Заново» — бесплатно и без ограничений</li><li><b>Интерфейс</b>: «⚙ Настройки» — шрифт, фон (Солнечная система / Галактика / Планета), язык, цвет</li><li><b>Названия</b>: кнопка «✨» — выбирайте из вариантов ИИ</li><li><b>Сохранение</b>: всё хранится на вашем устройстве; перенос через «Резерв и экспорт»</li><li><b>Помощь</b>: кликните инопланетянина слева внизу</li></ul>',
-    'guide.s4': '<h3>💎 О платных планах (в самом конце)</h3><p>Сейчас <b>бета: всё бесплатно</b>. Никаких обязательных покупок.</p><ul><li>🎁 Новый аккаунт уже получил <b>1 день бесплатного Флагмана</b> (максимальный уровень): все модели, память до 10 глав, полный текст с ИИ-самопроверкой</li><li>После пробника вы автоматически вернётесь на бесплатный план — работы и данные не пострадают</li><li>Центр членства объясняет планы (тоже бесплатно во время беты)</li><li>О платном запуске предупредим заранее — автоплатежей не будет</li></ul><p>Всё готово — пишите! 🚀</p>',
+    'quick.title': 'Быстрый старт',
+    'quick.heading': 'Напишите первый абзац.',
+    'quick.intro': 'Программировать не нужно. Пишите сами или выберите модель ИИ для помощи.',
+    'quick.novel': 'Начать роман',
+    'quick.novelHint': 'Создайте роман и откройте первую главу. Напишите текст или составьте план.',
+    'quick.paper': 'Начать статью',
+    'quick.paperHint': 'Создайте статью, введите тему исследования и выберите язык текста.',
+    'quick.model': 'Выбрать модель ИИ',
+    'quick.modelHint': 'Выберите сохранённую модель или подключите своего поставщика по шаблону.',
+    'quick.backup': 'Сохранить и восстановить',
+    'quick.backupHint': 'Скачайте текст или резервную копию работ. Здесь же можно восстановить копию.',
+    'quick.tip': 'Работы хранятся в этом браузере. Перед сменой браузера или устройства скачайте резервную копию.',
+    'quick.guest': 'Писать без аккаунта',
+    'quick.guestNote': 'Регистрация необязательна. Если разрешить сохранение, работы останутся в этом браузере.',
+    'quick.localAccount': 'Локальная работа без входа',
     'asst.title': '🛸 Помощник', 'asst.petTitle': 'Кликните меня — открою помощника', 'asst.hide': '🙈 Скрыть питомца',
     'asst.a1': '＋ Новый роман', 'asst.a2': '🚀 Начать писать', 'asst.a3': '✨ Названия', 'asst.a4': '⚙ Настройки', 'asst.a5': '💬 Отзыв',
     'asst.guide': '<h3>🚀 Три шага до первой главы</h3><ul><li><b>Шаг 1 · Роман</b>: «＋ Новый роман» и таблица стиля. Название можно оставить пустым.</li><li><b>Шаг 2 · План</b>: откройте главу и опишите, что произойдёт, в «📋 План главы».</li><li><b>Шаг 3 · Пишем</b>: «🚀 Начать писать» — ИИ изучит стили онлайн, составит черновик и напишет текст. Не понравилось — «🔄 Заново».</li></ul><h3>💡 Частые вопросы</h3><ul><li><b>Где текст?</b> В большом поле под планом; сохраняется автоматически.</li><li><b>План и текст рядом?</b> Кнопка «⇋» на панели плана или «⚙ Настройки → Макет».</li><li><b>ИИ пишет не как вы?</b> Вкладка «🖊 Стиль»: авторы или свой текст 500 знаков.</li><li><b>Шрифт, фон, тема?</b> «⚙ Настройки» — есть Солнечная система, Галактика, Планета.</li><li><b>Боитесь потерять данные?</b> «⚙ Настройки → Резерв и экспорт».</li><li><b>Остались вопросы?</b> «⚙ Настройки → Обратная связь».</li></ul>',
     'storage.title': '💾 Разрешение на хранение',
-    'storage.desc': '<p>XIAOXING сохраняет ваши <b>романы, планы, персонажей и память</b> в <b>хранилище браузера на вашем устройстве</b> (IndexedDB) для автосохранения. На серверы ничего не загружается.</p><p>Согласитесь — работы сохраняются. Откажетесь — <b>ничего не сохранится</b> и может пропасть при закрытии страницы.</p>',
+    'storage.desc': '<p>XIAOXING сохраняет ваши <b>романы, планы, персонажей и память</b> в <b>хранилище браузера на вашем устройстве</b> (IndexedDB) для автосохранения. Это разрешение относится только к локальному сохранению; работа с ИИ через интернет запускается отдельно.</p><p>Согласитесь — работы сохраняются. Откажетесь — <b>ничего не сохранится</b> и может пропасть при закрытии страницы.</p>',
     'storage.allow': 'Разрешить и сохранять', 'storage.deny': 'Отказаться',
     'storage.warn': '⚠ Хранилище не разрешено: работы НЕ сохраняются. Разрешите в «⚙ Настройки → Хранилище».',
     'tip.title': '☕ Поддержать автора',
@@ -799,6 +910,137 @@ const I18N = {
     'tip.fail': 'Не удалось отправить, попробуйте позже', 'tip.needAmount': 'Выберите или введите сумму'
   }
 };
+
+/* Model setup copy */
+Object.assign(I18N.zh, {
+  "model.active": "当前模型",
+  "model.useDefault": "使用内置模型",
+  "model.testActive": "测试当前模型",
+  "model.intro": "内置模型无需填密钥；也可接入自己账户里的模型，或连接本机已运行的模型。内置服务可能限流。",
+  "model.addCloud": "接入其他模型",
+  "model.addLocal": "连接本机模型",
+  "model.keyPh": "仅在服务商要求时填写",
+  "model.testPrivacy": "测试只给所填地址发送一句固定问候，不附带论文或小说。使用在线模型写作时，填写的密钥和所选写作上下文会发给该服务商。",
+  "model.advanced": "高级设置（地址、模型名、生成参数）",
+  "model.builtinName": "Pollinations 内置模型",
+  "model.unnamed": "未命名模型",
+  "model.none": "未选择模型",
+  "model.noneHint": "可以先用内置模型，也可以添加自己的模型。",
+  "model.badAddress": "请填写有效的 HTTP(S) 接口地址。将查询参数放在接口路径里；地址不要包含密码或片段。",
+  "model.activeTag": "使用中",
+  "model.use": "使用",
+  "model.edit": "编辑",
+  "model.editNamed": "编辑模型：{name}",
+  "model.switched": "已选择：{name}",
+  "model.editGuide": "修改后点「保存并启用」。只想检查连接，可以先点「测试连接」。",
+  "model.localGuide": "先启动本机服务，在高级设置里填实际已安装的模型名。若本机服务没有启用认证，密钥留空。",
+  "model.cloudGuide": "先从下拉框选择服务商，填它提供的 API Key。自定义地址或模型名在高级设置里填写。",
+  "model.presetGuide": "已填入默认地址和模型名。服务商要求时填 API Key；模型名可在高级设置中修改。",
+  "model.customGuide": "在高级设置中填入服务商给出的 API 地址和实际模型名。",
+  "model.missing": "还需要填写 API 地址和模型名称。",
+  "model.newHostKey": "地址已换到其他服务，已清空旧密钥。请在确认新地址后再填写对应密钥。",
+  "model.testing": "正在测试 {host}…",
+  "model.timeout": "测试超时。请确认模型服务已经启动，或检查网络后重试。",
+  "model.connected": "{name} 返回了有效答复。现在可以保存并使用。",
+  "model.auth": "认证失败（HTTP {status}）。检查密钥、账户权限和服务商是否一致。",
+  "model.credit": "服务商拒绝了请求（HTTP {status}）。请检查余额或额度。",
+  "model.notFound": "没有找到接口或模型（HTTP {status}）。请核对路径和模型名。",
+  "model.rate": "服务商限流（HTTP {status}）。稍后重试，或检查账户额度。",
+  "model.upstream": "模型服务暂时失败（HTTP {status}）。稍后重试或切换模型。",
+  "model.request": "服务商拒绝了测试（HTTP {status}）。请检查 API 地址、模型名和接口兼容性。",
+  "model.network": "无法连通。检查服务是否启动、网址是否正确，以及服务商是否允许此网页跨域访问。",
+  "model.badResponse": "服务返回了数据，但没有提供 OpenAI 兼容的文字答复。请核对接口路径和模型类型。",
+  "model.cancelled": "测试已取消。"
+});
+Object.assign(I18N.en, {
+  "model.active": "Current model",
+  "model.useDefault": "Use built-in model",
+  "model.testActive": "Test current model",
+  "model.intro": "The built-in model needs no key and may be rate-limited. You can also connect a model from your own provider account or one running on your device.",
+  "model.addCloud": "Connect another model",
+  "model.addLocal": "Connect a local model",
+  "model.keyPh": "Only if your provider requires a key",
+  "model.testPrivacy": "The test sends a fixed greeting to this endpoint, with no novel or paper content. When you write with an online model, the key and selected writing context go to that provider.",
+  "model.advanced": "Advanced settings (endpoint, model name, generation options)",
+  "model.builtinName": "Built-in Pollinations model",
+  "model.unnamed": "Unnamed model",
+  "model.none": "No model selected",
+  "model.noneHint": "Use the built-in model or add your own.",
+  "model.badAddress": "Enter a valid HTTP(S) API address. Put any query parameters in the endpoint path; do not include credentials or fragments.",
+  "model.activeTag": "Active",
+  "model.use": "Use",
+  "model.edit": "Edit",
+  "model.editNamed": "Edit model: {name}",
+  "model.switched": "Selected: {name}",
+  "model.editGuide": "Save & enable your changes when ready. You can test the connection first.",
+  "model.localGuide": "Start your local model server first. Set the name of a model it has installed under Advanced. Leave the key empty if your local service does not require one.",
+  "model.cloudGuide": "Choose a provider from the list and enter its API key. Open Advanced to enter a custom address or model name.",
+  "model.presetGuide": "The default address and model are filled in. Enter an API key if required, or open Advanced to change the model.",
+  "model.customGuide": "Open Advanced and enter your provider's API address and actual model name.",
+  "model.missing": "An API address and model name are required.",
+  "model.newHostKey": "You changed providers. The old key was cleared; confirm the new address before entering its key.",
+  "model.testing": "Testing {host}…",
+  "model.timeout": "The test timed out. Check whether the model server is running and try again.",
+  "model.connected": "{name} returned a valid reply. You can save and use this model.",
+  "model.auth": "Authentication failed (HTTP {status}). Check that the key, permissions and provider match.",
+  "model.credit": "The provider rejected the request (HTTP {status}). Check your balance or quota.",
+  "model.notFound": "Endpoint or model not found (HTTP {status}). Check the path and model name.",
+  "model.rate": "The provider is rate-limiting requests (HTTP {status}). Try later or check your quota.",
+  "model.upstream": "The model service is temporarily unavailable (HTTP {status}). Try again or switch models.",
+  "model.request": "The provider rejected the test (HTTP {status}). Check the API address, model name and API compatibility.",
+  "model.network": "Unable to connect. Check the server, address, and whether the service allows cross-origin requests from this site.",
+  "model.badResponse": "The service responded, but did not return an OpenAI-compatible text reply. Check the API path and model type.",
+  "model.cancelled": "Test cancelled."
+});
+Object.assign(I18N.ru, {
+  "model.active": "Текущая модель",
+  "model.useDefault": "Выбрать встроенную модель",
+  "model.testActive": "Проверить текущую модель",
+  "model.intro": "Для встроенной модели ключ не нужен; возможны ограничения частоты запросов. Можно подключить модель другого сервиса или модель на своём устройстве.",
+  "model.addCloud": "Подключить другую модель",
+  "model.addLocal": "Подключить локальную модель",
+  "model.keyPh": "Только если сервис требует ключ",
+  "model.testPrivacy": "При проверке на указанный адрес отправляется только короткое приветствие, без текста романа или статьи. При работе с облачной моделью выбранный контекст и ключ получает этот сервис.",
+  "model.advanced": "Дополнительные настройки: адрес, модель и параметры генерации",
+  "model.builtinName": "Встроенная модель Pollinations",
+  "model.unnamed": "Модель без названия",
+  "model.none": "Модель не выбрана",
+  "model.noneHint": "Выберите встроенную модель или добавьте свою.",
+  "model.badAddress": "Укажите корректный HTTP(S)-адрес API. Параметры запроса добавьте к пути; не включайте учётные данные или фрагмент.",
+  "model.activeTag": "Активна",
+  "model.use": "Выбрать",
+  "model.edit": "Изменить",
+  "model.editNamed": "Изменить модель: {name}",
+  "model.switched": "Выбрано: {name}",
+  "model.editGuide": "Сохраните и включите модель или сначала проверьте подключение.",
+  "model.localGuide": "Сначала запустите локальный сервер. В дополнительных настройках укажите имя установленной модели. Если ключ не требуется, оставьте поле пустым.",
+  "model.cloudGuide": "Выберите сервис из списка и введите его ключ API. Свой адрес и имя модели можно задать в дополнительных настройках.",
+  "model.presetGuide": "Адрес и модель заполнены. Введите ключ, если он нужен; имя модели можно изменить в дополнительных настройках.",
+  "model.customGuide": "В дополнительных настройках укажите адрес API и имя модели вашего сервиса.",
+  "model.missing": "Укажите адрес API и имя модели.",
+  "model.newHostKey": "Адрес сервиса изменился, старый ключ удалён из формы. Проверьте новый адрес и введите подходящий ключ.",
+  "model.testing": "Проверка {host}…",
+  "model.timeout": "Время проверки истекло. Проверьте, запущен ли сервер модели, и повторите попытку.",
+  "model.connected": "Модель {name} вернула корректный ответ. Её можно сохранить и использовать.",
+  "model.auth": "Ошибка авторизации (HTTP {status}). Проверьте ключ, права доступа и адрес сервиса.",
+  "model.credit": "Сервис отклонил запрос (HTTP {status}). Проверьте баланс или лимит.",
+  "model.notFound": "Интерфейс или модель не найдены (HTTP {status}). Проверьте путь API и имя модели.",
+  "model.rate": "Слишком много запросов (HTTP {status}). Попробуйте позже или проверьте лимит.",
+  "model.upstream": "Сервис модели временно недоступен (HTTP {status}). Попробуйте позже или переключите модель.",
+  "model.request": "Сервис отклонил проверку (HTTP {status}). Проверьте адрес API, имя модели и совместимость интерфейса.",
+  "model.network": "Нет подключения. Проверьте запуск сервера, адрес и разрешены ли запросы с этого сайта.",
+  "model.badResponse": "Сервис ответил, но не вернул текст в формате OpenAI API. Проверьте путь и тип модели.",
+  "model.cancelled": "Проверка отменена."
+});
+
+const OUTPUT_LANGS = Object.freeze({ zh: '中文', en: 'English', ru: 'Русский' });
+function normalizeOutputLang(value, fallback = 'zh') {
+  return Object.hasOwn(OUTPUT_LANGS, value) ? value : Object.hasOwn(OUTPUT_LANGS, fallback) ? fallback : 'zh';
+}
+function outputLanguageRule(lang) {
+  return 'Output language: ' + OUTPUT_LANGS[normalizeOutputLang(lang)] +
+    '. Use this language for generated prose and explanations. Preserve requested machine-readable keys, structure, proper names, quotations, and citation titles.';
+}
 function t(k, vars) {
   const dict = I18N[state.settings.lang] || I18N.zh;
   let s = dict[k] !== undefined ? dict[k] : (I18N.zh[k] !== undefined ? I18N.zh[k] : k);
@@ -806,11 +1048,22 @@ function t(k, vars) {
   return s;
 }
 function applyI18n() {
-  $$('[data-i18n]').forEach(el => { const v = t(el.dataset.i18n); if (v !== el.dataset.i18n) el.textContent = v; });
-  $$('[data-i18n-ph]').forEach(el => { const v = t(el.dataset.i18nPh); if (v !== el.dataset.i18nPh) el.placeholder = v; });
-  $$('[data-i18n-title]').forEach(el => { const v = t(el.dataset.i18nTitle); if (v !== el.dataset.i18nTitle) el.title = v; });
-  $$('[data-i18n-html]').forEach(el => { const v = t(el.dataset.i18nHtml); if (v !== el.dataset.i18nHtml) el.innerHTML = v; });
+  document.documentElement.lang = ({zh: 'zh-CN', en: 'en', ru: 'ru'})[normalizeOutputLang(state.settings.lang)];
+  $$('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  $$('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+  $$('[data-i18n-title]').forEach(el => { el.title = t(el.dataset.i18nTitle); });
+  $$('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
   $('#ai-input').placeholder = t('ai.inputPh');
+  $('#btn-mobile-assistant').setAttribute('aria-label', t('asst.title'));
+  $('#btn-mobile-panel-close').setAttribute('aria-label', t('common.close'));
+  $('#btn-quick-start').setAttribute('aria-label', t('quick.title'));
+  applyHistoryLabels();
+  applyCoachLabels();
+  applyManuscriptLabels();
+  applyInstallLabels();
+  applyDocxLabels();
+  syncMobileWritingKeys();
+  if (typeof DraftReview !== 'undefined') DraftReview.refresh();
   $('#btn-focus').textContent = t(document.body.classList.contains('focus-mode') ? 'btn.focusExit' : 'btn.focus');
   renderEditorPlaceholder();
   if (state.module === 'world' && curNovel()) renderPanel();
@@ -993,7 +1246,7 @@ const PRESETS = [
 const SYSTEM_PROMPT = [
   '你是「晓星 XIAOXING」的内置剧情引擎，一位精通全类型小说（玄幻、科幻、都市、悬疑、言情、历史、轻小说等）的资深作家与策划。职责：讨论剧情、续写正文、推演走向、润色文笔、提取记忆、规划大纲、诊断文风。',
   '规则：',
-  '1. 默认使用中文交流（用户使用其他语言时跟随用户语言）。',
+  '1. 使用系统指定的作品输出语言。',
   '2. 用户消息中会携带【小说信息】【风格档案】【大纲】【角色卡】【世界观】【记忆库】【参考作家技法】【前文章节】等上下文，这是你对这部小说的全部记忆，请始终以此为依据，保持人物、设定、伏笔一致。',
   '3. 被要求「续写」时，只输出小说正文，不要任何解释、标题或前言。',
   '4. 被要求「提取记忆」时，只输出 JSON 数组，不要任何其他内容。',
@@ -1001,7 +1254,6 @@ const SYSTEM_PROMPT = [
   '6. 永远尊重用户创意，可大胆提出构思，但不擅自删除设定。',
   '7. 文笔要求（非常重要）：像人类作家一样写作——句式长短交错，段落节奏有变化；避免连续段落用相同句式开头；少用「只见/顿时/不由得/心中一动」等套路词堆砌；对话口语化、符合人物身份与情绪；用具体细节与五感描写代替抽象概括；避免机械重复同一表达；情节推进自然，不硬凑。',
   '8. 若用户提供了参考作家：学习其写作技法（而非抄袭其句子或情节），结合本小说题材灵活运用，让文笔接地气、通人性。',
-  '9. 若风格档案标注写作语言为英文，正文与润色请用地道自然的英文输出。',
   '10. 所有输出遵循标准格式：使用规范文字与标点，不使用表情符号、特殊符号或装饰性字符；引用与参考文献按学术规范标注。'
 ].join('\n');
 
@@ -1037,7 +1289,7 @@ async function dbInit() {
   catch (e) { dbMode = 'ls'; lsLoad(); toast('已切换到 localStorage 存储模式（容量有限，建议定期备份）', 'warn', 5000); }
 }
 function dbPut(store, obj) {
-  if (state.storageDenied) return Promise.resolve(obj);
+  if (state.settings.storageDenied) return Promise.resolve(obj);
   if (dbMode === 'idb') return new Promise((res, rej) => {
     const tr = db.transaction(store, 'readwrite');
     tr.objectStore(store).put(obj);
@@ -1045,8 +1297,195 @@ function dbPut(store, obj) {
   });
   lsMem[store][obj.id] = obj; lsSave(store); return Promise.resolve(obj);
 }
+/* Draft saves compare and write inside one transaction, across tabs. */
+const draftWrites = new WeakMap();
+const draftRedirect = new WeakMap();
+const RECOVERY_KEY = 'nebula-draft-recovery-v1';
+const pendingDrafts = new Map();
+const recoveryId = (store, id) => store + ':' + id;
+function syncPendingDrafts() {
+  if (state.settings.storageDenied) return;
+  try {
+    if (!pendingDrafts.size) sessionStorage.removeItem(RECOVERY_KEY);
+    else sessionStorage.setItem(RECOVERY_KEY, JSON.stringify([...pendingDrafts.values()]));
+  } catch (_) { /* IndexedDB remains the primary save path. */ }
+}
+function rememberPendingDraft(store, record, delta, options) {
+  const key = recoveryId(store, record.id);
+  const { id, title, novelId, order, createdAt, updatedAt, revision } = record;
+  const pending = { store, base: { id, title, novelId, order, createdAt, updatedAt, revision }, delta, options };
+  pendingDrafts.set(key, pending);
+  syncPendingDrafts();
+  return pending;
+}
+function clearPendingDraft(pending) {
+  const key = recoveryId(pending.store, pending.base.id);
+  if (pendingDrafts.get(key) !== pending) return;
+  pendingDrafts.delete(key);
+  syncPendingDrafts();
+}
+async function replayPendingDrafts() {
+  if (state.settings.storageDenied) return;
+  let entries;
+  try { entries = JSON.parse(sessionStorage.getItem(RECOVERY_KEY) || '[]'); }
+  catch (_) { return; }
+  if (!Array.isArray(entries)) return;
+  for (const item of entries) {
+    if (!item || ![STORE.chapters, STORE.papers].includes(item.store) ||
+        typeof item.base?.id !== 'string' || typeof item.delta?.content !== 'string') continue;
+    pendingDrafts.set(recoveryId(item.store, item.base.id), item);
+  }
+  let recovered = 0;
+  for (const entry of [...pendingDrafts.values()]) {
+    try {
+      const latest = await dbGet(entry.store, entry.base.id);
+      const delta = { ...draftVersionFields(entry.delta), wordCount: countWords(entry.delta.content) };
+      if (latest && Object.keys(delta).every(key => latest[key] === delta[key])) {
+        clearPendingDraft(entry);
+        continue;
+      }
+      if (entry.store === STORE.chapters && !await dbGet(STORE.novels, entry.base.novelId)) continue;
+      const result = await dbSaveDraft(entry.store, entry.base, delta, entry.options);
+      clearPendingDraft(entry);
+      recovered++;
+      if (entry.store === STORE.chapters && state.currentChapterId === entry.base.id) state.currentChapterId = result.saved.id;
+      if (entry.store === STORE.papers && state.currentPaperId === entry.base.id) state.currentPaperId = result.saved.id;
+    } catch (_) { /* Keep the journal for the next retry. */ }
+  }
+  if (recovered) toast(draftNotice('replayed'), 'ok', 8000);
+  if (pendingDrafts.size) toast(draftNotice('failed'), 'err', 9000);
+}
+function draftStamp(record) {
+  return record ? JSON.stringify([record.revision || '', record.updatedAt || 0]) : null;
+}
+function draftNotice(key) {
+  const labels = {
+    copy: ['另一标签页已更新原稿。你的改动已另存为冲突副本。', 'The original changed in another tab. Your edits were saved as a conflict copy.', 'Оригинал изменён в другой вкладке. Ваши правки сохранены в отдельной копии.'],
+    failed: ['保存失败：请先复制正文或导出备份。', 'Save failed. Copy your text or export a backup before leaving.', 'Не удалось сохранить. Скопируйте текст или экспортируйте резервную копию.'],
+    memory: ['未启用本地存储；当前改动只保留在本页。', 'Local storage is disabled. Changes are kept only on this page.', 'Локальное хранилище отключено. Правки остаются только на этой странице.'],
+    suffix: ['冲突副本', 'Conflict copy', 'Конфликтная копия'],
+    replayed: ['已找回刷新前尚未写入的稿件。', 'Recovered edits pending before reload.', 'Восстановлены правки, ожидавшие сохранения до обновления страницы.']
+  };
+  return labels[key][({zh:0,en:1,ru:2})[state.settings.lang] ?? 0];
+}
+const HISTORY_LIMIT = 16;
+const HISTORY_MAX_CHARS = 1250000;
+const HISTORY_FIELDS = ['title', 'content', 'outline', 'topic', 'status', 'outLang'];
+function draftVersionFields(record) {
+  return Object.fromEntries(HISTORY_FIELDS.filter(key => typeof record[key] === 'string').map(key => [key, record[key]]));
+}
+function versionSize(record) {
+  return HISTORY_FIELDS.reduce((n, key) => n + (typeof record[key] === 'string' ? record[key].length : 0), 0);
+}
+function collectDraftHistory(record, delta, checkpoint = false) {
+  const history = (Array.isArray(record.history) ? record.history : []).filter(item =>
+    item && typeof item.id === 'string' && Number.isFinite(item.at) && versionSize(item) <= HISTORY_MAX_CHARS);
+  if (!HISTORY_FIELDS.some(key => key in delta && (record[key] || '') !== (delta[key] || ''))) return history;
+  if (!record.content && !record.outline && !record.topic) return history;
+  const old = { id: uid(), at: record.updatedAt || now(), ...draftVersionFields(record) };
+  if (versionSize(old) > HISTORY_MAX_CHARS) return history;
+  const rolling = history.at(-1);
+  if (!checkpoint && rolling && !rolling.checkpoint && old.at - rolling.at < 30000) {
+    history[history.length - 1] = old;
+  } else {
+    if (rolling) history[history.length - 1] = { ...rolling, checkpoint: true };
+    if (checkpoint) old.checkpoint = true;
+    history.push(old);
+  }
+  let size = history.reduce((n, entry) => n + versionSize(entry), 0);
+  while (history.length > HISTORY_LIMIT || size > HISTORY_MAX_CHARS) size -= versionSize(history.shift());
+  return history;
+}
+function draftOutcome(latest, base, delta, options = {}) {
+  const conflict = !latest || draftStamp(latest) !== draftStamp(base);
+  const source = latest && !conflict ? latest : base;
+  const saved = { ...source, ...delta, revision: uid(), updatedAt: now() };
+  saved.history = collectDraftHistory(conflict ? { ...source, history: [] } : source, delta, options.checkpoint);
+  if (options.checkpoint && source.content && saved.content !== source.content && !saved.history.some(v => v.content === source.content)) {
+    throw new Error('Cannot safely checkpoint the current draft before restoring');
+  }
+  if (conflict) {
+    saved.id = uid();
+    saved.conflictOf = base.id;
+    saved.title = (delta.title || base.title || '—') + ' · ' + draftNotice('suffix');
+    if (typeof saved.order === 'number') saved.order += 0.5;
+  }
+  return { saved, latest, conflict };
+}
+async function dbSaveDraft(store, base, delta, options = {}) {
+  if (state.settings.storageDenied) return { ...draftOutcome(base, base, delta, options), memory: true };
+  if (dbMode === 'idb') return new Promise((resolve, reject) => {
+    const tr = db.transaction(store, 'readwrite');
+    const os = tr.objectStore(store);
+    const req = os.get(base.id);
+    let result;
+    let failure;
+    req.onsuccess = () => {
+      try { result = draftOutcome(req.result, base, delta, options); os.put(result.saved); }
+      catch (error) { failure = error; tr.abort(); }
+    };
+    tr.oncomplete = () => resolve(result);
+    tr.onabort = () => reject(failure || tr.error || new Error('Draft transaction aborted'));
+  });
+  if (!navigator.locks) throw new Error('Safe cross-tab draft locking unavailable');
+  return navigator.locks.request(lsKey(store), () => {
+    const records = JSON.parse(localStorage.getItem(lsKey(store)) || '{}');
+    const result = draftOutcome(records[base.id], base, delta, options);
+    records[result.saved.id] = result.saved;
+    localStorage.setItem(lsKey(store), JSON.stringify(records));
+    lsMem[store] = records;
+    return result;
+  });
+}
+async function persistDraft(store, record, delta, manual, options = {}) {
+  const paper = store === STORE.papers;
+  const idKey = paper ? 'currentPaperId' : 'currentChapterId';
+  const dirtyKey = paper ? 'paperDirty' : 'editorDirty';
+  const setStatus = paper ? setPaperSaveState : setSaveState;
+  const titleBox = paper ? '#paper-title' : '#chapter-title';
+  const coll = paper ? state.papers : state.chapters;
+  const pending = rememberPendingDraft(store, record, delta, options);
+  const previous = draftWrites.get(record) || Promise.resolve();
+  const work = previous.catch(() => {}).then(async () => {
+    const base = draftRedirect.get(record) || record;
+    try {
+      const result = await dbSaveDraft(store, base, delta, options);
+      clearPendingDraft(pending);
+      if (result.conflict) {
+        if (result.latest) Object.assign(base, result.latest);
+        else {
+          const i = coll.indexOf(base);
+          if (i >= 0) coll.splice(i, 1);
+        }
+        coll.push(result.saved);
+        draftRedirect.set(record, result.saved);
+        draftWrites.set(result.saved, draftWrites.get(record) || work);
+        if (state[idKey] === base.id) {
+          state[idKey] = result.saved.id;
+          saveResumeIds();
+          if ($(titleBox).value.trim() === delta.title) $(titleBox).value = result.saved.title;
+        }
+        toast(draftNotice('copy'), 'warn', 9000);
+      } else {
+        Object.assign(base, result.saved);
+        if (result.memory && manual) toast(draftNotice('memory'), 'warn');
+        else if (manual) toast(t(paper ? 'toast.paperSaved' : 'toast.savedOk'), 'ok');
+      }
+      if (state[idKey] === result.saved.id && !state[dirtyKey]) setStatus(!result.memory);
+      renderTop();
+      if (paper ? state.board === 'paper' : state.board === 'novel' && state.module === 'chapters') renderPanel();
+      return result;
+    } catch (e) {
+      if (state[idKey] === base.id) { state[dirtyKey] = true; setStatus(false); }
+      toast(draftNotice('failed'), 'err', 9000);
+    }
+  });
+  draftWrites.set(record, work);
+  return work;
+}
+
 function dbDel(store, id) {
-  if (state.storageDenied) return Promise.resolve();
+  if (state.settings.storageDenied) return Promise.resolve();
   if (dbMode === 'idb') return new Promise((res, rej) => {
     const tr = db.transaction(store, 'readwrite');
     tr.objectStore(store).delete(id);
@@ -1055,7 +1494,7 @@ function dbDel(store, id) {
   delete lsMem[store][id]; lsSave(store); return Promise.resolve();
 }
 function dbClear(store) {
-  if (state.storageDenied) return Promise.resolve();
+  if (state.settings.storageDenied) return Promise.resolve();
   if (dbMode === 'idb') return new Promise((res, rej) => {
     const tr = db.transaction(store, 'readwrite');
     tr.objectStore(store).clear();
@@ -1085,13 +1524,13 @@ function defaultSettings() {
   return {
     providers: [], activeProviderId: null,
     fontSize: 18, accent: 'cyan', aiPanelOpen: true, lang: 'zh', layout: 'stack',
-    bg: 'stars', petVisible: true, autoModel: true, plan: 'free', storageDenied: false, board: 'novel',
+    bg: 'stars', petVisible: true, autoModel: false, plan: 'free', storageDenied: false, board: 'novel',
     ctx: { outline: true, chars: true, world: true, mem: true, chatHistory: true, prevChapters: 2 },
     user: { nickname: '', avatarPreset: 0, avatarData: '' },
     customAuthors: []
   };
 }
-const APP_VERSION = '3.7.2';
+const APP_VERSION = '4.1.0';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -1110,7 +1549,7 @@ const state = {
   wikiCache: {},
   learning: false,
   genState: { running: false, stageIdx: -1, abort: null, genKind: 'novel' },
-  accounts: {}, currentUser: null, authMode: 'login', guideStep: 0, tipAmount: null,
+  accounts: {}, currentUser: null, authMode: 'login', tipAmount: null,
   changelogChecked: false
 };
 let lastTrialState = null;
@@ -1126,6 +1565,24 @@ function loadWikiCache() {
   try { state.wikiCache = JSON.parse(localStorage.getItem('nebula-wiki-cache') || '{}'); } catch (e) { state.wikiCache = {}; }
 }
 function saveWikiCache() { try { localStorage.setItem('nebula-wiki-cache', JSON.stringify(state.wikiCache)); } catch (e) { } }
+
+const RESUME_KEY = 'nebula-current-work-v1';
+function loadResumeIds() {
+  if (state.settings.storageDenied) return;
+  try {
+    const ids = JSON.parse(sessionStorage.getItem(RESUME_KEY) || '{}');
+    for (const key of ['currentNovelId', 'currentChapterId', 'currentPaperId']) {
+      if (typeof ids[key] === 'string') state[key] = ids[key];
+    }
+  } catch (_) { /* Selection will fall back to the latest available draft. */ }
+}
+function saveResumeIds() {
+  if (state.settings.storageDenied) return;
+  try {
+    const {currentNovelId, currentChapterId, currentPaperId} = state;
+    sessionStorage.setItem(RESUME_KEY, JSON.stringify({currentNovelId, currentChapterId, currentPaperId}));
+  } catch (_) {}
+}
 
 const curNovel = () => state.novels.find(n => n.id === state.currentNovelId) || null;
 const curChapter = () => state.chapters.find(c => c.id === state.currentChapterId) || null;
@@ -1150,6 +1607,9 @@ async function loadAll() {
   state.chapters = chapters; state.outline = outline;
   state.characters = characters; state.memories = memories; state.chats = chats;
   state.papers = papers;
+  if (!papers.some(p => p.id === state.currentPaperId)) {
+    state.currentPaperId = [...papers].sort((a,b) => (b.updatedAt || 0) - (a.updatedAt || 0))[0]?.id || null;
+  }
   if (!state.novels.length) { state.currentNovelId = null; state.currentChapterId = null; state.chatForNovel = []; return; }
   if (!state.currentNovelId || !state.novels.find(n => n.id === state.currentNovelId)) state.currentNovelId = state.novels[0].id;
   const chs = chaptersOf(state.currentNovelId);
@@ -1190,7 +1650,7 @@ function renderTop() {
 function renderModelTag() {
   const p = activeProvider();
   const el = $('#ai-model-tag');
-  el.textContent = p ? (p.name + ' · ' + p.model) : t('ai.modelNone');
+  el.textContent = p ? (modelDisplayName(p) + ' · ' + p.model) : t('ai.modelNone');
   el.classList.toggle('off', !p);
 }
 function renderProfileTop() {
@@ -1236,6 +1696,7 @@ function renderLibrary() {
 }
 async function switchNovel(id) {
   if (id === state.currentNovelId) { closeModal('modal-library'); return; }
+  cancelGen();
   await flushSave();
   state.currentNovelId = id;
   const chs = chaptersOf(id);
@@ -1246,7 +1707,9 @@ async function switchNovel(id) {
 }
 
 /* ---------------- 小说弹窗（含风格表格） ---------------- */
-function openNovelModal(id) {
+let quickStartNovel = false;
+function openNovelModal(id, { firstChapter = false } = {}) {
+  quickStartNovel = firstChapter;
   state.novelEditingId = id || null;
   $('#novel-modal-title').textContent = id ? t('novel.edit') : t('novel.new');
   $('#novel-title').value = ''; $('#novel-desc').value = '';
@@ -1263,7 +1726,7 @@ function openNovelModal(id) {
       narrative: n.narrative || 'dialogue',
       standard: n.standard || '通用',
       personal: n.personal || 'human',
-      lang: n.lang || 'zh',
+      lang: normalizeOutputLang(n.lang),
       authors: [...novelRefAuthors(n)]
     };
   } else {
@@ -1308,6 +1771,7 @@ function onStyleChipClick(e) {
 async function saveNovelFromForm() {
   const title = $('#novel-title').value.trim();
   const id = state.novelEditingId;
+  const createFirstChapter = quickStartNovel && !id;
   const desc = $('#novel-desc').value.trim();
   const d = state.styleDraft || { audience: '通用', genres: [], length: '未定', pov: '未定', tone: '未定', narrative: 'dialogue', standard: '通用', personal: 'human', lang: 'zh', authors: [] };
   const genreStr = d.genres.join('、') || t('novel.legacyGenre');
@@ -1318,7 +1782,7 @@ async function saveNovelFromForm() {
       n.audience = d.audience; n.genres = [...d.genres]; n.genre = genreStr;
       n.length = d.length; n.pov = d.pov; n.tone = d.tone; n.narrative = d.narrative;
       n.standard = d.standard; n.personal = d.personal;
-      n.lang = d.lang; n.refAuthors = [...d.authors];
+      n.lang = normalizeOutputLang(d.lang); n.refAuthors = [...d.authors];
       n.updatedAt = now();
       await dbPut(STORE.novels, n);
     }
@@ -1335,17 +1799,21 @@ async function saveNovelFromForm() {
     };
     state.novels.push(n);
     await dbPut(STORE.novels, n);
+    cancelGen();
+    await flushSave();
     state.currentNovelId = n.id; state.currentChapterId = null;
     await loadChatFor(n.id);
   }
   closeModal('modal-novel');
   renderLibrary(); renderAll();
   toast(t('toast.novelSaved'));
+  if (createFirstChapter && state.board === 'novel') await newChapter();
 }
 async function delNovel(id) {
   const n = state.novels.find(x => x.id === id);
   if (!n) return;
   if (!await confirmDialog(t('confirm.delNovel', { t: n.title }))) return;
+  if (state.currentNovelId === id) cancelGen();
   for (const c of state.chapters.filter(c => c.novelId === id)) await dbDel(STORE.chapters, c.id);
   for (const o of state.outline.filter(o => o.novelId === id)) await dbDel(STORE.outline, o.id);
   for (const c of state.characters.filter(c => c.novelId === id)) await dbDel(STORE.characters, c.id);
@@ -1366,12 +1834,12 @@ async function delNovel(id) {
 }
 
 /* ---------------- 作家文风 · 联网学习 ---------------- */
-async function wikiLearn(authorId) {
+async function wikiLearn(authorId, signal) {
   const a = AUTHORS.find(x => x.id === authorId);
   if (!a) return null;
   if (state.wikiCache[a.id] && state.wikiCache[a.id].text) return state.wikiCache[a.id].text;
   const url = 'https://zh.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&format=json&origin=*&redirects=1&titles=' + encodeURIComponent(a.wiki || a.name);
-  const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+  const res = await fetch(url, { signal: generationTimeout(15000, signal) });
   if (!res.ok) throw new Error('HTTP ' + res.status);
   const j = await res.json();
   const pages = j && j.query && j.query.pages;
@@ -1412,20 +1880,22 @@ async function learnAuthors(ids, statusEl) {
 
 /* ---------------- 章节 ---------------- */
 function selectChapter(id) {
-  if (state.genState.running && state.genState.abort) state.genState.abort.abort();
+  if (id === state.currentChapterId) return;
+  cancelGen();
   flushSave();
   state.currentChapterId = id;
   renderEditor(); renderPanel();
 }
 async function newChapter() {
   if (!curNovel()) return toast(t('toast.needNovel'), 'warn');
+  cancelGen();
   await flushSave();
   const chs = chaptersOf(state.currentNovelId);
   const ch = {
     id: uid(), novelId: state.currentNovelId,
     title: `第 ${chs.length + 1} 章`, content: '', status: 'draft',
     order: chs.length ? Math.max(...chs.map(c => c.order)) + 1 : 0,
-    wordCount: 0, rev: 1, createdAt: now(), updatedAt: now()
+    wordCount: 0, createdAt: now(), updatedAt: now()
   };
   state.chapters.push(ch);
   await dbPut(STORE.chapters, ch);
@@ -1437,6 +1907,7 @@ async function newChapter() {
 async function createChapterFromOutline(nodeId) {
   const node = state.outline.find(o => o.id === nodeId);
   if (!node) return;
+  cancelGen();
   await flushSave();
   const chs = chaptersOf(state.currentNovelId);
   const ch = {
@@ -1459,6 +1930,7 @@ async function delChapter(id) {
   if (!await confirmDialog(t('confirm.delChapter'))) return;
   const i = state.chapters.findIndex(c => c.id === id);
   if (i < 0) return;
+  if (state.currentChapterId === id) cancelGen();
   await dbDel(STORE.chapters, id);
   state.chapters.splice(i, 1);
   if (state.currentChapterId === id) {
@@ -1474,7 +1946,25 @@ async function moveInList(arr, id, dir, store) {
   const j = i + dir;
   if (i < 0 || j < 0 || j >= arr.length) return;
   const tmp = arr[i].order; arr[i].order = arr[j].order; arr[j].order = tmp;
-  await dbPut(store, arr[i]); await dbPut(store, arr[j]);
+  if (store === STORE.chapters && !state.settings.storageDenied) {
+    const pairs = [arr[i], arr[j]].map(c => [c.id, c.order]);
+    if (dbMode === 'idb') await new Promise((resolve, reject) => {
+      const tr = db.transaction(store, 'readwrite'), os = tr.objectStore(store);
+      for (const [id, order] of pairs) {
+        const req = os.get(id);
+        req.onsuccess = () => { if (req.result) os.put({ ...req.result, order }); };
+      }
+      tr.oncomplete = resolve;
+      tr.onabort = () => reject(tr.error);
+    });
+    else if (navigator.locks) await navigator.locks.request(lsKey(store), () => {
+      const records = JSON.parse(localStorage.getItem(lsKey(store)) || '{}');
+      for (const [id, order] of pairs) if (records[id]) records[id].order = order;
+      localStorage.setItem(lsKey(store), JSON.stringify(records));
+      lsMem[store] = records;
+    });
+    else toast(draftNotice('failed'), 'err');
+  } else { await dbPut(store, arr[i]); await dbPut(store, arr[j]); }
   renderPanel();
 }
 function moveChapter(id, dir) { moveInList(chaptersOf(state.currentNovelId), id, dir, STORE.chapters); }
@@ -1489,14 +1979,19 @@ function moveOutline(id, dir) {
 function renderEditorPlaceholder() {
   const ed = $('#editor');
   const n = curNovel();
-  const key = n && n.lang === 'en' ? 'editor.placeholder.en' : 'editor.placeholder.zh';
+  const key = 'editor.placeholder.' + normalizeOutputLang(n?.lang, state.settings.lang);
   ed.placeholder = t(key);
 }
 function renderEditor() {
-  if (state.board === 'paper') { renderPaperEditor(); return; }
+  saveResumeIds();
+  if (state.board === 'paper') { renderPaperEditor(); syncMobileWritingKeys(); return; }
+  syncMobileWritingKeys();
   const c = curChapter();
   const tEl = $('#chapter-title'), st = $('#chapter-status'), ed = $('#editor'), co = $('#chapter-outline');
   renderEditorPlaceholder();
+  $('#btn-chapter-history').disabled = !c;
+  $('#btn-manuscript-search').disabled = !curNovel();
+  $('#btn-chapter-coach').disabled = !c;
   if (!c) {
     tEl.value = ''; tEl.disabled = true; st.disabled = true;
     ed.value = ''; ed.disabled = true;
@@ -1505,14 +2000,17 @@ function renderEditor() {
     updateCounts(); setSaveState(null);
     return;
   }
+  const pending = pendingDrafts.get(recoveryId(STORE.chapters, c.id));
+  const shown = pending ? { ...c, ...pending.delta } : c;
   tEl.disabled = false; st.disabled = false; ed.disabled = false; co.disabled = false;
-  if (document.activeElement !== tEl) tEl.value = c.title || '';
-  if (document.activeElement !== ed) ed.value = c.content || '';
-  if (document.activeElement !== co) co.value = c.outline || '';
-  st.value = c.status || 'draft';
+  if (document.activeElement !== tEl) tEl.value = shown.title || '';
+  if (document.activeElement !== ed) ed.value = shown.content || '';
+  if (document.activeElement !== co) co.value = shown.outline || '';
+  st.value = shown.status || 'draft';
   ed.style.fontSize = state.settings.fontSize + 'px';
   updateCounts();
-  setSaveState(true);
+  if (pending) state.editorDirty = true;
+  setSaveState(!state.editorDirty);
 }
 function updatePos() {
   const ed = $('#editor');
@@ -1536,27 +2034,6 @@ function setSaveState(saved) {
   el.textContent = saved ? '● ' + fmtTime(now()) : '◌ …';
   el.className = 'meta-chip save-chip ' + (saved ? 'saved' : 'dirty');
 }
-/* ---------------- 多标签页冲突检测（跨标签页同步镜像 + 版本号） ---------------- */
-const DOC_MIRROR_KEY = 'nebula-doc-mirror';
-let docMirror = {};
-let loadedRevs = {};
-function loadDocMirror() {
-  try { docMirror = JSON.parse(localStorage.getItem(DOC_MIRROR_KEY) || '{}'); } catch (e) { docMirror = {}; }
-}
-function saveDocMirror() {
-  try {
-    localStorage.setItem(DOC_MIRROR_KEY, JSON.stringify(docMirror));
-  } catch (e) {
-    // 超出配额：丢弃最旧条目后重试一次
-    const keys = Object.keys(docMirror).sort((a, b) => (docMirror[a].t || 0) - (docMirror[b].t || 0));
-    while (keys.length) {
-      delete docMirror[keys[0]];
-      keys.shift();
-      try { localStorage.setItem(DOC_MIRROR_KEY, JSON.stringify(docMirror)); return; } catch (e2) { }
-    }
-  }
-}
-function paperMirrorKey(id) { return 'paper-' + id; }
 function scheduleSave() {
   state.editorDirty = true;
   setSaveState(false);
@@ -1566,56 +2043,18 @@ function scheduleSave() {
 async function flushSave() {
   clearTimeout(state.saveTimer);
   if (state.editorDirty) await saveChapter(false);
+  else await draftWrites.get(curChapter());
 }
 async function saveChapter(manual) {
   const c = curChapter();
   if (!c) { state.editorDirty = false; return; }
-  const ext = docMirror[c.id];
-  const myRev = c.rev || 0;
-  if (ext && (ext.rev || 0) > myRev && ext.content !== undefined) {
-    // 其他标签页已保存过本章：冲突处理——保留两份，绝不静默丢稿
-    const draft = {
-      id: uid(), novelId: c.novelId,
-      title: ($('#chapter-title').value.trim() || c.title || t('novel.pending')) + t('doc.conflictSuffix'),
-      content: $('#editor').value, outline: $('#chapter-outline').value,
-      status: c.status, wordCount: countWords($('#editor').value),
-      rev: 1, createdAt: now(), updatedAt: now()
-    };
-    await dbPut(STORE.chapters, draft);
-    state.chapters.push(draft);
-    c.title = ext.title !== undefined ? ext.title : ($('#chapter-title').value.trim() || c.title);
-    c.content = ext.content;
-    c.outline = ext.outline !== undefined ? ext.outline : c.outline;
-    c.rev = ext.rev;
-    c.updatedAt = now();
-    state.editorDirty = false;
-    await dbPut(STORE.chapters, c);
-    loadedRevs[c.id] = c.rev;
-    $('#editor').value = c.content;
-    $('#chapter-title').value = c.title;
-    $('#chapter-outline').value = c.outline;
-    updateCounts();
-    setSaveState(true);
-    toast(t('doc.conflict'), 'warn', 8000);
-    renderAll();
-    return;
-  }
-  c.title = $('#chapter-title').value.trim();
-  c.content = $('#editor').value;
-  c.outline = $('#chapter-outline').value;
-  c.status = $('#chapter-status').value;
-  c.wordCount = countWords(c.content);
-  c.rev = (c.rev || 0) + 1;
-  c.updatedAt = now();
+  clearTimeout(state.saveTimer);
+  if (!state.editorDirty) return draftWrites.get(c);
+  const content = $('#editor').value;
+  const delta = { title: $('#chapter-title').value.trim(), content,
+    outline: $('#chapter-outline').value, status: $('#chapter-status').value, wordCount: countWords(content) };
   state.editorDirty = false;
-  await dbPut(STORE.chapters, c);
-  docMirror[c.id] = { rev: c.rev, title: c.title, content: c.content, outline: c.outline, t: Date.now() };
-  saveDocMirror();
-  loadedRevs[c.id] = c.rev;
-  setSaveState(true);
-  if (manual) toast(t('toast.savedOk'), 'ok');
-  renderTop();
-  if (state.module === 'chapters') renderPanel();
+  await persistDraft(STORE.chapters, c, delta, manual);
 }
 function toggleFocus(force) {
   const on = force !== undefined ? force : !document.body.classList.contains('focus-mode');
@@ -1624,8 +2063,156 @@ function toggleFocus(force) {
 }
 
 /* ---------------- 面板渲染 ---------------- */
+function inMobileWorkspace() {
+  return matchMedia('(max-width: 680px)').matches;
+}
+function syncMobileWorkspace() {
+  const compact = inMobileWorkspace();
+  const panelOpen = document.body.classList.contains('mobile-panel-open');
+  const aiOpen = document.body.classList.contains('mobile-ai-open');
+  for (const b of $$('#main-nav .nav-item')) {
+    if (compact) {
+      b.setAttribute('aria-controls', 'side-panel');
+      b.setAttribute('aria-expanded', String(panelOpen && b.dataset.module === state.module));
+    } else {
+      b.removeAttribute('aria-controls');
+      b.removeAttribute('aria-expanded');
+    }
+  }
+  $('#btn-mobile-paper-list').setAttribute('aria-expanded', String(panelOpen));
+  $('#btn-mobile-paper-ai').setAttribute('aria-expanded', String(aiOpen));
+  const toggle = $('#btn-ai-toggle');
+  if (compact) {
+    toggle.setAttribute('aria-controls', 'ai-panel');
+    toggle.setAttribute('aria-expanded', String(aiOpen));
+  } else {
+    toggle.removeAttribute('aria-controls');
+    toggle.removeAttribute('aria-expanded');
+  }
+}
+function setMobilePanel(open) {
+  document.body.classList.toggle('mobile-panel-open', open);
+  syncMobileWorkspace();
+}
+function setMobileBrief(kind, open) {
+  const id = kind === 'paper' ? 'btn-mobile-topic' : 'btn-mobile-outline';
+  document.body.classList.toggle('mobile-' + kind + '-brief-open', open);
+  $('#' + id).setAttribute('aria-expanded', String(open));
+}
+function setMobileAI(open, move = true) {
+  if (open && document.body.classList.contains('focus-mode')) toggleFocus(false);
+  document.body.classList.toggle('mobile-ai-open', open);
+  syncMobileWorkspace();
+  if (open && move) $('#ai-panel').scrollIntoView({ block: 'start' });
+}
+/* Mobile editing keys complement the system keyboard without changing the draft format. */
+const MOBILE_KEY_LABELS = {
+  zh: {keys:'写作键', save:'保存', quotes:'插入引号', brackets:'插入括号', dash:'插入破折号', ellipsis:'插入省略号', paragraph:'另起一段', end:'跳到文末'},
+  en: {keys:'Writing keys', save:'Save', quotes:'Insert quotation marks', brackets:'Insert parentheses', dash:'Insert a dash', ellipsis:'Insert an ellipsis', paragraph:'Start a new paragraph', end:'Go to the end'},
+  ru: {keys:'Клавиши', save:'Сохранить', quotes:'Вставить кавычки', brackets:'Вставить скобки', dash:'Вставить тире', ellipsis:'Вставить многоточие', paragraph:'Начать новый абзац', end:'Перейти в конец'}
+};
+function mobileKeyMarks(action, lang) {
+  if (action === 'quotes') return lang === 'ru' ? ['«', '»'] : ['“', '”'];
+  if (action === 'brackets') return lang === 'zh' ? ['（', '）'] : ['(', ')'];
+  if (action === 'dash') return [lang === 'zh' ? '——' : '—', ''];
+  if (action === 'ellipsis') return [lang === 'zh' ? '……' : '…', ''];
+  if (action === 'paragraph') return ['\n\n', ''];
+  return null;
+}
+function mobileEditPlan(value, start, end, action, lang) {
+  const marks = mobileKeyMarks(action, lang);
+  if (!marks) return null;
+  const [left, right] = marks;
+  const from = right ? start : end;
+  const replacement = left + (right ? value.slice(start, end) : '') + right;
+  return {
+    from, to: end,
+    replacement,
+    start: from + left.length,
+    end: from + left.length + (right ? end - start : 0)
+  };
+}
+function mobileDraftLanguage(board) {
+  const selected = board === 'paper' ? ($('#paper-lang')?.value || currentPaper()?.outLang) : curNovel()?.lang;
+  return normalizeOutputLang(selected, state.settings.lang);
+}
+function syncMobileWritingKeys() {
+  const labels = MOBILE_KEY_LABELS[state.settings.lang] || MOBILE_KEY_LABELS.zh;
+  for (const shelf of $$('.mobile-writing-tools')) {
+    const board = shelf.dataset.writingBoard;
+    shelf.hidden = board !== state.board || !(board === 'paper' ? currentPaper() : curChapter());
+    const lang = mobileDraftLanguage(board);
+    for (const label of shelf.querySelectorAll('[data-writing-label]')) label.textContent = labels[label.dataset.writingLabel];
+    shelf.querySelector('[data-writing-area]').setAttribute('aria-label', labels.keys);
+    for (const btn of shelf.querySelectorAll('[data-writing-key]')) {
+      const action = btn.dataset.writingKey;
+      btn.title = labels[action];
+      if (action !== 'save') btn.setAttribute('aria-label', labels[action]);
+      if (['quotes','brackets','dash','ellipsis'].includes(action)) {
+        const [left, right] = mobileKeyMarks(action, lang);
+        btn.textContent = right ? left + ' ' + right : left;
+      }
+    }
+  }
+}
+async function applyMobileWritingKey(board, action) {
+  if (!inMobileWorkspace() || state.board !== board) return;
+  const paper = board === 'paper';
+  if (!(paper ? currentPaper() : curChapter())) return;
+  const ed = paper ? $('#paper-editor') : $('#editor');
+  if (ed.disabled || ed.readOnly) return;
+  if (action === 'save') {
+    const dirty = () => paper ? state.paperDirty : state.editorDirty;
+    const wasDirty = dirty();
+    await (paper ? savePaper(true) : saveChapter(true));
+    if (state.board === board && !wasDirty && !dirty()) {
+      if (state.settings.storageDenied) toast(draftNotice('memory'), 'warn');
+      else toast(t(paper ? 'toast.paperSaved' : 'toast.savedOk'), 'ok', 1600);
+    }
+    return;
+  }
+  if (action === 'end') {
+    ed.focus({ preventScroll:true });
+    ed.setSelectionRange(ed.value.length, ed.value.length);
+    ed.scrollTop = ed.scrollHeight;
+    if (paper) updatePaperCounts(); else updatePos();
+    return;
+  }
+  const {value, selectionStart, selectionEnd} = ed;
+  const plan = mobileEditPlan(value, selectionStart, selectionEnd, action, mobileDraftLanguage(board));
+  if (!plan) return;
+  ed.focus({ preventScroll:true });
+  ed.setSelectionRange(plan.from, plan.to);
+  let inputFired = false;
+  const noteInput = () => { inputFired = true; };
+  ed.addEventListener('input', noteInput, { once:true });
+  try {
+    // Native insertText retains undo where supported, including touch keyboards.
+    if (plan.replacement) document.execCommand?.('insertText', false, plan.replacement);
+  } catch (_) { /* Some browsers don't implement insertText in textarea. */ }
+  ed.removeEventListener('input', noteInput);
+  if (ed.value === value) ed.setRangeText(plan.replacement, plan.from, plan.to, 'end');
+  ed.setSelectionRange(plan.start, plan.end);
+  if (!inputFired) ed.dispatchEvent(new Event('input', { bubbles:true }));
+  else if (paper) updatePaperCounts(); else updatePos();
+}
+function bindMobileWritingKeys() {
+  for (const shelf of $$('.mobile-writing-tools')) {
+    shelf.addEventListener('mousedown', event => {
+      const key = event.target.closest('[data-writing-key]');
+      const ed = shelf.dataset.writingBoard === 'paper' ? $('#paper-editor') : $('#editor');
+      if (key && document.activeElement === ed) event.preventDefault();
+    });
+    shelf.addEventListener('click', event => {
+      const key = event.target.closest('[data-writing-key]');
+      if (key) applyMobileWritingKey(shelf.dataset.writingBoard, key.dataset.writingKey);
+    });
+  }
+  $('#paper-lang').addEventListener('change', syncMobileWritingKeys);
+}
 function setNavActive() {
   $$('#main-nav .nav-item').forEach(b => b.classList.toggle('active', b.dataset.module === state.module));
+  syncMobileWorkspace();
 }
 function renderPanel() {
   const m = state.module;
@@ -1782,8 +2369,8 @@ function renderWorld() {
         <tr><td class="sp-label">${t('w.length')}</td><td class="sp-val">${esc(styleValName(n.length || '未定'))}</td></tr>
         <tr><td class="sp-label">${t('w.pov')}</td><td class="sp-val">${esc(styleValName(n.pov || '未定'))}</td></tr>
         <tr><td class="sp-label">${t('w.tone')}</td><td class="sp-val">${esc(styleValName(n.tone || '未定'))}</td></tr>
-        <tr><td class="sp-label">${t('style.narrative')}</td><td class="sp-val">${esc({ dialogue: t('style.dialogue'), balanced: t('style.balanced'), narrative: t('style.narrativeMode') }[n.narrative] || t('style.dialogue'))}</td></tr>
         <tr><td class="sp-label">${t('w.lang')}</td><td class="sp-val">${n.lang === 'en' ? 'English' : (n.lang === 'ru' ? 'Русский' : '中文')}</td></tr>
+        <tr><td class="sp-label">${t('style.narrative')}</td><td class="sp-val">${esc({ dialogue: t('style.dialogue'), balanced: t('style.balanced'), narrative: t('style.narrativeMode') }[n.narrative] || t('style.dialogue'))}</td></tr>
         <tr><td class="sp-label">${t('style.standard')}</td><td class="sp-val">${esc({ '通用': t('style.stGeneric'), '中国网文': t('style.stNet'), '中式传统': t('style.stTrad'), '日式轻小说': t('style.stJP'), '欧美小说': t('style.stWest'), '俄式文学': t('style.stRu') }[n.standard || '通用'] || n.standard || '通用')}</td></tr>
         <tr><td class="sp-label">${t('style.personal')}</td><td class="sp-val">${esc((n.personal || 'human') === 'human' ? t('style.perHuman') : t('style.perStandard'))}</td></tr>
         <tr><td class="sp-label">${t('w.authors')}</td><td class="sp-val">${esc(refs || '—')}</td></tr>
@@ -1927,8 +2514,17 @@ function onPanelInput(e) {
   else if (f === 'secTitle') { const s = (n.worldSections || []).find(x => x.id === tEl.dataset.id); if (s) s.title = tEl.value; }
   else if (f === 'secBody') { const s = (n.worldSections || []).find(x => x.id === tEl.dataset.id); if (s) s.content = tEl.value; }
   n.updatedAt = now();
+  pendingWorldBackupSaves.set(n.id, n);
   clearTimeout(state.novelSaveTimer);
-  state.novelSaveTimer = setTimeout(() => dbPut(STORE.novels, n), 800);
+  state.novelSaveTimer = setTimeout(() => flushWorldBackupSave().catch(() => toast(t('backup.exportFail'), 'err')), 800);
+}
+const pendingWorldBackupSaves = new Map();
+async function flushWorldBackupSave() {
+  clearTimeout(state.novelSaveTimer);
+  const waiting = [...pendingWorldBackupSaves.values()];
+  pendingWorldBackupSaves.clear();
+  await Promise.all(waiting.filter(n => state.novels.includes(n)).map(n =>
+    dbPut(STORE.novels, n).catch(error => { pendingWorldBackupSaves.set(n.id, n); throw error; })));
 }
 async function addWorldSection() {
   const n = curNovel();
@@ -2107,18 +2703,486 @@ async function delMem(id) {
 }
 
 /* ---------------- 模态框与确认 ---------------- */
-function openModal(id) {
-  // 从设置中心打开的弹窗：先关掉设置，避免设置窗口压在弹窗上方造成误点
-  if (id !== 'modal-settings') closeModal('modal-settings');
-  $('#' + id).hidden = false;
+const FOCUS_MANAGED_MODALS = {
+  'modal-chapter-coach': () => $('#btn-chapter-coach'),
+  'modal-draft-history': () => $(state.board === 'paper' ? '#btn-paper-history' : '#btn-chapter-history'),
+  'modal-install-app': () => $('#btn-settings')
+};
+const modalReturnFocus = new WeakMap();
+function modalCanFocus(el) {
+  return !!el && el !== document.body && !el.disabled && !el.closest('[hidden],[inert]') && el.getClientRects().length > 0;
 }
-function closeModal(id) { $('#' + id).hidden = true; }
+function modalTabStops(overlay) {
+  return [...overlay.querySelectorAll('button,a[href],input,textarea,select,summary,[tabindex]')]
+    .filter(el => el.tabIndex >= 0 && modalCanFocus(el));
+}
+function openModal(id) {
+  const overlay = $('#' + id);
+  if (Object.hasOwn(FOCUS_MANAGED_MODALS, id) && overlay.hidden) {
+    modalReturnFocus.set(overlay, document.activeElement);
+    queueMicrotask(() => {
+      if (!overlay.hidden && !overlay.contains(document.activeElement)) {
+        modalTabStops(overlay)[0]?.focus({ preventScroll:true });
+      }
+    });
+  }
+  overlay.hidden = false;
+}
+function closeModal(id) {
+  const overlay = $('#' + id);
+  overlay.hidden = true;
+  if (!Object.hasOwn(FOCUS_MANAGED_MODALS, id) || !modalReturnFocus.has(overlay)) return;
+  const opener = modalReturnFocus.get(overlay);
+  modalReturnFocus.delete(overlay);
+  const target = modalCanFocus(opener) ? opener : FOCUS_MANAGED_MODALS[id]();
+  if (modalCanFocus(target)) target.focus({ preventScroll:true });
+}
+function handleManagedModalKeys(event) {
+  if (event.isComposing || event.defaultPrevented || !['Escape', 'Tab'].includes(event.key)) return false;
+  // A native dialog such as Quick Start remains responsible for its own keyboard events.
+  if ($('dialog[open]') || !$('#modal-confirm').hidden) return false;
+  const visible = $$('.modal-overlay:not([hidden])');
+  const overlay = visible.at(-1);
+  if (!overlay || !Object.hasOwn(FOCUS_MANAGED_MODALS, overlay.id)) return false;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeModal(overlay.id);
+    return true;
+  }
+  const stops = modalTabStops(overlay);
+  const here = stops.indexOf(document.activeElement);
+  if (here < 0 || (event.shiftKey ? here === 0 : here === stops.length - 1)) {
+    event.preventDefault();
+    (event.shiftKey ? stops.at(-1) : stops[0])?.focus({ preventScroll:true });
+    return true;
+  }
+  return false;
+}
 function confirmDialog(text) {
   return new Promise(res => {
     state.confirmResolve = res;
     $('#confirm-text').textContent = text;
     openModal('modal-confirm');
   });
+}
+
+/* ---------------- 安装与离线工作区 ---------------- */
+const INSTALL_COPY = {
+  zh: {title:'安装到设备', help:'打开浏览器菜单，寻找「安装应用」或「添加到主屏幕」。如果当前浏览器没有这个选项，仍可在网页上写作。', installed:'晓星已在独立应用窗口运行。', offline:'第一次在线打开后，离线也能写作和管理本机稿件。AI、联网查文献和词典需要网络。'},
+  en: {title:'Install on device', help:'Open your browser menu and look for “Install app” or “Add to Home Screen”. If unavailable, you can keep writing in the browser.', installed:'Xiaoxing is already running in an app window.', offline:'After a first online visit, write and manage local drafts offline. AI, source search and the online dictionary need a connection.'},
+  ru: {title:'Установить на устройство', help:'Откройте меню браузера и найдите «Установить приложение» или «Добавить на главный экран». Если такого пункта нет, продолжайте писать в браузере.', installed:'Сяосин уже открыт в отдельном окне приложения.', offline:'После первого посещения с интернетом можно писать и работать с локальными черновиками офлайн. ИИ, поиск источников и словарь требуют подключения.'}
+};
+let installEvent = null;
+const installCopy = () => INSTALL_COPY[state.settings.lang] || INSTALL_COPY.zh;
+function applyInstallLabels() {
+  $('#set-install-app').textContent = '↓ ' + installCopy().title;
+}
+async function openInstallApp() {
+  closeModal('modal-settings');
+  if (installEvent) {
+    const prompt = installEvent;
+    installEvent = null;
+    try { await prompt.prompt(); return; }
+    catch (_) { /* A browser may revoke the install prompt; show manual steps. */ }
+  }
+  const copy = installCopy();
+  $('#install-app-title').textContent = copy.title;
+  $('#install-app-help').textContent = (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) ? copy.installed : copy.help;
+  $('#install-app-offline').textContent = copy.offline;
+  openModal('modal-install-app');
+}
+function setupInstallApp() {
+  window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installEvent = event; });
+  window.addEventListener('appinstalled', () => { installEvent = null; });
+  if (window.isSecureContext && 'serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js').catch(() => {});
+  }
+}
+
+/* ---------------- 当前小说：全文查找 ---------------- */
+const MANUSCRIPT_SEARCH = {
+  zh: {
+    title:'全文查找', query:'查找文字', placeholder:'输入人物、地点或一句台词…', scope:'查找范围', all:'全部',
+    fields:{title:'章节标题',content:'正文',outline:'章节大纲'}, close:'关闭',
+    hint:'只搜索这本小说；查询和稿件都不发送到网络。', empty:'输入文字，立即查找匹配片段。',
+    none:'没有找到匹配。试试较短的词，或切换到「全部」。',
+    count:'找到 {n} 处匹配', limit:'仅显示前 {n} 处匹配，请缩小范围。',
+    chapter:'第 {n} 章', keyhelp:'↓ 进入结果，Enter 跳转，Esc 关闭。'
+  },
+  en: {
+    title:'Find in manuscript', query:'Search text', placeholder:'Enter a name, place, or line of dialogue…', scope:'Search in', all:'All fields',
+    fields:{title:'Chapter title',content:'Manuscript',outline:'Chapter outline'}, close:'Close',
+    hint:'Searches only this novel. Nothing is sent over the network.', empty:'Type some text to find matching passages.',
+    none:'No matches. Try a shorter phrase or search all fields.',
+    count:'{n} matches found', limit:'Showing the first {n} matches. Narrow your search for more.',
+    chapter:'Chapter {n}', keyhelp:'↓ moves to results, Enter jumps, Esc closes.'
+  },
+  ru: {
+    title:'Поиск по рукописи', query:'Поисковый запрос', placeholder:'Имя, место или фраза из диалога…', scope:'Область поиска', all:'Везде',
+    fields:{title:'Название главы',content:'Рукопись',outline:'План главы'}, close:'Закрыть',
+    hint:'Поиск только в этом романе. Данные не отправляются по сети.', empty:'Введите слово или фразу, чтобы найти нужный фрагмент.',
+    none:'Совпадений нет. Попробуйте более короткую фразу или поиск везде.',
+    count:'Результаты: {n}', limit:'Показаны первые {n} результатов. Уточните запрос.',
+    chapter:'Глава {n}', keyhelp:'↓ к результатам, Enter для перехода, Esc для закрытия.'
+  }
+};
+const manuscriptCopy = () => MANUSCRIPT_SEARCH[state.settings.lang] || MANUSCRIPT_SEARCH.zh;
+const manuscriptFields = ['title', 'content', 'outline'];
+const manuscriptSearchLimit = 80;
+let manuscriptMatches = [];
+let manuscriptNovelId = null;
+let manuscriptTimer;
+let manuscriptJumped = false;
+
+function manuscriptPattern(query) {
+  // Match literal text and retain offsets into the original textarea value.
+  return new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'giu');
+}
+function findManuscriptMatches(chapters, query, scope = 'all', limit = manuscriptSearchLimit) {
+  const needle = String(query || '').trim().slice(0, 120);
+  const hits = [];
+  if (!needle) return { hits, limited: false };
+  const pattern = manuscriptPattern(needle);
+  const fields = manuscriptFields.includes(scope) ? [scope] : manuscriptFields;
+  for (const [index, chapter] of chapters.entries()) {
+    for (const field of fields) {
+      const source = typeof chapter[field] === 'string' ? chapter[field] : '';
+      pattern.lastIndex = 0;
+      let match;
+      while ((match = pattern.exec(source))) {
+        if (hits.length >= limit) return { hits, limited: true };
+        const start = match.index, end = start + match[0].length;
+        let left = Math.max(0, start - 44);
+        let right = Math.min(source.length, end + 84);
+        // Do not cut surrogate pairs at excerpt boundaries.
+        if (left > 0 && /[\uDC00-\uDFFF]/.test(source[left])) left--;
+        if (right < source.length && /[\uDC00-\uDFFF]/.test(source[right])) right++;
+        hits.push({
+          id: chapter.id, title: chapter.title, index, field, start, end, matched: match[0],
+          before: (left > 0 ? '…' : '') + source.slice(left, start),
+          after: source.slice(end, right) + (right < source.length ? '…' : '')
+        });
+      }
+    }
+  }
+  return { hits, limited: false };
+}
+function searchableManuscript(id) {
+  const active = curChapter();
+  return chaptersOf(id).map(chapter => {
+    const pending = pendingDrafts.get(recoveryId(STORE.chapters, chapter.id))?.delta;
+    const row = pending ? { ...chapter, ...pending } : chapter;
+    return active?.id === chapter.id ? { ...row, title: $('#chapter-title').value,
+      content: $('#editor').value, outline: $('#chapter-outline').value } : row;
+  });
+}
+function applyManuscriptLabels() {
+  const c = manuscriptCopy();
+  const labels = {
+    'btn-manuscript-search':'title', 'manuscript-title':'title', 'manuscript-query-label':'query',
+    'manuscript-scope-label':'scope', 'manuscript-local':'hint', 'manuscript-keys':'keyhelp'
+  };
+  for (const [id, key] of Object.entries(labels)) $('#' + id).textContent = c[key];
+  $('#manuscript-query').placeholder = c.placeholder;
+  $('#manuscript-close').setAttribute('aria-label', c.close);
+  for (const option of $('#manuscript-scope').options) option.textContent = c.fields[option.value] || c.all;
+}
+function renderManuscriptResults() {
+  const c = manuscriptCopy();
+  const input = $('#manuscript-query'), list = $('#manuscript-results');
+  const query = input.value.trim();
+  const { hits, limited } = findManuscriptMatches(searchableManuscript(manuscriptNovelId), query, $('#manuscript-scope').value);
+  manuscriptMatches = hits;
+  $('#manuscript-status').textContent = !query ? c.empty : !hits.length ? c.none
+    : (limited ? c.limit : c.count).replace('{n}', String(hits.length));
+  const frag = document.createDocumentFragment();
+  hits.forEach((hit, i) => {
+    const li = document.createElement('li');
+    const button = document.createElement('button');
+    const heading = document.createElement('span');
+    const field = document.createElement('span');
+    const excerpt = document.createElement('span');
+    const mark = document.createElement('mark');
+    button.type = 'button';
+    button.className = 'manuscript-hit';
+    button.dataset.hit = String(i);
+    heading.className = 'manuscript-hit-heading';
+    field.className = 'manuscript-hit-field';
+    excerpt.className = 'manuscript-hit-text';
+    const chapterName = c.chapter.replace('{n}', String(hit.index + 1));
+    heading.textContent = hit.title && hit.title !== chapterName ? chapterName + ' · ' + hit.title : chapterName;
+    field.textContent = c.fields[hit.field];
+    mark.textContent = hit.matched;
+    excerpt.append(hit.before, mark, hit.after);
+    button.append(heading, field, excerpt);
+    li.append(button);
+    frag.append(li);
+  });
+  list.replaceChildren(frag);
+  list.scrollTop = 0;
+}
+function scheduleManuscriptSearch() {
+  clearTimeout(manuscriptTimer);
+  manuscriptTimer = setTimeout(renderManuscriptResults, 90);
+}
+function openManuscriptSearch() {
+  if (state.board !== 'novel' || !curNovel()) return;
+  const dialog = $('#modal-manuscript-search');
+  const input = $('#manuscript-query');
+  if (manuscriptNovelId !== state.currentNovelId) {
+    manuscriptNovelId = state.currentNovelId;
+    input.value = '';
+    $('#manuscript-scope').value = 'all';
+  }
+  manuscriptJumped = false;
+  applyManuscriptLabels();
+  renderManuscriptResults();
+  if (!dialog.open) dialog.showModal();
+  input.focus();
+  input.select();
+}
+function revealManuscriptSelection(field, start) {
+  if (field.tagName !== 'TEXTAREA') return;
+  const css = getComputedStyle(field);
+  if (field.value.length > 350000 || !field.clientWidth) {
+    field.scrollTop = field.scrollHeight * start / Math.max(1, field.value.length) - field.clientHeight / 3;
+    return;
+  }
+  const mirror = document.createElement('div');
+  const sentinel = document.createElement('span');
+  mirror.style.cssText = 'position:fixed;left:-10000px;top:0;visibility:hidden;pointer-events:none;white-space:pre-wrap;overflow-wrap:break-word;box-sizing:border-box;';
+  for (const key of ['font', 'lineHeight', 'letterSpacing', 'tabSize', 'textIndent', 'padding']) mirror.style[key] = css[key];
+  mirror.style.width = field.clientWidth + 'px';
+  mirror.append(field.value.slice(0, start), sentinel);
+  sentinel.textContent = '\u200b';
+  document.body.append(mirror);
+  const top = sentinel.getBoundingClientRect().top - mirror.getBoundingClientRect().top;
+  mirror.remove();
+  field.scrollTop = Math.max(0, top - field.clientHeight / 3);
+}
+function jumpToManuscriptMatch(index) {
+  const hit = manuscriptMatches[index];
+  if (!hit || state.board !== 'novel' || state.currentNovelId !== manuscriptNovelId ||
+      !chaptersOf(manuscriptNovelId).some(c => c.id === hit.id)) return;
+  const dialog = $('#modal-manuscript-search');
+  const query = $('#manuscript-query').value.trim().slice(0, 120);
+  manuscriptJumped = true;
+  dialog.close();
+  document.activeElement?.blur?.();
+  selectChapter(hit.id);
+  if (inMobileWorkspace()) setMobilePanel(false);
+  if (hit.field === 'outline') setMobileBrief('novel', true);
+  const field = $(({title:'#chapter-title',content:'#editor',outline:'#chapter-outline'})[hit.field]);
+  field.focus({ preventScroll:true });
+  if (query) {
+    const pattern = manuscriptPattern(query);
+    pattern.lastIndex = hit.start;
+    const match = pattern.exec(field.value) || manuscriptPattern(query).exec(field.value);
+    if (match) {
+      field.setSelectionRange(match.index, match.index + match[0].length);
+      revealManuscriptSelection(field, match.index);
+    }
+  }
+  field.scrollIntoView({ block: 'nearest' });
+  if (hit.field === 'content') updatePos();
+}
+function bindManuscriptSearch() {
+  const dialog = $('#modal-manuscript-search'), input = $('#manuscript-query'), results = $('#manuscript-results');
+  $('#btn-manuscript-search').addEventListener('click', openManuscriptSearch);
+  $('#manuscript-close').addEventListener('click', () => dialog.close());
+  $('#manuscript-scope').addEventListener('change', renderManuscriptResults);
+  input.addEventListener('input', e => { if (!e.isComposing) scheduleManuscriptSearch(); });
+  input.addEventListener('compositionend', scheduleManuscriptSearch);
+  dialog.addEventListener('close', () => {
+    clearTimeout(manuscriptTimer);
+    if (!manuscriptJumped) $('#btn-manuscript-search').focus();
+  });
+  results.addEventListener('click', e => {
+    const button = e.target.closest('button[data-hit]');
+    if (button) jumpToManuscriptMatch(Number(button.dataset.hit));
+  });
+  dialog.addEventListener('keydown', e => {
+    if (e.isComposing || e.keyCode === 229) return;
+    if (e.target === input && ['Enter', 'ArrowDown'].includes(e.key)) {
+      e.preventDefault();
+      clearTimeout(manuscriptTimer);
+      renderManuscriptResults();
+      if (e.key === 'Enter') jumpToManuscriptMatch(0);
+      else results.querySelector('button')?.focus();
+      return;
+    }
+    const button = e.target.closest('button[data-hit]');
+    if (!button || !['ArrowDown', 'ArrowUp'].includes(e.key)) return;
+    e.preventDefault();
+    const next = e.key === 'ArrowDown' ? button.parentElement.nextElementSibling : button.parentElement.previousElementSibling;
+    if (next) next.querySelector('button')?.focus();
+    else if (e.key === 'ArrowUp') input.focus();
+  });
+}
+
+/* ---------------- 章节构思卡 ---------------- */
+const CHAPTER_COACH = {
+  zh: {
+    open: '构思这一章', heading: '写出第一场戏', sub: '先写一两句就行。下面的卡片会把想法整理成本章大纲，你也可以直接手写。',
+    example: '示例题材', exampleTip: '点题材切换提示词；示例不会填进正文。',
+    fields: ['场景：谁，在哪里？', '目标：人物想得到什么？', '阻碍：为什么没那么容易？', '转折：这场戏结束时变了什么？'],
+    mystery: ['旧车站即将关门，值夜员收到一封没署名的信。', '找出信是写给谁的。', '车站监控跳过了关键的十分钟。', '他认出信上的字是自己写的。'],
+    adventure: ['两名旅人终于抵达地图上的冰河渡口。', '在天黑前把药品送到对岸。', '渡船不见了，冰面开始开裂。', '他们发现岸边有人提前埋了绳索。'],
+    relationship: ['多年未见的两人在一家即将关门的书店相遇。', '主角想说清当年没有告别的原因。', '对方似乎把那段往事记成了另一个样子。', '书页里掉出一张当年的电影票。'],
+    sci: ['潮汐观测员在凌晨收到一条来自明天的广播。', '确认声音来自哪里。', '设备记录显示广播是由她本人发送的。', '广播最后说，别打开窗。'],
+    genres: ['悬疑', '冒险', '人物关系', '科幻'], ready: '{n}/4 项已填', use: '添加到本章大纲', add: '自己的想法会加在原大纲后，正文不会被改动。', done: '构思已加入本章大纲。你可以继续手写，也可以使用 AI。', close: '关闭'
+  },
+  en: {
+    open: 'Plan this chapter', heading: 'Build your first scene', sub: 'Start with a sentence or two. This card turns your ideas into a chapter outline. You can also write it by hand.',
+    example: 'Example genre', exampleTip: 'Change the genre to see different prompts. Examples are not added to your manuscript.',
+    fields: ['Scene: who is where?', 'Goal: what do they want?', 'Obstacle: what makes it hard?', 'Turn: what changes by the end?'],
+    mystery: ['A night attendant receives an unsigned letter at a closing train station.', 'Find out who the letter is meant for.', 'The station camera skips the key ten minutes.', 'The attendant recognizes their own handwriting.'],
+    adventure: ['Two travelers arrive at the ice crossing marked on their map.', 'Get the medicine across before dark.', 'The ferry is missing and the ice has begun to crack.', 'Someone has left a rope hidden on the bank.'],
+    relationship: ['Two people meet again after years in a bookstore about to close.', 'Explain why they left without saying goodbye.', 'The other person remembers that day differently.', 'An old movie ticket falls from a book.'],
+    sci: ['A tide observer hears a broadcast sent from tomorrow.', 'Find out who sent it.', 'The records suggest she sent it herself.', 'The voice tells her not to open the window.'],
+    genres: ['Mystery', 'Adventure', 'Relationships', 'Science fiction'], ready: '{n}/4 filled', use: 'Add to chapter outline', add: 'Your ideas are appended to the existing outline. The manuscript is unchanged.', done: 'Added to the outline. Keep writing by hand or use AI when ready.', close: 'Close'
+  },
+  ru: {
+    open: 'План главы', heading: 'Начните с первой сцены', sub: 'Достаточно одной или двух фраз. Карточка соберёт идеи в план главы; план также можно написать вручную.',
+    example: 'Пример жанра', exampleTip: 'Выберите жанр, чтобы сменить подсказки. Примеры не добавляются в рукопись.',
+    fields: ['Сцена: кто и где?', 'Цель: чего хочет герой?', 'Препятствие: что ему мешает?', 'Поворот: что изменится к концу сцены?'],
+    mystery: ['Дежурный получает письмо без подписи перед закрытием станции.', 'Выяснить, кому адресовано письмо.', 'На записи с камеры нет нужных десяти минут.', 'Дежурный узнаёт свой почерк.'],
+    adventure: ['Два путника приходят к ледовой переправе.', 'Доставить лекарство на другой берег до темноты.', 'Парома нет, а лёд начинает трескаться.', 'На берегу кто-то заранее оставил верёвку.'],
+    relationship: ['Двое встречаются спустя годы в книжном магазине перед закрытием.', 'Объяснить, почему в прошлый раз никто не попрощался.', 'Другой человек помнит тот день иначе.', 'Из книги выпадает старый билет в кино.'],
+    sci: ['Наблюдательница приливов слышит радиосообщение из завтрашнего дня.', 'Выяснить, кто его отправил.', 'По данным станции его отправила она сама.', 'Голос просит её не открывать окно.'],
+    genres: ['Детектив', 'Приключения', 'Отношения', 'Научная фантастика'], ready: 'Заполнено {n}/4', use: 'Добавить в план главы', add: 'Идеи добавятся к существующему плану. Текст рукописи не изменится.', done: 'Идеи добавлены в план. Продолжите сами или воспользуйтесь ИИ.', close: 'Закрыть'
+  }
+};
+const coachCopy = () => CHAPTER_COACH[state.settings.lang] || CHAPTER_COACH.zh;
+const coachGenres = ['mystery', 'adventure', 'relationship', 'sci'];
+let coachChapter = null;
+function coachValues() {
+  return [0, 1, 2, 3].map(i => $('#chapter-coach-' + i).value.trim());
+}
+function chapterCoachPlan(values, lang) {
+  const labels = (CHAPTER_COACH[lang] || CHAPTER_COACH.zh).fields;
+  return values.map((value, i) => value ? labels[i] + ' ' + value : '').filter(Boolean).join('\n');
+}
+function syncCoachProgress() {
+  const n = coachValues().filter(Boolean).length;
+  $('#chapter-coach-progress').textContent = coachCopy().ready.replace('{n}', n);
+  $('#chapter-coach-add').disabled = !n;
+}
+function updateCoachExample() {
+  const c = coachCopy();
+  const key = $('#chapter-coach-example').value;
+  const values = c[coachGenres.includes(key) ? key : coachGenres[0]];
+  values.forEach((value, i) => { $('#chapter-coach-' + i).placeholder = value; });
+}
+function applyCoachLabels() {
+  const c = coachCopy();
+  const map = { 'btn-chapter-coach':'open', 'chapter-coach-title':'heading', 'chapter-coach-sub':'sub', 'chapter-coach-example-label':'example', 'chapter-coach-example-tip':'exampleTip', 'chapter-coach-add':'use', 'chapter-coach-footnote':'add' };
+  for (const [id, key] of Object.entries(map)) $('#' + id).textContent = c[key];
+  $('#chapter-coach-close').setAttribute('aria-label', c.close);
+  c.fields.forEach((value, i) => { $('#chapter-coach-label-' + i).textContent = value; });
+  [...$('#chapter-coach-example').options].forEach((option, i) => { option.textContent = c.genres[i]; });
+  updateCoachExample();
+  syncCoachProgress();
+}
+function openChapterCoach() {
+  if (state.genState.running) return toast(historyCopy().busy, 'warn');
+  const chapter = curChapter();
+  if (state.board !== 'novel' || !chapter) return toast(t('toast.needChapter'), 'warn');
+  if (coachChapter !== chapter.id) {
+    coachChapter = chapter.id;
+    for (let i = 0; i < 4; i++) $('#chapter-coach-' + i).value = '';
+  }
+  applyCoachLabels();
+  openModal('modal-chapter-coach');
+  $('#chapter-coach-0').focus();
+}
+function applyChapterCoach() {
+  if (state.board !== 'novel' || curChapter()?.id !== coachChapter || state.genState.running) return;
+  const values = coachValues();
+  const plan = chapterCoachPlan(values, state.settings.lang);
+  if (!plan) return;
+  const outline = $('#chapter-outline');
+  outline.value = [outline.value.trimEnd(), plan].filter(Boolean).join('\n\n');
+  scheduleSave();
+  for (let i = 0; i < 4; i++) $('#chapter-coach-' + i).value = '';
+  closeModal('modal-chapter-coach');
+  setMobileBrief('novel', true);
+  outline.focus();
+  toast(coachCopy().done, 'ok', 4500);
+}
+
+/* ---------------- 版本历史 ---------------- */
+const HISTORY_COPY = {
+  zh: { button: '版本历史', empty: '还没有旧版本。继续编辑和保存后，旧稿会出现在这里。', help: '预览早前保存的稿件。恢复时会先保留当前稿。最多保留 16 个旧版本；连续编辑会合并，过大的旧稿可能不保留。', restore: '恢复选中版本', restored: '已恢复旧版本；恢复前的稿件仍在版本历史中。', pick: '请选择版本', preview: '旧稿预览', busy: '请先停止 AI 创作，再查看或恢复旧稿。' },
+  en: { button: 'Version history', empty: 'No earlier versions yet. Older drafts will appear after more edits are saved.', help: 'Preview a saved draft. Restoring preserves your current version first. Up to 16 earlier versions are kept; rapid edits are grouped and very large drafts may be omitted.', restore: 'Restore selected version', restored: 'Version restored. Your previous draft remains in history.', pick: 'Choose a version', preview: 'Version preview', busy: 'Stop AI generation before viewing or restoring an earlier draft.' },
+  ru: { button: 'История версий', empty: 'Предыдущих версий пока нет. Они появятся после сохранения следующих правок.', help: 'Просмотрите сохранённый черновик. Перед восстановлением сохраняется текущая версия. Хранятся до 16 версий; частые изменения объединяются, а очень большие черновики могут быть пропущены.', restore: 'Восстановить выбранную версию', restored: 'Версия восстановлена. Предыдущий черновик остался в истории.', pick: 'Выберите версию', preview: 'Просмотр версии', busy: 'Остановите генерацию, прежде чем просматривать или восстанавливать черновик.' }
+};
+const historyCopy = () => HISTORY_COPY[state.settings.lang] || HISTORY_COPY.zh;
+let historySelection = null;
+function applyHistoryLabels() {
+  const c = historyCopy();
+  for (const id of ['#btn-chapter-history', '#btn-paper-history', '#draft-history-title']) $(id).textContent = c.button;
+  $('#draft-history-help').textContent = c.help;
+  $('#draft-history-restore').textContent = c.restore;
+  $('#draft-history-list').setAttribute('aria-label', c.pick);
+  $('#draft-history-preview').setAttribute('aria-label', c.preview);
+}
+function previewDraftHistory() {
+  const i = $('#draft-history-list').selectedIndex;
+  const item = historySelection?.entries[i];
+  $('#draft-history-preview').value = item ? [item.title, item.outline || item.topic, item.content].filter(Boolean).join('\n\n') : historyCopy().empty;
+  $('#draft-history-restore').disabled = !item;
+}
+async function openDraftHistory(paper) {
+  if (state.genState.running) return toast(historyCopy().busy, 'warn');
+  await (paper ? flushPaperSave() : flushSave());
+  const record = paper ? currentPaper() : curChapter();
+  if (!record) return;
+  const store = paper ? STORE.papers : STORE.chapters;
+  let latest = record;
+  if (!state.settings.storageDenied) {
+    try { latest = (await dbGet(store, record.id)) || record; }
+    catch (e) { return toast(draftNotice('failed'), 'err'); }
+  }
+  const entries = !Array.isArray(latest.history) ? [] : latest.history.filter(item =>
+    item && typeof item.id === 'string' && Number.isFinite(item.at)).slice(-HISTORY_LIMIT).reverse();
+  historySelection = { paper, id: record.id, entries };
+  applyHistoryLabels();
+  const list = $('#draft-history-list');
+  list.replaceChildren();
+  for (const item of entries) {
+    const option = document.createElement('option');
+    option.value = item.id;
+    option.textContent = new Date(item.at).toLocaleString(({zh:'zh-CN', en:'en', ru:'ru'})[state.settings.lang]) +
+      (item.title ? ' · ' + item.title.slice(0, 72) : '');
+    list.append(option);
+  }
+  list.disabled = !entries.length;
+  previewDraftHistory();
+  openModal('modal-draft-history');
+  (entries.length ? list : $('#draft-history-close')).focus();
+}
+async function restoreDraftHistory() {
+  const context = historySelection;
+  const item = context?.entries[$('#draft-history-list').selectedIndex];
+  if (!item || state.genState.running) return;
+  const current = () => context.paper ? currentPaper() : curChapter();
+  const flush = context.paper ? flushPaperSave : flushSave;
+  await flush();
+  const record = current();
+  if (!record || record.id !== context.id || (context.paper ? state.paperDirty : state.editorDirty)) return;
+  const button = $('#draft-history-restore');
+  button.disabled = true;
+  const delta = { ...draftVersionFields(item), wordCount: countWords(item.content || '') };
+  const result = await persistDraft(context.paper ? STORE.papers : STORE.chapters, record, delta, false, { checkpoint: true });
+  if (!result) { previewDraftHistory(); return; }
+  closeModal('modal-draft-history');
+  if (current()?.id === result.saved.id) {
+    // A button can lose focus on modal close; blur explicitly before loading restored fields.
+    document.activeElement?.blur?.();
+    renderEditor();
+  }
+  if (!result.conflict && !result.memory) toast(historyCopy().restored, 'ok');
 }
 
 /* ---------------- 个人档案 ---------------- */
@@ -2280,6 +3344,17 @@ async function dictSearch(word) {
 
 /* ---------------- 备份与导出 ---------------- */
 async function exportTxt() {
+  if (state.board === 'paper') {
+    await flushPaperSave();
+    const p = currentPaper();
+    if (!p) return toast(t('p.needOpen'), 'warn');
+    const title = state.paperDirty ? $('#paper-title').value.trim() : p.title;
+    const text = state.paperDirty ? $('#paper-editor').value : (p.content || '');
+    const display = title || t('novel.pending');
+    download(display + '.txt', display + '\n\n' + text);
+    return toast(t('toast.txtOk'), 'ok');
+  }
+  await flushSave();
   const n = curNovel();
   if (!n) return toast(t('toast.needNovelSel'), 'warn');
   const chs = chaptersOf(n.id);
@@ -2291,40 +3366,340 @@ async function exportTxt() {
   download(n.title + '.txt', head + body);
   toast(t('toast.txtOk'), 'ok');
 }
-async function exportJson() {
-  const data = {
-    exportedAt: new Date().toISOString(),
-    novels: state.novels, chapters: state.chapters, outline: state.outline,
-    characters: state.characters, memories: state.memories, chats: state.chats, papers: state.papers
-  };
-  const d = new Date();
-  const p = n => String(n).padStart(2, '0');
-  download(`xiaoxing-备份-${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}.json`, JSON.stringify(data, null, 2), 'application/json');
-  toast(t('toast.backupOk'), 'ok');
+/* ---------------- 可编辑 Word 文档 ---------------- */
+const DOCX_TYPE = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+const DOCX_COPY = {
+  zh: ['导出 Word 文档', '下载可继续编辑的小说或论文（.docx）', '下载 Word', 'Word 文档已导出', 'Word 导出失败，请重试。'],
+  en: ['Export Word document', 'Download an editable novel or paper (.docx)', 'Download Word', 'Word document exported', 'Word export failed. Please retry.'],
+  ru: ['Экспорт в Word', 'Скачайте редактируемый роман или статью (.docx)', 'Скачать Word', 'Документ Word экспортирован', 'Не удалось экспортировать в Word. Повторите попытку.']
+};
+const docxCopy = () => DOCX_COPY[state.settings.lang] || DOCX_COPY.zh;
+function applyDocxLabels() {
+  ['#docx-title', '#docx-desc', '#btn-export-docx'].forEach((id, i) => { $(id).textContent = docxCopy()[i]; });
 }
-async function doImport(file) {
+function docxXml(text) {
+  return String(text ?? '').replace(/[^\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD\u{10000}-\u{10FFFF}]/gu, '\uFFFD')
+    .replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+}
+const ZIP_CRC = Uint32Array.from({ length: 256 }, (_, value) => {
+  for (let i = 0; i < 8; i++) value = (value & 1) ? 0xEDB88320 ^ (value >>> 1) : value >>> 1;
+  return value;
+});
+function zipStored(parts) {
+  const enc = new TextEncoder(), files = [], directory = [];
+  const footer = new Uint8Array(22), end = new DataView(footer.buffer);
+  let offset = 0, dirSize = 0;
+  for (const [path, text] of Object.entries(parts)) {
+    const name = enc.encode(path), body = enc.encode(text);
+    let crc = 0xFFFFFFFF;
+    for (const byte of body) crc = ZIP_CRC[(crc ^ byte) & 255] ^ (crc >>> 8);
+    crc = (crc ^ 0xFFFFFFFF) >>> 0;
+    const local = new Uint8Array(30 + name.length), l = new DataView(local.buffer);
+    l.setUint32(0, 0x04034B50, true); l.setUint16(4, 20, true);
+    l.setUint16(12, 0x21, true);
+    l.setUint32(14, crc, true); l.setUint32(18, body.length, true); l.setUint32(22, body.length, true);
+    l.setUint16(26, name.length, true); local.set(name, 30);
+    const central = new Uint8Array(46 + name.length), c = new DataView(central.buffer);
+    c.setUint32(0, 0x02014B50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true);
+    c.setUint16(14, 0x21, true);
+    c.setUint32(16, crc, true); c.setUint32(20, body.length, true); c.setUint32(24, body.length, true);
+    c.setUint16(28, name.length, true); c.setUint32(42, offset, true); central.set(name, 46);
+    files.push(local, body); directory.push(central);
+    offset += local.length + body.length; dirSize += central.length;
+  }
+  end.setUint32(0, 0x06054B50, true);
+  end.setUint16(8, directory.length, true); end.setUint16(10, directory.length, true);
+  end.setUint32(12, dirSize, true); end.setUint32(16, offset, true);
+  return [...files, ...directory, footer];
+}
+function makeWordPackage(title, chapters, lang) {
+  const w = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+  const rel = 'http://schemas.openxmlformats.org/package/2006/relationships';
+  const office = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/';
+  const head = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+  const tag = ({zh:'zh-CN',en:'en-US',ru:'ru-RU'})[normalizeOutputLang(lang)];
+  const paragraph = (value, style) => {
+    const bits = String(value ?? '').split('\t').map(x => '<w:t xml:space="preserve">' + docxXml(x) + '</w:t>');
+    return '<w:p>' + (style ? '<w:pPr><w:pStyle w:val="' + style + '"/></w:pPr>' : '') +
+      '<w:r>' + bits.join('<w:tab/>') + '</w:r></w:p>';
+  };
+  const contents = [paragraph(title,'Title')];
+  for (const chapter of chapters) {
+    if (chapter.title) contents.push(paragraph(chapter.title,'Heading1'));
+    for (const line of String(chapter.content || '').split(/\r\n?|\n/)) contents.push(paragraph(line, ''));
+  }
+  return zipStored({
+    '[Content_Types].xml': head + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>',
+    '_rels/.rels': head + '<Relationships xmlns="' + rel + '"><Relationship Id="rId1" Type="' + office + 'officeDocument" Target="word/document.xml"/></Relationships>',
+    'word/document.xml': head + '<w:document xmlns:w="' + w + '"><w:body>' + contents.join('') + '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1440" w:right="1400" w:bottom="1440" w:left="1400" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:body></w:document>',
+    'word/_rels/document.xml.rels': head + '<Relationships xmlns="' + rel + '"><Relationship Id="rId1" Type="' + office + 'styles" Target="styles.xml"/></Relationships>',
+    'word/styles.xml': head + '<w:styles xmlns:w="' + w + '"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Microsoft YaHei"/><w:sz w:val="24"/><w:lang w:val="' + tag + '" w:eastAsia="zh-CN"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="100" w:line="340" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:pPr><w:keepNext/><w:spacing w:after="260"/></w:pPr><w:rPr><w:b/><w:sz w:val="42"/></w:rPr></w:style><w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="240" w:after="100"/><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'
+  });
+}
+async function exportWord() {
+  const paper = state.board === 'paper';
   try {
-    const text = await file.text();
-    const data = JSON.parse(text);
-    for (const k of Object.values(STORE)) {
-      if (data[k] !== undefined && !Array.isArray(data[k])) throw new Error('字段 ' + k + ' 格式错误');
-    }
-    if (!await confirmDialog(t('confirm.import'))) return;
-    await flushSave();
-    for (const k of Object.values(STORE)) {
-      await dbClear(k);
-      const arr = data[k] || [];
-      for (const r of arr) await dbPut(k, r);
-    }
-    await loadAll();
-    renderLibrary(); renderAll();
-    toast(t('toast.importOk'), 'ok');
-  } catch (e) {
-    toast(t('toast.importFail') + e.message, 'err', 6000);
-  } finally {
-    $('#import-file').value = '';
+    await (paper ? flushPaperSave() : flushSave());
+    const current = paper ? currentPaper() : curNovel();
+    if (!current) return toast(t(paper ? 'p.needOpen' : 'toast.needNovelSel'), 'warn');
+    const view = (store, item) => ({ ...item, ...pendingDrafts.get(recoveryId(store, item.id))?.delta });
+    const doc = paper ? view(STORE.papers, current) : current;
+    const sections = paper ? [{content:doc.content}] : chaptersOf(current.id).map(c => view(STORE.chapters,c));
+    if (!sections.length) return toast(t('toast.noChapters'), 'warn');
+    const title = doc.title || t('novel.pending');
+    const safeName = title.replace(/[<>:"/\\|?*\x00-\x1F]/g, '_').slice(0,100) || 'xiaoxing';
+    const url = URL.createObjectURL(new Blob(makeWordPackage(title, sections, doc.outLang || doc.lang), { type:DOCX_TYPE }));
+    const link = document.createElement('a');
+    link.href = url; link.download = safeName + '.docx'; document.body.append(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+    toast(docxCopy()[3], 'ok');
+  } catch (_) { toast(docxCopy()[4], 'err'); }
+}
+
+function backupObject(value) {
+  return !!value && typeof value === 'object' && !Array.isArray(value);
+}
+const BACKUP_STORES = Object.values(STORE);
+const BACKUP_FORMAT = 'xiaoxing-backup';
+const BACKUP_SCHEMA = 1;
+function backupStoreLabel(key) {
+  const names = {
+    novels: ['小说','novels','романов'], chapters: ['章节','chapters','глав'],
+    papers: ['论文','papers','статей'], outline: ['大纲节点','outline nodes','пунктов плана'],
+    characters: ['角色','characters','персонажей'], memories: ['记忆','memories','заметок'],
+    chats: ['对话','chats','диалогов']
+  };
+  return names[key][({zh:0,en:1,ru:2})[state.settings.lang] ?? 0];
+}
+function backupText(r, keys, path, target = {}) {
+  for (const key of keys) {
+    if (r[key] == null) continue;
+    if (typeof r[key] !== 'string') throw new Error(path + '.' + key);
+    target[key] = r[key];
+  }
+  return target;
+}
+function backupNumbers(r, keys, path, target) {
+  for (const key of keys) {
+    if (r[key] == null) continue;
+    if (!Number.isFinite(r[key])) throw new Error(path + '.' + key);
+    target[key] = r[key];
   }
 }
+function buildBackupCopies(raw, makeId = uid) {
+  if (!backupObject(raw) || (raw.format !== undefined && raw.format !== BACKUP_FORMAT) ||
+      (raw.schemaVersion !== undefined && raw.schemaVersion !== BACKUP_SCHEMA) ||
+      (!Array.isArray(raw.novels) && !Array.isArray(raw.papers))) throw new Error(t('backup.invalid'));
+  const source = {};
+  const mapped = {};
+  const ids = {};
+  for (const key of BACKUP_STORES) {
+    source[key] = raw[key] === undefined ? [] : raw[key];
+    if (!Array.isArray(source[key])) throw new Error(key);
+    mapped[key] = [];
+    ids[key] = new Map();
+    source[key].forEach((r, i) => {
+      if (!backupObject(r) || typeof r.id !== 'string' || !r.id.trim() ||
+          r.id.length > 256 || ids[key].has(r.id)) throw new Error(key + '[' + i + '].id');
+      ids[key].set(r.id, makeId());
+    });
+  }
+  if (!source.novels.length && !source.papers.length) throw new Error(t('backup.empty'));
+  const outlineById = new Map(source.outline.map(o => [o.id, o]));
+  const fields = {
+    novels: ['title','description','audience','genre','length','pov','tone','narrative','standard','personal',
+      'styleMode','styleSample','synopsis','world'], chapters: ['title','content','outline'],
+    papers: ['title','topic','content'], outline: ['title','note'],
+    characters: ['name','role','appearance','personality','background','relations','notes','relation','note'],
+    memories: ['category','content','source'], chats: []
+  };
+  let omittedChats = 0;
+  for (const key of BACKUP_STORES) {
+    for (const [i, r] of source[key].entries()) {
+      const path = key + '[' + i + ']';
+      const copy = backupText(r, fields[key], path, { id: ids[key].get(r.id) });
+      backupNumbers(r, ['createdAt','updatedAt','order','wordCount'], path, copy);
+      if (key === STORE.novels) {
+        copy.title = (copy.title || t('novel.pending')) + ' · ' + t('backup.copySuffix');
+        copy.lang = normalizeOutputLang(r.lang);
+        copy.color = typeof r.color === 'string' && /^#[0-9a-f]{6}$/i.test(r.color) ? r.color : PALETTE[0];
+        for (const field of ['genres','refAuthors']) {
+          if (r[field] == null) continue;
+          if (!Array.isArray(r[field]) || r[field].some(v => typeof v !== 'string')) throw new Error(path + '.' + field);
+          copy[field] = [...r[field]];
+        }
+        if (r.worldSections != null) {
+          if (!Array.isArray(r.worldSections)) throw new Error(path + '.worldSections');
+          copy.worldSections = r.worldSections.map((v, j) => {
+            if (!backupObject(v)) throw new Error(path + '.worldSections[' + j + ']');
+            return backupText(v, ['title','content'], path + '.worldSections[' + j + ']', { id: makeId() });
+          });
+        }
+      } else if (key === STORE.papers) {
+        copy.title = (copy.title || t('novel.pending')) + ' · ' + t('backup.copySuffix');
+        copy.outLang = normalizeOutputLang(r.outLang, state.settings.lang);
+        if (r.sources != null) {
+          if (!Array.isArray(r.sources) || r.sources.length > PAPER_SOURCE_LIMIT) throw new Error(path + '.sources');
+          const sourceIds = new Set();
+          const sourceUrls = new Set();
+          copy.sources = r.sources.map((v, j) => {
+            const itemPath = path + '.sources[' + j + ']';
+            if (!backupObject(v) || typeof v.id !== 'string' || !v.id || v.id.length > 256 || sourceIds.has(v.id)) throw new Error(itemPath + '.id');
+            const entry = normalizePaperSource(v, makeId());
+            if (!entry || sourceUrls.has(entry.url)) throw new Error(itemPath + '.url');
+            sourceIds.add(v.id);
+            sourceUrls.add(entry.url);
+            return entry;
+          });
+        }
+      }
+      if (key === STORE.chapters || key === STORE.papers) {
+        copy.status = ['draft','revising','done'].includes(r.status) ? r.status : 'draft';
+        if (r.history != null) {
+          if (!Array.isArray(r.history) || r.history.some(v => !backupObject(v))) throw new Error(path + '.history');
+          copy.history = r.history.map((entry,j) => {
+            const itemPath = path + '.history[' + j + ']';
+            if (!Number.isFinite(entry.at) || entry.at <= 0) throw new Error(itemPath + '.at');
+            const item = backupText(entry, ['title','content','outline','topic'], itemPath, { id: makeId(), at: entry.at });
+            if (typeof entry.checkpoint === 'boolean') item.checkpoint = entry.checkpoint;
+            if (['draft','revising','done'].includes(entry.status)) item.status = entry.status;
+            if (entry.outLang != null) item.outLang = normalizeOutputLang(entry.outLang);
+            return item;
+          });
+        }
+        if (typeof r.conflictOf === 'string' && ids[key].has(r.conflictOf)) {
+          copy.conflictOf = ids[key].get(r.conflictOf);
+        }
+      }
+      if ([STORE.chapters, STORE.outline, STORE.characters, STORE.memories].includes(key)) {
+        copy.novelId = ids.novels.get(r.novelId);
+        if (!copy.novelId) throw new Error(path + '.novelId');
+      }
+      if (key === STORE.outline) {
+        copy.status = ['todo','doing','done'].includes(r.status) ? r.status : 'todo';
+        const parent = r.parentId == null || r.parentId === '' ? null : outlineById.get(r.parentId);
+        if (r.parentId && (!parent || parent.novelId !== r.novelId || parent.parentId)) throw new Error(path + '.parentId');
+        copy.parentId = parent ? ids.outline.get(parent.id) : null;
+      }
+      if (key === STORE.chats) {
+        const paper = r.id.startsWith('paper-') && ids.papers.get(r.id.slice(6));
+        copy.id = ids.novels.get(r.id) || (paper ? 'paper-' + paper : null);
+        if (!copy.id) { omittedChats++; continue; }
+        copy.novelId = copy.id;
+        if (!Array.isArray(r.messages)) throw new Error(path + '.messages');
+        copy.messages = r.messages.map((v,j) => {
+          if (!backupObject(v) || !['user','assistant'].includes(v.role)) throw new Error(path + '.messages[' + j + ']');
+          const message = backupText(v, ['role','content','kind','error'], path + '.messages[' + j + ']');
+          if (backupObject(v.extra) && Array.isArray(v.extra.entries)) {
+            message.extra = { entries: v.extra.entries.map((e,k) => {
+              if (!backupObject(e)) throw new Error(path + '.messages[' + j + '].entries[' + k + ']');
+              return backupText(e, ['category','content'], path + '.messages[' + j + '].entries[' + k + ']');
+            }) };
+          }
+          return message;
+        });
+      }
+      mapped[key].push(copy);
+    }
+  }
+  return { mapped, omittedChats };
+}
+function readBackupSnapshot() {
+  if (state.settings.storageDenied) return Promise.resolve(Object.fromEntries(BACKUP_STORES.map(key => [key, state[key]])));
+  if (dbMode !== 'idb') return Promise.resolve(Object.fromEntries(BACKUP_STORES.map(key => {
+    const stored = JSON.parse(localStorage.getItem(lsKey(key)) || '{}');
+    return [key, Object.values(stored)];
+  })));
+  return new Promise((resolve, reject) => {
+    const trx = db.transaction(BACKUP_STORES, 'readonly');
+    const snapshot = {};
+    for (const key of BACKUP_STORES) {
+      const req = trx.objectStore(key).getAll();
+      req.onsuccess = () => { snapshot[key] = req.result; };
+    }
+    trx.onabort = () => reject(trx.error || new Error('Snapshot aborted'));
+    trx.oncomplete = () => resolve(snapshot);
+  });
+}
+function commitBackupCopies(source, target = db) {
+  return new Promise((resolve, reject) => {
+    const txn = target.transaction(BACKUP_STORES, 'readwrite');
+    txn.onabort = () => reject(txn.error || new Error('Restore transaction aborted'));
+    txn.oncomplete = () => resolve();
+    try {
+      for (const key of BACKUP_STORES) {
+        const table = txn.objectStore(key);
+        for (const record of source[key]) table.add(record);
+      }
+    } catch (error) {
+      txn.abort();
+      reject(error);
+    }
+  });
+}
+async function exportJson() {
+  try {
+    await Promise.all([flushSave(), flushPaperSave(), flushWorldBackupSave()]);
+    const snapshot = await readBackupSnapshot();
+    // If an active editor failed to save, keep its newest text in the downloadable copy.
+    for (const [key, active, dirty, controls] of [
+      [STORE.chapters, curChapter(), state.editorDirty, {title:'chapter-title', content:'editor', outline:'chapter-outline', status:'chapter-status'}],
+      [STORE.papers, currentPaper(), state.paperDirty, {title:'paper-title', content:'paper-editor', topic:'paper-topic', status:'paper-status', outLang:'paper-lang'}]
+    ]) if (active && dirty) {
+      const record = { ...active };
+      for (const [field, control] of Object.entries(controls)) record[field] = $('#' + control).value;
+      record.wordCount = countWords(record.content);
+      snapshot[key] = [...snapshot[key].filter(r => r.id !== record.id), record];
+    }
+    const data = { format: BACKUP_FORMAT, schemaVersion: BACKUP_SCHEMA, exportedAt: new Date().toISOString(), ...snapshot };
+    const stamp = data.exportedAt.slice(0, 19).replace(/[:T]/g, '-');
+    download('xiaoxing-backup-' + stamp + '.json', JSON.stringify(data, null, 2), 'application/json');
+    toast(t('toast.backupOk'), 'ok');
+  } catch (err) {
+    toast(t('backup.exportFail'), 'err', 7000);
+  }
+}
+let backupImportPending = false;
+async function doImport(file) {
+  if (backupImportPending) return;
+  backupImportPending = true;
+  const input = $('#import-file');
+  const button = $('#btn-import-json');
+  button.disabled = true;
+  try {
+    if (state.settings.storageDenied || dbMode !== 'idb') throw new Error(t('backup.idbOnly'));
+    const text = (await file.text()).replace(/^\uFEFF/, '');
+    const { mapped, omittedChats } = buildBackupCopies(JSON.parse(text));
+    const details = BACKUP_STORES.filter(k => mapped[k].length).map(k => mapped[k].length + ' ' + backupStoreLabel(k)).join(' / ');
+    const ignored = omittedChats ? ' ' + t('backup.orphanChats', { n: omittedChats }) : '';
+    if (!await confirmDialog(t('confirm.import', { details }) + ignored)) return;
+    await commitBackupCopies(mapped);
+    // Do not reload the app: that would discard edits still open on this tab.
+    for (const key of BACKUP_STORES) for (const record of mapped[key]) state[key].push(record);
+    let selectionChanged = false;
+    if (!curNovel() && mapped.novels.length) {
+      selectionChanged ||= state.board === 'novel';
+      state.currentNovelId = mapped.novels[0].id;
+      state.currentChapterId = chaptersOf(state.currentNovelId)[0]?.id || null;
+    }
+    if (!currentPaper() && mapped.papers.length) {
+      selectionChanged ||= state.board === 'paper';
+      state.currentPaperId = mapped.papers[0].id;
+    }
+    closeModal('modal-backup');
+    renderLibrary();
+    if (selectionChanged) { await loadChatFor(chatKey()); renderAll(); }
+    else { renderTop(); renderPanel(); }
+    toast(t('toast.importOk'), 'ok', 5500);
+  } catch (e) {
+    toast(t('toast.importFail') + e.message, 'err', 7000);
+  } finally {
+    input.value = '';
+    button.disabled = false;
+    backupImportPending = false;
+  }
+}
+
 async function wipeAll() {
   if (!await confirmDialog(t('confirm.wipe'))) return;
   await flushSave();
@@ -2341,96 +3716,238 @@ async function wipeAll() {
 /* ---------------- AI 提供方配置 ---------------- */
 const activeProvider = () => state.settings.providers.find(p => p.id === state.settings.activeProviderId) || null;
 const baseUrl = p => String(p.baseUrl || '').trim().replace(/\/+$/, '');
-const apiPath = p => (p.path !== undefined && p.path !== null && String(p.path).trim() !== '') ? String(p.path).trim() : '/chat/completions';
+const apiPath = p => (p.path != null && String(p.path).trim() !== '') ? String(p.path).trim() : '/chat/completions';
+let modelTestController = null;
 
+function modelEndpoint(p) {
+  const base = new URL(baseUrl(p));
+  const path = apiPath(p);
+  if (!['http:', 'https:'].includes(base.protocol) || base.username || base.password || base.search || base.hash ||
+      !path.startsWith('/') || path.startsWith('//') || /[\\\s#]/.test(path)) throw new Error('endpoint');
+  const endpoint = new URL(baseUrl(p) + path);
+  if (endpoint.origin !== base.origin) throw new Error('endpoint');
+  return endpoint;
+}
+function modelEndpointOrigin(p) {
+  try { return modelEndpoint(p).origin; } catch { return ''; }
+}
+function isBuiltinModel(p) {
+  return !!p && !p.apiKey && baseUrl(p) === PRESETS[0].baseUrl && apiPath(p) === PRESETS[0].path && p.model === PRESETS[0].model;
+}
+function modelDisplayName(p) {
+  return isBuiltinModel(p) ? t('model.builtinName') : p.name || t('model.unnamed');
+}
 function renderProviderList() {
-  const list = $('#provider-list');
-  list.innerHTML = state.settings.providers.map(x => `
-    <div class="prov-row ${x.id === state.settings.activeProviderId ? 'active' : ''}" data-id="${x.id}">
+  const selected = activeProvider();
+  $('#model-active-name').textContent = selected ? modelDisplayName(selected) : t('model.none');
+  $('#model-active-meta').textContent = selected
+    ? [selected.model, modelEndpointOrigin(selected) || t('model.badAddress')].filter(Boolean).join(' · ') : t('model.noneHint');
+  $('#model-use-default').disabled = isBuiltinModel(selected);
+  $('#model-test-active').disabled = !selected || !!modelTestController;
+  $('#set-auto-model').checked = !!state.settings.autoModel;
+  $('#provider-list').innerHTML = state.settings.providers.map(p => `
+    <div class="prov-row ${p.id === state.settings.activeProviderId ? 'active' : ''}" data-id="${esc(p.id)}">
       <div class="prov-info">
-        <div class="prov-name">${esc(x.name || '未命名')}</div>
-        <div class="prov-meta">${esc(x.model || '')} · ${esc(baseUrl(x) || '')}</div>
+        <div class="prov-name">${esc(modelDisplayName(p))}</div>
+        <div class="prov-meta">${esc(p.model || '')} · ${esc(modelEndpointOrigin(p) || t('model.badAddress'))}</div>
       </div>
-      ${x.id === state.settings.activeProviderId ? '<span class="badge">使用中</span>' : ''}
-    </div>`).join('') || '<div class="empty-hint small">' + t('aiset.list') + '</div>';
+      <div class="prov-actions">
+        <button type="button" class="btn mini" data-use-provider ${p.id === state.settings.activeProviderId ? 'disabled' : ''}>
+          ${esc(t(p.id === state.settings.activeProviderId ? 'model.activeTag' : 'model.use'))}</button>
+        <button type="button" class="btn mini ghost" data-edit-provider aria-label="${esc(t('model.editNamed', { name: modelDisplayName(p) }))}">${esc(t('model.edit'))}</button>
+      </div>
+    </div>`).join('') || '<div class="empty-hint small">' + esc(t('model.none')) + '</div>';
+}
+function setModelStatus(key, kind, vars) {
+  const el = $('#model-test-status');
+  el.hidden = !key;
+  el.textContent = key ? t(key, vars) : '';
+  el.dataset.kind = kind || '';
+}
+function cancelModelTest() {
+  if (modelTestController) modelTestController.abort();
+  modelTestController = null;
+  $('#btn-prov-test').disabled = false;
+  setModelStatus();
 }
 function fillProvForm(p) {
-  $('#prov-name').value = p ? (p.name || '') : '';
-  $('#prov-base').value = p ? (p.baseUrl || '') : '';
-  $('#prov-path').value = p ? (p.path !== undefined ? p.path : '/chat/completions') : '/chat/completions';
-  $('#prov-key').value = p ? (p.apiKey || '') : '';
-  $('#prov-model').value = p ? (p.model || '') : '';
-  $('#prov-temp').value = p ? (p.temperature ?? 0.8) : 0.8;
-  $('#prov-maxtok').value = p ? (p.maxTokens || 4096) : 4096;
+  $('#prov-name').value = p?.name || '';
+  $('#prov-base').value = p?.baseUrl || '';
+  $('#prov-path').value = p ? apiPath(p) : '/chat/completions';
+  $('#prov-key').value = p?.apiKey || '';
+  $('#prov-model').value = p?.model || '';
+  $('#prov-temp').value = p?.temperature ?? 0.8;
+  $('#prov-maxtok').value = p?.maxTokens ?? 4096;
   $('#preset-select').value = '';
+}
+function useProvider(provider) {
+  cancelModelTest();
+  state.settings.activeProviderId = provider.id;
+  saveSettings();
+  renderProviderList(); renderModelTag();
+}
+function makeBuiltinProvider() {
+  const {name, baseUrl, path, model} = PRESETS[0];
+  return { id: uid(), name, baseUrl, path, model, apiKey: '', temperature: 0.8, maxTokens: 4096 };
+}
+function useBuiltinProvider() {
+  let provider = state.settings.providers.find(isBuiltinModel);
+  if (!provider) {
+    provider = makeBuiltinProvider();
+    state.settings.providers.push(provider);
+  }
+  useProvider(provider);
+  setModelStatus('model.switched', 'ok', {name: modelDisplayName(provider)});
+}
+function openModelForm(p = null, local = false) {
+  cancelModelTest();
+  state.provEditingId = p?.id || null;
+  fillProvForm(p);
+  $('#model-form').hidden = false;
+  $('#btn-prov-del').hidden = !p;
+  $('#model-advanced').open = local;
+  $('#model-form-guide').textContent = t(p ? 'model.editGuide' : local ? 'model.localGuide' : 'model.cloudGuide');
+  if (!p && local) {
+    const i = PRESETS.findIndex(v => v.name.startsWith('Ollama'));
+    if (i >= 0) applyModelPreset(i);
+  }
+  renderProviderList();
+  $(p ? '#prov-name' : '#preset-select').focus();
+}
+function hideModelForm() {
+  cancelModelTest();
+  $('#model-form').hidden = true;
+  state.provEditingId = null;
+  fillProvForm(null);
+  renderProviderList();
 }
 function openAISettings() {
   fillPresetSelect();
-  renderProviderList();
-  state.provEditingId = null;
-  fillProvForm(null);
+  hideModelForm();
   openModal('modal-ai');
 }
-async function saveProvider() {
-  const name = $('#prov-name').value.trim() || '未命名模型';
-  const base = $('#prov-base').value.trim();
-  const model = $('#prov-model').value.trim();
-  if (!base || !model) return toast(t('toast.providerFill'), 'warn');
-  const data = {
-    id: state.provEditingId || uid(), name, baseUrl: base,
-    path: $('#prov-path').value.trim() || '/chat/completions',
-    apiKey: $('#prov-key').value.trim(), model,
-    temperature: clamp(parseFloat($('#prov-temp').value) || 0.8, 0, 2),
-    maxTokens: clamp(parseInt($('#prov-maxtok').value) || 4096, 64, 128000)
+function applyModelPreset(index) {
+  const preset = PRESETS[index];
+  if (!preset) return;
+  cancelModelTest();
+  // A preset starts a fresh configuration, so a key can never be carried over.
+  state.provEditingId = null;
+  fillProvForm(preset);
+  $('#preset-select').value = String(index);
+  $('#btn-prov-del').hidden = true;
+  const local = /^http:\/\/(?:localhost|127\.0\.0\.1)(?:[:/]|$)/i.test(preset.baseUrl);
+  $('#model-form-guide').textContent = t(local ? 'model.localGuide' : preset.baseUrl ? 'model.presetGuide' : 'model.customGuide');
+  $('#model-advanced').open = local || !preset.baseUrl || !preset.model;
+}
+function providerFromForm() {
+  const temp = Number.parseFloat($('#prov-temp').value);
+  const limit = Number.parseInt($('#prov-maxtok').value, 10);
+  return {
+    id: state.provEditingId, name: $('#prov-name').value.trim() || t('model.unnamed'),
+    baseUrl: $('#prov-base').value.trim(), path: $('#prov-path').value.trim() || '/chat/completions',
+    apiKey: $('#prov-key').value.trim(), model: $('#prov-model').value.trim(),
+    temperature: clamp(Number.isFinite(temp) ? temp : 0.8, 0, 2),
+    maxTokens: clamp(Number.isFinite(limit) ? limit : 4096, 64, 128000)
   };
+}
+function validateModelForm(p, editing = false) {
+  if (!p?.baseUrl || !p.model) return 'model.missing';
+  if (!modelEndpointOrigin(p)) return 'model.badAddress';
+  if (editing && p.id && p.apiKey) {
+    const original = state.settings.providers.find(item => item.id === p.id);
+    if (original?.apiKey === p.apiKey && modelEndpointOrigin(p) !== modelEndpointOrigin(original)) return 'model.newHostKey';
+  }
+  return '';
+}
+function showModelFormIssue(key) {
+  if (key === 'model.newHostKey') $('#prov-key').value = '';
+  $('#model-advanced').open = true;
+  setModelStatus(key, 'err');
+  $('#model-test-status').scrollIntoView({block:'nearest'});
+}
+async function saveProvider() {
+  const data = providerFromForm();
+  const issue = validateModelForm(data, true);
+  if (issue) return showModelFormIssue(issue);
+  if (!data.id) data.id = uid();
   const i = state.settings.providers.findIndex(p => p.id === data.id);
   if (i >= 0) state.settings.providers[i] = data; else state.settings.providers.push(data);
-  state.settings.activeProviderId = data.id;
-  saveSettings();
-  renderProviderList(); renderModelTag();
-  closeModal('modal-ai');
-  toast(t('toast.providerSaved'));
+  useProvider(data);
+  hideModelForm();
+  setModelStatus('model.switched', 'ok', { name: modelDisplayName(data) });
 }
 async function delProvider() {
-  if (!state.provEditingId) return toast(t('toast.providerPick'), 'warn');
+  const id = state.provEditingId;
+  if (!id) return toast(t('toast.providerPick'), 'warn');
   if (!await confirmDialog(t('confirm.delProvider'))) return;
-  state.settings.providers = state.settings.providers.filter(p => p.id !== state.provEditingId);
-  if (state.settings.activeProviderId === state.provEditingId) state.settings.activeProviderId = state.settings.providers[0] ? state.settings.providers[0].id : null;
-  // 全部删光时自动恢复内置免费模型，保证 AI 始终可用
-  if (!state.settings.providers.length) {
-    state.settings.providers.push({
-      id: uid(), name: 'Pollinations 免费模型', baseUrl: 'https://text.pollinations.ai', path: '/openai',
-      apiKey: '', model: 'openai', temperature: 0.8, maxTokens: 4096
-    });
-    state.settings.activeProviderId = state.settings.providers[0].id;
-  }
-  state.provEditingId = null;
+  state.settings.providers = state.settings.providers.filter(p => p.id !== id);
+  if (!state.settings.providers.length) state.settings.providers.push(makeBuiltinProvider());
+  if (state.settings.activeProviderId === id) state.settings.activeProviderId = state.settings.providers[0].id;
   saveSettings();
-  renderProviderList(); renderModelTag();
-  fillProvForm(null);
+  hideModelForm(); renderModelTag();
   toast(t('toast.providerDel'));
 }
-async function testProvider() {
-  const base = $('#prov-base').value.trim();
-  const model = $('#prov-model').value.trim();
-  if (!base || !model) return toast(t('toast.providerFill'), 'warn');
-  const p = { baseUrl: base, model, apiKey: $('#prov-key').value.trim(), temperature: 0.7 };
-  const btn = $('#btn-prov-test');
-  btn.disabled = true;
+function modelHttpStatus(status) {
+  if (status === 401 || status === 403) return 'model.auth';
+  if (status === 402) return 'model.credit';
+  if (status === 404) return 'model.notFound';
+  if (status === 429) return 'model.rate';
+  if (status >= 500) return 'model.upstream';
+  return status >= 400 ? 'model.request' : '';
+}
+async function probeModel(p, signal) {
+  let response;
   try {
-    const res = await fetch(baseUrl(p) + apiPath(p), {
-      method: 'POST',
+    response = await fetch(modelEndpoint(p).href, {
+      method: 'POST', credentials: 'omit', redirect: 'error', referrerPolicy: 'no-referrer', signal,
       headers: { 'Content-Type': 'application/json', ...(p.apiKey ? { 'Authorization': 'Bearer ' + p.apiKey } : {}) },
-      body: JSON.stringify({ model: p.model, messages: [{ role: 'user', content: '请只回复四个字：连接成功' }], max_tokens: 64, stream: false })
+      body: JSON.stringify({ model: p.model, messages: [{ role: 'user', content: 'Reply with OK.' }], max_tokens: 32, stream: false })
     });
-    if (!res.ok) { const tt = await res.text(); throw new Error(`HTTP ${res.status}: ${tt.slice(0, 160)}`); }
-    const j = await res.json();
-    const rep = j.choices && j.choices[0] && j.choices[0].message ? (j.choices[0].message.content || '') : '';
-    toast(t('dict.provOk') + (rep || '').slice(0, 60), 'ok', 4200);
-  } catch (e) {
-    toast(t('dict.provFail') + e.message, 'err', 6500);
+  } catch (error) {
+    if (signal.aborted || error?.name === 'AbortError') return { key:'model.cancelled' };
+    return { key:'model.network' };
+  }
+  if (!response.ok) return { key:modelHttpStatus(response.status), status:response.status };
+  try {
+    const body = await response.json();
+    const message = body?.choices?.[0]?.message;
+    return message && typeof message.content === 'string' && message.content.trim()
+      ? { key:'model.connected' } : { key:'model.badResponse' };
+  } catch {
+    return signal.aborted ? { key:'model.cancelled' } : { key:'model.badResponse' };
+  }
+}
+async function testProvider(useActive = false) {
+  if (modelTestController) return;
+  const p = useActive ? activeProvider() : providerFromForm();
+  const issue = validateModelForm(p, !useActive);
+  if (issue) {
+    if (useActive) setModelStatus(issue, 'err');
+    else showModelFormIssue(issue);
+    return;
+  }
+  const controller = new AbortController();
+  modelTestController = controller;
+  $('#btn-prov-test').disabled = true;
+  $('#model-test-active').disabled = true;
+  const host = modelEndpointOrigin(p);
+  setModelStatus('model.testing', 'wait', {host});
+  $('#model-test-status').scrollIntoView({block:'nearest'});
+  let timedOut = false;
+  const timer = setTimeout(() => { timedOut = true; controller.abort(); }, 12000);
+  try {
+    const result = await probeModel(p, controller.signal);
+    if (modelTestController === controller) {
+      setModelStatus(timedOut ? 'model.timeout' : result.key, result.key === 'model.connected' ? 'ok' : 'err',
+        { host, status:result.status || '', name:modelDisplayName(p) });
+    }
   } finally {
-    btn.disabled = false;
+    clearTimeout(timer);
+    if (modelTestController === controller) {
+      modelTestController = null;
+      $('#btn-prov-test').disabled = false;
+      $('#model-test-active').disabled = !activeProvider();
+    }
   }
 }
 
@@ -2447,7 +3964,7 @@ async function aiRequestOnce(messages, opts, p) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...(p.apiKey ? { 'Authorization': 'Bearer ' + p.apiKey } : {}) },
     body: JSON.stringify(body),
-    signal: state.aiAbort ? state.aiAbort.signal : undefined
+    signal: opts?.signal || state.aiAbort?.signal
   });
   if (!res.ok) {
     let msg = '';
@@ -2464,6 +3981,11 @@ async function aiRequestOnce(messages, opts, p) {
 async function aiRequest(messages, opts) {
   const p = activeProvider();
   if (!p) throw new Error('未配置 AI 模型');
+  let lang = opts?.outputLang;
+  if (!lang) lang = state.board === 'paper'
+    ? ($('#paper-lang').value || currentPaper()?.outLang)
+    : curNovel()?.lang;
+  messages = [{ role: 'system', content: outputLanguageRule(normalizeOutputLang(lang, state.settings.lang)) }, ...messages];
   let lastErr = null;
   const candidates = [p].concat(state.settings.providers.filter(x => x.id !== p.id));
   const maxTries = state.settings.autoModel ? Math.min(candidates.length, 3) : 1;
@@ -2534,7 +4056,7 @@ function formatStyleForAI() {
   const std = n.standard || '通用';
   const per = n.personal === 'standard' ? '标准输出' : '更像人写的（自然化）';
   const lines = [];
-  lines.push(`用户群体：${n.audience || '通用'}；类型：${gs}；篇幅：${n.length || '未定'}；视角：${n.pov || '未定'}；基调：${n.tone || '未定'}；写法：${nar}；创作标准：${std}；个性化输出：${per}；写作语言：${n.lang === 'en' ? '英文' : '中文'}`);
+  lines.push(`用户群体：${n.audience || '通用'}；类型：${gs}；篇幅：${n.length || '未定'}；视角：${n.pov || '未定'}；基调：${n.tone || '未定'}；写法：${nar}；创作标准：${std}；个性化输出：${per}；写作语言：${OUTPUT_LANGS[normalizeOutputLang(n.lang)]}`);
   const styleMode = n.styleMode || 'author';
   if (styleMode === 'mine' && n.styleSample && n.styleSample.trim()) {
     lines.push('【用户文风样本】请学习该样本的句式节奏、用词习惯、对话风格与叙事口吻，模仿其文风进行创作（学习文风，不抄袭内容）：\n' + n.styleSample.trim().slice(0, 500));
@@ -2696,17 +4218,20 @@ function afterAI(asst) {
 }
 async function sendAI(userText, opts) {
   opts = opts || {};
-  const n = curNovel();
-  if (!n) { toast(t('toast.needNovel'), 'warn'); return; }
+  const paper = state.board === 'paper';
+  const work = paper ? currentPaper() : curNovel();
+  if (!work) { toast(t(paper ? 'p.needOpen' : 'toast.needNovel'), 'warn'); return; }
   const p = activeProvider();
   if (!p) { toast(t('toast.noAI'), 'warn'); openAISettings(); return; }
   if (state.aiStreaming) { toast(t('toast.aiBusy'), 'warn'); return; }
   if (state.genState.running) { toast(t('co.running'), 'warn'); return; }
-  await flushSave();
-  const ctx = state.board === 'paper' ? buildPaperContext() : buildContext();
+  await (paper ? flushPaperSave() : flushSave());
+  if ((paper ? state.board !== 'paper' || currentPaper() !== work : state.board !== 'novel' || curNovel() !== work) ||
+      state.aiStreaming || state.genState.running) return;
+  const ctx = paper ? buildPaperContext() : buildContext();
   const history = state.settings.ctx.chatHistory ? state.chatForNovel.slice(-12).filter(m => !m.error) : [];
-  const messages = [{ role: 'system', content: SYSTEM_PROMPT }];
-  if (ctx) messages.push({ role: 'user', content: `以下是这部小说当前的完整状态（即你的记忆）：\n\n${ctx}\n\n—— 请先内化以上信息，再回应接下来的问题。` });
+  const messages = [{ role: 'system', content: paper ? '你是论文写作助手。区分论点和证据，不编造引用或来源。' : SYSTEM_PROMPT }];
+  if (ctx) messages.push({ role: 'user', content: `以下是这份${paper ? '论文' : '小说'}当前的上下文：\n\n${ctx}\n\n—— 请先内化以上信息，再回应接下来的问题。` });
   messages.push(...history, { role: 'user', content: userText });
 
   state.chatForNovel.push({ role: 'user', content: userText });
@@ -2800,7 +4325,7 @@ function quickPrompt(action) {
   const c = curChapter();
   const sel = ed.value.substring(ed.selectionStart, ed.selectionEnd);
   const n = curNovel();
-  const langNote = n && n.lang === 'en' ? (state.settings.lang === 'zh' ? '（本小说写作语言为英文，请用英文输出）' : ' (This novel is written in English — output in English)') : '';
+  const langNote = n ? '\n' + outputLanguageRule(n.lang) : '';
   switch (action) {
     case 'continue': {
       if (!c) { toast(t('toast.needChapter'), 'warn'); return; }
@@ -2885,6 +4410,76 @@ async function saveMemFromMsg(idx, ei, all) {
 
 /* ---------------- 章节联网生成（大纲 → 正文） ---------------- */
 const GEN_STAGES = ['gp.search', 'gp.style', 'gp.draft', 'gp.write', 'gp.check'];
+function beginGeneration(kind, item, ed, fields, outputLang) {
+  const controller = new AbortController();
+  const task = { kind, item, ed, before: ed.value, fields: fields.map(el => [el, el.value]), controller,
+    opts: { stream: true, outputLang: normalizeOutputLang(outputLang, state.settings.lang), signal: controller.signal } };
+  Object.assign(state.genState, { running: true, abort: controller, genKind: kind, task });
+  state.aiAbort = controller;
+  showGenProgress();
+  return task;
+}
+function generationGuard(task) {
+  if (task.controller.signal.aborted || state.genState.task !== task ||
+      state.board !== task.kind || (task.kind === 'paper' ? currentPaper() : curChapter()) !== task.item) {
+    throw new DOMException('Generation target is no longer active', 'AbortError');
+  }
+}
+function finishGeneration(task) {
+  if (state.genState.task !== task) return;
+  Object.assign(state.genState, { running: false, abort: null, task: null });
+  if (state.aiAbort === task.controller) state.aiAbort = null;
+  hideGenProgress();
+}
+function generationDelay(ms, signal) {
+  if (!signal) return new Promise(resolve => setTimeout(resolve, ms));
+  if (signal.aborted) return Promise.reject(new DOMException('Generation cancelled', 'AbortError'));
+  return new Promise((resolve, reject) => {
+    const timeout = setTimeout(() => {
+      signal.removeEventListener('abort', abort);
+      resolve();
+    }, ms);
+    const abort = () => {
+      clearTimeout(timeout);
+      reject(new DOMException('Generation cancelled', 'AbortError'));
+    };
+    signal.addEventListener('abort', abort, { once: true });
+  });
+}
+function generationTimeout(ms, signal) {
+  const timeout = AbortSignal.timeout(ms);
+  return signal && AbortSignal.any ? AbortSignal.any([signal, timeout]) : timeout;
+}
+async function collectGeneration(res, task, preview = false) {
+  let text = '', refreshedAt = 0;
+  for await (const chunk of aiStream(res)) {
+    generationGuard(task);
+    text += chunk;
+    if (preview && Date.now() - refreshedAt >= 150) {
+      $('#gp-note').textContent = text.slice(-200);
+      refreshedAt = Date.now();
+    }
+  }
+  generationGuard(task);
+  if (!text.trim()) throw new Error('empty');
+  return text;
+}
+function applyGeneratedDraft(task, candidate) {
+  generationGuard(task);
+  if (task.ed.value !== task.before || task.fields.some(([el, value]) => el.value !== value)) {
+    const notices = {
+      zh: '写作期间修改了原稿或生成条件，AI 未替换原稿。',
+      en: 'Your text or instructions changed while generating. The original was kept.',
+      ru: 'Текст или задание изменились во время генерации. Оригинал сохранён.'
+    };
+    toast(notices[state.settings.lang] || notices.zh, 'warn', 6000);
+    return false;
+  }
+  task.ed.value = candidate;
+  if (task.kind === 'paper') { updatePaperCounts(); schedulePaperSave(); }
+  else { updateCounts(); scheduleSave(); }
+  return true;
+}
 function renderGenStages(note) {
   const gs = state.genState;
   const box = $('#gen-stages');
@@ -2896,10 +4491,12 @@ function renderGenStages(note) {
   }).join('');
   $('#gp-note').textContent = note || '';
 }
-async function genSetStage(idx, note) {
+async function genSetStage(task, idx, note) {
+  generationGuard(task);
   state.genState.stageIdx = idx;
   renderGenStages(note);
-  await new Promise(r => setTimeout(r, 400));
+  await generationDelay(400, task.opts.signal);
+  generationGuard(task);
 }
 function hideGenProgress() {
   $('#gen-progress').hidden = true;
@@ -2933,7 +4530,7 @@ async function aiCallRetry(messages, opts, stageNote) {
           ? (isQuota ? '免费额度限流' : '服务繁忙') + '，' + Math.round(waitMs / 1000) + ' 秒后自动重试…'
           : (isQuota ? 'Quota limited' : 'Service busy') + ', retrying in ' + Math.round(waitMs / 1000) + 's…';
         renderGenStages((stageNote || '') + '（' + waitTxt + '）');
-        await new Promise(r => setTimeout(r, waitMs));
+        await generationDelay(waitMs, opts?.signal);
         continue;
       }
       throw e;
@@ -2954,19 +4551,17 @@ function narrativeHint(n) {
   else hint += '输出要求：规范、标准、结构清晰。';
   return hint;
 }
-async function genDraft(outline, planCtx) {
+async function genDraft(outline, planCtx, task) {
   const n = curNovel();
   const nar = narrativeHint(n);
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
     { role: 'user', content: planCtx + '\n\n【本章大纲】\n' + outline + (nar ? '\n\n' + nar : '') + '\n\n请为本章拟写细纲，只输出：\n【核心】一句话概括本章\n【情节节点】3-6 条\n【开头钩子】1-2 句。不要写正文。' }
   ];
-  const res = await aiCallRetry(messages, { stream: true }, t('gp.draft'));
-  let acc = '';
-  for await (const chunk of aiStream(res)) acc += chunk;
-  return (acc || '').trim();
+  const res = await aiCallRetry(messages, task.opts, t('gp.draft'));
+  return (await collectGeneration(res, task)).trim();
 }
-async function genStreamIntoEditor(outline, plan, planCtx) {
+async function generateChapterCandidate(outline, plan, planCtx, task) {
   const n = curNovel();
   const nar = narrativeHint(n);
   const tier = PLAN_LEVEL[effectivePlan()] || 0;
@@ -2975,17 +4570,8 @@ async function genStreamIntoEditor(outline, plan, planCtx) {
     { role: 'system', content: SYSTEM_PROMPT },
     { role: 'user', content: planCtx + '\n\n【本章大纲】\n' + outline + (nar ? '\n\n' + nar : '') + '\n\n【细纲】\n' + plan + '\n\n请根据以上内容撰写本章正文。要求：像人类作家一样写作（句式长短交错、对话自然、细节具体），篇幅目标约 ' + lenHint + '（内容完整、起承转合自然，不注水凑字数），直接输出正文，不要标题、不要解释。' }
   ];
-  const res = await aiCallRetry(messages, { stream: true }, t('gp.write'));
-  const ed = $('#editor');
-  let acc = '';
-  for await (const chunk of aiStream(res)) {
-    acc += chunk;
-    ed.value = acc;
-    ed.scrollTop = ed.scrollHeight;
-    updateCounts();
-  }
-  if (!acc.trim()) throw new Error('empty');
-  return acc;
+  const res = await aiCallRetry(messages, task.opts, t('gp.write'));
+  return collectGeneration(res, task, true);
 }
 
 /* ---------------- 质量自检循环（写完先自查，有问题重写，不合格不输出） ---------------- */
@@ -2999,26 +4585,21 @@ const NOVEL_CHECK_CRITERIA = [
 ].join('\n');
 const PAPER_CHECK_CRITERIA = [
   '1. 学术规范、语言严谨，结构完整（引言-论述-结论-参考文献）',
-  '2. 正文引用处 [n] 标注与文末参考文献一一对应，无凭空引用',
-  '3. 参考文献格式标准，每条均含网页链接，未编造文献',
+  '2. 如有引用，正文 [n] 标注应与程序附上的文末条目一一对应；没有证据时允许不引用并标明待核实，不虚构引文',
+  '3. 不把候选书目信息当成已阅读全文，不虚构页码、引语、数据或文献',
   '4. 只使用规范文字与标点，无表情符号或特殊字符',
   '5. 论点清晰、论证充分，无逻辑漏洞，内容完整',
   '6. 字数达标，无注水或明显截断'
 ].join('\n');
-async function aiCollectText(res) {
-  let acc = '';
-  for await (const chunk of aiStream(res)) acc += chunk;
-  return acc;
-}
-async function runQualityCheck(kind, text, refCtx) {
+async function runQualityCheck(kind, text, refCtx, task) {
   const criteria = kind === 'paper' ? PAPER_CHECK_CRITERIA : NOVEL_CHECK_CRITERIA;
   const what = kind === 'paper' ? '论文' : '小说章节';
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
     { role: 'user', content: `你是严格的质量审核员。请逐条检查以下${what}是否达标。\n【审核标准】\n${criteria}\n${refCtx ? '【创作要求参考】\n' + refCtx.slice(0, 1500) + '\n' : ''}【待审文本】\n${text.slice(0, 6000)}\n\n只输出一行 JSON（不要其他任何内容）：{"ok":true,"issues":"通过"} 或 {"ok":false,"issues":"问题简述（简短）"}` }
   ];
-  const res = await aiCallRetry(messages, { stream: true }, t('gp.check'));
-  const out = (await aiCollectText(res)).trim();
+  const res = await aiCallRetry(messages, task.opts, t('gp.check'));
+  const out = (await collectGeneration(res, task)).trim();
   const m = out.match(/\{[\s\S]*\}/);
   if (m) {
     try {
@@ -3026,138 +4607,69 @@ async function runQualityCheck(kind, text, refCtx) {
       return { ok: j.ok === true || j.ok === 'true', issues: String(j.issues || '') };
     } catch (e) { }
   }
-  const low = out.toLowerCase();
-  if (/(通过|pass|ok|达标|无问题)/.test(low)) return { ok: true, issues: '' };
   return { ok: false, issues: out.slice(0, 160) || '未达标' };
 }
-async function qualityLoopNovel(outline, plan, planCtx) {
-  const tier = PLAN_LEVEL[effectivePlan()] || 0;
-  const maxRewrites = tier >= 2 ? 2 : 1;
-  const ed = $('#editor');
+async function reviewedCandidate(task, write, refCtx) {
+  const paper = task.kind === 'paper';
+  const maxRewrites = (PLAN_LEVEL[effectivePlan()] || 0) >= 2 ? 2 : 1;
   for (let i = 0; i <= maxRewrites; i++) {
-    await genSetStage(4, '');
-    const r = await runQualityCheck('novel', ed.value, planCtx);
-    if (r.ok) {
-      renderGenStages('✓ ' + t('gp.pass'));
-      await new Promise(r2 => setTimeout(r2, 600));
-      return true;
-    }
+    await genSetStage(task, paper ? 2 : 3, '');
+    const candidate = await write();
+    await genSetStage(task, paper ? 3 : 4, '');
+    const result = await runQualityCheck(task.kind, candidate, refCtx, task);
+    if (result.ok) return candidate;
     if (i < maxRewrites) {
-      renderGenStages(t('gp.rewrite') + ' (' + (i + 1) + '/' + maxRewrites + ')：' + (r.issues || '').slice(0, 60));
-      await new Promise(r2 => setTimeout(r2, 800));
-      await genSetStage(3, '');
-      await genStreamIntoEditor(outline, plan, planCtx);
-      updateCounts(); scheduleSave();
-      continue;
+      renderGenStages(t('gp.rewrite') + ' (' + (i + 1) + '/' + maxRewrites + ')：' + result.issues.slice(0, 60));
+      await generationDelay(800, task.opts.signal);
     }
-    ed.value = '';
-    scheduleSave(); updateCounts();
-    toast(t('gp.failCheck'), 'warn', 6000);
-    return false;
   }
-  return false;
-}
-async function qualityLoopPaper(topic, draft, refsText, lenHint, L) {
-  const tier = PLAN_LEVEL[effectivePlan()] || 0;
-  const maxRewrites = tier >= 2 ? 2 : 1;
-  const ed = $('#paper-editor');
-  const refCtx = `论文主题：${topic}\n可引用文献：\n${refsText}`;
-  for (let i = 0; i <= maxRewrites; i++) {
-    await genSetStage(3, '');
-    const r = await runQualityCheck('paper', ed.value, refCtx);
-    if (r.ok) {
-      renderGenStages('✓ ' + t('gp.pass'));
-      await new Promise(r2 => setTimeout(r2, 600));
-      return true;
-    }
-    if (i < maxRewrites) {
-      renderGenStages(t('gp.rewrite') + ' (' + (i + 1) + '/' + maxRewrites + ')：' + (r.issues || '').slice(0, 60));
-      await new Promise(r2 => setTimeout(r2, 800));
-      await genSetStage(2, '');
-      await paperStream(topic, draft, refsText, lenHint, ed, L);
-      updatePaperCounts(); schedulePaperSave();
-      continue;
-    }
-    ed.value = '';
-    schedulePaperSave(); updatePaperCounts();
-    toast(t('gp.failCheck'), 'warn', 6000);
-    return false;
-  }
-  return false;
+  toast(t('gp.failCheck'), 'warn', 6000);
+  return null;
 }
 async function generateChapter() {
   const c = curChapter();
-  if (!c) return toast(t('co.needChapter'), 'warn');
-  const outline = $('#chapter-outline').value.trim();
-  if (!outline) { toast(t('co.needOutline'), 'warn'); $('#chapter-outline').focus(); return; }
+  if (!c || state.board !== 'novel') return toast(t('co.needChapter'), 'warn');
+  const outlineEl = $('#chapter-outline'), ed = $('#editor');
+  const outline = outlineEl.value.trim();
+  if (!outline) {
+    toast(t('co.needOutline'), 'warn');
+    if (typeof setMobileBrief === 'function') setMobileBrief('novel', true);
+    outlineEl.focus();
+    return;
+  }
   if (state.genState.running) return;
-  if (state.aiStreaming) { toast(t('toast.aiBusy'), 'warn'); return; }
-  const p = activeProvider();
-  if (!p) { toast(t('toast.noAI'), 'warn'); openAISettings(); return; }
-  const ed = $('#editor');
-  if (ed.value.trim() && !await confirmDialog(t('co.confirmOverwrite'))) return;
-  await flushSave();
-  // 首次联网生成告知：会把哪些写作内容发送给 AI
-  try {
-    if (localStorage.getItem('nebula-ai-notice') !== '1') {
-      if (!await confirmDialog(t('ai.firstNotice'))) return;
-      localStorage.setItem('nebula-ai-notice', '1');
-    }
-  } catch (e) { }
+  if (state.aiStreaming) return toast(t('toast.aiBusy'), 'warn');
+  if (!activeProvider()) { toast(t('toast.noAI'), 'warn'); openAISettings(); return; }
+  const before = ed.value;
+  if (before.trim() && !await confirmDialog(t('co.confirmOverwrite'))) return;
+  if (state.genState.running || state.aiStreaming || state.board !== 'novel' || curChapter() !== c ||
+      ed.value !== before || outlineEl.value.trim() !== outline) return;
   const n = curNovel();
-  const planCtx = buildContext(false) || '（无上下文）';
-  state.genState.running = true;
-  state.genState.abort = new AbortController();
-  state.aiAbort = state.genState.abort;
-  state.genState.genKind = 'novel';
-  showGenProgress();
+  const task = beginGeneration('novel', c, ed, [outlineEl], n?.lang);
   try {
-    // 阶段1：搜索作家
-    await genSetStage(0, '');
+    await flushSave();
+    await genSetStage(task, 0, '');
     const refs = novelRefAuthors(n);
-    const pending = refs.filter(id => {
+    for (const id of refs) {
+      generationGuard(task);
       const a = findAuthor(id);
-      return a && !a.custom && !(state.wikiCache[id] && state.wikiCache[id].text);
-    });
-    for (let i = 0; i < pending.length; i++) {
-      const a = findAuthor(pending[i]);
-      renderGenStages(t('learn.fetching', { name: a ? a.name : '' }));
-      try { await wikiLearn(pending[i]); } catch (e) { }
+      if (!a || a.custom || (state.wikiCache[id] && state.wikiCache[id].text)) continue;
+      renderGenStages(t('learn.fetching', { name: a.name }));
+      try { await wikiLearn(id, task.opts.signal); } catch (e) { generationGuard(task); }
     }
-    // 阶段2：学习作家文风
-    const refNames = refs.map(id => { const a = findAuthor(id); return a ? a.name : ''; }).filter(Boolean).join('、');
-    await genSetStage(1, refNames || '');
-    // 阶段3：拟写正文
-    await genSetStage(2, '');
-    const plan = await genDraft(outline, planCtx);
-    if (!plan) throw new Error('draft-empty');
+    await genSetStage(task, 1, refs.map(id => findAuthor(id)?.name).filter(Boolean).join('、'));
+    const planCtx = buildContext(false) || '（无上下文）';
+    await genSetStage(task, 2, '');
+    const plan = await genDraft(outline, planCtx, task);
     renderGenStages(plan.slice(0, 140));
-    await new Promise(r => setTimeout(r, 500));
-    // 阶段4：输出正文
-    await genSetStage(3, '');
-    await genStreamIntoEditor(outline, plan, planCtx);
-    updateCounts(); scheduleSave();
-    // 自检循环：有问题重写，不合格不输出
-    const ok = await qualityLoopNovel(outline, plan, planCtx);
-    if (!ok) {
-      state.genState.running = false;
-      state.aiAbort = null;
-      hideGenProgress();
-      return;
-    }
-    state.genState.running = false;
-    state.aiAbort = null;
-    renderGenStages('');
-    $('#gp-title').textContent = '✓ ' + t('gp.title');
-    toast(t('co.done'), 'ok', 4000);
-    setTimeout(hideGenProgress, 2200);
+    await generationDelay(500, task.opts.signal);
+    const candidate = await reviewedCandidate(task, () => generateChapterCandidate(outline, plan, planCtx, task), planCtx);
+    if (candidate && applyGeneratedDraft(task, candidate)) toast(t('co.done'), 'ok', 4000);
   } catch (e) {
-    const aborted = e && e.name === 'AbortError';
-    state.genState.running = false;
-    state.aiAbort = null;
-    hideGenProgress();
-    if (aborted) toast(t('co.cancelled'));
+    if (e?.name === 'AbortError') toast(t('co.cancelled'));
     else toast(humanizeAIError(e), 'err', 6000);
+  } finally {
+    finishGeneration(task);
   }
 }
 function cancelGen() { if (state.genState.running && state.genState.abort) state.genState.abort.abort(); }
@@ -3256,9 +4768,6 @@ async function submitFeedback() {
 }
 
 /* ---------------- UI 偏好 ---------------- */
-function applyMobile() {
-  document.body.classList.toggle('mobile', innerWidth <= 700);
-}
 function applyUIPrefs() {
   document.documentElement.style.setProperty('--accent', ACCENTS[state.settings.accent] || ACCENTS.cyan);
   document.body.classList.toggle('no-ai', !state.settings.aiPanelOpen);
@@ -3270,6 +4779,7 @@ function applyUIPrefs() {
   $$('#modal-auth [data-authlang]').forEach(b => b.classList.toggle('on', b.dataset.authlang === state.settings.lang));
   // 动态背景
   bgMode = state.settings.bg || 'stars';
+  redrawStillBackground();
   const bgChips = { stars: 'set-bg-stars', solar: 'set-bg-solar', galaxy: 'set-bg-galaxy', planet: 'set-bg-planet' };
   Object.keys(bgChips).forEach(k => { const el = $('#' + bgChips[k]); if (el) el.classList.toggle('on', k === bgMode); });
   // 存储状态
@@ -3308,6 +4818,7 @@ function renderAll() {
 
 /* ---------------- 动态背景（星空 / 太阳系 / 银河系 / 星球 · 拟真渲染 · 全部自绘无版权素材） ---------------- */
 let bgCtx = null, bgW = 0, bgH = 0, bgMode = 'stars', bgEntities = [];
+let redrawStillBackground = () => {};
 let bgNebula = [], bgBand = [], bgSunspots = [], bgGalaxy = [], bgAsteroids = [];
 function bgResize() {
   const cv = $('#starfield');
@@ -3347,8 +4858,10 @@ function bgResize() {
 function bgInit() {
   bgCtx = $('#starfield').getContext('2d');
   bgResize();
-  addEventListener('resize', bgResize);
-  const step = ts => {
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const narrow = matchMedia('(max-width: 680px)');
+  let frame = 0, paintedAt = -Infinity;
+  const paint = ts => {
     if (!bgCtx) return;
     const ctx = bgCtx, W = bgW, H = bgH;
     ctx.clearRect(0, 0, W, H);
@@ -3362,12 +4875,32 @@ function bgInit() {
       try { drawStars(ctx, W, H, ts); } catch (e2) { }
     }
     try { drawVignette(ctx, W, H); } catch (e3) { }
-    requestAnimationFrame(step);
   };
-  requestAnimationFrame(step);
+  const step = ts => {
+    frame = 0;
+    if (document.hidden || motion.matches) return;
+    // The starfield is decorative. Draw at roughly 30 fps on phones.
+    if (!narrow.matches || ts - paintedAt >= 32) { paint(ts); paintedAt = ts; }
+    frame = requestAnimationFrame(step);
+  };
+  redrawStillBackground = () => {
+    if (motion.matches && !document.hidden) paint(0);
+  };
+  const restart = () => {
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    if (document.hidden) return;
+    if (motion.matches) paint(0);
+    else { paintedAt = -Infinity; frame = requestAnimationFrame(step); }
+  };
+  addEventListener('resize', () => { bgResize(); redrawStillBackground(); });
+  motion.addEventListener('change', restart);
+  document.addEventListener('visibilitychange', restart);
+  restart();
 }
 function setBgMode(m) {
   bgMode = m;
+  redrawStillBackground();
   state.settings.bg = m;
   saveSettings();
   const chips = { stars: 'set-bg-stars', solar: 'set-bg-solar', galaxy: 'set-bg-galaxy', planet: 'set-bg-planet' };
@@ -3668,7 +5201,7 @@ async function genTitles(kind) {
       { role: 'system', content: SYSTEM_PROMPT },
       { role: 'user', content: `请根据以下内容为这部${kind === 'novel' ? '小说' : '章节'}想出 8 个候选${target}：\n\n${base.slice(0, 1500)}\n\n要求：每个候选单独一行，格式「候选名（2-4字风格标签）」；风格多样、朗朗上口、有吸引力，不要重复，不要解释。` }
     ];
-    const res = await aiCallRetry(messages, { stream: true }, t('toast.titlesGen'));
+    const res = await aiCallRetry(messages, { stream: true, outputLang: kind === 'novel' ? state.styleDraft?.lang : curNovel()?.lang }, t('toast.titlesGen'));
     let acc = '';
     for await (const chunk of aiStream(res)) acc += chunk;
     const lines = acc.split('\n').map(s => s.trim())
@@ -4013,46 +5546,68 @@ async function logoutUser() {
   lastTrialState = false;
   renderAll();
   toast(t('auth.loggedOut'), 'ok');
-  switchAuthTab('login');
-  openModal('modal-auth');
+  closeModal('modal-settings');
+  continueLocalWriting();
 }
 
-/* ---------------- 新手引导（先教免费 AI，再谈付费） ---------------- */
-function guidedDone() { try { return localStorage.getItem('nebula-guided') === '1'; } catch (e) { return true; } }
-function openGuide() {
-  state.guideStep = 0;
-  renderGuideStep();
-  openModal('modal-guide');
+/* ---------------- 新手工作台 ---------------- */
+let localWriting = false;
+function guestStarted() {
+  if (localWriting) return true;
+  try { return storageAllowed() && localStorage.getItem('nebula-local-writing') === '1'; }
+  catch (e) { return false; }
 }
-function renderGuideStep() {
-  const total = 4;
-  $('#guide-dots').innerHTML = Array.from({ length: total }, (_, i) => `<div class="guide-dot ${i === state.guideStep ? 'on' : ''}"></div>`).join('');
-  $('#guide-step').innerHTML = t('guide.s' + (state.guideStep + 1));
-  $('#btn-guide-prev').style.visibility = state.guideStep === 0 ? 'hidden' : 'visible';
-  $('#btn-guide-next').textContent = state.guideStep === total - 1 ? t('guide.done') : t('guide.next');
+function continueLocalWriting() {
+  localWriting = true;
+  if (storageAllowed()) {
+    try { localStorage.setItem('nebula-local-writing', '1'); } catch (e) { }
+  }
+  switchAuthTab('login');
+  closeModal('modal-auth');
+  advanceOnboarding();
 }
-function guideNext() {
-  if (state.guideStep < 3) { state.guideStep++; renderGuideStep(); }
-  else {
-    closeModal('modal-guide');
-    try { localStorage.setItem('nebula-guided', '1'); } catch (e) { }
-    toast(t('toast.welcome'), 'info', 4000);
+let quickStarted = false;
+function guidedDone() {
+  if (quickStarted) return true;
+  try { return localStorage.getItem('nebula-guided') === '1'; } catch (e) { return false; }
+}
+function openQuickStart() {
+  if (!termsAccepted() || (!storageAllowed() && !state.settings.storageDenied) || (!state.currentUser && !guestStarted())) {
     advanceOnboarding();
+    return;
+  }
+  const dialog = $('#modal-quick-start');
+  if (!dialog.open) dialog.showModal();
+}
+async function runQuickStart(action) {
+  const dialog = $('#modal-quick-start');
+  if (!dialog.open) return;
+  dialog.close();
+  if (action === 'novel') {
+    await setBoard('novel');
+    if (state.board === 'novel') openNovelModal(null, { firstChapter: true });
+  } else if (action === 'paper') {
+    await setBoard('paper');
+    if (state.board === 'paper') await newPaper();
+  } else if (action === 'model') {
+    openAISettings();
+  } else if (action === 'backup') {
+    openModal('modal-backup');
   }
 }
-function guidePrev() { if (state.guideStep > 0) { state.guideStep--; renderGuideStep(); } }
-function guideSkip() {
-  closeModal('modal-guide');
+function finishQuickStart() {
+  if (guidedDone()) return;
+  quickStarted = true;
   try { localStorage.setItem('nebula-guided', '1'); } catch (e) { }
   advanceOnboarding();
 }
 
-/* ---------------- 首次使用流程（须知 → 存储 → 登录 → 引导） ---------------- */
+/* ---------------- 首次使用：须知 → 存储 → 本地写作或登录 → 工作台 ---------------- */
 function advanceOnboarding() {
   if (!termsAccepted()) { openTerms(); return; }
   if (!storageAllowed() && !state.settings.storageDenied) { openStorageAsk(); return; }
-  if (!state.currentUser) { switchAuthTab(state.authMode); openModal('modal-auth'); return; }
-  if (!guidedDone()) { openGuide(); return; }
+  if (!state.currentUser && !guestStarted()) { switchAuthTab(state.authMode); openModal('modal-auth'); return; }
+  if (!guidedDone()) { openQuickStart(); return; }
   if (!state.changelogChecked) {
     state.changelogChecked = true;
     setTimeout(checkChangelog, 900);
@@ -4099,6 +5654,7 @@ const PAPER_STAGES = ['gp.psearch', 'gp.pdraft', 'gp.pwrite', 'gp.check'];
 const currentPaper = () => state.papers.find(p => p.id === state.currentPaperId) || null;
 async function setBoard(b) {
   if (state.board === b) return;
+  cancelGen();
   flushSave();
   flushPaperSave();
   state.board = b;
@@ -4107,6 +5663,417 @@ async function setBoard(b) {
   loadChatFor(chatKey()).then(() => renderChat());
   renderAll();
 }
+function safeReferenceURL(value) {
+  try {
+    const parsed = new URL(value);
+    return ['https:', 'http:'].includes(parsed.protocol) && !parsed.username && !parsed.password ? parsed.href : '';
+  } catch (e) { return ''; }
+}
+function isPaperRefsHeading(raw) {
+  return /^(?:参考文献|引用文献|参考资料|references|bibliography|works cited|список литературы|библиография|литература|источники)\s*[:：]?$/iu.test(
+    raw.trim().replace(/^(?:#{1,6}\s*|[0-9]+[.)、]\s*)+/, '').replace(/^(?:\*\*|__)(.*?)(?:\*\*|__)$/, '$1').trim()
+  );
+}
+function splitPaperReferences(text) {
+  const lines = text.split(/\r?\n/);
+  const heading = lines.findIndex(isPaperRefsHeading);
+  return heading < 0 ? { body: text, entries: [] } : { body: lines.slice(0, heading).join('\n'), entries: lines.slice(heading + 1) };
+}
+function paperCitationNumbers(body) {
+  const groups = [...body.matchAll(/[\[［]\s*([0-9][0-9\s,，、;；–—-]*)[\]］]/gu)].map(m => m[1].trim());
+  return { used: [...new Set(groups.filter(n => /^\d+$/.test(n)).map(Number))].sort((a,b) => a-b),
+    malformed: groups.some(n => !/^\d+$/.test(n)) };
+}
+function auditPaperReferences(text) {
+  const { body, entries } = splitPaperReferences(text);
+  const { used, malformed } = paperCitationNumbers(body);
+  const listed = new Map(), duplicates = new Set();
+  for (const line of entries) {
+    const match = line.match(/^\s*(?:[-*]\s+)?(?:\[(\d+)\]|(\d+)[.)、])\s*(.*)$/);
+    if (!match) continue;
+    const number = Number(match[1] || match[2]);
+    if (listed.has(number)) duplicates.add(number);
+    const links = (match[3].match(/https?:\/\/[^\s<>]+/ig) || []).map(x => safeReferenceURL(x.replace(/[.,;，；。)]+$/, '')));
+    listed.set(number, links.some(Boolean));
+  }
+  return { used, listed, malformed, duplicate: [...duplicates],
+    missing: used.filter(n => !listed.has(n)),
+    uncited: [...listed.keys()].filter(n => !used.includes(n)),
+    noLink: [...listed.entries()].filter(([,valid]) => !valid).map(([n]) => n) };
+}
+function showPaperReferenceAudit() {
+  const report = $('#paper-guide-audit-result');
+  const content = currentPaper() ? $('#paper-editor').value.trim() : '';
+  if (!content) { report.textContent = t('p.auditEmpty'); return; }
+  const a = auditPaperReferences(content);
+  const parts = [t('p.auditTally', { n:a.used.length, m:a.listed.size })];
+  for (const [field, key] of [['missing','Missing'], ['uncited','Uncited'], ['duplicate','Duplicate'], ['noLink','NoLink']]) {
+    if (a[field].length) parts.push(t('p.audit' + key, { n: a[field].map(n => '[' + n + ']').join(' ') }));
+  }
+  if (a.malformed) parts.push(t('p.auditMalformed'));
+  if (!a.used.length && !a.listed.size) parts.push(t('p.auditNoRefs'));
+  else if (parts.length === 1) parts.push(t('p.auditPass'));
+  report.textContent = parts.join('\n');
+}
+const PAPER_TEMPLATES = {review:'p.tplReviewBody', compare:'p.tplCompareBody', empirical:'p.tplEmpiricalBody'};
+function openPaperGuide() {
+  const paper = currentPaper();
+  const occupied = !!$('#paper-topic').value.trim();
+  $('#paper-guide-template-note').textContent = t(!paper ? 'p.guideNeedPaper' : occupied ? 'p.guideFilled' : 'p.guideBlank');
+  $$('#modal-paper-guide [data-paper-template]').forEach(b => { b.disabled = !paper || occupied; });
+  $('#btn-paper-audit').disabled = !paper;
+  $('#paper-guide-audit-result').textContent = '';
+  openModal('modal-paper-guide');
+}
+function insertPaperTemplate(id) {
+  const topic = $('#paper-topic');
+  if (!currentPaper() || topic.value.trim() || !Object.hasOwn(PAPER_TEMPLATES,id)) return;
+  const keys = I18N[normalizeOutputLang($('#paper-lang').value, state.settings.lang)];
+  topic.value = keys[PAPER_TEMPLATES[id]];
+  schedulePaperSave();
+  closeModal('modal-paper-guide');
+  if (typeof setMobileBrief === 'function') setMobileBrief('paper', true);
+  topic.focus();
+}
+function paperSearchQuery(topic) {
+  const use = value => value.replace(/\s+/g, ' ').trim().slice(0, 180);
+  const question = topic.match(/^\s*(?:研究问题|research question|исследовательский вопрос)\s*[:：]([^\r\n]*)/im);
+  const keywords = topic.match(/^\s*(?:检索关键词|search keywords|ключевые слова)\s*[:：]([^\r\n]*)/im);
+  if (question && !question[1].trim()) return '';
+  return use(keywords?.[1] || question?.[1] || topic.trim().split(/\r?\n/,1)[0] || '');
+}
+/* ---------------- 本地文献笔记（仅在明确选择时加入 AI） ---------------- */
+const PAPER_SOURCE_LIMIT = 100;
+const PAPER_SOURCE_UI = {
+  zh: {
+    open: '文献笔记', purpose: '给这篇论文留一份资料清单。保存网址不代表已核实正文，读过原文后再勾选。',
+    record: '添加文献', editRecord:'编辑文献', title:'文献标题', url:'网址或 DOI', authors:'作者', venue:'出处 / 期刊', year:'年份', notes:'我的阅读笔记（可写页码和证据）', read:'我已读过原文', ai:'允许这条书目信息参与 AI 起草（不发送笔记）',
+    keep:'保存文献', reset:'清空表单', search:'检索公开书目信息', searchTip:'点击查找后，仅将这里的关键词发给数据库；查找结果不会自动加入笔记。', find:'查找候选', finding:'正在查找……', idle:'也可以直接粘贴网址和标题。', query:'检索关键词',
+    add:'加入笔记', added:'已收录', cite:'插入引用', edit:'编辑', remove:'移除',
+    local:'本篇文献', empty:'还没有资料。先添加一条，或用关键词检索。', found:'找到 {n} 条候选。请点开来源核对。',
+    noResults:'没有找到候选。试试缩短关键词，或手动添加链接。', bad:'请填写标题以及有效的 HTTP(S) 网址或 DOI。',
+    duplicate:'这个网址已在笔记里。可以编辑原来的条目。', max:'本篇最多保留 100 条文献。', saved:'已保存文献笔记。', fail:'没有写入文献笔记。请保留输入，稍后再试。',
+    readBadge:'原文已读（自标）', pendingBadge:'仅书目信息', aiBadge:'准许用于起草', inserted:'已插入 {ref}，并保留正文与已有书目。', noCite:'当前正在生成，或原稿已切换。请回到本篇后重试。', close:'关闭文献笔记',
+    removePrompt:'只移除笔记里的条目。已插入正文的引用和书目保持原样。是否移除？'
+  },
+  en: {
+    open:'Source notebook', purpose:'Keep a reading list for this paper. A saved link does not verify the text. Mark it read only after checking the original.',
+    record:'Add a source', editRecord:'Edit source', title:'Source title', url:'URL or DOI', authors:'Authors', venue:'Publication / journal', year:'Year', notes:'Private reading notes (evidence and page numbers)', read:'I have read the original', ai:'Allow AI drafting to use this bibliography entry (no private notes)',
+    keep:'Save source', reset:'Clear form', search:'Search public bibliographic databases', searchTip:'Only these keywords are sent when you search. Candidates are not added automatically.', find:'Find candidates', finding:'Searching…', idle:'You can also paste a title and link.', query:'Search keywords',
+    add:'Add to notebook', added:'In notebook', cite:'Insert citation', edit:'Edit', remove:'Remove',
+    local:'Sources for this paper', empty:'No sources yet. Add a link or search by keyword.', found:'{n} candidates found. Open each source to check it.',
+    noResults:'No candidates found. Try fewer words or add a link by hand.', bad:'Enter a title and a valid HTTP(S) address or DOI.',
+    duplicate:'This URL is already in the notebook. Edit the existing entry instead.', max:'This paper can keep up to 100 sources.', saved:'Source notebook saved.', fail:'The notebook was not saved. Keep your input and try again.',
+    readBadge:'Original read (self-marked)', pendingBadge:'Bibliographic metadata only', aiBadge:'Allowed in AI drafts', inserted:'Inserted {ref}. The original text and existing bibliography remain.', noCite:'Generation is running or the paper changed. Return to this paper and retry.', close:'Close source notebook',
+    removePrompt:'Only remove the notebook entry? The citations and bibliography already in your draft will stay.'
+  },
+  ru: {
+    open:'Заметки об источниках', purpose:'Ведите список литературы для этой статьи. Наличие ссылки не подтверждает содержание. Отмечайте источник после чтения оригинала.',
+    record:'Добавить источник', editRecord:'Изменить источник', title:'Название источника', url:'Ссылка или DOI', authors:'Авторы', venue:'Издание / журнал', year:'Год', notes:'Личные заметки (доказательства, страницы)', read:'Оригинал прочитан', ai:'Разрешить ИИ использовать библиографию (личные заметки не отправляются)',
+    keep:'Сохранить источник', reset:'Очистить форму', search:'Поиск в открытых библиографических базах', searchTip:'При поиске отправляются только ключевые слова. Результаты не добавляются автоматически.', find:'Найти источники', finding:'Идёт поиск…', idle:'Можно вставить ссылку и название вручную.', query:'Ключевые слова',
+    add:'Добавить в заметки', added:'Уже в заметках', cite:'Вставить ссылку', edit:'Изменить', remove:'Убрать',
+    local:'Источники статьи', empty:'Источников пока нет. Добавьте ссылку или выполните поиск.', found:'Найдено источников: {n}. Откройте и проверьте оригинал.',
+    noResults:'Ничего не найдено. Упростите запрос или добавьте ссылку вручную.', bad:'Введите название и действительную ссылку HTTP(S) или DOI.',
+    duplicate:'Ссылка уже добавлена. Можно изменить существующую запись.', max:'К статье можно сохранить до 100 источников.', saved:'Заметки сохранены.', fail:'Не удалось сохранить заметки. Сохраните введённое и повторите попытку.',
+    readBadge:'Оригинал прочитан (вручную)', pendingBadge:'Только библиографические данные', aiBadge:'Разрешён для черновиков ИИ', inserted:'Вставлено {ref}. Исходный текст и существующий список сохранены.', noCite:'Идёт генерация или выбрана другая статья. Вернитесь и повторите.', close:'Закрыть заметки об источниках',
+    removePrompt:'Удалить только запись из заметок? Ссылки и список литературы в самой статье сохранятся.'
+  }
+};
+const paperSourceUI = () => PAPER_SOURCE_UI[state.settings.lang] || PAPER_SOURCE_UI.zh;
+let notebookSession = null;
+function paperSourceURL(input) {
+  if (typeof input !== 'string') return '';
+  const raw = input.trim().replace(/^doi\s*:\s*/i, '');
+  if (!raw || raw.length > 600) return '';
+  const url = safeReferenceURL(/^10\.\d{4,9}\/[^\s<>?#]+$/u.test(raw) ? 'https://doi.org/' + raw : raw);
+  return url && url.length <= 850 ? url : '';
+}
+function normalizePaperSource(source, id = uid()) {
+  if (!source || typeof source !== 'object') return null;
+  const clean = (key, max, multi = false) => {
+    const value = typeof source[key] === 'string' ? source[key].trim() : '';
+    return (multi ? value : value.replace(/\s+/gu, ' ')).slice(0, max);
+  };
+  const title = clean('title', 180), url = paperSourceURL(source.url);
+  if (!title || !url) return null;
+  return { id, title, url, authors:clean('authors',160), venue:clean('venue',140), year:clean('year',12),
+    notes:clean('notes',1600,true), read:source.read === true, ai:source.ai === true };
+}
+function paperSources(record) {
+  return Array.isArray(record?.sources) ? record.sources : [];
+}
+function combinePaperSources(selected, candidates, count) {
+  const seen = new Set(), refs = [];
+  for (const source of [...selected, ...candidates]) {
+    const url = paperSourceURL(source?.url);
+    if (!url || !source.title || seen.has(url)) continue;
+    seen.add(url);
+    refs.push({ url, title: source.title, authors: source.authors, year: source.year, venue:source.venue });
+    if (refs.length >= count) break;
+  }
+  return refs;
+}
+function citationLineNumber(line) {
+  return Number(line.match(/^\s*(?:[-*]\s+)?(?:\[(\d+)\]|(\d+)[.)、])\s*/u)?.slice(1).find(Boolean) || 0);
+}
+function sourceURLs(line) {
+  return (line.match(/https?:\/\/[^\s<>]+/giu) || []).map(x => paperSourceURL(x.replace(/[.,;，；。]+$/u, ''))).filter(Boolean);
+}
+function makePaperCitation(text, cursor, source, L) {
+  const url = paperSourceURL(source.url);
+  if (!url) return null;
+  const lines = text.split('\n');
+  const heading = lines.findIndex(isPaperRefsHeading);
+  const refLines = heading < 0 ? [] : lines.slice(heading + 1);
+  const used = new Set(paperCitationNumbers(heading < 0 ? text : lines.slice(0, heading).join('\n')).used);
+  const counts = new Map();
+  for (const line of refLines) {
+    const number = citationLineNumber(line);
+    if (number > 0) { counts.set(number, (counts.get(number) || 0) + 1); used.add(number); }
+  }
+  let n = refLines.map(line => [citationLineNumber(line), sourceURLs(line)])
+    .find(([num, urls]) => num > 0 && counts.get(num) === 1 && urls.includes(url))?.[0];
+  const add = !n;
+  if (add) {
+    n = 1;
+    while (used.has(n)) n++;
+  }
+  const mark = '[' + n + ']';
+  const bodyEnd = heading < 0 ? text.length : lines.slice(0, heading).join('\n').trimEnd().length;
+  const offset = clamp(Number.isInteger(cursor) ? cursor : bodyEnd, 0, bodyEnd);
+  const beforeHeadingAtStart = heading === 0 ? '\n\n' : '';
+  let draft = text.slice(0, offset) + mark + beforeHeadingAtStart + text.slice(offset);
+  if (add) {
+    const entry = [
+      mark + ' ' + [source.authors, source.title, source.venue, source.year].filter(Boolean).join('. ') + '.',
+      L.linkLabel + ': ' + url
+    ].join(' ');
+    const tail = draft.endsWith('\n') ? '' : '\n';
+    draft += heading < 0 ? tail + '\n' + L.refsTitle + '\n' + entry : tail + entry;
+  }
+  return { value:draft, mark, cursor:offset + mark.length, added:add };
+}
+async function mutatePaperSources(record, fn) {
+  const apply = latest => {
+    if (!latest) throw new Error('paper-not-found');
+    return { ...latest, sources:fn(paperSources(latest)) };
+  };
+  if (state.settings.storageDenied) return apply(record).sources;
+  if (dbMode === 'idb') return new Promise((resolve, reject) => {
+    const tr = db.transaction(STORE.papers, 'readwrite');
+    const store = tr.objectStore(STORE.papers);
+    const read = store.get(record.id);
+    let error, checked;
+    read.onsuccess = () => {
+      try { checked = apply(read.result); store.put(checked); }
+      catch (e) { error = e; tr.abort(); }
+    };
+    tr.oncomplete = () => resolve(checked.sources);
+    tr.onabort = () => reject(error || tr.error || new Error('source notebook aborted'));
+  });
+  if (!navigator.locks) throw new Error('No safe local storage lock');
+  return navigator.locks.request(lsKey(STORE.papers), () => {
+    const records = JSON.parse(localStorage.getItem(lsKey(STORE.papers)) || '{}');
+    const checked = apply(records[record.id]);
+    records[record.id] = checked;
+    localStorage.setItem(lsKey(STORE.papers), JSON.stringify(records));
+    lsMem[STORE.papers] = records;
+    return checked.sources;
+  });
+}
+function renderPaperSourcesButton(record) {
+  const button = $('#btn-paper-sources');
+  if (!button) return;
+  const n = paperSources(record).length;
+  button.textContent = t('refs.open') + (n ? ' · ' + n : '');
+}
+const SOURCE_LABELS = {
+  'paper-source-heading':'open','paper-source-intro':'purpose','paper-source-form-title':'record',
+  'paper-source-tab-library':'local','paper-source-tab-form':'record',
+  'paper-source-title-label':'title','paper-source-url-label':'url','paper-source-authors-label':'authors','paper-source-venue-label':'venue',
+  'paper-source-year-label':'year','paper-source-notes-label':'notes','paper-source-read-label':'read','paper-source-ai-label':'ai',
+  'paper-source-submit':'keep','paper-source-reset':'reset','paper-source-search-title':'search',
+  'paper-source-search-tip':'searchTip','paper-source-search-submit':'find','paper-source-list-title':'local'
+};
+function applyPaperSourceLabels() {
+  const copy = paperSourceUI();
+  Object.entries(SOURCE_LABELS).forEach(([id, key]) => { $('#' + id).textContent = copy[key]; });
+  $('#paper-source-query').setAttribute('aria-label', copy.query);
+  $('#paper-source-query').placeholder = copy.query;
+  $('#paper-source-close').setAttribute('aria-label', copy.close);
+}
+function setPaperNotebookView(view) {
+  const modal = $('#modal-paper-sources');
+  modal.dataset.view = view === 'form' ? 'form' : 'library';
+  $('#paper-source-tab-library').setAttribute('aria-pressed', String(modal.dataset.view === 'library'));
+  $('#paper-source-tab-form').setAttribute('aria-pressed', String(modal.dataset.view === 'form'));
+}
+function resetPaperSourceForm() {
+  if (notebookSession?.busy) return;
+  $('#paper-source-form').reset();
+  if (notebookSession) notebookSession.editId = null;
+  $('#paper-source-form-title').textContent = paperSourceUI().record;
+  $('#paper-source-form-status').textContent = '';
+}
+function sourceCards(record) {
+  const copy = paperSourceUI();
+  const entries = paperSources(record);
+  const cards = (records, candidate) => records.map((row,i) => {
+    const isSaved = candidate && entries.some(v => v.url === row.url);
+    const action = (name, label, disabled = false) => '<button type="button" class="btn mini" data-source-action="' + name +
+      '" data-index="' + i + '"' + (disabled ? ' disabled' : '') + '>' + esc(label) + '</button>';
+    const metadata = [row.authors,row.venue,row.year].filter(Boolean).join(' · ');
+    const url = paperSourceURL(row.url);
+    return '<article class="source-note-card"><div class="source-note-card-main"><strong>' + esc(row.title) + '</strong>' +
+      (metadata ? '<div class="source-note-meta">' + esc(metadata) + '</div>' : '') +
+      (url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(url) + '</a>' : '') +
+      (row.notes ? '<p class="source-note-private">' + esc(row.notes) + '</p>' : '') + '</div>' +
+      '<div class="source-note-badges"><span class="meta-chip">' + esc(row.read ? copy.readBadge : copy.pendingBadge) + '</span>' +
+      (row.ai ? '<span class="meta-chip">' + esc(copy.aiBadge) + '</span>' : '') + '</div><div class="source-note-actions">' +
+      (candidate ? action('add', isSaved ? copy.added : copy.add, isSaved) :
+        action('cite',copy.cite) + action('edit',copy.edit) + action('remove',copy.remove)) + '</div></article>';
+  }).join('');
+  $('#paper-source-list').innerHTML = cards(entries,false) || '<p class="empty-hint">' + esc(copy.empty) + '</p>';
+  $('#paper-source-results').innerHTML = cards(notebookSession?.candidates || [],true);
+  renderPaperSourcesButton(record);
+}
+function openPaperNotebook() {
+  const paper = currentPaper();
+  if (!paper || state.board !== 'paper' || state.genState.running) return toast(paperSourceUI().noCite,'warn');
+  if ($('#modal-paper-sources').open) return;
+  const cursor = $('#paper-editor').selectionEnd;
+  notebookSession = { id:paper.id, editId:null, cursor, busy:false, search:null, candidates:[] };
+  applyPaperSourceLabels();
+  resetPaperSourceForm();
+  $('#paper-source-query').value = paperSearchQuery($('#paper-topic').value) || '';
+  $('#paper-source-search-status').textContent = paperSourceUI().idle;
+  sourceCards(paper);
+  const hasSources = paperSources(paper).length > 0;
+  setPaperNotebookView(hasSources ? 'library' : 'form');
+  $('#modal-paper-sources').showModal();
+  if (hasSources && window.matchMedia('(max-width:680px)').matches) $('#paper-source-tab-library').focus();
+  else $('#paper-source-title').focus();
+}
+function endPaperNotebook() {
+  if ($('#modal-paper-sources').open) return;
+  notebookSession?.search?.abort();
+  notebookSession = null;
+}
+function closePaperNotebook(event) {
+  if (event?.type === 'cancel') event.preventDefault();
+  if ($('#modal-paper-sources').open) $('#modal-paper-sources').close();
+  endPaperNotebook();
+}
+function sourceEditorRow(source) {
+  const F = ['title','url','authors','venue','year','notes'];
+  for (const f of F) $('#paper-source-' + f).value = source[f] || '';
+  for (const f of ['read','ai']) $('#paper-source-' + f).checked = source[f] === true;
+  setPaperNotebookView('form');
+  $('#paper-source-form-title').textContent = paperSourceUI().editRecord;
+  $('#paper-source-form-status').textContent = '';
+  $('#paper-source-title').focus();
+}
+async function commitSourceChange(session, record, action) {
+  if (session.busy) return false;
+  const status = $('#paper-source-form-status');
+  const copy = paperSourceUI();
+  session.busy = true;
+  $('#paper-source-submit').disabled = true;
+  try {
+    record.sources = await mutatePaperSources(record, action);
+    if (notebookSession === session && currentPaper()?.id === record.id) {
+      sourceCards(record);
+      status.textContent = copy.saved;
+    }
+    if (state.settings.storageDenied) toast(draftNotice('memory'),'warn');
+    return true;
+  } catch (err) {
+    if (notebookSession === session) status.textContent = ({duplicate:copy.duplicate,max:copy.max})[err.message] || copy.fail;
+    toast(({duplicate:copy.duplicate,max:copy.max})[err.message] || copy.fail,'warn');
+    return false;
+  } finally {
+    session.busy = false;
+    $('#paper-source-submit').disabled = !!notebookSession?.busy;
+  }
+}
+function setNotebookSource(list, entry, editingId) {
+  if (list.some(x => x.url === entry.url && x.id !== editingId)) throw new Error('duplicate');
+  if (!editingId && list.length >= PAPER_SOURCE_LIMIT) throw new Error('max');
+  if (editingId && !list.some(x => x.id === editingId)) throw new Error('missing');
+  return editingId ? list.map(x => x.id === editingId ? entry : x) : [...list, entry];
+}
+async function savePaperSource(event) {
+  event.preventDefault();
+  const session = notebookSession, record = currentPaper();
+  if (!session || !record || record.id !== session.id || session.busy) return;
+  const raw = {};
+  for (const f of ['title','url','authors','venue','year','notes']) raw[f] = $('#paper-source-' + f).value;
+  for (const f of ['read','ai']) raw[f] = $('#paper-source-' + f).checked;
+  const editingId = session.editId;
+  const entry = normalizePaperSource(raw, editingId || uid());
+  if (!entry) { $('#paper-source-form-status').textContent = paperSourceUI().bad; return; }
+  if (await commitSourceChange(session,record,list => setNotebookSource(list,entry,editingId)) && notebookSession === session) {
+    resetPaperSourceForm();
+    $('#paper-source-form-status').textContent = paperSourceUI().saved;
+  }
+}
+async function handlePaperSource(event) {
+  const button = event.target.closest('[data-source-action]');
+  const session = notebookSession, record = currentPaper();
+  if (!button || !session || !record || record.id !== session.id || session.busy) return;
+  const i = Number(button.dataset.index), action = button.dataset.sourceAction;
+  const source = (action === 'add' ? session.candidates : paperSources(record))[i];
+  if (!source) return;
+  if (action === 'cite') {
+    if (state.genState.running || state.board !== 'paper') return toast(paperSourceUI().noCite,'warn');
+    const ed = $('#paper-editor');
+    const change = makePaperCitation(ed.value,session.cursor,source,paperLang($('#paper-lang').value));
+    if (!change) return;
+    ed.value = change.value;
+    closePaperNotebook();
+    ed.focus();
+    ed.setSelectionRange(change.cursor,change.cursor);
+    schedulePaperSave(); updatePaperCounts();
+    toast(paperSourceUI().inserted.replace('{ref}',change.mark),'ok');
+  } else if (action === 'edit') {
+    session.editId = source.id;
+    sourceEditorRow(source);
+  } else if (action === 'remove') {
+    // The native dialog is already modal, so ask inline instead of stacking a competing overlay.
+    if (button.dataset.armed !== 'yes') {
+      button.dataset.armed = 'yes';
+      $('#paper-source-form-status').textContent = paperSourceUI().removePrompt;
+      button.textContent = '✓ ' + paperSourceUI().remove;
+      return;
+    }
+    if (await commitSourceChange(session,record,list => list.filter(row => row.id !== source.id)) && notebookSession === session && session.editId === source.id) resetPaperSourceForm();
+  } else if (action === 'add') {
+    const entry = normalizePaperSource(source);
+    if (entry) await commitSourceChange(session,record,list => setNotebookSource(list,entry,null));
+  }
+}
+async function searchPaperSources(event) {
+  event.preventDefault();
+  const session = notebookSession, record = currentPaper();
+  const query = $('#paper-source-query').value.trim().slice(0,180);
+  if (!session || !record || record.id !== session.id || !query) return;
+  session.search?.abort();
+  const abort = new AbortController();
+  const status = $('#paper-source-search-status');
+  const copy = paperSourceUI();
+  session.search = abort;
+  status.textContent = copy.finding;
+  try {
+    const candidates = await fetchRefs(query,8,abort.signal);
+    if (notebookSession !== session || session.search !== abort || abort.signal.aborted) return;
+    session.candidates = candidates.map(r => normalizePaperSource(r)).filter(Boolean);
+    status.textContent = session.candidates.length ? copy.found.replace('{n}',session.candidates.length) : copy.noResults;
+    sourceCards(record);
+  } catch (e) {
+    if (notebookSession === session && session.search === abort && !abort.signal.aborted) status.textContent = copy.noResults;
+  }
+}
+
 function renderPaperPanel() {
   const list = [...state.papers].sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
   $('#panel-title').textContent = t('p.list');
@@ -4124,20 +6091,27 @@ function renderPaperPanel() {
   </div>`).join('') || '<div class="empty-hint">' + t('p.empty') + '</div>';
 }
 async function newPaper() {
+  cancelGen();
+  await flushPaperSave();
+  if (state.board !== 'paper') return;
   const p = {
     id: uid(), title: '', topic: '', content: '', status: 'draft',
     outLang: ['zh', 'en', 'ru'].includes(state.settings.lang) ? state.settings.lang : 'zh',
     wordCount: 0, createdAt: now(), updatedAt: now()
   };
+  try { await dbPut(STORE.papers, p); }
+  catch (error) { toast(draftNotice('failed'), 'err'); return; }
+  if (state.board !== 'paper') { state.papers.push(p); return; }
   state.papers.push(p);
   state.currentPaperId = p.id;
   loadChatFor('paper-' + p.id).then(() => renderChat());
   renderAll();
-  dbPut(STORE.papers, p);
+  if (typeof setMobileBrief === 'function') setMobileBrief('paper', true);
   $('#paper-topic').focus();
 }
 function selectPaper(id) {
-  if (state.genState.running && state.genState.abort) state.genState.abort.abort();
+  if (id === state.currentPaperId) return;
+  cancelGen();
   flushPaperSave();
   state.currentPaperId = id;
   loadChatFor('paper-' + id);
@@ -4147,6 +6121,7 @@ async function delPaper(id) {
   if (!await confirmDialog(t('confirm.delChapter'))) return;
   const i = state.papers.findIndex(p => p.id === id);
   if (i < 0) return;
+  if (state.currentPaperId === id) cancelGen();
   await dbDel(STORE.papers, id);
   await dbDel(STORE.chats, 'paper-' + id);
   state.papers.splice(i, 1);
@@ -4161,19 +6136,25 @@ async function delPaper(id) {
 function renderPaperEditor() {
   const p = currentPaper();
   const tEl = $('#paper-title'), st = $('#paper-status'), tp = $('#paper-topic'), ed = $('#paper-editor');
+  $('#btn-paper-history').disabled = !p;
+  $('#btn-paper-sources').disabled = !p;
+  renderPaperSourcesButton(p);
   if (!p) {
     tEl.value = ''; st.value = 'draft'; tp.value = ''; ed.value = '';
     updatePaperCounts(); setPaperSaveState(null);
     return;
   }
-  if (document.activeElement !== tEl) tEl.value = p.title || '';
-  if (document.activeElement !== tp) tp.value = p.topic || '';
-  if (document.activeElement !== ed) ed.value = p.content || '';
-  st.value = p.status || 'draft';
-  $('#paper-lang').value = p.outLang || state.settings.lang || 'zh';
+  const pending = pendingDrafts.get(recoveryId(STORE.papers, p.id));
+  const shown = pending ? { ...p, ...pending.delta } : p;
+  if (document.activeElement !== tEl) tEl.value = shown.title || '';
+  if (document.activeElement !== tp) tp.value = shown.topic || '';
+  if (document.activeElement !== ed) ed.value = shown.content || '';
+  st.value = shown.status || 'draft';
+  $('#paper-lang').value = normalizeOutputLang(shown.outLang, state.settings.lang);
   ed.style.fontSize = state.settings.fontSize + 'px';
   updatePaperCounts();
-  setPaperSaveState(true);
+  if (pending) state.paperDirty = true;
+  setPaperSaveState(!state.paperDirty);
 }
 function updatePaperCounts() {
   const txt = $('#paper-editor').value;
@@ -4199,56 +6180,19 @@ function schedulePaperSave() {
 async function flushPaperSave() {
   clearTimeout(state.paperSaveTimer);
   if (state.paperDirty) await savePaper(false);
+  else await draftWrites.get(currentPaper());
 }
 async function savePaper(manual) {
   const p = currentPaper();
   if (!p) { state.paperDirty = false; return; }
-  const key = paperMirrorKey(p.id);
-  const ext = docMirror[key];
-  const myRev = p.rev || 0;
-  if (ext && (ext.rev || 0) > myRev && ext.content !== undefined) {
-    const draft = {
-      id: uid(), title: ($('#paper-title').value.trim() || p.title || t('novel.pending')) + t('doc.conflictSuffix'),
-      topic: $('#paper-topic').value, content: $('#paper-editor').value,
-      status: p.status, outLang: p.outLang, wordCount: countWords($('#paper-editor').value),
-      rev: 1, createdAt: now(), updatedAt: now()
-    };
-    await dbPut(STORE.papers, draft);
-    state.papers.push(draft);
-    p.title = ext.title !== undefined ? ext.title : p.title;
-    p.topic = ext.topic !== undefined ? ext.topic : p.topic;
-    p.content = ext.content;
-    p.rev = ext.rev;
-    p.updatedAt = now();
-    state.paperDirty = false;
-    await dbPut(STORE.papers, p);
-    loadedRevs[key] = p.rev;
-    $('#paper-editor').value = p.content;
-    $('#paper-title').value = p.title;
-    $('#paper-topic').value = p.topic;
-    updatePaperCounts();
-    setPaperSaveState(true);
-    toast(t('doc.conflict'), 'warn', 8000);
-    renderAll();
-    return;
-  }
-  p.title = $('#paper-title').value.trim();
-  p.topic = $('#paper-topic').value;
-  p.content = $('#paper-editor').value;
-  p.status = $('#paper-status').value;
-  p.outLang = $('#paper-lang').value || p.outLang || 'zh';
-  p.wordCount = countWords(p.content);
-  p.rev = (p.rev || 0) + 1;
-  p.updatedAt = now();
+  clearTimeout(state.paperSaveTimer);
+  if (!state.paperDirty) return draftWrites.get(p);
+  const content = $('#paper-editor').value;
+  const delta = { title: $('#paper-title').value.trim(), topic: $('#paper-topic').value,
+    content, status: $('#paper-status').value, outLang: normalizeOutputLang($('#paper-lang').value, p.outLang),
+    wordCount: countWords(content) };
   state.paperDirty = false;
-  await dbPut(STORE.papers, p);
-  docMirror[key] = { rev: p.rev, title: p.title, topic: p.topic, content: p.content, t: Date.now() };
-  saveDocMirror();
-  loadedRevs[key] = p.rev;
-  setPaperSaveState(true);
-  if (manual) toast(t('toast.paperSaved'), 'ok');
-  renderTop();
-  if (state.board === 'paper') renderPanel();
+  await persistDraft(STORE.papers, p, delta, manual);
 }
 /* 联网检索文献（Crossref + Semantic Scholar + 维基百科 三源并行 · 结果缓存提速） */
 const REF_CACHE_KEY = 'nebula-ref-cache';
@@ -4256,21 +6200,23 @@ let refCache = {};
 function loadRefCache() { try { refCache = JSON.parse(localStorage.getItem(REF_CACHE_KEY) || '{}'); } catch (e) { refCache = {}; } }
 function saveRefCache() { try { localStorage.setItem(REF_CACHE_KEY, JSON.stringify(refCache)); } catch (e) { } }
 function refTopicKey(topic) { return (topic || '').trim().toLowerCase().slice(0, 60); }
-async function fetchRefs(topic, count) {
+async function fetchRefs(topic, count, signal) {
   const key = refTopicKey(topic);
-  if (refCache[key] && (Date.now() - refCache[key].t < 86400000) && refCache[key].refs.length) return refCache[key].refs;
+  if (refCache[key] && (Date.now() - refCache[key].t < 86400000) && refCache[key].refs.length) {
+    return refCache[key].refs.filter(ref => ref && ref.title && safeReferenceURL(ref.url)).slice(0, count + 2);
+  }
   const refs = [];
   const seen = new Set();
   const push = r => {
-    const k = ((r.url || '') + '|' + (r.title || '')).toLowerCase();
-    if (!k || seen.has(k)) return;
-    seen.add(k);
-    refs.push(r);
+    const url = safeReferenceURL(r.url);
+    if (!url || !r.title || seen.has(url)) return;
+    seen.add(url);
+    refs.push({ ...r, url });
   };
   const jobs = [
     (async () => {
       try {
-        const r = await fetch('https://api.crossref.org/works?query=' + encodeURIComponent(topic) + '&rows=' + (count + 4) + '&select=title,author,URL,DOI,issued,container-title', { signal: AbortSignal.timeout(9000) });
+        const r = await fetch('https://api.crossref.org/works?query=' + encodeURIComponent(topic) + '&rows=' + (count + 4) + '&select=title,author,URL,DOI,issued,container-title', { signal: generationTimeout(9000, signal) });
         if (!r.ok) return;
         const j = await r.json();
         for (const it of (j.message.items || [])) {
@@ -4285,7 +6231,7 @@ async function fetchRefs(topic, count) {
     })(),
     (async () => {
       try {
-        const r = await fetch('https://api.semanticscholar.org/graph/v1/paper/search?query=' + encodeURIComponent(topic) + '&fields=title,authors,year,url,venue&limit=' + (count + 4), { signal: AbortSignal.timeout(9000) });
+        const r = await fetch('https://api.semanticscholar.org/graph/v1/paper/search?query=' + encodeURIComponent(topic) + '&fields=title,authors,year,url,venue&limit=' + (count + 4), { signal: generationTimeout(9000, signal) });
         if (!r.ok) return;
         const j = await r.json();
         for (const it of (j.data || [])) {
@@ -4298,7 +6244,7 @@ async function fetchRefs(topic, count) {
     })(),
     (async () => {
       try {
-        const r = await fetch('https://zh.wikipedia.org/w/api.php?action=opensearch&search=' + encodeURIComponent(topic.slice(0, 30)) + '&limit=4&format=json&origin=*', { signal: AbortSignal.timeout(8000) });
+        const r = await fetch('https://zh.wikipedia.org/w/api.php?action=opensearch&search=' + encodeURIComponent(topic.slice(0, 30)) + '&limit=4&format=json&origin=*', { signal: generationTimeout(8000, signal) });
         if (!r.ok) return;
         const j = await r.json();
         const titles = j[1] || [], urls = j[3] || [];
@@ -4315,128 +6261,100 @@ async function fetchRefs(topic, count) {
   }
   return out;
 }
-function paperLang() {
-  const p = currentPaper();
-  const L = (p && p.outLang) || state.settings.lang;
+function paperLang(lang = currentPaper()?.outLang) {
+  const L = normalizeOutputLang(lang, state.settings.lang);
   const MAP = {
     zh: { write: '请用中文撰写整篇论文', fallback: '在线检索受限，参考文献待补充', linkLabel: '链接', dateLabel: '检索于', noRefs: '在线检索受限，参考文献待补充', refsTitle: '参考文献' },
     en: { write: '请用英文撰写整篇论文', fallback: 'Online search was limited; the reference list is to be supplemented.', linkLabel: 'Link', dateLabel: 'retrieved on', noRefs: 'Online search was limited; references to be supplemented.', refsTitle: 'References' },
     ru: { write: 'Пишите всю статью на русском языке', fallback: 'Онлайн-поиск был ограничен; список литературы будет дополнен.', linkLabel: 'Ссылка', dateLabel: 'дата обращения', noRefs: 'Онлайн-поиск ограничен; список литературы будет дополнен.', refsTitle: 'Список литературы' },
-    ja: { write: '論文全体を日本語で執筆してください', fallback: 'オンライン検索が制限されたため、参考文献は後日補足します。', linkLabel: 'リンク', dateLabel: '参照日', noRefs: 'オンライン検索が制限されたため、参考文献は後日補足します。', refsTitle: '参考文献' },
-    fr: { write: 'Rédigez tout l\'article en français', fallback: 'Recherche en ligne limitée ; la liste des références sera complétée.', linkLabel: 'Lien', dateLabel: 'consulté le', noRefs: 'Recherche en ligne limitée ; références à compléter.', refsTitle: 'Références' },
-    de: { write: 'Schreiben Sie den gesamten Artikel auf Deutsch', fallback: 'Online-Recherche eingeschränkt; das Literaturverzeichnis wird ergänzt.', linkLabel: 'Link', dateLabel: 'abgerufen am', noRefs: 'Online-Recherche eingeschränkt; Literaturverzeichnis wird ergänzt.', refsTitle: 'Literaturverzeichnis' },
-    es: { write: 'Escriba todo el artículo en español', fallback: 'Búsqueda en línea limitada; la lista de referencias se completará.', linkLabel: 'Enlace', dateLabel: 'consultado el', noRefs: 'Búsqueda en línea limitada; referencias por completar.', refsTitle: 'Referencias' }
   };
   return MAP[L] || MAP.zh;
 }
-function refsToText(refs, L) {
-  if (!refs.length) return '';
-  const today = new Date().toISOString().slice(0, 10);
-  const lp = L || paperLang();
-  return refs.map((r, i) => {
-    const au = r.authors ? r.authors + '. ' : '';
-    const ven = r.venue || '';
-    const yr = r.year || '';
-    const isNet = !ven || ven === '维基百科';
-    const tag = isNet ? '[EB/OL]. ' : '[J]. ';
-    const source = isNet ? (ven ? ven + ', ' : '') + lp.dateLabel + ' ' + today + '. ' : (ven + (yr ? ', ' + yr : '') + '. ');
-    return `[${i + 1}] ${au}${r.title}${tag}${source}${lp.linkLabel}: ${r.url}`;
+function refsToText(refs, L, only = null) {
+  const line = value => String(value || '').replace(/\s+/g, ' ').trim();
+  return refs.map((ref, i) => ({ref, n:i + 1})).filter(({n}) => !only || only.includes(n)).map(({ref:r, n}) => {
+    return `[${n}] ${[line(r.authors), line(r.title), line(r.venue), line(r.year)].filter(Boolean).join('. ')}. ${L.linkLabel}: ${safeReferenceURL(r.url)}`;
   }).join('\n');
+}
+function buildPaperWithSources(raw, refs, L) {
+  const body = splitPaperReferences(raw).body.trim();
+  if (!body) return null;
+  const { used, malformed } = paperCitationNumbers(body);
+  if (malformed || used.some(n => n < 1 || !refs[n - 1] || !safeReferenceURL(refs[n - 1].url))
+      || /https?:\/\/|(?:\bdoi\s*:\s*)?\b10\.\d{4,9}\//i.test(body)) return null;
+  return used.length ? body + '\n\n' + L.refsTitle + '\n' + refsToText(refs, L, used) : body;
 }
 function cleanPaperText(s) {
   return s
     .replace(/[\u{1F000}-\u{1FAFF}\u{2190}-\u{21FF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{FFFD}]/gu, '')
     .replace(/[✦✧✩✪✫✬✭✮✯✰✱✲✳✴✵✶✷✸✹✺✻✼✽✾✿❀❁❂❃❄❅❆❇❈❉❊❋☀☁★☆♠♣♥♦]/g, '');
 }
-async function paperDraft(topic, refsText, lenHint, L) {
+async function paperDraft(topic, refsText, lenHint, L, task) {
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
     { role: 'user', content: `请为以下论文拟写提纲（${L.write}，只输出提纲，不写正文；不使用表情或特殊符号）：\n【论文主题/要求】\n${topic}\n【可引用文献】\n${refsText || '（无）'}\n\n输出：\n【标题建议】1 个\n【摘要要点】2-3 句\n【章节结构】引言 / 方法或论述 / 分析与讨论 / 结论，每节 1-2 句要点\n字数目标：${lenHint}` }
   ];
-  const res = await aiCallRetry(messages, { stream: true }, t('gp.pdraft'));
-  let acc = '';
-  for await (const chunk of aiStream(res)) acc += chunk;
-  return (acc || '').trim();
+  const res = await aiCallRetry(messages, task.opts, t('gp.pdraft'));
+  return (await collectGeneration(res, task)).trim();
 }
-async function paperStream(topic, draft, refsText, lenHint, ed, L) {
+async function generatePaperCandidate(topic, draft, refsText, lenHint, L, task, refs) {
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: `请根据以下内容撰写完整论文正文（${L.write}），要求：\n1. 学术规范、语言严谨；字数约 ${lenHint}。\n2. 正文引用处一律用 [n] 标注，且只能引用下方给定文献，不得编造文献。\n3. 文末必须附「${L.refsTitle}」列表，严格按最标准格式，每条必须附上检索到的网页链接：\n[编号] 作者. 标题[J]. 期刊/来源, 年份, 卷(期): 页码. ${L.linkLabel}: URL\n网络资料用 [EB/OL] 并注明检索日期与链接。\n（信息缺失的字段可省略，但链接不可省略，不得编造）\n4. 只使用规范文字与标点，不使用表情符号、特殊符号或装饰性字符。\n5. 若下方文献为空，文末注明「${L.noRefs}」，不要编造。\n6. 直接输出正文（含文末「${L.refsTitle}」列表），不要任何额外解释。\n\n【论文主题/要求】\n${topic}\n\n【提纲】\n${draft}\n\n【可引用文献】\n${refsText || '（无）'}` }
+    { role: 'user', content: `请根据以下内容撰写论文正文草稿（${L.write}），篇幅约 ${lenHint}。只输出正文，不要生成参考文献章节或链接。引用只可使用下方清单现有编号 [n]；多条写成 [1][2]，没有合适来源就不要加编号，并明确指出需要证据。清单只有书目信息，不要把它当成已阅读原文，不可虚构引语、页码、实证结果或来源。不要输出 DOI 或链接，系统会按正文实际用到的编号附上书目。
+\n【论文主题/要求】\n${topic}\n\n【提纲】\n${draft}\n\n【候选来源】\n${refsText || '（无；不得使用 [n]）'}` }
   ];
-  const res = await aiCallRetry(messages, { stream: true }, t('gp.pwrite'));
-  let acc = '';
-  for await (const chunk of aiStream(res)) {
-    acc += chunk;
-    ed.value = cleanPaperText(acc);
-    ed.scrollTop = ed.scrollHeight;
-    updatePaperCounts();
-  }
-  if (!acc.trim()) throw new Error('empty');
-  ed.value = cleanPaperText(acc);
-  return acc;
+  const res = await aiCallRetry(messages, task.opts, t('gp.pwrite'));
+  const candidate = cleanPaperText(await collectGeneration(res, task, true));
+  if (!candidate.trim()) throw new Error('empty');
+  const formatted = buildPaperWithSources(candidate, refs, L);
+  if (!formatted) throw new Error(t('p.refsInvalid'));
+  return formatted;
 }
 async function generatePaper() {
   const p = currentPaper();
-  if (!p) return toast(t('p.needOpen'), 'warn');
-  const topic = $('#paper-topic').value.trim();
-  if (!topic) { toast(t('p.needTopic'), 'warn'); $('#paper-topic').focus(); return; }
-  if (state.genState.running || state.aiStreaming) { toast(t('toast.aiBusy'), 'warn'); return; }
-  const prov = activeProvider();
-  if (!prov) { toast(t('toast.noAI'), 'warn'); openAISettings(); return; }
-  const ed = $('#paper-editor');
-  if (ed.value.trim() && !await confirmDialog(t('p.overwrite'))) return;
-  flushPaperSave();
-  // 首次联网生成告知：会把哪些写作内容发送给 AI
-  try {
-    if (localStorage.getItem('nebula-ai-notice') !== '1') {
-      if (!await confirmDialog(t('ai.firstNotice'))) return;
-      localStorage.setItem('nebula-ai-notice', '1');
-    }
-  } catch (e) { }
-  const premium = (PLAN_LEVEL[effectivePlan()] || 0);
+  if (!p || state.board !== 'paper') return toast(t('p.needOpen'), 'warn');
+  const topicEl = $('#paper-topic'), language = $('#paper-lang'), ed = $('#paper-editor');
+  const topic = topicEl.value.trim();
+  if (!topic) {
+    toast(t('p.needTopic'), 'warn');
+    if (typeof setMobileBrief === 'function') setMobileBrief('paper', true);
+    topicEl.focus();
+    return;
+  }
+  const query = paperSearchQuery(topic);
+  if (!query) { toast(t('p.topicRequired'),'warn'); topicEl.focus(); return; }
+  if (state.genState.running || state.aiStreaming) return toast(t('toast.aiBusy'), 'warn');
+  if (!activeProvider()) { toast(t('toast.noAI'), 'warn'); openAISettings(); return; }
+  const before = ed.value;
+  if (before.trim() && !await confirmDialog(t('p.overwrite'))) return;
+  if (state.genState.running || state.aiStreaming || state.board !== 'paper' || currentPaper() !== p ||
+      ed.value !== before || topicEl.value.trim() !== topic) return;
+  const task = beginGeneration('paper', p, ed, [topicEl, language], language.value || p.outLang);
+  const premium = PLAN_LEVEL[effectivePlan()] || 0;
   const refCount = premium >= 2 ? 15 : (premium === 1 ? 12 : 8);
   const lenHint = premium >= 2 ? '4000-5000 字' : (premium === 1 ? '3000-3500 字' : '1500-2000 字');
-  const L = paperLang();
-  state.genState.running = true;
-  state.genState.abort = new AbortController();
-  state.aiAbort = state.genState.abort;
-  state.genState.genKind = 'paper';
-  showGenProgress();
+  const L = paperLang(task.opts.outputLang);
   try {
-    await genSetStage(0, '');
-    const refs = await fetchRefs(topic, refCount);
+    await flushPaperSave();
+    await genSetStage(task, 0, '');
+    const selectedSources = paperSources(p).filter(source => source.ai);
+    const refs = combinePaperSources(selectedSources, await fetchRefs(query, refCount, task.opts.signal), refCount);
+    generationGuard(task);
     const refsText = refsToText(refs, L);
     renderGenStages(t('gp.refsFound', { n: refs.length }));
-    await new Promise(r2 => setTimeout(r2, 400));
-    await genSetStage(1, '');
-    const draft = await paperDraft(topic, refsText, lenHint, L);
-    if (!draft) throw new Error('draft-empty');
+    await generationDelay(400, task.opts.signal);
+    await genSetStage(task, 1, '');
+    const draft = await paperDraft(topic, refsText, lenHint, L, task);
     renderGenStages(draft.slice(0, 140));
-    await new Promise(r2 => setTimeout(r2, 400));
-    await genSetStage(2, '');
-    await paperStream(topic, draft, refsText, lenHint, ed, L);
-    updatePaperCounts(); schedulePaperSave();
-    // 自检循环：有问题重写，不合格不输出
-    const ok = await qualityLoopPaper(topic, draft, refsText, lenHint, L);
-    if (!ok) {
-      state.genState.running = false;
-      state.aiAbort = null;
-      hideGenProgress();
-      return;
-    }
-    state.genState.running = false;
-    state.aiAbort = null;
-    renderGenStages('');
-    $('#gp-title').textContent = '✓ ' + t('gp.title');
-    toast(t('p.done'), 'ok', 4000);
-    setTimeout(hideGenProgress, 2200);
+    await generationDelay(400, task.opts.signal);
+    const refCtx = '论文主题：' + topic + '\n可引用文献：\n' + refsText;
+    const candidate = await reviewedCandidate(task, () => generatePaperCandidate(topic, draft, refsText, lenHint, L, task, refs), refCtx);
+    if (candidate && applyGeneratedDraft(task, candidate)) toast(t('p.done'), 'ok', 4000);
   } catch (e) {
-    const aborted = e && e.name === 'AbortError';
-    state.genState.running = false;
-    state.aiAbort = null;
-    hideGenProgress();
-    if (aborted) toast(t('co.cancelled'));
+    if (e?.name === 'AbortError') toast(t('co.cancelled'));
     else toast(humanizeAIError(e), 'err', 6000);
+  } finally {
+    finishGeneration(task);
   }
 }
 function buildPaperContext() {
@@ -4472,6 +6390,7 @@ async function checkChangelog() {
       try { localStorage.setItem('nebula-seen-version', data.version); } catch (e) { }
       return;
     }
+    if ($('#modal-quick-start').open || $$('.modal-overlay:not([hidden])').length) return;
     $('#upd-version').textContent = data.version + (data.date ? ' · ' + data.date : '');
     lastChangelogVersion = data.version;
     const items = state.settings.lang === 'en' ? (data.itemsEn || data.items) : (state.settings.lang === 'ru' ? (data.itemsRu || data.items) : data.items);
@@ -4491,6 +6410,7 @@ function adjustFont(d) {
   if (v) v.textContent = state.settings.fontSize + 'px';
 }
 function setLang(l) {
+  l = normalizeOutputLang(l);
   if (state.settings.lang === l) return;
   state.settings.lang = l;
   saveSettings();
@@ -4523,7 +6443,9 @@ function openSettings() {
   const u = s.user || {};
   $('#set-profile-name').textContent = u.nickname || t('profile.default');
   $('#set-profile-avatar').innerHTML = u.avatarData ? '<img src="' + u.avatarData + '" alt="" />' : esc(AVATAR_PRESETS[u.avatarPreset || 0][0]);
-  $('#set-account-name').textContent = state.currentUser ? (state.currentUser + (trialActive() ? t('set.trialBadge') : '')) : '—';
+  $('#set-account-name').textContent = state.currentUser ? (state.currentUser + (trialActive() ? t('set.trialBadge') : '')) : t('quick.localAccount');
+  $('#set-login').hidden = !!state.currentUser;
+  $('#set-logout').hidden = !state.currentUser;
   $('#set-version').textContent = APP_VERSION;
   openModal('modal-settings');
 }
@@ -4554,14 +6476,6 @@ async function checkUpdate() {
 function bindEvents() {
   // 顶部
   $('#btn-novel-switch').addEventListener('click', () => { renderLibrary(); openModal('modal-library'); });
-  // 窄屏：面板抽屉与大纲折叠
-  $('#btn-panel-toggle').addEventListener('click', () => { document.body.classList.toggle('panel-open'); });
-  $('#btn-outline-toggle').addEventListener('click', () => { document.body.classList.toggle('outline-open'); });
-  document.addEventListener('click', e => {
-    if (document.body.classList.contains('panel-open') && !e.target.closest('#side-panel') && !e.target.closest('#btn-panel-toggle')) {
-      document.body.classList.remove('panel-open');
-    }
-  });
   $('#btn-settings').addEventListener('click', openSettings);
   $('#btn-vip').addEventListener('click', () => { renderVip(); openModal('modal-vip'); });
   $('#btn-profile').addEventListener('click', openProfile);
@@ -4569,6 +6483,27 @@ function bindEvents() {
   $('#board-novel').addEventListener('click', () => setBoard('novel'));
   $('#board-paper').addEventListener('click', () => setBoard('paper'));
   // 论文板块
+  $('#btn-paper-guide').addEventListener('click', openPaperGuide);
+  $('#btn-paper-sources').addEventListener('click', openPaperNotebook);
+  $('#paper-source-form').addEventListener('submit', savePaperSource);
+  $('#paper-source-reset').addEventListener('click', () => { resetPaperSourceForm(); $('#paper-source-title').focus(); });
+  $('#paper-source-list').addEventListener('click', handlePaperSource);
+  $('#paper-source-results').addEventListener('click', handlePaperSource);
+  $('#paper-source-search').addEventListener('submit', searchPaperSources);
+  $('#modal-paper-sources').addEventListener('cancel', closePaperNotebook);
+  $('#modal-paper-sources').addEventListener('close', endPaperNotebook);
+  $('#paper-source-close').addEventListener('click', closePaperNotebook);
+  $('#paper-source-tab-library').addEventListener('click', () => setPaperNotebookView('library'));
+  $('#paper-source-tab-form').addEventListener('click', () => setPaperNotebookView('form'));
+  $('#paper-source-open-notes').addEventListener('click', () => {
+    closeModal('modal-paper-guide');
+    openPaperNotebook();
+  });
+  $('#modal-paper-guide').addEventListener('click', e => {
+    const option = e.target.closest('[data-paper-template]');
+    if (option) insertPaperTemplate(option.dataset.paperTemplate);
+  });
+  $('#btn-paper-audit').addEventListener('click', showPaperReferenceAudit);
   $('#paper-title').addEventListener('input', schedulePaperSave);
   $('#paper-topic').addEventListener('input', schedulePaperSave);
   $('#paper-status').addEventListener('change', schedulePaperSave);
@@ -4583,8 +6518,32 @@ function bindEvents() {
   $('#main-nav').addEventListener('click', e => {
     const b = e.target.closest('.nav-item');
     if (!b) return;
+    const sameModule = state.module === b.dataset.module;
     state.module = b.dataset.module;
+    if (inMobileWorkspace()) setMobilePanel(!sameModule || !document.body.classList.contains('mobile-panel-open'));
     setNavActive(); renderPanel();
+  });
+  const mobileQuery = matchMedia('(max-width: 680px)');
+  mobileQuery.addEventListener('change', syncMobileWorkspace);
+  $('#btn-mobile-outline').addEventListener('click', e => setMobileBrief('novel', e.currentTarget.getAttribute('aria-expanded') !== 'true'));
+  $('#btn-mobile-topic').addEventListener('click', e => setMobileBrief('paper', e.currentTarget.getAttribute('aria-expanded') !== 'true'));
+  $('#btn-mobile-paper-list').addEventListener('click', e => setMobilePanel(e.currentTarget.getAttribute('aria-expanded') !== 'true'));
+  $('#btn-mobile-paper-ai').addEventListener('click', e => setMobileAI(e.currentTarget.getAttribute('aria-expanded') !== 'true'));
+  $('#btn-mobile-assistant').addEventListener('click', openAssistant);
+  bindMobileWritingKeys();
+  $('#btn-mobile-panel-close').addEventListener('click', () => {
+    setMobilePanel(false);
+    (state.board === 'paper' ? $('#btn-mobile-paper-list') : $('#main-nav .nav-item.active'))?.focus();
+  });
+  for (const id of ['board-novel', 'board-paper']) $('#' + id).addEventListener('click', () => {
+    if (inMobileWorkspace()) { setMobilePanel(false); setMobileAI(false, false); }
+  });
+  $('#panel-body').addEventListener('click', e => {
+    const action = e.target.closest('[data-act]')?.dataset.act;
+    if (inMobileWorkspace() && (action === 'open' || action === 'openpaper')) setMobilePanel(false);
+  });
+  $('#panel-actions').addEventListener('click', e => {
+    if (inMobileWorkspace() && e.target.closest('#act-new-paper,#act-new-chapter')) setMobilePanel(false);
   });
   // 面板
   $('#panel-body').addEventListener('click', onPanelClick);
@@ -4597,6 +6556,16 @@ function bindEvents() {
   $('#chapter-title').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('#editor').focus(); } });
   $('#chapter-status').addEventListener('change', scheduleSave);
   $('#btn-title-suggest').addEventListener('click', () => genTitles('chapter'));
+  $('#btn-chapter-history').addEventListener('click', () => openDraftHistory(false));
+  bindManuscriptSearch();
+  $('#btn-chapter-coach').addEventListener('click', openChapterCoach);
+  $('#set-install-app').addEventListener('click', openInstallApp);
+  $('#chapter-coach-example').addEventListener('change', updateCoachExample);
+  $('#modal-chapter-coach').addEventListener('input', syncCoachProgress);
+  $('#chapter-coach-add').addEventListener('click', applyChapterCoach);
+  $('#btn-paper-history').addEventListener('click', () => openDraftHistory(true));
+  $('#draft-history-list').addEventListener('change', previewDraftHistory);
+  $('#draft-history-restore').addEventListener('click', restoreDraftHistory);
   $('#btn-focus').addEventListener('click', () => toggleFocus());
   $('#btn-dict').addEventListener('click', () => openDict());
   // 智能起名（弹窗列表点击）
@@ -4621,10 +6590,20 @@ function bindEvents() {
     $('#' + id).addEventListener('keydown', e => { if (e.key === 'Enter') authSubmit(); });
   });
   $('#set-logout').addEventListener('click', logoutUser);
-  // 新手引导（先教免费 AI 配置，再谈付费）
-  $('#btn-guide-next').addEventListener('click', guideNext);
-  $('#btn-guide-prev').addEventListener('click', guidePrev);
-  $('#btn-guide-skip').addEventListener('click', guideSkip);
+  $('#set-login').addEventListener('click', () => {
+    closeModal('modal-settings');
+    switchAuthTab('login');
+    openModal('modal-auth');
+    $('#auth-user').focus();
+  });
+  $('#btn-auth-guest').addEventListener('click', continueLocalWriting);
+  $('#btn-quick-start').addEventListener('click', openQuickStart);
+  $('#btn-quick-close').addEventListener('click', () => $('#modal-quick-start').close());
+  $('#modal-quick-start').addEventListener('close', finishQuickStart);
+  $('#modal-quick-start').addEventListener('click', e => {
+    const card = e.target.closest('[data-quick-action]');
+    if (card) runQuickStart(card.dataset.quickAction).catch(() => toast(draftNotice('failed'), 'err'));
+  });
   // 更新弹窗
   $('#btn-upd-done').addEventListener('click', () => {
     closeModal('modal-update');
@@ -4703,8 +6682,8 @@ function bindEvents() {
   $('#set-lang-en').addEventListener('click', () => setLang('en'));
   $('#set-lang-ru').addEventListener('click', () => setLang('ru'));
   $('#set-profile-edit').addEventListener('click', openProfile);
-  $('#set-backup').addEventListener('click', () => openModal('modal-backup'));
-  $('#set-ai').addEventListener('click', openAISettings);
+  $('#set-backup').addEventListener('click', () => { closeModal('modal-settings'); openModal('modal-backup'); });
+  $('#set-ai').addEventListener('click', () => { closeModal('modal-settings'); openAISettings(); });
   $('#set-feedback').addEventListener('click', () => openModal('modal-feedback'));
   $('#set-terms').addEventListener('click', openTerms);
   $('#btn-check-update').addEventListener('click', checkUpdate);
@@ -4723,8 +6702,18 @@ function bindEvents() {
     }
   });
   // AI 面板
-  $('#btn-ai-toggle').addEventListener('click', () => { state.settings.aiPanelOpen = !state.settings.aiPanelOpen; saveSettings(); applyUIPrefs(); });
-  $('#btn-ai-close').addEventListener('click', () => { state.settings.aiPanelOpen = false; saveSettings(); applyUIPrefs(); });
+  $('#btn-ai-toggle').addEventListener('click', () => {
+    if (inMobileWorkspace()) { setMobileAI(!document.body.classList.contains('mobile-ai-open')); return; }
+    state.settings.aiPanelOpen = !state.settings.aiPanelOpen; saveSettings(); applyUIPrefs();
+  });
+  $('#btn-ai-close').addEventListener('click', () => {
+    if (inMobileWorkspace()) {
+      setMobileAI(false, false);
+      (state.board === 'paper' ? $('#btn-mobile-paper-ai') : $('#btn-ai-toggle'))?.focus();
+      return;
+    }
+    state.settings.aiPanelOpen = false; saveSettings(); applyUIPrefs();
+  });
   $('#btn-ai-config').addEventListener('click', openAISettings);
   $('#btn-ai-clear').addEventListener('click', () => { state.chatForNovel = []; saveChat(); renderChat(); toast(t('toast.chatClear')); });
   $('#btn-ai-send').addEventListener('click', () => {
@@ -4779,6 +6768,7 @@ function bindEvents() {
   });
   // 备份
   $('#btn-export-txt').addEventListener('click', exportTxt);
+  $('#btn-export-docx').addEventListener('click', exportWord);
   $('#btn-export-json').addEventListener('click', exportJson);
   $('#btn-import-json').addEventListener('click', () => $('#import-file').click());
   $('#import-file').addEventListener('change', e => { const f = e.target.files[0]; if (f) doImport(f); });
@@ -4816,23 +6806,27 @@ function bindEvents() {
     if (b) dictSearch(b.dataset.syn);
   });
   // AI 设置
-  $('#btn-add-provider').addEventListener('click', () => { state.provEditingId = null; fillProvForm(null); $('#prov-name').focus(); });
+  $('#btn-add-provider').addEventListener('click', () => openModelForm());
+  $('#model-add-local').addEventListener('click', () => openModelForm(null, true));
+  $('#model-use-default').addEventListener('click', useBuiltinProvider);
+  $('#model-test-active').addEventListener('click', () => testProvider(true));
+  $('#model-hide-form').addEventListener('click', () => { hideModelForm(); $('#btn-add-provider').focus(); });
   $('#provider-list').addEventListener('click', e => {
     const row = e.target.closest('.prov-row');
     if (!row) return;
-    state.provEditingId = row.dataset.id;
-    fillProvForm(state.settings.providers.find(p => p.id === row.dataset.id));
+    const provider = state.settings.providers.find(p => p.id === row.dataset.id);
+    if (!provider) return;
+    if (e.target.closest('[data-use-provider]')) {
+      useProvider(provider);
+      setModelStatus('model.switched', 'ok', {name: modelDisplayName(provider)});
+      $('#model-test-active').focus();
+    } else if (e.target.closest('[data-edit-provider]')) openModelForm(provider);
   });
   $('#preset-select').addEventListener('change', e => {
-    const p = PRESETS[Number(e.target.value)];
-    if (!p) return;
-    $('#prov-base').value = p.baseUrl;
-    $('#prov-path').value = p.path || '/chat/completions';
-    $('#prov-model').value = p.model;
-    if (!$('#prov-name').value) $('#prov-name').value = p.name;
+    if (e.target.value !== '') applyModelPreset(Number(e.target.value));
   });
   $('#btn-prov-save').addEventListener('click', saveProvider);
-  $('#btn-prov-test').addEventListener('click', testProvider);
+  $('#btn-prov-test').addEventListener('click', () => testProvider(false));
   $('#btn-prov-del').addEventListener('click', delProvider);
   // 笔记 / 角色
   $('#btn-note-save').addEventListener('click', saveNote);
@@ -4851,13 +6845,21 @@ function bindEvents() {
   document.addEventListener('click', e => {
     const c = e.target.closest('[data-close]');
     if (c) { closeModal(c.dataset.close); return; }
-    if (e.target.classList && e.target.classList.contains('modal-overlay')) e.target.hidden = true;
+    if (e.target.id === 'modal-confirm') { $('#btn-confirm-cancel').click(); return; }
+    if (e.target.classList && e.target.classList.contains('modal-overlay')) closeModal(e.target.id);
   });
   // 快捷键
   document.addEventListener('keydown', e => {
+    if (handleManagedModalKeys(e)) return;
+    if (e.key === 'Escape' && !$('#modal-confirm').hidden) {
+      e.preventDefault();
+      $('#btn-confirm-cancel').click();
+      return;
+    }
     if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
       e.preventDefault();
       if (document.activeElement && document.activeElement.id === 'ai-input') { const t2 = $('#ai-input').value.trim(); if (t2) { $('#ai-input').value = ''; sendAI(t2); } }
+      else if (state.board === 'paper') savePaper(true);
       else saveChapter(true);
     }
     if ((e.ctrlKey || e.metaKey) && (e.key === 'd' || e.key === 'D')) {
@@ -4867,17 +6869,15 @@ function bindEvents() {
     if (e.key === 'Escape' && document.body.classList.contains('focus-mode')) toggleFocus(false);
   });
   // 离开页面前保存
-  document.addEventListener('visibilitychange', () => { if (document.hidden) flushSave(); });
-  window.addEventListener('beforeunload', () => { flushSave(); saveSettings(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { flushSave(); flushPaperSave(); } });
+  window.addEventListener('pagehide', () => { flushSave(); flushPaperSave(); syncPendingDrafts(); });
 }
 
-/* ---------------- 预设下拉（按会员方案过滤） ---------------- */
+/* ---------------- 模型预设 ---------------- */
 function fillPresetSelect() {
   const sel = $('#preset-select');
   sel.innerHTML = '<option value="">— ' + t('aiset.preset') + ' —</option>';
-  const lvl = PLAN_LEVEL[effectivePlan()] || 0;
   PRESETS.forEach((p, i) => {
-    if ((PLAN_LEVEL[p.plan] || 0) > lvl) return;
     const o = document.createElement('option');
     o.value = String(i); o.textContent = p.name;
     sel.appendChild(o);
@@ -4887,10 +6887,10 @@ function fillPresetSelect() {
 /* ---------------- 启动 ---------------- */
 async function boot() {
   loadSettings();
+  state.board = state.settings.board === 'paper' ? 'paper' : 'novel';
   loadWikiCache();
   loadAccounts();
   loadRefCache();
-  loadDocMirror();
   // 首次使用自动配置免费免密钥模型（Pollinations AI），开箱即用
   if (!state.settings.providers.length) {
     state.settings.providers.push({
@@ -4902,27 +6902,18 @@ async function boot() {
   }
   fillPresetSelect();
   applyUIPrefs();
-  applyMobile();
-  addEventListener('resize', applyMobile);
   bgInit();
   bindEvents();
+  setupInstallApp();
+  if (typeof DraftReview !== 'undefined') DraftReview.install();
   await dbInit();
+  loadResumeIds();
+  await replayPendingDrafts();
   await loadAll();
   if (state.board === 'paper') await loadChatFor(chatKey());
-  // 记录各文档已加载的版本号（多标签页冲突检测用）
-  loadedRevs = {};
-  state.chapters.forEach(c => { loadedRevs[c.id] = c.rev || 0; });
-  state.papers.forEach(p => { loadedRevs[paperMirrorKey(p.id)] = p.rev || 0; });
-  // 跨标签页同步：其他标签页保存后同步镜像；本标签页回到前台时刷新
-  window.addEventListener('storage', e => { if (e.key === DOC_MIRROR_KEY) loadDocMirror(); });
-  window.addEventListener('focus', loadDocMirror);
   renderLibrary();
   renderAll();
-  if (!state.novels.length) {
-    openModal('modal-library');
-    toast(t('toast.welcome'), 'info', 7000);
-  }
-  // 首次使用流程：用户须知 → 存储授权 → 登录/注册 → 新手引导
+  // 首次使用只显示当前步骤，避免书库与须知、登录、工作台重叠。
   advanceOnboarding();
   window.__nebulaReady = true;
 }
