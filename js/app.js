@@ -169,7 +169,7 @@ const I18N = {
     'fb.title': '💬 意见反馈', 'fb.label': '问题或建议',
     'fb.ph': '请描述您遇到的问题或建议…', 'fb.hint': '我们会认真阅读每一条反馈。',
     'fb.send': '提交反馈', 'fb.thanks': '感谢您的反馈', 'fb.fail': '反馈提交失败，请稍后再试', 'fb.needMsg': '请先填写反馈内容',
-    'vip.title': '💎 会员中心', 'vip.notice': '试运营 · 不收费',
+    'vip.title': '💎 会员中心', 'vip.notice': '目前唯一付费内容：DeepSeek 月度会员（¥40/月）· 其余功能试运营期间免费',
     'vip.free': '免费体验版', 'vip.freePrice': '¥0 · 试运营', 'vip.currentBtn': '当前方案',
     'vip.f1': '内置免费 AI 模型', 'vip.f2': '全部创作功能', 'vip.f3': '数据本地保存',
     'vip.pro': '专业创作版', 'vip.proPrice': '¥0 · 试运营',
@@ -177,7 +177,7 @@ const I18N = {
     'vip.flag': '旗舰版', 'vip.flagPrice': '¥0 · 试运营',
     'vip.l1': '全部专业版权益', 'vip.l2': '优先接入新模型', 'vip.l3': '专属客服支持',
     'vip.btn': '暂未开放', 'vip.btnToast': '试运营期间不收费，敬请期待',
-    'vip.foot': '试运营期间所有方案均不收费，敬请期待正式上线。',
+    'vip.foot': '目前唯一付费内容：DeepSeek 月度会员（¥40/月）；其余功能在试运营期间免费。',
     'vip.deepseek': 'DeepSeek 月度会员', 'vip.deepseekPrice': '¥40 / 月',
     'vip.d1': 'DeepSeek 等优质大模型稳定接入（不占用免费额度）',
     'vip.d2': '更快响应 · 更长记忆（前 5 章）',
@@ -345,7 +345,7 @@ const I18N = {
     'auth.adminBadge': '管理员',
     'online.label': '在线',
     'set.adminBg': '👑 管理员专属背景', 'set.adminBgOn': '红灯车灯', 'set.adminBgOff': '普通版背景',
-    'admin.open': '👑 站长操作台', 'admin.openTitle': '站长操作台（站内直接管理用户）',
+    'admin.open': '👑 管理入口', 'admin.openTitle': '管理入口（站内直接管理用户、付款、私信）',
     'admin.title': '👑 站长操作台',
     'admin.total': '注册人数', 'admin.online': '在线人数', 'admin.payers': '充值人数', 'admin.net': '净收入（元）',
     'admin.searchPh': '搜索用户…', 'admin.refresh': '刷新', 'admin.fullConsole': '打开完整后台 ↗',
@@ -354,6 +354,13 @@ const I18N = {
     'admin.protected': '管理员账号受保护', 'admin.required': '需要创作者授权的管理员账号',
     'admin.loadFail': '操作台数据加载失败，请检查网络', 'admin.opFail': '操作失败，请重试',
     'admin.blockedOk': '该用户已被拉黑并强制下线', 'admin.unblocked': '已解除拉黑',
+    'admin.needServer': '完整管理功能需管理版服务器（node server.mjs）。您可点击右上「打开完整后台」或联系部署者。',
+    'admin.receiptTitle': '🧾 收退款登记（核对到账后填写）',
+    'admin.receiptKind': '类型', 'admin.receiptPayment': '收款', 'admin.receiptRefund': '退款',
+    'admin.receiptAmount': '金额（元）', 'admin.receiptRef': '交易编号', 'admin.receiptTime': '发生时间（可选，默认现在）',
+    'admin.receiptNote': '备注（可选）', 'admin.receiptSubmit': '登记',
+    'admin.receiptOk': '已登记；40 元收款自动开通 30 天 DeepSeek',
+    'admin.funcNote': '管理模块全部功能：① 统计概览 ② 待核对付款一键开通 ③ 收款流水 ④ 收退款登记 ⑤ 用户名单（搜索/拉黑/白名单/私信/邮箱） ⑥ 私信 ⑦ 完整后台',
     'auth.noQuestion': '该账户未设置密保问题，无法自助找回。请联系管理员重置密码。',
     'auth.badAnswer': '密保答案不正确', 'auth.resetOk': '密码已重置，请使用新密码登录',
     'auth.submitLogin': '登录', 'auth.submitRegister': '注册并开启体验',
@@ -361,12 +368,12 @@ const I18N = {
     'auth.errPass': '密码需 6-20 位，且必须同时包含英文字母和数字',
     'auth.errPass2': '两次输入的密码不一致',
     'auth.errLogin': '用户名或密码错误', 'auth.errExists': '该用户名已注册，请直接登录',
-    'auth.okRegister': '注册成功！已自动登录，1 天旗舰版体验已开启',
+    'auth.okRegister': '注册成功！已自动登录，1 天最高规格免费体验已开启（含 DeepSeek 等高级权益）',
     'auth.welcome': '欢迎回来，{u}',
-    'auth.trialBanner': '🎁 注册新账户即享 1 天旗舰版免费体验（最高规格待遇 · 不强制消费）',
+    'auth.trialBanner': '🎁 注册新账户即享 1 天最高规格免费体验（含 DeepSeek 等高级权益 · 不强制消费）',
     'auth.account': '登录账户', 'auth.logout': '退出登录',
     'auth.confirmLogout': '确定退出当前账户？作品数据仍保存在本机。', 'auth.loggedOut': '已退出登录',
-    'set.trialBadge': ' · 🎁 旗舰版体验中',
+    'set.trialBadge': ' · 🎁 最高规格体验中',
     'quick.title': '新手工作台',
     'quick.heading': '第一段，从这里写起。',
     'quick.intro': '不用写代码。可以自己写，也可以先选模型，再用 AI 协助。',
@@ -382,7 +389,7 @@ const I18N = {
     'quick.guest': '先本地写作',
     'quick.guestNote': '可以不注册。允许本地保存后，作品只留在当前浏览器。',
     'quick.localAccount': '本地写作（未登录）',
-    'vip.trialOn': '🎁 新用户专享：旗舰版体验中（最高规格待遇），剩余 {t}（不强制消费）',
+    'vip.trialOn': '🎁 新用户专享：最高规格免费体验中（含 DeepSeek 等高级权益），剩余 {t}（不强制消费）',
     'vip.trialEnd': '专业版体验已结束，感谢体验！会员中心可选方案（试运营免费）。',
     'set.creator': '创作者：小柚子', 'set.creatorNote': '本站由单人开发 · 不定期更新', 'set.tip': '☕ 请作者喝杯奶茶',
     'tip.title': '☕ 支持创作者', 'tip.note': '本站由小柚子单人开发，不定期更新。打赏全凭心意，不强制、纯自愿。',
@@ -514,7 +521,7 @@ const I18N = {
     'fb.title': '💬 Feedback', 'fb.label': 'Issue or suggestion',
     'fb.ph': 'Describe the issue or your suggestion…', 'fb.hint': 'We read every piece of feedback.',
     'fb.send': 'Submit', 'fb.thanks': 'Thank you for your feedback', 'fb.fail': 'Failed to submit, try again later', 'fb.needMsg': 'Please write something first',
-    'vip.title': '💎 Membership', 'vip.notice': 'Beta · Free',
+    'vip.title': '💎 Membership', 'vip.notice': 'Only paid item: DeepSeek Monthly (¥40/month) · everything else is free during beta',
     'vip.free': 'Free', 'vip.freePrice': '¥0 · beta', 'vip.currentBtn': 'Current plan',
     'vip.f1': 'Built-in free AI model', 'vip.f2': 'All creative features', 'vip.f3': 'Local data storage',
     'vip.pro': 'Pro', 'vip.proPrice': '¥0 · beta',
@@ -522,7 +529,7 @@ const I18N = {
     'vip.flag': 'Flagship', 'vip.flagPrice': '¥0 · beta',
     'vip.l1': 'All Pro benefits', 'vip.l2': 'Early access to new models', 'vip.l3': 'Dedicated support',
     'vip.btn': 'Coming soon', 'vip.btnToast': 'Free during beta — stay tuned',
-    'vip.foot': 'All plans are free during the beta period.',
+    'vip.foot': 'The only paid item is DeepSeek Monthly (¥40/month); everything else is free during beta.',
     'vip.deepseek': 'DeepSeek Monthly', 'vip.deepseekPrice': '¥40 / month',
     'vip.d1': 'Stable access to DeepSeek and other quality models (separate from the free quota)',
     'vip.d2': 'Faster responses · longer memory (up to 5 chapters)',
@@ -690,7 +697,7 @@ const I18N = {
     'auth.adminBadge': 'Admin',
     'online.label': 'online',
     'set.adminBg': '👑 Admin background', 'set.adminBgOn': 'Red lights', 'set.adminBgOff': 'Normal background',
-    'admin.open': '👑 Admin Console', 'admin.openTitle': 'Admin console (manage users right here)',
+    'admin.open': '👑 Admin Entry', 'admin.openTitle': 'Admin entry (manage users, payments and messages right here)',
     'admin.title': '👑 Admin Console',
     'admin.total': 'Sign-ups', 'admin.online': 'Online', 'admin.payers': 'Payers', 'admin.net': 'Net (CNY)',
     'admin.searchPh': 'Search users…', 'admin.refresh': 'Refresh', 'admin.fullConsole': 'Full console ↗',
@@ -699,6 +706,13 @@ const I18N = {
     'admin.protected': 'Admin accounts are protected', 'admin.required': 'A creator-authorized admin account is required',
     'admin.loadFail': 'Failed to load console data. Check your connection.', 'admin.opFail': 'Action failed. Please retry.',
     'admin.blockedOk': 'User blocked and signed out', 'admin.unblocked': 'User unblocked',
+    'admin.needServer': 'Full admin features require the managed server (node server.mjs). Open the full console or contact the operator.',
+    'admin.receiptTitle': '🧾 Record a receipt/refund (after verifying the transfer)',
+    'admin.receiptKind': 'Type', 'admin.receiptPayment': 'Payment', 'admin.receiptRefund': 'Refund',
+    'admin.receiptAmount': 'Amount (CNY)', 'admin.receiptRef': 'Reference', 'admin.receiptTime': 'Time (optional, defaults to now)',
+    'admin.receiptNote': 'Note (optional)', 'admin.receiptSubmit': 'Record',
+    'admin.receiptOk': 'Recorded; a ¥40 payment auto-activates 30 days of DeepSeek',
+    'admin.funcNote': 'Admin module functions: ① stats ② pending payments one-click activation ③ receipt history ④ record receipts/refunds ⑤ user list (search / block / allowlist / message / email) ⑥ private messages ⑦ full console',
     'auth.noQuestion': 'This account has no security question set, so self-service recovery is unavailable. Contact the operator.',
     'auth.badAnswer': 'Incorrect security answer', 'auth.resetOk': 'Password reset — sign in with the new password',
     'auth.submitLogin': 'Sign in', 'auth.submitRegister': 'Register & start trial',
@@ -706,12 +720,12 @@ const I18N = {
     'auth.errPass': 'Password must be 6-20 chars and contain both letters and digits',
     'auth.errPass2': 'The two passwords do not match',
     'auth.errLogin': 'Wrong username or password', 'auth.errExists': 'Username already registered — sign in instead',
-    'auth.okRegister': 'Registered! Signed in automatically — 1-day Flagship trial started',
+    'auth.okRegister': 'Registered! Signed in automatically — 1-day top-tier free trial (incl. DeepSeek) started',
     'auth.welcome': 'Welcome back, {u}',
-    'auth.trialBanner': '🎁 New accounts get a 1-day free Flagship trial (top-tier treatment · no purchase required)',
+    'auth.trialBanner': '🎁 New accounts get a 1-day top-tier free trial (incl. DeepSeek · no purchase required)',
     'auth.account': 'Account', 'auth.logout': 'Sign out',
     'auth.confirmLogout': 'Sign out of this account? Your works stay saved on this device.', 'auth.loggedOut': 'Signed out',
-    'set.trialBadge': ' · 🎁 Flagship trial',
+    'set.trialBadge': ' · 🎁 Top-tier trial',
     'quick.title': 'Quick Start',
     'quick.heading': 'Write your first paragraph.',
     'quick.intro': 'No code required. Write on your own or choose an AI model for help.',
@@ -727,7 +741,7 @@ const I18N = {
     'quick.guest': 'Write without an account',
     'quick.guestNote': 'Registration is optional. If you allow local storage, your work stays in this browser.',
     'quick.localAccount': 'Writing locally (signed out)',
-    'vip.trialOn': '🎁 New-user perk: Flagship trial (top-tier treatment) active, {t} left (no purchase required)',
+    'vip.trialOn': '🎁 New-user perk: top-tier free trial (incl. DeepSeek) active, {t} left (no purchase required)',
     'vip.trialEnd': 'Your Pro trial has ended — thanks for trying! Pick a plan in the Membership center (free during beta).',
     'set.creator': 'Creator: 小柚子', 'set.creatorNote': 'Solo developer · irregular updates', 'set.tip': '☕ Tip the creator',
     'tip.title': '☕ Support the Creator', 'tip.note': 'Made by 小柚子, a solo developer, with irregular updates. Tips are completely voluntary — no obligation.',
@@ -877,7 +891,7 @@ const I18N = {
     'fb.title': '💬 Обратная связь', 'fb.label': 'Проблема или пожелание',
     'fb.ph': 'Опишите проблему или предложение…', 'fb.hint': 'Мы читаем каждый отзыв.',
     'fb.send': 'Отправить', 'fb.thanks': 'Спасибо за отзыв', 'fb.fail': 'Не удалось отправить, попробуйте позже', 'fb.needMsg': 'Сначала напишите текст',
-    'vip.title': '💎 Членство', 'vip.notice': 'Бета · Бесплатно',
+    'vip.title': '💎 Членство', 'vip.notice': 'Единственное платное: DeepSeek ежемесячно (¥40/месяц) · остальное бесплатно во время беты',
     'vip.free': 'Бесплатный', 'vip.freePrice': '¥0 · бета', 'vip.freeBtn': 'Текущий план', 'vip.currentBtn': 'Текущий план',
     'vip.f1': 'Встроенная бесплатная ИИ-модель', 'vip.f2': 'Все функции творчества', 'vip.f3': 'Память 2 главы · локальное хранение',
     'vip.pro': 'Профессиональный', 'vip.proPrice': '¥0 · бета',
@@ -885,7 +899,7 @@ const I18N = {
     'vip.flag': 'Флагманский', 'vip.flagPrice': '¥0 · бета',
     'vip.l1': 'Все плюсы Про + топ-модели', 'vip.l2': 'Поиск ИИ-моделей по всему миру', 'vip.l3': 'Память до 10 глав · поддержка',
     'vip.btn': 'Скоро', 'vip.btnToast': 'Во время беты бесплатно',
-    'vip.foot': 'Во время беты все планы бесплатны.',
+    'vip.foot': 'Единственное платное — DeepSeek ежемесячно (¥40/месяц); остальное бесплатно во время беты.',
     'vip.deepseek': 'DeepSeek ежемесячно', 'vip.deepseekPrice': '¥40 / месяц',
     'vip.d1': 'Стабильный доступ к DeepSeek и другим качественным моделям (отдельно от бесплатной квоты)',
     'vip.d2': 'Быстрее ответы · длиннее память (до 5 глав)',
@@ -914,7 +928,7 @@ const I18N = {
     'vip.searchTitle': '🔍 Поиск ИИ-моделей по всему миру', 'vip.searchPh': 'Ключевое слово (deepseek / qwen / llama…)',
     'vip.searchBtn': 'Искать', 'vip.searching': 'Ищу модели…', 'vip.searchFail': 'Поиск не удался — попробуйте позже',
     'vip.searchEmpty': 'Модели не найдены', 'vip.copy': 'Копировать ID', 'vip.copied': 'ID скопирован',
-    'vip.trialOn': '🎁 Подарок новичку: Флагман-пробник (максимальный уровень), осталось {t} (покупка не требуется)',
+    'vip.trialOn': '🎁 Подарок новичку: бесплатный пробный период высшего уровня (включая DeepSeek), осталось {t} (покупка не требуется)',
     'vip.trialEnd': 'Пробный период Про завершён — спасибо! Выберите план в центре членства (во время беты бесплатно).',
     'btn.settings': '⚙ Настройки', 'btn.settingsTitle': 'Настройки',
     'set.title': '⚙ Настройки', 'set.ui': 'Интерфейс', 'set.font': 'Размер шрифта', 'set.layout': 'Макет',
@@ -930,7 +944,7 @@ const I18N = {
     'set.about': 'О версии', 'set.version': 'Текущая версия', 'set.check': 'Проверить обновления',
     'set.upToDate': 'У вас последняя версия ({v})', 'set.updateFound': 'Доступна версия {v} — нажмите Ctrl+F5',
     'set.updateFail': 'Проверка не удалась — проверьте сеть',
-    'set.trialBadge': ' · 🎁 Флагман-пробник',
+    'set.trialBadge': ' · 🎁 Пробный период',
     'set.creator': 'Автор: 小柚子 (Сяо Юцзы)', 'set.creatorNote': 'Сайт разработан одним человеком · обновления нерегулярны',
     'set.tip': '☕ Поддержать автора',
     'sp.pickTip': 'Кликните автора, чтобы выбрать его эталоном (повторный клик — отмена). «Изучить стили онлайн» загрузит материалы из Википедии. Не нашли любимого автора? Добавьте через поиск.',
@@ -1030,7 +1044,7 @@ const I18N = {
     'auth.adminBadge': 'Админ',
     'online.label': 'онлайн',
     'set.adminBg': '👑 Фон администратора', 'set.adminBgOn': 'Красные фары', 'set.adminBgOff': 'Обычный фон',
-    'admin.open': '👑 Панель администратора', 'admin.openTitle': 'Панель администратора (управление прямо на сайте)',
+    'admin.open': '👑 Вход администратора', 'admin.openTitle': 'Вход администратора (пользователи, платежи и сообщения прямо на сайте)',
     'admin.title': '👑 Панель администратора',
     'admin.total': 'Регистраций', 'admin.online': 'Онлайн', 'admin.payers': 'Плательщики', 'admin.net': 'Чистый (CNY)',
     'admin.searchPh': 'Поиск пользователей…', 'admin.refresh': 'Обновить', 'admin.fullConsole': 'Полная панель ↗',
@@ -1039,6 +1053,13 @@ const I18N = {
     'admin.protected': 'Аккаунты администраторов защищены', 'admin.required': 'Нужен авторизованный администратор',
     'admin.loadFail': 'Не удалось загрузить данные панели. Проверьте сеть.', 'admin.opFail': 'Не удалось выполнить действие. Повторите.',
     'admin.blockedOk': 'Пользователь заблокирован и вышел из системы', 'admin.unblocked': 'Пользователь разблокирован',
+    'admin.needServer': 'Полные функции управления требуют сервер (node server.mjs). Откройте полную панель или обратитесь к оператору.',
+    'admin.receiptTitle': '🧾 Регистрация поступления/возврата (после проверки перевода)',
+    'admin.receiptKind': 'Тип', 'admin.receiptPayment': 'Поступление', 'admin.receiptRefund': 'Возврат',
+    'admin.receiptAmount': 'Сумма (юани)', 'admin.receiptRef': 'Номер операции', 'admin.receiptTime': 'Время (необязательно, по умолчанию сейчас)',
+    'admin.receiptNote': 'Заметка (необязательно)', 'admin.receiptSubmit': 'Записать',
+    'admin.receiptOk': 'Записано; поступление 40 юаней автоматически открывает 30 дней DeepSeek',
+    'admin.funcNote': 'Функции панели: ① статистика ② ожидающие платежи (активация в один клик) ③ история поступлений ④ регистрация поступлений/возвратов ⑤ список пользователей (поиск / блок / белый список / сообщение / почта) ⑥ сообщения ⑦ полная панель',
     'auth.noQuestion': 'Контрольный вопрос не задан — самостоятельное восстановление недоступно. Обратитесь к администратору.',
     'auth.badAnswer': 'Неверный ответ', 'auth.resetOk': 'Пароль сброшен — войдите с новым паролем',
     'auth.submitLogin': 'Войти', 'auth.submitRegister': 'Зарегистрироваться и начать',
@@ -1046,9 +1067,9 @@ const I18N = {
     'auth.errPass': 'Пароль: 6-20 знаков, обязательно буквы и цифры',
     'auth.errPass2': 'Пароли не совпадают',
     'auth.errLogin': 'Неверное имя или пароль', 'auth.errExists': 'Такое имя уже занято — войдите',
-    'auth.okRegister': 'Готово! Вы вошли — пробный Флагман на 1 день активирован',
+    'auth.okRegister': 'Готово! Вы вошли — бесплатный пробный период высшего уровня (включая DeepSeek) активирован',
     'auth.welcome': 'С возвращением, {u}',
-    'auth.trialBanner': '🎁 Новым аккаунтам — 1 день бесплатного Флагмана (максимальный уровень · без обязательств)',
+    'auth.trialBanner': '🎁 Новым аккаунтам — 1 день бесплатного пробного периода высшего уровня (включая DeepSeek · без обязательств)',
     'auth.account': 'Аккаунт', 'auth.logout': 'Выйти',
     'auth.confirmLogout': 'Выйти из аккаунта? Ваши работы останутся на этом устройстве.', 'auth.loggedOut': 'Вы вышли',
     'quick.title': 'Быстрый старт',
@@ -1706,7 +1727,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.5.0';
+const APP_VERSION = '4.6.0';
 const PLAN_LEVEL = { free: 0, pro: 1, deepseek: 2, flag: 3 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, deepseek: 5, flag: 10 };
 const state = {
@@ -5803,8 +5824,9 @@ function applyAdminMode() {
   document.body.classList.toggle('is-admin', admin);
   // 管理员可随时切回普通版背景
   document.body.classList.toggle('admin-mode', admin && state.settings.adminBg !== false);
+  // 管理入口：管理员任何模式下都可见（静态模式提示需服务器）
   const btn = $('#btn-admin-console');
-  if (btn) btn.style.display = admin && authMode === 'managed' ? '' : 'none';
+  if (btn) btn.style.display = admin ? '' : 'none';
 }
 let onlineTimer = null;
 async function pollOnline() {
@@ -5911,7 +5933,7 @@ function renderAdminList() {
     if (u.blocked) badges.push('<span class="au-badge blocked">' + t('admin.blocked') + '</span>');
     return `<div class="admin-user-row ${u.blocked ? 'blocked' : ''}" data-uid="${esc(u.id)}">
       <span class="au-name">${esc(u.username)}</span>
-      <span class="au-meta">${new Date(u.createdAt).toLocaleDateString()}${u.hasPaid ? ' · ' + t('admin.payers') : ''}</span>
+      <span class="au-meta">${esc(u.email || '')} · ${new Date(u.createdAt).toLocaleDateString()}${u.hasPaid ? ' · ' + t('admin.payers') : ''}</span>
       <span class="au-badges">${badges.join(' ')}</span>
       <span class="au-actions">
         <button class="btn mini" data-aa="block" ${u.isAdmin ? 'disabled title="' + esc(t('admin.protected')) + '"' : ''}>${u.blocked ? t('admin.unblock') : t('admin.block')}</button>
@@ -5969,11 +5991,16 @@ async function refreshAdminConsole() {
   adminState.busy = true;
   setAdminStatus('');
   try {
+    if (authMode !== 'managed') {
+      setAdminStatus(t('admin.needServer'), true);
+      return;
+    }
     const d = await adminApi('./api/admin/dashboard?days=30');
     adminState.users = Array.isArray(d.users) ? d.users : [];
     renderAdminStats(d);
     renderAdminPending(d.pending || []);
     renderAdminPayments(d.payments || []);
+    fillReceiptUserSelect();
     renderAdminList();
     setAdminStatus(adminState.notice || (t('admin.total') + '：' + (d.totalUsers ?? '—')));
     adminState.notice = '';
@@ -5981,6 +6008,40 @@ async function refreshAdminConsole() {
     setAdminStatus(e.code === 'admin_required' ? t('admin.required') : t('admin.loadFail'), true);
   } finally {
     adminState.busy = false;
+  }
+}
+function fillReceiptUserSelect() {
+  const sel = $('#ar-user');
+  if (!sel) return;
+  const prev = sel.value;
+  sel.innerHTML = '<option value="">' + t('admin.searchPh') + '</option>' +
+    adminState.users.map(u => `<option value="${esc(u.id)}">${esc(u.username)}</option>`).join('');
+  if (prev) sel.value = prev;
+}
+async function submitReceipt() {
+  if (adminState.busy) return;
+  const userId = $('#ar-user').value;
+  const amountYuan = Number($('#ar-amount').value);
+  const reference = $('#ar-ref').value.trim();
+  if (!userId || !Number.isFinite(amountYuan) || amountYuan <= 0 || !reference) {
+    setAdminStatus(t('admin.opFail') + '：' + t('admin.searchPh') + '/金额/编号', true);
+    return;
+  }
+  adminState.busy = true;
+  setAdminStatus('');
+  try {
+    await adminApi('./api/admin/payments', 'POST', {
+      userId, kind: $('#ar-kind').value, amountCents: Math.round(amountYuan * 100),
+      reference, occurredAt: $('#ar-time').value ? new Date($('#ar-time').value).toISOString() : undefined,
+      note: $('#ar-note').value.trim()
+    });
+    $('#ar-amount').value = ''; $('#ar-ref').value = ''; $('#ar-time').value = ''; $('#ar-note').value = '';
+    toast(t('admin.receiptOk'), 'ok', 4000);
+  } catch (e) {
+    setAdminStatus(t('admin.opFail') + (e.code ? '（' + e.code + '）' : ''), true);
+  } finally {
+    adminState.busy = false;
+    await refreshAdminConsole();
   }
 }
 async function adminRowAction(uid, kind) {
@@ -6039,6 +6100,7 @@ function bindAdminConsole() {
   });
   $('#btn-admin-msg-send').addEventListener('click', sendAdminMessage);
   $('#btn-admin-msg-cancel').addEventListener('click', () => { $('#admin-msg-composer').hidden = true; });
+  $('#btn-ar-submit').addEventListener('click', submitReceipt);
   // 邮箱补充（管理版老用户）
   $('#set-email-save').addEventListener('click', async () => {
     const email = $('#set-email-input').value.trim().toLowerCase();
