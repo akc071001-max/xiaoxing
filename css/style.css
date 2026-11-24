@@ -1074,11 +1074,17 @@ body.is-admin .admin-only-row{display:flex}
 .msg-compose{border-top:1px dashed var(--line);padding-top:10px;margin-top:10px}
 .msg-compose textarea{margin-top:6px}
 @media (max-width:680px){
-  .modal{width:min(560px,96vw);max-height:94vh}
-  .modal.wide{width:96vw}
-  .modal-body{max-height:calc(94vh - 122px)}
+  .modal{width:min(560px,98vw);max-height:96vh;max-height:96dvh}
+  .modal.wide{width:98vw}
+  .modal-body{max-height:calc(96vh - 122px);max-height:calc(96dvh - 122px)}
   .modal-foot{flex-wrap:wrap;gap:6px}
   .modal-foot .btn{min-height:40px}
+  /* 登录等关键弹窗：表单区滚动、底栏固定可见，防止手机上按钮被挤出屏幕 */
+  #modal-auth .modal,#modal-terms .modal,#modal-storage .modal,#modal-agreement .modal{max-height:96vh;max-height:96dvh}
+  #modal-auth .modal-body{flex:1;min-height:0}
+  /* 手机输入不触发 iOS 自动缩放；按钮防双击缩放 */
+  .modal input,.modal textarea,.modal select{font-size:16px}
+  button,.btn,.chip{touch-action:manipulation}
   .dev-tip{flex-direction:column;align-items:center;gap:12px}
   .dev-tip .tip-qr{width:min(240px,72vw)}
   .agr-scroll{max-height:30vh}
