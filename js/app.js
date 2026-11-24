@@ -1597,7 +1597,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.3.1';
+const APP_VERSION = '4.3.2';
 const PLAN_LEVEL = { free: 0, pro: 1, flag: 2 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, flag: 10 };
 const state = {
@@ -5631,81 +5631,100 @@ async function pollOnline() {
 function startOnlinePoll() { stopOnlinePoll(); pollOnline(); onlineTimer = setInterval(pollOnline, 30000); }
 function stopOnlinePoll() { if (onlineTimer) clearInterval(onlineTimer); onlineTimer = null; }
 
-/* ---------------- 站长操作台（管理员站内直接管理用户） ---------------- */
-let lastAdminUsers = [];
-function renderAdminUserList() {
-  const q = ($('#admin-user-search').value || '').toLowerCase();
-  const users = (lastAdminUsers || []).filter(u => !q || String(u.username).toLowerCase().includes(q));
-  const el = $('#admin-user-list');
-  el.innerHTML = users.map(u => {
+/* ---------------- 站长操作台（站内）· 重制版 ---------------- */
+const adminState = { users: [], busy: false, notice: '' };
+async function adminApi(path, method = 'GET', body) {
+  const r = await fetch(new URL(path, document.baseURI), {
+    method, credentials: 'same-origin', cache: 'no-store',
+    headers: { Accept: 'application/json', ...(body ? { 'Content-Type': 'application/json' } : {}) },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  const data = await r.json().catch(() => null);
+  if (!r.ok) throw Object.assign(new Error((data && data.error) || 'request failed'), { status: r.status, code: data && data.code });
+  return data;
+}
+function setAdminStatus(txt, isErr) {
+  const el = $('#admin-status');
+  el.textContent = txt || '';
+  el.className = 'auth-hint' + (isErr ? ' err' : '');
+}
+function renderAdminStats(d) {
+  $('#admin-stat-total').textContent = d.totalUsers ?? '—';
+  $('#admin-stat-online').textContent = d.onlineUsers ?? '—';
+  $('#admin-stat-payers').textContent = d.totalPayers ?? '—';
+  $('#admin-stat-net').textContent = ((d.periodNetCents || 0) / 100).toFixed(2);
+}
+function renderAdminList() {
+  const q = ($('#admin-user-search').value || '').trim().toLowerCase();
+  const users = adminState.users.filter(u => !q || String(u.username || '').toLowerCase().includes(q));
+  $('#admin-user-list').innerHTML = users.map(u => {
     const badges = [];
     if (u.isAdmin) badges.push('<span class="au-badge admin">👑 ' + t('auth.adminBadge') + '</span>');
     else if (u.plan === 'flag') badges.push('<span class="au-badge flag">' + t('vip.flag') + '</span>');
     if (u.blocked) badges.push('<span class="au-badge blocked">' + t('admin.blocked') + '</span>');
-    return `<div class="admin-user-row ${u.blocked ? 'blocked' : ''}" data-id="${esc(u.id)}">
+    return `<div class="admin-user-row ${u.blocked ? 'blocked' : ''}" data-uid="${esc(u.id)}">
       <span class="au-name">${esc(u.username)}</span>
       <span class="au-meta">${new Date(u.createdAt).toLocaleDateString()}${u.hasPaid ? ' · ' + t('admin.payers') : ''}</span>
       <span class="au-badges">${badges.join(' ')}</span>
       <span class="au-actions">
-        <button class="btn mini" data-aact="block" data-id="${esc(u.id)}" data-blocked="${u.blocked ? 1 : 0}" ${u.isAdmin ? 'disabled title="' + esc(t('admin.protected')) + '"' : ''}>${u.blocked ? t('admin.unblock') : t('admin.block')}</button>
-        <button class="btn mini" data-aact="wl" data-id="${esc(u.id)}" data-wl="${u.whitelisted ? 1 : 0}">${u.whitelisted ? t('admin.unwl') : t('admin.wl')}</button>
+        <button class="btn mini" data-aa="block" ${u.isAdmin ? 'disabled title="' + esc(t('admin.protected')) + '"' : ''}>${u.blocked ? t('admin.unblock') : t('admin.block')}</button>
+        <button class="btn mini" data-aa="wl">${u.whitelisted ? t('admin.unwl') : t('admin.wl')}</button>
       </span>
     </div>`;
   }).join('') || '<div class="empty-hint">' + t('vip.searchEmpty') + '</div>';
-  el.querySelectorAll('[data-aact]').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const id = btn.dataset.id;
-      btn.disabled = true;
-      try {
-        if (btn.dataset.aact === 'block') {
-          const r = await fetch(new URL('./api/admin/blacklist', document.baseURI), {
-            method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({ userId: id, blocked: btn.dataset.blocked !== '1' })
-          });
-          if (!r.ok) throw Object.assign(new Error('fail'), { status: r.status });
-          toast(btn.dataset.blocked === '1' ? t('admin.unblocked') : t('admin.blockedOk'), 'ok');
-        } else {
-          const r = await fetch(new URL('./api/admin/whitelist', document.baseURI), {
-            method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({ userId: id, whitelisted: btn.dataset.wl !== '1' })
-          });
-          if (!r.ok) throw Object.assign(new Error('fail'), { status: r.status });
-          toast(t('toast.planChanged', { p: btn.dataset.wl === '1' ? t('vip.free') : t('vip.flag') }), 'ok');
-        }
-        await renderAdminPanel();
-      } catch (e) {
-        toast(t('admin.opFail'), 'err');
-        await renderAdminPanel();
-      }
-    });
-  });
 }
-async function renderAdminPanel() {
-  const status = $('#admin-status');
-  status.textContent = ''; status.className = 'auth-hint';
+async function refreshAdminConsole() {
+  if (adminState.busy) return;
+  adminState.busy = true;
+  setAdminStatus('');
   try {
-    const r = await fetch(new URL('./api/admin/dashboard?days=30', document.baseURI), {
-      credentials: 'same-origin', cache: 'no-store', headers: { Accept: 'application/json' }
-    });
-    if (!r.ok) {
-      const j = await r.json().catch(() => null);
-      throw Object.assign(new Error('fail'), { status: r.status, code: j?.code });
-    }
-    const data = await r.json();
-    lastAdminUsers = data.users || [];
-    $('#admin-stat-total').textContent = data.totalUsers;
-    $('#admin-stat-online').textContent = data.onlineUsers;
-    $('#admin-stat-payers').textContent = data.totalPayers;
-    $('#admin-stat-net').textContent = ((data.periodNetCents || 0) / 100).toFixed(2);
-    renderAdminUserList();
+    const d = await adminApi('./api/admin/dashboard?days=30');
+    adminState.users = Array.isArray(d.users) ? d.users : [];
+    renderAdminStats(d);
+    renderAdminList();
+    setAdminStatus(adminState.notice || (t('admin.total') + '：' + (d.totalUsers ?? '—')));
+    adminState.notice = '';
   } catch (e) {
-    status.textContent = e.code === 'admin_required' ? t('admin.required') : t('admin.loadFail');
-    status.className = 'auth-hint err';
+    setAdminStatus(e.code === 'admin_required' ? t('admin.required') : t('admin.loadFail'), true);
+  } finally {
+    adminState.busy = false;
+  }
+}
+async function adminRowAction(uid, kind) {
+  const u = adminState.users.find(x => x.id === uid);
+  if (!u || adminState.busy) return;
+  adminState.busy = true;
+  setAdminStatus('');
+  try {
+    if (kind === 'block') {
+      await adminApi('./api/admin/blacklist', 'PUT', { userId: uid, blocked: !u.blocked });
+      adminState.notice = u.blocked ? t('admin.unblocked') : t('admin.blockedOk');
+    } else {
+      await adminApi('./api/admin/whitelist', 'PUT', { userId: uid, whitelisted: !u.whitelisted });
+      adminState.notice = t('toast.planChanged', { p: u.whitelisted ? t('vip.free') : t('vip.flag') });
+    }
+  } catch (e) {
+    adminState.notice = '';
+    setAdminStatus(e.code === 'admin_protected' ? t('admin.protected') : t('admin.opFail'), true);
+  } finally {
+    adminState.busy = false;
+    await refreshAdminConsole();
   }
 }
 function openAdminConsole() {
   openModal('modal-admin');
-  renderAdminPanel();
+  refreshAdminConsole();
+}
+function bindAdminConsole() {
+  $('#btn-admin-console').addEventListener('click', openAdminConsole);
+  $('#btn-admin-refresh').addEventListener('click', () => { adminState.notice = ''; refreshAdminConsole(); });
+  $('#admin-user-search').addEventListener('input', renderAdminList);
+  $('#admin-user-list').addEventListener('click', e => {
+    const btn = e.target.closest('[data-aa]');
+    if (!btn || btn.disabled) return;
+    const row = btn.closest('[data-uid]');
+    if (row) adminRowAction(row.dataset.uid, btn.dataset.aa);
+  });
 }
 let authMode = 'unknown', serverUser = null, authModeCheck = null, authBusy = false, authRevision = 0;
 let presenceTimer = null, presenceRequest = null, restoreSession = null;
@@ -7053,10 +7072,8 @@ function bindEvents() {
   $('#btn-settings').addEventListener('click', openSettings);
   $('#btn-vip').addEventListener('click', () => { renderVip(); openModal('modal-vip'); });
   $('#btn-profile').addEventListener('click', openProfile);
-  // 站长操作台（管理员站内直接管理）
-  $('#btn-admin-console').addEventListener('click', openAdminConsole);
-  $('#btn-admin-refresh').addEventListener('click', renderAdminPanel);
-  $('#admin-user-search').addEventListener('input', renderAdminUserList);
+  // 站长操作台（管理员站内直接管理 · 重制版）
+  bindAdminConsole();
   // 板块切换（小说 / 论文）
   $('#board-novel').addEventListener('click', () => setBoard('novel'));
   $('#board-paper').addEventListener('click', () => setBoard('paper'));
