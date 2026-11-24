@@ -1069,3 +1069,23 @@ body.is-admin .admin-only-row{display:flex}
   .paper-notebook[data-view=form] .paper-notebook-library,
   .paper-notebook[data-view=library] .paper-notebook-form{display:none}
 }
+
+/* ---------------- 手机全适配：弹窗 / 付费 / 通信（每一部手机） ---------------- */
+.msg-compose{border-top:1px dashed var(--line);padding-top:10px;margin-top:10px}
+.msg-compose textarea{margin-top:6px}
+@media (max-width:680px){
+  .modal{width:min(560px,96vw);max-height:94vh}
+  .modal.wide{width:96vw}
+  .modal-body{max-height:calc(94vh - 122px)}
+  .modal-foot{flex-wrap:wrap;gap:6px}
+  .modal-foot .btn{min-height:40px}
+  .dev-tip{flex-direction:column;align-items:center;gap:12px}
+  .dev-tip .tip-qr{width:min(240px,72vw)}
+  .agr-scroll{max-height:30vh}
+  .agr-pay-note{font-size:12px}
+  #topbar .topbar-right{flex-wrap:wrap;justify-content:flex-end}
+  #btn-admin-console{padding:6px 10px;font-size:12.5px;min-height:36px}
+  .admin-receipt-form .input{min-width:96px;flex:1 1 42%}
+  .admin-console-body{max-height:88vh}
+  .msg-compose textarea{min-height:60px}
+}
