@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080c19">
+  <meta name="robots" content="noindex, nofollow">
+  <title>晓星 · 运营控制台</title>
+  <link rel="icon" href="/icons/xiaoxing-192.png">
+  <link rel="stylesheet" href="/css/admin.css">
+  <script type="module" src="/js/admin.js"></script>
+</head>
+<body>
+  <a href="#main" class="skip">跳到主要内容</a>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="/" aria-label="返回晓星写作台"><span class="brand-star" aria-hidden="true">✦</span> 晓星 <span class="brand-en">XIAOXING</span></a>
+      <span class="section-label">运营控制台</span>
+      <a class="quiet-link" href="/">返回写作台 ↗</a>
+    </div>
+  </header>
+  <main class="wrap" id="main">
+    <section id="login-view" class="login panel" aria-labelledby="login-title">
+      <p class="eyebrow">✦ &nbsp; ADMIN CONSOLE</p>
+      <h1 id="login-title">进入运营控制台</h1>
+      <p>仅限管理者查看集中注册人数、近期在线人数和实收款项。</p>
+      <form id="login-form">
+        <label for="admin-password">管理密码</label>
+        <input type="password" id="admin-password" name="password" autocomplete="current-password" required maxlength="1024">
+        <button type="submit" class="primary">登录</button>
+      </form>
+      <p class="callout" id="login-help">管理密码由部署者在服务器上设置。普通作者账号不能登录此页。</p>
+      <output id="login-status" class="status" role="status" aria-live="polite"></output>
+    </section>
+
+    <div id="dashboard-view" hidden>
+      <section aria-labelledby="page-title" class="intro">
+        <div>
+          <p class="eyebrow">✦ &nbsp; OPERATIONS / XIAOXING</p>
+          <h1 id="page-title" tabindex="-1">用户与收入概览</h1>
+          <p>同一处看注册、在线、白名单和已核验的收退款。</p>
+        </div>
+        <div class="controls">
+          <label for="period">统计区间</label>
+          <select id="period">
+            <option value="7">近 7 天</option>
+            <option value="30" selected>近 30 天</option>
+            <option value="90">近 90 天</option>
+            <option value="all">全部时间</option>
+          </select>
+          <button class="secondary" id="refresh" type="button">刷新</button>
+          <button class="ghost" id="logout" type="button">退出</button>
+        </div>
+      </section>
+      <output id="dashboard-status" class="status" role="status" aria-live="polite"></output>
+      <section class="metrics" aria-label="核心指标">
+        <article class="panel metric"><span>注册总人数</span><strong id="total-users">—</strong><small>所选区间新增 <b id="period-users">—</b></small></article>
+        <article class="panel metric"><span>在线人数</span><strong id="online-users">—</strong><small>近 5 分钟内有活动的已登录用户，按账号去重</small></article>
+        <article class="panel metric"><span>累计充值人数</span><strong id="total-payers">—</strong><small>所选区间充值 <b id="period-payers">—</b></small></article>
+        <article class="panel metric"><span>白名单人数</span><strong id="whitelist-count">—</strong><small>白名单授权与充值分开</small></article>
+        <article class="panel metric"><span>所选区间实收</span><strong id="period-gross">—</strong><small>已核验收款，人民币</small></article>
+        <article class="panel metric"><span>所选区间退款</span><strong id="period-refunds">—</strong><small>已核验退款，人民币</small></article>
+        <article class="panel metric net"><span>所选区间净收入</span><strong id="period-net">—</strong><small>实收扣除退款，未扣手续费或成本</small></article>
+      </section>
+      <p class="callout">仅统计在本服务器注册的账号；本地历史账号、未登录访客和浏览器里的旧稿不会被计入。流水是运营者对已到账交易的登记，此页面不会发起收款或退款。</p>
+
+      <div class="main-grid">
+        <section class="panel section" aria-labelledby="users-title">
+          <div class="section-head">
+            <div><p class="eyebrow">01 / USERS</p><h2 id="users-title">注册用户与白名单</h2></div>
+            <div class="filter"><label for="user-search">搜索用户名</label><input id="user-search" type="search" maxlength="80" autocomplete="off" placeholder="按姓名筛选"></div>
+          </div>
+          <label class="check filter-check"><input id="payer-filter" type="checkbox"> 只看有充值记录的用户</label>
+          <div class="table-wrap" tabindex="0" aria-label="注册用户，可横向滚动">
+            <table>
+              <thead><tr><th scope="col">用户名</th><th scope="col">注册时间</th><th scope="col">会员</th><th scope="col">累计净入账</th><th scope="col">白名单</th></tr></thead>
+              <tbody id="users-body"></tbody>
+            </table>
+          </div>
+          <p class="empty" id="users-empty" hidden></p>
+        </section>
+        <section class="panel section" id="receipt-panel" aria-labelledby="receipt-title">
+          <div class="section-head"><div><p class="eyebrow">02 / RECEIPTS</p><h2 id="receipt-title">登记已核验流水</h2></div></div>
+          <p class="section-copy">从你的支付账户确认到账或退款后再登记。订单号应唯一，避免重复计入。</p>
+          <form id="receipt-form" class="receipt">
+            <label>对应用户<select id="receipt-user" name="user" required></select></label>
+            <div class="two">
+              <label>类型<select id="receipt-kind" name="kind"><option value="payment">到账</option><option value="refund">已退回</option></select></label>
+              <label>金额（元）<input id="receipt-amount" type="text" name="amount" inputmode="decimal" maxlength="15" placeholder="例如 29.90" required></label>
+            </div>
+            <label>凭证编号（例如支付订单号）<input id="receipt-reference" name="reference" autocomplete="off" required maxlength="100"></label>
+            <label>实际交易时间（本机时区）<input id="receipt-occurrence" name="occurrence" type="datetime-local" required></label>
+            <label>备注（选填）<textarea id="receipt-note" name="note" rows="2" maxlength="200"></textarea></label>
+            <label class="check"><input id="receipt-confirm" name="confirm" type="checkbox" required> 我已经核对实际交易、账号和金额</label>
+            <button class="primary" id="record-button" type="submit">登记流水</button>
+          </form>
+          <output id="receipt-status" class="status" role="status" aria-live="polite"></output>
+        </section>
+      </div>
+
+      <section class="panel section" aria-labelledby="ledger-title">
+        <div class="section-head"><div><p class="eyebrow">03 / LEDGER</p><h2 id="ledger-title">充值人与收退款流水</h2></div></div>
+        <div class="table-wrap" tabindex="0" aria-label="收退款流水，可横向滚动">
+          <table>
+            <thead><tr><th scope="col">交易时间</th><th scope="col">用户</th><th scope="col">类型</th><th scope="col">金额</th><th scope="col">凭证编号</th><th scope="col">备注</th></tr></thead>
+            <tbody id="ledger-body"></tbody>
+          </table>
+        </div>
+        <p class="empty" id="ledger-empty" hidden>所选区间没有已登记流水。</p>
+      </section>
+
+      <section class="panel section" aria-labelledby="daily-title">
+        <div class="section-head"><div><p class="eyebrow">04 / DAILY</p><h2 id="daily-title">按日汇总</h2></div></div>
+        <p class="section-copy" id="daily-zone">日汇总和流水可能使用不同的时区。</p>
+        <div class="table-wrap" tabindex="0" aria-label="按日汇总，可横向滚动">
+          <table>
+            <thead><tr><th scope="col">日期</th><th scope="col">新增注册</th><th scope="col">到账笔数</th><th scope="col">退款笔数</th><th scope="col">净收入</th></tr></thead>
+            <tbody id="daily-body"></tbody>
+          </table>
+        </div>
+        <p class="empty" id="daily-empty" hidden>所选区间暂无按日数据。</p>
+      </section>
+    </div>
+  </main>
+  <footer class="wrap footer">晓星运营控制台 · 金额按人民币分存储，按元显示。</footer>
+</body>
+</html>
+
+
