@@ -1,34 +1,19 @@
 {
-  "version": "4.1.0",
+  "version": "4.1.1",
   "date": "2026-11-23",
   "items": [
-    {
-      "title": "长篇导航和稿件自检",
-      "desc": "小说可在标题、正文和大纲中搜索。自检可定位待完成标记、重复段落和较长段落。"
-    },
-    {
-      "title": "论文资料与手机写作",
-      "desc": "保存文献资料与阅读笔记，按编号插入引用；手机可展开写作键并手动保存。"
-    }
+    { "title": "自检规则更新：两次重写后直接输出", "desc": "合格→输出正文；不合格→返回重写；执行两次重写后无论结果直接输出正文，供您审阅修改，不再拦截" },
+    { "title": "小助手交互升级", "desc": "单击=点开创作小助手；双击=纯互动彩蛋（不打开助手）；拖拽手感增强（跟手缩放、惯性回弹、光标反馈）" },
+    { "title": "文风栏滑动系统", "desc": "作家列表区可独立滑动，新增 ▲▼ 滑动按键，所有作家简介均可完整浏览" }
   ],
   "itemsEn": [
-    {
-      "title": "Manuscript search and review",
-      "desc": "Find titles, passages and outlines. Review unfinished markers, repeated passages and long paragraphs."
-    },
-    {
-      "title": "Paper sources and mobile writing",
-      "desc": "Keep a source notebook and add numbered citations; use writing keys and Save on narrow screens."
-    }
+    { "title": "Self-check rule: output after two rewrites", "desc": "Pass → output; fail → rewrite; after two rewrite rounds the text is output directly for your review — never blocked again." },
+    { "title": "Pet assistant interaction upgrade", "desc": "Single click opens the assistant; double click is pure fun (doesn't open it); improved drag feel (scale, settle easing, cursor feedback)." },
+    { "title": "Style panel scroll system", "desc": "The author list scrolls independently, with ▲▼ buttons, so every author bio can be read in full." }
   ],
   "itemsRu": [
-    {
-      "title": "Поиск и проверка рукописи",
-      "desc": "Поиск по главам, тексту и планам; проверка отметок, повторов и длинных абзацев."
-    },
-    {
-      "title": "Источники и мобильный ввод",
-      "desc": "Ведите список источников, вставляйте ссылки и сохраняйте текст с мобильной панели."
-    }
+    { "title": "Правило самопроверки: вывод после двух переписываний", "desc": "Пройдена → вывод; не пройдена → переписывание; после двух раундов текст выводится напрямую для вашей проверки — больше без блокировок." },
+    { "title": "Питомец-помощник: новая интеракция", "desc": "Один клик открывает помощника; двойной клик — просто развлечение (без открытия); улучшено ощущение перетаскивания." },
+    { "title": "Прокрутка в разделе стилей", "desc": "Список авторов прокручивается отдельно, добавлены кнопки ▲▼ — все биографии читаются полностью." }
   ]
 }
