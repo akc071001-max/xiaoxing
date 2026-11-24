@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.3.3" />
+<link rel="stylesheet" href="css/style.css?v=4.4.0" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -797,6 +797,16 @@
           </ul>
           <button class="btn primary" data-plan="flag" data-i18n="vip.btn">免费开通</button>
         </div>
+        <div class="vip-card vip-deepseek">
+          <div class="vip-name" data-i18n="vip.deepseek">DeepSeek 月度会员</div>
+          <div class="vip-price" data-i18n="vip.deepseekPrice">¥40 / 月</div>
+          <ul>
+            <li data-i18n="vip.d1">DeepSeek 等优质大模型稳定接入（不占用免费额度）</li>
+            <li data-i18n="vip.d2">更快响应 · 更长记忆（前 5 章）</li>
+            <li data-i18n="vip.d3">按月支付 · 不自动续费 · 到期自行决定是否续费</li>
+          </ul>
+          <button class="btn primary" data-plan="deepseek" data-i18n="vip.deepseekBtn">签署协议并开通</button>
+        </div>
       </div>
       <p class="vip-foot-note" data-i18n="vip.foot">试运营期间所有方案均不收费，敬请期待正式上线。</p>
       <div class="set-section-title" data-i18n="vip.searchTitle">🔍 全网搜索 AI 模型</div>
@@ -1159,6 +1169,45 @@
   </div>
 </div>
 
+<!-- DeepSeek 月度会员：付费协议与收款 -->
+<div class="modal-overlay" id="modal-agreement" hidden>
+  <div class="modal wide">
+    <div class="modal-head">
+      <div class="modal-title" data-i18n="agr.title">📄 DeepSeek 月度会员付费协议</div>
+      <button class="icon-btn modal-close" data-close="modal-agreement">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="agr-scroll" id="agr-text"></div>
+      <div id="agr-sign-section">
+        <label class="agr-check"><input type="checkbox" id="agr-agree-chk" />
+          <span data-i18n="agr.agreeLabel">我已阅读并同意以上全部条款</span>
+        </label>
+        <label class="agr-sign"><span data-i18n="agr.signLabel">电子签名（输入用户名确认签署）</span>
+          <input class="input" id="agr-sign-name" maxlength="20" autocomplete="off" data-i18n-ph="agr.signPh" placeholder="输入您的用户名作为电子签名" />
+        </label>
+        <div class="auth-hint" id="agr-hint"></div>
+        <button class="btn primary" id="btn-agr-sign" data-i18n="agr.signBtn" disabled>签署协议并查看收款码</button>
+      </div>
+      <div id="agr-pay-section" hidden>
+        <div class="agr-pay-note" data-i18n="agr.payNote"></div>
+        <div class="dev-tip">
+          <img class="tip-qr" src="qr-tip.png" alt="付款收款码" />
+          <div class="dev-tip-body">
+            <div class="agr-amount" data-i18n="agr.amount">付款金额：¥40.00（一个月服务）</div>
+            <ul class="agr-pay-steps">
+              <li data-i18n="agr.step1">打开微信/支付宝扫左侧收款码</li>
+              <li data-i18n="agr.step2">付款时请在「添加备注/转账说明」中填写您的用户名</li>
+              <li data-i18n="agr.step3">付款完成后点击下方「我已付款，提交核对」</li>
+            </ul>
+            <div class="agr-note" data-i18n="agr.waitNote">提交后管理员将在 24 小时内核对入账并开通；核对完成前可随时申请退款。</div>
+            <button class="btn small primary" id="btn-agr-paid" data-i18n="agr.paidBtn">我已付款，提交核对</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="toasts"></div>
 <noscript><div style="position:fixed;inset:0;background:#04060e;color:#fff;display:flex;align-items:center;justify-content:center">本应用需要启用 JavaScript。</div></noscript>
 <div class="modal-overlay" id="modal-install-app" hidden>
@@ -1256,7 +1305,7 @@
     <p id="draft-review-note" role="status"></p>
   </div>
 </dialog>
-<script src="js/draft-review.js?v=4.3.3"></script>
-<script src="js/app.js?v=4.3.3"></script>
+<script src="js/draft-review.js?v=4.4.0"></script>
+<script src="js/app.js?v=4.4.0"></script>
 </body>
 </html>
