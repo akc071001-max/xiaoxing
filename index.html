@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.8.0" />
+<link rel="stylesheet" href="css/style.css?v=4.9.0" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -565,6 +565,19 @@
       <div class="backup-row"><div><b id="docx-title">导出 Word 文档</b><span id="docx-desc">下载可继续编辑的小说或论文（.docx）</span></div><button type="button" class="btn" id="btn-export-docx">下载 Word</button></div>
       <div class="backup-row"><div><b data-i18n="backup.json">备份全部作品 JSON</b><span data-i18n="backup.jsonSub">含稿件、版本历史和对话；不含账号或模型密钥</span></div><button class="btn" id="btn-export-json" data-i18n="backup.backupBtn">备份</button></div>
       <div class="backup-row"><div><b data-i18n="backup.import">导入备份 JSON</b><span data-i18n="backup.importSub">恢复为独立副本，保留现有数据</span></div><button class="btn" id="btn-import-json" data-i18n="backup.importBtn">导入</button></div>
+      <div class="backup-row"><div><b data-i18n="backup.xdev">跨设备完整备份（账号+数据，加密）</b><span data-i18n="backup.xdevSub">含账号、全部作品与设置；任何设备可恢复</span></div>
+        <input class="input backup-pass" id="xdev-pass" type="password" maxlength="64" data-i18n-ph="backup.xdevPassPh" placeholder="备份密码（≥6位，含字母+数字）" autocomplete="off" />
+        <button class="btn" id="btn-xdev-export" data-i18n="backup.xdevExport">加密备份</button>
+      </div>
+      <div class="backup-row"><div><b data-i18n="backup.xdevImport">跨设备完整恢复</b><span data-i18n="backup.xdevImportSub">选择 .xxb 文件或粘贴备份码</span></div>
+        <input class="input backup-pass" id="xdev-import-pass" type="password" maxlength="64" data-i18n-ph="backup.xdevImportPassPh" placeholder="备份密码" autocomplete="off" />
+        <button class="btn" id="btn-xdev-import-file" data-i18n="backup.xdevFile">选择文件</button>
+        <button class="btn" id="btn-xdev-import-text" data-i18n="backup.xdevPaste">粘贴备份码</button>
+      </div>
+      <div class="backup-row" id="xdev-text-wrap" hidden>
+        <textarea class="input" id="xdev-text" rows="3" placeholder="XXB1.…"></textarea>
+        <button class="btn primary" id="btn-xdev-import-go" data-i18n="backup.xdevImport">恢复</button>
+      </div>
       <div class="backup-row danger-row"><div><b data-i18n="backup.wipe">清除全部数据</b><span data-i18n="backup.wipeSub">不可恢复！</span></div><button class="btn danger" id="btn-wipe" data-i18n="backup.wipeBtn">清除</button></div>
       <input type="file" id="import-file" accept="application/json" hidden />
     </div>
@@ -1356,8 +1369,8 @@
   </div>
 </dialog>
 <script src="js/account-config.js"></script>
-<script src="js/account-bridge.js?v=4.8.0"></script>
-<script src="js/draft-review.js?v=4.8.0"></script>
-<script src="js/app.js?v=4.8.0"></script>
+<script src="js/account-bridge.js?v=4.9.0"></script>
+<script src="js/draft-review.js?v=4.9.0"></script>
+<script src="js/app.js?v=4.9.0"></script>
 </body>
 </html>
