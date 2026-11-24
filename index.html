@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.3.2" />
+<link rel="stylesheet" href="css/style.css?v=4.3.3" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -850,6 +850,11 @@
         <button class="chip set-chip" id="set-bg-galaxy" data-bg="galaxy">🌌 银河系</button>
         <button class="chip set-chip" id="set-bg-planet" data-bg="planet">🌍 星球</button>
       </div>
+      <div class="set-row admin-only" id="admin-bg-row">
+        <span class="set-label" data-i18n="set.adminBg">👑 管理员专属背景</span>
+        <button class="chip set-chip" id="set-admin-bg-on" data-adminbg="1" data-i18n="set.adminBgOn">红灯车灯</button>
+        <button class="chip set-chip" id="set-admin-bg-off" data-adminbg="0" data-i18n="set.adminBgOff">普通版背景</button>
+      </div>
       <div class="set-row">
         <span class="set-label" data-i18n="set.pet">创作小助手</span>
         <button class="chip set-chip" id="set-pet-on" data-pet="1" data-i18n="set.on">显示</button>
@@ -1251,7 +1256,7 @@
     <p id="draft-review-note" role="status"></p>
   </div>
 </dialog>
-<script src="js/draft-review.js?v=4.3.2"></script>
-<script src="js/app.js?v=4.3.2"></script>
+<script src="js/draft-review.js?v=4.3.3"></script>
+<script src="js/app.js?v=4.3.3"></script>
 </body>
 </html>
