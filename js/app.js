@@ -1736,7 +1736,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.7.1';
+const APP_VERSION = '4.8.0';
 const PLAN_LEVEL = { free: 0, pro: 1, deepseek: 2, flag: 3 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, deepseek: 5, flag: 10 };
 const state = {
@@ -5822,6 +5822,42 @@ const AUTH_MODE_I18N = {
   }
 };
 const authModeCopy = () => AUTH_MODE_I18N[state.settings.lang] || AUTH_MODE_I18N.zh;
+const ACCOUNT_BRIDGE_I18N = {
+  zh: {
+    mirror: '使用同一个晓星账号。密码只在 {site} 输入，之后会回到这个网站。',
+    login: '前往统一登录', register: '前往统一注册', forgot: '找回晓星账号密码',
+    connecting: '正在打开统一登录站…', returning: '正在返回写作站…', unavailable: '本站无法连接统一登录。你可以继续本地写作，稍后重试。',
+    failed: '登录连接失败。请回到发起登录的页面，在同一浏览器内重新登录。',
+    storage: '当前浏览器无法保存本次登录状态。可在正常浏览窗口重试，或前往统一登录站写作。',
+    central: '登录完成后将回到 {site}。', current: '使用账号「{name}」继续前往 {site}。',
+    continue: '确认并返回写作站', switchUser: '换一个账号', cancel: '取消连接并留在本站',
+    restored: '晓星账号已登录。', console: '管理后台请在统一账户站点打开。'
+  },
+  en: {
+    mirror: 'Use your Xiaoxing account here. Enter your password at {site}, then return to this site.',
+    login: 'Open central sign-in', register: 'Open central registration', forgot: 'Reset your Xiaoxing password',
+    connecting: 'Opening the central sign-in site…', returning: 'Returning to the writing site…', unavailable: 'This site cannot reach central sign-in. You can keep writing locally and try again later.',
+    failed: 'The sign-in connection failed. Return to the page where you started and try again in the same browser.',
+    storage: 'Your browser could not store this sign-in request. Try in a regular window or write at the central site.',
+    central: 'After signing in, you will return to {site}.', current: 'Continue to {site} with the account “{name}”.',
+    continue: 'Confirm and return to writing', switchUser: 'Use another account', cancel: 'Cancel and stay here',
+    restored: 'You are signed in to Xiaoxing.', console: 'Open the admin console on the central account site.'
+  },
+  ru: {
+    mirror: 'Здесь можно использовать единый аккаунт «Сяосин». Введите пароль на {site} и вернитесь сюда.',
+    login: 'Войти через главный сайт', register: 'Зарегистрироваться через главный сайт', forgot: 'Восстановить пароль аккаунта',
+    connecting: 'Открываем главный сайт…', returning: 'Возвращаемся на сайт для работы…', unavailable: 'Сервис входа недоступен. Можно продолжить писать локально и повторить попытку позже.',
+    failed: 'Не удалось войти. Вернитесь на исходную страницу и повторите попытку в том же браузере.',
+    storage: 'Браузер не сохранил запрос на вход. Используйте обычное окно или пишите на главном сайте.',
+    central: 'После входа вы вернётесь на {site}.', current: 'Продолжить на {site} с аккаунтом «{name}».',
+    continue: 'Подтвердить и вернуться', switchUser: 'Войти в другой аккаунт', cancel: 'Отменить и остаться здесь',
+    restored: 'Вы вошли в аккаунт «Сяосин».', console: 'Панель управления доступна на главном сайте.'
+  }
+};
+function bridgeText(key, values = {}) {
+  const messages = ACCOUNT_BRIDGE_I18N[state.settings.lang] || ACCOUNT_BRIDGE_I18N.zh;
+  return messages[key].replace(/\{(\w+)\}/g, (_, name) => values[name] ?? '');
+}
 /* 创作者授权的管理员账号（用户名名单，由创作者维护；静态版凭此自动获得旗舰版最高权限） */
 const CREATOR_ADMIN_USERS = ['小柚子'];
 const isCreatorAdmin = username => CREATOR_ADMIN_USERS.includes((username || '').trim().normalize('NFKC'));
@@ -5835,7 +5871,7 @@ function applyAdminMode() {
   document.body.classList.toggle('admin-mode', admin && state.settings.adminBg !== false);
   // 管理入口：管理员任何模式下都可见（静态模式提示需服务器）
   const btn = $('#btn-admin-console');
-  if (btn) btn.style.display = admin ? '' : 'none';
+  if (btn) btn.style.display = admin && !mirrorConfigured() ? '' : 'none';
 }
 let onlineTimer = null;
 async function pollOnline() {
@@ -5846,15 +5882,10 @@ async function pollOnline() {
     return;
   }
   try {
-    const r = await fetch(new URL('./api/status', document.baseURI), {
-      credentials: 'same-origin', cache: 'no-store', headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(4000)
-    });
-    if (r.ok && authJson(r)) {
-      const j = await r.json();
-      if (typeof j.online === 'number') {
-        $('#online-count').textContent = j.online;
-        $('#online-indicator').hidden = false;
-      }
+    const status = await accountStatus(4000);
+    if (typeof status?.online === 'number') {
+      $('#online-count').textContent = status.online;
+      $('#online-indicator').hidden = false;
     }
   } catch (e) { }
 }
@@ -5870,8 +5901,10 @@ async function pollInbox() {
     stopInboxPoll();
     return;
   }
+  const revision = authRevision;
   try {
     const r = await serverAuthRequest('messages');
+    if (revision !== authRevision || !serverUser) return;
     const badge = $('#inbox-badge');
     $('#btn-inbox').hidden = false;
     if (Number(r.unread) > 0) { badge.hidden = false; badge.textContent = r.unread > 99 ? '99+' : r.unread; }
@@ -5938,6 +5971,7 @@ function bindInbox() {
 /* ---------------- 站长操作台（站内）· 重制版 ---------------- */
 const adminState = { users: [], busy: false, notice: '' };
 async function adminApi(path, method = 'GET', body) {
+  if (mirrorConfigured()) throw new Error('Administrator access requires the account site');
   const r = await fetch(new URL(path, document.baseURI), {
     method, credentials: 'same-origin', cache: 'no-store',
     headers: { Accept: 'application/json', ...(body ? { 'Content-Type': 'application/json' } : {}) },
@@ -6135,6 +6169,7 @@ async function sendAdminMessage() {
   }
 }
 function openAdminConsole() {
+  if (mirrorConfigured()) return toast(bridgeText('console'), 'warn');
   openModal('modal-admin');
   refreshAdminConsole();
 }
@@ -6170,6 +6205,12 @@ function bindAdminConsole() {
 }
 let authMode = 'unknown', serverUser = null, authModeCheck = null, authBusy = false, authRevision = 0;
 let presenceTimer = null, presenceRequest = null, restoreSession = null;
+const accountBridge = globalThis.XiaoxingAccount;
+const mirrorConfigured = () => accountBridge?.hasMirrorConfig() ?? Boolean(
+  globalThis.XIAOXING_ACCOUNT_CONFIG?.serverOrigin || globalThis.XIAOXING_ACCOUNT_CONFIG?.mirrorReturnUrl
+);
+let accountConnection = null, connectionFormShown = false, confirmConnectedUser = false;
+let mirrorCallbackChecked = false, mirrorCallbackNotice = '';
 const authNamespace = () => 'nebula-managed-auth:' + new URL('.', document.baseURI).pathname;
 const authMethod = () => location.protocol === 'https:' || location.protocol === 'http:';
 function readManagedMarker() {
@@ -6179,7 +6220,21 @@ function writeManagedMarker() {
   try { localStorage.setItem(authNamespace(), '1'); } catch (_) {}
 }
 function authJson(response) { return /^application\/json(?:\s*;|$)/i.test(response.headers.get('content-type') || ''); }
+const accountTimeout = ms => typeof globalThis.AbortSignal?.timeout === 'function' ? AbortSignal.timeout(ms) : undefined;
+async function accountStatus(timeout = 3000) {
+  if (mirrorConfigured()) return accountBridge?.status();
+  const response = await fetch(new URL('./api/status', document.baseURI), {
+    credentials: 'same-origin', cache: 'no-store', redirect: 'error', signal: accountTimeout(timeout),
+    headers: { Accept: 'application/json' }
+  });
+  if ([404, 405, 410].includes(response.status)) return false;
+  return response.ok && authJson(response) ? response.json() : null;
+}
 async function serverAuthRequest(path, data) {
+  if (mirrorConfigured()) {
+    if (!accountBridge?.isMirror()) throw new Error('Invalid account site configuration');
+    return accountBridge.request(path, data);
+  }
   const endpoint = new URL('./api/auth/' + path, document.baseURI);
   // Central credentials may travel over plaintext only for local development.
   if (endpoint.protocol !== 'https:' && !['localhost','127.0.0.1','[::1]'].includes(endpoint.hostname)) {
@@ -6190,7 +6245,7 @@ async function serverAuthRequest(path, data) {
     credentials: 'same-origin', cache: 'no-store', redirect: 'error',
     headers: data === undefined ? { Accept: 'application/json' } : { Accept: 'application/json', 'Content-Type': 'application/json' },
     body: data === undefined ? undefined : JSON.stringify(data),
-    signal: AbortSignal.timeout(path === 'me' ? 3500 : 10000)
+    signal: accountTimeout(path === 'me' ? 3500 : 10000)
   });
   let result = null;
   if (authJson(response)) try { result = await response.json(); } catch (_) {}
@@ -6205,6 +6260,7 @@ function updateServerUser(user) {
     // 账户已被管理员拉黑：立即下线并提示
     serverUser = null;
     state.currentUser = null;
+    if (mirrorConfigured()) accountBridge?.clearSession();
     stopPresence();
     applyAdminMode();
     refreshAccountLabel();
@@ -6215,6 +6271,11 @@ function updateServerUser(user) {
   }
   serverUser = u;
   state.currentUser = u?.username || null;
+  if (!u) {
+    stopInboxPoll();
+    const inbox = $('#btn-inbox');
+    if (inbox) inbox.hidden = true;
+  }
   applyAdminMode();
 }
 function refreshAccountLabel() {
@@ -6232,6 +6293,92 @@ function refreshAccountLabel() {
   $('#set-login').hidden = !!state.currentUser;
   $('#set-logout').hidden = !state.currentUser;
 }
+function renderAccountConnection() {
+  const credentials = $('#auth-credentials');
+  if (!credentials) return;
+  const mirror = mirrorConfigured();
+  const confirmUser = Boolean(accountConnection && confirmConnectedUser && serverUser);
+  credentials.hidden = mirror || confirmUser;
+  if (mirror) {
+    for (const el of credentials.querySelectorAll('input, select, button')) el.disabled = true;
+    $('#forgot-panel').hidden = true;
+    for (const el of $('#forgot-panel').querySelectorAll('input, button')) el.disabled = true;
+    $('#auth-trial-banner').hidden = true;
+  }
+  $('#auth-tabs').hidden = confirmUser;
+  $('#auth-bridge-choice').hidden = !mirror && !accountConnection;
+  const mirrorForgot = $('#btn-auth-bridge-forgot');
+  const switchUser = $('#btn-auth-bridge-switch');
+  mirrorForgot.hidden = !mirror || state.authMode !== 'login' || !accountBridge?.isMirror();
+  mirrorForgot.textContent = bridgeText('forgot');
+  switchUser.hidden = !confirmUser;
+  switchUser.textContent = bridgeText('switchUser');
+  const info = $('#auth-bridge-info');
+  const submit = $('#btn-auth-submit');
+  const guest = $('#btn-auth-guest');
+  if (mirror) {
+    info.textContent = accountBridge?.isMirror()
+      ? bridgeText('mirror', { site: accountBridge.accountOrigin() }) : bridgeText('unavailable');
+    submit.textContent = bridgeText(state.authMode === 'register' ? 'register' : 'login');
+    submit.disabled = authBusy || !accountBridge?.isMirror();
+    guest.disabled = authBusy;
+  } else {
+    if (accountConnection) {
+      const destination = new URL(accountConnection.returnUrl);
+      const site = destination.host + destination.pathname;
+      info.textContent = bridgeText(confirmUser ? 'current' : 'central', { site, name: serverUser?.username });
+    }
+    submit.textContent = confirmUser ? bridgeText('continue') : t(state.authMode === 'register' ? 'auth.submitRegister' : 'auth.submitLogin');
+  }
+  guest.textContent = accountConnection ? bridgeText('cancel') : t('quick.guest');
+}
+function setAccountConnectionStatus(key = '') {
+  const status = $('#auth-bridge-status');
+  if (!status) return;
+  status.hidden = !key;
+  status.textContent = key ? bridgeText(key) : '';
+  status.classList.toggle('err', ['failed', 'storage', 'unavailable'].includes(key));
+}
+function openAccountConnection() {
+  if (!connectionFormShown) {
+    connectionFormShown = true;
+    confirmConnectedUser = Boolean(serverUser && accountConnection.action === 'login');
+    switchAuthTab(accountConnection.action === 'register' ? 'register' : 'login');
+    if (accountConnection.action === 'forgot') openForgot();
+  }
+  renderAccountConnection();
+  openModal('modal-auth');
+}
+function switchAccountConnectionUser() {
+  if (authBusy || !accountConnection) return;
+  confirmConnectedUser = false;
+  setAccountConnectionStatus();
+  switchAuthTab('login');
+  $('#auth-user').focus();
+}
+async function startMirrorSignIn(action) {
+  if (authBusy || !mirrorConfigured()) return;
+  if (!accountBridge?.isMirror()) return setAccountConnectionStatus('unavailable');
+  authBusy = true;
+  renderAccountConnection();
+  setAccountConnectionStatus('connecting');
+  try {
+    await Promise.all([flushSave(), flushPaperSave()]);
+    await accountBridge.start(action, state.settings.lang);
+  } catch (error) {
+    setAccountConnectionStatus(error.code === 'storage_unavailable' ? 'storage' : 'failed');
+  } finally {
+    authBusy = false;
+    renderAccountConnection();
+  }
+}
+async function finishAccountConnection() {
+  const connection = accountConnection;
+  const { redirectUrl } = await serverAuthRequest('connect', {
+    returnUrl: connection.returnUrl, challenge: connection.challenge, state: connection.state
+  });
+  accountBridge.complete(connection, redirectUrl);
+}
 function renderAuthModeCopy() {
   const anchor = $('#auth-hint');
   if (!anchor) return;
@@ -6243,6 +6390,7 @@ function renderAuthModeCopy() {
     anchor.after(note);
   }
   note.textContent = authModeCopy()[authMode === 'managed' ? 'server' : authMode === 'local' ? 'local' : 'offline'];
+  renderAccountConnection();
   if (authMode === 'managed') {
     $('#auth-user').placeholder = authModeCopy().user;
     $('#auth-pass').placeholder = authModeCopy().pass;
@@ -6269,21 +6417,25 @@ function renderAuthModeCopy() {
   }
 }
 async function setUpAccountMode({ restore = false } = {}) {
-  if (!authMethod()) { authMode = 'local'; return; }
+  if (mirrorConfigured()) {
+    // A configured mirror stays managed when its account service is unavailable.
+    authMode = 'managed';
+  } else if (!authMethod()) {
+    authMode = 'local';
+    loadAccounts();
+    return;
+  }
   if (authMode === 'local') return;
   if (readManagedMarker()) authMode = 'managed';
   if (authMode === 'unknown') {
     if (!authModeCheck) {
       authModeCheck = (async () => {
         try {
-          const response = await fetch(new URL('./api/status', document.baseURI), {
-            credentials:'same-origin', cache:'no-store', redirect:'error', signal:AbortSignal.timeout(3000),
-            headers:{Accept:'application/json'}
-          });
-          if ((response.ok && authJson(response) && (await response.json())?.managed === true)) {
+          const status = await accountStatus();
+          if (status?.managed === true) {
             authMode = 'managed';
             writeManagedMarker();
-          } else if ([404,405,410].includes(response.status)) {
+          } else if (status === false) {
             // An explicit absence is normal on the static deployment. Never downgrade a known managed installation.
             authMode = 'local';
             loadAccounts();
@@ -6294,10 +6446,11 @@ async function setUpAccountMode({ restore = false } = {}) {
     await authModeCheck;
   }
   if (authMode !== 'local' && !serverUser) state.currentUser = null;
+  if (restore) await restoreMirrorCallback();
   if (restore && authMode === 'managed' && !serverUser) await restoreManagedSession();
-  if (authMode === 'managed') {
+  if (authMode === 'managed' && (!mirrorConfigured() || accountBridge?.isMirror())) {
     startOnlinePoll();
-    startInboxPoll();
+    if (serverUser) startInboxPoll();
   } else {
     stopOnlinePoll();
     stopInboxPoll();
@@ -6308,6 +6461,20 @@ async function setUpAccountMode({ restore = false } = {}) {
   }
   applyAdminMode();
 }
+async function restoreMirrorCallback() {
+  if (mirrorCallbackChecked || !mirrorConfigured() || !accountBridge?.isMirror()) return;
+  mirrorCallbackChecked = true;
+  try {
+    const response = await accountBridge.consumeCallback();
+    if (response?.user) {
+      authRevision++;
+      updateServerUser(response.user);
+      if (serverUser) mirrorCallbackNotice = 'restored';
+    }
+  } catch (error) {
+    mirrorCallbackNotice = error.code === 'storage_unavailable' ? 'storage' : 'failed';
+  }
+}
 async function restoreManagedSession() {
   if (restoreSession) return restoreSession;
   const version = authRevision;
@@ -6315,7 +6482,9 @@ async function restoreManagedSession() {
     try {
       const response = await serverAuthRequest('me');
       if (authRevision === version) updateServerUser(response.user);
-    } catch (_) { /* An offline or busy server never creates a local shadow account. */ }
+    } catch (error) {
+      if (mirrorConfigured() && error.status === 401 && authRevision === version) accountBridge?.clearSession();
+    }
   })().finally(() => { restoreSession = null; });
   return restoreSession;
 }
@@ -6344,6 +6513,7 @@ async function heartbeat() {
       }
     } catch (error) {
       if (error.status === 401 && authRevision === version && serverUser?.id === user) {
+        if (mirrorConfigured()) accountBridge?.clearSession();
         updateServerUser(null);
         stopPresence();
         refreshAccountLabel();
@@ -6378,6 +6548,7 @@ function resetForgotState() {
   if (fp) fp.value = '';
 }
 function openForgot() {
+  if (mirrorConfigured()) { void startMirrorSignIn('forgot'); return; }
   $('#forgot-panel').hidden = false;
   $('#btn-auth-forgot').style.display = 'none';
   resetForgotState();
@@ -6390,6 +6561,7 @@ function closeForgot() {
   resetForgotState();
 }
 async function askForgotQuestion() {
+  if (mirrorConfigured()) return;
   const user = $('#forgot-user').value.trim();
   if (!user) return hintForgot(t('auth.errUser'));
   hintForgot('');
@@ -6418,6 +6590,7 @@ async function askForgotQuestion() {
   }
 }
 async function submitForgotReset() {
+  if (mirrorConfigured()) return;
   const user = $('#forgot-user').value.trim();
   const answer = $('#forgot-answer').value.trim();
   const pass = $('#forgot-pass').value;
@@ -6509,16 +6682,23 @@ function switchAuthTab(mode) {
 }
 async function authSubmit() {
   if (authBusy) return;
+  if (mirrorConfigured()) return startMirrorSignIn(state.authMode);
   const user = $('#auth-user').value.trim();
   const pass = $('#auth-pass').value;
   const isRegister = state.authMode === 'register';
-  if (isRegister && $('#auth-pass2').value !== pass) return setAuthHint(t('auth.errPass2'));
+  if (!confirmConnectedUser && isRegister && $('#auth-pass2').value !== pass) return setAuthHint(t('auth.errPass2'));
   const submit = $('#btn-auth-submit'), guest = $('#btn-auth-guest');
   authBusy = true;
   submit.disabled = true;
   if (guest) guest.disabled = true;
   let signedIn = false;
   try {
+    setAccountConnectionStatus();
+    if (accountConnection && confirmConnectedUser && serverUser) {
+      setAccountConnectionStatus('returning');
+      await finishAccountConnection();
+      return;
+    }
     if (authMode === 'unknown') await setUpAccountMode();
     renderAuthModeCopy();
     if (authMode === 'unknown') return setAuthHint(authModeCopy().failed);
@@ -6534,6 +6714,15 @@ async function authSubmit() {
       authRevision++;
       updateServerUser(response.user);
       if (!serverUser) throw new Error('Missing session user');
+      if (accountConnection) {
+        signedIn = true;
+        confirmConnectedUser = true;
+        $('#auth-pass').value = ''; $('#auth-pass2').value = '';
+        renderAccountConnection();
+        setAccountConnectionStatus('returning');
+        await finishAccountConnection();
+        return;
+      }
     } else {
       if (!validUser(user)) return setAuthHint(t('auth.errUser'));
       if (!validPass(pass)) return setAuthHint(t('auth.errPass'));
@@ -6564,12 +6753,19 @@ async function authSubmit() {
     renderAll();
     advanceOnboarding();
   } catch (error) {
-    setAuthHint(authMode === 'managed' ? managedAuthHint(error) : authModeCopy().failed);
+    if (accountConnection && confirmConnectedUser) {
+      if (error.status === 401) {
+        confirmConnectedUser = false;
+        updateServerUser(null);
+        switchAuthTab('login');
+      }
+      setAccountConnectionStatus('failed');
+    } else setAuthHint(authMode === 'managed' ? managedAuthHint(error) : authModeCopy().failed);
   } finally {
     authBusy = false;
     submit.disabled = false;
     if (guest) guest.disabled = false;
-    if (signedIn) syncPresence();
+    if (signedIn) { syncPresence(); startInboxPoll(); }
   }
 }
 async function logoutUser() {
@@ -6580,7 +6776,8 @@ async function logoutUser() {
   try {
     if (authMode === 'managed') {
       try { await serverAuthRequest('logout', {}); }
-      catch (error) { if (error.status !== 401) throw error; }
+      catch (error) { if (error.status !== 401 && !mirrorConfigured()) throw error; }
+      if (mirrorConfigured()) accountBridge?.clearSession();
       updateServerUser(null);
     } else {
       try { localStorage.removeItem('nebula-session'); } catch (_) {}
@@ -6607,6 +6804,13 @@ function guestStarted() {
   catch (e) { return false; }
 }
 function continueLocalWriting() {
+  if (accountConnection) {
+    accountBridge.clearIncoming();
+    accountConnection = null;
+    connectionFormShown = false;
+    confirmConnectedUser = false;
+    setAccountConnectionStatus();
+  }
   localWriting = true;
   if (storageAllowed()) {
     try { localStorage.setItem('nebula-local-writing', '1'); } catch (e) { }
@@ -6654,6 +6858,7 @@ function finishQuickStart() {
 /* ---------------- 首次使用：须知 → 存储 → 本地写作或登录 → 工作台 ---------------- */
 function advanceOnboarding() {
   if (!termsAccepted()) { openTerms(); return; }
+  if (accountConnection) { openAccountConnection(); return; }
   if (!storageAllowed() && !state.settings.storageDenied) { openStorageAsk(); return; }
   if (!state.currentUser && !guestStarted()) { switchAuthTab(state.authMode); openModal('modal-auth'); return; }
   if (!guidedDone()) { openQuickStart(); return; }
@@ -7647,6 +7852,8 @@ function bindEvents() {
   $('#auth-tab-login').addEventListener('click', () => switchAuthTab('login'));
   // 忘记密码（密保问题找回）
   $('#btn-auth-forgot').addEventListener('click', openForgot);
+  $('#btn-auth-bridge-forgot')?.addEventListener('click', () => startMirrorSignIn('forgot'));
+  $('#btn-auth-bridge-switch')?.addEventListener('click', switchAccountConnectionUser);
   $('#btn-forgot-back').addEventListener('click', closeForgot);
   $('#btn-forgot-reset').addEventListener('click', submitForgotReset);
   $('#forgot-user').addEventListener('keydown', e => { if (e.key === 'Enter') askForgotQuestion(); });
@@ -7665,7 +7872,7 @@ function bindEvents() {
     closeModal('modal-settings');
     switchAuthTab('login');
     openModal('modal-auth');
-    $('#auth-user').focus();
+    $(mirrorConfigured() || confirmConnectedUser ? '#btn-auth-submit' : '#auth-user').focus();
   });
   $('#btn-auth-guest').addEventListener('click', continueLocalWriting);
   document.addEventListener('visibilitychange', syncPresence);
@@ -7676,7 +7883,9 @@ function bindEvents() {
     if (authMode === 'managed' && serverUser) { void heartbeat(); return; }
     if (authMode !== 'local') {
       await setUpAccountMode({restore:true});
+      loadAccountConnection();
       renderAuthModeCopy();
+      if (accountConnection) { advanceOnboarding(); return; }
       if (!serverUser) return;
       if (!$('#modal-auth').hidden) closeModal('modal-auth');
       renderVip();
@@ -7983,12 +8192,19 @@ function fillPresetSelect() {
 }
 
 /* ---------------- 启动 ---------------- */
+function loadAccountConnection() {
+  if (mirrorConfigured()) return;
+  if (authMode === 'local') { accountBridge?.clearIncoming(); return; }
+  if (authMode !== 'managed' || accountConnection) return;
+  accountConnection = accountBridge?.incoming() || null;
+  if (accountConnection) state.settings.lang = normalizeOutputLang(accountConnection.lang, state.settings.lang);
+}
 async function boot() {
   loadSettings();
   state.board = state.settings.board === 'paper' ? 'paper' : 'novel';
   loadWikiCache();
-  loadAccounts();
   await setUpAccountMode({restore:true});
+  loadAccountConnection();
   lastTrialState = trialActive();
   loadRefCache();
   // 首次使用自动配置免费免密钥模型（Pollinations AI），开箱即用
@@ -8016,6 +8232,11 @@ async function boot() {
   // 首次使用只显示当前步骤，避免书库与须知、登录、工作台重叠。
   advanceOnboarding();
   syncPresence();
+  if (mirrorCallbackNotice) {
+    const restored = mirrorCallbackNotice === 'restored';
+    if (!restored) setAccountConnectionStatus(mirrorCallbackNotice);
+    toast(bridgeText(mirrorCallbackNotice), restored ? 'ok' : 'warn', 5000);
+  }
   window.__nebulaReady = true;
 }
 boot();
