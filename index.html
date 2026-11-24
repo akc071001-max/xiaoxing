@@ -27,15 +27,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.3.0" />
+<link rel="stylesheet" href="css/style.css?v=4.3.1" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
-<!-- 管理员专属背景：黑色沉稳 + 法拉利车灯般的呼吸之眼 -->
+<!-- 管理员专属背景：深黑青色氛围 + 屏幕中央的 LED 车灯（呼吸动效） -->
 <div id="admin-eyes" aria-hidden="true">
-  <div class="admin-eye" id="admin-eye-l"></div>
-  <div class="admin-eye" id="admin-eye-r"></div>
+  <div class="admin-eyes-row">
+    <div class="admin-eye" id="admin-eye-l"></div>
+    <div class="admin-eye" id="admin-eye-r"></div>
+  </div>
   <div class="admin-eye-glow"></div>
+  <div class="admin-eye-reflection"></div>
 </div>
 <div class="scanlines" aria-hidden="true"></div>
 
@@ -1248,7 +1251,7 @@
     <p id="draft-review-note" role="status"></p>
   </div>
 </dialog>
-<script src="js/draft-review.js?v=4.3.0"></script>
-<script src="js/app.js?v=4.3.0"></script>
+<script src="js/draft-review.js?v=4.3.1"></script>
+<script src="js/app.js?v=4.3.1"></script>
 </body>
 </html>
