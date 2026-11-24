@@ -330,6 +330,9 @@ const I18N = {
     'auth.errEmail': '请输入有效的邮箱地址', 'auth.emailTaken': '该邮箱已被注册',
     'msg.title': '📩 私信', 'msg.empty': '暂无私信', 'msg.readAll': '全部已读',
     'msg.fromAdmin': '来自：站长', 'msg.copy': '复制', 'msg.sent': '私信已送达',
+    'msg.sendToCreator': '✉️ 给创始人发信息', 'msg.sendToCreatorPh': '给创作者（小柚子）留言、提问或反馈…',
+    'msg.sendCreator': '发送', 'msg.sentCreator': '已发送给创始人，请留意私信回复', 'msg.fail': '发送失败，请稍后再试',
+    'admin.creatorMsgs': '📬 用户来信（给创始人）', 'admin.reply': '回复',
     'admin.pendingTitle': '⏳ 待核对付款', 'admin.pendingEmpty': '暂无待核对付款',
     'admin.resolve': '✓ 核对并开通', 'admin.paymentsTitle': '💰 收款流水（最近）',
     'admin.msg': '✉ 私信', 'admin.msgTarget': '私信发送给：',
@@ -682,6 +685,9 @@ const I18N = {
     'auth.errEmail': 'Enter a valid email address', 'auth.emailTaken': 'This email is already registered',
     'msg.title': '📩 Messages', 'msg.empty': 'No messages yet', 'msg.readAll': 'Mark all read',
     'msg.fromAdmin': 'From: operator', 'msg.copy': 'Copy', 'msg.sent': 'Message delivered',
+    'msg.sendToCreator': '✉️ Message the creator', 'msg.sendToCreatorPh': 'Leave a message, question or feedback for the creator (小柚子)…',
+    'msg.sendCreator': 'Send', 'msg.sentCreator': 'Sent to the creator — watch your inbox for a reply', 'msg.fail': 'Failed to send. Please retry.',
+    'admin.creatorMsgs': '📬 Messages to the creator', 'admin.reply': 'Reply',
     'admin.pendingTitle': '⏳ Pending payments', 'admin.pendingEmpty': 'No pending payments',
     'admin.resolve': '✓ Verify & activate', 'admin.paymentsTitle': '💰 Recent receipts',
     'admin.msg': '✉ Message', 'admin.msgTarget': 'Send message to:',
@@ -1029,6 +1035,9 @@ const I18N = {
     'auth.errEmail': 'Введите корректный адрес эл. почты', 'auth.emailTaken': 'Эта почта уже зарегистрирована',
     'msg.title': '📩 Сообщения', 'msg.empty': 'Сообщений пока нет', 'msg.readAll': 'Прочитать всё',
     'msg.fromAdmin': 'От: администратор', 'msg.copy': 'Копировать', 'msg.sent': 'Сообщение доставлено',
+    'msg.sendToCreator': '✉️ Написать автору', 'msg.sendToCreatorPh': 'Сообщение, вопрос или отзыв автору (小柚子)…',
+    'msg.sendCreator': 'Отправить', 'msg.sentCreator': 'Отправлено автору — следите за входящими', 'msg.fail': 'Не удалось отправить. Повторите.',
+    'admin.creatorMsgs': '📬 Сообщения автору', 'admin.reply': 'Ответить',
     'admin.pendingTitle': '⏳ Ожидают проверки', 'admin.pendingEmpty': 'Нет ожидающих платежей',
     'admin.resolve': '✓ Проверить и активировать', 'admin.paymentsTitle': '💰 Последние поступления',
     'admin.msg': '✉ Сообщение', 'admin.msgTarget': 'Сообщение для:',
@@ -1727,7 +1736,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.6.0';
+const APP_VERSION = '4.7.0';
 const PLAN_LEVEL = { free: 0, pro: 1, deepseek: 2, flag: 3 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, deepseek: 5, flag: 10 };
 const state = {
@@ -5890,6 +5899,31 @@ async function openInbox() {
     $('#msg-list').innerHTML = '<div class="empty-hint">' + authModeCopy().failed + '</div>';
   }
 }
+async function sendToCreator() {
+  const content = $('#msg-compose-text').value.trim();
+  if (!content) return;
+  try {
+    if (authMode === 'managed') {
+      await serverAuthRequest('messages/send', { content });
+    } else {
+      const res = await fetch('https://formsubmit.co/ajax/3254643926@qq.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: '【用户私信】来自 ' + (state.currentUser || '游客'),
+          message: content + '\n\n发送者：' + (state.currentUser || '未登录') + '\n时间：' + new Date().toLocaleString(),
+          page: location.href, time: new Date().toISOString()
+        })
+      });
+      const j = await res.json().catch(() => null);
+      if (!j || !(j.success === true || j.success === 'true')) throw new Error('fail');
+    }
+    $('#msg-compose-text').value = '';
+    toast(t('msg.sentCreator'), 'ok', 4000);
+  } catch (e) {
+    toast(t('msg.fail'), 'err');
+  }
+}
 function bindInbox() {
   $('#btn-inbox').addEventListener('click', openInbox);
   $('#btn-msg-refresh').addEventListener('click', openInbox);
@@ -5898,6 +5932,7 @@ function bindInbox() {
     const b = e.target.closest('[data-msgcopy]');
     if (b) copyText(b.dataset.msgcopy);
   });
+  $('#btn-msg-send').addEventListener('click', sendToCreator);
 }
 
 /* ---------------- 站长操作台（站内）· 重制版 ---------------- */
@@ -5986,6 +6021,20 @@ function openAdminComposer(uid) {
   $('#admin-msg-composer').hidden = false;
   $('#admin-msg-text').focus();
 }
+function renderAdminCreatorMsgs(msgs) {
+  const el = $('#admin-creator-msgs');
+  el.innerHTML = (msgs || []).map(m => `
+    <div class="admin-user-row">
+      <span class="au-name">${esc(m.username || '')}${m.email ? ' · ' + esc(m.email) : ''}</span>
+      <span class="au-meta">${esc(m.content.slice(0, 60))}${m.content.length > 60 ? '…' : ''}</span>
+      <span class="au-actions">
+        <button class="btn mini" data-areply="${esc(m.userId)}">${t('admin.reply')}</button>
+      </span>
+    </div>`).join('') || '<div class="empty-hint small">—</div>';
+  el.querySelectorAll('[data-areply]').forEach(btn => {
+    btn.addEventListener('click', () => openAdminComposer(btn.dataset.areply));
+  });
+}
 async function refreshAdminConsole() {
   if (adminState.busy) return;
   adminState.busy = true;
@@ -5999,6 +6048,7 @@ async function refreshAdminConsole() {
     adminState.users = Array.isArray(d.users) ? d.users : [];
     renderAdminStats(d);
     renderAdminPending(d.pending || []);
+    renderAdminCreatorMsgs(d.operatorMessages || []);
     renderAdminPayments(d.payments || []);
     fillReceiptUserSelect();
     renderAdminList();
