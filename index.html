@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.10.0" />
+<link rel="stylesheet" href="css/style.css?v=4.11.0" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -76,6 +76,7 @@
       <span class="online-dot"></span><span id="online-count">0</span><span data-i18n="online.label">在线</span>
     </div>
     <button class="tb-btn" id="btn-inbox" data-i18n-title="msg.title" title="私信" hidden>📩<span class="inbox-badge" id="inbox-badge" hidden>0</span></button>
+    <button class="tb-btn" id="btn-share" data-i18n-title="share.title" title="把晓星分享给朋友">📤</button>
     <button class="tb-btn admin-only" id="btn-admin-console" data-i18n="admin.open" data-i18n-title="admin.openTitle" title="站长操作台">👑 管理</button>
     <button class="tb-btn" id="btn-vip" data-i18n="btn.vip" data-i18n-title="btn.vipTitle" title="会员中心（试运营）">💎 会员</button>
     <button class="tb-btn" id="btn-settings" data-i18n="btn.settings" data-i18n-title="btn.settingsTitle" title="设置">⚙ 设置</button>
@@ -113,9 +114,9 @@
 
   <main id="editor-zone">
     <div id="editor-toolbar">
+      <button class="im-entry" id="btn-immersive" data-i18n-title="im.openTitle" title="沉浸式写作：像发消息一样用角色对话写小说"><span class="im-entry-ico">🗨</span><span class="im-entry-label" data-i18n="im.open">沉浸式写作</span></button>
       <input id="chapter-title" type="text" data-i18n-ph="ed.chapterTitlePh" placeholder="章节标题（可留空，AI 可代起）…" maxlength="120" autocomplete="off" />
       <button class="icon-btn" id="btn-title-suggest" data-i18n-title="co.chapterTitle" title="AI 起章节名">✨</button>
-      <button class="icon-btn" id="btn-immersive" data-i18n-title="im.openTitle" title="沉浸式写作：在聊天界面里用角色对话写小说">🗨</button>
       <select id="chapter-status" data-i18n-title="ed.chapterStatus" title="章节状态">
         <option value="draft" data-i18n="status.draft">草稿</option>
         <option value="revising" data-i18n="status.revising">修订中</option>
@@ -123,7 +124,7 @@
       </select>
       <span class="meta-chip" id="word-count">0 字</span>
       <span class="meta-chip save-chip" id="save-state">—</span>
-      <button class="btn mini draft-history-btn" id="btn-chapter-history" type="button" disabled>版本历史</button>
+      <button class="btn mini draft-history-btn" id="btn-chapter-history" type="button" disabled data-i18n-title="history.btnTitle" title="查看本文章的全部保存历史并可恢复">🕘 历史记录</button>
       <button class="btn mini" id="btn-manuscript-search" type="button" aria-haspopup="dialog" disabled>全文查找</button>
       <span class="spacer"></span>
       <button class="tb-btn" id="btn-focus" data-i18n="btn.focus" data-i18n-title="btn.focusTitle" title="专注写作模式（隐藏面板）">⛶ 专注</button>
@@ -183,7 +184,7 @@
         </select>
         <span class="meta-chip" id="paper-word-count">0 字</span>
         <span class="meta-chip save-chip" id="paper-save-state">—</span>
-      <button class="btn mini draft-history-btn" id="btn-paper-history" type="button" disabled>版本历史</button>
+      <button class="btn mini draft-history-btn" id="btn-paper-history" type="button" disabled data-i18n-title="history.btnTitle" title="查看本文章的全部保存历史并可恢复">🕘 历史记录</button>
         <span class="spacer"></span>
         <button class="btn" id="btn-paper-guide" type="button" aria-haspopup="dialog" data-i18n="p.guide">写作向导</button>
         <button type="button" class="btn" id="btn-paper-sources" aria-haspopup="dialog" data-i18n="refs.open" disabled>文献笔记</button>
@@ -1293,6 +1294,31 @@
   </div>
 </div>
 
+<!-- 分享 -->
+<div class="modal-overlay" id="modal-share" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" data-i18n="share.title">📤 把晓星分享给朋友</div>
+      <button class="icon-btn modal-close" data-close="modal-share">✕</button>
+    </div>
+    <div class="modal-body share-body">
+      <p class="share-slogan" data-i18n="share.slogan">免费 AI 写小说、写论文，还能用角色对话沉浸式创作——推荐给你！</p>
+      <button class="btn primary share-big" id="btn-share-api" data-i18n="share.api">📲 一键分享（系统分享）</button>
+      <div class="share-row">
+        <input class="input" id="share-link" readonly />
+        <button class="btn" id="btn-share-copy-link" data-i18n="share.copyLink">复制链接</button>
+      </div>
+      <div class="share-row">
+        <button class="btn" id="btn-share-copy-text" data-i18n="share.copyText">复制推荐语 + 链接</button>
+      </div>
+      <div class="share-qr-wrap">
+        <img class="share-qr" id="share-qr" alt="二维码" />
+        <span class="share-qr-note" data-i18n="share.qrNote">扫码即可打开晓星</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="toasts"></div>
 <noscript><div style="position:fixed;inset:0;background:#04060e;color:#fff;display:flex;align-items:center;justify-content:center">本应用需要启用 JavaScript。</div></noscript>
 <div class="modal-overlay" id="modal-install-app" hidden>
@@ -1391,8 +1417,8 @@
   </div>
 </dialog>
 <script src="js/account-config.js"></script>
-<script src="js/account-bridge.js?v=4.10.0"></script>
-<script src="js/draft-review.js?v=4.10.0"></script>
-<script src="js/app.js?v=4.10.0"></script>
+<script src="js/account-bridge.js?v=4.11.0"></script>
+<script src="js/draft-review.js?v=4.11.0"></script>
+<script src="js/app.js?v=4.11.0"></script>
 </body>
 </html>
