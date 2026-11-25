@@ -341,7 +341,7 @@ const I18N = {
     'msg.sendToCreator': '✉️ 给创始人发信息', 'msg.sendToCreatorPh': '给创作者（小柚子）留言、提问或反馈…',
     'msg.sendCreator': '发送', 'msg.sentCreator': '已发送给创始人，请留意私信回复', 'msg.fail': '发送失败，请稍后再试',
     'admin.creatorMsgs': '📬 用户来信（给创始人）', 'admin.reply': '回复',
-    'im.openTitle': '沉浸式写作：在聊天界面里用角色对话写小说',
+    'im.openTitle': '沉浸式写作：在聊天界面里用角色对话写小说', 'im.open': '沉浸式写作',
     'im.finish': '完成本章', 'im.inputPh': '输入角色要说的话…', 'im.send': '发送',
     'im.narrator': '旁白', 'im.hint': '选择下方角色，像发消息一样写对话。点右上角「完成本章」，AI 会把对话融合成正文并加入旁白。',
     'im.needNovel': '请先创建小说', 'im.needChapter': '请先创建章节', 'im.untitled': '未命名小说',
@@ -388,6 +388,10 @@ const I18N = {
     'auth.errPass2': '两次输入的密码不一致',
     'auth.errLogin': '用户名或密码错误', 'auth.errExists': '该用户名已注册，请直接登录',
     'auth.anyDevice': '无服务器模式：同一用户名+密码可在任何设备登录；数据请用「跨设备完整备份」携带',
+    'history.btnTitle': '查看本文章的全部保存历史并可恢复', 'history.hint': '已自动保存历史快照：点工具栏「🕘 历史记录」可随时查看与恢复之前的版本',
+    'share.title': '📤 把晓星分享给朋友', 'share.slogan': '免费 AI 写小说、写论文，还能用角色对话沉浸式创作——推荐给你！',
+    'share.api': '📲 一键分享（系统分享）', 'share.copyLink': '复制链接', 'share.copyText': '复制推荐语 + 链接',
+    'share.qrNote': '扫码即可打开晓星', 'share.copied': '已复制，快去分享吧！',
     'auth.adoptToast': '已在本设备建立该账号档案（同用户名+密码=同一身份；数据可用「跨设备完整备份」携带）',
     'auth.okRegister': '注册成功！已自动登录，1 天最高规格免费体验已开启（含 DeepSeek 等高级权益）',
     'auth.welcome': '欢迎回来，{u}',
@@ -714,7 +718,7 @@ const I18N = {
     'msg.sendToCreator': '✉️ Message the creator', 'msg.sendToCreatorPh': 'Leave a message, question or feedback for the creator (小柚子)…',
     'msg.sendCreator': 'Send', 'msg.sentCreator': 'Sent to the creator — watch your inbox for a reply', 'msg.fail': 'Failed to send. Please retry.',
     'admin.creatorMsgs': '📬 Messages to the creator', 'admin.reply': 'Reply',
-    'im.openTitle': 'Immersive writing: write your novel as character chats',
+    'im.openTitle': 'Immersive writing: write your novel as character chats', 'im.open': 'Immersive Writing',
     'im.finish': 'Finish chapter', 'im.inputPh': 'Type what the character says…', 'im.send': 'Send',
     'im.narrator': 'Narrator', 'im.hint': 'Pick a character below and write like chatting. Tap “Finish chapter” and the AI turns the dialogue into prose with narration.',
     'im.needNovel': 'Create a novel first', 'im.needChapter': 'Create a chapter first', 'im.untitled': 'Untitled novel',
@@ -761,6 +765,10 @@ const I18N = {
     'auth.errPass2': 'The two passwords do not match',
     'auth.errLogin': 'Wrong username or password', 'auth.errExists': 'Username already registered — sign in instead',
     'auth.anyDevice': 'Serverless mode: the same username + password works on any device; carry your data with “Full cross-device backup”.',
+    'history.btnTitle': 'View and restore all saved versions of this document', 'history.hint': 'Snapshots are saved automatically: tap “🕘 History” in the toolbar to view and restore earlier versions anytime',
+    'share.title': '📤 Share Xiaoxing with friends', 'share.slogan': 'Free AI novel & paper writing, plus immersive character-chat creation — recommended!',
+    'share.api': '📲 Share (system dialog)', 'share.copyLink': 'Copy link', 'share.copyText': 'Copy message + link',
+    'share.qrNote': 'Scan to open Xiaoxing', 'share.copied': 'Copied — go share it!',
     'auth.adoptToast': 'Account profile created on this device (same username + password = same identity; carry data with “Full cross-device backup”).',
     'auth.okRegister': 'Registered! Signed in automatically — 1-day top-tier free trial (incl. DeepSeek) started',
     'auth.welcome': 'Welcome back, {u}',
@@ -1082,7 +1090,7 @@ const I18N = {
     'msg.sendToCreator': '✉️ Написать автору', 'msg.sendToCreatorPh': 'Сообщение, вопрос или отзыв автору (小柚子)…',
     'msg.sendCreator': 'Отправить', 'msg.sentCreator': 'Отправлено автору — следите за входящими', 'msg.fail': 'Не удалось отправить. Повторите.',
     'admin.creatorMsgs': '📬 Сообщения автору', 'admin.reply': 'Ответить',
-    'im.openTitle': 'Погружение: пишите роман как чат персонажей',
+    'im.openTitle': 'Погружение: пишите роман как чат персонажей', 'im.open': 'Погружение',
     'im.finish': 'Завершить главу', 'im.inputPh': 'Введите реплику персонажа…', 'im.send': 'Отправить',
     'im.narrator': 'Рассказчик', 'im.hint': 'Выберите персонажа и пишите, как в чате. Нажмите «Завершить главу» — ИИ превратит диалог в текст с повествованием.',
     'im.needNovel': 'Сначала создайте роман', 'im.needChapter': 'Сначала создайте главу', 'im.untitled': 'Без названия',
@@ -1129,6 +1137,10 @@ const I18N = {
     'auth.errPass2': 'Пароли не совпадают',
     'auth.errLogin': 'Неверное имя или пароль', 'auth.errExists': 'Такое имя уже занято — войдите',
     'auth.anyDevice': 'Режим без сервера: одни и те же имя и пароль работают на любом устройстве; данные переносите через «Полный бэкап между устройствами».',
+    'history.btnTitle': 'Просмотр и восстановление всех сохранённых версий', 'history.hint': 'Снимки сохраняются автоматически: нажмите «🕘 История» на панели, чтобы посмотреть и восстановить версии',
+    'share.title': '📤 Поделиться Сяосин с друзьями', 'share.slogan': 'Бесплатные романы и работы с ИИ и погружением в чат персонажей — рекомендую!',
+    'share.api': '📲 Поделиться (системно)', 'share.copyLink': 'Копировать ссылку', 'share.copyText': 'Копировать текст + ссылку',
+    'share.qrNote': 'Отсканируйте, чтобы открыть', 'share.copied': 'Скопировано — делитесь!',
     'auth.adoptToast': 'Профиль создан на этом устройстве (те же имя и пароль = та же личность; данные — через «Полный бэкап»).',
     'auth.okRegister': 'Готово! Вы вошли — бесплатный пробный период высшего уровня (включая DeepSeek) активирован',
     'auth.welcome': 'С возвращением, {u}',
@@ -1627,7 +1639,7 @@ function draftNotice(key) {
   };
   return labels[key][({zh:0,en:1,ru:2})[state.settings.lang] ?? 0];
 }
-const HISTORY_LIMIT = 16;
+const HISTORY_LIMIT = 50;
 const HISTORY_MAX_CHARS = 1250000;
 const HISTORY_FIELDS = ['title', 'content', 'outline', 'topic', 'status', 'outLang'];
 function draftVersionFields(record) {
@@ -1644,7 +1656,7 @@ function collectDraftHistory(record, delta, checkpoint = false) {
   const old = { id: uid(), at: record.updatedAt || now(), ...draftVersionFields(record) };
   if (versionSize(old) > HISTORY_MAX_CHARS) return history;
   const rolling = history.at(-1);
-  if (!checkpoint && rolling && !rolling.checkpoint && old.at - rolling.at < 30000) {
+  if (!checkpoint && rolling && !rolling.checkpoint && old.at - rolling.at < 15000) {
     history[history.length - 1] = old;
   } else {
     if (rolling) history[history.length - 1] = { ...rolling, checkpoint: true };
@@ -1790,7 +1802,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.10.0';
+const APP_VERSION = '4.11.0';
 const PLAN_LEVEL = { free: 0, pro: 1, deepseek: 2, flag: 3 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, deepseek: 5, flag: 10 };
 const state = {
@@ -2316,7 +2328,8 @@ async function saveChapter(manual) {
   const delta = { title: $('#chapter-title').value.trim(), content,
     outline: $('#chapter-outline').value, status: $('#chapter-status').value, wordCount: countWords(content) };
   state.editorDirty = false;
-  await persistDraft(STORE.chapters, c, delta, manual);
+  const result = await persistDraft(STORE.chapters, c, delta, manual);
+  if (result && manual) document.dispatchEvent(new Event('historyFirstSave'));
 }
 function toggleFocus(force) {
   const on = force !== undefined ? force : !document.body.classList.contains('focus-mode');
@@ -3383,9 +3396,9 @@ function applyChapterCoach() {
 
 /* ---------------- 版本历史 ---------------- */
 const HISTORY_COPY = {
-  zh: { button: '版本历史', empty: '还没有旧版本。继续编辑和保存后，旧稿会出现在这里。', help: '预览早前保存的稿件。恢复时会先保留当前稿。最多保留 16 个旧版本；连续编辑会合并，过大的旧稿可能不保留。', restore: '恢复选中版本', restored: '已恢复旧版本；恢复前的稿件仍在版本历史中。', pick: '请选择版本', preview: '旧稿预览', busy: '请先停止 AI 创作，再查看或恢复旧稿。' },
-  en: { button: 'Version history', empty: 'No earlier versions yet. Older drafts will appear after more edits are saved.', help: 'Preview a saved draft. Restoring preserves your current version first. Up to 16 earlier versions are kept; rapid edits are grouped and very large drafts may be omitted.', restore: 'Restore selected version', restored: 'Version restored. Your previous draft remains in history.', pick: 'Choose a version', preview: 'Version preview', busy: 'Stop AI generation before viewing or restoring an earlier draft.' },
-  ru: { button: 'История версий', empty: 'Предыдущих версий пока нет. Они появятся после сохранения следующих правок.', help: 'Просмотрите сохранённый черновик. Перед восстановлением сохраняется текущая версия. Хранятся до 16 версий; частые изменения объединяются, а очень большие черновики могут быть пропущены.', restore: 'Восстановить выбранную версию', restored: 'Версия восстановлена. Предыдущий черновик остался в истории.', pick: 'Выберите версию', preview: 'Просмотр версии', busy: 'Остановите генерацию, прежде чем просматривать или восстанавливать черновик.' }
+  zh: { button: '🕘 历史记录', empty: '还没有旧版本。继续编辑和保存后，旧稿会出现在这里。', help: '预览早前保存的稿件。恢复时会先保留当前稿。最多保留 50 个旧版本；连续编辑会合并，过大的旧稿可能不保留。', restore: '恢复选中版本', restored: '已恢复旧版本；恢复前的稿件仍在版本历史中。', pick: '请选择版本', preview: '旧稿预览', busy: '请先停止 AI 创作，再查看或恢复旧稿。' },
+  en: { button: '🕘 History', empty: 'No earlier versions yet. Older drafts will appear after more edits are saved.', help: 'Preview a saved draft. Restoring preserves your current version first. Up to 50 earlier versions are kept; rapid edits are grouped and very large drafts may be omitted.', restore: 'Restore selected version', restored: 'Version restored. Your previous draft remains in history.', pick: 'Choose a version', preview: 'Version preview', busy: 'Stop AI generation before viewing or restoring an earlier draft.' },
+  ru: { button: '🕘 История', empty: 'Предыдущих версий пока нет. Они появятся после сохранения следующих правок.', help: 'Просмотрите сохранённый черновик. Перед восстановлением сохраняется текущая версия. Хранятся до 50 версий; частые изменения объединяются, а очень большие черновики могут быть пропущены.', restore: 'Восстановить выбранную версию', restored: 'Версия восстановлена. Предыдущий черновик остался в истории.', pick: 'Выберите версию', preview: 'Просмотр версии', busy: 'Остановите генерацию, прежде чем просматривать или восстанавливать черновик.' }
 };
 const historyCopy = () => HISTORY_COPY[state.settings.lang] || HISTORY_COPY.zh;
 let historySelection = null;
@@ -8247,6 +8260,32 @@ function bindImmersive() {
   $('#im-input').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.isComposing) sendImMsg(); });
 }
 
+/* ---------------- 分享系统 ---------------- */
+function shareText() {
+  const copy = { zh: '晓星 XIAOXING——免费 AI 写小说、写论文，还能在聊天界面里用角色对话沉浸式创作！', en: 'Xiaoxing XIAOXING — free AI novel & paper writing, with immersive character-chat writing!', ru: 'Сяосин XIAOXING — бесплатное написание романов и работ с ИИ и погружением в чат персонажей!' };
+  return (copy[state.settings.lang] || copy.zh) + '\n' + location.href;
+}
+function openShare() {
+  $('#share-link').value = location.href;
+  const qr = $('#share-qr');
+  qr.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=' + encodeURIComponent(location.href);
+  qr.onerror = () => { qr.style.display = 'none'; };
+  const api = $('#btn-share-api');
+  const canShare = typeof navigator.share === 'function';
+  api.style.display = canShare ? '' : 'none';
+  openModal('modal-share');
+}
+function bindShare() {
+  $('#btn-share').addEventListener('click', openShare);
+  $('#btn-share-api').addEventListener('click', async () => {
+    try {
+      await navigator.share({ title: '晓星 XIAOXING', text: shareText(), url: location.href });
+    } catch (e) { }
+  });
+  $('#btn-share-copy-link').addEventListener('click', () => { copyText(location.href); toast(t('share.copied'), 'ok', 2500); });
+  $('#btn-share-copy-text').addEventListener('click', () => { copyText(shareText()); toast(t('share.copied'), 'ok', 2500); });
+}
+
 /* ---------------- 跨设备完整备份（无服务器 · 账号+数据密码加密） ---------------- */
 async function xdevKey(pass, saltStr, usage) {
   const enc = new TextEncoder();
@@ -8353,6 +8392,19 @@ async function importFullBackup(text) {
   $('#btn-xdev-import-go')?.addEventListener('click', () => importFullBackup($('#xdev-text').value.trim()));
   // 沉浸式写作
   bindImmersive();
+  // 分享系统
+  bindShare();
+  // 首次保存历史提示（只提示一次）
+  if (window.__hintBound) return;
+  window.__hintBound = true;
+  const historyHint = () => {
+    try {
+      if (localStorage.getItem('nebula-history-hint')) return;
+      localStorage.setItem('nebula-history-hint', '1');
+      toast(t('history.hint'), 'ok', 6000);
+    } catch (_) { }
+  };
+  document.addEventListener('historyFirstSave', historyHint, { once: true });
   // 个人档案
   $('#btn-profile-save').addEventListener('click', saveProfile);
   $('#btn-avatar-upload').addEventListener('click', () => $('#avatar-file').click());
