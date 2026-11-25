@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4.9.1" />
+<link rel="stylesheet" href="css/style.css?v=4.10.0" />
 </head>
 <body>
 <canvas id="starfield" aria-hidden="true"></canvas>
@@ -115,6 +115,7 @@
     <div id="editor-toolbar">
       <input id="chapter-title" type="text" data-i18n-ph="ed.chapterTitlePh" placeholder="章节标题（可留空，AI 可代起）…" maxlength="120" autocomplete="off" />
       <button class="icon-btn" id="btn-title-suggest" data-i18n-title="co.chapterTitle" title="AI 起章节名">✨</button>
+      <button class="icon-btn" id="btn-immersive" data-i18n-title="im.openTitle" title="沉浸式写作：在聊天界面里用角色对话写小说">🗨</button>
       <select id="chapter-status" data-i18n-title="ed.chapterStatus" title="章节状态">
         <option value="draft" data-i18n="status.draft">草稿</option>
         <option value="revising" data-i18n="status.revising">修订中</option>
@@ -1274,6 +1275,24 @@
   </div>
 </div>
 
+<!-- 沉浸式写作：模拟聊天界面，用角色对话写小说 -->
+<div id="immersive" hidden>
+  <div class="im-frame">
+    <div class="im-head">
+      <span class="im-close" id="im-close" data-i18n-title="common.close" title="关闭">✕</span>
+      <div class="im-title"><span class="im-dot"></span><b id="im-novel-title">…</b></div>
+      <button class="im-finish" id="im-finish" data-i18n="im.finish">完成本章</button>
+    </div>
+    <div class="im-body" id="im-list"></div>
+    <div class="im-speakers" id="im-speakers"></div>
+    <div class="im-inputbar">
+      <input id="im-input" maxlength="500" data-i18n-ph="im.inputPh" placeholder="输入角色要说的话…" autocomplete="off" />
+      <button class="im-send" id="im-send" data-i18n="im.send">发送</button>
+    </div>
+    <div class="im-status" id="im-status"></div>
+  </div>
+</div>
+
 <div id="toasts"></div>
 <noscript><div style="position:fixed;inset:0;background:#04060e;color:#fff;display:flex;align-items:center;justify-content:center">本应用需要启用 JavaScript。</div></noscript>
 <div class="modal-overlay" id="modal-install-app" hidden>
@@ -1372,8 +1391,8 @@
   </div>
 </dialog>
 <script src="js/account-config.js"></script>
-<script src="js/account-bridge.js?v=4.9.1"></script>
-<script src="js/draft-review.js?v=4.9.1"></script>
-<script src="js/app.js?v=4.9.1"></script>
+<script src="js/account-bridge.js?v=4.10.0"></script>
+<script src="js/draft-review.js?v=4.10.0"></script>
+<script src="js/app.js?v=4.10.0"></script>
 </body>
 </html>
