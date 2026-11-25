@@ -1,19 +1,19 @@
 ﻿{
-  "version": "4.10.0",
+  "version": "4.11.0",
   "date": "2026-11-24",
   "items": [
-    { "title": "沉浸式写作", "desc": "工具栏新增 🗨 沉浸式写作：在模拟手机聊天界面里，选择角色像发消息一样写对话（自动加入角色卡中的角色）" },
-    { "title": "AI 融合成正文", "desc": "点「完成本章」后 AI 总结对话、加入旁白与动作心理描写，融合成小说正文接在章节末尾，衔接前文并推动完整剧情发展" },
-    { "title": "手机版同步", "desc": "沉浸式界面手机端全屏适配（100dvh 聊天窗），电脑手机两端同步上线" }
+    { "title": "沉浸式入口一眼看懂", "desc": "工具栏新增醒目的青色发光按钮「🗨 沉浸式写作」，带文字说明与提示，点击直达聊天写作界面（手机端自动收起为图标）" },
+    { "title": "历史记录系统升级", "desc": "保存系统自动记录每次修改的历史快照（15 秒窗口防重复，最多保留 50 版）；工具栏「🕘 历史记录」一键查看时间线、预览并恢复任意版本；首次保存会提示该功能" },
+    { "title": "分享系统", "desc": "顶栏新增 📤 分享：系统一键分享、复制链接、复制推荐语+链接、二维码扫码直达，把晓星分享给朋友" }
   ],
   "itemsEn": [
-    { "title": "Immersive writing", "desc": "The toolbar gains 🗨 Immersive Writing: a phone-style chat where you pick characters (from your character cards) and write the story as messages." },
-    { "title": "AI turns dialogue into prose", "desc": "Tapping “Finish chapter” makes the AI summarize the dialogue, add narration, action and inner thoughts, and append the prose to the chapter, connecting with previous text and pushing the plot forward." },
-    { "title": "Mobile in sync", "desc": "The immersive screen is fully adapted for phones (100dvh chat window); desktop and mobile ship together." }
+    { "title": "Immersive entry you can't miss", "desc": "The toolbar now shows a glowing cyan “🗨 Immersive Writing” button with a clear label, opening the chat writing screen directly (icon-only on phones)." },
+    { "title": "Upgraded history system", "desc": "Every edit is snapshotted automatically (15-second window, up to 50 versions); the toolbar “🕘 History” lists the timeline, previews and restores any version; a first-save hint announces the feature." },
+    { "title": "Share system", "desc": "The top bar gains 📤 Share: system share dialog, copy link, copy message + link, and a QR code that opens Xiaoxing directly." }
   ],
   "itemsRu": [
-    { "title": "Погружение в написание", "desc": "На панели появилась кнопка 🗨 Погружение: чат как в телефоне, выбирайте персонажей (из карточек) и пишите сюжет сообщениями." },
-    { "title": "ИИ превращает диалог в прозу", "desc": "«Завершить главу» — ИИ обобщает диалог, добавляет повествование, действия и мысли, и добавляет прозу в конец главы, связывая с текстом и двигая сюжет." },
-    { "title": "Телефоны синхронно", "desc": "Экран погружения полностью адаптирован для телефонов (окно 100dvh); компьютер и телефон обновляются вместе." }
+    { "title": "Заметный вход в погружение", "desc": "На панели появилась светящаяся голубая кнопка «🗨 Погружение» с подписью — открывает чат-режим сразу (на телефоне — только значок)." },
+    { "title": "Улучшенная история", "desc": "Каждое изменение сохраняется автоматически (окно 15 секунд, до 50 версий); кнопка «🕘 История» показывает хронологию, предпросмотр и восстановление любой версии; при первом сохранении — подсказка." },
+    { "title": "Система «Поделиться»", "desc": "В верхней панели — 📤 Поделиться: системный диалог, копирование ссылки, текст + ссылка и QR-код для быстрого открытия." }
   ]
 }
