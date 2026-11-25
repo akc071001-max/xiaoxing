@@ -1,19 +1,19 @@
 ﻿{
-  "version": "4.9.1",
+  "version": "4.10.0",
   "date": "2026-11-24",
   "items": [
-    { "title": "修复弹窗关不掉", "desc": "登录弹窗此前没有任何关闭方式（无 ✕、禁点背景、Escape 无效），一直遮挡界面；现已加回 ✕ 关闭按钮，Escape 可关闭任何弹窗" },
-    { "title": "用户须知可关闭", "desc": "从设置打开的用户须知新增 ✕ 关闭按钮；全站 14 类弹窗的 ✕ / 取消 / Escape 全部实测可正常关闭" },
-    { "title": "无服务器跨平台登录", "desc": "同一用户名+密码在任何设备、任何入口都可登录；跨设备完整备份（账号+数据密码加密）随本版保留" }
+    { "title": "沉浸式写作", "desc": "工具栏新增 🗨 沉浸式写作：在模拟手机聊天界面里，选择角色像发消息一样写对话（自动加入角色卡中的角色）" },
+    { "title": "AI 融合成正文", "desc": "点「完成本章」后 AI 总结对话、加入旁白与动作心理描写，融合成小说正文接在章节末尾，衔接前文并推动完整剧情发展" },
+    { "title": "手机版同步", "desc": "沉浸式界面手机端全屏适配（100dvh 聊天窗），电脑手机两端同步上线" }
   ],
   "itemsEn": [
-    { "title": "Fixed unclosable dialogs", "desc": "The sign-in dialog previously had no way to close it (no ✕, backdrop disabled, Escape ignored) and blocked the whole screen; it now has an ✕ and Escape closes any dialog." },
-    { "title": "Terms can be closed", "desc": "The Terms dialog opened from Settings now has an ✕; all 14 dialog types were tested and close correctly via ✕ / Cancel / Escape." },
-    { "title": "Serverless cross-platform login", "desc": "The same username + password signs in on any device and entry point; encrypted full cross-device backup is kept in this release." }
+    { "title": "Immersive writing", "desc": "The toolbar gains 🗨 Immersive Writing: a phone-style chat where you pick characters (from your character cards) and write the story as messages." },
+    { "title": "AI turns dialogue into prose", "desc": "Tapping “Finish chapter” makes the AI summarize the dialogue, add narration, action and inner thoughts, and append the prose to the chapter, connecting with previous text and pushing the plot forward." },
+    { "title": "Mobile in sync", "desc": "The immersive screen is fully adapted for phones (100dvh chat window); desktop and mobile ship together." }
   ],
   "itemsRu": [
-    { "title": "Исправлены незакрывающиеся окна", "desc": "У окна входа не было способа закрытия (нет ✕, фон отключён, Escape не работал) — оно блокировало экран; теперь есть ✕, а Escape закрывает любое окно." },
-    { "title": "Правила можно закрыть", "desc": "У окна правил из настроек появилась ✕; все 14 типов окон проверены — закрываются через ✕ / Отмена / Escape." },
-    { "title": "Вход без сервера на всех платформах", "desc": "Одни и те же имя и пароль работают на любом устройстве; шифрованный полный бэкап сохранён в этом выпуске." }
+    { "title": "Погружение в написание", "desc": "На панели появилась кнопка 🗨 Погружение: чат как в телефоне, выбирайте персонажей (из карточек) и пишите сюжет сообщениями." },
+    { "title": "ИИ превращает диалог в прозу", "desc": "«Завершить главу» — ИИ обобщает диалог, добавляет повествование, действия и мысли, и добавляет прозу в конец главы, связывая с текстом и двигая сюжет." },
+    { "title": "Телефоны синхронно", "desc": "Экран погружения полностью адаптирован для телефонов (окно 100dvh); компьютер и телефон обновляются вместе." }
   ]
 }
