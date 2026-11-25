@@ -341,6 +341,14 @@ const I18N = {
     'msg.sendToCreator': '✉️ 给创始人发信息', 'msg.sendToCreatorPh': '给创作者（小柚子）留言、提问或反馈…',
     'msg.sendCreator': '发送', 'msg.sentCreator': '已发送给创始人，请留意私信回复', 'msg.fail': '发送失败，请稍后再试',
     'admin.creatorMsgs': '📬 用户来信（给创始人）', 'admin.reply': '回复',
+    'im.openTitle': '沉浸式写作：在聊天界面里用角色对话写小说',
+    'im.finish': '完成本章', 'im.inputPh': '输入角色要说的话…', 'im.send': '发送',
+    'im.narrator': '旁白', 'im.hint': '选择下方角色，像发消息一样写对话。点右上角「完成本章」，AI 会把对话融合成正文并加入旁白。',
+    'im.needNovel': '请先创建小说', 'im.needChapter': '请先创建章节', 'im.untitled': '未命名小说',
+    'im.empty': '还没有对话，先发几条消息吧', 'im.confirm': 'AI 将把这些对话融合成正文（加入旁白与描写）并接在章节末尾。确定完成本章吗？',
+    'im.generating': 'AI 正在融合对话与旁白…', 'im.done': '已完成：对话已融入正文，剧情继续推进！',
+    'im.fail': '生成失败：',
+    'im.system': '你是小说作家。请把下面的对话草稿改写成小说正文片段：加入旁白、动作与心理描写，衔接前文，推动剧情发展；保持人物性格与小说风格一致。直接输出正文，不要任何解释或标记。\n【小说】{title}\n【题材】{genre}\n【风格】{style}\n{chars}\n【前文结尾】{tail}\n【对话草稿】\n{transcript}',
     'admin.pendingTitle': '⏳ 待核对付款', 'admin.pendingEmpty': '暂无待核对付款',
     'admin.resolve': '✓ 核对并开通', 'admin.paymentsTitle': '💰 收款流水（最近）',
     'admin.msg': '✉ 私信', 'admin.msgTarget': '私信发送给：',
@@ -706,6 +714,14 @@ const I18N = {
     'msg.sendToCreator': '✉️ Message the creator', 'msg.sendToCreatorPh': 'Leave a message, question or feedback for the creator (小柚子)…',
     'msg.sendCreator': 'Send', 'msg.sentCreator': 'Sent to the creator — watch your inbox for a reply', 'msg.fail': 'Failed to send. Please retry.',
     'admin.creatorMsgs': '📬 Messages to the creator', 'admin.reply': 'Reply',
+    'im.openTitle': 'Immersive writing: write your novel as character chats',
+    'im.finish': 'Finish chapter', 'im.inputPh': 'Type what the character says…', 'im.send': 'Send',
+    'im.narrator': 'Narrator', 'im.hint': 'Pick a character below and write like chatting. Tap “Finish chapter” and the AI turns the dialogue into prose with narration.',
+    'im.needNovel': 'Create a novel first', 'im.needChapter': 'Create a chapter first', 'im.untitled': 'Untitled novel',
+    'im.empty': 'No dialogue yet — send a few messages first', 'im.confirm': 'The AI will turn this dialogue into prose (with narration) and append it to the chapter. Finish the chapter now?',
+    'im.generating': 'AI is weaving dialogue and narration…', 'im.done': 'Done: the dialogue is now prose and the plot moves on!',
+    'im.fail': 'Generation failed: ',
+    'im.system': 'You are a novelist. Rewrite the dialogue draft below into novel prose: add narration, action and inner thoughts, connect with the previous text and push the plot forward; keep the characters and style consistent. Output only the prose, without explanations or markers.\n【Novel】{title}\n【Genre】{genre}\n【Style】{style}\n{chars}\n【End of previous text】{tail}\n【Dialogue draft】\n{transcript}',
     'admin.pendingTitle': '⏳ Pending payments', 'admin.pendingEmpty': 'No pending payments',
     'admin.resolve': '✓ Verify & activate', 'admin.paymentsTitle': '💰 Recent receipts',
     'admin.msg': '✉ Message', 'admin.msgTarget': 'Send message to:',
@@ -1066,6 +1082,14 @@ const I18N = {
     'msg.sendToCreator': '✉️ Написать автору', 'msg.sendToCreatorPh': 'Сообщение, вопрос или отзыв автору (小柚子)…',
     'msg.sendCreator': 'Отправить', 'msg.sentCreator': 'Отправлено автору — следите за входящими', 'msg.fail': 'Не удалось отправить. Повторите.',
     'admin.creatorMsgs': '📬 Сообщения автору', 'admin.reply': 'Ответить',
+    'im.openTitle': 'Погружение: пишите роман как чат персонажей',
+    'im.finish': 'Завершить главу', 'im.inputPh': 'Введите реплику персонажа…', 'im.send': 'Отправить',
+    'im.narrator': 'Рассказчик', 'im.hint': 'Выберите персонажа и пишите, как в чате. Нажмите «Завершить главу» — ИИ превратит диалог в текст с повествованием.',
+    'im.needNovel': 'Сначала создайте роман', 'im.needChapter': 'Сначала создайте главу', 'im.untitled': 'Без названия',
+    'im.empty': 'Диалогов пока нет — отправьте несколько сообщений', 'im.confirm': 'ИИ превратит этот диалог в прозу (с повествованием) и добавит в конец главы. Завершить главу?',
+    'im.generating': 'ИИ соединяет диалог и повествование…', 'im.done': 'Готово: диалог стал прозой, сюжет движется дальше!',
+    'im.fail': 'Ошибка генерации: ',
+    'im.system': 'Ты — писатель. Перепиши черновик диалога ниже в прозу: добавь повествование, действия и мысли, свяжи с предыдущим текстом и продвинь сюжет; сохрани характеры и стиль. Выводи только прозу, без пояснений.\n【Роман】{title}\n【Жанр】{genre}\n【Стиль】{style}\n{chars}\n【Конец предыдущего текста】{tail}\n【Черновик диалога】\n{transcript}',
     'admin.pendingTitle': '⏳ Ожидают проверки', 'admin.pendingEmpty': 'Нет ожидающих платежей',
     'admin.resolve': '✓ Проверить и активировать', 'admin.paymentsTitle': '💰 Последние поступления',
     'admin.msg': '✉ Сообщение', 'admin.msgTarget': 'Сообщение для:',
@@ -1766,7 +1790,7 @@ function defaultSettings() {
     customAuthors: []
   };
 }
-const APP_VERSION = '4.9.1';
+const APP_VERSION = '4.10.0';
 const PLAN_LEVEL = { free: 0, pro: 1, deepseek: 2, flag: 3 };
 const PLAN_PREV_MAX = { free: 2, pro: 5, deepseek: 5, flag: 10 };
 const state = {
@@ -1785,6 +1809,7 @@ const state = {
   wikiCache: {},
   learning: false,
   genState: { running: false, stageIdx: -1, abort: null, genKind: 'novel' },
+  immersive: null, imRunning: false, imAbort: null,
   accounts: {}, currentUser: null, authMode: 'login', tipAmount: null,
   changelogChecked: false
 };
@@ -1797,6 +1822,7 @@ function loadSettings() {
   } catch (e) { }
 }
 function saveSettings() { localStorage.setItem('nebula-settings', JSON.stringify(state.settings)); }
+function loadImmersive() { try { state.immersive = JSON.parse(localStorage.getItem('nebula-immersive')) || null; } catch (_) { state.immersive = null; } }
 function loadWikiCache() {
   try { state.wikiCache = JSON.parse(localStorage.getItem('nebula-wiki-cache') || '{}'); } catch (e) { state.wikiCache = {}; }
 }
@@ -8120,6 +8146,107 @@ function bindEvents() {
   $('#import-file').addEventListener('change', e => { const f = e.target.files[0]; if (f) doImport(f); });
   $('#btn-wipe').addEventListener('click', wipeAll);
 
+/* ---------------- 沉浸式写作：模拟聊天界面，用角色对话写小说 ---------------- */
+let imSpeaker = '';
+function openImmersive() {
+  if (!curNovel()) return toast(t('im.needNovel'), 'warn');
+  if (!curChapter()) return toast(t('im.needChapter'), 'warn');
+  if (!state.immersive || state.immersive.chapterId !== curChapter().id) {
+    state.immersive = { chapterId: curChapter().id, novelId: state.currentNovelId, messages: [] };
+  }
+  $('#im-novel-title').textContent = curNovel().title || t('im.untitled');
+  imSpeaker = '';
+  renderImSpeakers();
+  renderImList();
+  $('#im-status').textContent = '';
+  $('#immersive').hidden = false;
+  $('#im-input').focus();
+}
+function imChars() {
+  return state.characters.filter(c => c.novelId === state.currentNovelId);
+}
+function renderImSpeakers() {
+  const chars = imChars();
+  const names = chars.map(c => c.name).filter(Boolean);
+  if (!imSpeaker) imSpeaker = names[0] || '';
+  $('#im-speakers').innerHTML =
+    (imSpeaker ? '' : '<button class="chip mini" data-imspeaker="">' + t('im.narrator') + '</button>') +
+    names.map(n => `<button class="chip mini ${n === imSpeaker ? 'on' : ''}" data-imspeaker="${esc(n)}">${esc(n)}</button>`).join('');
+  $('#im-speakers').querySelectorAll('[data-imspeaker]').forEach(b => {
+    b.addEventListener('click', () => { imSpeaker = b.dataset.imspeaker; renderImSpeakers(); $('#im-input').focus(); });
+  });
+}
+function renderImList() {
+  const msgs = state.immersive?.messages || [];
+  $('#im-list').innerHTML = msgs.map((m, i) => `
+    <div class="im-msg ${i % 2 === 0 ? '' : 'me'}">
+      <div class="im-avatar">${esc((m.speaker || t('im.narrator')).slice(0, 1))}</div>
+      <div class="im-bubble"><span class="im-speaker">${esc(m.speaker || t('im.narrator'))}</span>${esc(m.text)}</div>
+    </div>`).join('') || '<div class="empty-hint">' + t('im.hint') + '</div>';
+  const body = $('#im-list');
+  body.scrollTop = body.scrollHeight;
+}
+function sendImMsg() {
+  const text = $('#im-input').value.trim();
+  if (!text || !state.immersive) return;
+  state.immersive.messages.push({ speaker: imSpeaker, text, t: Date.now() });
+  $('#im-input').value = '';
+  persistImmersive();
+  renderImList();
+  $('#im-input').focus();
+}
+function persistImmersive() { try { localStorage.setItem('nebula-immersive', JSON.stringify(state.immersive)); } catch (_) { } }
+function closeImmersive() {
+  if (state.imRunning) { try { state.imAbort?.abort(); } catch (_) { } return; }
+  $('#immersive').hidden = true;
+}
+async function finishImmersiveChapter() {
+  if (!state.immersive || !state.immersive.messages.length) return toast(t('im.empty'), 'warn');
+  const ok = await confirmDialog(t('im.confirm'));
+  if (!ok) return;
+  state.imRunning = true;
+  state.imAbort = new AbortController();
+  $('#im-finish').disabled = true;
+  $('#im-status').textContent = t('im.generating');
+  try {
+    const novel = curNovel();
+    const chapter = curChapter();
+    const transcript = state.immersive.messages.map(m => (m.speaker || t('im.narrator')) + '：' + m.text).join('\n');
+    const charsTxt = imChars().length ? '【角色卡】\n' + imChars().map(c => c.name + '：' + String(c.desc || '').slice(0, 160)).join('\n') : '';
+    const tail = String(chapter.content || '').slice(-400);
+    const system = t('im.system', {
+      title: novel?.title || '', genre: novel?.genre || '', style: novel?.style || '',
+      chars: charsTxt, tail: tail, transcript: transcript
+    });
+    const candidate = (await aiRequest([
+      { role: 'system', content: system },
+      { role: 'user', content: transcript }
+    ], { signal: state.imAbort.signal, outputLang: novel?.lang })).trim();
+    if (!candidate) throw new Error('empty');
+    chapter.content = (chapter.content ? chapter.content.replace(/\s+$/, '') + '\n\n' : '') + candidate;
+    $('#editor').value = chapter.content;
+    updateCounts(); scheduleSave();
+    $('#im-status').textContent = '';
+    state.immersive = { chapterId: chapter.id, novelId: state.currentNovelId, messages: [] };
+    persistImmersive();
+    $('#immersive').hidden = true;
+    toast(t('im.done'), 'ok', 5000);
+  } catch (e) {
+    $('#im-status').textContent = String(e && e.message || e).includes('abort') ? '' : (t('im.fail') + ' ' + String(e && e.message || '').slice(0, 80));
+  } finally {
+    state.imRunning = false;
+    state.imAbort = null;
+    $('#im-finish').disabled = false;
+  }
+}
+function bindImmersive() {
+  $('#btn-immersive').addEventListener('click', openImmersive);
+  $('#im-close').addEventListener('click', closeImmersive);
+  $('#im-send').addEventListener('click', sendImMsg);
+  $('#im-finish').addEventListener('click', finishImmersiveChapter);
+  $('#im-input').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.isComposing) sendImMsg(); });
+}
+
 /* ---------------- 跨设备完整备份（无服务器 · 账号+数据密码加密） ---------------- */
 async function xdevKey(pass, saltStr, usage) {
   const enc = new TextEncoder();
@@ -8153,7 +8280,9 @@ async function exportFullBackup() {
   try {
     const payload = JSON.stringify({
       v: 1, exportedAt: Date.now(), fromUser: state.currentUser,
-      accounts: state.accounts, novels: state.novels, papers: state.papers, settings: state.settings
+      accounts: state.accounts, novels: state.novels, chapters: state.chapters,
+      outline: state.outline, characters: state.characters, memories: state.memories,
+      papers: state.papers, settings: state.settings
     });
     const key = await xdevKey(pass, 'xiaoxing-xdev-v1', 'encrypt');
     const iv = crypto.getRandomValues(new Uint8Array(12));
@@ -8187,21 +8316,28 @@ async function importFullBackup(text) {
     const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ct);
     const data = JSON.parse(new TextDecoder().decode(pt));
     if (data.v !== 1) throw new Error('bad version');
-    // 合并：账号（保留本机已有，补充缺失）、作品按 id 合并、设置浅合并
+    // 合并：账号（保留本机已有，补充缺失）、作品按 id 合并并写入本地库、设置浅合并
     for (const u of Object.keys(data.accounts || {})) {
       if (!Object.hasOwn(state.accounts, u)) {
         Object.defineProperty(state.accounts, u, { value: data.accounts[u], enumerable: true, writable: true, configurable: true });
       }
     }
-    const mergeById = (target, incoming) => {
-      for (const id of Object.keys(incoming || {})) {
-        if (!Object.hasOwn(target, id)) target[id] = incoming[id];
+    const mergeStore = (targetArr, incoming, store) => {
+      for (const item of Object.values(incoming || {})) {
+        if (item && item.id && !targetArr.some(x => x.id === item.id)) {
+          targetArr.push(item);
+          dbPut(store, item).catch(() => { });
+        }
       }
     };
-    mergeById(state.novels, data.novels);
-    mergeById(state.papers, data.papers);
+    mergeStore(state.novels, data.novels, STORE.novels);
+    mergeStore(state.chapters, data.chapters, STORE.chapters);
+    mergeStore(state.outline, data.outline, STORE.outline);
+    mergeStore(state.characters, data.characters, STORE.characters);
+    mergeStore(state.memories, data.memories, STORE.memories);
+    mergeStore(state.papers, data.papers, STORE.papers);
     if (data.settings) state.settings = Object.assign({}, data.settings, state.settings);
-    saveAccounts(); saveState();
+    saveAccounts();
     renderAll(); applyUIPrefs();
     window.__xdevImported = true;
     toast(t('backup.xdevRestored'), 'ok', 5000);
@@ -8215,6 +8351,8 @@ async function importFullBackup(text) {
   $('#xdev-file')?.addEventListener('change', e => { const f = e.target.files[0]; if (f) f.text().then(txt => importFullBackup(txt)); });
   $('#btn-xdev-import-text')?.addEventListener('click', () => { const box = $('#xdev-text-wrap'); if (box) { box.hidden = !box.hidden; if (!box.hidden) $('#xdev-text').focus(); } });
   $('#btn-xdev-import-go')?.addEventListener('click', () => importFullBackup($('#xdev-text').value.trim()));
+  // 沉浸式写作
+  bindImmersive();
   // 个人档案
   $('#btn-profile-save').addEventListener('click', saveProfile);
   $('#btn-avatar-upload').addEventListener('click', () => $('#avatar-file').click());
@@ -8340,6 +8478,7 @@ function loadAccountConnection() {
 }
 async function boot() {
   loadSettings();
+  loadImmersive();
   state.board = state.settings.board === 'paper' ? 'paper' : 'novel';
   loadWikiCache();
   await setUpAccountMode({restore:true});
